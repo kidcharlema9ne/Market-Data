@@ -1,0 +1,45 @@
+# Development status
+
+Updated November 6, 2026. The decision log and master specification govern research methodology. The tests below are local unless explicitly linked to a GitHub Actions run.
+
+## A. SEC data integrity
+
+- [x] Baseline snapshot reviewed and local suite passed (27 tests). Source archive scope is 2006 Q1 through 2026 Q3 (83 published quarters).
+- [ ] Verify all archived ZIPs and the derived SQLite database in R2. [Archive run](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42288337419) was in progress at first check. The archive job writes ZIPs. The downstream SEC-to-prices workflow builds the database.
+- [x] Implement exact quarter-name validation, database readback hashing, row reconciliation and indexed-column versus payload checks in `sec_archive_scope.py`, `build_historical_sec_database.py` and `validate_historical_candidates.py`. See the commit introducing this checkpoint. Live R2 validation remains pending.
+- [ ] Reconcile archive filings to SEC indexes, including the unpublished-quarter gap. Quantify unmatched records and investigate source duplicate rows.
+- [ ] Connect amendment handling to ingestion and opportunity construction. Verify original and corrected facts, filing dates, ambiguous amendments, duplicate prevention, insider identities, roles and ownership with real filing examples.
+
+## B. Historical security master
+
+- [ ] Add effective-dated issuer/security/identifier mappings and provenance. Cover renamed and reused tickers, share classes, mergers, delistings and ambiguous matches. Test each case. Static mapping support in `integrated_research_dataset.py` is scaffolding.
+
+## C. Price-data integration
+
+- [ ] Revalidate the 251 free-year R2 partitions, schema, dates, OHLCV and adjustment conventions. Use the exchange session calendar to reject missing entry bars and mark forward-window gaps. Implement liquidity, six-calendar-month outcomes and corporate action handling or explicit flags. Audit D-051 entries, D-052 descriptive baselines and fixed pre-entry ATR against independently calculated real cases. The existing free-year smoke workflow uses the older entry rule.
+
+## D. Benchmark and sector research
+
+- [ ] Add effective-dated membership, exchange, sector and industry data contracts with provenance and missing-data flags. Implement D-009/D-025 selection, benchmark percentage and excess percentage returns, and reliable supplementary comparisons. Test point-in-time behavior.
+
+## E. Insider research features
+
+- [ ] Implement ownership significance, overlapping roles and CFO/CEO cohorts, earnings timing, cluster buying, and matured prior performance by insider across issuers. Add pre-entry liquidity, momentum, volatility, 52-week range and market/industry context. Test the information cutoff.
+- [ ] Replace legacy seven-calendar-day filing grouping with D-048 purchase-date ten-session episodes and D-050 90-calendar-day campaigns. Preserve independent entries and multi-owner/multi-security membership. Campaign success criterion remains unspecified.
+
+## F. Statistical analysis
+
+- [ ] Verify metric-specific eligibility, success, denominators, descriptive distributions and missingness for all horizons. Add dependence-aware uncertainty and false-discovery controls, chronological development/validation separation, and bias regression checks. Existing `research_statistics.py` provides descriptive scaffolding.
+
+## G. Findings report
+
+- [ ] Wire `research_html_report.py` to actual integrated data. Cover all requested findings, diagnostics, assumptions, reproducibility metadata and data limitations. Review the generated real-data artifact.
+
+## H. End-to-end validation
+
+- [ ] Connect verified SEC and free-year R2 inputs through identity, outcomes, research statistics and report generation. Publish report and diagnostics in Actions, verify representative calculations and record run/commit references. A database-only pass does not establish readiness.
+- [ ] Update infrastructure and recovery instructions against live workflow behavior and storage state. Keep paid-data acquisition gated on separate authorization.
+
+## Resume point
+
+Check the archive run and downstream job, then verify R2 audit artifacts. Continue implementing independent price and identity work while long jobs run. The real-data report and successful end-to-end run are still outstanding.

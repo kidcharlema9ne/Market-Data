@@ -1,8 +1,10 @@
 """Build resumable historical candidate SQLite database from archived SEC quarterly ZIPs."""
-import hashlib, json, os, sqlite3, tempfile
+import hashlib, json, sqlite3, tempfile
+from contextlib import closing
 from pathlib import Path
 from r2_storage import BUCKET, client
 from sec_bulk_importer import import_zip
+from sec_archive_scope import QUARTERS, missing_quarters
 
 PREFIX="sec/insider-transactions/quarterly-original-zips/"
 OUTKEY="sec/insider-transactions/derived/purchase_candidates.sqlite3"
@@ -11,17 +13,19 @@ with tempfile.TemporaryDirectory() as tmp:
     dbpath=Path(tmp)/"purchase_candidates.sqlite3"
     db=sqlite3.connect(str(dbpath))
     db.execute("CREATE TABLE IF NOT EXISTS imported_quarters(name TEXT PRIMARY KEY, sha256 TEXT NOT NULL, candidate_rows INTEGER NOT NULL)")
-    keys=sorted(obj["Key"] for page in storage.get_paginator("list_objects_v2").paginate(Bucket=BUCKET,Prefix=PREFIX) for obj in page.get("Contents",[]) if obj["Key"].endswith(".zip"))
-    expected={f"{y}q{q}_form345.zip" for y in range(2006,2027) for q in range(1,5) if y<2026 or q<=3}
-    found={k.rsplit("/",1)[-1] for k in keys}
-    missing=sorted(expected-found)
+    keys = sorted(
+        obj["Key"] for page in storage.get_paginator("list_objects_v2").paginate(Bucket=BUCKET, Prefix=PREFIX)
+        for obj in page.get("Contents", []) if obj["Key"].removeprefix(PREFIX) in QUARTERS
+    )
+    missing = missing_quarters(key.removeprefix(PREFIX) for key in keys)
     if missing:
         raise SystemExit(f"Archive incomplete: {len(missing)} missing quarters; first: {missing[:5]}")
     summaries=[]
     for key in keys:
         name=key.rsplit("/",1)[-1]
         obj=storage.get_object(Bucket=BUCKET,Key=key)
-        payload=obj["Body"].read()
+        with closing(obj["Body"]) as body:
+            payload = body.read()
         sha=hashlib.sha256(payload).hexdigest()
         if sha!=obj.get("Metadata",{}).get("verified-sha256"):
             raise SystemExit(f"Checksum mismatch for {name}")
@@ -33,7 +37,8 @@ with tempfile.TemporaryDirectory() as tmp:
     db.execute("PRAGMA wal_checkpoint(TRUNCATE)")
     total=db.execute("SELECT COUNT(*) FROM purchase_candidates").fetchone()[0]
     db.close()
-    digest=hashlib.sha256(dbpath.read_bytes()).hexdigest()
+    with dbpath.open("rb") as stream:
+        digest = hashlib.file_digest(stream, "sha256").hexdigest()
     storage.upload_file(str(dbpath),BUCKET,OUTKEY,ExtraArgs={"Metadata":{"verified-sha256":digest,"source":"sec-bulk-quarterly"}})
     remote=storage.head_object(Bucket=BUCKET,Key=OUTKEY)
     if remote["ContentLength"]!=dbpath.stat().st_size or remote.get("Metadata",{}).get("verified-sha256")!=digest:
