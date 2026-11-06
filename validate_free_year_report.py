@@ -90,7 +90,7 @@ def main():
         "security_title": title, "filing_date": filing_date, "security_id": security_id,
         "transaction_dates": sorted({row["transaction_date"] for row in purchases}),
         "aggregate_dollars": str(sum(Decimal(row["transaction_value"]) for row in purchases)),
-        "owners": [{"cik": owner} for owner in purchases[0]["owner_ciks"]],
+        "owners": filing["owners"],
         "review_flags": sorted({flag for row in purchases for flag in row["review_flags"]}),
     }
     dataset = integrate([record], {security_id: bars}, sessions=days)

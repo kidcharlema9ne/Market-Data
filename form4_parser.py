@@ -72,6 +72,14 @@ def parse_form4(raw: str) -> dict:
     owners = nodes("reportingOwner")
     owner_ciks = [value(o, "reportingOwnerId/rptOwnerCik") for o in owners]
     owner_names = [value(o, "reportingOwnerId/rptOwnerName") for o in owners]
+    relationships = {"isDirector": "Director", "isOfficer": "Officer",
+                     "isTenPercentOwner": "10% Owner", "isOther": "Other"}
+    reporting_owners = [
+        {"cik": cik, "name": name, "title": value(owner, "reportingOwnerRelationship/officerTitle"),
+         "relationship": ", ".join(label for field, label in relationships.items()
+                                   if value(owner, f"reportingOwnerRelationship/{field}").lower() in {"1", "true"})}
+        for owner, cik, name in zip(owners, owner_ciks, owner_names)
+    ]
     footnotes = {e.get("id"): (e.text or "").strip() for e in nodes("footnote")}
     purchases = []
     for tx in nodes("nonDerivativeTransaction"):
@@ -110,6 +118,7 @@ def parse_form4(raw: str) -> dict:
             footnote_ids=refs, review_flags=flags,
         ))
     return {
+        "owners": reporting_owners,
         "document_type": value(root, "documentType"),
         "acceptance_datetime": accepted,
         "issuer_cik": value(issuer, "issuerCik"),
