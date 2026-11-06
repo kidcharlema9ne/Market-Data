@@ -1,0 +1,102 @@
+name: MarketParquet free year to R2
+on: workflow_dispatch
+permissions:
+  contents: read
+concurrency: marketparquet-r2-sample
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow
+      - name: Transfer and verify daily Parquet files
+        env:
+          MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from io import BytesIO
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlsplit
+          from urllib.request import Request, urlopen
+          from botocore.exceptions import ClientError
+          from pyarrow.parquet import ParquetFile
+          from r2_storage import BUCKET, client
+
+          def fetch(url, label, limit, headers=None):
+              try:
+                  with urlopen(Request(url, headers={'User-Agent': 'Mozilla/5.0', **(headers or {})}), timeout=35) as response:
+                      return response.read(limit + 1)
+              except HTTPError as error:
+                  raise SystemExit(f'{label}: HTTP {error.code}') from None
+              except (URLError, TimeoutError):
+                  raise SystemExit(f'{label}: network failure') from None
+
+          start, end = '2025-11-06', '2026-11-05'
+          token = os.environ['MARKETPARQUET_API_KEY']
+          if not token:
+              raise SystemExit('MARKETPARQUET_API_KEY is missing')
+          manifest = json.loads(fetch(
+              f'https://marketparquet.com/api/v1/manifest/stock_daily?start={start}&end={end}',
+              'MarketParquet manifest', 2_000_000, {'Authorization': f'Bearer {token}'},
+          ))
+          files = manifest.get('files', [])
+          dates = sorted(entry['date'] for entry in files)
+          if len(set(dates)) != 251 or len(dates) != 251 or dates[0] != start or dates[-1] != end:
+              raise SystemExit(f'Expected 251 distinct dates from {start} through {end}; got {len(dates)} entries')
+          print(f'Manifest contains {len(dates)} dates from {start} through {end}', flush=True)
+          storage = client()
+          uploaded = skipped = 0
+          for entry in files:
+              day = entry['date']
+              key = f'samples/marketparquet/stock_daily/{day}.parquet'
+              size = entry['file_size_bytes']
+              if not 0 < size <= 8 * 1024 * 1024:
+                  raise SystemExit(f'{day}: unexpected manifest size')
+              try:
+                  info = storage.head_object(Bucket=BUCKET, Key=key)
+              except ClientError as error:
+                  if error.response['ResponseMetadata']['HTTPStatusCode'] != 404:
+                      raise
+                  info = None
+              if info and info['ContentLength'] == size and info['Metadata'].get('verified-sha256'):
+                  with storage.get_object(Bucket=BUCKET, Key=key)['Body'] as body:
+                      if hashlib.sha256(body.read()).hexdigest() == info['Metadata']['verified-sha256']:
+                          skipped += 1
+                          continue
+              url = entry['download_url']
+              if urlsplit(url).scheme != 'https':
+                  raise SystemExit(f'{day}: insecure download URL')
+              data = fetch(url, day, size)
+              if len(data) != size or data[:4] != b'PAR1' or data[-4:] != b'PAR1':
+                  raise SystemExit(f'{day}: invalid Parquet or size mismatch')
+              parquet = ParquetFile(BytesIO(data))
+              fields = set(parquet.schema_arrow.names)
+              if not {'symbol', 'open', 'high', 'low', 'close', 'volume'} <= fields or not {'date', 'timestamp'} & fields or not parquet.metadata.num_rows:
+                  raise SystemExit(f'{day}: missing rows or required columns')
+              date_field = 'date' if 'date' in fields else 'timestamp'
+              actual_dates = {str(value)[:10] for value in parquet.read(columns=[date_field]).column(0).to_pylist()}
+              if actual_dates != {day}:
+                  raise SystemExit(f'{day}: incorrect trading date in Parquet')
+              digest = hashlib.sha256(data).hexdigest()
+              if not info:
+                  storage.put_object(Bucket=BUCKET, Key=key, Body=data, Metadata={'verified-sha256': digest})
+              with storage.get_object(Bucket=BUCKET, Key=key)['Body'] as body:
+                  if body.read() != data:
+                      raise SystemExit(f'{day}: R2 bytes differ from MarketParquet')
+              if info:
+                  storage.copy_object(Bucket=BUCKET, Key=key, CopySource={'Bucket': BUCKET, 'Key': key}, MetadataDirective='REPLACE', Metadata={'verified-sha256': digest})
+              uploaded += not bool(info)
+              skipped += bool(info)
+              print(f'{day}: verified {size} bytes', flush=True)
+          print(f'Verified {len(dates)} dates. Uploaded {uploaded}; existing and verified {skipped}.')
+          PY
