@@ -25,12 +25,16 @@ Updated November 6, 2026. The decision log and master specification govern resea
 
 ## D. Benchmark and sector research
 
-- [ ] Add effective-dated membership, exchange, sector and industry data contracts with provenance and missing-data flags. Implement D-009/D-025 selection, benchmark percentage and excess percentage returns, and reliable supplementary comparisons. Test point-in-time behavior.
+- [x] Implement D-009 core market selection from verified input, aligned benchmark price returns and stock excess percentage points, and missing classification/price flags in `research_benchmarks.py`. Integration accepts a verified entry-date classification snapshot. Local suite passed (36 tests).
+
+- [ ] Add effective-dated membership, exchange, sector and industry data contracts with provenance and missing-data flags. Load and verify actual historical membership/exchange data and sector/industry series. Validate the selection and percentage calculations on real historical observations.
 
 ## E. Insider research features
 
+- [x] Compute contiguous pre-entry returns (5/21/63/126/252 completed sessions), ATR as a percentage of prior close, realized volatility and 52-week range where available. Regression changes every bar from entry onward and verifies identical pre-entry inputs.
+
 - [ ] Implement ownership significance, overlapping roles and CFO/CEO cohorts, earnings timing, cluster buying, and matured prior performance by insider across issuers. Add pre-entry liquidity, momentum, volatility, 52-week range and market/industry context. Test the information cutoff.
-- [ ] Replace legacy seven-calendar-day filing grouping with D-048 purchase-date ten-session episodes and D-050 90-calendar-day campaigns. Preserve independent entries and multi-owner/multi-security membership. Campaign success criterion remains unspecified.
+- [x] Implement D-048 ten-session purchase episodes and D-050 90-calendar-day campaigns in the calendar-aware integration path. Keep multi-group membership and use explicit episode IDs in statistics. Legacy callers without a session calendar still use the descriptive filing grouping. Commit `fcb9a15`. Campaign success criterion remains unspecified. Real historical grouping validation is open.
 
 ## F. Statistical analysis
 
@@ -42,7 +46,7 @@ Updated November 6, 2026. The decision log and master specification govern resea
 
 ## H. End-to-end validation
 
-- [x] Commit the narrow real-data smoke workflow and trigger [run 42295939875](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42295939875). This run uses the pinned original GME filing, R2 price partitions and an independent XNYS calendar. Check its result before counting it as verified.
+- [x] Commit the narrow real-data smoke workflow and trigger [run 42295939875](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42295939875). This run uses the pinned original GME filing, R2 price partitions and an independent XNYS calendar. Passed and published HTML/JSON artifact 13541068767. The sample report is an engineering validation, with one pinned security and price-only outcomes.
 - [x] GitHub Actions passed integrated and historical outcomes tests on `35ff7dba43a3e47989d6dd2cd6bd4f8b8b89a015` ([integration](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42295756410), [outcomes](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42295756399)). The subsequent dated mapping and SEC date changes passed the 31-test suite locally.
 
 - [ ] Connect verified SEC and free-year R2 inputs through identity, outcomes, research statistics and report generation. Publish report and diagnostics in Actions, verify representative calculations and record run/commit references. A database-only pass does not establish readiness.

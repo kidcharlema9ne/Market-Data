@@ -6,6 +6,7 @@ from collections import defaultdict
 from entry_features import stock_entry_features
 from sec_amendments_and_identity import resolve_security
 from price_outcomes import compare_disclosure
+from research_benchmarks import benchmark_outcomes
 from sec_episode_research import build_episodes, build_purchase_groups, prior_disclosure_counts
 
 def _role(owners):
@@ -17,12 +18,14 @@ def _role(owners):
     if "officer" in relationships:return "Officer"
     return "Unclassified"
 
-def integrate(disclosures, bars_by_security, security_mappings=None, *, sessions=None, dated_mappings=None):
+def integrate(disclosures, bars_by_security, security_mappings=None, *, sessions=None, dated_mappings=None, classifications=None, benchmark_bars=None):
     """Return disclosure-level records, episode summary and quality accounting.
 
     bars_by_security maps stable security_id to chronological validated daily OHLCV.
     security_mappings maps (issuer_cik,ticker_at_filing,security_title) to stable IDs,
     or supply explicit security_id on a disclosure. Never guess by ticker alone.
+    classifications maps (security_id, entry_date) to verified entry-time exchange,
+    index membership, and optional sector or industry benchmark symbols.
     """
     disclosures=list(disclosures)
     security_mappings=security_mappings or {}
@@ -75,6 +78,9 @@ def integrate(disclosures, bars_by_security, security_mappings=None, *, sessions
         else:
             outcome=compare_disclosure(bars_by_security[sid],r["filing_date"], sessions=sessions)
             item["outcome_status"]=outcome["status"]
+            if outcome["status"] == "ok" and classifications is not None:
+                classification = classifications.get((sid, outcome["next_open_date"]), {})
+                item["benchmarks"] = benchmark_outcomes(outcome, classification, benchmark_bars or {})
             item["horizons"]=outcome.get("horizons",{})
             if outcome["status"] == "ok" and sessions is not None:
                 item["entry_features"] = stock_entry_features(
