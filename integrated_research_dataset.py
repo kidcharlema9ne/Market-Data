@@ -15,7 +15,7 @@ def _role(owners):
     if "officer" in relationships:return "Officer"
     return "Unclassified"
 
-def integrate(disclosures, bars_by_security, security_mappings=None):
+def integrate(disclosures, bars_by_security, security_mappings=None, *, sessions=None):
     """Return disclosure-level records, episode summary and quality accounting.
 
     bars_by_security maps stable security_id to chronological validated daily OHLCV.
@@ -57,10 +57,10 @@ def integrate(disclosures, bars_by_security, security_mappings=None):
         elif not r.get("filing_date"):
             item["outcome_status"]="missing_filing_date"
         else:
-            outcome=compare_disclosure(bars_by_security[sid],r["filing_date"])
+            outcome=compare_disclosure(bars_by_security[sid],r["filing_date"], sessions=sessions)
             item["outcome_status"]=outcome["status"]
             item["horizons"]=outcome.get("horizons",{})
-            for k in ("next_open","next_open_date","atr14","entry_gap_atr","entry_gap_percent"):
+            for k in ("next_open","next_open_date","atr14","entry_gap_atr","entry_gap_percent","filing_close","filing_close_status"):
                 if k in outcome:item[k]=outcome[k]
         result.append(item)
     return {"schema_version":1,"entry_rule":"D-051: next regular session open after SEC filing date",

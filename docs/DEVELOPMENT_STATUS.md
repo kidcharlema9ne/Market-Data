@@ -16,7 +16,9 @@ Updated November 6, 2026. The decision log and master specification govern resea
 
 ## C. Price-data integration
 
-- [ ] Revalidate the 251 free-year R2 partitions, schema, dates, OHLCV and adjustment conventions. Use the exchange session calendar to reject missing entry bars and mark forward-window gaps. Implement liquidity, six-calendar-month outcomes and corporate action handling or explicit flags. Audit D-051 entries, D-052 descriptive baselines and fixed pre-entry ATR against independently calculated real cases. The existing free-year smoke workflow uses the older entry rule.
+- [x] Implement calendar-aware D-051 entry, fixed ATR using 14 true ranges, optional D-052 filing-close reference, explicit bar gaps and six-calendar-month price-only outcomes in `price_outcomes.py`. Regression suite passed locally (29 tests). Both baselines use identical forward sessions beginning at the next open. The six-month endpoint is the last regular session on or before the six-month anniversary. Production must supply an independent exchange calendar. Live sample verification remains open.
+
+- [ ] Revalidate the 251 free-year R2 partitions, schema, dates, OHLCV and adjustment conventions. Use the exchange session calendar to reject missing entry bars and mark forward-window gaps. Implement liquidity and corporate action handling or explicit flags. Audit D-051 entries, D-052 descriptive baselines and fixed pre-entry ATR against independently calculated real cases. The existing free-year smoke workflow uses the older entry rule.
 
 ## D. Benchmark and sector research
 

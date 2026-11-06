@@ -27,7 +27,7 @@ def render(dataset, title="Insider Buying Research — Findings"):
                                  s["valid_opportunities"],s["distinct_valid_episodes"],
                                  s["mean_atr"],s["median_atr"],s["opportunity_win_rate"],
                                  s["episode_win_rate"],s["excluded_opportunities"]))
-        sections.append("<section><h2>"+esc(horizon)+" trading sessions / horizon</h2>"+
+        sections.append("<section><h2>"+esc("Six calendar months" if horizon == "6m" else horizon + " trading sessions")+"</h2>"+
                         table(("Metric","Group","Total","Valid","Episodes","Mean ATR","Median ATR","Opportunity >0 rate","Episode >0 rate","Missing"),rows)+"</section>")
     details=[]
     for r in observations:
@@ -48,7 +48,7 @@ def render(dataset, title="Insider Buying Research — Findings"):
           "ATR(14) is fixed using completed pre-entry sessions. Each filing/security is one investor opportunity; "
           "episodes are descriptive, not synthetic trades. Missing outcomes are excluded from metric denominators, not treated as losses. "
           "Benchmark, sector, dividend, delisting and corporate-action completeness must be independently verified. "
-          "A six-calendar-month horizon is not yet calculated by the existing price engine; it is shown as missing. "
+          "Six months ends on the last regular session on or before the entry anniversary. "
           "No causal inference or cluster-aware confidence intervals are claimed.")
     return ('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             '<title>'+esc(title)+'</title><style>'+css+'</style></head><body><h1>'+esc(title)+'</h1>'

@@ -31,4 +31,28 @@ class TestOutcomes(unittest.TestCase):
     def test_insufficient_history(self):
         bars=[{"date":f"2026-01-{i:02}","open":1,"high":2,"low":0.5,"close":1} for i in range(1,8)]
         self.assertEqual(compare_disclosure(bars,"2026-01-03")["status"],"missing_or_invalid_entry_atr")
+    def test_calendar_prevents_entry_shift_and_flags_forward_gaps(self):
+        start = date(2026, 1, 1)
+        days = [(start + timedelta(days=i)).isoformat() for i in range(230)]
+        bars = [{"date": day, "open": 100, "high": 103, "low": 99, "close": 101} for day in days]
+        filing = days[19]
+        self.assertEqual(compare_disclosure(bars[:20] + bars[21:], filing, sessions=days)["status"],
+                         "missing_entry_session")
+        result = compare_disclosure(bars[:35] + bars[36:], filing, sessions=days)
+        self.assertEqual(result["horizons"]["11"]["status"], "ok")
+        self.assertEqual(result["horizons"]["21"]["status"], "missing_forward_session")
+        self.assertEqual(result["horizons"]["6m"]["status"], "missing_forward_session")
+        result = compare_disclosure(bars, filing, sessions=days)
+        self.assertEqual(result["horizons"]["6m"]["end_date"], "2026-07-21")
+        self.assertEqual(Decimal(result["atr14"]), Decimal(4))
+        self.assertEqual(Decimal(result["horizons"]["6m"]["next_open"]["end_return_atr"]), Decimal("0.25"))
+
+    def test_non_session_filing_date_has_no_close_reference(self):
+        start = date(2026, 1, 1)
+        days = [(start + timedelta(days=i)).isoformat() for i in range(40) if i != 19]
+        bars = [{"date": day, "open": 100, "high": 103, "low": 99, "close": 101} for day in days]
+        result = compare_disclosure(bars, "2026-01-20", sessions=days)
+        self.assertEqual(result["next_open_date"], "2026-01-21")
+        self.assertNotIn("filing_close_reference", result["horizons"]["11"])
+
 if __name__=="__main__":unittest.main()
