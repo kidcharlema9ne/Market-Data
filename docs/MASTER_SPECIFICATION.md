@@ -529,3 +529,8 @@ For the historical Form 4/4-A insider-purchase study, use the **actual SEC filin
 ## November 6, 2026 — additional filing-date versus next-open outcome comparison
 
 Preserve the approved **next-trading-session open after actual filing date** as the primary tradable investor entry. Additionally compute a **filing-date closing-price reference** and returns measured from that close for the same approved outcome horizons, alongside next-open-based returns, plus the filing-close-to-next-open gap (percent and where applicable ATR units). Keep the two series distinctly labeled and compare their results without silently conflating them. Filing-date close may precede publication for after-hours filings, so this reference is **descriptive/non-executable**, not a claimed investor entry. Align horizons explicitly to the respective reference dates and disclose any horizon offset. Retain original transaction date and actual SEC filing date; do not add a presumed two-day lag after filing.
+
+
+# Approved implementation clarification — SEC alert latency vs stock-price freshness (November 6, 2026)
+
+The scanner shall send prompt SEC filing-based Pushover alerts without waiting for a current-day or previous-day MarketParquet daily OHLCV update. Each alert must explicitly label the last available daily bar date; no stale bar is to be represented as a live quote. Research outcome updates are run on completed daily bars as they arrive. Real-time stock-price data is not required for the initial scanner or historical research engine; optional live quotes may be added later. This does not change the approved next-session-open investor entry convention or make filing-date-close a tradable price.
