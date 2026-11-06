@@ -17,8 +17,8 @@ jobs:
     steps:
       - name: Send Pushover result
         env:
-          PUSHOVER_APP_TOKEN: ${{ secrets.PUSHOVER_APP_TOKEN }}
-          PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
+          PUSHOVER_APP_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER }}
           RUN_NAME: ${{ github.event.workflow_run.name }}
           RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
           RUN_URL: ${{ github.event.workflow_run.html_url }}
