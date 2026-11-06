@@ -44,10 +44,11 @@ def parse_master_idx(text):
         record = {"accession": accession, "form": form, "filed": filed, "cik": cik, "company": company, "path": path}
         if accession in records:
             prior = records[accession]
-            if prior["path"] != path or prior["filed"] != filed or prior["form"] != form:
-                raise ValueError(f"Conflicting SEC index records for accession {accession}: {prior} vs {record}")
-            # The same filing can appear more than once (e.g., multiple CIK rows).
-            # Count the accession once, without asserting the CIK is identical.
+            if prior["filed"] != filed or prior["form"] != form:
+                raise ValueError(f"Conflicting SEC index filing metadata for accession {accession}: {prior} vs {record}")
+            # Ownership filings are indexed under both issuer and reporting-owner CIKs.
+            # The accession is one filing, but retain all associated CIK/path records.
+            prior.setdefault("additional_index_rows", []).append(record)
             continue
         records[accession] = record
     return records
