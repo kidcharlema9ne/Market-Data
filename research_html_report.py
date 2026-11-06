@@ -66,7 +66,7 @@ def render(dataset, title="Insider Buying Research — Findings", *, detail_limi
           "No causal inference or cluster-aware confidence intervals are claimed.")
     return ('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             '<title>'+esc(title)+'</title><style>'+css+'</style></head><body><h1>'+esc(title)+'</h1>'+
-            ('<p class="warning">'+esc(scope_note)+'</p>' if scope_note else '')+
+            ('<p class="warning">'+esc(scope_note)+'</p>' if scope_note else '')
             + '<p>Generated '+esc(datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"))+'</p><p class="warning">'+esc(note)+'</p>'
             '<section><h2>Coverage and exclusions</h2><p>Opportunities: '+esc(len(observations))+
             ' | Episodes: '+esc(len(dataset.get("episodes",[])))+'</p>'+summary+'</section>'+
