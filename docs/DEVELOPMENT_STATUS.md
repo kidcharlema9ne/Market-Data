@@ -5,7 +5,7 @@ Updated November 6, 2026. The decision log and master specification govern resea
 ## A. SEC data integrity
 
 - [x] Baseline snapshot reviewed and local suite passed (27 tests). Source archive scope is 2006 Q1 through 2026 Q3 (83 published quarters).
-- [ ] Verify all archived ZIPs and the derived SQLite database in R2. [Archive run](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42288337419) was in progress at first check. The archive job writes ZIPs. The downstream SEC-to-prices workflow builds the database.
+- [ ] Verify all archived ZIPs and the derived SQLite database in R2. [Archive run](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42288337419) failed: 81 HTTP 404s from a hard-coded path; two ZIPs saved to R2. The downstream build was skipped. Commit `78f4298` fixes catalog discovery, skips retries for permanent HTTP failures and triggered [recovery run 42296737372](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42296737372). The downstream SEC-to-prices workflow builds the database after archive success.
 - [x] Implement exact quarter-name validation, database readback hashing, row reconciliation and indexed-column versus payload checks in `sec_archive_scope.py`, `build_historical_sec_database.py` and `validate_historical_candidates.py`. See the commit introducing this checkpoint. Live R2 validation remains pending.
 - [ ] Reconcile archive filings to SEC indexes, including the unpublished-quarter gap. Quantify unmatched records and investigate source duplicate rows.
 - [x] Normalize ISO and SEC day-month-name dates while preserving raw source values. Disclosure aggregation now carries form, transaction dates and original submission date when present. Local test suite passed (31 tests).
@@ -38,6 +38,8 @@ Updated November 6, 2026. The decision log and master specification govern resea
 
 ## F. Statistical analysis
 
+- [x] Add chronological cohort assignment with purge of development outcome windows crossing the validation boundary and a tested Benjamini–Hochberg adjustment utility in `ac38b83`. Production still needs a prespecified boundary, hypothesis families and dependence-aware inference.
+
 - [ ] Verify metric-specific eligibility, success, denominators, descriptive distributions and missingness for all horizons. Add dependence-aware uncertainty and false-discovery controls, chronological development/validation separation, and bias regression checks. Existing `research_statistics.py` provides descriptive scaffolding.
 
 ## G. Findings report
@@ -54,4 +56,4 @@ Updated November 6, 2026. The decision log and master specification govern resea
 
 ## Resume point
 
-Check the archive run and downstream job, then verify R2 audit artifacts. Continue implementing independent price and identity work while long jobs run. The real-data report and successful end-to-end run are still outstanding.
+Check recovery run 42296737372 and downstream job, then verify R2 audit artifacts. Local suite passed 39 tests after the archive fix. The repeat real-data smoke test [42296267833](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42296267833) also passed. Continue implementing independent price and identity work while long jobs run. The real-data report and successful end-to-end run are still outstanding.
