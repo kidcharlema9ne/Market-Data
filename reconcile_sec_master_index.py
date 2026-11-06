@@ -41,9 +41,15 @@ def parse_master_idx(text):
         if not match:
             raise ValueError(f"Form 4 index row lacks accession: {line[:180]}")
         accession = match.group(1)
+        record = {"accession": accession, "form": form, "filed": filed, "cik": cik, "company": company, "path": path}
         if accession in records:
-            raise ValueError(f"Duplicate accession in index: {accession}")
-        records[accession] = {"accession": accession, "form": form, "filed": filed, "cik": cik, "company": company, "path": path}
+            prior = records[accession]
+            if prior["path"] != path or prior["filed"] != filed or prior["form"] != form:
+                raise ValueError(f"Conflicting SEC index records for accession {accession}: {prior} vs {record}")
+            # The same filing can appear more than once (e.g., multiple CIK rows).
+            # Count the accession once, without asserting the CIK is identical.
+            continue
+        records[accession] = record
     return records
 
 
