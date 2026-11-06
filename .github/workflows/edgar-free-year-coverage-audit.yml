@@ -1,6 +1,10 @@
 name: EDGAR free-year coverage audit
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/edgar-free-year-coverage-audit.yml'
 permissions:
   contents: read
 jobs:
