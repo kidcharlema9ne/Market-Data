@@ -109,10 +109,15 @@ def import_zip(payload, db):
     db.commit()
     return count
 
-def disclosure_opportunities(db):
+def disclosure_opportunities(db, start=None, end=None):
     """Group multiple transaction rows within a filing by issuer/security, preserving underlying rows."""
     grouped=defaultdict(list)
-    for (payload,) in db.execute("SELECT payload FROM purchase_candidates"):
+    query = "SELECT payload FROM purchase_candidates"
+    if start is not None and end is not None:
+        records = db.execute(query + " WHERE filing_date BETWEEN ? AND ?", (start, end))
+    else:
+        records = db.execute(query)
+    for (payload,) in records:
         r=json.loads(payload)
         grouped[(r["accession"],r["issuer_cik"],r["security_title"])].append(r)
     for (accession,cik,security),group in grouped.items():

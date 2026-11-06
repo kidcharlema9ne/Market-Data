@@ -22,7 +22,7 @@ def display_number(value, *, scale=1, prefix="", suffix=""):
     return f"{prefix}{number:,.2f}{suffix}" if number.is_finite() else None
 
 
-def render(dataset, title="Insider Buying Research — Findings"):
+def render(dataset, title="Insider Buying Research — Findings", *, detail_limit=None, scope_note=None):
     observations=dataset["opportunities"]
     status=Counter(r.get("outcome_status","unknown") for r in observations)
     horizons=("11","21","43","64","6m")
@@ -43,7 +43,7 @@ def render(dataset, title="Insider Buying Research — Findings"):
         sections.append("<section><h2>"+esc("Six calendar months" if horizon == "6m" else horizon + " trading sessions")+"</h2>"+
                         table(("Metric","Group","Total","Valid","Episodes","Mean ATR","Median ATR","Opportunity >0 rate","Episode >0 rate","Missing"),rows)+"</section>")
     details=[]
-    for r in observations:
+    for r in observations[:detail_limit]:
         h=r.get("horizons",{}).get("21",{})
         stats=h.get("next_open",{}) if h.get("status")=="ok" else {}
         details.append((r["accession"],r.get("ticker_at_filing"),r.get("filing_date"),r.get("role"),
@@ -66,10 +66,12 @@ def render(dataset, title="Insider Buying Research — Findings"):
           "No causal inference or cluster-aware confidence intervals are claimed.")
     return ('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             '<title>'+esc(title)+'</title><style>'+css+'</style></head><body><h1>'+esc(title)+'</h1>'
+            ('<p class="warning">'+esc(scope_note)+'</p>' if scope_note else '')+
             '<p>Generated '+esc(datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"))+'</p><p class="warning">'+esc(note)+'</p>'
             '<section><h2>Coverage and exclusions</h2><p>Opportunities: '+esc(len(observations))+
             ' | Episodes: '+esc(len(dataset.get("episodes",[])))+'</p>'+summary+'</section>'+
             ''.join(sections)+'<section><h2>Disclosure-level observations (21-session snapshot)</h2>'+
+            ('<p>Showing '+esc(len(details))+' of '+esc(len(observations))+' disclosures.</p>' if detail_limit is not None else '')+
             detail_table+'</section></body></html>')
 
 def write_report(dataset,output_path, **render_options):
