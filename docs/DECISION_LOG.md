@@ -124,3 +124,12 @@ Exact out-of-sample date split, overlap-aware separation of training/validation 
 - **D-051 (approved November 6, 2026):** Historical investor entry is the **next regular trading session's open after the actual SEC Form 4/4-A filing date**, obtained from the SEC quarterly insider-transactions bulk dataset. This replaces the earlier acceptance-time-based same-day/next-day entry logic **for the historical study**. No acceptance timestamp lookup is required for historical entry. Do not substitute transaction date, presumed two-day reporting lag, or quarterly ZIP publication date for the actual filing date. Verify dataset coverage/fields on a sample before large-scale ingestion; retain all other approved outcome and eligibility rules.
 
 - **D-052 (approved November 6, 2026):** In addition to the primary tradable next-session-open outcomes (D-051), calculate filing-date-close-based reference returns over corresponding research horizons and the filing-close-to-next-open gap. Compare the two return series explicitly. Filing-date close is a descriptive benchmark and may precede actual public disclosure; do not present it as necessarily executable. Preserve approved ATR and percentage outcome reporting and document horizon alignment.
+
+
+## Approved — November 6, 2026: Live scanner vs daily prices
+
+- Detect and notify qualifying SEC Form 4 purchase disclosures promptly, independent of the stock-price data refresh schedule.
+- Do not delay Pushover filing alerts when the latest available daily OHLCV bar is one or more sessions old. Always label the last completed price session and never present stale prices as current quotes.
+- Update historical research outcomes and ATR-normalized statistics when newly completed daily bars become available. Real-time market-price subscriptions are not required for the initial research/scanner architecture.
+- A live/premarket quote or intraday price-based alert is an optional later enhancement, not a prerequisite for initial SEC filing alerts.
+- Preserve the previously approved primary next-session-open historical entry methodology; an alert is not an execution fill.
