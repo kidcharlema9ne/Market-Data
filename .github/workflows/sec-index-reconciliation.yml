@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/sec-index-reconciliation.yml'
+      - 'reconcile_sec_master_index.py'
+      - 'test_reconcile_sec_master_index.py'
   workflow_dispatch:
 permissions:
   contents: read
