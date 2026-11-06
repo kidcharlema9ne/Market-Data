@@ -20,7 +20,7 @@ jobs:
       - name: Python dependencies
         run: python -m pip install boto3
       - name: Verify parsing, grouping, outcomes, and scanner tests
-        run: python -m unittest -v test_sec_bulk_importer.py test_form4_parser.py test_price_outcomes.py test_scanner_alerts.py test_reconcile_sec_master_index.py
+        run: python -m unittest -v test_sec_bulk_importer.py test_form4_parser.py test_price_outcomes.py test_scanner_alerts.py test_reconcile_sec_master_index.py test_sec_episode_research.py
       - name: Build historical SEC database from verified archived quarters
         env:
           R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
