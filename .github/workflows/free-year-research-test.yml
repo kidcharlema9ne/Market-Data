@@ -17,4 +17,10 @@ jobs:
           R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-        run: python -u test_research_batch.py . --r2
+        run: |
+          python -u test_research_batch.py . --r2
+          python -u research_pilot.py february_review_queue.json february-pilot.json --r2
+      - uses: actions/upload-artifact@v4
+        with:
+          name: february-pilot-coverage
+          path: february-pilot.json
