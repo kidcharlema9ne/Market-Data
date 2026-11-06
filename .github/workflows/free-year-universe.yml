@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'validate_free_year_universe.py'
+      - 'research_html_report.py'
       - '.github/workflows/free-year-universe.yml'
 permissions:
   contents: read
