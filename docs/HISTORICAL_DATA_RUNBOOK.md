@@ -1,3 +1,9 @@
+## Binding historical entry rule — D-051 (approved November 6, 2026)
+
+For the HISTORICAL STUDY, use the **opening price of the next regular trading session strictly after the actual SEC Form 4/4-A FILING DATE** from the quarterly bulk dataset. This is a calendar/session-date rule, not an acceptance-timestamp rule. **Do not require, fetch, or reconcile acceptance timestamps to calculate historical investor entry.** Never use insider transaction date, assumed reporting lag, or bulk ZIP publication date as a substitute. Preserve the filing date, transaction dates, and disclosure-level grouping. The historical rule supersedes older acceptance-timestamp entry language in this runbook and in master specification sections 5 and 15 wherever conflicting. The decision log D-051 is authoritative for this exception. Real-time scanner alerts may use timestamps separately; they must not change historical entry logic.
+
+Before proposing methodology changes or blocking on data fields, read docs/DECISION_LOG.md (latest decisions, especially D-051) and docs/MASTER_SPECIFICATION.md; do not reopen an approved decision. Acceptance-time reconciliation is **not** a prerequisite to historical-price acquisition or the historical backtest. Remaining SEC tasks: verify actual quarterly archive coverage, candidate ingestion and filing-date quality, deduplication/amendments, classification flags, grouping, and test fixtures.
+
 # Historical data ingestion and verification runbook
 
 ## Reuse the free-year setup
