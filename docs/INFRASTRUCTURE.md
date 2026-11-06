@@ -1,8 +1,21 @@
 # Infrastructure
 
-- Store historical data in the private Cloudflare R2 Standard bucket intended as `insider-research`. Bucket setup and verification are pending. R2 provides object storage.
-- Plan one acquisition of approximately 20 years of daily OHLCV in Parquet, including delisted securities and historical identifiers where available. Provider, coverage, size, cost, and dataset layout remain open. The archive may be frozen after the historical study.
-- Python and GitHub Actions handle computation. Database engine and location remain open.
-- The separate SEC scanner retrieves its own current price and volume data and delivers alerts via Pushover. Google Drive is a candidate for human-readable reports.
-- Restrict R2 object read/write credentials to the project bucket. Store credentials in GitHub Actions secrets and keep them out of repository files, chat, and logs. Test upload, readback, and deletion with one temporary object.
-- Paid services, data purchases, and bulk downloads require separate approval.
+| Component | Decision or status |
+| --- | --- |
+| Source control | Private GitHub repository for documentation, Python code, and GitHub Actions. |
+| Historical dataset storage | Cloudflare R2 Standard. Intended private bucket is `insider-research`. Bucket and connection are pending verification. |
+| Price archive | Parquet with daily OHLCV, delisted securities, and point-in-time security identifiers where available. Plan one acquisition of about 20 years. Provider, exact coverage, size, cost, and layout are pending verification. |
+| Archive maintenance | May freeze the archive after the historical study. |
+| Database | Database engine, schema deployment, and location are undecided. R2 stores objects. |
+| Computation | Python research programs and GitHub Actions run the computation. R2 provides storage. |
+| Scanner | Separate SEC Form 4 scanner fetches current price and volume as needed and delivers alerts via Pushover. Scanner filters do not define the research universe. |
+| Reports | Google Drive is a candidate for human-readable reports. Final report location is open. |
+
+## R2 setup and verification
+
+1. Create or verify the private Standard bucket and confirm account terms before enabling any paid service.
+2. Create an Object Read & Write credential limited to this bucket. Save the values in repository Actions secrets `R2_ACCESS_KEY_ID` and `R2_SECRET_ACCESS_KEY`. Supply the account S3 endpoint as `R2_ENDPOINT_URL`. Keep credentials out of files, chat, and logs.
+3. Configure the Python boto3 client to use the account's S3 endpoint and the bucket. Upload a small object under a unique test key, read it back and compare bytes, delete it, and verify the key is absent.
+4. Verify the provider, including pre-failure LEH and original Washington Mutual WM, identifier mapping, and the archive's scope and cost before requesting authorization for acquisition.
+
+No paid services, purchases, bulk downloads, or large compute jobs are authorized by this setup.
