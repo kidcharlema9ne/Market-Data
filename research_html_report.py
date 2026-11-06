@@ -28,10 +28,11 @@ def render(dataset, title="Insider Buying Research — Findings"):
     horizons=("11","21","43","64","6m")
     metrics=(("max_gain_atr","Maximum appreciation (ATR)"),("max_adverse_atr","Maximum adverse excursion (ATR)"),("end_return_atr","Ending return (ATR)"))
     sections=[]
+    groups = ((), ("role",)) if len({row.get("role") for row in observations}) > 1 else ((),)
     for horizon in horizons:
         rows=[]
         for metric,label in metrics:
-            for group in ((),("role",)):
+            for group in groups:
                 summaries=summarize(observations,group_keys=group,horizon=horizon,metric=metric)
                 for s in summaries:
                     rows.append((label,"All" if not group else s["group"]["role"],s["total_opportunities"],
@@ -53,9 +54,9 @@ def render(dataset, title="Insider Buying Research — Findings"):
     summary=table(("Status","Count"),sorted(status.items()))
     detail_table=table(("SEC accession","Ticker at filing","Filing date","Role","Insider $","Entry date","Entry open","Fixed ATR(14)",
                         "Max gain ATR (21)","MAE ATR (21)","End ATR (21)","Data status"),details)
-    css="""body{font:15px system-ui,sans-serif;max-width:1300px;margin:auto;padding:30px;color:#18212d;background:#f7f9fc}
+    css="""body{font:15px system-ui,sans-serif;max-width:1040px;margin:auto;padding:clamp(12px,3vw,26px);color:#18212d;background:#f7f9fc}
     h1,h2{color:#10294a}section{background:white;padding:20px;margin:18px 0;border:1px solid #dde6f0;border-radius:12px;overflow:auto}
-    table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:9px;border-bottom:1px solid #dce4ed;text-align:left;font-variant-numeric:tabular-nums}tbody tr:nth-child(even){background:#f7f9fc}
+    table{border-collapse:collapse;width:max-content;max-width:100%;font-size:13px}th,td{padding:6px 9px;border-bottom:1px solid #dce4ed;text-align:left;font-variant-numeric:tabular-nums}td{white-space:nowrap}td:nth-child(n+3){text-align:right}tbody tr:nth-child(even){background:#f7f9fc}
     th{background:#e8eef6;position:sticky;top:0}p{line-height:1.6}.warning{border-left:4px solid #ba781a;padding:12px;background:#fff7e8}"""
     note=("Research output, not investment advice. Entry is the next regular trading session open after SEC filing date (D-051). "
           "ATR(14) is fixed using completed pre-entry sessions. Each filing/security is one investor opportunity; "
