@@ -1,0 +1,81 @@
+name: Free-year research smoke test
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install boto3 pyarrow python-dateutil
+      - name: Match EDGAR disclosures and calculate price outcomes
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          python - <<'PY'
+          from bisect import bisect_left, bisect_right
+          from datetime import datetime, time, date
+          from io import BytesIO
+          from statistics import mean
+          import re
+          from urllib.request import Request, urlopen
+          from dateutil.relativedelta import relativedelta
+          import pyarrow.parquet as pq
+          from r2_storage import BUCKET, client
+
+          # Price-only checks. The simple 14-range mean and entry as session one
+          # are explicit smoke-test conventions. No dividend or benchmark claims.
+          cases = {
+              'GME': '1326380/000186828826000002/0001868288-26-000002',
+              'CRM': '1108524/000110852426000066/0001108524-26-000066',
+              'LULU': '1397187/000139718726000038/0001397187-26-000038',
+              'INTC': '50863/000005086326000032/0000050863-26-000032',
+          }
+          s3 = client()
+          prefix = 'samples/marketparquet/stock_daily/'
+          keys = sorted(obj['Key'] for page in s3.get_paginator('list_objects_v2').paginate(Bucket=BUCKET, Prefix=prefix)
+                        for obj in page.get('Contents', []) if re.fullmatch(r'\d{4}-\d{2}-\d{2}\.parquet', obj['Key'][len(prefix):]))
+          days = [date.fromisoformat(key[len(prefix):-8]) for key in keys]
+          assert len(days) == 251 and str(days[0]) == '2025-11-06' and str(days[-1]) == '2026-11-05'
+          entries = {}
+          for symbol, path in cases.items():
+              url = 'https://www.sec.gov/Archives/edgar/data/' + path + '.txt'
+              with urlopen(Request(url, headers={'User-Agent': 'Insider Buying Research https://github.com/kidcharlema9ne'}), timeout=30) as response:
+                  filing = response.read()
+              stamp = datetime.strptime(re.search(rb'<ACCEPTANCE-DATETIME>(\d{14})', filing)[1].decode(), '%Y%m%d%H%M%S')
+              assert re.search(rb'<transactionCode>\s*P\s*</transactionCode>', filing)
+              assert re.search(rb'<issuerTradingSymbol>\s*' + symbol.encode() + rb'\s*</issuerTradingSymbol>', filing)
+              i = bisect_left(days, stamp.date()) if stamp.time() < time(9, 30) else bisect_right(days, stamp.date())
+              entries[symbol] = (stamp, i, min(len(days), bisect_right(days, days[i] + relativedelta(months=6))))
+          bars = {symbol: {} for symbol in cases}
+          for j in range(min(i-15 for _, i, _ in entries.values()), max(end for _, _, end in entries.values())):
+              with s3.get_object(Bucket=BUCKET, Key=keys[j])['Body'] as body:
+                  rows = pq.read_table(BytesIO(body.read()), columns=['symbol','open','high','low','close'],
+                                       filters=[('symbol', 'in', list(cases))], use_threads=False).to_pylist()
+              for row in rows:
+                  symbol = row.pop('symbol')
+                  assert j not in bars[symbol], (symbol, days[j])
+                  bars[symbol][j] = row
+          for symbol, (stamp, i, end) in entries.items():
+              b = bars[symbol]
+              ranges = [max(b[j]['high'], b[j-1]['close']) - min(b[j]['low'], b[j-1]['close']) for j in range(i-14, i)]
+              atr = mean(ranges)
+              entry = b[i]['open']
+              assert atr > 0 and entry > 0
+              print(f'{symbol} {cases[symbol].split("/")[-1]} accepted ET {stamp}; entry {days[i]} at {entry}; ATR {atr}; prior ranges {ranges}', flush=True)
+              for label, stop in [(str(n), i+n) for n in (11,21,43,64)] + [('6 months', end)]:
+                  if stop > len(days) or (label == '6 months' and days[i] + relativedelta(months=6) > days[-1]):
+                      print(f'  {label}: incomplete')
+                      continue
+                  window = [b[j] for j in range(i,stop)]
+                  high, low, close = max(r['high'] for r in window), min(r['low'] for r in window), window[-1]['close']
+                  pct = [round(100*(p-entry)/entry, 5) for p in (high,low,close)]
+                  units = [round((p-entry)/atr, 5) for p in (high,low,close)]
+                  print(f'  {label} through {days[stop-1]}: high/low/close {high}, {low}, {close}; percent {pct}; ATR units {units}')
+          PY
