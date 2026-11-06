@@ -57,3 +57,9 @@ Updated November 6, 2026. The decision log and master specification govern resea
 ## Resume point
 
 Check recovery run 42296737372 and downstream job, then verify R2 audit artifacts. Local suite passed 39 tests after the archive fix. The repeat real-data smoke test [42296267833](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42296267833) also passed. Continue implementing independent price and identity work while long jobs run. The real-data report and successful end-to-end run are still outstanding.
+
+## Free-year multi-stock purchase gate
+
+- [x] Historical SEC archive recovery [42296737372](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42296737372) and downstream SQLite build/audit [42297173813](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42297173813) passed.
+- [ ] Verify [free-year candidate integration 42299249032](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42299249032). The workflow verifies SEC and price bytes from R2, joins provisional historical ticker candidates with unambiguous issuer/security within the sample, checks the next-session rule and writes an HTML report with JSON coverage. The first revision exposed a report-rendering regression; it was fixed and all 39 local tests passed.
+- [ ] Verify historical provider identity and adjustment limits, including pre-failure LEH and original WM. A provisional candidate join is an engineering test. Production still requires dated security identity, amendment review, liquidity and eligibility checks, and corporate-action treatment. Keep the purchase decision separate from production readiness.
