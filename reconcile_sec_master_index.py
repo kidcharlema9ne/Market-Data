@@ -114,7 +114,7 @@ def main():
     with (out / "sec_missing_form4_accessions.csv").open("w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=["accession", "form", "filed", "cik", "company", "path"])
         writer.writeheader()
-        writer.writerows(sec[a] for a in missing)
+        writer.writerows({field: sec[a][field] for field in writer.fieldnames} for a in missing)
     with (out / "manifest_not_in_sec_window.csv").open("w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["accession"])
