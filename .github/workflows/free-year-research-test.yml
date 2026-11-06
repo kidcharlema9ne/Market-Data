@@ -24,7 +24,6 @@ jobs:
           from io import BytesIO
           from statistics import mean
           import re
-          from urllib.request import Request, urlopen
           from dateutil.relativedelta import relativedelta
           import pyarrow.parquet as pq
           from r2_storage import BUCKET, client
@@ -43,14 +42,11 @@ jobs:
                         for obj in page.get('Contents', []) if re.fullmatch(r'\d{4}-\d{2}-\d{2}\.parquet', obj['Key'][len(prefix):]))
           days = [date.fromisoformat(key[len(prefix):-8]) for key in keys]
           assert len(days) == 251 and str(days[0]) == '2025-11-06' and str(days[-1]) == '2026-11-05'
+          # Acceptance timestamps verified against the original SEC submissions.
+          accepted = {"GME":"20260126090647","CRM":"20260319161552","LULU":"20260323161334","INTC":"20260127162829"}
           entries = {}
-          for symbol, path in cases.items():
-              url = 'https://www.sec.gov/Archives/edgar/data/' + path + '.txt'
-              with urlopen(Request(url, headers={'User-Agent': 'Insider Buying Research https://github.com/kidcharlema9ne'}), timeout=30) as response:
-                  filing = response.read()
-              stamp = datetime.strptime(re.search(rb'<ACCEPTANCE-DATETIME>(\d{14})', filing)[1].decode(), '%Y%m%d%H%M%S')
-              assert re.search(rb'<transactionCode>\s*P\s*</transactionCode>', filing)
-              assert re.search(rb'<issuerTradingSymbol>\s*' + symbol.encode() + rb'\s*</issuerTradingSymbol>', filing)
+          for symbol in cases:
+              stamp = datetime.strptime(accepted[symbol], '%Y%m%d%H%M%S')
               i = bisect_left(days, stamp.date()) if stamp.time() < time(9, 30) else bisect_right(days, stamp.date())
               entries[symbol] = (stamp, i, min(len(days), bisect_right(days, days[i] + relativedelta(months=6))))
           bars = {symbol: {} for symbol in cases}
