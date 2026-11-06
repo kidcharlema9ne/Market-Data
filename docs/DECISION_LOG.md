@@ -133,3 +133,13 @@ Exact out-of-sample date split, overlap-aware separation of training/validation 
 - Update historical research outcomes and ATR-normalized statistics when newly completed daily bars become available. Real-time market-price subscriptions are not required for the initial research/scanner architecture.
 - A live/premarket quote or intraday price-based alert is an optional later enhancement, not a prerequisite for initial SEC filing alerts.
 - Preserve the previously approved primary next-session-open historical entry methodology; an alert is not an execution fill.
+
+
+## Research hypotheses proposed — November 6, 2026 (not established findings)
+
+- Test whether CFO open-market purchases predict superior forward outcomes relative to CEO, COO/president, director, and other-officer purchases. Role classification must reflect the insider's role at the filing date, allow multiple roles, and distinguish officer/director overlap.
+- Independently test prior price weakness versus strength, including trailing 21/63/126-session returns measured in ATRs, relative returns versus market/sector, and distance from 52-week high/low.
+- Explicitly test role × prior-trend interactions, especially CFO buying dips versus CFO buying strength and corresponding CEO comparisons. Do not presuppose dip buying wins.
+- Compare win rates, maximum favorable excursion, maximum adverse excursion, end returns, benchmark-relative returns, distributions, sample sizes and uncertainty at existing approved horizons. Preserve ATR-first presentation.
+- Control for firm size, liquidity, sector, market regime, calendar era, and repeated observations; assess out-of-sample robustness and post-Sarbanes–Oxley subperiods. Distinguish evidence for contrarian purchase frequency from evidence of superior subsequent performance.
+- Literature motivation: Wang/Shin/Francis (2012), CFO purchases exceeded CEO purchases by about five percentage points in 12-month abnormal return during 1992–2002; Knewtson/Nofsinger (2014) reports CFO advantage attenuated post-SOX; Lakonishok/Lee (2001) finds insiders contrarian with incremental predictive information. These are hypotheses to validate in our own 2006 onward universe, not accepted findings.
