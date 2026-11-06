@@ -21,6 +21,6 @@ class TestBulk(unittest.TestCase):
         records=list(disclosure_opportunities(db))
         self.assertEqual(len(records),1)
         self.assertEqual(records[0]["aggregate_dollars"],"16000")
-        self.assertEqual(records[0]["insider_weighted_price"],str(16000/300))
+        self.assertEqual(records[0]["insider_weighted_price"],str(__import__("decimal").Decimal(16000)/__import__("decimal").Decimal(300)))
         self.assertIn("possible_10b5_1",records[0]["review_flags"])
 if __name__=="__main__":unittest.main()
