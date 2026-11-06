@@ -135,7 +135,11 @@ The aggregate insider transaction price is descriptive of the insider’s purcha
 
 # 7. Buying episodes
 
-APPROVED — FIVE-TRADING-SESSION GAP RULE (November 5, 2026)
+APPROVED UPDATE — TEN-TRADING-SESSION GAP RULE (November 6, 2026; supersedes the five-session rule below)
+
+Consecutive qualifying purchases by the same insider in the same company/security belong to one buying episode when the gap between purchase dates is no more than **10 trading sessions**. A gap greater than 10 trading sessions starts a new episode. This replaces the previously approved five-session threshold; the earlier wording is retained below as historical context, not an active rule.
+
+APPROVED — FIVE-TRADING-SESSION GAP RULE (November 5, 2026; SUPERSEDED)
 
 Consecutive qualifying purchases by the same insider in the same company/security belong to the same buying episode when the gap between purchases is no more than five trading sessions. A gap greater than five trading sessions starts a new episode.
 
@@ -498,7 +502,7 @@ CHECKPOINT: Decisions and proposed implementation contingencies recorded through
 
 - Design importer for daily date-partitioned Parquet with date/timestamp schema normalization and independent security master. Plan reconciliation of CIK, filing issuer, ticker, security class, exchange, listing dates and corporate actions; flag ambiguous matches.
 
-- Design reproducible SEC Form 4 ingestion with acceptance timestamp and individual purchase/disclosure opportunity, retaining same-day weighted aggregations and five-session episodes per existing rules.
+- Design reproducible SEC Form 4 ingestion with acceptance timestamp and individual purchase/disclosure opportunity, retaining same-day weighted aggregations and ten-session episodes per the November 6 approved update.
 
 - Design modular OHLCV/ATR and benchmark calculations; postpone full historical execution until data validated. Any code or tests must not silently redefine approved metrics.
 
@@ -507,3 +511,13 @@ CHECKPOINT: Decisions and proposed implementation contingencies recorded through
 ## Version history addition
 
 v0.9 (November 6, 2026): Preserves v0.8 in full; records data-provider investigation, conditional \$79 vendor decision, historical identity-mapping risk, and explicit authorization for initial implementation scaffolding without bulk data. No substantive research metric changed.
+
+# 22. November 6, 2026 — episode and signal-campaign update
+
+**APPROVED — TWO DISTINCT GROUPING LEVELS**
+
+- **Buying episode:** same insider and same security; consecutive qualifying purchase dates separated by **10 or fewer trading sessions** belong to the same episode. More than 10 trading sessions starts a new episode. Supersedes the prior five-session gap.
+- **Signal campaign:** a separate, broader grouping of repeated purchases by the same insider in the same security over an approximately **three-month / 90-calendar-day separation window**. For implementation, tentatively group consecutive qualifying purchases when no gap exceeds 90 calendar days, and start a new campaign after a longer gap. The user described this as a 'three-month trading session separation'; **90 trading sessions would be approximately four months, not three**. The exact calendar-versus-trading-session convention requires confirmation before production implementation; do not silently interpret 90 trading sessions as three months.
+- **Keep these separate:** disclosure-level investor opportunities, 10-session buying episodes, and longer signal campaigns are distinct units. Preserve every filing's public-disclosure timestamp, eligible investor entry, and full outcome path. Do not create synthetic entry prices or merge disclosure-level observations.
+- **Profitability and statistical interpretation:** report campaign-level profitability/success separately from episode-level and disclosure-level results, including all three denominators. Do not treat repeated profitable purchases in a sustained bull market as independent evidence of insider skill. Campaign success metric/aggregation (e.g., any constituent opportunity profitable versus first opportunity profitable, benchmark-adjusted return, or another measure) remains to be specified; do not silently substitute the existing episode 'any opportunity succeeds' definition.
+- **Governance:** this is an explicit user-approved change to the episode window and addition of a three-month campaign concept; the exact campaign separation convention and success criterion remain implementation questions. Preserve existing horizon metrics (11/21/43/64 trading sessions and six-calendar-month horizon) unchanged.
