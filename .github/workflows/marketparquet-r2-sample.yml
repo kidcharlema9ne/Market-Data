@@ -1,0 +1,64 @@
+name: MarketParquet to R2 sample
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency: marketparquet-r2-sample
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow
+      - name: Transfer and verify three daily files
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          python - <<'PY'
+          from contextlib import closing
+          from io import BytesIO
+          from urllib.request import urlopen
+          from botocore.exceptions import ClientError
+          from pyarrow.parquet import ParquetFile
+          from r2_storage import BUCKET, client
+
+          storage = client()
+          base = 'https://marketparquet.com/api/data/download/stock_daily'
+          cap = 8 * 1024 * 1024
+          for day in ('2026-10-30', '2026-11-02', '2026-11-03'):
+              key = f'samples/marketparquet/stock_daily/{day}.parquet'
+              try:
+                  metadata = storage.head_object(Bucket=BUCKET, Key=key)
+              except ClientError as error:
+                  if error.response['ResponseMetadata']['HTTPStatusCode'] != 404:
+                      raise SystemExit(f'{day}: R2 existence check failed') from None
+              else:
+                  if metadata['ContentLength'] <= 0:
+                      raise SystemExit(f'{day}: existing object is empty')
+                  print(f'{day}: skipped existing object ({metadata["ContentLength"]} bytes)')
+                  continue
+
+              with urlopen(f'{base}/{day}.parquet', timeout=30) as response:
+                  payload = response.read(cap + 1)
+              if len(payload) > cap:
+                  raise SystemExit(f'{day}: exceeded sample size limit')
+              parquet = ParquetFile(BytesIO(payload))
+              required = {'symbol', 'open', 'high', 'low', 'close', 'volume'}
+              if not required.issubset(parquet.schema_arrow.names) or not parquet.metadata.num_rows:
+                  raise SystemExit(f'{day}: missing columns or empty data')
+              try:
+                  storage.put_object(Bucket=BUCKET, Key=key, Body=payload, ContentType='application/vnd.apache.parquet')
+                  with closing(storage.get_object(Bucket=BUCKET, Key=key)['Body']) as stored:
+                      if stored.read(cap + 1) != payload:
+                          storage.delete_object(Bucket=BUCKET, Key=key)
+                          raise SystemExit(f'{day}: readback did not match')
+              except ClientError:
+                  raise SystemExit(f'{day}: R2 transfer failed') from None
+              print(f'{day}: uploaded and verified {len(payload)} bytes, {parquet.metadata.num_rows} rows')
+          PY
