@@ -1,5 +1,6 @@
 import unittest
-from research_statistics import summarize
+from decimal import Decimal
+from research_statistics import adjust_false_discovery_rate, chronological_samples, summarize
 
 def item(oid,episode,return_atr,status="ok",role="CFO"):
     return {"opportunity_id":oid,"episode_id":episode,"role":role,
@@ -36,5 +37,22 @@ class StatisticsTests(unittest.TestCase):
         self.assertEqual(stats["distinct_valid_episodes"], 2)
         self.assertEqual(stats["winning_episodes"], 2)
         self.assertEqual(stats["valid_opportunities_without_episode"], 1)
+
+    def test_chronological_split_purges_overlapping_outcome_paths(self):
+        rows = [
+            {"next_open_date": "2025-01-02", "horizons": {"21": {"status": "ok", "end_date": "2025-02-01"}}},
+            {"next_open_date": "2025-12-15", "horizons": {"21": {"status": "ok", "end_date": "2026-01-15"}}},
+            {"next_open_date": "2026-01-02"},
+            {},
+        ]
+        result = chronological_samples(rows, "2026-01-01")
+        self.assertEqual(result, dict(zip(("development", "purged", "validation", "undated"),
+                                          ([row] for row in rows))))
+
+    def test_false_discovery_rate_preserves_input_order(self):
+        self.assertEqual(adjust_false_discovery_rate(["0.04", "0.01", "0.03"]),
+                         [Decimal("0.04"), Decimal("0.03"), Decimal("0.04")])
+        with self.assertRaises(ValueError):
+            adjust_false_discovery_rate(["NaN"])
 
 if __name__=="__main__":unittest.main()

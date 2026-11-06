@@ -74,3 +74,42 @@ def summarize(observations, group_keys=("role",), horizon="21", metric="end_retu
             "interpretation":"Descriptive; non-independent observations and selection bias may invalidate naive confidence intervals."
         })
     return output
+
+
+def chronological_samples(observations, validation_start):
+    """Separate cohorts and purge development labels that reach validation."""
+    from datetime import date
+
+    boundary = date.fromisoformat(validation_start)
+    result = {"development": [], "validation": [], "purged": [], "undated": []}
+    for row in observations:
+        entry = row.get("next_open_date")
+        if not entry:
+            result["undated"].append(row)
+            continue
+        if date.fromisoformat(entry) >= boundary:
+            result["validation"].append(row)
+            continue
+        ends = [date.fromisoformat(h["end_date"]) for h in row.get("horizons", {}).values()
+                if h.get("status") == "ok"]
+        cohort = "purged" if any(end >= boundary for end in ends) else "development"
+        result[cohort].append(row)
+    return result
+
+
+def adjust_false_discovery_rate(p_values):
+    """Benjamini–Hochberg adjusted p-values for one prespecified family."""
+    ordered = []
+    for i, value in enumerate(p_values):
+        p = _decimal(value)
+        if p is None or not p.is_finite() or not 0 <= p <= 1:
+            raise ValueError("FDR adjustment requires finite p-values between zero and one")
+        ordered.append((p, i))
+    ordered.sort()
+    adjusted = [None] * len(ordered)
+    running_min = Decimal(1)
+    for rank in range(len(ordered), 0, -1):
+        p, index = ordered[rank - 1]
+        running_min = min(running_min, p * len(ordered) / rank)
+        adjusted[index] = running_min
+    return adjusted
