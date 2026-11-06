@@ -19,3 +19,9 @@
 4. Verify the provider, including pre-failure LEH and original Washington Mutual WM, identifier mapping, and the archive's scope and cost before requesting authorization for acquisition.
 
 No paid services, purchases, bulk downloads, or large compute jobs are authorized by this setup.
+
+## Historical research validation
+
+- The historical SEC archive workflow stores original quarterly ZIPs under `sec/insider-transactions/quarterly-original-zips/`. The downstream SEC-to-prices preparation workflow builds a SQLite candidate snapshot at `sec/insider-transactions/derived/purchase_candidates.sqlite3` and checks the downloaded bytes against the stored SHA-256 before auditing. The current snapshot scope is 2006 Q1 through 2026 Q3.
+- The Free-year research smoke test uses the existing bucket-scoped Actions secrets. It reads the pinned original GameStop filing and verified daily partitions under `samples/marketparquet/stock_daily/`, checks them against an XNYS session calendar and publishes HTML and JSON as the `real-data-research-smoke` artifact. This workflow has a single pinned security identity and exercises price-only calculations.
+- Record live run conclusions and scope in [development status](DEVELOPMENT_STATUS.md).

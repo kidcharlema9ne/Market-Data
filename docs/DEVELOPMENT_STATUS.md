@@ -8,9 +8,12 @@ Updated November 6, 2026. The decision log and master specification govern resea
 - [ ] Verify all archived ZIPs and the derived SQLite database in R2. [Archive run](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42288337419) was in progress at first check. The archive job writes ZIPs. The downstream SEC-to-prices workflow builds the database.
 - [x] Implement exact quarter-name validation, database readback hashing, row reconciliation and indexed-column versus payload checks in `sec_archive_scope.py`, `build_historical_sec_database.py` and `validate_historical_candidates.py`. See the commit introducing this checkpoint. Live R2 validation remains pending.
 - [ ] Reconcile archive filings to SEC indexes, including the unpublished-quarter gap. Quantify unmatched records and investigate source duplicate rows.
+- [x] Normalize ISO and SEC day-month-name dates while preserving raw source values. Disclosure aggregation now carries form, transaction dates and original submission date when present. Local test suite passed (31 tests).
 - [ ] Connect amendment handling to ingestion and opportunity construction. Verify original and corrected facts, filing dates, ambiguous amendments, duplicate prevention, insider identities, roles and ownership with real filing examples.
 
 ## B. Historical security master
+
+- [x] Wire the existing dated resolver into `integrated_research_dataset.py` with explicit matched, ambiguous and unresolved evidence. Local integration regression covers expired symbols, ticker reuse by another issuer and overlapping IDs. Production mapping data, alias histories and terminal events still require validation.
 
 - [ ] Add effective-dated issuer/security/identifier mappings and provenance. Cover renamed and reused tickers, share classes, mergers, delistings and ambiguous matches. Test each case. Static mapping support in `integrated_research_dataset.py` is scaffolding.
 
@@ -38,6 +41,9 @@ Updated November 6, 2026. The decision log and master specification govern resea
 - [ ] Wire `research_html_report.py` to actual integrated data. Cover all requested findings, diagnostics, assumptions, reproducibility metadata and data limitations. Review the generated real-data artifact.
 
 ## H. End-to-end validation
+
+- [x] Commit the narrow real-data smoke workflow and trigger [run 42295939875](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42295939875). This run uses the pinned original GME filing, R2 price partitions and an independent XNYS calendar. Check its result before counting it as verified.
+- [x] GitHub Actions passed integrated and historical outcomes tests on `35ff7dba43a3e47989d6dd2cd6bd4f8b8b89a015` ([integration](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42295756410), [outcomes](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42295756399)). The subsequent dated mapping and SEC date changes passed the 31-test suite locally.
 
 - [ ] Connect verified SEC and free-year R2 inputs through identity, outcomes, research statistics and report generation. Publish report and diagnostics in Actions, verify representative calculations and record run/commit references. A database-only pass does not establish readiness.
 - [ ] Update infrastructure and recovery instructions against live workflow behavior and storage state. Keep paid-data acquisition gated on separate authorization.
