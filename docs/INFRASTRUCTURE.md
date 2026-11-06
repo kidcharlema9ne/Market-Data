@@ -3,7 +3,7 @@
 | Component | Decision or status |
 | --- | --- |
 | Source control | Private GitHub repository for documentation, Python code, and GitHub Actions. |
-| Historical dataset storage | Cloudflare R2 Standard. Intended private bucket is `insider-research`. Bucket and connection are pending verification. |
+| Historical dataset storage | Cloudflare R2 Standard. Intended private bucket is `insider-research`. The GitHub Actions connection passed on November 6, 2026. [Run 42201493380](https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/42201493380) verified upload, byte-for-byte readback, deletion, and absence of the test object afterward. |
 | Price archive | Parquet with daily OHLCV, delisted securities, and point-in-time security identifiers where available. Plan one acquisition of about 20 years. Provider, exact coverage, size, cost, and layout are pending verification. |
 | Archive maintenance | May freeze the archive after the historical study. |
 | Database | Database engine, schema deployment, and location are undecided. R2 stores objects. |
