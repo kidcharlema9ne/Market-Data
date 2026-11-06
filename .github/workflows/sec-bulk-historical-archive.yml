@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - '.github/workflows/sec-bulk-historical-archive.yml'
+      - 'archive_sec_bulk_history.py'
+      - 'sec_archive_scope.py'
 permissions:
   contents: read
 concurrency:
