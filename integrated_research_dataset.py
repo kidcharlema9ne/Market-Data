@@ -3,6 +3,7 @@
 Security identity is explicit. Unmatched and incomplete observations remain in output.
 """
 from collections import defaultdict
+from entry_features import stock_entry_features
 from sec_amendments_and_identity import resolve_security
 from price_outcomes import compare_disclosure
 from sec_episode_research import build_episodes, build_purchase_groups, prior_disclosure_counts
@@ -75,6 +76,10 @@ def integrate(disclosures, bars_by_security, security_mappings=None, *, sessions
             outcome=compare_disclosure(bars_by_security[sid],r["filing_date"], sessions=sessions)
             item["outcome_status"]=outcome["status"]
             item["horizons"]=outcome.get("horizons",{})
+            if outcome["status"] == "ok" and sessions is not None:
+                item["entry_features"] = stock_entry_features(
+                    bars_by_security[sid], sessions, outcome["next_open_date"], outcome["atr14"]
+                )
             for k in ("next_open","next_open_date","atr14","entry_gap_atr","entry_gap_percent","filing_close","filing_close_status"):
                 if k in outcome:item[k]=outcome[k]
         result.append(item)

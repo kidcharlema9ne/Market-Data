@@ -46,4 +46,17 @@ class IntegrationTests(unittest.TestCase):
         self.assertEqual(result["security_match"]["status"], "ambiguous")
         self.assertEqual(result["outcome_status"], "unmatched_security")
 
+    def test_entry_features_do_not_read_entry_or_future_bars(self):
+        sample = bars()
+        sessions = [bar["date"] for bar in sample]
+        record = dict(disclosure("a"), security_id="stable")
+        original = integrate([record], {"stable": sample}, sessions=sessions)["opportunities"][0]
+        for bar in sample[25:]:
+            bar.update(open=200, high=210, low=190, close=205)
+        updated = integrate([record], {"stable": sample}, sessions=sessions)["opportunities"][0]
+        self.assertNotEqual(original["next_open"], updated["next_open"])
+        self.assertEqual(original["entry_features"], updated["entry_features"])
+        self.assertEqual(original["entry_features"]["completed_session_count"], 25)
+        self.assertNotIn("63", original["entry_features"]["prior_returns"])
+
 if __name__=="__main__":unittest.main()
