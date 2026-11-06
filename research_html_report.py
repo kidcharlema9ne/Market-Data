@@ -58,10 +58,10 @@ def render(dataset, title="Insider Buying Research — Findings"):
             ''.join(sections)+'<section><h2>Disclosure-level observations (21-session snapshot)</h2>'+
             detail_table+'</section></body></html>')
 
-def write_report(dataset,output_path):
+def write_report(dataset,output_path, **render_options):
     path=Path(output_path)
     path.parent.mkdir(parents=True,exist_ok=True)
-    path.write_text(render(dataset),encoding="utf-8")
+    path.write_text(render(dataset, **render_options),encoding="utf-8")
     return path
 
 if __name__=="__main__":
