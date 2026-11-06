@@ -113,3 +113,8 @@ Exact out-of-sample date split, overlap-aware separation of training/validation 
 - I-004 — Use Python and GitHub Actions for automation and Pushover for scanner notifications. Google Drive is a candidate for human-readable reports.
 - I-005 — Maintain authoritative documentation in Git. Log explicit approvals and preserve prior versions through descriptive commits.
 - I-006 — Restrict R2 credentials to the project bucket and store them in GitHub Actions secrets. Verify with a small temporary object. Paid services, data purchases, and bulk downloads await separate approval.
+
+## November 6, 2026 — approved episode/campaign revisions
+
+- **D-048 (approved):** Replace the five-trading-session buying-episode gap with **10 trading sessions** for consecutive qualifying purchases by the same insider in the same security. Prior five-session decision is superseded, not erased.
+- **D-049 (approved in principle):** Introduce a **separate three-month (~90-calendar-day) signal-campaign grouping**, alongside disclosure-level opportunities and 10-session episodes, to study repeated buying and campaign profitability without inflating evidence of insider skill from correlated entries. Do not collapse individual disclosures or episode observations. User also used the phrase 'three-month trading session separation'; 90 trading sessions is longer than three months, so the exact calendar/trading-day operational threshold is **pending confirmation**. Campaign-level success aggregation remains unresolved; preserve existing per-disclosure and per-episode rules until separately specified.
