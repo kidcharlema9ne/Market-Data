@@ -3,6 +3,8 @@ import json, os, sqlite3, tempfile
 from collections import Counter
 from pathlib import Path
 from r2_storage import BUCKET, client
+from sec_bulk_importer import disclosure_opportunities
+from sec_episode_research import build_episodes, prior_disclosure_counts
 
 KEY="sec/insider-transactions/derived/purchase_candidates.sqlite3"
 storage=client()
@@ -33,11 +35,15 @@ with tempfile.TemporaryDirectory() as tmp:
         if r.get("form") not in ("4","4/A"): counts["unexpected_form"]+=1
         filings.add(r["accession"])
         opportunities.add((r["accession"],r["issuer_cik"],r["security_title"]))
-    report={"stage":"sec_preprice_validation","db_key":KEY,"integrity":integrity,
+    disclosures=list(disclosure_opportunities(db))
+    episodes=build_episodes(disclosures)
+    history=prior_disclosure_counts(disclosures)
+    report={"episode_count":len(episodes),"insider_history_keys":len(history),"stage":"sec_preprice_validation","db_key":KEY,"integrity":integrity,
       "imported_quarters":len(quarters),"candidate_rows":len(rows),
       "unique_filings":len(filings),"filing_security_opportunities":len(opportunities),
       "field_quality":dict(counts),"year_counts":dict(sorted(years.items())),
       "quarter_counts":dict(quarters),
+      "episode_rule":"Descriptive grouping only; individual disclosure entries remain separate",
       "historical_entry_rule":"D-051: next regular trading session open after SEC filing date; acceptance timestamp not needed",
       "status":"passed" if len(quarters)==83 and len(rows)>0 and not counts["missing_filing_date"] and not counts["unexpected_form"] else "blocked"}
     Path("reports").mkdir(exist_ok=True)
