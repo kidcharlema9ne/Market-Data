@@ -19,6 +19,11 @@ class ReconciliationTests(unittest.TestCase):
         self.assertEqual(archived, ["0000000100-25-000001"])
         self.assertEqual(unmatched, ["0000000100-25-000009"])
         self.assertEqual(months["2025-11"]["sec"], 2)
+    def test_repeated_identical_accession_deduplicated(self):
+        row = "100|Alpha|4|2026-02-01|edgar/data/100/0000000100-26-000001.txt"
+        rows = parse_master_idx(index([row, row]))
+        self.assertEqual(len(rows), 1)
+
     def test_duplicate_rejected(self):
         row = "100|Alpha|4|2026-02-01|edgar/data/100/0000000100-26-000001.txt"
         with self.assertRaises(ValueError):
