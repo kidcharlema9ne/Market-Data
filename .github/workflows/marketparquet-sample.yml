@@ -1,0 +1,51 @@
+name: MarketParquet daily sample
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pyarrow pandas
+      - name: Download and inspect three public daily files
+        run: |
+          python - <<'PY'
+          from io import BytesIO
+          from urllib.request import Request, urlopen
+          import numpy as np
+          import pandas as pd
+
+          base = 'https://marketparquet.com/api/data/download/stock_daily'
+          required = {'symbol', 'open', 'high', 'low', 'close', 'volume'}
+          cap = 8 * 1024 * 1024
+          failed = False
+          for day in ('2026-11-03', '2026-11-02', '2026-10-30'):
+              with urlopen(Request(f'{base}/{day}.parquet', headers={'User-Agent': 'insider-buying-research sample validation'}), timeout=30) as response:
+                  raw = response.read(cap + 1)
+              if len(raw) > cap:
+                  raise SystemExit(f'{day}: exceeded sample size limit')
+              data = pd.read_parquet(BytesIO(raw))
+              missing = required - set(data.columns)
+              if missing or data.empty:
+                  raise SystemExit(f'{day}: empty data or missing columns {sorted(missing)}')
+              price = data[['open', 'high', 'low', 'close']]
+              invalid = (~np.isfinite(price).all(axis=1) | price.le(0).any(axis=1)
+                         | data.high.lt(price.max(axis=1)) | data.low.gt(price.min(axis=1))
+                         | ~np.isfinite(data.volume) | data.volume.lt(0))
+              duplicates = data.symbol.duplicated(keep=False)
+              date_column = next((name for name in ('date', 'timestamp') if name in data), None)
+              if date_column is None:
+                  raise SystemExit(f'{day}: missing date or timestamp column')
+              wrong_date = pd.to_datetime(data[date_column], errors='coerce').dt.strftime('%Y-%m-%d').ne(day)
+              missing_symbol = data.symbol.fillna('').astype(str).str.strip().eq('')
+              print(f'{day}: {len(raw):,} bytes, {len(data):,} rows, {data.symbol.nunique():,} symbols; invalid OHLCV={invalid.sum()}, duplicate-symbol rows={duplicates.sum()}, date mismatches={wrong_date.sum()}, blank symbols={missing_symbol.sum()}')
+              print(data.dtypes.to_string())
+              failed |= bool((invalid | duplicates | wrong_date | missing_symbol).any())
+          if failed:
+              raise SystemExit('Sample contains anomalies; review the counts above.')
+          PY
