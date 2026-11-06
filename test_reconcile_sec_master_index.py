@@ -24,6 +24,14 @@ class ReconciliationTests(unittest.TestCase):
         rows = parse_master_idx(index([row, row]))
         self.assertEqual(len(rows), 1)
 
+    def test_same_accession_different_cik_paths(self):
+        rows = parse_master_idx(index([
+            '1003078|MSC INDUSTRIAL DIRECT|4|2025-11-20|edgar/data/1003078/0000950142-25-003039.txt',
+            '1008015|JACOBSON MITCHELL|4|2025-11-20|edgar/data/1008015/0000950142-25-003039.txt',
+        ]))
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(len(rows['0000950142-25-003039']['additional_index_rows']), 1)
+
     def test_duplicate_rejected(self):
         row = "100|Alpha|4|2026-02-01|edgar/data/100/0000000100-26-000001.txt"
         with self.assertRaises(ValueError):
