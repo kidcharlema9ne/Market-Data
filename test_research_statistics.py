@@ -1,0 +1,31 @@
+import unittest
+from research_statistics import summarize
+
+def item(oid,episode,return_atr,status="ok",role="CFO"):
+    return {"opportunity_id":oid,"episode_id":episode,"role":role,
+            "horizons":{"21":{"status":status,"next_open":{"end_return_atr":return_atr}}}}
+
+class StatisticsTests(unittest.TestCase):
+    def test_disclosure_and_episode_denominators(self):
+        rows=[item("a","e1","2"),item("b","e1","-1"),item("c","e2","-3"),
+              item("d","e3",None,"insufficient_forward_bars")]
+        x=summarize(rows)[0]
+        self.assertEqual(x["total_opportunities"],4)
+        self.assertEqual(x["valid_opportunities"],3)
+        self.assertEqual(x["distinct_valid_episodes"],2)
+        self.assertEqual(x["winning_opportunities"],1)
+        self.assertEqual(x["winning_episodes"],1)
+        self.assertEqual(x["opportunity_win_rate"],str(__import__("decimal").Decimal(1)/3))
+        self.assertEqual(x["episode_win_rate"],"0.5")
+        self.assertEqual(x["excluded_opportunities"],1)
+    def test_missing_outcomes_never_count_as_losses(self):
+        x=summarize([item("a","a",None,"insufficient_forward_bars")])[0]
+        self.assertEqual(x["valid_opportunities"],0)
+        self.assertIsNone(x["opportunity_win_rate"])
+    def test_duplicate_opportunity_rejected(self):
+        with self.assertRaises(ValueError):
+            summarize([item("a","a","1"),item("a","a","2")])
+    def test_grouping(self):
+        x=summarize([item("a","a","1",role="CFO"),item("b","b","-1",role="CEO")])
+        self.assertEqual(len(x),2)
+if __name__=="__main__":unittest.main()
