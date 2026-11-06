@@ -3,6 +3,7 @@
 Security identity is explicit. Unmatched and incomplete observations remain in output.
 """
 from collections import defaultdict
+from sec_amendments_and_identity import resolve_security
 from price_outcomes import compare_disclosure
 from sec_episode_research import build_episodes, prior_disclosure_counts
 
@@ -15,7 +16,7 @@ def _role(owners):
     if "officer" in relationships:return "Officer"
     return "Unclassified"
 
-def integrate(disclosures, bars_by_security, security_mappings=None, *, sessions=None):
+def integrate(disclosures, bars_by_security, security_mappings=None, *, sessions=None, dated_mappings=None):
     """Return disclosure-level records, episode summary and quality accounting.
 
     bars_by_security maps stable security_id to chronological validated daily OHLCV.
@@ -24,6 +25,14 @@ def integrate(disclosures, bars_by_security, security_mappings=None, *, sessions
     """
     disclosures=list(disclosures)
     security_mappings=security_mappings or {}
+    if dated_mappings is not None and security_mappings:
+        raise ValueError("Supply either dated mappings or the legacy static mapping")
+    mapping_index = defaultdict(list)
+    if dated_mappings is not None:
+        for mapping in dated_mappings:
+            if not mapping.get("start_date") or not mapping.get("security_id"):
+                raise ValueError("Dated mapping requires start_date and security_id")
+            mapping_index[str(mapping.get("issuer_cik", ""))].append(mapping)
     episodes=build_episodes(disclosures)
     episode_for={}
     for i,e in enumerate(episodes):
@@ -39,7 +48,13 @@ def integrate(disclosures, bars_by_security, security_mappings=None, *, sessions
         owners=r.get("owners") or []
         owner_ids=sorted({str(o.get("cik")) for o in owners if o.get("cik")})
         key=(str(r.get("issuer_cik") or ""),str(r.get("ticker_at_filing") or ""),str(r.get("security_title") or ""))
-        sid=r.get("security_id") or security_mappings.get(key)
+        if dated_mappings is not None:
+            match = (resolve_security(*key, r["filing_date"], mapping_index[key[0]])
+                     if r.get("filing_date") else {"status": "missing_filing_date"})
+            sid = match.get("security_id")
+        else:
+            sid = r.get("security_id") or security_mappings.get(key)
+            match = {"status": "provided" if sid else "unmatched"}
         item={"opportunity_id":oid,"accession":r.get("accession"),"issuer_cik":r.get("issuer_cik"),
               "ticker_at_filing":r.get("ticker_at_filing"),"security_title":r.get("security_title"),
               "filing_date":r.get("filing_date"),"security_id":sid,"role":_role(owners),
@@ -49,7 +64,7 @@ def integrate(disclosures, bars_by_security, security_mappings=None, *, sessions
               "prior_disclosures_by_owner":{o:history.get((str(r.get("issuer_cik") or ""),o,r.get("accession")),0) for o in owner_ids},
               "episode_ids":[episode_for[(r["accession"],o)] for o in owner_ids if (r["accession"],o) in episode_for],
               "episode_id":episode_for.get((r["accession"],owner_ids[0])) if len(owner_ids)==1 else None,
-              "outcome_status":"not_computed","horizons":{}}
+              "security_match":match, "outcome_status":"not_computed","horizons":{}}
         if not sid:
             item["outcome_status"]="unmatched_security"
         elif sid not in bars_by_security:

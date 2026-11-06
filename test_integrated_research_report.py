@@ -32,4 +32,18 @@ class IntegrationTests(unittest.TestCase):
         page=render(d)
         self.assertNotIn("<script>",page)
         self.assertIn("&lt;script&gt;",page)
+    def test_dated_mapping_excludes_expired_and_ambiguous_listings(self):
+        expired = dict(issuer_cik="100", ticker="ABC", security_title="Common Stock",
+                       start_date="2020-01-01", end_date="2025-12-31", security_id="expired")
+        active = dict(expired, start_date="2026-01-01", end_date=None, security_id="active")
+        reused = dict(active, issuer_cik="999", security_id="reused")
+        result = integrate([disclosure("a")], {"active": bars()},
+                           dated_mappings=[expired, active, reused])["opportunities"][0]
+        self.assertEqual(result["security_id"], "active")
+        self.assertEqual(result["outcome_status"], "ok")
+        result = integrate([disclosure("a")], {"active": bars()},
+                           dated_mappings=[active, dict(active, security_id="conflict")])["opportunities"][0]
+        self.assertEqual(result["security_match"]["status"], "ambiguous")
+        self.assertEqual(result["outcome_status"], "unmatched_security")
+
 if __name__=="__main__":unittest.main()

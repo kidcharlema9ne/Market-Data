@@ -1,11 +1,26 @@
 """SEC Form 3/4/5 quarterly ZIP importer. Standard library; preserves raw rows."""
 import csv, io, json, re, sqlite3, zipfile
 from collections import defaultdict
+from datetime import date, datetime
 from decimal import Decimal, InvalidOperation
 
 def rows(z, filename):
     with z.open(filename) as f:
         yield from csv.DictReader(io.TextIOWrapper(f, encoding="utf-8-sig", errors="replace", newline=""), delimiter="\t")
+
+def sec_date(value):
+    """Normalize source dates while retaining original values in the raw tables."""
+    if not value:
+        return None
+    value = value.strip()
+    try:
+        return date.fromisoformat(value).isoformat()
+    except ValueError:
+        try:
+            return datetime.strptime(value, "%d-%b-%Y").date().isoformat()
+        except ValueError:
+            return None
+
 
 def number(x):
     try:
@@ -51,12 +66,14 @@ def extract(z):
         price=number(r.get("TRANS_PRICEPERSHARE"))
         if shares is None or price is None: flags.append("missing_numeric_amount")
         amount=str(Decimal(shares)*Decimal(price)) if shares is not None and price is not None else None
-        if not sub.get("FILING_DATE"): flags.append("missing_filing_date")
-        if not r.get("TRANS_DATE"): flags.append("missing_transaction_date")
+        filing_date = sec_date(sub.get("FILING_DATE"))
+        transaction_date = sec_date(r.get("TRANS_DATE"))
+        if filing_date is None: flags.append("missing_or_invalid_filing_date")
+        if transaction_date is None: flags.append("missing_or_invalid_transaction_date")
         yield {
             "accession":acc,"transaction_row_key":r.get("NONDERIV_TRANS_SK",""),
-            "form":sub.get("DOCUMENT_TYPE"),"filing_date":sub.get("FILING_DATE"),
-            "transaction_date":r.get("TRANS_DATE"),"issuer_cik":sub.get("ISSUERCIK"),
+            "form":sub.get("DOCUMENT_TYPE"),"filing_date":filing_date,
+            "transaction_date":transaction_date,"issuer_cik":sub.get("ISSUERCIK"),
             "issuer_name":sub.get("ISSUERNAME"),"ticker_at_filing":sub.get("ISSUERTRADINGSYMBOL"),
             "security_title":r.get("SECURITY_TITLE"),"shares":shares,"price_per_share":price,
             "dollar_value":amount,"acquired_disposed":r.get("TRANS_ACQUIRED_DISP_CD"),
@@ -104,7 +121,10 @@ def disclosure_opportunities(db):
         total_shares=sum(shares)
         total_amount=sum(amounts)
         yield {"accession":accession,"issuer_cik":cik,"security_title":security,
-               "filing_date":group[0]["filing_date"],"ticker_at_filing":group[0]["ticker_at_filing"],
+               "form":group[0]["form"],
+               "filing_date":sec_date(group[0]["filing_date"]),
+               "transaction_dates":sorted({day for r in group if (day := sec_date(r["transaction_date"]))}),
+               "original_submission_date":sec_date(group[0].get("raw_submission", {}).get("DATE_OF_ORIG_SUB")),"ticker_at_filing":group[0]["ticker_at_filing"],
                "transaction_count":len(group),"aggregate_shares":str(total_shares) if len(shares)==len(group) else None,
                "aggregate_dollars":str(total_amount) if len(amounts)==len(group) else None,
                "insider_weighted_price":str(total_amount/total_shares) if len(amounts)==len(group) and len(shares)==len(group) and total_shares else None,
