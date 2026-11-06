@@ -5,7 +5,7 @@ Security identity is explicit. Unmatched and incomplete observations remain in o
 from collections import defaultdict
 from sec_amendments_and_identity import resolve_security
 from price_outcomes import compare_disclosure
-from sec_episode_research import build_episodes, prior_disclosure_counts
+from sec_episode_research import build_episodes, build_purchase_groups, prior_disclosure_counts
 
 def _role(owners):
     titles=" ".join(str(o.get("title","")) for o in owners).lower()
@@ -58,7 +58,7 @@ def integrate(disclosures, bars_by_security, security_mappings=None, *, sessions
         item={"opportunity_id":oid,"accession":r.get("accession"),"issuer_cik":r.get("issuer_cik"),
               "ticker_at_filing":r.get("ticker_at_filing"),"security_title":r.get("security_title"),
               "filing_date":r.get("filing_date"),"security_id":sid,"role":_role(owners),
-              "owners":owners,"owner_ciks":owner_ids,"review_flags":r.get("review_flags",[]),
+              "transaction_dates":r.get("transaction_dates", []), "owners":owners,"owner_ciks":owner_ids,"review_flags":r.get("review_flags",[]),
               "aggregate_dollars":r.get("aggregate_dollars"),
               "insider_weighted_price":r.get("insider_weighted_price"),
               "prior_disclosures_by_owner":{o:history.get((str(r.get("issuer_cik") or ""),o,r.get("accession")),0) for o in owner_ids},
@@ -78,8 +78,20 @@ def integrate(disclosures, bars_by_security, security_mappings=None, *, sessions
             for k in ("next_open","next_open_date","atr14","entry_gap_atr","entry_gap_percent","filing_close","filing_close_status"):
                 if k in outcome:item[k]=outcome[k]
         result.append(item)
+    campaigns = build_purchase_groups(result, sessions, campaign=True)
+    if sessions is not None:
+        episodes = build_purchase_groups(result, sessions)
+        for groups, field in ((episodes, "episode_ids"), (campaigns, "campaign_ids")):
+            memberships = defaultdict(list)
+            for group in groups:
+                for oid in group["opportunity_ids"]:
+                    memberships[oid].append(group["group_id"])
+            for item in result:
+                item[field] = memberships[item["opportunity_id"]]
+        for item in result:
+            item["episode_id"] = item["episode_ids"][0] if len(item["episode_ids"]) == 1 else None
     return {"schema_version":1,"entry_rule":"D-051: next regular session open after SEC filing date",
-            "opportunities":result,"episodes":episodes,
+            "opportunities":result,"episodes":episodes,"campaigns":campaigns,
             "counts":{"disclosures":len(result),"episodes":len(episodes),
                       "priced":sum(r["outcome_status"]=="ok" for r in result),
                       "unpriced":sum(r["outcome_status"]!="ok" for r in result)}}

@@ -28,4 +28,13 @@ class StatisticsTests(unittest.TestCase):
     def test_grouping(self):
         x=summarize([item("a","a","1",role="CFO"),item("b","b","-1",role="CEO")])
         self.assertEqual(len(x),2)
+    def test_explicit_episode_memberships_and_unknown_are_distinct(self):
+        rows = [dict(item("a", None, "2"), episode_ids=["e1", "e2"]),
+                dict(item("b", None, "3"), episode_ids=[])]
+        stats = summarize(rows)[0]
+        self.assertEqual(stats["valid_opportunities"], 2)
+        self.assertEqual(stats["distinct_valid_episodes"], 2)
+        self.assertEqual(stats["winning_episodes"], 2)
+        self.assertEqual(stats["valid_opportunities_without_episode"], 1)
+
 if __name__=="__main__":unittest.main()

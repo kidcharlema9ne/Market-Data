@@ -60,3 +60,52 @@ def prior_disclosure_counts(disclosures):
             for x in group: result[(issuer,owner,x[3])]=prior
             prior+=len(group)
     return result
+
+
+def build_purchase_groups(disclosures, sessions, *, campaign=False):
+    """Group purchases by stable security and owner under D-048 or D-050.
+
+    Missing identities and out-of-calendar dates are omitted. Every group
+    records its constituent opportunity IDs, including multi-group filings.
+    """
+    from bisect import bisect_right
+    from itertools import groupby
+
+    purchases = defaultdict(set)
+    for row in disclosures:
+        sid = row.get("security_id")
+        if not sid:
+            continue
+        for day in row.get("transaction_dates", []):
+            day = _day(day)
+            if not campaign and (not sessions or not sessions[0] <= day.isoformat() <= sessions[-1]):
+                continue
+            for owner in _owner_ids(row):
+                purchases[(sid, owner)].add((day, row["opportunity_id"]))
+    groups = []
+    for (sid, owner), entries in sorted(purchases.items()):
+        current = []
+        for day, same_day in groupby(sorted(entries), key=lambda entry: entry[0]):
+            if current:
+                previous = current[-1][0]
+                if campaign:
+                    gap = (day - previous).days
+                else:
+                    gap = bisect_right(sessions, day.isoformat()) - bisect_right(sessions, previous.isoformat())
+                if gap > (90 if campaign else 10):
+                    groups.append((sid, owner, current))
+                    current = []
+            current.extend(same_day)
+        groups.append((sid, owner, current))
+    kind = "campaign" if campaign else "episode"
+    return [
+        {
+            "group_id": f"{kind}-{i}",
+            "security_id": sid, "owner_cik": owner,
+            "first_purchase_date": items[0][0].isoformat(),
+            "last_purchase_date": items[-1][0].isoformat(),
+            "opportunity_ids": sorted({oid for _, oid in items}),
+            "synthetic_entry": False,
+        }
+        for i, (sid, owner, items) in enumerate(groups, 1)
+    ]

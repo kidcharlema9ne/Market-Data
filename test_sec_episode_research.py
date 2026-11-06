@@ -1,5 +1,6 @@
 import unittest
-from sec_episode_research import build_episodes,prior_disclosure_counts
+from datetime import date, timedelta
+from sec_episode_research import build_episodes,build_purchase_groups,prior_disclosure_counts
 
 def row(acc,day,owner="42",issuer="100"):
     return {"accession":acc,"filing_date":day,"issuer_cik":issuer,
@@ -21,5 +22,19 @@ class EpisodeTests(unittest.TestCase):
         self.assertEqual(c[("100","42","a")],0)
         self.assertEqual(c[("100","42","b")],0)
         self.assertEqual(c[("100","42","c")],2)
+
+    def test_purchase_episodes_and_campaigns_use_distinct_calendars(self):
+        start = date(2026, 1, 5)
+        sessions = [(start + timedelta(days=i)).isoformat() for i in range(130)
+                    if (start + timedelta(days=i)).weekday() < 5]
+        records = [
+            dict(row(acc, "2026-05-01"), security_id="stable", opportunity_id=acc,
+                 transaction_dates=[day])
+            for acc, day in zip("abcd", [sessions[0], sessions[10], sessions[21], sessions[-1]])
+        ]
+        self.assertEqual([g["opportunity_ids"] for g in build_purchase_groups(records, sessions)],
+                         [["a", "b"], ["c"], ["d"]])
+        self.assertEqual([g["opportunity_ids"] for g in build_purchase_groups(records, sessions, campaign=True)],
+                         [["a", "b", "c"], ["d"]])
 
 if __name__=="__main__":unittest.main()

@@ -35,17 +35,24 @@ def summarize(observations, group_keys=("role",), horizon="21", metric="end_retu
         values=[]
         episodes=defaultdict(list)
         excluded=defaultdict(int)
+        ungrouped = 0
         for r in rows:
             h=r.get("horizons",{}).get(str(horizon),{})
             if h.get("status")!="ok":
-                excluded[h.get("status","missing_horizon")]+=1
+                excluded[h.get("status") or (r.get("outcome_status") if r.get("outcome_status") != "ok" else None) or "missing_horizon"]+=1
                 continue
             v=_decimal(h.get("next_open",{}).get(metric))
             if v is None or not v.is_finite():
                 excluded["invalid_metric"]+=1
                 continue
             values.append(v)
-            episodes[str(r.get("episode_id") or r["opportunity_id"])].append(v)
+            memberships = r.get("episode_ids")
+            if memberships is None:
+                memberships = [r["episode_id"]] if r.get("episode_id") else []
+            if not memberships:
+                ungrouped += 1
+            for episode_id in set(memberships):
+                episodes[episode_id].append(v)
         n=len(values)
         mean=sum(values)/n if n else None
         wins=sum(v>0 for v in values)
@@ -58,7 +65,7 @@ def summarize(observations, group_keys=("role",), horizon="21", metric="end_retu
             "group":dict(zip(group_keys,key)),"horizon":str(horizon),"metric":metric,
             "total_opportunities":len(rows),"valid_opportunities":n,
             "excluded_opportunities":len(rows)-n,"exclusion_reasons":dict(sorted(excluded.items())),
-            "distinct_valid_episodes":len(episodes),"winning_opportunities":wins,
+            "distinct_valid_episodes":len(episodes),"valid_opportunities_without_episode":ungrouped,"winning_opportunities":wins,
             "winning_episodes":ep_wins,"opportunity_win_rate":str(Decimal(wins)/n) if n else None,
             "episode_win_rate":str(Decimal(ep_wins)/len(episodes)) if episodes else None,
             "mean_atr":str(mean) if mean is not None else None,
