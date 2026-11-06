@@ -20,7 +20,10 @@ jobs:
         run: |
           python -u test_research_batch.py . --r2
           python -u research_pilot.py february_review_queue.json february-pilot.json --r2
+          python -u shortlist_security_matches.py february-pilot.json february-match-review.json
       - uses: actions/upload-artifact@v4
         with:
           name: february-pilot-coverage
-          path: february-pilot.json
+          path: |
+            february-pilot.json
+            february-match-review.json
