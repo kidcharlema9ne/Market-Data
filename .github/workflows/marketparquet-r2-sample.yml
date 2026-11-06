@@ -23,7 +23,7 @@ jobs:
           python - <<'PY'
           from contextlib import closing
           from io import BytesIO
-          from urllib.request import urlopen
+          from urllib.request import Request, urlopen
           from botocore.exceptions import ClientError
           from pyarrow.parquet import ParquetFile
           from r2_storage import BUCKET, client
@@ -44,7 +44,7 @@ jobs:
                   print(f'{day}: skipped existing object ({metadata["ContentLength"]} bytes)')
                   continue
 
-              with urlopen(f'{base}/{day}.parquet', timeout=30) as response:
+              with urlopen(Request(f'{base}/{day}.parquet', headers={'User-Agent': 'insider-buying-research sample validation'}), timeout=30) as response:
                   payload = response.read(cap + 1)
               if len(payload) > cap:
                   raise SystemExit(f'{day}: exceeded sample size limit')
