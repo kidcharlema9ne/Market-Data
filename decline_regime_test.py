@@ -93,11 +93,14 @@ def build():
         stock_pct = c1 / c0 - 1
         scale = o / atr
         row = {"ticker": d["_t"], "entry_day": days[e], "decl": (c1 - c0) / atr, "stock": (x - o) / atr, "lag": True}
+        row["stock_c"] = (x - c1) / atr  # alternative entry: close of the filing day (session e-1)
         for sym in SYMBOLS:
             b = etf[sym]
             row["lag"] = row["lag"] and stock_pct < b[need[1]][3] / b[need[0]][3] - 1
             row[sym] = (b[need[3]][3] / b[need[2]][0] - 1) * scale
             row["exc_" + sym] = row["stock"] - row[sym]
+            row[sym + "_c"] = (b[need[3]][3] / b[need[1]][3] - 1) * (c1 / atr)
+            row["exc_" + sym + "_c"] = row["stock_c"] - row[sym + "_c"]
         spy_dir = (etf["SPY"][need[1]][3] - etf["SPY"][need[0]][3]) / spy_atr
         row["regime"] = "Down" if spy_dir <= -0.5 else "Up" if spy_dir >= 0.5 else "Flat"
         rows.append(row)
