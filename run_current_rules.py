@@ -178,6 +178,7 @@ def outcome(entry, series, spy, days):
         "stock": stock, "spy": spy_in_atr, "excess": stock - spy_in_atr, "adv": adv, "cfo": entry["cfo"],
         "decline": (base_close - last_close) / atr, "spy_move": (spy[days[e - 1]][3] - spy[days[e - 16]][3]) / spy_atr,
         "entry_day": entry_day, "buyers": entry["buyers"],
+        "atr_pct": atr / open_, "entry_open": open_,
     }, "ok"
 
 
