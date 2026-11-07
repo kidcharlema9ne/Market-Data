@@ -1,0 +1,90 @@
+name: Run ChatGPT recovered code unchanged
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/run-chatgpt-code-unchanged.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      # Saved Actions artifacts from ChatGPT's 7 Nov runs (free-year-candidate-integration)
+      ORIGINALS: "13577322443 13578539048"
+      CURRENTS: "13580379189 13581190927 13582058667"
+      BENCH: "13577375610 13576401007"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify the four recovered scripts are untouched
+        run: |
+          git fetch --depth=1 origin c4fb6932d8e28ce6ffd26c93a02dc54b6684c144
+          git diff --exit-code c4fb6932d8e28ce6ffd26c93a02dc54b6684c144 -- research/recovered_20261107 && echo "Recovered scripts identical to recovery branch tip c4fb693"
+          sha256sum research/recovered_20261107/*.py
+      - name: Download ChatGPT's saved inputs
+        run: |
+          mkdir -p /tmp/in && cd /tmp/in
+          for id in $ORIGINALS $CURRENTS $BENCH; do
+            gh api repos/$REPO/actions/artifacts/$id/zip > a_$id.zip
+            mkdir -p x_$id && unzip -q -o a_$id.zip -d x_$id
+            echo "== artifact $id"; ls -l x_$id
+          done
+      - name: Inventory (hashes, counts, date ranges)
+        run: |
+          cd /tmp/in
+          python3 - <<'PY'
+          import glob, json, csv, os
+          for p in sorted(glob.glob('x_*/free_year_candidates.json')):
+              d = json.load(open(p))
+              m = d['metadata']
+              rows = d['opportunities']
+              has_adv = sum('average_daily_dollars_15' in r.get('entry_features', {}) for r in rows)
+              print(p, 'rows', len(rows), 'db', str(m.get('database_sha256'))[:12], 'price_days', len(m.get('price_sha256_by_date', {})), 'rows_with_ADV15', has_adv)
+          for p in sorted(glob.glob('x_*/market_benchmark_bars.csv')):
+              r = list(csv.DictReader(open(p)))
+              spy = sorted(x['date'] for x in r if x['symbol'] == 'SPY')
+              print(p, 'rows', len(r), 'SPY', spy[0], spy[-1], len(spy))
+          z = glob.glob('x_*/**/free_year_zero_buyer_price_candidates.json', recursive=True)
+          print('zero-buyer control file found in:', z)
+          PY
+      - name: Run ChatGPT's scripts unchanged (first input pair that passes its own assertions)
+        run: |
+          cd /tmp/in
+          for id in $BENCH; do
+            if [ -f x_$id/market_benchmark_bars.csv ]; then (cd x_$id && zip -q ../bench_$id.zip market_benchmark_bars.csv); fi
+          done
+          S=$GITHUB_WORKSPACE/research/recovered_20261107
+          ok=0
+          for bench in bench_*.zip; do
+            for cur in $CURRENTS; do
+              for orig in $ORIGINALS; do
+                work=/tmp/run_${bench%.zip}_${cur}_${orig}; mkdir -p $work; cp $S/*.py $work/
+                cp a_$cur.zip $work/current.zip; cp a_$orig.zip $work/matrix.zip; cp $bench $work/1.zip
+                z=$(ls x_*/free_year_zero_buyer_price_candidates.json x_*/*/free_year_zero_buyer_price_candidates.json 2>/dev/null | head -1)
+                if [ -n "$z" ]; then (cd $(dirname $z) && zip -q $work/zero.zip free_year_zero_buyer_price_candidates.json); fi
+                echo "##### TRY bench=$bench current=$cur original=$orig"
+                if (cd $work && python liquidity_tiers.py current.zip > liq.out 2> liq.err); then
+                  echo "PASSED ITS OWN ASSERTIONS with bench=$bench current=$cur original=$orig"
+                  ok=1; echo "$work" > /tmp/winner; break 3
+                else
+                  tail -3 $work/liq.err
+                fi
+              done
+            done
+          done
+          echo "ok=$ok"
+      - name: Print results of every script on the winning input set
+        run: |
+          if [ ! -f /tmp/winner ]; then echo "No input combination passed liquidity_tiers.py's own assertions"; exit 0; fi
+          cd $(cat /tmp/winner); pwd
+          echo "################ matrix_warm.py (selector grid)"; python matrix_warm.py current.zip || true
+          echo "################ wider.py (15 vs 30 session windows)"; python wider.py current.zip || true
+          echo "################ liquidity_tiers.py (items 3 and 4)"; cat liq.out
+          echo "################ purchase_size_screen.py (item 5)"; python purchase_size_screen.py current.zip || true
