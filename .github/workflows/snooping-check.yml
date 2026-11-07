@@ -1,0 +1,26 @@
+name: Overfitting check on the four-buyer pilot
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'snooping_check.py'
+      - '.github/workflows/snooping-check.yml'
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow exchange-calendars
+      - name: Bootstrap and shuffle tests (read-only, prints to log)
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
+        run: python -u snooping_check.py
