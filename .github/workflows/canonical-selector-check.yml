@@ -67,3 +67,7 @@ jobs:
           python -m pip install -q numpy
           cd $(cat /tmp/winner)
           python $GITHUB_WORKSPACE/research/canonical/robustness_check.py $(pwd)
+      - name: Step 2D CEO analysis and schema dump
+        run: |
+          cd $(cat /tmp/winner)
+          python $GITHUB_WORKSPACE/research/canonical/ceo_and_schema.py $(pwd)
