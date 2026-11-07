@@ -56,6 +56,12 @@ At 21 sessions, the 750 disclosures in a down SPY regime averaged +0.06 stock AT
 
 Reproduce the tables using `python analyze_2026_market_regimes.py <candidate-zip> <ETF-OHLC-zip>`. The next step is to supply effective-dated benchmark assignments and rerun the full D-055 laggard cohort. The pullback-depth and role splits remain pending.
 
+## One-, three-, and six-month market lookbacks at insider purchase
+
+The [lookback pilot](https://chatgpt.com/library?file_id=libfile_e178bf4db29c819184d8ed68c825be97&account_id=personal) classifies the SPY net change over 21, 63, and 126 sessions ending before the actual insider purchase date, divided by SPY’s pre-purchase ATR(14). Use the latest transaction date when one disclosure spans multiple purchase dates. This is a purchase-context analysis with forward returns measured from the approved post-disclosure entry. Show entry-date context as a sensitivity. Down bands of 0.5–<2, 2–<5, and 5+ ATR are exploratory. Include the whole screened cohort with valid context rather than conditioning on stock weakness. The historical assigned index is still unavailable, so report each matched SPY, ONEQ, and IWM reference separately.
+
+Warm-up data from [ChartExchange](https://chartexchange.com/symbol/nyse-spy/historical) cover 126 sessions from June to November 2025. The SPY OHLC comparison against the ETF artifact matched within two cents over 19 overlapping sessions. For the one- and three-month lookbacks, the 5+ ATR down group has 70 completed 21-session outcomes on nine entry dates. The six-month lookback has 70 in the 2–<5 ATR group and 157 in the 0.5–<2 group, with zero in the 5+ group. Every market-down band with data lagged each ETF at the 21-session horizon. The deep one- and three-month cells and moderate six-month cell contain the same 70 disclosures. This is descriptive. Test additional independent drawdown periods when extending the dataset.
+
 ## Data validation backlog
 
 Validate effective-dated issuer/security mappings and discretionary common-stock eligibility for the January–September candidate cohort. Start with the wording-only review queue and keep multi-class, multi-issuer and non-common securities separate. Keep the October–November filing backlog separate from the requested pilot. Then rerun the 2026 integration, retain incomplete horizons, and report ATR and benchmark outcomes separately. The free sample is sufficient for this stage.
