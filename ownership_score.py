@@ -88,8 +88,8 @@ def build():
         if not d["transaction_dates"]:
             return None
         t0 = date.fromisoformat(d["transaction_dates"][0])
-        look = t0 - timedelta(days=round(months * 30.44))
-        if look.isoformat() < first_filing:
+        look = date.min if months is None else t0 - timedelta(days=round(months * 30.44))
+        if months is not None and look.isoformat() < first_filing:
             return None  # lookback reaches before the database starts
         prior = [t for f, t in history[(d["issuer_cik"], owner)] if f and f < d["filing_date"]]
         return not any(look.isoformat() <= t < t0.isoformat() for t in prior)
@@ -115,7 +115,8 @@ def build():
         if not buyer or e >= len(days):
             continue
         f = holding_features(d, raw)
-        f["first3"], f["first6"] = first_within(d, buyer[0], 3), first_within(d, buyer[0], 6)
+        for name, m in (("first3", 3), ("first6", 6), ("first12", 12), ("first24", 24), ("firstever", None)):
+            f[name] = first_within(d, buyer[0], m)
         events[t].append((e, buyer[0], buyer[1], d["filing_date"], f))
 
     rows = []
@@ -140,6 +141,9 @@ def build():
                 "dollars": sum(dollars) if all(x is not None for x in dollars) else None,
                 "first3": sum(f["first3"] is True for f in fs) if all(f["first3"] is not None for f in fs) else None,
                 "first6": sum(f["first6"] is True for f in fs) if all(f["first6"] is not None for f in fs) else None,
+                "first12": sum(f["first12"] is True for f in fs) if all(f["first12"] is not None for f in fs) else None,
+                "first24": sum(f["first24"] is True for f in fs) if all(f["first24"] is not None for f in fs) else None,
+                "firstever": sum(f["firstever"] is True for f in fs) if all(f["firstever"] is not None for f in fs) else None,
             })
             rows.append(result)
     return rows
@@ -216,11 +220,13 @@ def main():
                         ("Two or more buyers new", lambda r: r["n_new"] >= 2)):
         print(line(label, [r for r in liquid if test(r)]))
 
-    for months, key in ((3, "first3"), (6, "first6")):
-        print(f"\nB{months}. Buyers with no purchase of this company in the prior {months} months (only trades where the data reaches back far enough)")
+    for months, key in ((3, "first3"), (12, "first12"), (24, "first24"), (None, "firstever")):
+        span = "ever on record since 2006" if months is None else f"in the prior {months} months"
+        print(f"\nB{months}. Buyers with no purchase of this company {span}")
         obs = [r for r in liquid if r[key] is not None]
         for label, test in (("No first-time buyer", lambda r: r[key] == 0), ("One first-time buyer", lambda r: r[key] == 1),
-                            ("Two or more first-time buyers", lambda r: r[key] >= 2)):
+                            ("Two first-time buyers", lambda r: r[key] == 2), ("Three first-time buyers", lambda r: r[key] == 3),
+                            ("Four or more first-time buyers", lambda r: r[key] >= 4)):
             print(line(label, [r for r in obs if test(r)]))
 
     print("\nC. Median percent increase in holdings across the buyers (existing holders only), split into thirds")
@@ -238,7 +244,8 @@ def main():
 
     print("\nE. Rank correlation with excess return (0 means no link; range resamples entry dates)")
     for feature, label in (("n_new", "Number of new-position buyers"), ("first3", "First-time buyers, 3 months"),
-                           ("first6", "First-time buyers, 6 months"), ("med_pct", "Median percent increase"),
+                           ("first6", "First-time buyers, 6 months"), ("first12", "First-time buyers, 12 months"),
+                           ("first24", "First-time buyers, 24 months"), ("firstever", "First-time buyers, ever on record"), ("med_pct", "Median percent increase"),
                            ("dollars", "Total dollars bought")):
         n, base, rng = corr_range(liquid, feature)
         print(f"  {label:<34} trades {n:>3}  correlation {base if base is None else format(base, '+.2f')}"
