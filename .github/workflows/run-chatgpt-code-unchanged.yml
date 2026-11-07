@@ -54,32 +54,26 @@ jobs:
           z = glob.glob('x_*/**/free_year_zero_buyer_price_candidates.json', recursive=True)
           print('zero-buyer control file found in:', z)
           PY
-      - name: Run ChatGPT's scripts unchanged (first input pair that passes its own assertions)
+      - name: Run ChatGPT's scripts unchanged (first input set that passes its own assertions)
         run: |
           cd /tmp/in
-          for id in $BENCH; do
-            if [ -f x_$id/market_benchmark_bars.csv ]; then (cd x_$id && zip -q ../bench_$id.zip market_benchmark_bars.csv); fi
-          done
+          (cd x_13577375610 && zip -q ../bench.zip market_benchmark_bars.csv)
           S=$GITHUB_WORKSPACE/research/recovered_20261107
-          ok=0
-          for bench in bench_*.zip; do
-            for cur in $CURRENTS; do
-              for orig in $ORIGINALS; do
-                work=/tmp/run_${bench%.zip}_${cur}_${orig}; mkdir -p $work; cp $S/*.py $work/
-                cp a_$cur.zip $work/current.zip; cp a_$orig.zip $work/matrix.zip; cp $bench $work/1.zip
-                z=$(ls x_*/free_year_zero_buyer_price_candidates.json x_*/*/free_year_zero_buyer_price_candidates.json 2>/dev/null | head -1)
-                if [ -n "$z" ]; then (cd $(dirname $z) && zip -q $work/zero.zip free_year_zero_buyer_price_candidates.json); fi
-                echo "##### TRY bench=$bench current=$cur original=$orig"
-                if (cd $work && python liquidity_tiers.py current.zip > liq.out 2> liq.err); then
-                  echo "PASSED ITS OWN ASSERTIONS with bench=$bench current=$cur original=$orig"
-                  ok=1; echo "$work" > /tmp/winner; break 3
-                else
-                  tail -3 $work/liq.err
-                fi
-              done
+          cur=13582058667   # only artifact that carries the 15-session dollar-volume feature
+          for orig in 13578539048 13577322443; do
+            for zid in 13581190927 13580379189; do
+              work=/tmp/run_${orig}_${zid}; mkdir -p $work; cp $S/*.py $work/
+              cp a_$cur.zip $work/current.zip; cp a_$orig.zip $work/matrix.zip; cp bench.zip $work/1.zip
+              (cd x_$zid && zip -q $work/zero.zip free_year_zero_buyer_price_candidates.json)
+              echo "##### TRY original=$orig zero-control-from=$zid"
+              if (cd $work && python liquidity_tiers.py current.zip > liq.out 2> liq.err); then
+                echo "PASSED ITS OWN ASSERTIONS: original=$orig zero-control=$zid"
+                echo "$work" > /tmp/winner; break 2
+              else
+                tail -3 $work/liq.err
+              fi
             done
           done
-          echo "ok=$ok"
       - name: Print results of every script on the winning input set
         run: |
           if [ ! -f /tmp/winner ]; then echo "No input combination passed liquidity_tiers.py's own assertions"; exit 0; fi
