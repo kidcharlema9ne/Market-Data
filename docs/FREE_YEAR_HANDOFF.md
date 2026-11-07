@@ -32,6 +32,14 @@ The 2,443 identity conflicts split into 606 with multiple issuer CIKs and 1,837 
 
 The attached Word v0.10 and repository decision log reuse D-048 and D-049 for different decisions. Word v0.10 records the approved 63-session pullback and 21-session direction fields and provisional subgroup reporting. The repository uses those numbers for episodes and campaigns. Preserve both records and reconcile identifiers before the next specification update. The existing candidate artifact contains the earlier trailing-return fields and does not contain the new 63-session pullback measure.
 
-## Next run
+## January–September pilot results
 
-Validate effective-dated issuer/security mappings and discretionary common-stock eligibility for the January–September candidate cohort. Start with the wording-only review queue and keep multi-class, multi-issuer and non-common securities separate. In parallel, reconcile October through November 5 filings against the SEC index and obtain transaction-level source rows. Then rerun the 2026 integration, retain incomplete horizons, and report ATR and benchmark outcomes separately. The free sample is sufficient for this stage.
+The requested pilot uses existing January–September SEC filings and all available forward prices through November 5. October and November filing ingestion is outside this pilot. [Read the pilot report](https://chatgpt.com/library?file_id=libfile_e89a4467d8448191b271493a9c0d6b43&account_id=personal).
+
+The broad cohort has 9,671 code-P candidates. An exploratory screen sets aside 1,319 rows with at least one review flag for affirmative or possible 10b5-1 activity, possible non-discretionary activity, a non-acquisition, or missing numeric amounts. An additional plain common-stock or common-share title check leaves 6,604 candidates. These are sensitivity cohorts and do not change the approved eligibility rules. With sufficient data, the narrow cohort has 4,546 complete 21-session outcomes and 1,799 complete six-month outcomes. The median ending returns are −0.10 and +0.47 ATR, respectively. Restricting the comparison to the same 1,799 disclosures at every horizon moves the 21-session median to +0.05 ATR. The 21-session matched next-open versus filing-close comparison covers 4,541 rows and has a median opening gap of +0.16 ATR.
+
+The pilot has no benchmark-relative results. Verify the largest price paths and effective-dated identity and eligibility before making predictive claims. The next analytical run should add matched market returns for the approved benchmark mapping, retaining explicit missing classifications. Integrate the approved 63-session pullback field before evaluating pullback subgroups. Continue with the existing SEC cohort.
+
+## Data validation backlog
+
+Validate effective-dated issuer/security mappings and discretionary common-stock eligibility for the January–September candidate cohort. Start with the wording-only review queue and keep multi-class, multi-issuer and non-common securities separate. Keep the October–November filing backlog separate from the requested pilot. Then rerun the 2026 integration, retain incomplete horizons, and report ATR and benchmark outcomes separately. The free sample is sufficient for this stage.
