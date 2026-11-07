@@ -5,6 +5,7 @@ effective-dated identity and eligibility. This run measures pipeline coverage.
 """
 
 import json
+import math
 import os
 import sqlite3
 from bisect import bisect_left, bisect_right
@@ -26,6 +27,58 @@ from validate_free_year_report import PRICE_PREFIX, checked_object
 
 DB_KEY = "sec/insider-transactions/derived/purchase_candidates.sqlite3"
 START, END = "2025-11-06", "2026-11-05"
+MATCH_DATES = ("2026-03-02", "2026-05-12", "2026-05-19", "2026-05-20",
+               "2026-06-01", "2026-08-05", "2026-08-12", "2026-08-18", "2026-08-25")
+
+
+def read_control_bars(data, day, date_col, fields):
+    rows = pq.read_table(BytesIO(data), columns=["symbol", date_col, *fields]).to_pylist()
+    counts = Counter(row["symbol"] for row in rows)
+    bars = {}
+    for row in rows:
+        ticker = row["symbol"]
+        values = [row[field] for field in fields]
+        if not ticker or counts[ticker] != 1 or str(row[date_col])[:10] != day:
+            continue
+        if any(value is None or not math.isfinite(value) for value in values):
+            continue
+        o, h, l, c, v = values
+        if 0 < l <= min(o, c) <= max(o, c) <= h and v >= 0:
+            bars[ticker] = row
+    return bars
+
+
+def control_candidates(days, raw_bars):
+    result = {}
+    for entry in MATCH_DATES:
+        i = days.index(entry)
+        prior = days[i - 16:i]
+        forward = days[i:i + 21]
+        matches = {}
+        for ticker, bar in raw_bars[entry].items():
+            if any(ticker not in raw_bars[day] for day in prior):
+                continue
+            history = [raw_bars[day][ticker] for day in prior]
+            risk = atr14(history, 16)
+            if not risk or risk <= 0:
+                continue
+            close = Decimal(str(history[-1]["close"]))
+            base = Decimal(str(history[0]["close"]))
+            depth = (base - close) / risk
+            if not 2 <= depth <= 5:
+                continue
+            opening = Decimal(str(bar["open"]))
+            daily_dollars = sum(Decimal(str(x["close"])) * Decimal(str(x["volume"]))
+                                for x in history[1:]) / 15
+            complete = all(ticker in raw_bars[day] for day in forward)
+            exit_close = raw_bars[forward[-1]][ticker]["close"] if complete else None
+            matches[ticker] = {
+                "entry_open": str(opening), "atr14": str(risk), "depth_atr": str(depth),
+                "prior_close": str(close), "average_daily_dollars_15": str(daily_dollars),
+                "exit_close": str(exit_close) if complete else None,
+            }
+        result[entry] = {"end_date": forward[-1], "stocks": matches}
+    return result
 
 
 def main():
@@ -54,6 +107,11 @@ def main():
         elif ticker:
             row["review_flags"].append("conflicting_sec_ticker_identity")
 
+    control_days = set()
+    for entry in MATCH_DATES:
+        i = days.index(entry)
+        control_days.update(days[i - 16:i + 21])
+    raw_bars = {}
     series = defaultdict(list)
     hashes = {}
     rejected_bars = Counter()
@@ -65,6 +123,8 @@ def main():
         date_col = "date" if "date" in schema else "timestamp"
         if not {"symbol", date_col, *fields} <= schema or not parquet.metadata.num_rows:
             raise ValueError(f"Invalid price partition schema on {day}")
+        if day in control_days:
+            raw_bars[day] = read_control_bars(data, day, date_col, fields)
         rows = pq.read_table(BytesIO(data), columns=["symbol", date_col, *fields],
                              filters=[("symbol", "in", sorted(provisional))]).to_pylist()
         counts = Counter(row["symbol"] for row in rows)
@@ -146,6 +206,9 @@ def main():
                            "scope": "Provisional engineering sample. Ticker joins, eligibility, corporate actions and adjustments require verification."}
     output = Path("reports")
     output.mkdir(exist_ok=True)
+    (output / "free_year_zero_buyer_price_candidates.json").write_text(
+        json.dumps(control_candidates(days, raw_bars))
+    )
     (output / "free_year_coverage.json").write_text(json.dumps(dataset["metadata"], indent=2))
     (output / "free_year_candidates.json").write_text(json.dumps(dataset))
     write_report(dataset, output / "free_year_candidates.html", title="Free-year integration — provisional candidates",
