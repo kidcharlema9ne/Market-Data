@@ -15,7 +15,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install pyarrow exchange-calendars
-      - name: Extract verified daily ETF opens and closes
+      - name: Extract verified ETF OHLC with December lookback
         env:
           MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
         run: |
@@ -35,7 +35,7 @@ jobs:
           import exchange_calendars as xcals
           import pyarrow.parquet as pq
 
-          START, END = '2026-01-02', '2026-11-05'
+          START, END = '2025-12-01', '2026-11-05'
           SYMBOLS = {'SPY', 'ONEQ', 'IWM'}
           dates = [str(day.date()) for day in xcals.get_calendar('XNYS').sessions_in_range(START, END)]
 
@@ -76,13 +76,13 @@ jobs:
                   hashes[day] = hashlib.sha256(payload).hexdigest()
                   names = set(pq.ParquetFile(BytesIO(payload)).schema_arrow.names)
                   date_field = 'date' if 'date' in names else 'timestamp'
-                  bars = pq.read_table(BytesIO(payload), columns=['symbol', date_field, 'open', 'close'],
+                  bars = pq.read_table(BytesIO(payload), columns=['symbol', date_field, 'open', 'high', 'low', 'close'],
                                        filters=[('symbol', 'in', sorted(SYMBOLS))]).to_pylist()
                   if len(bars) != len(SYMBOLS) or {r['symbol'] for r in bars} != SYMBOLS:
                       raise SystemExit(f'{day}: incomplete or duplicate benchmark bars')
                   for row in sorted(bars, key=lambda r: r['symbol']):
-                      values = [Decimal(str(row[k])) for k in ('open', 'close')]
-                      if str(row[date_field])[:10] != day or not all(v.is_finite() and v > 0 for v in values):
+                      values = [Decimal(str(row[k])) for k in ('open', 'high', 'low', 'close')]
+                      if str(row[date_field])[:10] != day or not (all(v.is_finite() for v in values) and 0 < values[2] <= min(values[0], values[3]) <= max(values[0], values[3]) <= values[1]):
                           raise SystemExit(f'{day}: invalid benchmark bar')
                       rows.append((day, row['symbol'], *values))
               return rows, {'source': 'MarketParquet etf_daily', 'partition_sha256': hashes}
@@ -110,9 +110,9 @@ jobs:
                   days = [datetime.fromtimestamp(t, timezone.utc).date().isoformat() for t in result['timestamp']]
                   if days != dates:
                       raise SystemExit(f'Incomplete benchmark dates for {symbol}: {len(days)} of {len(dates)}')
-                  for day, opening, closing in zip(days, quote['open'], quote['close'], strict=True):
-                      values = [Decimal(str(v)) for v in (opening, closing)]
-                      if not all(v.is_finite() and v > 0 for v in values):
+                  for day, opening, high, low, closing in zip(days, quote['open'], quote['high'], quote['low'], quote['close'], strict=True):
+                      values = [Decimal(str(v)) for v in (opening, high, low, closing)]
+                      if not (all(v.is_finite() for v in values) and 0 < values[2] <= min(values[0], values[3]) <= max(values[0], values[3]) <= values[1]):
                           raise SystemExit(f'{day}: invalid {symbol} prices')
                       rows.append((day, symbol, *values))
               return sorted(rows), {'source': 'Yahoo Finance unadjusted daily chart OHLC', 'response_sha256': hashes}
@@ -126,7 +126,7 @@ jobs:
           output.mkdir()
           with (output / 'market_benchmark_bars.csv').open('w', newline='') as stream:
               writer = csv.writer(stream)
-              writer.writerow(('date', 'symbol', 'open', 'close'))
+              writer.writerow(('date', 'symbol', 'open', 'high', 'low', 'close'))
               writer.writerows(rows)
           (output / 'market_benchmark_source.json').write_text(json.dumps({
               **source, 'start': START, 'end': END, 'session_count': len(dates),
