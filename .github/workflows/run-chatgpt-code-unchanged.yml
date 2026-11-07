@@ -90,3 +90,9 @@ jobs:
           cd $(cat /tmp/winner)
           cp $GITHUB_WORKSPACE/research/claude_tests/chance_test.py .
           python chance_test.py current.zip
+      - name: Stand-alone SPY-rising test
+        run: |
+          if [ ! -f /tmp/winner ]; then echo "no winner"; exit 0; fi
+          cd $(cat /tmp/winner)
+          cp $GITHUB_WORKSPACE/research/claude_tests/spy_rising_test.py .
+          python spy_rising_test.py current.zip
