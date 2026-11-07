@@ -2,7 +2,7 @@
 MASTER RESEARCH SPECIFICATION**
 
 Version 0.9 — Consolidated authoritative working specification  
-Last updated: November 6, 2026  
+Last updated: November 7, 2026  
 Status: Approved methodology preserved; initial implementation scaffolding authorized; historical source selection pending.
 
 # Document control and preservation
@@ -543,3 +543,51 @@ D-054 carries forward the two approved entry-context measurements from the Word 
 **D-055 — Approved first market-regime comparison.** Use the same 21 close-to-close intervals ending at the last completed session before entry for stock direction, relative performance versus the assigned entry-date benchmark, and SPY regime. For this comparison, a laggard is a stock with both a negative prior stock move and negative stock-minus-assigned-benchmark performance. Classify SPY as flat when its absolute 21-session change is less than 0.5 of its own pre-entry ATR(14), down at or below −0.5 ATR, and up at or above +0.5 ATR. Use only completed bars. Compare subsequent outcomes at the approved horizons by regime, with named matched benchmarks, paired excess in stock ATR units, and counts. Missing benchmark assignments remain flagged. Any proxy comparisons must be labeled. These are study strata and do not change eligibility.
 
 **Open design question.** The tentative pullback-depth bands of under 2 ATR, 2 to under 5 ATR, and 5 ATR or more, and further insider-role and cluster splits, remain proposals for subsequent analysis.
+
+
+# What we have learned so far
+
+November 7, 2026 · Exploratory pilot findings
+
+The January–September 2026 pilot produced two leads for independent testing: larger clusters of distinct buyers and purchases after mild stock declines when the broad market was flat or rising. CFO participation may add information within a large cluster. The pilot has yet to establish a reliable trading edge.
+
+The pilot screened 6,604 Form 4 purchase candidates, with forward prices through November 5. The public investor enters at the next regular-session open after filing. Returns below are price-only ending returns at 21 trading sessions, measured in the stock’s fixed pre-entry ATR. SPY, ONEQ, and IWM use the same entry and exit dates and the same stock ATR scale. The individual historical benchmark assignment is unavailable in this pilot, so the ETFs are shown separately.
+
+## Results at 21 trading sessions
+
+| Pilot group | Entries | Stock | SPY | ONEQ | IWM |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| All screened buys | 4,546 | +0.02 | +0.15 | +0.23 | +0.09 |
+| CFO buys | 287 | −0.10 | +0.09 | +0.16 | +0.07 |
+| CEO buys | 736 | −0.29 | +0.15 | +0.22 | +0.08 |
+| Non-officer directors | 2,050 | +0.09 | +0.14 | +0.22 | +0.08 |
+| Four distinct buyers | 101 | +0.79 | +0.05 | +0.05 | +0.18 |
+| Five or more distinct buyers | 64 | +0.59 | +0.15 | +0.12 | +0.32 |
+| First four-plus entry, CFO among buyers | 57 | +0.97 | +0.07 | +0.11 | +0.08 |
+| First four-plus entry, no CFO identified | 80 | +0.59 | +0.13 | +0.12 | +0.27 |
+| Stock down 0.5 to <2 ATR, SPY flat¹ | 132 | +0.63 | +0.06 | +0.10 | −0.23 |
+| Stock down 0.5 to <2 ATR, SPY up¹ | 455 | +0.26 | +0.06 | −0.04 | −0.03 |
+| Stock down 5+ ATR, SPY down¹ | 211 | +0.48 | +0.50 | +0.75 | +0.46 |
+
+¹ Equal weight per entry date. All other rows give each stock entry or disclosure equal weight. Samples can overlap. In particular, the pooled first four-plus entry and the separate four- and five-plus-buyer groups answer different questions and should stay separate.
+
+## What held up in the pilot
+
+- **Number of buyers.** Count different officers and directors who bought the same stock in the preceding 15 trading sessions and whose filings were already public. Repeat purchases by one person count once. Four and five-plus buyers beat all three references at 21 sessions even with equal weight per entry date. One and two buyers lagged all three across all five tested holding periods. The 21-session excess over SPY was +0.74 ATR for four buyers (95% interval −0.38 to +1.95) and +0.44 ATR for five-plus (−0.51 to +1.40). Neither passed the statistical test. Four buyers also beat the three references at six months, based on 39 entries and limited independent calendar coverage.
+- **CFO participation.** CFO buys did better than CEO buys overall at 21 sessions, and non-officer directors were roughly in line with the same-date references. The mean CFO-minus-CEO stock difference shrank to about +0.01 ATR across the 114 companies where both bought, with unmatched dates and benchmark unavailable for that within-company comparison. Within first four-plus clusters, CFO participation was associated with +0.44 ATR more excess over SPY (95% interval −1.30 to +2.42, raw p=0.61). The direction held with equal date weighting and among exactly-four-buyer entries. Incomplete filing roles mean some buyers in the no-identified-CFO group may have been CFOs.
+- **Stock decline and market direction.** The stock measure is the net change over 21 completed sessions before the actual insider purchase, scaled by that stock’s pre-purchase ATR. A 0.5 to under 2 ATR decline in a flat or rising SPY market beat all three ETF references even with equal date weighting. Those groups spanned 49 and 97 entry dates, respectively. Stocks down at least 5 ATR showed little advantage during broad declines after equal date weighting. They averaged −0.43 stock ATR versus +0.02 SPY, 0.00 ONEQ and −0.06 IWM when SPY had been rising (162 entries, disclosure-weighted).
+- **Broad market decline alone.** Using one-, three-, or six-month SPY lookbacks before purchase, every market-down band with data lagged all three references at the 21-session horizon. The deepest one- and three-month groups and the moderate six-month decline group were the same 70 disclosures across nine entry dates. Treat that as one set of observations viewed through three lookbacks.
+- **Entry timing.** Use the next regular open after filing for investable results. The filing-day close is a separate descriptive reference because the filing can become public after that close. The pilot showed that changing the entry reference could change the sign of the typical result.
+
+## Candidates for a future score
+
+- Retain distinct buyer count and stock decline crossed with the broad-market regime as the first two candidate scoring inputs. Retain CFO participation within four-plus clusters as a secondary interaction. The pilot gives less support to CFO status by itself, very deep stock declines, and broad market declines by themselves.
+- Before looking at a separate period’s returns, specify the buyer window, decline bands, 21-session primary horizon, benchmark mapping, and how repeated issuers and overlapping dates will be handled. Verify each security’s benchmark as of entry. Use more historical price coverage so the test spans separate market episodes.
+- Keep the underlying results separate by feature, horizon, and sample. A future score is a proposal. Choose weights and evaluate any combined score only after individual features and their overlap are tested on separate data.
+
+## Source reports
+
+- [Buyer counts, statistical tests, and CFO participation](https://chatgpt.com/library?file_id=libfile_d742aa48034c8191a4aee1d54e1c64dc&account_id=personal)
+- [Stock decline and market regime matrix](https://chatgpt.com/library?file_id=libfile_aca3eb087cc0819196c9493fe80ed2b9&account_id=personal)
+- [Broad market lookbacks](https://chatgpt.com/library?file_id=libfile_e178bf4db29c819184d8ed68c825be97&account_id=personal)
+- [Project handoff and source runs](https://github.com/kidcharlema9ne/insider-buying-research/blob/main/docs/FREE_YEAR_HANDOFF.md)

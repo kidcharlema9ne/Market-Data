@@ -151,3 +151,8 @@ Exact out-of-sample date split, overlap-aware separation of training/validation 
 - **D-054 (previously approved measurements carried forward):** Record the 63-session pullback depth and signed 21-session price change in stock ATR units at investor entry, as specified in Word v0.10 D-048. This repository number avoids the existing episode decision’s D-048. The Word D-049 reporting bands and any down-versus-up subgroup comparisons remain open for discussion before implementation.
 
 - **D-055 (approved November 7, 2026):** Compare pre-entry falling stocks that lagged their assigned benchmark, stratified by SPY’s 21-session regime. Use the same 21 close-to-close intervals ending before entry. SPY is flat strictly inside ±0.5 of its own pre-entry ATR(14), down at or below −0.5, and up at or above +0.5. Report forward outcomes and applicable benchmarks under D-053. This authorizes the first regime test. Additional pullback-depth, role, and cluster splits remain proposals.
+
+
+## November 7, 2026 — pilot evidence and future scoring proposal
+
+- Added the [pilot findings](MASTER_SPECIFICATION.md#what-we-have-learned-so-far) to the master specification. The user asked to retain evidence that could eventually inform a score. Buyer count, mild stock decline in a flat or rising market, and CFO participation within four-plus clusters are candidates for validation. A combined score, weights, and scanner rules remain proposals. The current reporting methodology continues to present the underlying measures separately.
