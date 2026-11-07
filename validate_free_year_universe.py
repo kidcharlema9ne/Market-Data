@@ -27,8 +27,7 @@ from validate_free_year_report import PRICE_PREFIX, checked_object
 
 DB_KEY = "sec/insider-transactions/derived/purchase_candidates.sqlite3"
 START, END = "2025-11-06", "2026-11-05"
-MATCH_DATES = ("2026-03-02", "2026-05-12", "2026-05-19", "2026-05-20",
-               "2026-06-01", "2026-08-05", "2026-08-12", "2026-08-18", "2026-08-25")
+MATCH_DATES = ("2026-03-17", "2026-09-17")
 
 
 def read_control_bars(data, day, date_col, fields):
