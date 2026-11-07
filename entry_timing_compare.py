@@ -5,12 +5,15 @@ Filing-day-close entry has look-ahead risk: Forms 4 count as filed the same day 
 So the 'tradeable' version keeps only entries whose four-buyer cluster was already public (accepted by 3:50 p.m. Eastern
 on the filing day) and uses the cluster and CFO status known at that moment.
 """
+import json
 import random
 import re
 import sqlite3
+import time
 from bisect import bisect_right
 from collections import Counter, defaultdict
-from datetime import datetime
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 from statistics import mean, median
 from tempfile import TemporaryDirectory
@@ -19,7 +22,7 @@ import exchange_calendars as xcals
 
 from r2_storage import BUCKET, client
 from run_current_rules import (FLAGS, FLOOR, HOLD, PLACEHOLDERS, TITLE, WINDOW, WINDOW_FILINGS, atr_before, buyer_of,
-                               find_entries, load_bars, price_verdict, spy_bars)
+                               fetch, find_entries, load_bars, price_verdict, spy_bars)
 from sec_bulk_importer import disclosure_opportunities
 from validate_free_year_report import checked_object
 from validate_free_year_universe import DB_KEY, END, START
@@ -30,6 +33,8 @@ COSTS = (0.10, 0.25)
 ACCEPT = re.compile(rb"<ACCEPTANCE-DATETIME>\s*(\d{14})")
 PREFIX = "sec/edgar/free-year/originals/"
 CUTOFF = "15:50:00"
+SEC_UA = "InsiderBuyingResearch mgd.dorsey@gmail.com"
+EASTERN = ZoneInfo("America/New_York")
 
 
 def outcome_both(entry, series, spy, days):
@@ -54,18 +59,57 @@ def outcome_both(entry, series, spy, days):
             "spy_move": (spy[d_prev][3] - spy[days[e - 16]][3]) / spy_atr, "buyers": entry["buyers"]}
 
 
-def acceptance(storage, accession, cache):
-    if accession not in cache:
-        try:
-            data = storage.get_object(Bucket=BUCKET, Key=PREFIX + accession + ".txt", Range="bytes=0-6000")["Body"].read()
+def archive_time(storage, accession):
+    try:
+        data = storage.get_object(Bucket=BUCKET, Key=PREFIX + accession + ".txt", Range="bytes=0-6000")["Body"].read()
+        m = ACCEPT.search(data)
+        if not m:
+            data = storage.get_object(Bucket=BUCKET, Key=PREFIX + accession + ".txt")["Body"].read()
             m = ACCEPT.search(data)
-            if not m:
-                data = storage.get_object(Bucket=BUCKET, Key=PREFIX + accession + ".txt")["Body"].read()
-                m = ACCEPT.search(data)
-            cache[accession] = datetime.strptime(m.group(1).decode(), "%Y%m%d%H%M%S") if m else None
-        except Exception:
-            cache[accession] = None
-    return cache[accession]
+        return datetime.strptime(m.group(1).decode(), "%Y%m%d%H%M%S") if m else None
+    except Exception:
+        return None
+
+
+def sec_submissions(cik):
+    url = f"https://data.sec.gov/submissions/CIK{int(cik):010d}.json"
+    for attempt in range(4):
+        try:
+            recent = json.loads(fetch(url, 30_000_000, {"User-Agent": SEC_UA, "Accept-Encoding": "identity"}))["filings"]["recent"]
+            time.sleep(0.15)
+            return {a: datetime.strptime(t[:19], "%Y-%m-%dT%H:%M:%S") for a, t in zip(recent["accessionNumber"], recent["acceptanceDateTime"]) if t}
+        except Exception as error:
+            if attempt == 3:
+                print(f"  SEC lookup failed for issuer {cik}: {type(error).__name__}")
+                return {}
+            time.sleep(1.5 * (attempt + 1))
+
+
+def resolve_times(storage, needed):
+    """needed: accession -> issuer CIK. Archive first, then the SEC submissions feed, checked against the archive."""
+    times, source = {}, {}
+    for acc in needed:
+        t = archive_time(storage, acc)
+        if t:
+            times[acc], source[acc] = t, "archive"
+    missing = {a: c for a, c in needed.items() if a not in times}
+    check_issuers = {needed[a] for a in list(times)[:40]}
+    sec = {}
+    for cik in sorted(set(missing.values()) | check_issuers):
+        sec.update(sec_submissions(cik))
+    overlap = [(times[a], sec[a]) for a in times if a in sec]
+    as_eastern = sum(x == y for x, y in overlap)
+    as_utc = sum(x == y.replace(tzinfo=timezone.utc).astimezone(EASTERN).replace(tzinfo=None) for x, y in overlap)
+    utc_mode = as_utc > as_eastern
+    print(f"SEC feed check against archived filings: {len(overlap)} overlapping; identical if read as Eastern {as_eastern}; identical if read as UTC {as_utc}; using {'UTC' if utc_mode else 'Eastern'}")
+    for acc in missing:
+        if acc in sec:
+            t = sec[acc]
+            times[acc] = t.replace(tzinfo=timezone.utc).astimezone(EASTERN).replace(tzinfo=None) if utc_mode else t
+            source[acc] = "SEC feed"
+    print(f"Same-day filings needing a time: {len(needed)}; from archive {sum(v == 'archive' for v in source.values())}; "
+          f"from SEC feed {sum(v == 'SEC feed' for v in source.values())}; still unknown {len(needed) - len(times)}")
+    return times
 
 
 def build_cluster():
@@ -96,8 +140,8 @@ def build_cluster():
         buyer = buyer_of(d)
         e = bisect_right(days, d["filing_date"])
         if buyer and e < len(days):
-            events[t].append((e, buyer[0], buyer[1], d["filing_date"], d["accession"]))
-    cache, timing, rows = {}, Counter(), []
+            events[t].append((e, buyer[0], buyer[1], d["filing_date"], d["accession"], d["issuer_cik"]))
+    pending, needed = [], {}
     for t, evs in events.items():
         for entry in find_entries(evs, len(days) - 1):
             if not (WINDOW_FILINGS[0] <= entry["filed"] <= WINDOW_FILINGS[1]):
@@ -106,22 +150,32 @@ def build_cluster():
             if not result:
                 continue
             live = [ev for ev in evs if entry["e"] - WINDOW + 1 <= ev[0] <= entry["e"]]
-            known = []
             for ev in live:
-                if ev[3] < entry["filed"]:
-                    known.append(ev)
-                    continue
-                at = acceptance(storage, ev[4], cache)
-                if at is None:
-                    timing["acceptance time unavailable"] += 1
-                    continue
-                clock = at.strftime("%H:%M:%S")
-                timing["accepted by 3:50 pm" if clock <= CUTOFF else "accepted 3:50 to 4:00 pm" if clock <= "16:00:00" else "accepted after 4:00 pm"] += 1
-                if at.strftime("%Y-%m-%d %H:%M:%S") <= f"{entry['filed']} {CUTOFF}":
-                    known.append(ev)
-            result.update({"ticker": t, "cfo": entry["cfo"], "tradeable": len({ev[1] for ev in known}) >= 4,
-                           "cfo_close": any(ev[2] for ev in known)})
-            rows.append(result)
+                if ev[3] >= entry["filed"]:
+                    needed[ev[4]] = ev[5]
+            pending.append((t, entry, result, live))
+    times = resolve_times(storage, needed)
+    timing, rows = Counter(), []
+    for t, entry, result, live in pending:
+        known = []
+        for ev in live:
+            if ev[3] < entry["filed"]:
+                known.append(ev)
+                continue
+            at = times.get(ev[4])
+            if at is None:
+                timing["acceptance time unavailable"] += 1
+                continue
+            clock = at.strftime("%H:%M:%S")
+            timing["accepted by 3:50 pm" if clock <= CUTOFF else "accepted 3:50 to 4:00 pm" if clock <= "16:00:00" else "accepted after 4:00 pm"] += 1
+            if at.strftime("%Y-%m-%d %H:%M:%S") <= f"{entry['filed']} {CUTOFF}":
+                known.append(ev)
+        ok = len({ev[1] for ev in known}) >= 4
+        result.update({"ticker": t, "cfo": entry["cfo"], "tradeable": ok, "cfo_close": any(ev[2] for ev in known),
+                       "stock_h": result["stock_c"] if ok else result["stock"], "spy_h": result["spy_c"] if ok else result["spy"],
+                       "excess_h": result["excess_c"] if ok else result["excess"],
+                       "cfo_h": any(ev[2] for ev in known) if ok else entry["cfo"]})
+        rows.append(result)
     print(f"Cluster entries with outcomes: {len(rows)}; filings on the entry day by acceptance time: {dict(timing)}")
     return rows
 
@@ -158,6 +212,11 @@ def main():
     for label, g in groups(tradeable, "cfo_close"):
         print(f"  {label:<44} OPEN  {stat(g, 'stock', 'spy', 'excess')}")
         print(f"  {'':<44} CLOSE {stat(g, 'stock_c', 'spy_c', 'excess_c')}")
+
+    print("\n2b. Hybrid rule: buy at the close if the cluster was public by 3:50 pm, otherwise at the next open (the realistic version)")
+    for label, g in groups(liquid, "cfo_h"):
+        print(f"  {label:<44} OPEN   {stat(g, 'stock', 'spy', 'excess')}")
+        print(f"  {'':<44} HYBRID {stat(g, 'stock_h', 'spy_h', 'excess_h')}")
 
     print("\n3. Broad pilot lead and neighbours (all screened buys, close version unconstrained)")
     allrows = broad.build()
