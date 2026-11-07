@@ -70,20 +70,19 @@ def build():
         path.write_bytes(database)
         del database
         with sqlite3.connect(path.as_uri() + "?mode=ro", uri=True) as db:
-            raw = {}
-            for (payload,) in db.execute("SELECT payload FROM purchase_candidates"):
+            raw, history = {}, defaultdict(list)  # history: (issuer_cik, owner_cik) -> [(filing_date, first transaction date)]
+            keep = ("transaction_row_key", "direct_indirect", "transaction_date", "shares", "shares_after", "filing_date")
+            for n, (payload,) in enumerate(db.execute("SELECT payload FROM purchase_candidates"), 1):
                 r = json.loads(payload)
-                raw[r["transaction_row_key"]] = r
+                raw[r["transaction_row_key"]] = {k: r.get(k) for k in keep}
+                owners = r.get("owners") or []
+                if len(owners) == 1 and owners[0].get("cik") and sec_date(r.get("transaction_date")):
+                    history[(r["issuer_cik"], owners[0]["cik"])].append((sec_date(r.get("filing_date")), sec_date(r.get("transaction_date"))))
+                if n % 20000 == 0:
+                    print(f"  read {n} rows", flush=True)
             disclosures = list(disclosure_opportunities(db, START, END))
-            all_disclosures = list(disclosure_opportunities(db))
     first_filing = min(sec_date(r.get("filing_date")) or "9999" for r in raw.values())
     print(f"Raw purchase rows: {len(raw)}; earliest filing in the database: {first_filing}")
-
-    history = defaultdict(list)  # (issuer_cik, owner_cik) -> [(filing_date, first transaction date)]
-    for d in all_disclosures:
-        owners = d.get("owners") or []
-        if len(owners) == 1 and owners[0].get("cik") and d["transaction_dates"]:
-            history[(d["issuer_cik"], owners[0]["cik"])].append((d["filing_date"], d["transaction_dates"][0]))
 
     def first_within(d, owner, months):
         if not d["transaction_dates"]:
@@ -92,7 +91,7 @@ def build():
         look = t0 - timedelta(days=round(months * 30.44))
         if look.isoformat() < first_filing:
             return None  # lookback reaches before the database starts
-        prior = [t for f, t in history[(d["issuer_cik"], owner)] if f < d["filing_date"]]
+        prior = [t for f, t in history[(d["issuer_cik"], owner)] if f and f < d["filing_date"]]
         return not any(look.isoformat() <= t < t0.isoformat() for t in prior)
 
     days = [str(x.date()) for x in xcals.get_calendar("XNYS").sessions_in_range(START, END)]
