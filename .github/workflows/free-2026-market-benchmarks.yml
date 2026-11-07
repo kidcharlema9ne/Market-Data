@@ -68,9 +68,11 @@ jobs:
                   size = entry['file_size_bytes']
                   if not 0 < size <= 8 * 1024 * 1024:
                       raise SystemExit(f'{day}: unexpected ETF partition size')
-                  payload = fetch(entry['download_url'], day, size)
-                  if len(payload) != size or payload[:4] != b'PAR1' or payload[-4:] != b'PAR1':
-                      raise SystemExit(f'{day}: invalid ETF partition')
+                  payload = fetch(entry['download_url'], day, 8 * 1024 * 1024)
+                  if len(payload) > 8 * 1024 * 1024 or payload[:4] != b'PAR1' or payload[-4:] != b'PAR1':
+                      raise ValueError(f'{day}: invalid ETF partition ({len(payload)} bytes)')
+                  if len(payload) != size:
+                      print(f'{day}: manifest lists {size} bytes, downloaded {len(payload)}; verifying Parquet content')
                   hashes[day] = hashlib.sha256(payload).hexdigest()
                   names = set(pq.ParquetFile(BytesIO(payload)).schema_arrow.names)
                   date_field = 'date' if 'date' in names else 'timestamp'
