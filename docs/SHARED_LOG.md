@@ -85,10 +85,15 @@ Script `research/claude_tests/spy_rising_test.py`, run **42419781207**. Question
 Concentration: 23 entry dates, 12 calendar weeks. Four consecutive weeks (11 May - 7 Jun 2026; ISO weeks 20-23; 25 trades) hold about 93% of the total gain (about +1.8 ATR per trade); the other 14 rising-market trades average about +0.24. Without the best week (ISO week 22) the mean is +0.69; without the best trade +0.78; without the best three +0.45; median +0.56. 67% of rising-market trades positive vs 48% of the rest.
 Caveat: the question was chosen after looking at this same data, so the 2-4% understates the real chance of luck; the best-of-menu figure in Entry 5 (about 25%) overstates it. Treat as an out-of-sample candidate, not an edge.
 
+## Entry 7 | 7 Nov 2026 | Claude | Decisions recorded, pull request merged | CONFIRMED
+Michael approved two rules in chat; both are now in `docs/DECISION_LOG.md` as D-057 (cluster window counts by purchase date, filing already public) and D-058 (decline and SPY regime measured before the entry date, per D-055). Pull request #1 (this log plus the `AGENTS.md` rule) was merged into `main` at Michael's request (commit 7e9a5c8).
+Which code runs: ChatGPT's recovered selector (`research/recovered_20261107/wider.py` logic) is the cluster definition. Claude's `run_current_rules.py` is retired for that job and stays PROVISIONAL. Claude's overfitting, cost and entry-timing scripts are to be re-pointed to the 91-trade cohort. Planned next: one canonical selector module in the repo that all later tests import. Where code and spec disagree, the spec and decision log decide; if silent, Michael decides and the answer is recorded here.
+Unapproved choices inside ChatGPT's selector, for Michael to review: sole-owner filings only (joint filings dropped), entity-like owner names excluded by a name pattern, one representative filing per cluster (prefers outcome_status ok, then earliest filing date and accession), filings before 1 Jan 2026 used only for building the count.
+
 ---
 
-## Open items (as of Entry 6)
-1. Write the cluster-window rule into `DECISION_LOG.md` as a numbered decision (D-056 is missing from the repo; D-048/D-049 numbering clash with Word v0.10 remains).
+## Open items (as of Entry 7)
+1. Add D-056 (extra buyers) to the repo and fix the D-048/D-049 numbering clash with Word v0.10. (Cluster window and entry-date anchor are now D-057 and D-058.)
 2. Rerun the overfitting checks, costs and ownership tests from Entry 2 on the Entry 4 cohort (ChatGPT's selector).
 3. List the top trades behind the +0.53 average (the single best trade appears worth about 19 ATR by arithmetic from printed means; verify).
 4. Recover or retire the depth-table generator (132 / 455 / 211); do not quote those rows until reproduced with committed code.
