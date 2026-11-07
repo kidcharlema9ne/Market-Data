@@ -122,8 +122,6 @@ def main():
         date_col = "date" if "date" in schema else "timestamp"
         if not {"symbol", date_col, *fields} <= schema or not parquet.metadata.num_rows:
             raise ValueError(f"Invalid price partition schema on {day}")
-        if day in control_days:
-            raw_bars[day] = read_control_bars(data, day, date_col, fields)
         rows = pq.read_table(BytesIO(data), columns=["symbol", date_col, *fields],
                              filters=[("symbol", "in", sorted(provisional))]).to_pylist()
         counts = Counter(row["symbol"] for row in rows)
@@ -163,6 +161,11 @@ def main():
         close = Decimal(str(bars[days[index - 1]]["close"]))
         base = Decimal(str(bars[days[index - 16]]["close"]))
         risk = Decimal(row["atr14"])
+        dollar_volume = sum(
+            Decimal(str(bars[day]["close"])) * Decimal(str(bars[day]["volume"]))
+            for day in days[index - 15:index]
+        ) / 15
+        row["entry_features"]["average_daily_dollars_15"] = str(dollar_volume)
         row["entry_features"]["prior_returns"]["15"] = {
             "percent": str((close / base - 1) * 100),
             "atr": str((close - base) / risk),
@@ -205,9 +208,6 @@ def main():
                            "scope": "Provisional engineering sample. Ticker joins, eligibility, corporate actions and adjustments require verification."}
     output = Path("reports")
     output.mkdir(exist_ok=True)
-    (output / "free_year_zero_buyer_price_candidates.json").write_text(
-        json.dumps(control_candidates(days, raw_bars))
-    )
     (output / "free_year_coverage.json").write_text(json.dumps(dataset["metadata"], indent=2))
     (output / "free_year_candidates.json").write_text(json.dumps(dataset))
     write_report(dataset, output / "free_year_candidates.html", title="Free-year integration — provisional candidates",
