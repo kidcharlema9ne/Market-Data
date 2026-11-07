@@ -185,7 +185,7 @@ Example: investor entry is \$50 and the fixed ATR is \$2. A subsequent high of \
 
 - Maximum appreciation and maximum adverse excursion are based on intraday price High/Low.
 
-- Benchmark returns remain percentages, not benchmark ATR units. Do not convert benchmark returns into ATRs and do not subtract a benchmark percentage return from a stock ATR return. Benchmark-relative excess return remains a separate percentage measure: stock percentage return minus benchmark percentage return.
+- Whenever a stock ATR return is displayed, place its named, point-in-time market benchmark alongside it for the same entry and exit dates. Display the benchmark move and excess in units of the stock’s fixed entry ATR under D-053. Preserve the underlying stock and benchmark percentage returns and their difference for calculation and audit.
 
 # 9. Measurement horizons
 
@@ -217,7 +217,8 @@ APPROVED
 
 - QQQ may be used as a secondary comparison for large Nasdaq growth names, not as the default benchmark.
 
-- For each opportunity and horizon, report stock ATR return, stock percentage return, benchmark percentage return over the same dates, and excess return (stock percentage return minus benchmark percentage return).
+- **D-053, approved November 7, 2026.** Every stock ATR return in a report or project update must have the applicable index name or ETF symbol and the matched benchmark return immediately alongside it, at the same horizon. Display the benchmark move in stock ATR units by multiplying its same-window decimal return by the stock entry price and dividing by the stock’s fixed pre-entry ATR(14). Report paired excess as stock ATR return minus benchmark move in stock ATR units. Retain underlying percentage fields for audit. A benchmark’s own ATR, if shown separately, is a different measure.
+- Use the mapping above at the entry date, including the S&P 500 exception for Nasdaq stocks, and keep the assignment fixed over the holding period. For subgroup means or medians, use the same paired observations and weighting for stock, benchmark and excess. Name any benchmark mix and show the matched and missing counts. If classification or prices are unavailable, display “benchmark unavailable” beside the stock return. Any all-cohort ETF reference must be explicitly labeled as a provisional comparison.
 
 - Industry and market conditions (rising, falling, or flat) are descriptive variables, not filters. In addition to the primary approved market benchmark, report sector and industry benchmark returns separately when reliable point-in-time classifications and historical series are available. A matched-stock comparison against similar stocks without contemporaneous qualifying insider purchases is an optional research extension, not a prerequisite for the initial study.
 
@@ -299,7 +300,7 @@ Implementation edge cases, including material amendments made after an initial i
 
 APPROVED REPORTING PRINCIPLES
 
-- For each insider, horizon, and performance measure, report arithmetic average, median, win/success rate, observation count, distribution, and confidence intervals where appropriate. Stock performance and stock-based success calculations use ATR units as the primary measurement; percentage returns remain supplementary. Benchmark returns and benchmark-relative excess returns remain percentages.
+- For each insider, horizon, and performance measure, report arithmetic average, median, win/success rate, observation count, distribution, and confidence intervals where appropriate. Stock performance and stock-based success calculations use ATR units as the primary measurement; percentage returns remain supplementary. Present the applicable benchmark and paired excess next to stock ATR returns in stock ATR units under D-053. Retain their percentage equivalents for audit.
 
 - Also report the number of distinct insiders, companies, and buying episodes represented.
 
@@ -534,3 +535,9 @@ Preserve the approved **next-trading-session open after actual filing date** as 
 # Approved implementation clarification — SEC alert latency vs stock-price freshness (November 6, 2026)
 
 The scanner shall send prompt SEC filing-based Pushover alerts without waiting for a current-day or previous-day MarketParquet daily OHLCV update. Each alert must explicitly label the last available daily bar date; no stale bar is to be represented as a live quote. Research outcome updates are run on completed daily bars as they arrive. Real-time stock-price data is not required for the initial scanner or historical research engine; optional live quotes may be added later. This does not change the approved next-session-open investor entry convention or make filing-date-close a tradable price.
+
+## November 7, 2026 — entry direction and pullback depth
+
+D-054 carries forward the two approved entry-context measurements from the Word v0.10 specification, where they were numbered D-048. At investor entry, pullback depth is the highest intraday high over the 63 completed sessions minus the last completed close, divided by the stock’s fixed pre-entry ATR(14). Signed 21-session price change is the last completed close minus the close 21 sessions earlier, divided by the same ATR. It requires 22 closes. Missing history stays missing. Both are continuous context fields.
+
+**Open design question.** Consider comparing falling and rising stocks by the sign of the 21-session measure, with zero separate, then comparing within tentative 63-session pullback-depth bands of under 2 ATR, 2 to under 5 ATR, and 5 ATR or more. The Word v0.10 D-049 bands and subgroup design remain provisional. Agree the comparison, subgroup priorities and any minimum sample sizes before implementation or reviewing outcomes. These fields are context and do not change eligibility.
