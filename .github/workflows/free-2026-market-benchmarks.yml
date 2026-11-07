@@ -21,6 +21,7 @@ jobs:
         run: |
           python -u - <<'PY'
           import csv
+          from datetime import datetime, timezone
           import hashlib
           import json
           import os
@@ -40,47 +41,85 @@ jobs:
 
           def fetch(url, label, limit, headers=None):
               if urlsplit(url).scheme != 'https':
-                  raise SystemExit(f'{label}: expected HTTPS URL')
+                  raise ValueError(f'{label}: expected HTTPS URL')
               try:
                   with urlopen(Request(url, headers=headers or {}), timeout=30) as response:
                       return response.read(limit + 1)
               except HTTPError as error:
-                  raise SystemExit(f'{label}: HTTP {error.code}') from None
+                  raise ValueError(f'{label}: HTTP {error.code}') from None
               except (URLError, TimeoutError):
-                  raise SystemExit(f'{label}: network failure') from None
+                  raise ValueError(f'{label}: network failure') from None
 
-          token = os.environ['MARKETPARQUET_API_KEY']
-          if not token:
-              raise SystemExit('MarketParquet API key is missing')
-          url = f'https://marketparquet.com/api/v1/manifest/etf_daily?start={START}&end={END}'
-          files = json.loads(fetch(url, 'ETF manifest', 2_000_000,
-                                   {'Authorization': f'Bearer {token}'}))['files']
-          entries = {row['date']: row for row in files}
-          if len(entries) != len(files) or sorted(entries) != dates:
-              raise SystemExit(f'Expected {len(dates)} distinct ETF dates, got {len(entries)}')
-          print(f'Verified manifest for {len(dates)} trading sessions')
-          hashes = {}
-          rows = []
-          for day in dates:
-              entry = entries[day]
-              size = entry['file_size_bytes']
-              if not 0 < size <= 8 * 1024 * 1024:
-                  raise SystemExit(f'{day}: unexpected ETF partition size')
-              payload = fetch(entry['download_url'], day, size)
-              if len(payload) != size or payload[:4] != b'PAR1' or payload[-4:] != b'PAR1':
-                  raise SystemExit(f'{day}: invalid ETF partition')
-              hashes[day] = hashlib.sha256(payload).hexdigest()
-              names = set(pq.ParquetFile(BytesIO(payload)).schema_arrow.names)
-              date_field = 'date' if 'date' in names else 'timestamp'
-              bars = pq.read_table(BytesIO(payload), columns=['symbol', date_field, 'open', 'close'],
-                                   filters=[('symbol', 'in', sorted(SYMBOLS))]).to_pylist()
-              if len(bars) != len(SYMBOLS) or {r['symbol'] for r in bars} != SYMBOLS:
-                  raise SystemExit(f'{day}: incomplete or duplicate benchmark bars')
-              for row in sorted(bars, key=lambda r: r['symbol']):
-                  values = [Decimal(str(row[k])) for k in ('open', 'close')]
-                  if str(row[date_field])[:10] != day or not all(v.is_finite() and v > 0 for v in values):
-                      raise SystemExit(f'{day}: invalid benchmark bar')
-                  rows.append((day, row['symbol'], *values))
+          def marketparquet():
+              token = os.environ['MARKETPARQUET_API_KEY']
+              if not token:
+                  raise ValueError('MarketParquet API key is missing')
+              url = f'https://marketparquet.com/api/v1/manifest/etf_daily?start={START}&end={END}'
+              files = json.loads(fetch(url, 'ETF manifest', 2_000_000,
+                                       {'Authorization': f'Bearer {token}', 'User-Agent': 'Mozilla/5.0'}))['files']
+              entries = {row['date']: row for row in files}
+              if len(entries) != len(files) or sorted(entries) != dates:
+                  raise SystemExit(f'Expected {len(dates)} distinct ETF dates, got {len(entries)}')
+              print(f'Verified manifest for {len(dates)} trading sessions')
+              hashes = {}
+              rows = []
+              for day in dates:
+                  entry = entries[day]
+                  size = entry['file_size_bytes']
+                  if not 0 < size <= 8 * 1024 * 1024:
+                      raise SystemExit(f'{day}: unexpected ETF partition size')
+                  payload = fetch(entry['download_url'], day, size)
+                  if len(payload) != size or payload[:4] != b'PAR1' or payload[-4:] != b'PAR1':
+                      raise SystemExit(f'{day}: invalid ETF partition')
+                  hashes[day] = hashlib.sha256(payload).hexdigest()
+                  names = set(pq.ParquetFile(BytesIO(payload)).schema_arrow.names)
+                  date_field = 'date' if 'date' in names else 'timestamp'
+                  bars = pq.read_table(BytesIO(payload), columns=['symbol', date_field, 'open', 'close'],
+                                       filters=[('symbol', 'in', sorted(SYMBOLS))]).to_pylist()
+                  if len(bars) != len(SYMBOLS) or {r['symbol'] for r in bars} != SYMBOLS:
+                      raise SystemExit(f'{day}: incomplete or duplicate benchmark bars')
+                  for row in sorted(bars, key=lambda r: r['symbol']):
+                      values = [Decimal(str(row[k])) for k in ('open', 'close')]
+                      if str(row[date_field])[:10] != day or not all(v.is_finite() and v > 0 for v in values):
+                          raise SystemExit(f'{day}: invalid benchmark bar')
+                      rows.append((day, row['symbol'], *values))
+              return rows, {'source': 'MarketParquet etf_daily', 'partition_sha256': hashes}
+
+          def yahoo_chart():
+              rows, hashes = [], {}
+              start = int(datetime.fromisoformat(START).replace(tzinfo=timezone.utc).timestamp())
+              stop = int(datetime(2026, 11, 6, tzinfo=timezone.utc).timestamp())
+              for symbol in sorted(SYMBOLS):
+                  data = None
+                  for host in ('query1.finance.yahoo.com', 'query2.finance.yahoo.com'):
+                      url = f'https://{host}/v8/finance/chart/{symbol}?period1={start}&period2={stop}&interval=1d'
+                      try:
+                          data = fetch(url, f'Yahoo Finance {symbol}', 2_000_000, {'User-Agent': 'Mozilla/5.0'})
+                          break
+                      except ValueError as error:
+                          print(error)
+                  if data is None:
+                      raise SystemExit(f'No Yahoo Finance chart data for {symbol}')
+                  result = json.loads(data)['chart']['result'][0]
+                  if result['meta']['symbol'] != symbol:
+                      raise SystemExit(f'Unexpected benchmark ticker for {symbol}')
+                  hashes[symbol] = hashlib.sha256(data).hexdigest()
+                  quote = result['indicators']['quote'][0]
+                  days = [datetime.fromtimestamp(t, timezone.utc).date().isoformat() for t in result['timestamp']]
+                  if days != dates:
+                      raise SystemExit(f'Incomplete benchmark dates for {symbol}: {len(days)} of {len(dates)}')
+                  for day, opening, closing in zip(days, quote['open'], quote['close'], strict=True):
+                      values = [Decimal(str(v)) for v in (opening, closing)]
+                      if not all(v.is_finite() and v > 0 for v in values):
+                          raise SystemExit(f'{day}: invalid {symbol} prices')
+                      rows.append((day, symbol, *values))
+              return sorted(rows), {'source': 'Yahoo Finance unadjusted daily chart OHLC', 'response_sha256': hashes}
+
+          try:
+              rows, source = marketparquet()
+          except ValueError as error:
+              print(f'{error}; trying Yahoo Finance daily chart')
+              rows, source = yahoo_chart()
           output = Path('reports')
           output.mkdir()
           with (output / 'market_benchmark_bars.csv').open('w', newline='') as stream:
@@ -88,8 +127,7 @@ jobs:
               writer.writerow(('date', 'symbol', 'open', 'close'))
               writer.writerows(rows)
           (output / 'market_benchmark_source.json').write_text(json.dumps({
-              'source': 'MarketParquet etf_daily', 'start': START, 'end': END,
-              'session_count': len(dates), 'partition_sha256': hashes,
+              **source, 'start': START, 'end': END, 'session_count': len(dates),
           }, indent=2))
           print(f'Verified {len(rows)} benchmark bars across {len(dates)} sessions')
           PY
