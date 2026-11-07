@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/run-chatgpt-code-unchanged.yml'
+      - 'research/claude_tests/**'
 permissions:
   contents: read
   actions: read
@@ -82,3 +83,10 @@ jobs:
           echo "################ wider.py (15 vs 30 session windows)"; python wider.py current.zip || true
           echo "################ liquidity_tiers.py (items 3 and 4)"; cat liq.out
           echo "################ purchase_size_screen.py (item 5)"; python purchase_size_screen.py current.zip || true
+      - name: Chance test (new code; imports ChatGPT's code unchanged)
+        run: |
+          if [ ! -f /tmp/winner ]; then echo "no winner"; exit 0; fi
+          python -m pip install -q numpy
+          cd $(cat /tmp/winner)
+          cp $GITHUB_WORKSPACE/research/claude_tests/chance_test.py .
+          python chance_test.py current.zip
