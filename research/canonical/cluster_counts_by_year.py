@@ -97,10 +97,12 @@ def summarize(events):
 
 
 def load_rows(db_path, start='2005-12-01'):
+    """Group transaction rows into one record per filing/issuer/security with the repo's own function."""
+    from sec_bulk_importer import disclosure_opportunities
     db = sqlite3.connect(db_path)
-    cur = db.execute('SELECT payload FROM purchase_candidates WHERE filing_date >= ?', (start,))
-    for (payload,) in cur:
-        yield json.loads(payload)
+    for row in disclosure_opportunities(db):
+        if row['filing_date'] and row['filing_date'] >= start:
+            yield row
 
 
 def fetch_db(tmp):
