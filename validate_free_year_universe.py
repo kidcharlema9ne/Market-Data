@@ -7,7 +7,7 @@ effective-dated identity and eligibility. This run measures pipeline coverage.
 import json
 import os
 import sqlite3
-from bisect import bisect_right
+from bisect import bisect_left, bisect_right
 from collections import Counter, defaultdict
 from decimal import Decimal
 from io import BytesIO
@@ -18,6 +18,7 @@ import exchange_calendars as xcals
 import pyarrow.parquet as pq
 
 from integrated_research_dataset import integrate
+from price_outcomes import atr14
 from r2_storage import BUCKET, client
 from research_html_report import write_report
 from sec_bulk_importer import disclosure_opportunities
@@ -89,6 +90,31 @@ def main():
         expected = days[bisect_right(days, row["filing_date"])]
         if row["next_open_date"] != expected:
             raise ValueError(f"D-051 entry mismatch for {row['accession']}")
+    # Purchase-date context is descriptive. The outcome still starts after filing.
+    for row in priced:
+        trade_dates = row.get("transaction_dates") or []
+        if not trade_dates:
+            continue
+        purchase_date = max(trade_dates)
+        index = bisect_left(days, purchase_date)
+        if index < 22 or purchase_date > row["filing_date"]:
+            continue
+        context_days = days[index - 22:index]
+        wanted = set(context_days)
+        by_day = {bar["date"]: bar for bar in series[row["security_id"]] if bar["date"] in wanted}
+        if len(by_day) != len(context_days):
+            continue
+        history = [by_day[day] for day in context_days]
+        risk = atr14(history, len(history))
+        if risk is None or risk <= 0:
+            continue
+        row["purchase_context"] = {
+            "date": purchase_date,
+            "last_completed_session": context_days[-1],
+            "atr14": str(risk),
+            "signed_21_session_atr": str((Decimal(str(history[-1]["close"])) -
+                                          Decimal(str(history[0]["close"]))) / risk),
+        }
     coverage = {
         "candidate_disclosures": len(disclosures),
         "priced_candidate_disclosures": len(priced),
