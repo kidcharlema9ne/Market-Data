@@ -109,3 +109,17 @@ Top trades (open-to-close 21 sessions, excess over SPY in the stock's ATR; total
 Mean excess without the top 1 / 3 / 5 / 10 trades: +0.318 / +0.173 / +0.046 / -0.182. Bottom five: RWT -4.21, CSGP -3.84, GRNT -3.83, UAMY -3.29, FSBC -2.56. 83 distinct tickers, 62 entry dates, 51 of 91 beat SPY. The earlier "about 19 ATR" estimate for the best trade is confirmed (+19.19).
 Reading: the +0.53 average depends on a handful of winners; without the best five it is about zero. OTLK was not in the price setup (stock had risen about 6 ATR over the prior 15 sessions).
 Next: re-point `snooping_check`, cost conversion and entry-timing scripts to `load_cohort`; then freeze the rule.
+
+## Entry 9 | 7 Nov 2026 | Claude | Step 2A: outlier-robust and week-clustered checks on the 91 liquid trades | CONFIRMED
+Script `research/canonical/robustness_check.py` (imports the canonical selector, ChatGPT's code unchanged), branch `claude/canonical-selector-20261107`, run **42421864891**. Self-check reproduced 91 trades, mean excess +0.5257 (stock +0.5337, SPY +0.0080). Independent units: 62 entry dates, 30 ISO weeks, 83 tickers. Week-block bootstrap, 10,000 draws, seed 20261107.
+| Statistic (excess over SPY, ATR) | Value | 95% range | Share of draws <= 0 |
+|---|---:|---|---:|
+| Mean | +0.526 | -0.067 to +1.195 | 4.4% |
+| Median | +0.165 | -0.151 to +0.588 | 17.5% |
+| Trimmed mean (5% each tail) | +0.267 | -0.207 to +0.742 | 12.2% |
+| Capped mean (each trade +-5 ATR) | +0.318 | -0.144 to +0.727 | 8.4% |
+| Capped mean (+-3 ATR) | +0.199 | -0.192 to +0.537 | 15.3% |
+Concentration: ISO week 2026-W22 alone holds 24.14 of the 47.84 total ATR (50%); weeks 22, 25, 20, 21 together hold about 102%. Dropping W22 leaves a mean of +0.269. Only 15 of 30 weeks have positive total excess. Sign test: 51 of 91 beat SPY, one-sided chance under a coin flip 14.7%.
+Selector sensitivity (only the options exposed by the recovered `select()`; sole-owner and one-filing-per-cluster are hard-coded and were not varied): entity-name exclusion and same-title matching make no difference to the liquid cohort (91 trades, +0.526). The "previous" count rule gives 89 trades, +0.517. Keeping only the first cluster per issuer gives 81 trades, +0.640 (median +0.256). Capped means +0.30 to +0.41. The cohort is not fragile to these options.
+Variants counted so far: 12 selector variants here, 5 summary statistics, 714 slices in Entry 5, 5 cut-offs in Entry 6.
+Reading: the unadjusted mean is borderline (4.4% one-sided), and every outlier-robust version is weaker and its range includes zero. Not an edge; a candidate that needs older years. Steps 2B (costs) and 2C (entry timing) still to do.
