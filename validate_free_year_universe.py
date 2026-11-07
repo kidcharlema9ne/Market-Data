@@ -90,6 +90,24 @@ def main():
         expected = days[bisect_right(days, row["filing_date"])]
         if row["next_open_date"] != expected:
             raise ValueError(f"D-051 entry mismatch for {row['accession']}")
+    # Add the exploratory three-week feature to the isolated pilot artifact.
+    bars_by_security = {
+        security: {bar["date"]: bar for bar in bars}
+        for security, bars in series.items()
+    }
+    for row in priced:
+        index = bisect_left(days, row["next_open_date"])
+        history = row.get("entry_features", {}).get("completed_session_count", 0)
+        if history <= 15:
+            continue
+        bars = bars_by_security[row["security_id"]]
+        close = Decimal(str(bars[days[index - 1]]["close"]))
+        base = Decimal(str(bars[days[index - 16]]["close"]))
+        risk = Decimal(row["atr14"])
+        row["entry_features"]["prior_returns"]["15"] = {
+            "percent": str((close / base - 1) * 100),
+            "atr": str((close - base) / risk),
+        }
     # Purchase-date context is descriptive. The outcome still starts after filing.
     for row in priced:
         trade_dates = row.get("transaction_dates") or []
