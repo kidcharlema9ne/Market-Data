@@ -86,6 +86,12 @@ The buyer-count report now contains completed observation counts by horizon, iss
 
 None passed 5% significance. At 21 sessions, four buyers averaged +0.79 stock ATR versus +0.05 SPY, an excess of +0.74 ATR with an unadjusted 95% interval from −0.38 to +1.95 and raw p=0.196. Five-plus averaged +0.59 stock ATR versus +0.15 SPY, an excess of +0.44 with an interval from −0.51 to +1.40 and raw p=0.316. The strongest comparison versus the one-buyer group was the four-buyer 21-session excess difference of +0.93 ATR, raw p=0.073. All Holm-adjusted p-values are 1.00. The next inferential step is an independent period with verified entry-date benchmark assignments and more nonoverlapping calendar coverage.
 
+## CFO participation in four-plus-buyer clusters
+
+The buyer-count report now splits the first public entry at which the 15-session cluster reaches at least four distinct buyers. A CFO must be identified in an already-public filing in that window. The no-identified-CFO group can contain missing role information. The pooled four-plus comparison uses one entry at the initial crossing, so a later fifth buyer does not create another observation until the cluster resets.
+
+At 21 sessions, the 57 CFO entries averaged +0.97 stock ATR versus +0.07 SPY, +0.11 ONEQ, and +0.08 IWM. The 80 no-identified-CFO entries averaged +0.59 versus +0.13 SPY, +0.12 ONEQ, and +0.27 IWM. The stock-minus-SPY difference between groups was +0.44 ATR. The issuer/calendar bootstrap 95% interval was −1.30 to +2.42 ATR, with raw p=0.61. Equal-date weighting left a positive difference. This is an exploratory split. The longer holding periods are descriptive, and historical per-stock benchmark assignments remain unverified. Carry this into independent validation as a secondary question alongside the four-plus signal itself.
+
 ## Data validation backlog
 
 Validate effective-dated issuer/security mappings and discretionary common-stock eligibility for the January–September candidate cohort. Start with the wording-only review queue and keep multi-class, multi-issuer and non-common securities separate. Keep the October–November filing backlog separate from the requested pilot. Then rerun the 2026 integration, retain incomplete horizons, and report ATR and benchmark outcomes separately. The free sample is sufficient for this stage.
