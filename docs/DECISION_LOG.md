@@ -156,3 +156,11 @@ Exact out-of-sample date split, overlap-aware separation of training/validation 
 ## November 7, 2026 — pilot evidence and future scoring proposal
 
 - Added the [pilot findings](MASTER_SPECIFICATION.md#what-we-have-learned-so-far) to the master specification. The user asked to retain evidence that could eventually inform a score. Buyer count, mild stock decline in a flat or rising market, and CFO participation within four-plus clusters are candidates for validation. A combined score, weights, and scanner rules remain proposals. The current reporting methodology continues to present the underlying measures separately.
+
+
+## November 7, 2026 — cluster window and context anchor (user decisions, recorded from chat)
+
+Numbering note: D-056 (extra buyers after the count reaches four) exists in Word v0.10 but is not yet in this repository. These two entries use D-057 and D-058 to avoid reusing it; reconcile numbering when D-056 is added.
+
+- **D-057 (approved by Michael, November 7, 2026):** The four-plus buyer cluster counts a distinct officer or director only if at least one of their **purchase (transaction) dates** falls inside the 15 completed trading sessions before the investor entry open **and** their filing is already public. A purchase made earlier and filed late does not count. Entry is the next regular open after the filing that brings the count to four. This matches the logic in ChatGPT's recovered selector (`research/recovered_20261107/wider.py`) and supersedes the filing-date-only counting used in Claude's earlier rebuild (`run_current_rules.py`), which is marked provisional. The recovered selector's undocumented choices (sole-owner filings only, entity-like names excluded, one representative filing per cluster) are listed in `docs/SHARED_LOG.md` for review and are not yet approved.
+- **D-058 (approved by Michael, November 7, 2026):** Stock decline and SPY regime used as study strata are measured over the completed sessions ending **before the investor entry date**, the information available when placing the trade, not before the insider's purchase date. This is consistent with D-055. The earlier depth-band table (132 / 455 / 211) anchored on the purchase date and is therefore not a D-055 test; it remains unreproduced because its generating script was never committed.
