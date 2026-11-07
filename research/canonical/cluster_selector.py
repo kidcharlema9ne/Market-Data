@@ -50,3 +50,31 @@ def load_cohort(workdir, current_zip='current.zip'):
             stock_atr=float(stock), spy_atr=float(spy_atr), excess_atr=float(excess), row=row))
     liquid = [t for t in trades if t['adv'] >= FLOOR]
     return SimpleNamespace(all_trades=trades, liquid=liquid, lt=lt)
+
+
+def add_roles(c):
+    """Add buyer-role fields to every trade (new code; reads the recovered selector's own data).
+    t['ceo'], t['n_buyers'], t['n_pure_directors'] (Director and not Officer). Self-checks against the selector's
+    buyer count and CFO flag on all trades."""
+    import re
+    lt = c.lt
+    CFO_RE = re.compile(r'\b(?:CFO|chief financial officer)\b', re.I)      # same pattern as wider.py
+    CEO_RE = re.compile(r'\b(?:CEO|chief executive officer)\b', re.I)
+    where = {id(row): (key, i, n, cfo) for (key, i), (row, cfo, n) in lt.short.items()}
+    bad = 0
+    for t in c.all_trades:
+        key, i, n, cfo = where[id(t['row'])]
+        start, entry = lt.calendar[max(0, i-15)], lt.calendar[i]
+        bs = [r for j, rs in lt.by_security[key].items() if j <= i for r in rs
+              if any(start <= d < entry for d in r['transaction_dates'])]
+        owners = {}
+        for r in bs:
+            o = r['owners'][0]; owners.setdefault(o['cik'], o)
+        rel = lambda o: o['relationship'].split(',')
+        t['n_buyers'] = len(owners)
+        t['ceo'] = any('Officer' in rel(o) and CEO_RE.search(o['title'] or '') for o in owners.values())
+        t['n_pure_directors'] = sum('Director' in rel(o) and 'Officer' not in rel(o) for o in owners.values())
+        cfo2 = any('Officer' in r['owners'][0]['relationship'].split(',') and CFO_RE.search(r['owners'][0]['title'] or '') for r in bs)
+        bad += (len(owners) != n) or (cfo2 != cfo)
+    assert bad == 0, f'{bad} trades where rebuilt buyer sets disagree with the selector'
+    return c

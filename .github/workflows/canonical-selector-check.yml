@@ -71,3 +71,7 @@ jobs:
         run: |
           cd $(cat /tmp/winner)
           python $GITHUB_WORKSPACE/research/canonical/ceo_and_schema.py $(pwd)
+      - name: Step 2E role chance test
+        run: |
+          cd $(cat /tmp/winner)
+          python $GITHUB_WORKSPACE/research/canonical/chance_roles.py $(pwd)
