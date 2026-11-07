@@ -33,7 +33,7 @@ COSTS = (0.10, 0.25)
 ACCEPT = re.compile(rb"<ACCEPTANCE-DATETIME>\s*(\d{14})")
 PREFIX = "sec/edgar/free-year/originals/"
 CUTOFF = "15:50:00"
-SEC_UA = "InsiderBuyingResearch mgd.dorsey@gmail.com"
+SEC_UA = "InsiderBuyingResearch mgdpublic@yahoo.com"
 EASTERN = ZoneInfo("America/New_York")
 
 
