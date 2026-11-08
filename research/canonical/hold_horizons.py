@@ -49,6 +49,16 @@ Not run: census, complete+incomplete tables, trade counts, extreme-trade lists (
 Tally: 6 passes x 5 holds x 7 groups = 210 group means (B), 6 constant-cohort rows sets, 48 chance tests, 210 clipped means.
 Usage (subsets):  python hold_horizons.py subsets DECLINE REGIME RET21 RET63 RET126 RET189 RET252
 
+TWO-MONTH HOLD (Entry 47; declared 8 Nov 2026 BEFORE any 42-session return was computed; asked by Michael: "put something between 21 and 63"). POST HOC, exploratory.
+New hold = 42 sessions (about 2 months; entry session = day one, exit = close of session 42), same entry rule, ATR and same-window-SPY definitions as Entry 28, price only.
+Returns from `refined_baseline.py year ... --hold 42` (workflow refined-baseline-hold.yml, hold=42). `mid` command compares 21, 42 and 63 sessions only, on four sets of the
+Entry 41 cohort with FELL/Q1 labels FIXED as in Entry 43 (no recut): FULL (n=1,273), S1 (without 2008Q4, 2011Q3, 2020Q1), S2 (entries from 2011-01-01), S3 (S2 without 2011Q3 and 2020Q1).
+Per set: B complete-only table with block ranges; D constant cohort with increments; E week-shuffle chance, Spearman(raw252, excess), complete-only and complete+incomplete;
+H clipped means. Also printed per set: excess per 21 sessions of capital tied up (mean excess / (hold/21)) for ALL, FELL, Q1, so holds can be compared per unit of time.
+Not run: 126 and longer (Entry 46), recut labels, new cut points, costs, any 2021-2025 entry, the pilot.
+Tally: 4 sets x 3 holds x 7 groups = 84 group means (B), 84 clipped means, 4 x 6 = 24 chance tests, 4 constant-cohort row sets, 12 per-time rows.
+Usage (mid):  python hold_horizons.py mid DECLINE REGIME RET21 RET42 RET63
+
 Usage:  python hold_horizons.py run DECLINE REGIME RET21 RET63 RET126 RET189 RET252 | --selftest
 """
 import argparse, json, statistics, sys
@@ -150,9 +160,9 @@ def ranges(rs):
     return '      ' + t(q, 'quarter') + '   ' + t(y, 'year')
 
 
-def table(cohort, rets_by_hold, statuses, title):
+def table(cohort, rets_by_hold, statuses, title, holds=HOLDS):
     print(f'\n=== {title} ===')
-    for h in HOLDS:
+    for h in holds:
         rows = rows_for(cohort, rets_by_hold[h], statuses)
         print(f'-- hold {h} sessions (about {round(h / 21)} months)')
         for g in GROUPS:
@@ -176,21 +186,21 @@ def census(cohort, rets_by_hold):
         print(f'            rest {cnt([r for r in cohort if not member(r, "FELL")])}')
 
 
-def constant(cohort, rets_by_hold):
+def constant(cohort, rets_by_hold, holds=HOLDS):
     print('\n=== D. Constant cohort: events complete at ALL of 63, 126, 189, 252 sessions (plus 21); mean excess (ATR) and increment from the previous horizon ===')
-    keep = [c for c in cohort if all(key(c) in rets_by_hold[h] and rets_by_hold[h][key(c)]['status'] == 'complete' for h in HOLDS)]
+    keep = [c for c in cohort if all(key(c) in rets_by_hold[h] and rets_by_hold[h][key(c)]['status'] == 'complete' for h in holds)]
     print(f'  {len(keep)} of {len(cohort)} events')
     for g in ('ALL', 'FELL', 'Q1', 'BOTH'):
         sub = [c for c in keep if member(c, g)]
-        means = [statistics.fmean(rets_by_hold[h][key(c)]['excess_atr'] for c in sub) if sub else float('nan') for h in HOLDS]
-        inc = [means[0]] + [means[i] - means[i - 1] for i in range(1, len(HOLDS))]
-        print(f'  {g:5s} n={len(sub):4d}  ' + '  '.join(f'{h}:{m:+.3f}' for h, m in zip(HOLDS, means)) + '   increments ' + '  '.join(f'{h}:{d:+.3f}' for h, d in zip(HOLDS, inc)))
+        means = [statistics.fmean(rets_by_hold[h][key(c)]['excess_atr'] for c in sub) if sub else float('nan') for h in holds]
+        inc = [means[0]] + [means[i] - means[i - 1] for i in range(1, len(holds))]
+        print(f'  {g:5s} n={len(sub):4d}  ' + '  '.join(f'{h}:{m:+.3f}' for h, m in zip(holds, means)) + '   increments ' + '  '.join(f'{h}:{d:+.3f}' for h, d in zip(holds, inc)))
 
 
-def chance(cohort, rets_by_hold):
+def chance(cohort, rets_by_hold, holds=HOLDS):
     print('\n=== E. Spearman(raw252, excess), excess shuffled inside the same entry week (negative = deeper 12-month fall, better excess) ===')
     for label, st in (('complete only (menu)', {'complete'}), ('complete + incomplete (sensitivity)', {'complete', 'incomplete'})):
-        for h in HOLDS:
+        for h in holds:
             rows = rows_for(cohort, rets_by_hold[h], st)
             obs, p, n = fd.perm_rho(rows, 'raw252', 'excess_atr')
             print(f'  {label:36s} hold {h:3d}: rho {obs:+.3f}, chance {p:.2%} (n={n})')
@@ -217,10 +227,10 @@ def outliers(cohort, rets_by_hold):
                 print(f'   {label:8s} {r["sym"]:10s} entry {r["entry"]} exit {r.get("exit")} open {r["entry_open"]:.4f} ATR {r["atr"]:.5f} stock {pct} excess {r["excess_atr"]:+.1f} ATR  FELL={member(c, "FELL")} Q1={member(c, "Q1")}')
 
 
-def winsor(cohort, rets_by_hold):
+def winsor(cohort, rets_by_hold, holds=HOLDS):
     import numpy as np
     print('\n=== H. Mean excess (ATR), unclipped vs clipped at the 1st and 99th percentile of the horizon\'s complete trades ===')
-    for h in HOLDS:
+    for h in holds:
         rows = rows_for(cohort, rets_by_hold[h], {'complete'})
         lo, hi = np.percentile([r['excess_atr'] for r in rows], [1, 99])
         out = []
@@ -287,6 +297,34 @@ def run_subsets(decline, regime, ret21, *long_folders):
     print('\nQuestions asked in this entry: see the docstring tally (post hoc, exploratory).')
 
 
+MID = (21, 42, 63)
+
+
+def run_mid(decline, regime, ret21, ret42, ret63):
+    full = build_cohort(decline, regime, ret21)
+    rets = {21: read_returns(ret21), 42: read_returns(ret42), 63: read_returns(ret63)}
+    for h in (42, 63):
+        print(f'hold {h}: {len(rets[h])} return rows read')
+    print('OVERLAP WARNING: holds that start in the same period overlap; independent observations are far fewer than n.')
+    sets = (('FULL cohort (all years)', None, ()),) + SUBSETS
+    for name, start, drop in sets:
+        print(f'\n########## {name} | labels FIXED as in Entry 43 ##########')
+        sub = subset_cohort(full, start, drop, False)
+        print(f'  n={len(sub)} of {len(full)}; ' + ', '.join(f'{g} {sum(member(r, g) for r in sub)}' for g in GROUPS))
+        table(sub, rets, {'complete'}, 'B. Complete trades only; excess over same-window SPY in ATR', MID)
+        constant(sub, rets, MID)
+        chance(sub, rets, MID)
+        winsor(sub, rets, MID)
+        print('  per 21 sessions of capital tied up (mean excess / (hold/21)), complete only:')
+        for g in ('ALL', 'FELL', 'Q1'):
+            cells = []
+            for h in MID:
+                rs = [r for r in rows_for(sub, rets[h], {'complete'}) if member(r, g)]
+                cells.append(f'{h}: {statistics.fmean(r["excess_atr"] for r in rs) / (h / 21):+.3f}' if rs else f'{h}: n/a')
+            print(f'    {g:5s} ' + '   '.join(cells))
+    print('\nQuestions asked in this entry: see the docstring tally (post hoc, exploratory).')
+
+
 def selftest():
     rs = [{'entry': f'20{10 + k % 5}-0{1 + k % 9}-1{k % 9}', 'excess_atr': float(k % 7) - 2.0, 'stock_atr': 1.0, 'spy_atr': 0.5, 'stock_pct': 0.10, 'spy_pct': 0.05,
            'g_raw252': 'most' if k % 5 == 0 else 'mid', 'band': 'Q1' if k % 3 == 0 else 'mid'} for k in range(90)]
@@ -311,6 +349,8 @@ if __name__ == '__main__':
     a = ap.parse_args()
     if a.cmd == 'run' and len(a.folders) == 7:
         run(*a.folders)
+    elif a.cmd == 'mid' and len(a.folders) == 5:
+        run_mid(*a.folders)
     elif a.cmd == 'subsets' and len(a.folders) == 7:
         run_subsets(*a.folders)
     else:
