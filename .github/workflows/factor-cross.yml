@@ -14,6 +14,10 @@ on:
         description: 'refined-baseline run holding the returns-* artifacts (Entry 28)'
         required: false
         default: '42490748366'
+      start:
+        description: 'optional first entry date to keep (e.g. 2011-01-01); empty = all development years'
+        required: false
+        default: ''
 permissions:
   contents: read
   actions: read
@@ -51,4 +55,4 @@ jobs:
           github-token: ${{ github.token }}
       - env:
           PYTHONPATH: .
-        run: python -u research/canonical/factor_cross.py cross reports/decl reports/feat reports/ret
+        run: python -u research/canonical/factor_cross.py cross reports/decl reports/feat reports/ret ${{ inputs.start != '' && format('--start {0}', inputs.start) || '' }}
