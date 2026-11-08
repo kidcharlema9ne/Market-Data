@@ -54,7 +54,7 @@ def true_range(bar, prev_close):
     return max(h - l, abs(h - prev_close), abs(l - prev_close))
 
 
-def trade_outcome(dates, stock, spy, entry):
+def trade_outcome(dates, stock, spy, entry, hold=HOLD):
     """dates: sorted session dates. stock, spy: {date: (open, high, low, close)}. Returns a dict with a status."""
     assert_allowed(entry)
     i = bisect_left(dates, entry)
@@ -69,7 +69,7 @@ def trade_outcome(dates, stock, spy, entry):
     if atr <= 0 or entry not in stock:
         return {'status': 'atr_missing'}
     entry_open = stock[entry][0]
-    j = i + HOLD - 1
+    j = i + hold - 1
     if j >= len(dates):
         return {'status': 'open', 'atr': atr, 'entry_open': entry_open}
     scale = entry_open / atr
@@ -79,12 +79,14 @@ def trade_outcome(dates, stock, spy, entry):
     if dates[j] in stock:
         s = (stock[dates[j]][3] - entry_open) / atr
         return {'status': 'complete', 'atr': atr, 'entry_open': entry_open, 'exit': dates[j],
-                'stock_atr': s, 'spy_atr': spy_atr, 'excess_atr': s - spy_atr}
+                'stock_atr': s, 'spy_atr': spy_atr, 'excess_atr': s - spy_atr,
+                'stock_pct': stock[dates[j]][3] / entry_open - 1, 'spy_pct': spy[dates[j]][3] / spy[entry][0] - 1}
     held = [d for d in dates[i:j + 1] if d in stock]
     last = held[-1]
     s = (stock[last][3] - entry_open) / atr
     return {'status': 'incomplete', 'atr': atr, 'entry_open': entry_open, 'exit': last,
-            'stock_atr': s, 'spy_atr': spy_atr, 'excess_atr': s - spy_atr}
+            'stock_atr': s, 'spy_atr': spy_atr, 'excess_atr': s - spy_atr,
+            'stock_pct': stock[last][3] / entry_open - 1, 'spy_pct': spy[dates[j]][3] / spy[entry][0] - 1}
 
 
 # ------------------------------------------------------------------ primary set
@@ -149,7 +151,7 @@ def load_span(s3, asset, years, want, head, tail_n):
     return bars, sorted(set(dates))
 
 
-def year_job(year, primary_path, out):
+def year_job(year, primary_path, out, hold=HOLD):
     from r2_storage import client
     from archive_coverage_audit import DELISTED, normalize_ticker
     s3 = client()
@@ -160,20 +162,22 @@ def year_job(year, primary_path, out):
     if entries:
         syms = {e['sym'] for e in entries}
         want = syms | {s + DELISTED for s in syms}
-        stock_bars, dates = load_span(s3, 'stock', [year], want, 25, 30)
-        spy_bars, _ = load_span(s3, 'etf', [year], {'SPY'}, 25, 30)
+        # Longer holds (HOLD != 21, Entry 43) need the following year's bars; the default 21-session path is unchanged.
+        span = [year] if hold == HOLD else [year, year + 1]
+        stock_bars, dates = load_span(s3, 'stock', span, want, 25, 30)
+        spy_bars, _ = load_span(s3, 'etf', span, {'SPY'}, 25, 30)
         spy = spy_bars.get('SPY', {})
         print(f'{year}: {len(entries)} entries, {len(dates)} sessions loaded, SPY bars {len(spy)}')
         for e in entries:
             series = dict(stock_bars.get(e['sym'], {}))
             if e.get('via') == 'delisted' or not series:
                 series = {**series, **stock_bars.get(e['sym'] + DELISTED, {})}
-            r = trade_outcome(dates, series, spy, e['entry'])
+            r = trade_outcome(dates, series, spy, e['entry'], hold)
             r.update({'entry': e['entry'], 'sym': e['sym'], 'cik': e['cik'], 'via': e.get('via')})
             rows.append(r)
     Path(out).parent.mkdir(parents=True, exist_ok=True)
     Path(out).write_text(json.dumps({'year': year, 'rows': rows}))
-    print(f'{year}: ' + str(dict(Counter(r['status'] for r in rows))))
+    print(f'{year} (hold {hold} sessions): ' + str(dict(Counter(r['status'] for r in rows))))
 
 
 # ------------------------------------------------------------------ summary
@@ -286,6 +290,9 @@ def selftest():
         except RuntimeError:
             continue
         raise AssertionError(f'guard let {bad} through')
+    r3 = trade_outcome(dates, flat, spy, entry, hold=5)
+    assert r3['status'] == 'complete' and r3['exit'] == dates[24] and abs(r3['stock_pct']) < 1e-12, r3
+    assert abs(r['stock_pct'] - 0.08) < 1e-12 and abs(r['spy_pct'] - 0.01) < 1e-12, r
     assert allowed('2020-12-31') and allowed('2026-01-02') and allowed('2008-10-10') and not allowed('2021-01-01')
     rows = [{'entry': f'2010-0{1 + k % 9}-{1 + k % 27:02d}', 'excess_atr': float(k % 5) - 1.0} for k in range(60)]
     assert week_bootstrap(rows, 200) == week_bootstrap(rows, 200)
@@ -299,6 +306,7 @@ if __name__ == '__main__':
     ap.add_argument('arg', nargs='?')
     ap.add_argument('--primary')
     ap.add_argument('--out')
+    ap.add_argument('--hold', type=int, default=HOLD)
     ap.add_argument('--selftest', action='store_true')
     a = ap.parse_args()
     sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -309,7 +317,7 @@ if __name__ == '__main__':
         Path(a.out).parent.mkdir(parents=True, exist_ok=True)
         Path(a.out).write_text(json.dumps(keep))
     elif a.cmd == 'year':
-        year_job(int(a.arg), a.primary, a.out)
+        year_job(int(a.arg), a.primary, a.out, a.hold)
     elif a.cmd == 'summary':
         summary(a.arg)
     else:
