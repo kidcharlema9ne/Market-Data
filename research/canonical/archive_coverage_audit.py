@@ -25,10 +25,12 @@ from pathlib import Path
 
 PREFIX = {'stock': 'marketparquet/stock_daily/', 'etf': 'marketparquet/etf_daily/'}
 ETF_CHECK = ('SPY', 'ONEQ', 'IWM')
-# Lehman / WaMu first, then well-known acquired or bankrupt US names as a delisted-coverage probe.
-# Symbols are checked by exact match only; reuse of a symbol by a later company shows up as a long series.
-STOCK_CHECK = ('LEH', 'LEHMQ', 'WM', 'WMI', 'WAMUQ', 'BSC', 'CFC', 'WB', 'MER', 'IMB', 'CCTYQ', 'ENRNQ', 'WCOEQ',
+# MarketParquet stores delisted names as <TICKER>-DELISTED (data-quality page). A reused ticker can therefore
+# exist twice: the live company under TICKER and the earlier one under TICKER-DELISTED.
+DELISTED = '-DELISTED'
+STOCK_BASES = ('LEH', 'LEHMQ', 'WM', 'WMI', 'WAMUQ', 'BSC', 'CFC', 'WB', 'MER', 'IMB', 'CCTYQ', 'ENRNQ', 'WCOEQ',
                'SHLDQ', 'JCPNQ', 'GMGMQ', 'BBI', 'BGPIQ', 'EKDKQ', 'WYE', 'SGP', 'ROH', 'XTO', 'TWX', 'MON')
+STOCK_CHECK = tuple(x for b in STOCK_BASES for x in (b, b + DELISTED))
 CLOSE_YEARS = {2007, 2008, 2009}  # keep closes of STOCK_CHECK symbols in these years only (identity check)
 FLOOR = 3_000_000
 WINDOW = 15
@@ -135,7 +137,7 @@ def audit_feed(s3, asset, year, need, collect_dv):
                     if dv is not None and s in need:
                         dv[s][day] = c * v
     rep.update({'rows_min': min(rows_per_file, default=0), 'rows_median': int(statistics.median(rows_per_file or [0])),
-                'rows_max': max(rows_per_file, default=0), 'distinct_symbols': len(symbols), 'symbols': sorted(symbols) if asset == 'stock' else [],
+                'rows_max': max(rows_per_file, default=0), 'distinct_symbols': len(symbols), 'symbols': sorted(symbols) if asset == 'stock' else [], 'delisted_suffix_symbols': sum(x.endswith(DELISTED) for x in symbols),
                 'column_sets': dict(columns), 'timestamp_column_files': timestamp_files,
                 'date_mismatch_files': date_mismatch, 'files_with_duplicate_symbols': dup_files,
                 'bad_rows': bad_rows, 'asset_types': dict(asset_types),
@@ -149,7 +151,7 @@ def year_job(year, events_path, out):
     events = [e for e in json.loads(Path(events_path).read_text()) if e['entry'].startswith(str(year))]
     for e in events:
         e['sym'], e['tcat'] = normalize_ticker(e['ticker'])
-    need = {e['sym'] for e in events if e['tcat'] == 'ok'}
+    need = {x for e in events if e['tcat'] == 'ok' for x in (e['sym'], e['sym'] + DELISTED)}
     stock, dates, dv = audit_feed(s3, 'stock', year, need, True)
     etf, _, _ = audit_feed(s3, 'etf', year, set(), False)
     # trailing files from the prior year so January entries have a 15-session window
@@ -165,11 +167,22 @@ def year_job(year, events_path, out):
     cls, liquid_q, events_q, unmatched = Counter(), Counter(), Counter(), Counter()
     liquid_ge10 = 0
     no_price_syms = []
+    matched_via = Counter()
     for e in events:
         if e['tcat'] != 'ok':
             c, mean, bars = 'unusable_ticker_' + e['tcat'], None, 0
         else:
-            c, mean, bars = classify(all_dates, e['entry'], dv.get(e['sym'], {}))
+            a = classify(all_dates, e['entry'], dv.get(e['sym'], {}))
+            b = classify(all_dates, e['entry'], dv.get(e['sym'] + DELISTED, {}))
+            if a[0] != 'no_price' and b[0] != 'no_price':
+                matched_via['both_series_in_window'] += 1
+                (c, mean, bars), via = (a, 'plain') if a[2] >= b[2] else (b, 'delisted_suffix')
+            elif b[0] != 'no_price':
+                (c, mean, bars), via = b, 'delisted_suffix'
+            else:
+                (c, mean, bars), via = a, 'plain'
+            if c != 'no_price':
+                matched_via[via] += 1
         cls[c] += 1
         events_q[quarter(e['entry'])] += 1
         liquid_q[quarter(e['entry'])] += c == 'liquid'
@@ -180,6 +193,7 @@ def year_job(year, events_path, out):
     report = {'year': year, 'stock': stock, 'etf': etf,
               'events': {'total': len(events), 'classes': dict(cls), 'liquid_ge10_bars_sensitivity': liquid_ge10,
                          'by_quarter': dict(events_q), 'liquid_by_quarter': dict(liquid_q),
+                         'matched_via': dict(matched_via),
                          'sample_no_price_tickers': [t for t, _ in unmatched.most_common(15)],
                          'no_price_symbols': no_price_syms}}
     Path(out).parent.mkdir(parents=True, exist_ok=True)
@@ -252,16 +266,18 @@ def summary(folder):
             allp[s] += d
         for s, c in r['stock']['closes'].items():
             closes[s].update(c)
+    missing = []
     for s in STOCK_CHECK:
         d = sorted(allp[s])
         if not d:
-            print(f'{s}: NOT FOUND in any year')
+            missing.append(s)
             continue
         gaps = [(d[i], d[i + 1]) for i in range(len(d) - 1) if _span(d[i], d[i + 1]) > 10]
         c = closes[s]
         pts = [(k, round(c[k], 2)) for k in ('2008-09-12', '2008-09-25', '2008-10-01') if k in c]
         print(f'{s}: first {d[0]} last {d[-1]} bars {len(d)} gaps>10d {gaps[:3]} closes {pts}')
-    print('Probe names were all US-listed and acquired, merged or bankrupt; "NOT FOUND" means the exact symbol has no bar in any year.')
+    print('NOT FOUND in any year:', missing)
+    print('Probe names were all US-listed and later acquired, merged or bankrupt (some symbols were reused by later companies).')
     print('(WM: Washington Mutual was about $1-3 in Sept 2008; a price near $30 means the series is Waste Management.)')
     print('\n=== D. Events by liquidity class (entry year); filings-only events matched to prices by symbol ===')
     liquid_q, events_q = Counter(), Counter()
@@ -275,6 +291,11 @@ def summary(folder):
         liquid_q.update(e['liquid_by_quarter'])
         events_q.update(e['by_quarter'])
     print('all years:', dict(tot))
+    mv = Counter()
+    for r in years:
+        mv.update(r['events'].get('matched_via', {}))
+    print('matched via:', dict(mv))
+    print('-DELISTED symbols in the stock feed by year:', {r['year']: r['stock']['delisted_suffix_symbols'] for r in years})
     print('liquid share of price-matched events (liquid / (liquid+illiquid)) by year:',
           {r['year']: round(r['events']['classes'].get('liquid', 0) / max(1, r['events']['classes'].get('liquid', 0) + r['events']['classes'].get('illiquid', 0)), 2) for r in years if r['events']['total']})
     every = set()
@@ -285,7 +306,7 @@ def summary(folder):
         syms = r['events']['no_price_symbols']
         if not syms:
             continue
-        never = sum(1 for x in syms if x not in every)
+        never = sum(1 for x in syms if x not in every and x + DELISTED not in every)
         print(f"{r['year']}: no_price {len(syms)} -> symbol never appears in any year {never}, appears in some year but not in the 15-session window {len(syms) - never}")
     print('sample unmatched tickers:', {r['year']: r['events']['sample_no_price_tickers'][:8] for r in years if r['events']['sample_no_price_tickers']})
     print('\n=== E. D-061 condition: sealed share of 2006-2025 liquid events (counts only, no returns) ===')
@@ -326,6 +347,7 @@ def selftest():
     cut, action = verdict(share_table(thin))  # sealed share 17.6% -> must move earlier, to a boundary that reaches 20%
     assert action == 'move' and cut < '2020Q1', (cut, action)
     assert verdict(share_table(Counter({'2010Q1': 1}))) [1] != 'keep'
+    assert 'LEH-DELISTED' in STOCK_CHECK and 'WM' in STOCK_CHECK
     print('selftest ok')
 
 
