@@ -1,8 +1,8 @@
-name: Wide Range Reversal study (read-only)
+name: COT Wide Range Reversal with opposite-bar stop (read-only)
 on:
   push:
     branches: [research/cot-futures-r2-audit]
-    paths: [cot_wide_range.py]
+    paths: [cot_wide_range_stop.py]
   workflow_dispatch:
 permissions:
   contents: read
@@ -21,9 +21,9 @@ jobs:
           R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-        run: python cot_wide_range.py
+        run: python cot_wide_range_stop.py
       - uses: actions/upload-artifact@v4
         with:
-          name: cot-wide-range-events
-          path: cot-wide-range-events.parquet
+          name: cot-wide-range-stop-events
+          path: cot-wide-range-stop-events.parquet
           retention-days: 7
