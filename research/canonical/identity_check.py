@@ -204,6 +204,53 @@ def year_job(year, events_path, out):
     print(f"{year}: events {len(events)} {dict(Counter(r['status'] for r in results))}")
 
 
+def diagnose_year(year, events_path):
+    """Print raw purchase prices beside archive closes for contradicted events (SYBT, GABC, low and high ratios).
+    Read-only; prints only prices on past purchase dates and series ends, never anything after entry."""
+    from r2_storage import client
+    s3 = client()
+    allev = json.loads(Path(events_path).read_text())
+    for e in allev:
+        e['sym'], e['tcat'] = normalize_ticker(e['ticker'])
+    events = [e for e in allev if e['entry'].startswith(str(year)) and e['tcat'] == 'ok']
+    need = {x for e in events for x in (e['sym'], e['sym'] + DELISTED)}
+    closes, dvol, _, dates = load_year(s3, year, need, set())
+    tail = list_dates(s3, 'stock', year - 1)[-WINDOW - 10:]
+    tail_dates = []
+    with ThreadPoolExecutor(8) as pool:
+        for key, _, t in pool.map(lambda k: read_file(s3, k), tail):
+            day = key_date(key)
+            tail_dates.append(day)
+            for s, c, v in zip(t['symbol'], t['close'], t['volume']):
+                if s in need and c and c > 0:
+                    closes[s][day] = c
+                    if v is not None and v >= 0:
+                        dvol[s][day] = c * v
+    all_dates = sorted(set(tail_dates) | set(dates))
+    per_issuer = Counter(e['issuer_cik'] for e in events)
+    shown = Counter()
+    for e in events:
+        series = {'plain': (closes.get(e['sym'], {}), dvol.get(e['sym'], {})),
+                  'delisted': (closes.get(e['sym'] + DELISTED, {}), dvol.get(e['sym'] + DELISTED, {}))}
+        r = evaluate_event(e, all_dates, series)
+        if r['status'] != 'contradicted':
+            continue
+        kind = 'SYBT/GABC' if e['sym'] in ('SYBT', 'GABC') else 'low' if r['ratio'] < 0.25 else 'high' if r['ratio'] > 2 else None
+        if kind is None or shown[kind] >= {'SYBT/GABC': 3, 'low': 6, 'high': 3}[kind]:
+            continue
+        shown[kind] += 1
+        cl = closes[e['sym'] if r['via'] == 'plain' else e['sym'] + DELISTED]
+        ds = sorted(cl)
+        pts = []
+        for d, p in e['purchases'][:3]:
+            i = bisect_right(ds, d)
+            pts.append((d, p, ds[i - 1] if i else None, cl[ds[i - 1]] if i else None))
+        print(f"DIAG {year} {kind} {e['sym']} via={r['via']} cik={e['issuer_cik']} entry={e['entry']} buyers={e['buyers']} "
+              f"ratio={r['ratio']:.3f} n_cmp={r['n_cmp']} purchases(date,price,close_date,close)={pts} "
+              f"series_in_year first={ds[0]}:{cl[ds[0]]:.2f} last={ds[-1]}:{cl[ds[-1]]:.2f}")
+    print(f'DIAG {year} events per issuer top: {per_issuer.most_common(5)}')
+
+
 # ---------------------------------------------------------------- summary
 def summary(folder):
     years = sorted((json.loads(p.read_text()) for p in Path(folder).glob('year_*.json')), key=lambda r: r['year'])
@@ -288,7 +335,7 @@ def selftest():
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
-    ap.add_argument('cmd', nargs='?', choices=['events', 'year', 'summary'])
+    ap.add_argument('cmd', nargs='?', choices=['events', 'year', 'summary', 'diagnose'])
     ap.add_argument('arg', nargs='?')
     ap.add_argument('--events', default='reports/events_priced.json')
     ap.add_argument('--out')
@@ -300,6 +347,8 @@ if __name__ == '__main__':
         build_events(a.out or 'reports/events_priced.json')
     elif a.cmd == 'year':
         year_job(int(a.arg), a.events, a.out or f'reports/year_{a.arg}.json')
+    elif a.cmd == 'diagnose':
+        diagnose_year(int(a.arg), a.events)
     elif a.cmd == 'summary':
         summary(a.arg or 'reports')
     else:
