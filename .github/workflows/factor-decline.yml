@@ -2,6 +2,10 @@ name: Factor C8/C9/C1 - decline look-backs and SPY regime at entry (development 
 on:
   workflow_dispatch:
     inputs:
+      features_run_id:
+        description: 'optional: earlier factor-decline run whose decline-* artifacts to reuse (feature code unchanged); empty = recompute'
+        required: false
+        default: ''
       returns_run_id:
         description: 'refined-baseline run holding primary_allowed and the returns-* artifacts (Entry 28)'
         required: false
@@ -11,6 +15,7 @@ permissions:
   actions: read
 jobs:
   features:
+    if: ${{ inputs.features_run_id == '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 90
     strategy:
@@ -44,7 +49,7 @@ jobs:
           path: reports/decline_${{ matrix.year }}.json
   summary:
     needs: features
-    if: ${{ !cancelled() }}
+    if: ${{ !cancelled() && (needs.features.result == 'success' || needs.features.result == 'skipped') }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -53,11 +58,20 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install boto3 pyarrow pandas_market_calendars numpy
-      - uses: actions/download-artifact@v4
+      - if: ${{ inputs.features_run_id == '' }}
+        uses: actions/download-artifact@v4
         with:
           pattern: decline-*
           merge-multiple: true
           path: reports/feat
+      - if: ${{ inputs.features_run_id != '' }}
+        uses: actions/download-artifact@v4
+        with:
+          pattern: decline-*
+          merge-multiple: true
+          path: reports/feat
+          run-id: ${{ inputs.features_run_id }}
+          github-token: ${{ github.token }}
       - uses: actions/download-artifact@v4
         with:
           pattern: returns-*
