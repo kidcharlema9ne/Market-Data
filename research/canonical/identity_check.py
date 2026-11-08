@@ -251,6 +251,18 @@ def diagnose_year(year, events_path):
     print(f'DIAG {year} events per issuer top: {per_issuer.most_common(5)}')
 
 
+def probe(symbol, start, end):
+    """Print symbol, date, close, volume for one symbol over a past date range (split-adjustment probe; no returns)."""
+    from r2_storage import client
+    s3 = client()
+    keys = [k for y in range(int(start[:4]), int(end[:4]) + 1) for k in list_dates(s3, 'stock', y) if start <= key_date(k) <= end]
+    for key in keys:
+        _, _, t = read_file(s3, key)
+        for s, c, v in zip(t['symbol'], t['close'], t['volume']):
+            if s == symbol:
+                print(f'PROBE {symbol} {key_date(key)} close={c} volume={v}')
+
+
 # ---------------------------------------------------------------- summary
 def summary(folder):
     years = sorted((json.loads(p.read_text()) for p in Path(folder).glob('year_*.json')), key=lambda r: r['year'])
@@ -335,10 +347,12 @@ def selftest():
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
-    ap.add_argument('cmd', nargs='?', choices=['events', 'year', 'summary', 'diagnose'])
+    ap.add_argument('cmd', nargs='?', choices=['events', 'year', 'summary', 'diagnose', 'probe'])
     ap.add_argument('arg', nargs='?')
     ap.add_argument('--events', default='reports/events_priced.json')
     ap.add_argument('--out')
+    ap.add_argument('--start')
+    ap.add_argument('--end')
     ap.add_argument('--selftest', action='store_true')
     a = ap.parse_args()
     if a.selftest:
@@ -347,6 +361,8 @@ if __name__ == '__main__':
         build_events(a.out or 'reports/events_priced.json')
     elif a.cmd == 'year':
         year_job(int(a.arg), a.events, a.out or f'reports/year_{a.arg}.json')
+    elif a.cmd == 'probe':
+        probe(a.arg, a.start, a.end)
     elif a.cmd == 'diagnose':
         diagnose_year(int(a.arg), a.events)
     elif a.cmd == 'summary':
