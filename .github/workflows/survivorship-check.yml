@@ -14,13 +14,13 @@ on:
         description: 'factor-decline run holding decline-* artifacts (Entry 36)'
         required: false
         default: '42499472150'
-permissions:
-  contents: read
-  actions: read
       start:
         description: 'optional entry-date floor for the year-matched subset section (e.g. 2011-01-01)'
         required: false
         default: ''
+permissions:
+  contents: read
+  actions: read
 jobs:
   check:
     runs-on: ubuntu-latest
