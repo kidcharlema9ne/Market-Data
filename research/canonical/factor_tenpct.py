@@ -29,7 +29,20 @@ from factor_roles import DEV_END, EPISODES, SEED, indep, quarter, stats_line, we
 
 
 def rel(o):
-    return {x.strip() for x in o[1].split(',') if x.strip()}
+    """Form 4 boxes ticked, from the relationship string. Matching is by normalised text because the SEC bulk data writes the
+    10% value as TenPercentOwner while the live parser writes '10% Owner' (the first run of this script looked only for the
+    latter and found none: see Entry 34)."""
+    s = (o[1] or '').lower().replace(' ', '')
+    out = set()
+    if 'director' in s:
+        out.add('Director')
+    if 'officer' in s:
+        out.add('Officer')
+    if 'tenpercent' in s or '10%' in s:
+        out.add('10% Owner')
+    if 'other' in s:
+        out.add('Other')
+    return out
 
 
 def roles2(owners):
@@ -134,6 +147,9 @@ def main(events_path, year_folder, returns_folder):
     rows = fr.load(events_path, year_folder, returns_folder)
     dev = [r for r in rows if r['entry'] <= DEV_END]
     pil = [r for r in rows if r['entry'] > DEV_END]
+    raw = Counter(o[1] for r in rows for o in r['owners'])
+    print(f'\nRaw relationship strings among the buyers (all analysed events): {raw.most_common(12)}; strings with a space after a comma: '
+          f'{sum(v for k, v in raw.items() if ", " in k)}; buyers recognised as 10% Owner: {sum(r["n_ten"] for r in rows)} of {sum(raw.values())}')
     print(f'\nComposition (all {len(rows)} analysed events): buyers per event {Counter(min(r["n_buyers"], 8) for r in rows)}')
     print(f'events with at least one buyer ticking the 10% box: {sum(r["n_ten"] >= 1 for r in rows)} '
           f'({sum(r["n_ten"] >= 1 for r in rows) / len(rows):.1%}); two or more: {sum(r["n_ten"] >= 2 for r in rows)}; '
@@ -160,6 +176,10 @@ def selftest():
     assert roles2([['1', 'Director', '']] * 4)['n_pure_dir'] == 1       # same cik repeated is one person
     assert roles2([[str(k), 'Director', ''] for k in range(4)])['n_pure_dir'] == 4
     assert roles2([['1', '10% Owner', '']])['no_do_box'] == 1
+    assert rel(['1', 'Director,TenPercentOwner', '']) == {'Director', '10% Owner'}
+    assert rel(['1', 'Director, 10% Owner', '']) == {'Director', '10% Owner'}
+    assert rel(['1', 'Officer', '']) == {'Officer'} and rel(['1', 'Other', '']) == {'Other'}
+    assert roles2([['1', 'Officer,TenPercentOwner', ''], ['2', 'Director', ''], ['3', 'Director', ''], ['4', 'Director', '']])['n_clean'] == 3
     rows = [{'entry': f'2010-0{1 + k % 9}-{1 + k % 27:02d}', 'excess_atr': float(k % 5) - 1.0, 'stock_atr': 0.0, 'spy_atr': 0.0,
              'cik': str(k), **roles2([[str(k), 'Director', ''], [str(k) + 'b', 'Officer', ''], [str(k) + 'c', 'Director,10% Owner' if k % 3 == 0 else 'Director', ''],
                                       [str(k) + 'd', 'Director' if k % 4 else 'Officer', '']])} for k in range(120)]
