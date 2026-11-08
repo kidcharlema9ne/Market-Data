@@ -33,6 +33,22 @@ smaller than n; the quarter-block and year-block ranges narrow this only partly.
 Not done on purpose: a different entry rule, stops, costs, the 2026 pilot, any new cut point, a 2011-2020 subset (can be added with --start if asked).
 Questions on the tally: 5 horizons x 7 groups x 2 variants of means (70), 8 chance tests, descriptive census, constant-cohort and trade-count tables.
 
+SUBSET RERUN (Entry 45; declared 8 Nov 2026 BEFORE any subset number was computed; asked in the Entry 43 "Next"): `subsets` command. POST HOC, exploratory.
+Same cohort, same returns runs and same holds as Entry 43. Three subsets of the 1,273-event cohort:
+  S1  without the three large episodes (entry quarters 2008Q4, 2011Q3, 2020Q1), all years;
+  S2  entries from 2011-01-01 only (the Entry 42 subset, missing-price share 5-15%);
+  S3  S2 and also without 2011Q3 and 2020Q1 (2008Q4 is outside S2).
+Each subset is run two ways: FIXED = FELL/Q1 labels kept exactly as in Entry 43 (cut points from the full cohort), so only the events change; RECUT = fifths and the
+lead63 cut points recomputed inside the subset (as Entry 42 did). 3 subsets x 2 = 6 passes. Per pass, only these sections (the ones named in the Entry 43 Next):
+  B. complete-only table per hold x group (stock and SPY legs, percent legs, quarter- and year-block ranges), as Entry 43 section B;
+  D. constant cohort (events complete at all horizons) with increments;
+  E. week-shuffle chance tests, Spearman(raw252, excess), complete-only and complete+incomplete (8 per pass);
+  H. clipped means (the SUNE ticker-reuse row, SunEdison 2015-08-26, is in every subset that holds 2011-2020; ALL and NEITHER unclipped at 189 and 252 are INVALID,
+     use clipped means or medians; FELL/Q1/BOTH/EITHER are unaffected).
+Not run: census, complete+incomplete tables, trade counts, extreme-trade lists (unchanged logic, see Entry 43). No new cut point, no 2021-2025 entry, no pilot.
+Tally: 6 passes x 5 holds x 7 groups = 210 group means (B), 6 constant-cohort rows sets, 48 chance tests, 210 clipped means.
+Usage (subsets):  python hold_horizons.py subsets DECLINE REGIME RET21 RET63 RET126 RET189 RET252
+
 Usage:  python hold_horizons.py run DECLINE REGIME RET21 RET63 RET126 RET189 RET252 | --selftest
 """
 import argparse, json, statistics, sys
@@ -40,7 +56,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from refined_baseline import DEV_END, assert_allowed
+from refined_baseline import DEV_END, EPISODES, assert_allowed, quarter
 import factor_decline as fd
 import factor_regime as fg
 import factor_cross as fc
@@ -233,6 +249,44 @@ def run(decline, regime, ret21, *long_folders):
     print('\nQuestions asked on this cohort in this entry: see the docstring tally (post hoc, exploratory).')
 
 
+SUBSETS = (('S1 without 2008Q4, 2011Q3, 2020Q1 (all years)', None, EPISODES),
+           ('S2 entries from 2011-01-01', '2011-01-01', ()),
+           ('S3 entries from 2011-01-01 without 2011Q3 and 2020Q1', '2011-01-01', ('2011Q3', '2020Q1')))
+
+
+def subset_cohort(full, start, drop_quarters, recut):
+    import numpy as np
+    sub = [dict(r) for r in full if (not start or r['entry'] >= start) and quarter(r['entry']) not in drop_quarters]
+    if recut and sub:
+        x = np.array([r['lead63'] for r in sub])
+        lo, hi = np.quantile(x, [0.2, 0.8])
+        for r, b in zip(sub, fc.bands(x, lo, hi)):
+            r['band'] = b
+        for r, g in zip(sub, fc.groups([r['raw252'] for r in sub])):
+            r['g_raw252'] = g
+        print(f'  recut: lead63 cut points {lo:+.4f} / {hi:+.4f}')
+    return sub
+
+
+def run_subsets(decline, regime, ret21, *long_folders):
+    full = build_cohort(decline, regime, ret21)
+    rets = {21: read_returns(ret21)}
+    for h, f in zip(LONG, long_folders):
+        rets[h] = read_returns(f)
+        print(f'hold {h}: {len(rets[h])} return rows read from {f}')
+    print('OVERLAP WARNING: long holds that start in the same period overlap almost completely; independent observations are far fewer than n.')
+    for name, start, drop in SUBSETS:
+        for recut in (False, True):
+            print(f'\n########## {name} | groups {"RECUT inside the subset" if recut else "FIXED as in Entry 43"} ##########')
+            sub = subset_cohort(full, start, drop, recut)
+            print(f'  n={len(sub)} of {len(full)}; ' + ', '.join(f'{g} {sum(member(r, g) for r in sub)}' for g in GROUPS))
+            table(sub, rets, {'complete'}, 'B. Complete trades only; excess over same-window SPY in ATR')
+            constant(sub, rets)
+            chance(sub, rets)
+            winsor(sub, rets)
+    print('\nQuestions asked in this entry: see the docstring tally (post hoc, exploratory).')
+
+
 def selftest():
     rs = [{'entry': f'20{10 + k % 5}-0{1 + k % 9}-1{k % 9}', 'excess_atr': float(k % 7) - 2.0, 'stock_atr': 1.0, 'spy_atr': 0.5, 'stock_pct': 0.10, 'spy_pct': 0.05,
            'g_raw252': 'most' if k % 5 == 0 else 'mid', 'band': 'Q1' if k % 3 == 0 else 'mid'} for k in range(90)]
@@ -242,6 +296,8 @@ def selftest():
     assert lo < statistics.fmean(r['excess_atr'] for r in rs) < hi and nb == 5
     assert block_range([rs[0], rs[5]], lambda r: r['entry'][:4]) is None
     assert 'pct:' in line(rs) and 'n=  90' in line(rs)
+    sub = subset_cohort([{**r, 'lead63': float(i), 'raw252': float(-i)} for i, r in enumerate(rs)], '2012-01-01', ('2013Q1',), True)
+    assert sub and all(r['entry'] >= '2012-01-01' and quarter(r['entry']) != '2013Q1' for r in sub) and any(member(r, 'FELL') for r in sub)
     print('hold_horizons self-test passed')
 
 
@@ -255,5 +311,7 @@ if __name__ == '__main__':
     a = ap.parse_args()
     if a.cmd == 'run' and len(a.folders) == 7:
         run(*a.folders)
+    elif a.cmd == 'subsets' and len(a.folders) == 7:
+        run_subsets(*a.folders)
     else:
         raise SystemExit(__doc__)
