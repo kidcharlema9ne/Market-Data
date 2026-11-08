@@ -17,6 +17,10 @@ on:
 permissions:
   contents: read
   actions: read
+      start:
+        description: 'optional entry-date floor for the year-matched subset section (e.g. 2011-01-01)'
+        required: false
+        default: ''
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -57,4 +61,4 @@ jobs:
           github-token: ${{ github.token }}
       - env:
           PYTHONPATH: .
-        run: python -u research/canonical/survivorship_check.py reports/events/events_refined.json reports/years reports/feat reports/ret
+        run: python -u research/canonical/survivorship_check.py reports/events/events_refined.json reports/years reports/feat reports/ret ${{ inputs.start }}
