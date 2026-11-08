@@ -1,4 +1,4 @@
-name: COT 200-day trend snapshots
+name: COT moving-average trend snapshots
 on:
   push:
     branches: [research/cot-futures-r2-audit]
@@ -49,10 +49,11 @@ jobs:
               bad|=g.session.duplicated(keep=False).to_numpy()|~g.date_offset.between(0,3).to_numpy()
               gaps=g.session.diff().dt.days.fillna(0).gt(7)
               close=g.close.mask(bad)
-              average=close.rolling(200).mean().where(~gaps.rolling(199).max().fillna(1).astype(bool))
               q=g[["symbol","session"]].copy()
               q["prior_close"]=close.shift(1)
-              q["ma200"]=average.shift(1)
+              for window in (20, 50, 200):
+                  valid=~gaps.rolling(window-1).max().fillna(1).astype(bool)
+                  q[f"ma{window}"]=close.rolling(window).mean().where(valid).shift(1)
               q["entry_open"]=g.open.mask(bad)
               q["prior_session"]=g.session.shift(1)
               snapshots.append(q[~g.session.duplicated(keep=False)])
