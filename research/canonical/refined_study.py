@@ -179,8 +179,10 @@ def find_events_refined(rows, cal, exclude_routine, tol=SAME_PRICE_TOL, min_buye
                         continue
                     p = row_price(r)
                     purchases += [(d, p) for d in r['transaction_dates'] if start <= d < entry]
+                owners = sorted({(row_owner(r), r['owners'][0]['relationship'], r['owners'][0].get('title') or '')
+                                 for r in seen if id(r) not in bad})
                 events.append({'issuer_cik': key[0], 'ticker': key[1], 'entry': entry, 'buyers': len(after),
-                               'purchases': purchases, 'n_routine_rows': len(bad)})
+                               'purchases': purchases, 'n_routine_rows': len(bad), 'owners': [list(o) for o in owners]})
     return events, stats
 
 
@@ -400,6 +402,7 @@ def selftest():
     disc = [_row(c, cal[30 + k], cal[31 + k], 10.0 + 0.5 * k) for k, c in enumerate('abcd')]
     ev, _ = find_events_refined(disc, cal, True)
     assert len(ev) == 1 and ev[0]['buyers'] == 4 and ev[0]['n_routine_rows'] == 0
+    assert len(ev[0]['owners']) == 4 and all(o[1] == 'Director' for o in ev[0]['owners']), ev[0]['owners']   # buyer roles are carried
     # 3. look-back only: a third same-price owner filing AFTER the entry cannot undo the event
     late = [_row('a', cal[30], cal[31], 10.0), _row('b', cal[30], cal[32], 10.0), _row('c', cal[31], cal[33], 10.5),
             _row('d', cal[32], cal[34], 11.0), _row('e', cal[30], cal[36], 10.0)]
