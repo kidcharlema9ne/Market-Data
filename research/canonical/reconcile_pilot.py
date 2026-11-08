@@ -91,13 +91,13 @@ def main(old_path, new_path, year_path):
             elif not e['liquid']:
                 reason = 'fails new $3M floor (15 archive bars)'
             elif k not in primary_keys:
-                reason = 'collapsed by option C (D-065) or not completed'
+                reason = 'collapsed by option C (D-065); every primary pilot entry completed'
             else:
                 reason = 'other'
         why[reason].append(k)
     print('\nWhy old-only trades are not in the new set:')
     for reason, ks in sorted(why.items(), key=lambda kv: -len(kv[1])):
-        print(f'  {len(ks):>3}  {reason}: old mean excess {m([oldkey[k]["excess_atr"] for k in ks]):+.3f}; ' + ', '.join(f'{k[0]} {k[1]}' for k in ks[:6]))
+        print(f'  {len(ks):>3}  {reason}: old mean excess {m([oldkey[k]["excess_atr"] for k in ks]):+.3f}; ' + ', '.join(f'{k[0]} {k[1]} {oldkey[k]["excess_atr"]:+.2f}' for k in ks))
     oldall = {(t['ticker'].upper(), t['entry']): t for t in old}
     wn = defaultdict(list)
     for k in only_new:
