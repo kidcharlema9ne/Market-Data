@@ -1,0 +1,127 @@
+name: Export COT 20-day trend snapshot
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/export-cot-trend.yml]
+  workflow_dispatch:
+  schedule:
+    - cron: '15 8 * * 2-6'
+permissions:
+  contents: read
+concurrency:
+  group: cot-trend-snapshot
+  cancel-in-progress: false
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check sync access
+        id: sync
+        env:
+          SYNC_TOKEN: ${{ secrets.COT_HISTORY_SYNC_TOKEN }}
+        run: |
+          if [ -n "$SYNC_TOKEN" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-python@v5
+        if: github.event_name != 'schedule' || steps.sync.outputs.enabled == 'true'
+        with:
+          python-version: '3.12'
+      - name: Export latest price relative to its 20-day average
+        if: github.event_name != 'schedule' || steps.sync.outputs.enabled == 'true'
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          python -m pip install boto3 pyarrow
+          python - <<'PY'
+          import hashlib
+          import json
+          import math
+          import os
+          from collections import defaultdict
+          from concurrent.futures import ThreadPoolExecutor
+          from contextlib import closing
+          from datetime import date
+          from io import BytesIO
+          from pathlib import Path
+          from statistics import fmean
+
+          import boto3
+          import pyarrow.parquet as pq
+
+          bucket = "insider-research"
+          prefix = "marketparquet/futures_daily/"
+          client = boto3.client(
+              "s3", endpoint_url=os.environ["R2_ENDPOINT_URL"],
+              aws_access_key_id=os.environ["R2_ACCESS_KEY_ID"],
+              aws_secret_access_key=os.environ["R2_SECRET_ACCESS_KEY"], region_name="auto",
+          )
+          objects = client.get_paginator("list_objects_v2").paginate(Bucket=bucket, Prefix=prefix)
+          keys = sorted(obj["Key"] for page in objects for obj in page.get("Contents", [])
+                        if obj["Key"].endswith(".parquet"))[-30:]
+          if len(keys) < 20:
+              raise RuntimeError("Fewer than 20 daily futures files")
+          def read(key):
+              response = client.get_object(Bucket=bucket, Key=key)
+              with closing(response["Body"]) as body:
+                  raw = body.read()
+              if hashlib.sha256(raw).hexdigest() != response["Metadata"].get("verified-sha256"):
+                  raise RuntimeError(f"Unverified archive object {key}")
+              rows = pq.read_table(BytesIO(raw), columns=["symbol", "close"]).to_pylist()
+              closes = {}
+              for row in rows:
+                  symbol, close = row["symbol"], row["close"]
+                  closes[symbol] = close if symbol not in closes else None
+              return date.fromisoformat(key[len(prefix):-8]), closes
+
+          history = defaultdict(list)
+          with ThreadPoolExecutor(max_workers=8) as pool:
+              for session, closes in pool.map(read, keys):
+                  for symbol, close in closes.items():
+                      history[symbol].append((session, close))
+          latest = session
+          trends = {}
+          for symbol, bars in sorted(history.items()):
+              tail = bars[-20:]
+              if len(tail) != 20 or tail[-1][0] != latest:
+                  continue
+              if any((b[0] - a[0]).days > 7 for a, b in zip(tail, tail[1:])):
+                  continue
+              prices = [close for _, close in tail]
+              if any(close is None or not math.isfinite(close) for close in prices):
+                  continue
+              price, average = prices[-1], fmean(prices)
+              trends[symbol] = "above" if price > average else "below" if price < average else "equal"
+          if not trends:
+              raise RuntimeError("No verified 20-day trends")
+          output = {"as_of": latest.isoformat(), "symbols": trends}
+          Path("futures_sma20.json").write_text(json.dumps(output, indent=2) + "\n")
+          print(f"{len(trends)} futures trend flags as of {latest}")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: github.event_name != 'schedule' || steps.sync.outputs.enabled == 'true'
+        with:
+          name: futures_sma20
+          path: futures_sma20.json
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/checkout@v4
+        if: steps.sync.outputs.enabled == 'true'
+        with:
+          repository: kidcharlema9ne/cot-history
+          ref: main
+          token: ${{ secrets.COT_HISTORY_SYNC_TOKEN }}
+          path: cot-history
+      - name: Publish only the trend flags
+        if: steps.sync.outputs.enabled == 'true'
+        run: |
+          cp futures_sma20.json cot-history/data/futures_sma20.json
+          cd cot-history
+          git add data/futures_sma20.json
+          if ! git diff --cached --quiet; then
+            git -c user.name=github-actions -c user.email=41898282+github-actions[bot]@users.noreply.github.com commit -m "Refresh futures 20-day trend flags"
+            git push
+          fi
