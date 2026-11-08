@@ -2,7 +2,7 @@ name: COT futures price outcomes (read-only)
 on:
   push:
     branches: [research/cot-futures-r2-audit]
-    paths: [.github/workflows/marketparquet-futures-daily.yml]
+    paths: [cot_futures_price_panel.py]
   workflow_dispatch:
 permissions:
   contents: read
