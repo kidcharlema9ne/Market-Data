@@ -10,6 +10,16 @@ on:
         description: 'refined-baseline run holding primary_allowed (Entry 28); only the entry list is used in stage 1'
         required: false
         default: '42490748366'
+      stage:
+        description: 'dist = stage 1 (no returns); stage2 = returns joined (cutoffs declared in CANDIDATES.md C23)'
+        required: true
+        default: 'dist'
+        type: choice
+        options: [dist, stage2]
+      regime_run_id:
+        description: 'factor-regime run holding the regime-* artifacts (Entry 37); stage2 only'
+        required: false
+        default: '42501167019'
       base_run_id:
         description: 'optional: earlier base-scan run whose base-* artifacts to reuse; empty = recompute the features'
         required: false
@@ -83,6 +93,30 @@ jobs:
           path: reports/decl
           run-id: ${{ inputs.decline_run_id }}
           github-token: ${{ github.token }}
+      - if: ${{ inputs.stage == 'stage2' }}
+        uses: actions/download-artifact@v4
+        with:
+          pattern: regime-*
+          merge-multiple: true
+          path: reports/feat
+          run-id: ${{ inputs.regime_run_id }}
+          github-token: ${{ github.token }}
+      - if: ${{ inputs.stage == 'stage2' }}
+        uses: actions/download-artifact@v4
+        with:
+          pattern: returns-*
+          merge-multiple: true
+          path: reports/ret
+          run-id: ${{ inputs.returns_run_id }}
+          github-token: ${{ github.token }}
+      - run: python research/canonical/base_scan.py --selftest
+        env:
+          PYTHONPATH: .
       - env:
           PYTHONPATH: .
-        run: python -u research/canonical/base_scan.py basedist reports/base reports/decl
+        run: |
+          if [ "${{ inputs.stage }}" = "stage2" ]; then
+            python -u research/canonical/base_scan.py stage2 reports/base reports/decl reports/feat reports/ret
+          else
+            python -u research/canonical/base_scan.py basedist reports/base reports/decl
+          fi
