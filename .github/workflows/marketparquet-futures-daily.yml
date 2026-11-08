@@ -1,8 +1,8 @@
-name: COT futures price outcomes (read-only)
+name: Wide Range Reversal study (read-only)
 on:
   push:
     branches: [research/cot-futures-r2-audit]
-    paths: [cot_futures_price_panel.py]
+    paths: [cot_wide_range.py]
   workflow_dispatch:
 permissions:
   contents: read
@@ -21,9 +21,9 @@ jobs:
           R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-        run: python cot_futures_price_panel.py
+        run: python cot_wide_range.py
       - uses: actions/upload-artifact@v4
         with:
-          name: cot-futures-price-outcomes
-          path: cot-futures-price-outcomes.parquet
+          name: cot-wide-range-events
+          path: cot-wide-range-events.parquet
           retention-days: 7
