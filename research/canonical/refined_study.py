@@ -182,8 +182,29 @@ def find_events_refined(rows, cal, exclude_routine, tol=SAME_PRICE_TOL, min_buye
                 owners = sorted({(row_owner(r), r['owners'][0]['relationship'], r['owners'][0].get('title') or '')
                                  for r in seen if id(r) not in bad})
                 events.append({'issuer_cik': key[0], 'ticker': key[1], 'entry': entry, 'buyers': len(after),
-                               'purchases': purchases, 'n_routine_rows': len(bad), 'owners': [list(o) for o in owners]})
+                               'purchases': purchases, 'n_routine_rows': len(bad), 'owners': [list(o) for o in owners],
+                               'window_start': start,
+                               'rows': [{'acc': r['accession'], 'keys': r['transaction_row_keys']} for r in seen if id(r) not in bad]})
     return events, stats
+
+
+def enrich(events, db):
+    """Attach to each event the individual purchase lines (owner, date, shares, price, shares owned after, direct/indirect)
+    that were counted, read from the SEC database. Selection is untouched. Removes the temporary 'rows' and 'window_start'."""
+    cache = {}
+    for e in events:
+        lines = []
+        for r in e.pop('rows'):
+            for k in r['keys']:
+                if (r['acc'], k) not in cache:
+                    got = db.execute('SELECT payload FROM purchase_candidates WHERE accession=? AND transaction_row_key=?', (r['acc'], k)).fetchone()
+                    cache[(r['acc'], k)] = json.loads(got[0]) if got else None
+                p = cache[(r['acc'], k)]
+                if p is not None and p.get('transaction_date') and e['window_start'] <= p['transaction_date'] < e['entry']:
+                    lines.append({'owner': p['owners'][0]['cik'], 'date': p['transaction_date'], 'shares': p.get('shares'),
+                                  'price': p.get('price_per_share'), 'after': p.get('shares_after'), 'di': p.get('direct_indirect'), 'acc': r['acc']})
+        e['lines'] = lines
+        e.pop('window_start')
 
 
 def build_events(out):
@@ -194,6 +215,12 @@ def build_events(out):
         original = find_events(rows, cal)
         base, _ = find_events_refined(rows, cal, False)
         refined, stats = find_events_refined(rows, cal, True)
+        import sqlite3
+        db = sqlite3.connect(str(next(Path(tmp).glob('*.sqlite3'))))
+        enrich(refined, db)
+        for e in base:
+            e.pop('rows', None)
+            e.pop('window_start', None)
         sens_rows, sens_cal = rows, cal
     k = lambda ev: sorted((e['issuer_cik'], e['ticker'], e['entry'], e['buyers']) for e in ev)
     assert k(base) == k(original), 'base set differs from cluster_counts_by_year.find_events'
@@ -372,7 +399,8 @@ def summary(folder, events_path):
 def _row(cik, tx, filed, price, issuer='1', ticker='ABC'):
     return {'review_flags': [], 'security_title': 'Common Stock', 'ticker_at_filing': ticker, 'issuer_cik': issuer,
             'owners': [{'cik': cik, 'name': 'Jane Doe', 'relationship': 'Director', 'title': ''}],
-            'transaction_dates': [tx], 'filing_date': filed, 'insider_weighted_price': str(price)}
+            'transaction_dates': [tx], 'filing_date': filed, 'insider_weighted_price': str(price),
+            'accession': f'acc-{cik}-{tx}', 'transaction_row_keys': ['k1']}
 
 
 def selftest():
@@ -426,6 +454,18 @@ def selftest():
     # look-back only for (b): the same history filed AFTER the event does not drop it
     posthist = [dict(r, filing_date=cal[230]) for r in hist]
     assert len(find_events_refined(posthist + cluster, cal, True)[0]) == 1
+
+    # enrich: purchase lines are attached from the database and filtered to the window
+    import sqlite3
+    dbm = sqlite3.connect(':memory:')
+    dbm.execute('CREATE TABLE purchase_candidates (accession TEXT, transaction_row_key TEXT, payload TEXT)')
+    for k in range(2):
+        dbm.execute('INSERT INTO purchase_candidates VALUES (?,?,?)', (f'acc{k}', 'r1', json.dumps({
+            'transaction_date': cal[10 + 40 * k], 'owners': [{'cik': f'o{k}'}], 'shares': 100, 'price_per_share': 5.0,
+            'shares_after': 1000, 'direct_indirect': 'D'})))
+    evs = [{'entry': cal[12], 'window_start': cal[0], 'rows': [{'acc': 'acc0', 'keys': ['r1']}, {'acc': 'acc1', 'keys': ['r1']}]}]
+    enrich(evs, dbm)
+    assert [l['owner'] for l in evs[0]['lines']] == ['o0'] and 'rows' not in evs[0] and 'window_start' not in evs[0], evs   # acc1 is outside the window
 
     # identity v2
     c10 = {d: 10.0 for d in cal[:30]}
