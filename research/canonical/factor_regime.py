@@ -26,7 +26,7 @@ Descriptive only (not in the chance menu): quintile tables with and without the 
 large episodes; forward SPY direction during the hold (NOT tradable; shows how much of the result depends on the market's move after entry);
 the 2026 pilot split at the development median.
 
-Usage:  python factor_regime.py year YEAR --primary FILE --out FILE   |   summary FEATURES_FOLDER RETURNS_FOLDER YEAR_FOLDER EVENTS.json   |   --selftest
+Usage:  python factor_regime.py year YEAR --primary FILE --out FILE   |   summary FEATURES_FOLDER RETURNS_FOLDER YEAR_FOLDER EVENTS.json   |   lead FEATURES_FOLDER RETURNS_FOLDER YEAR_FOLDER EVENTS.json   |   --selftest
 """
 import argparse, json, math, statistics, sys
 from bisect import bisect_left
@@ -325,6 +325,116 @@ def summary(feat_folder, ret_folder, year_folder, events_path):
     print('Questions asked on this cohort in this entry: 14 statistics (Part 1) + 7 controller gaps (Part 2), plus descriptive quintile tables, trend splits, hold-direction split, pilot split.')
 
 
+# ------------------------------------------------------------------ lead63 follow-up (Entry 37 lead): is the U-shape a few episodes or many?
+def spells(dates, gap=42):
+    """dates: sorted ISO dates of extreme-fifth entries. A spell is a maximal run with no gap larger than `gap` calendar days.
+    Returns lists of indices into `dates`."""
+    out, cur = [], []
+    prev = None
+    for k, d in enumerate(dates):
+        dd = date.fromisoformat(d)
+        if prev is not None and (dd - prev).days > gap:
+            out.append(cur)
+            cur = []
+        cur.append(k)
+        prev = dd
+    if cur:
+        out.append(cur)
+    return out
+
+
+def smile_of(ext_sum, ext_n, all_sum, all_n):
+    mid_n = all_n - ext_n
+    return (ext_sum / ext_n - (all_sum - ext_sum) / mid_n) if ext_n > 0 and mid_n > 0 else float('nan')
+
+
+def lead_followup(feat_folder, ret_folder, year_folder, events_path):
+    import numpy as np
+    import factor_roles as fr
+    import factor_officers as fo
+    fr.roles = fo.roles3
+    rows = fr.load(events_path, year_folder, ret_folder)
+    fdate = load_features(feat_folder)
+    for r in rows:
+        f = fdate.get(r['entry'])
+        if f and 'lead63' in f:
+            r['lead63'] = f['lead63']
+    dev = sorted([r for r in rows if r['entry'] <= DEV_END and 'lead63' in r], key=lambda r: r['entry'])
+    x = np.array([r['lead63'] for r in dev])
+    lo, hi = np.quantile(x, [0.2, 0.8])
+    for r in dev:
+        r['band'] = 'Q1' if r['lead63'] <= lo else 'Q5' if r['lead63'] >= hi else 'mid'
+    ex = np.array([r['excess_atr'] for r in dev])
+    ext = np.array([r['band'] != 'mid' for r in dev])
+    print(f'development events with lead63: {len(dev)}; cut points: lowest fifth <= {lo:+.4f}, highest fifth >= {hi:+.4f} (as in Entry 37)')
+    print(f'Entry 37 statistic reproduced: smile = mean excess of Q1+Q5 {ex[ext].mean():+.3f} (n={ext.sum()}) minus middle three fifths {ex[~ext].mean():+.3f} (n={(~ext).sum()}) = {ex[ext].mean() - ex[~ext].mean():+.3f}')
+    for b in ('Q1', 'mid', 'Q5'):
+        print(f'  {b}: {stats_line([r for r in dev if r["band"] == b])}')
+    print('\n=== A. By entry year (development): events in the lowest fifth / highest fifth / middle, and mean excess of each ===')
+    print('year | Q1 n, excess | Q5 n, excess | middle n, excess')
+    for y in sorted({r['entry'][:4] for r in dev}):
+        cell = lambda b: (lambda s: f'{len(s):3d}, {statistics.fmean(r["excess_atr"] for r in s):+.2f}' if s else '  0,   -  ')([r for r in dev if r['entry'][:4] == y and r['band'] == b])
+        print(f'{y} | {cell("Q1")} | {cell("Q5")} | {cell("mid")}')
+    print('\n=== B. Separate market periods ("spells": consecutive extreme-fifth entry dates with no gap over 42 calendar days) ===')
+    spell_rows = {}
+    for b in ('Q1', 'Q5'):
+        sub = [r for r in dev if r['band'] == b]
+        ds = [r['entry'] for r in sub]
+        sp = spells(ds)
+        spell_rows[b] = [[sub[k] for k in g] for g in sp]
+        sizes = sorted(((len(g), g) for g in spell_rows[b]), key=lambda t: -t[0])
+        tot = len(sub)
+        print(f'{b}: {tot} events in {len(sp)} spells; largest 8 spells (events, first to last entry date, mean excess):')
+        for n, g in sizes[:8]:
+            print(f'    {n:3d}  {g[0]["entry"]} to {g[-1]["entry"]}  {statistics.fmean(r["excess_atr"] for r in g):+.3f}')
+        top3 = [r for _, g in sizes[:3] for r in g]
+        rest = [r for _, g in sizes[3:] for r in g]
+        print(f'    top 3 spells hold {len(top3)} of {tot} events ({len(top3) / tot:.0%}); mean excess in them {statistics.fmean(r["excess_atr"] for r in top3):+.3f}; '
+              f'in all other spells {statistics.fmean(r["excess_atr"] for r in rest):+.3f} (n={len(rest)}, {len(sp) - 3} spells)')
+        sm = [statistics.fmean(r['excess_atr'] for r in g) for g in spell_rows[b]]
+        print(f'    spells with positive mean excess: {sum(m > 0 for m in sm)} of {len(sm)}; mean of spell means (each spell counts once) {statistics.fmean(sm):+.3f}, median {statistics.median(sm):+.3f}')
+    mid_ds = [r['entry'] for r in dev if r['band'] == 'mid']
+    mid_sp = spells(mid_ds)
+    print(f'middle three fifths for reference: {len(mid_ds)} events in {len(mid_sp)} spells (same 42-day rule)')
+    print('\n=== C. Leave-out checks on the smile statistic (extreme fifths minus middle three fifths; Entry 37 value above) ===')
+    tot_s, tot_n = ex.sum(), len(ex)
+    for y in sorted({r['entry'][:4] for r in dev}):
+        keep = np.array([r['entry'][:4] != y for r in dev])
+        print(f'  leave out {y}: {smile_of(ex[keep & ext].sum(), (keep & ext).sum(), ex[keep].sum(), keep.sum()):+.3f}  (n={keep.sum()})')
+    ep = np.array([quarter(r['entry']) in EPISODES for r in dev])
+    k = ~ep
+    print(f'  leave out the three large episodes: {smile_of(ex[k & ext].sum(), (k & ext).sum(), ex[k].sum(), k.sum()):+.3f}  (n={k.sum()})')
+    for b in ('Q1', 'Q5'):
+        sizes = sorted(spell_rows[b], key=lambda g: -len(g))[:3]
+        drop = {id(r) for g in sizes for r in g}
+        keep = np.array([id(r) not in drop for r in dev])
+        print(f'  leave out the 3 largest {b} spells: {smile_of(ex[keep & ext].sum(), (keep & ext).sum(), ex[keep].sum(), keep.sum()):+.3f}  (n={keep.sum()})')
+    drop = {id(r) for b in ('Q1', 'Q5') for g in sorted(spell_rows[b], key=lambda g: -len(g))[:3] for r in g}
+    keep = np.array([id(r) not in drop for r in dev])
+    print(f'  leave out the 3 largest spells of both extremes: {smile_of(ex[keep & ext].sum(), (keep & ext).sum(), ex[keep].sum(), keep.sum()):+.3f}  (n={keep.sum()})')
+    print('\n=== D. Quarter-block bootstrap (10,000 resamples of whole calendar quarters; keeps regime persistence) ===')
+    qs = sorted({quarter(r['entry']) for r in dev})
+    qi = {q: i for i, q in enumerate(qs)}
+    ids = np.array([qi[quarter(r['entry'])] for r in dev])
+    isq1 = np.array([r['band'] == 'Q1' for r in dev])
+    isq5 = np.array([r['band'] == 'Q5' for r in dev])
+    nq = len(qs)
+    agg = lambda mask: (np.bincount(ids, weights=ex * mask, minlength=nq), np.bincount(ids, weights=mask.astype(float), minlength=nq))
+    (e_s, e_n), (q1_s, q1_n), (q5_s, q5_n), (a_s, a_n) = agg(ext), agg(isq1), agg(isq5), agg(np.ones(len(ex), dtype=bool))
+    rng = np.random.default_rng(SEED)
+    draw = rng.integers(0, nq, size=(10000, nq))
+    S = lambda arr: arr[draw].sum(axis=1)
+    es, en, qs1, qn1, qs5, qn5, as_, an = S(e_s), S(e_n), S(q1_s), S(q1_n), S(q5_s), S(q5_n), S(a_s), S(a_n)
+    with np.errstate(divide='ignore', invalid='ignore'):
+        smile = es / en - (as_ - es) / (an - en)
+        q1m, q5m, midm = qs1 / qn1, qs5 / qn5, (as_ - qs1 - qs5) / (an - qn1 - qn5)
+    pct = lambda v: f'{np.nanpercentile(v, 2.5):+.3f} to {np.nanpercentile(v, 97.5):+.3f}'
+    print(f'{nq} quarters. Smile {ex[ext].mean() - ex[~ext].mean():+.3f}: 95% range {pct(smile)}; share of resamples with smile <= 0: {np.nanmean(smile <= 0):.1%}')
+    print(f'Q1 mean {ex[isq1].mean():+.3f}: range {pct(q1m)}; Q5 mean {ex[isq5].mean():+.3f}: range {pct(q5m)}; middle three mean {ex[~ext].mean():+.3f}: range {pct(midm)}')
+    print(f'Q1 minus middle: share of resamples <= 0: {np.nanmean(q1m - midm <= 0):.1%}; Q5 minus middle: share <= 0: {np.nanmean(q5m - midm <= 0):.1%}')
+    print('Questions asked on this cohort in this entry: follow-up on one already-registered lead (descriptive; reproduction of the Entry 37 statistic, by-year table, spell counts, 14 leave-out values, 5 bootstrap ranges).')
+
+
 # ------------------------------------------------------------------ self-test
 def selftest():
     import numpy as np
@@ -359,6 +469,9 @@ def selftest():
         r.update(fd[r['entry']])
     c1, c2 = controller_test(rows, 200), controller_test(rows, 200)
     assert c1 == c2
+    sp = spells(['2010-01-01', '2010-01-20', '2010-03-30', '2010-04-02', '2011-01-01'])
+    assert sp == [[0, 1], [2, 3], [4]], sp
+    assert math.isnan(smile_of(1.0, 0, 5.0, 10)) and abs(smile_of(6.0, 2, 10.0, 6) - (3.0 - 1.0)) < 1e-12
     print('factor_regime self-test passed')
 
 
@@ -379,5 +492,7 @@ if __name__ == '__main__':
         year_job(int(ns.a), ns.primary, ns.out)
     elif ns.cmd == 'summary':
         summary(ns.a, ns.b, ns.c, ns.d)
+    elif ns.cmd == 'lead':
+        lead_followup(ns.a, ns.b, ns.c, ns.d)
     else:
         ap.error('use: year YEAR --primary F --out F | summary FEAT RET YEARS EVENTS | --selftest')
