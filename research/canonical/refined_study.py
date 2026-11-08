@@ -98,7 +98,7 @@ def row_price(r):
     return p if p and p > 0 else None
 
 
-def same_day_same_price(rows, min_date=None, max_date=None):
+def same_day_same_price(rows, min_date=None, max_date=None, tol=SAME_PRICE_TOL, min_buyers=SAME_DAY_BUYERS):
     """Signature (a). Returns (indexes of flagged rows, flagged transaction dates). Uses only the rows given."""
     by_date = defaultdict(list)
     for k, r in enumerate(rows):
@@ -112,8 +112,8 @@ def same_day_same_price(rows, min_date=None, max_date=None):
     flagged_rows, flagged_dates = set(), set()
     for d, items in by_date.items():
         for p0, _, _ in items:
-            grp = [x for x in items if p0 - 1e-9 <= x[0] <= p0 + SAME_PRICE_TOL + 1e-9]
-            if len({o for _, o, _ in grp}) >= SAME_DAY_BUYERS:
+            grp = [x for x in items if p0 - 1e-9 <= x[0] <= p0 + tol + 1e-9]
+            if len({o for _, o, _ in grp}) >= min_buyers:
                 flagged_dates.add(d)
                 flagged_rows.update(k for _, _, k in grp)
     return flagged_rows, flagged_dates
@@ -130,15 +130,15 @@ def prior_months(filing_date, n=MODE_MONTHS):
     return out
 
 
-def issuer_routine_mode(issuer_rows, i, filing_date):
+def issuer_routine_mode(issuer_rows, i, filing_date, tol=SAME_PRICE_TOL, min_buyers=SAME_DAY_BUYERS):
     """Signature (b), look-back only: rows filed up to session index i; months strictly before the filing month."""
     months = prior_months(filing_date)
     pub = [r for j, r in issuer_rows if j <= i]
-    _, fdates = same_day_same_price(pub, min_date=months[-1] + '-01', max_date=filing_date)
+    _, fdates = same_day_same_price(pub, min_date=months[-1] + '-01', max_date=filing_date, tol=tol, min_buyers=min_buyers)
     return len({d[:7] for d in fdates} & set(months)) >= MODE_NEED
 
 
-def find_events_refined(rows, cal, exclude_routine):
+def find_events_refined(rows, cal, exclude_routine, tol=SAME_PRICE_TOL, min_buyers=SAME_DAY_BUYERS):
     """Same crossing logic as cluster_counts_by_year.find_events. With exclude_routine=False the result is identical to it."""
     from cluster_counts_by_year import usable
     by_security, by_issuer = defaultdict(lambda: defaultdict(list)), defaultdict(list)
@@ -163,14 +163,14 @@ def find_events_refined(rows, cal, exclude_routine):
             allrows = seen + new
             bad = set()
             if exclude_routine and allrows:
-                bad = {id(allrows[k]) for k in same_day_same_price(allrows)[0]}
+                bad = {id(allrows[k]) for k in same_day_same_price(allrows, tol=tol, min_buyers=min_buyers)[0]}
             before = {row_owner(r) for r in seen if id(r) not in bad}
             seen = allrows
             after = {row_owner(r) for r in seen if id(r) not in bad}
             if len(before) < 4 <= len(after):
                 if bad:
                     stats['crossings_with_routine_rows_excluded'] += 1
-                if exclude_routine and issuer_routine_mode(by_issuer[key[0]], i, max(r['filing_date'] for r in new)):
+                if exclude_routine and issuer_routine_mode(by_issuer[key[0]], i, max(r['filing_date'] for r in new), tol, min_buyers):
                     stats['dropped_issuer_routine_mode'] += 1
                     continue
                 purchases = []
@@ -192,6 +192,7 @@ def build_events(out):
         original = find_events(rows, cal)
         base, _ = find_events_refined(rows, cal, False)
         refined, stats = find_events_refined(rows, cal, True)
+        sens_rows, sens_cal = rows, cal
     k = lambda ev: sorted((e['issuer_cik'], e['ticker'], e['entry'], e['buyers']) for e in ev)
     assert k(base) == k(original), 'base set differs from cluster_counts_by_year.find_events'
     both = {(e['issuer_cik'], e['ticker'], e['entry']) for e in base} & {(e['issuer_cik'], e['ticker'], e['entry']) for e in refined}
@@ -205,6 +206,10 @@ def build_events(out):
     print(f'refined events (D-064 applied): {len(refined)}; same issuer/ticker/entry in both: {len(both)}; '
           f'base only: {len(base) - len(both)}; refined only: {len(refined) - len(both)}')
     print(f'refined run stats: {dict(stats)}')
+    print('Sensitivity of the refined event count to the D-064 thresholds (counts only; base = %d):' % len(base))
+    for tol, mb in ((0.0, 3), (0.005, 3), (0.01, 3), (0.02, 3), (0.01, 4), (0.0, 4)):
+        n = len(refined) if (tol, mb) == (SAME_PRICE_TOL, SAME_DAY_BUYERS) else len(find_events_refined(rows, cal, True, tol, mb)[0])
+        print(f'  price tolerance ${tol:.3f}, min distinct same-day buyers {mb}: refined events {n}')
 
 
 # ------------------------------------------------------------------ year job (identity v2 + $3M floor; no returns)
@@ -338,6 +343,26 @@ def summary(folder, events_path):
         print(f'independence, {label}: {len(items)} entries, {len({e["cik"] for e in items})} issuers, '
               f'{len({e["entry"] for e in items})} distinct entry dates, {len({week(e) for e in items})} distinct entry weeks')
     print('Entries by quarter (primary, 2006-2025):', dict(sorted(Counter(quarter(e['entry']) for e in inrange).items())))
+    print('\n=== E. What D-064 removed: base events with no refined counterpart (same issuer, ticker, entry) ===')
+    keep = {(e['issuer_cik'], e['ticker'], e['entry']) for e in allev if e['set'] == 'refined'}
+    gone = [e for e in allev if e['set'] == 'base' and (e['issuer_cik'], e['ticker'], e['entry']) not in keep]
+    stay = [e for e in allev if e['set'] == 'base' and (e['issuer_cik'], e['ticker'], e['entry']) in keep]
+    def level(e):
+        ps = sorted(p for _, p in e['purchases'] if p)
+        return ps[len(ps) // 2] if ps else None
+    def bucket(x):
+        return 'no price' if x is None else '<$2' if x < 2 else '$2-5' if x < 5 else '$5-20' if x < 20 else '$20+'
+    for label, items in (('removed', gone), ('kept', stay)):
+        c = Counter(bucket(level(e)) for e in items)
+        print(f'{label}: {len(items)} events; insider purchase price level (as traded): ' + ', '.join(f'{k} {c[k]} ({c[k] / max(1, len(items)):.0%})' for k in ('<$2', '$2-5', '$5-20', '$20+', 'no price')))
+    py = Counter((e['issuer_cik'], e['entry'][:4]) for e in allev if e['set'] == 'base')
+    rep = sum(1 for e in gone if py[(e['issuer_cik'], e['entry'][:4])] > 3)
+    iss = Counter(e['issuer_cik'] for e in gone)
+    print(f'removed events from {len(iss)} issuers; {rep} ({rep / max(1, len(gone)):.0%}) sit in issuer-years with more than 3 base events; '
+          f'top issuers by removed events (cik, ticker, n): ' + str([(c, next(e['ticker'] for e in gone if e['issuer_cik'] == c), n) for c, n in iss.most_common(12)]))
+    base_keys = {(b['issuer_cik'], b['ticker'], b['entry']) for b in allev if b['set'] == 'base'}
+    print('refined-only events (a later discretionary crossing once routine filings were removed):',
+          sum(1 for e in allev if e['set'] == 'refined' and (e['issuer_cik'], e['ticker'], e['entry']) not in base_keys))
     print('No returns were computed or read.')
 
 
@@ -361,6 +386,9 @@ def selftest():
     assert same_day_same_price(mk([10.00, 10.005, 10.01]))[0] == {0, 1, 2}
     assert same_day_same_price(mk([10.00, 10.01, 10.02]))[0] == set()
     assert same_day_same_price(mk([10.0, 10.0]))[0] == set()                      # only two owners
+    assert same_day_same_price(mk([10.00, 10.01, 10.02]), tol=0.02)[0] == {0, 1, 2}   # wider tolerance
+    assert same_day_same_price(mk([10.00, 10.00, 10.00]), min_buyers=4)[0] == set()   # stricter owner count
+    assert same_day_same_price(mk([10.00, 10.00, 10.00]), tol=0.0)[0] == {0, 1, 2}    # exact price
     r0 = _row('same', cal[5], cal[6], 10.0); r1 = _row('same', cal[5], cal[7], 10.0); r2 = _row('o2', cal[5], cal[8], 10.0)
     assert same_day_same_price([r0, r1, r2])[0] == set()                          # one owner twice is still two owners
 
