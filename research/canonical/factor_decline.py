@@ -214,12 +214,12 @@ def cell(rs):
     return f'{mean(rs):+.3f} (n={len(rs)}, {len({week_of(r) for r in rs})}w)' if rs else 'n=0'
 
 
-def spearman(rows, m):
+def spearman(rows, m, y='excess_atr'):
     import numpy as np
-    sub = [r for r in rows if m in r]
+    sub = [r for r in rows if m in r and y in r]
     if len(sub) < 20:
         return float('nan'), len(sub)
-    a, b = rank_avg([r[m] for r in sub]), rank_avg([r['excess_atr'] for r in sub])
+    a, b = rank_avg([r[m] for r in sub]), rank_avg([r[y] for r in sub])
     return float(np.corrcoef(a, b)[0, 1]), len(sub)
 
 
@@ -308,7 +308,69 @@ def summary(features_folder, returns_folder):
         qs = quintile_line(pil, m, info[m]['cuts'])
         r_, n_ = spearman(pil, m)
         print(f'{m}: ' + ' | '.join(f'Q{q + 1} {cell(g)}' for q, g in enumerate(qs)) + f'  Spearman {r_:+.3f} (n={n_})')
+    confound_checks(dev, pil)
     print(f'\nQuestions asked on this cohort in this entry: {len(keys)} statistics in the menu (21 measures x 2), plus descriptive quintile, band, crossing and pilot tables.')
+
+
+def perm_rho(rows, x, y, draws=10000):
+    """Single-question chance for the Spearman of x with y, y shuffled inside the same entry week."""
+    import numpy as np
+    sub = sorted([r for r in rows if x in r and y in r], key=week_of)
+    wk = {w: i for i, w in enumerate(sorted({week_of(r) for r in sub}))}
+    wi = np.array([wk[week_of(r)] for r in sub])
+    xs = rank_avg([r[x] for r in sub])
+    xc = xs - xs.mean()
+    yv = np.array([r[y] for r in sub])
+    n = len(sub)
+    norm = float(np.sqrt((xc ** 2).sum()) * np.sqrt(((np.arange(n) - (n - 1) / 2) ** 2).sum()))
+
+    def rho(v):
+        o = v.argsort()
+        r = np.empty(n)
+        r[o] = np.arange(n, dtype=float)
+        return float(xc @ (r - r.mean()) / norm)
+    obs = rho(yv)
+    rng = np.random.default_rng(SEED)
+    hits = sum(abs(rho(yv[np.lexsort((rng.random(n), wi))])) >= abs(obs) - 1e-12 for _ in range(draws))
+    return obs, hits / draws, n
+
+
+def confound_checks(dev, pil):
+    """POST-HOC follow-up (asked after seeing the Entry 36 long-window result): is the long-window pattern an artifact of the
+    ATR scaling (both the decline and the excess are divided by the entry ATR) or of price level?"""
+    import numpy as np
+    for r in dev + pil:
+        r['atr_pct'] = r['atr'] / r['entry_open']
+        r['excess_pct'] = r['excess_atr'] * r['atr_pct']              # stock % return minus SPY % return over the 21-session hold
+    print('\n=== G. POST-HOC follow-up: ATR-scale and price-level checks (development) ===')
+    for a, b in (('atr_pct', 'excess_atr'), ('atr_pct', 'raw252'), ('atr_pct', 'pct252'), ('entry_open', 'raw252'), ('entry_open', 'excess_atr')):
+        r_, n_ = spearman(dev, a, b)
+        print(f'Spearman {a} vs {b}: {r_:+.3f} (n={n_})')
+    print('Percent-unit version (stock decline in % vs excess in % over the hold; no ATR scaling on either side), shuffle chance alone:')
+    for W in (21, 63, 126, 252):
+        o, p, n = perm_rho(dev, f'pct{W}', 'excess_pct')
+        o2, p2, _ = perm_rho(dev, f'pct{W}', 'excess_atr')
+        print(f'  pct{W} vs excess_pct: Spearman {o:+.3f} (chance {p:.1%}); pct{W} vs excess_atr: {o2:+.3f} (chance {p2:.1%}); n={n}')
+        sub = [r for r in dev if f'pct{W}' in r]
+        cuts = np.quantile([r[f'pct{W}'] for r in sub], [0.2, 0.4, 0.6, 0.8])
+        lab = np.searchsorted(cuts, [r[f'pct{W}'] for r in sub], side='right')
+        cells = []
+        for q in range(5):
+            g = [r for r, l in zip(sub, lab) if l == q]
+            cells.append(f'Q{q + 1} {100 * statistics.fmean(r["excess_pct"] for r in g):+.2f}% / {statistics.fmean(r["excess_atr"] for r in g):+.3f} ATR (n={len(g)})')
+        print('    by fifth of pct decline (Q1 = biggest fall): ' + ' | '.join(cells) + '   cuts ' + '/'.join(f'{100 * c:.0f}%' for c in cuts))
+    for key, name in (('atr_pct', 'daily-range % of price (ATR / entry open)'), ('entry_open', 'entry price')):
+        vals = [r[key] for r in dev]
+        t1, t2 = np.quantile(vals, [1 / 3, 2 / 3])
+        print(f'Within terciles of {name} (cuts {t1:.4g} / {t2:.4g}):')
+        for lab_, f in (('low', lambda v: v <= t1), ('middle', lambda v: t1 < v <= t2), ('high', lambda v: v > t2)):
+            g = [r for r in dev if f(r[key])]
+            a, na = spearman(g, 'raw252', 'excess_atr')
+            b, nb = spearman(g, 'pct252', 'excess_pct')
+            c, nc = spearman(g, 'rel252', 'excess_atr')
+            print(f'  {lab_}: n={len(g)}, mean excess {mean(g):+.3f} ATR / {100 * statistics.fmean(r["excess_pct"] for r in g):+.2f}%; '
+                  f'raw252 vs excess_atr {a:+.3f}; rel252 vs excess_atr {c:+.3f}; pct252 vs excess_pct {b:+.3f} (n={nb})')
+    print('Questions asked in this follow-up (post hoc): 8 Spearman tests with chance, 8 descriptive Spearman rows, 6 tercile cells x 3.')
 
 
 # ------------------------------------------------------------------ self-test
@@ -354,6 +416,8 @@ def selftest():
     for k in range(400):
         v = rng.gauss(0, 1)
         rows.append({'entry': f'2010-{1 + k % 12:02d}-{1 + k % 27:02d}', 'cik': str(k), 'excess_atr': 0.8 * v + rng.gauss(0, 1),
+                     'atr': 1.0 + rng.random(), 'entry_open': 10 + 30 * rng.random(),
+                     **{f'pct{w}': rng.gauss(0, 0.2) for w in WINDOWS},
                      **{m: (v if m == 'raw21' else rng.gauss(0, 1)) for m in MEASURES}})
     rows.sort(key=week_of)
     info = prep(rows)
@@ -365,6 +429,13 @@ def selftest():
     null = [{**r, 'excess_atr': rng.gauss(0, 1)} for r in rows]
     n1 = perm_test(null, prep(null), 200)
     assert n1[2] > 0.05, n1[2]
+    import io, contextlib
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        confound_checks([dict(r) for r in rows], [dict(r) for r in rows[:30]])
+    assert 'Within terciles of entry price' in buf.getvalue() and 'pct252 vs excess_pct' in buf.getvalue()
+    o, p, n = perm_rho(rows, 'raw21', 'excess_atr', 300)
+    assert o > 0.3 and p < 0.01 and n == 400
     print('factor_decline self-test passed')
 
 
