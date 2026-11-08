@@ -1,0 +1,53 @@
+name: WTI release five-minute price probe
+on:
+  push:
+    branches: [research/cot-futures-r2-audit]
+    paths: [.github/workflows/wti-release-intraday.yml, wti_release_bars.py]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pyarrow boto3 pandas
+      - name: Verify CL entitlement and timestamps
+        env:
+          MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from io import BytesIO
+          from urllib.parse import urlencode, urljoin, urlsplit
+          from pyarrow.parquet import ParquetFile
+          from marketparquet_archive_transfer import BASE, fetch
+
+          headers = {"Authorization": "Bearer " + os.environ["MARKETPARQUET_API_KEY"]}
+          for day in ("2008-01-16", "2015-04-01", "2026-11-04"):
+              query = urlencode({"start": day, "end": day})
+              manifest = json.loads(fetch(f"{BASE}/api/v1/manifest/futures_5min?{query}", f"{day} manifest", 1_000_000, headers))
+              files = manifest.get("files") or []
+              if not files:
+                  print(f"{day}: manifest returned no files; plan={manifest.get('plan')!r}", flush=True)
+                  continue
+              for row in files:
+                  url = urljoin(BASE, row["download_url"])
+                  auth = headers if urlsplit(url).hostname == urlsplit(BASE).hostname else None
+                  size = row["file_size_bytes"]
+                  raw = fetch(url, day, size, auth)
+                  if raw[:4] != b"PAR1":
+                      raw = fetch(json.loads(raw)["download_url"], day, size)
+                  assert len(raw) == size
+                  parquet = ParquetFile(BytesIO(raw))
+                  df = parquet.read(columns=["timestamp", "symbol"]).to_pandas()
+                  cl = df.loc[df.symbol.eq("CL"), "timestamp"].sort_values()
+                  print(f"{day}: {size:,} bytes; {len(cl)} CL bars; {cl.min()} to {cl.max()}; "
+                        f"schema={parquet.schema_arrow.names}; 10:25/11:25/11:30="
+                        f"{[any(str(v).endswith(t) for v in cl) for t in ['10:25:00','11:25:00','11:30:00']]}", flush=True)
+          PY
