@@ -1,0 +1,49 @@
+name: Read stored WTI daily bars for inventory study
+on:
+  push:
+    branches: [research/cot-futures-r2-audit]
+    paths: [.github/workflows/wti-release-daily.yml]
+permissions:
+  contents: read
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pandas pyarrow boto3
+      - name: Extract only CL from verified stored date files
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          python - <<'PY'
+          import os
+          from concurrent.futures import ThreadPoolExecutor
+          import boto3
+          import pandas as pd
+          from botocore.config import Config
+          from cot_futures_price_panel import BUCKET, PREFIX, ROOTS, read_file
+
+          ROOTS.intersection_update({"CL"})
+          r2 = boto3.client("s3", endpoint_url=os.environ["R2_ENDPOINT_URL"],
+              aws_access_key_id=os.environ["R2_ACCESS_KEY_ID"], aws_secret_access_key=os.environ["R2_SECRET_ACCESS_KEY"],
+              region_name="auto", config=Config(max_pool_connections=32, retries={"max_attempts": 8}))
+          pages = r2.get_paginator("list_objects_v2").paginate(Bucket=BUCKET, Prefix=PREFIX)
+          keys = sorted(o["Key"] for page in pages for o in page.get("Contents", [])
+                        if o["Key"].endswith(".parquet") and o["Key"][len(PREFIX):-8] <= "2026-11-06")
+          with ThreadPoolExecutor(max_workers=24) as pool:
+              bars = pd.concat(pool.map(lambda key: read_file(r2, key), keys), ignore_index=True)
+          assert bars.symbol.eq("CL").all() and bars.session.is_unique
+          bars.sort_values("session").to_parquet("wti_daily_cl.parquet", index=False)
+          print(len(bars), bars.session.min(), bars.session.max(), flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wti-daily-cl
+          path: wti_daily_cl.parquet
+          retention-days: 7
