@@ -10,7 +10,7 @@ from botocore.config import Config
 from cot_futures_price_panel import BUCKET, PREFIX, read_file
 import os
 
-HORIZONS = (10, 21)
+HORIZONS = (10, 21, 63)
 
 
 def simulate(o, h, l, c, entry, end, fill, stop, side, at_open, hit_on_entry):
@@ -50,6 +50,10 @@ def market_events(bars):
     tr = np.maximum(h - l, np.maximum(abs(h - previous), abs(l - previous)))
     tr[bad | np.r_[True, bad[:-1]] | gaps] = np.nan
     atr = pd.Series(tr).rolling(20).mean().shift(1).to_numpy()
+    average_200 = close.rolling(200).mean()
+    valid_200 = ~pd.Series(gaps).rolling(199).max().fillna(1).astype(bool)
+    above_200 = (close > average_200).where(valid_200 & average_200.notna()).shift(1).to_numpy()
+    below_200 = (close < average_200).where(valid_200 & average_200.notna()).shift(1).to_numpy()
     avg = close.rolling(100).mean()
     up = ((close > avg) & (avg > avg.shift(20))).shift(1, fill_value=False).to_numpy()
     down = ((close < avg) & (avg < avg.shift(20))).shift(1, fill_value=False).to_numpy()
@@ -94,6 +98,7 @@ def market_events(bars):
                 "unstopped_atr": side * (c[end - 1] - fill) / atr[entry],
                 "move5": move[setup], "range_atr": ranges[setup] / atr[setup],
                 "trend_up": up[setup], "trend_down": down[setup],
+                "above_200": above_200[entry], "below_200": below_200[entry],
             }
             for scenario, hit in (("stop_after_entry", definite or ambiguous), ("stop_before_entry", definite)):
                 pnl, mae, mfe, hit_i, gap = simulate(o, h, l, c, entry, end, fill, stop, side, at_open, hit)
