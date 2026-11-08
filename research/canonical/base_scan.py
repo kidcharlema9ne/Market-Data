@@ -25,7 +25,14 @@ episodes, 2006-10 vs 2011-20, stock and SPY legs.
 Cautions written in advance: D1 is 255 events, so three states leave roughly 50-100 each; four windows multiply the questions asked; the base windows overlap
 (a 40-session base contains the 20-session base); costs and survivorship (Entries 38, 40, 44, 45) are not in any number.
 
-Usage:  python base_scan.py baseyear YEAR --primary FILE --out FILE   |   basedist BASE_FOLDER DECLINE_FOLDER   |   --selftest
+STAGE 2 (`stage2`, cutoffs declared in docs/CANDIDATES.md C23 before any return was joined): inside D1 of the flag cohort (Entries 51-58; returns Entry 28,
+decline features Entry 36, lead63 Entry 37) join the 21-session excess over same-window SPY (ATR; stock and SPY legs shown). For each W in 10, 20, 40, 60:
+BASING-TIGHT = eff_W in the lowest third inside D1, BASING-LOOSE = lowest two thirds, MOVED-UP = topgap_W >= -1 ATR. States 1 not basing, 2 basing and not
+moved up, 3 basing and moved up. Chance menu = 12 statistics (flag minus not-flag mean excess for BASING-TIGHT, BASING-LOOSE, MOVED-UP x 4 windows), excess
+shuffled inside the entry week, 10,000 draws, single-question and best of 12. Descriptive: state tables, quarter-block ranges, without the three large
+episodes, 2006-10 vs 2011-20, and the width-based and width-plus-choppiness definitions of stage 1.
+
+Usage:  python base_scan.py baseyear YEAR --primary FILE --out FILE   |   basedist BASE_FOLDER DECLINE_FOLDER   |   stage2 BASE_FOLDER DECLINE REGIME RETURNS   |   --selftest
 """
 import argparse, json, sys
 from bisect import bisect_left
@@ -173,6 +180,123 @@ def stage1(base_folder, decline_folder):
     print('\nNo return was joined or printed in this stage. Cutoffs for stage 2 are to be chosen from the tables above and written in the log before any return is read.')
 
 
+# ------------------------------------------------------------------ stage 2: returns joined, cutoffs declared in CANDIDATES.md
+def read_base(base_folder):
+    base = {}
+    for p in sorted(Path(base_folder).glob('base_*.json')):
+        for r in json.loads(p.read_text())['rows']:
+            assert_allowed(r['entry'])
+            base[(r['cik'], r['sym'], r['entry'])] = r
+    return base
+
+
+def diff_stats(ex, wi, flags, draws=10000, seed=fd.SEED):
+    """flags: (n, k) bool. Returns observed flag-minus-rest mean differences, single chances (two-sided) and best-of-k chance."""
+    import numpy as np
+    F = flags.astype(float)
+    nf, nr = F.sum(0), (1 - F).sum(0)
+
+    def stat(e):
+        return (F * e[:, None]).sum(0) / np.maximum(nf, 1) - ((1 - F) * e[:, None]).sum(0) / np.maximum(nr, 1)
+    obs = stat(ex)
+    rng = np.random.default_rng(seed)
+    sim = np.empty((draws, flags.shape[1]))
+    for k in range(draws):
+        order = np.lexsort((rng.random(len(ex)), wi))
+        sim[k] = np.abs(stat(ex[order]))
+    srt = np.sort(sim, axis=0)
+    obs_abs = np.abs(obs)
+    p1 = np.array([1.0 - np.searchsorted(srt[:, c], obs_abs[c] - 1e-12, side='left') / draws for c in range(flags.shape[1])])
+    pmat = np.empty_like(sim)
+    for c in range(flags.shape[1]):
+        pmat[:, c] = 1.0 - np.searchsorted(srt[:, c], sim[:, c] - 1e-12, side='left') / draws
+    best = float((pmat.min(axis=1) <= p1.min() + 1e-12).mean())
+    return obs, p1, best
+
+
+def stage2(base_folder, decl, regime, ret):
+    import numpy as np
+    import context_scan as cs
+    from oversold_scan import legs, mean_or_nan
+    from score_scan import QBoot
+    from refined_baseline import quarter
+    dev = cs.load_base(decl, regime, ret)
+    coh, cn, cd = cs.flag_cohort(dev)
+    base = read_base(base_folder)
+    d1, miss = [], 0
+    for r in coh:
+        if not r['D1']:
+            continue
+        b = base.get((r['cik'], r['sym'], r['entry']))
+        if not b or b['status'] != 'ok' or any(f'eff{W}' not in b for W in WINDOWS):
+            miss += 1
+            continue
+        d1.append({**r, **{k: v for k, v in b.items() if k.startswith(('width', 'eff', 'topgap'))}})
+    d1.sort(key=fd.week_of)
+    print(f'flag cohort n={len(coh)} (N cut {cn:+.4f}, D1 cut {cd:+.2f} ATR); D1 with all four base windows n={len(d1)} (missing {miss}); D1 excess {mean_or_nan(d1):+.3f}')
+    print(f'  D1 reference: {legs(d1)}')
+    qb = QBoot(d1)
+    ex = np.array([r['excess_atr'] for r in d1])
+    wk = {w: i for i, w in enumerate(sorted({fd.week_of(r) for r in d1}))}
+    wi = np.array([wk[fd.week_of(r)] for r in d1])
+    cols, labels = [], []
+    cut = {}
+    for W in WINDOWS:
+        e = np.array([r[f'eff{W}'] for r in d1])
+        t1, t2 = np.quantile(e, [1 / 3, 2 / 3])
+        cut[W] = (t1, t2)
+        for r in d1:
+            r[f'tight{W}'], r[f'loose{W}'], r[f'up{W}'] = r[f'eff{W}'] <= t1, r[f'eff{W}'] <= t2, r[f'topgap{W}'] >= -1.0
+        w1, w2 = np.quantile([r[f'width{W}'] for r in d1], [1 / 3, 2 / 3])
+        for r in d1:        # descriptive stage-1 definitions
+            r[f'wtight{W}'] = r[f'width{W}'] <= w1
+            r[f'wloose{W}'] = r[f'width{W}'] <= w2
+            r[f'btight{W}'] = r[f'wtight{W}'] and r[f'tight{W}']
+            r[f'bloose{W}'] = r[f'wloose{W}'] and r[f'loose{W}']
+    for kind in ('tight', 'loose', 'up'):
+        for W in WINDOWS:
+            cols.append([r[f'{kind}{W}'] for r in d1])
+            labels.append(f'{kind.upper()}{W}')
+    flags = np.array(cols, dtype=bool).T
+    obs, p1, best = diff_stats(ex, wi, flags)
+    print('\n=== A. Chance menu (12 statistics): mean excess with the flag minus without it, inside D1; excess shuffled inside the entry week ===')
+    for k, lab in enumerate(labels):
+        n1 = int(flags[:, k].sum())
+        print(f'  {lab:8s} flag n={n1:3d} vs {len(d1) - n1:3d}: difference {obs[k]:+.3f} (chance alone {p1[k]:.1%})')
+    print(f'  smallest single chance {p1.min():.1%}; chance the best of 12 is at least that small by luck {best:.1%}')
+    for W in WINDOWS:
+        print(f'\n=== B. Window W={W}: eff cutoffs inside D1 tight <= {cut[W][0]:.3g}, loose <= {cut[W][1]:.3g}; moved up = topgap >= -1 ATR ===')
+        for rule in ('tight', 'loose'):
+            s1 = [r for r in d1 if not r[f'{rule}{W}']]
+            s2 = [r for r in d1 if r[f'{rule}{W}'] and not r[f'up{W}']]
+            s3 = [r for r in d1 if r[f'{rule}{W}'] and r[f'up{W}']]
+            print(f'  rule {rule}:')
+            for nm, g in (('1 not basing', s1), ('2 basing, not moved up', s2), ('3 basing and moved up', s3)):
+                print(f'     {nm:24s} {legs(g)} | no episodes {mean_or_nan(no_ep_(g)):+.3f} (n={len(no_ep_(g))})')
+            a, b = [r for r in d1 if r[f'{rule}{W}']], s1
+            if len(a) >= 15 and len(b) >= 15:
+                print(f'     basing minus not basing {mean_or_nan(a) - mean_or_nan(b):+.3f} quarter-block {cs.fmt_range(qb.diff_range(a, b))}')
+            for lab, f in (('2006-10', lambda r: r['entry'] < '2011-01-01'), ('2011-20', lambda r: r['entry'] >= '2011-01-01')):
+                aa, bb = [r for r in a if f(r)], [r for r in b if f(r)]
+                print(f'     {lab}: basing {mean_or_nan(aa):+.3f} (n={len(aa)}) | not basing {mean_or_nan(bb):+.3f} (n={len(bb)})')
+        u, nu = [r for r in d1 if r[f'up{W}']], [r for r in d1 if not r[f'up{W}']]
+        print(f'  moved up (any base): {legs(u)}\n  not moved up:        {legs(nu)}')
+    print('\n=== C. Descriptive: width-based and width-plus-choppiness definitions (basing minus not basing; n) ===')
+    for W in WINDOWS:
+        parts = []
+        for kind in ('wtight', 'wloose', 'btight', 'bloose'):
+            a, b = [r for r in d1 if r[f'{kind}{W}']], [r for r in d1 if not r[f'{kind}{W}']]
+            parts.append(f'{kind} {mean_or_nan(a):+.3f} (n={len(a)}) vs {mean_or_nan(b):+.3f} (n={len(b)})')
+        print(f'  W={W}: ' + '; '.join(parts))
+    print('\nQuestions asked on this cohort in this entry: 12 chance-tested statistics, plus descriptive state tables, eras and alternative definitions. POST HOC. '
+          'D1 is about 255 events and the windows overlap, so the 12 statistics are far from independent (best-of-12 is conservative).')
+
+
+def no_ep_(rs):
+    from refined_baseline import EPISODES, quarter
+    return [r for r in rs if quarter(r['entry']) not in EPISODES]
+
+
 # ------------------------------------------------------------------ self-test
 def selftest():
     from datetime import date
@@ -208,6 +332,16 @@ def selftest():
         raise SystemExit('guard did not fire')
     except RuntimeError:
         pass
+    # flag-minus-rest chance machinery: a planted difference is found, a null is not
+    import numpy as np
+    rng = np.random.default_rng(3)
+    n = 400
+    wi = np.repeat(np.arange(100), 4)
+    f1 = rng.random(n) < 0.4
+    f2 = rng.random(n) < 0.4
+    exs = rng.normal(0, 1, n) + 1.0 * f1
+    obs, p1, best = diff_stats(exs, wi, np.array([f1, f2]).T, draws=300)
+    assert obs[0] > 0.7 and p1[0] < 0.02 and abs(obs[1]) < 0.5 and best < 0.05
     print('base_scan self-test passed')
 
 
@@ -219,6 +353,8 @@ if __name__ == '__main__':
     ap.add_argument('cmd')
     ap.add_argument('arg', nargs='?')
     ap.add_argument('arg2', nargs='?')
+    ap.add_argument('arg3', nargs='?')
+    ap.add_argument('arg4', nargs='?')
     ap.add_argument('--primary')
     ap.add_argument('--out')
     a = ap.parse_args()
@@ -226,5 +362,7 @@ if __name__ == '__main__':
         year_job(int(a.arg), a.primary, a.out)
     elif a.cmd == 'basedist':
         stage1(a.arg, a.arg2)
+    elif a.cmd == 'stage2':
+        stage2(a.arg, a.arg2, a.arg3, a.arg4)
     else:
         raise SystemExit(__doc__)
