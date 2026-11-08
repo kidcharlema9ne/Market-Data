@@ -1,0 +1,36 @@
+name: Shapiro additional futures price outcomes
+on:
+  push:
+    branches: [research/cot-futures-r2-audit]
+    paths: [.github/workflows/shapiro-futures-outcomes.yml]
+permissions:
+  contents: read
+jobs:
+  price-outcomes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pandas numpy pyarrow
+      - name: Calculate outcomes for the remaining research markets
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          python - <<'PY'
+          import cot_futures_price_panel as panel
+
+          panel.ROOTS = {"OJ", "LBS", "PA", "BTC", "ETH", "MET", "ZO"}
+          panel.PILOT = {"OJ", "LBS", "PA", "BTC", "ZO"}
+          panel.HORIZONS = (21,)
+          panel.main()
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shapiro-additional-futures-price-outcomes
+          path: cot-futures-price-outcomes.parquet
+          retention-days: 7
