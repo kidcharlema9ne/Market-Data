@@ -136,7 +136,7 @@ def selftest():
     assert nwin2 == 4 and len(vals2) == 4
     assert quant([1, 2, 3, 4], .5) == 2.5 and m(2.5e6) == '$2.5M'
     rs = [{'dv_mean': 4e6 + 1e6 * k, 'dv_median': 3e6 + 1e6 * k} for k in range(10)]
-    assert 'n=  10' in describe(rs) and 'under $5M 20%' in describe(rs)
+    assert 'n=  10' in describe(rs) and 'under $5M 10%' in describe(rs)
     try:
         assert_allowed('2023-05-01')
         raise SystemExit('guard did not fire')
