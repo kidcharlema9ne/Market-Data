@@ -25,7 +25,13 @@ Declared before the run (nothing below was chosen after seeing a cross result):
 Not done on purpose: pilot cross (too small, one regime); any new cut point or window; any claim about Q5 beyond what is printed.
 Questions on the tally: 12 overlap numbers, 4 3x3 tables (36 cells), within-band rho (12) and 8 group means, 3 models x 4 measures (coefficients), 2 chance tests.
 
-Usage:  python factor_cross.py cross DECLINE_FOLDER REGIME_FOLDER RETURNS_FOLDER   |   --selftest
+Subset option (declared 8 Nov 2026 BEFORE the 2011-2020 run, Entry 40 option (b)): `--start 2011-01-01` keeps only development entries from that date, where the
+share of events with no price series is 5-15% (Entry 38) instead of 22-42% in 2006-2010. Everything above is repeated unchanged on the subset (lead63 and decline cut
+points are recomputed on the subset and will differ from Entry 39). Section F adds the Entry 36 decline result on the same subset: Spearman of excess with raw252,
+rel252, hi252 and the within-week shuffle chance (10,000 draws, as Entry 36), plus the fell-most fifth vs fell-least fifth. Output now also prints the stock and SPY legs
+(ATR) beside each excess (D-053). This is a survivorship-exposure check, not a new hypothesis; it adds no new statistics beyond F's 3 chance-tested correlations.
+
+Usage:  python factor_cross.py cross DECLINE_FOLDER REGIME_FOLDER RETURNS_FOLDER [--start YYYY-MM-DD]   |   --selftest
 """
 import argparse, statistics, sys
 from pathlib import Path
@@ -134,7 +140,7 @@ def cell_line(rs):
     ex = [r['excess_atr'] for r in rs]
     flag = '  (n<15, not interpreted)' if len(rs) < 15 else ''
     return (f'n={len(rs):3d} {len({fd.week_of(r) for r in rs}):3d}w {len(fg.spells(ds)):2d}sp  mean {statistics.fmean(ex):+.3f}  '
-            f'median {statistics.median(ex):+.3f}{flag}')
+            f'median {statistics.median(ex):+.3f}  [stock {statistics.fmean(r["stock_atr"] for r in rs):+.3f} SPY {statistics.fmean(r["spy_atr"] for r in rs):+.3f}]{flag}')
 
 
 def table3(rows, m, label):
@@ -155,9 +161,12 @@ def load_joined(decline_folder, regime_folder, returns_folder):
     return sorted(out, key=lambda r: r['entry']), {d: f['lead63'] for d, f in fdate.items() if 'lead63' in f}
 
 
-def cross(decline_folder, regime_folder, returns_folder):
+def cross(decline_folder, regime_folder, returns_folder, start=None):
     import numpy as np
     dev, fdate = load_joined(decline_folder, regime_folder, returns_folder)
+    if start:
+        dev = [r for r in dev if r['entry'] >= start]
+        print(f'SUBSET: entries from {start} to {DEV_END} only')
     x = np.array([r['lead63'] for r in dev])
     lo, hi = np.quantile(x, [0.2, 0.8])
     print(f'development events with lead63 and all four decline measures: {len(dev)}; lead63 cut points {lo:+.4f} / {hi:+.4f} (Entry 39: {ENTRY39_CUTS[0]:+.4f} / {ENTRY39_CUTS[1]:+.4f})')
@@ -207,6 +216,15 @@ def cross(decline_folder, regime_folder, returns_folder):
     table3(d2, PRIMARY, 'without episodes')
     for model in ('decl', 'lead', 'both'):
         fit_report(d2, PRIMARY, model, 'no-episodes')
+    if start:
+        print('\n=== F. Entry 36 decline result on the same subset (excess in ATR; chance = excess shuffled inside the same entry week, 10,000 draws) ===')
+        for m in ('raw252', 'rel252', 'hi252'):
+            obs, p, n = fd.perm_rho(dev, m, 'excess_atr')
+            print(f'  {m}: Spearman {obs:+.3f}, chance {p:.2%} (n={n})')
+        for m in ('raw252', 'rel252', 'hi252'):
+            print(f'  {m} fell-most fifth: {cell_line([r for r in dev if r["g_" + m] == "most"])}')
+            print(f'  {m} fell-least fifth: {cell_line([r for r in dev if r["g_" + m] == "least"])}')
+        print(f'  all subset events: {cell_line(dev)}')
     print('\nQuestions asked on this cohort in this entry: see the docstring tally (cross of two registered leads; descriptive tables plus 2 chance tests).')
 
 
@@ -247,8 +265,9 @@ if __name__ == '__main__':
     ap.add_argument('decline')
     ap.add_argument('regime')
     ap.add_argument('returns')
+    ap.add_argument('--start')
     a = ap.parse_args()
     if a.cmd == 'cross':
-        cross(a.decline, a.regime, a.returns)
+        cross(a.decline, a.regime, a.returns, a.start)
     else:
         raise SystemExit(__doc__)
