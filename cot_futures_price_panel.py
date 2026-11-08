@@ -53,7 +53,7 @@ def outcomes(frame):
     previous = np.r_[np.nan, c[:-1]]
     tr = np.maximum(h - l, np.maximum(abs(h - previous), abs(l - previous)))
     tr[invalid | np.r_[True, invalid[:-1]] | gap] = np.nan
-    atr = pd.Series(tr).rolling(20).mean().shift(1).to_numpy()
+    atr = pd.Series(tr).rolling(20).mean().shift(1).to_numpy(copy=True)
     atr[~np.isfinite(atr) | (atr <= 0)] = np.nan
     result = frame[["symbol", "session", "date_offset"]].copy()
     result["entry_ready"] = np.isfinite(atr) & ~invalid
