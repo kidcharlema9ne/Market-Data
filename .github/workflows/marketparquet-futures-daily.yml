@@ -1,0 +1,66 @@
+name: MarketParquet futures daily to R2
+# Backfill: run by hand (workflow_dispatch). Nightly: keeps the current year up to date.
+# Objects are written to marketparquet/futures_daily/{date}.parquet in bucket insider-research.
+on:
+  workflow_dispatch:
+    inputs:
+      years:
+        description: 'JSON list of years to transfer (futures start 2007-12-31)'
+        required: false
+        default: '[2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026]'
+  schedule:
+    # MarketParquet publishes each session by about midnight ET (04:00-05:00 UTC).
+    # Tue-Sat 06:15 UTC picks up the session that ended the evening before.
+    - cron: '15 6 * * 2-6'
+permissions:
+  contents: read
+jobs:
+  backfill:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        year: ${{ fromJSON(inputs.years) }}
+    concurrency:
+      group: mp-futures_daily-${{ matrix.year }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow
+      - name: Transfer and verify futures_daily ${{ matrix.year }}
+        env:
+          MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python marketparquet_archive_transfer.py futures_daily "${{ matrix.year }}"
+  nightly:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: mp-futures_daily-nightly
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow
+      - name: Sync current year (and last year during the first week of January)
+        env:
+          MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          set -e
+          year=$(date -u +%Y)
+          if [ "$(date -u +%m)" = "01" ] && [ "$(date -u +%d)" -le 7 ]; then
+            python marketparquet_archive_transfer.py futures_daily "$((year - 1))"
+          fi
+          python marketparquet_archive_transfer.py futures_daily "$year"
