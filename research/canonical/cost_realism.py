@@ -1,5 +1,5 @@
 """Cost realism for the 12-month-fall lead (C8 fell-most fifth, raw252). Uses ONLY fields already in the committed Entry 28 returns
-and Entry 36 decline-feature files (entry price, ATR, 21-session stock/SPY percent legs, 252-session percent change), joined through
+and Entry 36 decline-feature files (entry price, ATR, 21-session stock/SPY legs in ATR units, 252-session percent change), joined through
 factor_decline.load, so the D-068 guard (development entries and the 2026 pilot) applies. No archive read, no new returns.
 
 WHAT THIS CANNOT DO: there are no bid/ask quotes in the repo or the archive, so no cost here is measured. Every cost is an ASSUMED
@@ -82,8 +82,8 @@ def tiered(name, rs, mult):
     for r in rs:
         b, c = tier(r)
         cost = mult * c / atr_pct(r)
-        s = (r['stock_pct']) / atr_pct(r)
-        p = (r['spy_pct']) / atr_pct(r)
+        s = r['stock_atr']
+        p = r['spy_atr']
         rows.append((r, b, cost, s, p, r['excess_atr'] - cost))
     net = [x[5] for x in rows]
     best5 = sorted(net)[:-5]
@@ -130,7 +130,7 @@ def run(features, returns):
 
 def selftest():
     rs = [{'entry': f'2012-0{1 + i % 9}-01', 'atr': 0.5 + (i % 5) * 0.1, 'entry_open': 3 + (i * 7) % 40, 'excess_atr': float(i % 7) - 2,
-           'stock_pct': 0.02, 'spy_pct': 0.01, 'pct252': -0.6 + (i % 10) / 10, 'cik': str(i)} for i in range(60)]
+           'stock_atr': 1.0, 'spy_atr': 0.4, 'pct252': -0.6 + (i % 10) / 10, 'cik': str(i)} for i in range(60)]
     profile('t', rs)
     flat_table('t', rs, None)
     tiered('t', rs, 1)
