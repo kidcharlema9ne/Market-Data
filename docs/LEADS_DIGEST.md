@@ -1,11 +1,11 @@
 # Leads digest (read this first; the log is for going deeper)
 
-Purpose: one page so a new chat does not have to read the 600-line `docs/SHARED_LOG.md`. Every line points to the log entry that holds the script and run link. This page repeats numbers from the log and creates none; if it disagrees with the log, the log governs. Last refreshed: 8 Nov 2026, after Entry 66.
+Purpose: one page so a new chat does not have to read the 600-line `docs/SHARED_LOG.md`. Every line points to the log entry that holds the script and run link. This page repeats numbers from the log and creates none; if it disagrees with the log, the log governs. Last refreshed: 8 Nov 2026, after Entry 67.
 
 ## How to read the log cheaply
 - Latest entries only: `tail -n 40 docs/SHARED_LOG.md`, or `grep -n '^## Entry' docs/SHARED_LOG.md | tail -5`.
 - One entry: `awk '/^## Entry 52 /{p=1} p{print} /^## Entry 53 /{exit}' docs/SHARED_LOG.md`.
-- Deep dives by topic: survivorship = Entries 38, 40, 44, 49, 65; costs = 45; stops = 62, 63; sizing = 64; score = 51; deep fall = 36, 42, 49, 52, 66; Nasdaq lag = 37, 39, 41; basing = 59-61.
+- Deep dives by topic: survivorship = Entries 38, 40, 44, 49, 65; costs = 45; stops = 62, 63; sizing = 64; score = 51; deep fall = 36, 42, 49, 52, 66, 67; Nasdaq lag = 37, 39, 41; basing = 59-61.
 
 ## Base rule (Michael's words, D-064/065/066/068)
 Four or more distinct officers/directors bought (purchase date) within 15 sessions before entry, all filed; $3M daily dollar volume; enter next open after the filing that makes four; 21-session price-only hold; results in ATR with SPY beside them. Development 2006-2020 n=1,372: +0.154 ATR over SPY gross, about zero after assumed costs (Entries 28, 45). A lead, not an edge. Sealed years 2021-2025 stay closed; Michael is not ready.
@@ -13,10 +13,10 @@ Four or more distinct officers/directors bought (purchase date) within 15 sessio
 ## Leads (all post hoc / exploratory; none is an edge)
 | Lead | What | Headline (excess over SPY, ATR) | Status | Entries |
 |---|---|---|---|---|
-| C8 / D1 | Deep 12-month fall (fell-most fifth, cut -15.3 ATR) | +0.593 (n=255); 2011-2020 +0.565 (n=175); pay sits in falls of 50%+ | Lead; survivorship and costs unresolved | 36, 38, 42, 44, 45, 49, 52 |
+| C8 / D1 / F | Deep 12-month fall. D1 = fell-most fifth (cut -15.3 ATR) = the fixed rule F: down 15+ ATR over 12 months | D1 +0.593 (n=255); F +0.599 (n=269, ~1.5 a month); 2011-2020 +0.565 (n=175); pay sits in falls of 50%+ | Lead; survivorship and costs unresolved | 36, 38, 42, 44, 45, 49, 52, 67 |
 | C16 / N | Nasdaq lagging SPY over 63 sessions (lowest fifth) | +0.60; one-month effect; no mechanism | Lead; weaker in 2011-2020 | 37, 39, 41, 42, 58 |
 | D1 and N together | Both | +1.434 (n=52, 0.29 a month) | Thin | 51, 64 |
-| C26 percent drawdown | Down 50%+ from the 252-session closing high (no ranking) | +0.468 (n=444, ~2.5 a month; +0.638 without the 3 episodes); a step at 50%, not a ladder; weaker than D1 | Lead (second ruler for C8); graded points not supported | 66 |
+| C26 percent drawdown (P) | Down 50%+ from the 252-session closing high | +0.468 (n=444, ~2.5 a month; +0.638 without the 3 episodes); a step at 50%, not a ladder; weaker than F; P and F together +0.662 (n=218), P adds an unproven +0.33 on top of F | Lead (second ruler for C8); graded points not supported | 66, 67 |
 | C23 basing | Inside D1, choppy last 2-3 months beats orderly slide | +0.80 (n=170) vs +0.17 (n=85) | Weak lead (best of 12 = 31.8%) | 59-61 |
 | Score (Michael's idea) | Points for R1 (no CEO/CFO), N, D1 | 0/1/2/3 points = -0.04/+0.29/+0.63/+1.21 (n=17) | Descriptive only; weights not set | 51, MICHAEL_DETERMINATIONS 1 |
 
