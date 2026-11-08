@@ -1,66 +1,117 @@
-name: MarketParquet futures daily to R2
-# Backfill: run by hand (workflow_dispatch). Nightly: keeps the current year up to date.
-# Objects are written to marketparquet/futures_daily/{date}.parquet in bucket insider-research.
+name: COT futures R2 audit (read-only)
 on:
   workflow_dispatch:
     inputs:
       years:
-        description: 'JSON list of years to transfer (futures start 2007-12-31)'
+        description: 'Existing workflow UI field. Ignored by the read-only audit.'
         required: false
-        default: '[2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026]'
-  schedule:
-    # MarketParquet publishes each session by about midnight ET (04:00-05:00 UTC).
-    # Tue-Sat 06:15 UTC picks up the session that ended the evening before.
-    - cron: '15 6 * * 2-6'
 permissions:
   contents: read
 jobs:
-  backfill:
-    if: github.event_name == 'workflow_dispatch'
+  inspect:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-    strategy:
-      fail-fast: false
-      max-parallel: 4
-      matrix:
-        year: ${{ fromJSON(inputs.years) }}
-    concurrency:
-      group: mp-futures_daily-${{ matrix.year }}
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - run: python -m pip install boto3 pyarrow
-      - name: Transfer and verify futures_daily ${{ matrix.year }}
+      - name: Inspect existing futures objects
         env:
-          MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
-          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-        run: python marketparquet_archive_transfer.py futures_daily "${{ matrix.year }}"
-  nightly:
-    if: github.event_name == 'schedule'
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    concurrency:
-      group: mp-futures_daily-nightly
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - run: python -m pip install boto3 pyarrow
-      - name: Sync current year (and last year during the first week of January)
-        env:
-          MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
           R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: |
-          set -e
-          year=$(date -u +%Y)
-          if [ "$(date -u +%m)" = "01" ] && [ "$(date -u +%d)" -le 7 ]; then
-            python marketparquet_archive_transfer.py futures_daily "$((year - 1))"
-          fi
-          python marketparquet_archive_transfer.py futures_daily "$year"
+          python - <<'PYTHON'
+          import hashlib
+          import json
+          from contextlib import closing
+          from io import BytesIO
+          from pathlib import Path
+          
+          import pyarrow.parquet as pq
+          
+          from r2_storage import BUCKET, client
+          
+          PREFIX = "marketparquet/futures_daily/"
+          REPORT_SYMBOLS = ["HG","CT","SI","ZW","HO","PL","ZL","6E","NG","ZB","6S","SR1","MNQ","6A","HE","6M","LE","6N","KE","ZN","GC","SR3","CL","ZF","ZC","GF","KC","6L","ES","VX","UB","ZS","BZ","ZM","ZQ","RB","CC","6B","DX","YM","ZT","TN","RTY","6C","SB","6J","NQ","MES"]
+          REQUESTED_DATES = (
+              "2007-12-31", "2008-01-02", "2020-04-20", "2020-04-21",
+              "2026-09-18", "2026-09-21", "2026-11-02", "2026-11-06",
+          )
+          
+          storage = client()
+          pages = storage.get_paginator("list_objects_v2").paginate(Bucket=BUCKET, Prefix=PREFIX)
+          dates = sorted({
+              obj["Key"][len(PREFIX):-8]
+              for page in pages
+              for obj in page.get("Contents", [])
+              if obj["Key"].endswith(".parquet")
+          })
+          if not dates:
+              raise SystemExit("R2 futures prefix contains no Parquet files")
+          
+          summaries = []
+          for day in sorted(set(REQUESTED_DATES) | {dates[0], dates[-1]}):
+              if day not in dates:
+                  summaries.append({"file_date": day, "present": False})
+                  continue
+              obj = storage.get_object(Bucket=BUCKET, Key=f"{PREFIX}{day}.parquet")
+              with closing(obj["Body"]) as body:
+                  raw = body.read()
+              expected = obj["Metadata"].get("verified-sha256")
+              if expected and hashlib.sha256(raw).hexdigest() != expected:
+                  raise SystemExit(f"R2 checksum mismatch for {day}")
+              parquet = pq.ParquetFile(BytesIO(raw))
+              rows = parquet.read().to_pylist()
+              symbols = sorted({row["symbol"] for row in rows if row.get("symbol")})
+              date_columns = [column for column in ("date", "timestamp") if column in parquet.schema_arrow.names]
+              contract_columns = [
+                  column for column in parquet.schema_arrow.names
+                  if any(term in column.lower() for term in ("contract", "roll", "expiry", "expiration", "asset_type"))
+              ]
+              summaries.append({
+                  "file_date": day,
+                  "present": True,
+                  "checksum_verified": bool(expected),
+                  "rows": len(rows),
+                  "schema": {field.name: str(field.type) for field in parquet.schema_arrow},
+                  "metadata_keys": [key.decode(errors="replace") for key in (parquet.schema_arrow.metadata or {})],
+                  "distinct_symbols": len(symbols),
+                  "duplicate_symbol_rows": len(rows) - len(symbols),
+                  "symbols": symbols,
+                  "date_columns": {
+                      column: sorted({str(row.get(column)) for row in rows})
+                      for column in date_columns
+                  },
+                  "contract_column_examples": {
+                      column: sorted({str(row.get(column)) for row in rows})[:15]
+                      for column in contract_columns
+                  },
+                  "price_checks": {
+                      column: {
+                          "null": sum(row.get(column) is None for row in rows),
+                          "nonpositive": sum(row[column] <= 0 for row in rows if row.get(column) is not None),
+                      }
+                      for column in ("open", "high", "low", "close")
+                  },
+              })
+          
+          seen = {symbol for row in summaries for symbol in row.get("symbols", [])}
+          result = {
+              "object_count": len(dates), "first_file": dates[0], "last_file": dates[-1],
+              "report_symbols_exact_in_sample": sorted(seen.intersection(REPORT_SYMBOLS)),
+              "report_symbols_needing_review": sorted(set(REPORT_SYMBOLS) - seen),
+              "files": summaries,
+          }
+          Path("cot-futures-r2-audit.json").write_text(json.dumps(result, indent=2) + "\n")
+          print(json.dumps({key: value for key, value in result.items() if key != "files"}, indent=2))
+          for summary in summaries:
+              print(json.dumps({key: value for key, value in summary.items() if key != "symbols"}))
+          PYTHON
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cot-futures-r2-audit
+          path: cot-futures-r2-audit.json
+          retention-days: 7
