@@ -25,12 +25,26 @@ from pathlib import Path
 
 PREFIX = {'stock': 'marketparquet/stock_daily/', 'etf': 'marketparquet/etf_daily/'}
 ETF_CHECK = ('SPY', 'ONEQ', 'IWM')
-STOCK_CHECK = ('LEH', 'LEHMQ', 'WM', 'WMI', 'WAMUQ')
+# Lehman / WaMu first, then well-known acquired or bankrupt US names as a delisted-coverage probe.
+# Symbols are checked by exact match only; reuse of a symbol by a later company shows up as a long series.
+STOCK_CHECK = ('LEH', 'LEHMQ', 'WM', 'WMI', 'WAMUQ', 'BSC', 'CFC', 'WB', 'MER', 'IMB', 'CCTYQ', 'ENRNQ', 'WCOEQ',
+               'SHLDQ', 'JCPNQ', 'GMGMQ', 'BBI', 'BGPIQ', 'EKDKQ', 'WYE', 'SGP', 'ROH', 'XTO', 'TWX', 'MON')
 CLOSE_YEARS = {2007, 2008, 2009}  # keep closes of STOCK_CHECK symbols in these years only (identity check)
 FLOOR = 3_000_000
 WINDOW = 15
 READ_COLS = ('symbol', 'close', 'volume', 'date', 'timestamp', 'asset_type')
 LAST_ARCHIVE_DATE = '2026-11-06'
+
+
+def normalize_ticker(raw):
+    """Return (symbol, category). category: ok | blank | otc | odd. Only case/whitespace/first-of-list cleaning."""
+    t = (raw or '').strip()
+    if not t or t.upper() in ('NONE', 'N/A', 'NA', 'NULL'):
+        return '', 'blank'
+    t = t.split(',')[0].strip().upper()
+    if t.endswith(('.OB', '.PK', '.OTC', '.OTCBB')):
+        return t, 'otc'
+    return t, 'ok'
 
 
 def quarter(iso):
@@ -121,7 +135,7 @@ def audit_feed(s3, asset, year, need, collect_dv):
                     if dv is not None and s in need:
                         dv[s][day] = c * v
     rep.update({'rows_min': min(rows_per_file, default=0), 'rows_median': int(statistics.median(rows_per_file or [0])),
-                'rows_max': max(rows_per_file, default=0), 'distinct_symbols': len(symbols),
+                'rows_max': max(rows_per_file, default=0), 'distinct_symbols': len(symbols), 'symbols': sorted(symbols) if asset == 'stock' else [],
                 'column_sets': dict(columns), 'timestamp_column_files': timestamp_files,
                 'date_mismatch_files': date_mismatch, 'files_with_duplicate_symbols': dup_files,
                 'bad_rows': bad_rows, 'asset_types': dict(asset_types),
@@ -133,7 +147,9 @@ def year_job(year, events_path, out):
     from r2_storage import client
     s3 = client()
     events = [e for e in json.loads(Path(events_path).read_text()) if e['entry'].startswith(str(year))]
-    need = {e['ticker'] for e in events}
+    for e in events:
+        e['sym'], e['tcat'] = normalize_ticker(e['ticker'])
+    need = {e['sym'] for e in events if e['tcat'] == 'ok'}
     stock, dates, dv = audit_feed(s3, 'stock', year, need, True)
     etf, _, _ = audit_feed(s3, 'etf', year, set(), False)
     # trailing files from the prior year so January entries have a 15-session window
@@ -148,18 +164,24 @@ def year_job(year, events_path, out):
     all_dates = sorted(set(tail_dates) | set(dates))
     cls, liquid_q, events_q, unmatched = Counter(), Counter(), Counter(), Counter()
     liquid_ge10 = 0
+    no_price_syms = []
     for e in events:
-        c, mean, bars = classify(all_dates, e['entry'], dv.get(e['ticker'], {}))
+        if e['tcat'] != 'ok':
+            c, mean, bars = 'unusable_ticker_' + e['tcat'], None, 0
+        else:
+            c, mean, bars = classify(all_dates, e['entry'], dv.get(e['sym'], {}))
         cls[c] += 1
         events_q[quarter(e['entry'])] += 1
         liquid_q[quarter(e['entry'])] += c == 'liquid'
         liquid_ge10 += (c in ('liquid', 'incomplete') and bars >= 10 and mean >= FLOOR)
         if c == 'no_price':
-            unmatched[e['ticker']] += 1
+            unmatched[e['sym']] += 1
+            no_price_syms.append(e['sym'])
     report = {'year': year, 'stock': stock, 'etf': etf,
               'events': {'total': len(events), 'classes': dict(cls), 'liquid_ge10_bars_sensitivity': liquid_ge10,
                          'by_quarter': dict(events_q), 'liquid_by_quarter': dict(liquid_q),
-                         'sample_no_price_tickers': [t for t, _ in unmatched.most_common(15)]}}
+                         'sample_no_price_tickers': [t for t, _ in unmatched.most_common(15)],
+                         'no_price_symbols': no_price_syms}}
     Path(out).parent.mkdir(parents=True, exist_ok=True)
     Path(out).write_text(json.dumps(report))
     s = report['stock']
@@ -237,9 +259,10 @@ def summary(folder):
             continue
         gaps = [(d[i], d[i + 1]) for i in range(len(d) - 1) if _span(d[i], d[i + 1]) > 10]
         c = closes[s]
-        tail = [(k, round(c[k], 2)) for k in sorted(c)[-4:]]
-        print(f'{s}: first {d[0]} last {d[-1]} bars {len(d)} gaps>10d (last bar before, first bar after) {gaps[:6]} last closes {tail}')
-    print('(WM before 2008-09 should be Washington Mutual; a price level near Waste Management after that means a different issuer.)')
+        pts = [(k, round(c[k], 2)) for k in ('2008-09-12', '2008-09-25', '2008-10-01') if k in c]
+        print(f'{s}: first {d[0]} last {d[-1]} bars {len(d)} gaps>10d {gaps[:3]} closes {pts}')
+    print('Probe names were all US-listed and acquired, merged or bankrupt; "NOT FOUND" means the exact symbol has no bar in any year.')
+    print('(WM: Washington Mutual was about $1-3 in Sept 2008; a price near $30 means the series is Waste Management.)')
     print('\n=== D. Events by liquidity class (entry year); filings-only events matched to prices by symbol ===')
     liquid_q, events_q = Counter(), Counter()
     tot = Counter()
@@ -252,6 +275,18 @@ def summary(folder):
         liquid_q.update(e['liquid_by_quarter'])
         events_q.update(e['by_quarter'])
     print('all years:', dict(tot))
+    print('liquid share of price-matched events (liquid / (liquid+illiquid)) by year:',
+          {r['year']: round(r['events']['classes'].get('liquid', 0) / max(1, r['events']['classes'].get('liquid', 0) + r['events']['classes'].get('illiquid', 0)), 2) for r in years if r['events']['total']})
+    every = set()
+    for r in years:
+        every.update(r['stock']['symbols'])
+    print('\n-- no_price events: is the (cleaned) symbol anywhere in the stock archive in any year? --')
+    for r in years:
+        syms = r['events']['no_price_symbols']
+        if not syms:
+            continue
+        never = sum(1 for x in syms if x not in every)
+        print(f"{r['year']}: no_price {len(syms)} -> symbol never appears in any year {never}, appears in some year but not in the 15-session window {len(syms) - never}")
     print('sample unmatched tickers:', {r['year']: r['events']['sample_no_price_tickers'][:8] for r in years if r['events']['sample_no_price_tickers']})
     print('\n=== E. D-061 condition: sealed share of 2006-2025 liquid events (counts only, no returns) ===')
     rows = share_table(liquid_q)

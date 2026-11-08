@@ -17,3 +17,5 @@ Anything on this list was found by looking at the 2026 pilot data, so it is a **
 Questions asked on this cohort so far (each one raises the bar for the next): Entry 5 (12 small + 702 wide slices), Entry 6 (5 SPY cut-offs), Entry 9 (5 statistics, 12 selector variants), Entry 10 (CEO split), Entry 11 (8 role groups, director count).
 
 Added 7 Nov 2026 (Entry 13): C8 and C9 were registered without being run. Michael plans to explore many decline and drawdown definitions in the pilot and development years on purpose; each variant counts toward the tally of questions asked above, and only pre-declared variants go to the sealed run.
+
+Added 8 Nov 2026 (D-062): the decline look-back for new work is 21 completed sessions. C2 stays as the 15-session reference row. Any new decline variant uses 21 unless it is explicitly a look-back-menu variant, and is added to the tally above.
