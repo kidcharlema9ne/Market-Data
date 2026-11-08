@@ -9,3 +9,5 @@ Whenever reporting an ATR return, put the applicable named, same-window benchmar
 After every substantive project update, give a concrete recommended next action and briefly explain why it comes next. If that action is already authorized, take it in the same turn. If blocked, identify the specific blocker and the action that resolves it. If a decision is required, give options and recommend one. Include a short checkpoint before switching chats.
 
 **Candidate factors.** [docs/CANDIDATES.md](docs/CANDIDATES.md) lists leads found in the pilot data (SPY regime, price setup, no CEO or CFO among buyers, purchase size, ownership). They are candidates, not rules. Add new ones there with their script and run link; carry them as separate named factors into the frozen-rule test.
+
+**Michael's determinations.** Read [docs/MICHAEL_DETERMINATIONS.md](docs/MICHAEL_DETERMINATIONS.md) at the start of every chat. It holds what Michael himself has decided or proposed (for example his scoring-system idea) in his words. Add to it only when he asks; never rewrite an existing item.
