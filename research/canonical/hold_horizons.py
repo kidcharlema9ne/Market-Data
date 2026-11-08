@@ -24,6 +24,10 @@ Declared before any long-hold return was computed:
   E. Chance tests (the only ones): Spearman(raw252, excess) with excess shuffled inside the same entry week (10,000 draws, as Entry 36), at 63, 126, 189, 252 sessions,
      for complete-only (4 tests, the menu) and complete+incomplete (4 sensitivity tests).
   F. Trade counts: events per year and average open positions (events per year x hold / 252) for ALL, FELL, Q1, BOTH, EITHER.
+  G. (ADDED after the first run, 42504935934, showed a mean of about +5,000 ATR at 189 and 252 sessions that no real trade can produce: a data-quality diagnostic, not a new
+     hypothesis.) Per horizon, the 8 largest and 8 smallest complete trades by excess with symbol, entry, exit, entry open, ATR, stock % and SPY %, and a count of trades with
+     |stock %| over 1,000%.
+  H. (ADDED, same reason.) Mean excess by group with the excess clipped at the 1st and 99th percentile of that horizon's complete trades, beside the unclipped mean.
 Overlap warning, printed with the results: holds of 63-252 sessions starting in the same period overlap almost completely, so the number of independent observations is far
 smaller than n; the quarter-block and year-block ranges narrow this only partly. Nothing here is a test of a rule.
 Not done on purpose: a different entry rule, stops, costs, the 2026 pilot, any new cut point, a 2011-2020 subset (can be added with --start if asked).
@@ -184,6 +188,33 @@ def counts(cohort):
         print(f'  {g:7s} {n:4d} events, {per:5.1f}/yr, {per / 12:4.2f}/month; open positions at hold ' + ', '.join(f'{h}: {per * h / 252:4.1f}' for h in HOLDS))
 
 
+def outliers(cohort, rets_by_hold):
+    print('\n=== G. Extreme trades (complete, cohort members): largest and smallest excess; entry open, exit date, ATR, stock % and SPY % ===')
+    for h in HOLDS:
+        rows = [(rets_by_hold[h][key(c)], c) for c in cohort if key(c) in rets_by_hold[h] and rets_by_hold[h][key(c)]['status'] == 'complete']
+        rows.sort(key=lambda t: t[0]['excess_atr'])
+        big = [t for t in rows if abs(t[0].get('stock_pct', 0.0)) > 10]
+        print(f'-- hold {h}: {len(rows)} trades; |stock %| > 1,000%: {len(big)}')
+        for label, sel in (('largest', rows[-8:][::-1]), ('smallest', rows[:8])):
+            for r, c in sel:
+                pct = f'{r["stock_pct"]:+.1%}' if 'stock_pct' in r else 'n/a'
+                print(f'   {label:8s} {r["sym"]:10s} entry {r["entry"]} exit {r.get("exit")} open {r["entry_open"]:.4f} ATR {r["atr"]:.5f} stock {pct} excess {r["excess_atr"]:+.1f} ATR  FELL={member(c, "FELL")} Q1={member(c, "Q1")}')
+
+
+def winsor(cohort, rets_by_hold):
+    import numpy as np
+    print('\n=== H. Mean excess (ATR), unclipped vs clipped at the 1st and 99th percentile of the horizon\'s complete trades ===')
+    for h in HOLDS:
+        rows = rows_for(cohort, rets_by_hold[h], {'complete'})
+        lo, hi = np.percentile([r['excess_atr'] for r in rows], [1, 99])
+        out = []
+        for g in GROUPS:
+            rs = [r for r in rows if member(r, g)]
+            if rs:
+                out.append(f'{g} {statistics.fmean(r["excess_atr"] for r in rs):+.3f}/{statistics.fmean(min(max(r["excess_atr"], lo), hi) for r in rs):+.3f}')
+        print(f'  hold {h:3d} (clip {lo:+.2f} to {hi:+.2f}): ' + '  '.join(out))
+
+
 def run(decline, regime, ret21, *long_folders):
     cohort = build_cohort(decline, regime, ret21)
     rets = {21: read_returns(ret21)}
@@ -197,6 +228,8 @@ def run(decline, regime, ret21, *long_folders):
     constant(cohort, rets)
     chance(cohort, rets)
     counts(cohort)
+    outliers(cohort, rets)
+    winsor(cohort, rets)
     print('\nQuestions asked on this cohort in this entry: see the docstring tally (post hoc, exploratory).')
 
 
