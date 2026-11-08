@@ -19,3 +19,5 @@ Questions asked on this cohort so far (each one raises the bar for the next): En
 Added 7 Nov 2026 (Entry 13): C8 and C9 were registered without being run. Michael plans to explore many decline and drawdown definitions in the pilot and development years on purpose; each variant counts toward the tally of questions asked above, and only pre-declared variants go to the sealed run.
 
 Added 8 Nov 2026 (D-062): the decline look-back for new work is 21 completed sessions. C2 stays as the 15-session reference row. Any new decline variant uses 21 unless it is explicitly a look-back-menu variant, and is added to the tally above.
+
+Added 8 Nov 2026 (Entry 32, run 42493259014): C3 and C5 tested on the refined primary set in the development years (2006-2020, n=1,372). C3 (neither CEO nor CFO among the buyers): +0.259 (n=378) vs +0.154 overall, a 0.14 ATR gap with a shuffle chance of 31.9% alone and 67.5% as the best of six role splits; the pilot gap (+1.12 vs +0.33) did not carry over. C5 (CFO among the buyers): +0.140 vs +0.164 without. Status: C3 weak, not supported; C5 not supported. Questions on the tally: +6 splits (CEO, CFO, neither, both, CEO only, CFO only).
