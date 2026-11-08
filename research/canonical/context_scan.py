@@ -190,6 +190,9 @@ def bounce(low_folder, decl, regime, ret):
     import numpy as np
     dev0 = load_base(decl, regime, ret)
     dev, atr_diff = load_low(low_folder, dev0)
+    n_all = len(dev)
+    dev = [r for r in dev if all(m in r for m in LOW_MEASURES)]       # entries with less than 252 sessions of archived history have no low features
+    print(f'events with all three 12-month-low features: {len(dev)} of {n_all} (the rest have too little archived history or too many missing closes)')
     print(f'development cohort n={len(dev)} excess {mean_or_nan(dev):+.3f}')
     if atr_diff:
         print('WARNING: entry ATR does not match the Entry 36 file for some rows; PROVISIONAL until explained')
