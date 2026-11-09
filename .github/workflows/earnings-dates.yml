@@ -31,7 +31,6 @@ permissions:
   actions: read
 jobs:
   summary:
-    needs: paths
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:

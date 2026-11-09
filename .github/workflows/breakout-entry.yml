@@ -1,4 +1,4 @@
-name: Costs and stop grid (C30, realistic spreads and impact in ATR, 9 stops x 5 holds (C31 adds fixed 2 and 2.5 ATR), deep-fall F; development years only, D-068)
+name: Entry timing (C32, buy-stop at the 10-session high after the four-buyer signal, 3 waits x 2 holds; development years only, D-068)
 on:
   workflow_dispatch:
     inputs:

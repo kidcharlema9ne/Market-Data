@@ -1,4 +1,4 @@
-name: Costs and stop grid (C30, realistic spreads and impact in ATR, 9 stops x 5 holds (C31 adds fixed 2 and 2.5 ATR), deep-fall F; development years only, D-068)
+name: Year-by-year consistency of the deep-fall rule (C33, descriptive, re-reads Entry 70-71 paths; development years only, D-068)
 on:
   workflow_dispatch:
     inputs:
@@ -35,7 +35,6 @@ permissions:
   actions: read
 jobs:
   summary:
-    needs: paths
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
