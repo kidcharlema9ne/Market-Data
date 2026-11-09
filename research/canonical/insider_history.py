@@ -414,7 +414,8 @@ def summary(events_path, years, returns, decline, hist_path, ep_dir, epret_dir):
 
     if decline:
         drows = {(r['cik'], r['sym'], r['entry']): r for r in fd.load(decline, returns)}
-        inside = [r for r in coh if (r['cik'], r['sym'], r['entry']) in drows and drows[(r['cik'], r['sym'], r['entry'])]['raw252'] <= -15.0]
+        inside = [r for r in coh if drows.get((r['cik'], r['sym'], r['entry']), {}).get('raw252') is not None
+                  and drows[(r['cik'], r['sym'], r['entry'])]['raw252'] <= -15.0]
         print(f'\n=== F. Inside the deep-fall rule F (down 15+ ATR over 12 months), same cohort: n={len(inside)} ===')
         print(line('F, whole', inside, fr))
         pair('F: strict planned filter, event SURVIVES', [r for r in inside if r['kept_strict']], [r for r in inside if not r['kept_strict']], fr)
