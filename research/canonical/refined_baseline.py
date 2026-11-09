@@ -20,7 +20,7 @@ Subcommands
   summary FOLDER                 merge and print
   --selftest
 """
-import argparse, json, random, statistics, sys
+import argparse, json, os, random, statistics, sys
 from bisect import bisect_left
 from collections import Counter, defaultdict
 from datetime import date
@@ -102,7 +102,10 @@ def build_primary(folder):
     n_hist = sum('2006' <= e['entry'][:4] <= '2025' for e in primary)
     n_pilot = sum(e['entry'][:4] == '2026' for e in primary)
     print(f'primary set rebuilt: 2006-2025 {n_hist} (expected {EXPECTED["2006-2025"]}), 2026 pilot {n_pilot} (expected {EXPECTED["2026"]})')
-    assert n_hist == EXPECTED['2006-2025'] and n_pilot == EXPECTED['2026'], 'primary set does not match Entry 25'
+    if os.environ.get('CLUSTER_WINDOW', '15') == '15':
+        assert n_hist == EXPECTED['2006-2025'] and n_pilot == EXPECTED['2026'], 'primary set does not match Entry 25'
+    else:
+        print('exploratory cluster window (C38): the Entry 25 count check is skipped; only development entries are used downstream')
     keep = [e for e in primary if allowed(e['entry'])]
     print(f'allowed under D-068 (entry <= {DEV_END} or >= {PILOT_START}): {len(keep)} '
           f'({sum(e["entry"] <= DEV_END for e in keep)} development, {sum(e["entry"] >= PILOT_START for e in keep)} pilot); '

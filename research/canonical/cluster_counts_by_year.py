@@ -19,7 +19,7 @@ from pathlib import Path
 FLAGS = {'filing_affirms_10b5_1', 'possible_10b5_1', 'possible_non_discretionary', 'not_acquisition', 'missing_numeric_amount'}
 TITLE = re.compile(r'(?:class [a-z0-9]+ )?common (?:stock|shares)(?:,?\s+(?:no par value|(?:par value )?\$\d+(?:\.\d+)?(?: par value)?(?: per share)?\.?))?', re.I)
 ENTITY = re.compile(r'\b(?:LLC|LLP|LLLP|LP|LTD|Limited|Inc|Corp|Corporation|Holdings|Partners|Capital|Fund|Trust|Foundation|Management|Group|Company|PLC|Investments|Advisors|Associates)\b', re.I)
-WINDOW = 15
+WINDOW = int(os.environ.get('CLUSTER_WINDOW', '15'))   # sessions of purchase dates before entry; 15 = rule in force (D-057); other values are exploratory variants (C38)
 DB_KEY = 'sec/insider-transactions/derived/purchase_candidates.sqlite3'
 
 

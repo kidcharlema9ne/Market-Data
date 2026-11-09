@@ -24,7 +24,7 @@ Subcommands
   summary  merge, collapse, print tables and the quarter-cut table
   --selftest
 """
-import argparse, json, statistics, sys, tempfile
+import argparse, json, os, statistics, sys, tempfile
 from bisect import bisect_left, bisect_right
 from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor
@@ -33,7 +33,7 @@ from pathlib import Path
 from archive_coverage_audit import DELISTED, FLOOR, WINDOW as LIQ_WINDOW, key_date, list_dates, normalize_ticker, read_file
 from identity_check import OK_HI, OK_LO, load_year, ratios_for, window_stats
 
-CLUSTER_WINDOW = 15            # sessions of purchase dates before entry (D-057, unchanged)
+CLUSTER_WINDOW = int(os.environ.get('CLUSTER_WINDOW', '15'))   # sessions of purchase dates before entry (D-057: 15 is the rule in force; other values are exploratory variants, C38)
 SAME_PRICE_TOL = 0.01          # D-064 (a): weighted prices within one cent
 SAME_DAY_BUYERS = 3            # D-064 (a): three or more distinct owners
 MODE_MONTHS, MODE_NEED = 3, 2  # D-064 (b): two of the three complete months before the filing month
