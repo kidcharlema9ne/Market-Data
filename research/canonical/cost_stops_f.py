@@ -27,6 +27,8 @@ DECLARED BEFORE RUNNING:
     Impact: square-root law, I = Y * sigma * sqrt(Q/V) (Toth et al.; Y of order one); average price paid over the order = 2/3 of I; sigma taken as ATR percent
     (an over-estimate of daily volatility, conservative); one way = (2/3) * Y * sqrt(phi) ATR; two ways in a round trip.  A one-cent tick floor is applied to any
     spread estimate.  Also printed for comparison: the Entry 45 assumptions (flat 0.10 / 0.25 ATR; price tiers 0.5% / 1% / 2% / 4% of price).
+ C31 ADDITION (9 Nov 2026, declared BEFORE the run; Michael: 'try a 2 and a 2.5 ATR stop'): two more FIXED stops, 2 and 2.5 ATR below the entry open,
+      added to the grid below (9 rules x 5 periods = 45 cells); every other cell is unchanged and must reproduce Entry 70.  Fixed 4 ATR not added (trail 4 exists).
  D. GRID.  Stop rules x holding periods, price only, fills at the stop or at the open on a gap, a series that ends early is closed at its last close ('delist'):
       none; fixed stop at 3 and 5 ATR below the entry open; trailing stop at 3, 4, 5, 6 ATR below the highest high (A4 of Entry 69 is trail 4; trail level
       never lowered; ATR fixed at the entry value).  Holding periods (sessions, entry session = day one): 21, 42, 63, 84, 126; every cell exits at the close of
@@ -55,7 +57,7 @@ from stop_test import block_range
 
 HS = (21, 42, 63, 84, 126)
 MAXH = max(HS)
-STOPS = [('none', 0), ('fixed', 3), ('fixed', 5), ('trail', 3), ('trail', 4), ('trail', 5), ('trail', 6)]
+STOPS = [('none', 0), ('fixed', 2), ('fixed', 2.5), ('fixed', 3), ('fixed', 5), ('trail', 3), ('trail', 4), ('trail', 5), ('trail', 6)]
 F_CUT = -15.0
 K_CS = 3 - 2 * math.sqrt(2)
 TICK = 0.01
@@ -358,7 +360,7 @@ def grid_section(name, rows):
     allc = [(k, H) for k in keys for H in HS if stat[(k, H)]]
     best = max(allc, key=lambda x: stat[x]['ex'])
     print(f'\n  best of {len(allc)} cells by gross excess: {label(best[0])} / {best[1]} sessions = {stat[best]["ex"]:+.3f} ATR (net {stat[best]["net"]:+.3f}); plain 42 = {stat[("none0", 42)]["ex"]:+.3f}; plain 21 = {stat[("none0", 21)]["ex"]:+.3f}.  '
-          'The best of 35 overlapping cells is optimistic by construction.')
+          'The best of these overlapping cells is optimistic by construction.')
     e1 = [r for r in rows if r['entry'] < '2011-01-01']
     e2 = [r for r in rows if r['entry'] >= '2011-01-01']
     ce = {}
