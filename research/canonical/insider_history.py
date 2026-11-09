@@ -201,12 +201,14 @@ def build_episodes(rows_path, out_dir):
 
 # ------------------------------------------------------------------ event features
 def buyer_features(b, ev, hist, ep_by_owner, ep_res):
-    """b: buyer cik. ev: event with 'lines', 'entry', 'issuer_cik'. Returns a dict of this buyer's point-in-time features."""
+    """b: buyer cik. ev: event with 'purchases', 'entry', 'issuer_cik'. Returns a dict of this buyer's point-in-time features."""
     entry, issuer = ev['entry'], ev['issuer_cik']
-    first_buy = min(l['date'] for l in ev['lines'])
-    mine = sorted(l['date'] for l in ev['lines'] if l['owner'] == b) or [first_buy]
-    anchor = d2(mine[0])
+    first_buy = min(d for d, _ in ev['purchases'])
     h = hist.get(b, {'P': [], 'S': []})
+    # the buyer's own counted purchase dates are rebuilt from his history rows: this issuer, from the cluster's first counted purchase
+    # up to (not including) the entry, filed before the entry; falls back to the cluster's first date
+    mine = sorted(r['d'] for r in h['P'] if r['i'] == issuer and first_buy <= r['d'] < entry and r['f'] < entry) or [first_buy]
+    anchor = d2(mine[0])
     prior = sorted(d2(r['d']) for r in h['P'] if r['i'] == issuer and r['d'] < first_buy and r['f'] < entry)
     pf = planned_flags(prior, anchor)
     start = (d2(first_buy) - timedelta(days=NET_DAYS)).isoformat()
@@ -326,7 +328,7 @@ def summary(events_path, years, returns, decline, hist_path, ep_dir, epret_dir):
     for r in base:
         if COHORT_START <= r['entry'] <= DEV_END:
             ev = ev_by_key[(r['cik'], r['sym'], r['entry'])][0]
-            assert ev['lines'], 'event without purchase lines'
+            assert ev['purchases'], 'event without purchase dates'
             coh.append({**r, **event_flags(ev, hist, ep_by_owner, ep_res)})
     coh.sort(key=lambda r: r['entry'])
     print(f'\ncohort: development events entered {COHORT_START} .. {DEV_END}: n={len(coh)}  ({COHORT_MONTHS} months)')
@@ -464,7 +466,7 @@ def selftest():
     assert abs(eps[0]['px'] - (1000 + 3600) / 400) < 1e-9 and st['collapsed_within_21_sessions'] == 1 and st['ticker_otc'] == 1, (eps, st)
     # 5. buyer features: earlier episode counted only if its hold ended before entry and it was filed before the first purchase
     ev = {'issuer_cik': '9', 'entry': '2019-06-20', 'owners': [['a', 'Director', ''], ['b', 'Director', ''], ['c', 'Officer', 'CFO'], ['d', 'Director', '']],
-          'lines': [{'owner': o, 'date': '2019-06-05'} for o in 'abcd']}
+          'purchases': [['2019-06-05', 10.0], ['2019-06-07', 10.0]]}
     hist = {'a': {'P': [{'o': 'a', 'i': '9', 'd': '2018-06-06', 'f': '2018-06-08', 's': 1.0, 'p': 1.0, 'pl': False},
                         {'o': 'a', 'i': '9', 'd': '2017-06-07', 'f': '2017-06-09', 's': 1.0, 'p': 1.0, 'pl': False}], 'S': []}}
     ep = {'a': [{'o': 'a', 'cik': '9', 'sym': 'ABC', 'f': '2018-06-08', 'entry': '2018-06-11', 'px': 10.0},
