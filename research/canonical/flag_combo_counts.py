@@ -67,10 +67,12 @@ def report(cohort):
     for combo, g in combos(cohort, ['R1', 'N', 'F']):
         print(f'  {label(["R1", "N", "F"], combo):14s} {len(g):5d}   {len(g) / MONTHS:7.2f}   | {dd.line(g) if g else "no events"}')
 
-    print('\n=== A3. Each flag, with it on (any other flags) ===')
+    print('\n=== A3. Each flag on and off (any other flags) ===')
     for k in FLAGS:
         g = [r for r in cohort if r[k]]
-        print(f'  {k}: n={len(g)}, {len(g) / MONTHS:.2f} per month | {dd.line(g)}')
+        go = [r for r in cohort if not r[k]]
+        print(f'  {k} on : n={len(g)}, {len(g) / MONTHS:.2f} per month | {dd.line(g)}')
+        print(f'  {k} off: n={len(go)}, {len(go) / MONTHS:.2f} per month | {dd.line(go)}')
 
     print('\n=== C. Totals ===')
     n = len(cohort)
