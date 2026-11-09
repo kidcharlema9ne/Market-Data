@@ -321,11 +321,15 @@ def run_scan(cohort, sim, spy, dv):
     bs_year = calendar_years(bench, START)
     cohort_check(trades)
 
+    flagged = [t for t in trades if any(t[f] for f in FLAGS)]
+    flagged_no_r1only = [t for t in flagged if not (t['R1'] and not (t['N'] or t['F'] or t['P']))]
     variants = [('MAIN 0.1% scaled', dict()), ('FLAT 1.0U all', dict(flat=True)), ('gross cost 0.00', dict(cost=0.0)), ('cost 0.20 ATR', dict(cost=0.20)),
-                ('base 0.125%', dict(base_pct=0.125))]
+                ('base 0.125%', dict(base_pct=0.125)), ('FLAGGED only', dict(sel=flagged)), ('FLAGGED, no R1-only', dict(sel=flagged_no_r1only)),
+                ('FLAGGED only, cost 0.2', dict(sel=flagged, cost=0.20))]
     res = {}
     for name, kw in variants:
-        curve, recs, cnt = simulate(trades, cal_run, **kw)
+        kw = dict(kw)
+        curve, recs, cnt = simulate(kw.pop('sel', trades), cal_run, **kw)
         res[name] = (curve, recs, cnt, curve_stats(curve, START))
     print('\n=== 1. Portfolio, all variants ($100,000 start; 3 ATR stop; 42-session exit) ===')
     for name, _ in variants:
@@ -414,8 +418,46 @@ def run_scan(cohort, sim, spy, dv):
     mr = sorted(((b / a - 1, m) for m, (a, b) in mon.items()))
     print('  worst 5 months: ' + ', '.join(f'{m} {x:+.1%}' for x, m in mr[:5]) + '; best 5: ' + ', '.join(f'{m} {x:+.1%}' for x, m in mr[-5:][::-1]))
     print(f'  months up {sum(x > 0 for x, _ in mr)} of {len(mr)}')
+    section5(recs, res, bs)
     print('\nPOST HOC; sizes and flags are Claude\'s Entry 78 judgment on post hoc leads; costs are 0.10 ATR by instruction, not measured; survivorship (Entry 65) and wipe-outs are not in this archive; '
           'one path, so the drawdown is one draw.')
+
+
+DECLINES = (('2007-10 to 2009-03 decline (SPY peak 2007-10-09 to trough 2009-03-09)', '2007-10-09', '2009-03-09'),
+            ('2020 decline (SPY 2020-02-19 to 2020-03-23)', '2020-02-19', '2020-03-23'))
+
+
+def section5(recs, res, bs):
+    """C40a (declared before the run, Michael: 'were all these trades taken during the two market declines?'): when are the flagged trades taken."""
+    print('\n=== 5. When were the trades taken? (MAIN sizes and costs; windows fixed in advance: the two big SPY declines, by ENTRY date) ===')
+    only_r1 = lambda x: x['flags'] == ('R1',)
+    groups = [('no extra flag (cluster only)', [x for x in recs if not x['flags']]), ('no CEO/CFO ONLY (no other flag)', [x for x in recs if only_r1(x)]),
+              ('any flag', [x for x in recs if x['flags']]), ('any flag except no-CEO/CFO-only', [x for x in recs if x['flags'] and not only_r1(x)]),
+              ('Nasdaq lagging', [x for x in recs if 'N' in x['flags']]), ('deep 12-month fall (15+ ATR)', [x for x in recs if 'F' in x['flags']]),
+              ('down 50%+ from 12-month high', [x for x in recs if 'P' in x['flags']])]
+    ex_ = lambda g: statistics.fmean(x['stock_atr'] - x['spy_atr'] for x in g) if g else float('nan')
+    for nm, g in groups:
+        tot = sum(x['pnl'] for x in g)
+        print(f'\n  {nm}: n={len(g)}, gross excess over SPY {ex_(g):+.3f} ATR, net P&L ${tot:+,.0f}')
+        inside = set()
+        for wn, a, b in DECLINES:
+            w = [x for x in g if a <= x['entry'] <= b]
+            inside.update(id(x) for x in w)
+            print(f'     entered in the {wn}: n={len(w)} ({len(w) / len(g):.0%} of the group), excess {ex_(w):+.3f}, P&L ${sum(x["pnl"] for x in w):+,.0f}' + (f' ({sum(x["pnl"] for x in w) / tot:.0%} of group P&L)' if tot else ''))
+        rest = [x for x in g if id(x) not in inside]
+        print(f'     entered outside both declines: n={len(rest)} ({len(rest) / len(g):.0%}), excess {ex_(rest):+.3f}, P&L ${sum(x["pnl"] for x in rest):+,.0f}' + (f' ({sum(x["pnl"] for x in rest) / tot:.0%})' if tot else ''))
+        gfc = [x for x in g if '2008-01-01' <= x['entry'] <= '2009-12-31']
+        c19 = [x for x in g if '2020-01-01' <= x['entry'] <= '2020-12-31']
+        o = [x for x in g if not ('2008-01-01' <= x['entry'] <= '2009-12-31' or '2020-01-01' <= x['entry'] <= '2020-12-31')]
+        print(f'     by calendar block: 2008-09 n={len(gfc)} excess {ex_(gfc):+.3f}; 2020 n={len(c19)} excess {ex_(c19):+.3f}; all other years n={len(o)} excess {ex_(o):+.3f}, P&L ${sum(x["pnl"] for x in o):+,.0f}')
+    print('\n  trades entered by year (any flag / deep fall / Nasdaq lag / 50% drop / cluster only), gross excess of the any-flag trades:')
+    for y in sorted({x['entry'][:4] for x in recs}):
+        a = [x for x in recs if x['entry'][:4] == y]
+        fl = [x for x in a if x['flags']]
+        print(f'    {y}: any flag {len(fl):3d} | deep fall {sum("F" in x["flags"] for x in a):3d} | Nasdaq lag {sum("N" in x["flags"] for x in a):3d} | 50% drop {sum("P" in x["flags"] for x in a):3d} | cluster only {len(a) - len(fl):3d} | any-flag excess {ex_(fl):+.3f}')
+    print('\n  quarters with the most any-flag entries:')
+    q = Counter(quarter(x['entry']) for x in recs if x['flags'])
+    print('    ' + ', '.join(f'{k} {v}' for k, v in q.most_common(8)) + f'; quarters with at least one flagged entry {len(q)} of 61')
 
 
 def cohort_check(trades):
