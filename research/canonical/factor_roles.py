@@ -10,7 +10,7 @@ Inputs: events JSON from refined_study.py events (carries each event's buyers), 
 run (to rebuild the primary set), and the returns_*.json files of a refined-baseline run (the 21-session results).
 Usage: python factor_roles.py EVENTS.json YEAR_FOLDER RETURNS_FOLDER      |      --selftest
 """
-import json, re, statistics, sys
+import json, os, re, statistics, sys
 from collections import Counter, defaultdict
 from datetime import date
 from pathlib import Path
@@ -64,7 +64,10 @@ def load(events_path, year_folder, returns_folder):
     from archive_coverage_audit import normalize_ticker
     events = json.loads(Path(events_path).read_text())
     cnt = Counter(e['set'] for e in events)
-    assert cnt['base'] == EXPECT_EVENTS['base'] and cnt['refined'] == EXPECT_EVENTS['refined'], dict(cnt)
+    if os.environ.get('CLUSTER_WINDOW', '15') == '15':
+        assert cnt['base'] == EXPECT_EVENTS['base'] and cnt['refined'] == EXPECT_EVENTS['refined'], dict(cnt)
+    else:
+        print(f'exploratory cluster window (C38/C39): the Entry 25 event-count check is skipped; counts {dict(cnt)}')
     primary = build_primary(year_folder)
     by_key = defaultdict(list)
     for e in events:
