@@ -35,7 +35,13 @@ EPISODES = ('2008Q4', '2011Q3', '2020Q1')
 BASELINE_PILOT = {'trades': 91, 'excess': 0.5257, 'run': 42421461026}   # Entry 8, different code and cohort
 
 
+SEALED_START, SEALED_END = '2021-04-01', '2025-12-31'   # D-068
+
+
 def allowed(entry):
+    # The sealed window opens ONLY for sealed_run.py, which sets SEALED_RUN=1 after docs/SEALED_HYPOTHESES.md is marked FROZEN (it checks that itself).
+    if os.environ.get('SEALED_RUN') == '1' and SEALED_START <= entry <= SEALED_END:
+        return True
     return entry <= DEV_END or entry >= PILOT_START
 
 
