@@ -38,6 +38,7 @@ SAME_PRICE_TOL = 0.01          # D-064 (a): weighted prices within one cent
 SAME_DAY_BUYERS = 3            # D-064 (a): three or more distinct owners
 MODE_MONTHS, MODE_NEED = 3, 2  # D-064 (b): two of the three complete months before the filing month
 HOLD_SESSIONS = 21             # D-065
+DATE_RULE = os.environ.get('DATE_RULE', '')   # C41 (POST HOC variant, Michael 9 Nov 2026): '' = rule in force; 'd2'/'d3' = counted purchases span >= 2/3 distinct dates; 'm4' = four buyers can be given four different dates
 
 SPLIT_FACTORS = [1.5, 2, 2.25, 2.5, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 20, 24, 25, 30, 40, 50, 100, 200, 250, 500, 1000]
 GRID = sorted(set(SPLIT_FACTORS) | {1 / f for f in SPLIT_FACTORS})
@@ -138,8 +139,47 @@ def issuer_routine_mode(issuer_rows, i, filing_date, tol=SAME_PRICE_TOL, min_buy
     return len({d[:7] for d in fdates} & set(months)) >= MODE_NEED
 
 
-def find_events_refined(rows, cal, exclude_routine, tol=SAME_PRICE_TOL, min_buyers=SAME_DAY_BUYERS):
-    """Same crossing logic as cluster_counts_by_year.find_events. With exclude_routine=False the result is identical to it."""
+# ------------------------------------------------------------------ distinct purchase dates (C41, exploratory)
+def owner_dates(rows, start, entry):
+    od = defaultdict(set)
+    for r in rows:
+        for d in r['transaction_dates']:
+            if start <= d < entry:
+                od[row_owner(r)].add(d)
+    return od
+
+
+def max_matching(od):
+    """Largest set of owners that can each be given a different purchase date (Kuhn's augmenting paths)."""
+    match = {}
+    def try_owner(o, seen):
+        for d in od[o]:
+            if d in seen:
+                continue
+            seen.add(d)
+            if d not in match or try_owner(match[d], seen):
+                match[d] = o
+                return True
+        return False
+    return sum(try_owner(o, set()) for o in od)
+
+
+def date_rule_ok(rows, start, entry, rule):
+    if not rule:
+        return True
+    od = owner_dates(rows, start, entry)
+    if rule in ('d2', 'd3'):
+        return len(set().union(*od.values())) >= int(rule[1]) if od else False
+    if rule == 'm4':
+        return max_matching(od) >= 4
+    raise ValueError(rule)
+
+
+def find_events_refined(rows, cal, exclude_routine, tol=SAME_PRICE_TOL, min_buyers=SAME_DAY_BUYERS, date_rule=None):
+    """Same crossing logic as cluster_counts_by_year.find_events. With exclude_routine=False the result is identical to it.
+    date_rule (default: DATE_RULE from the environment, applied only when exclude_routine is True): an event needs four distinct buyers AND
+    the date condition at the same time; the entry is the filing that makes both true. With no date rule the result is unchanged."""
+    rule = (DATE_RULE if date_rule is None else date_rule) if exclude_routine else ''
     from cluster_counts_by_year import usable
     by_security, by_issuer = defaultdict(lambda: defaultdict(list)), defaultdict(list)
     for row in rows:
@@ -164,10 +204,14 @@ def find_events_refined(rows, cal, exclude_routine, tol=SAME_PRICE_TOL, min_buye
             bad = set()
             if exclude_routine and allrows:
                 bad = {id(allrows[k]) for k in same_day_same_price(allrows, tol=tol, min_buyers=min_buyers)[0]}
-            before = {row_owner(r) for r in seen if id(r) not in bad}
+            before_rows = [r for r in seen if id(r) not in bad]
+            before = {row_owner(r) for r in before_rows}
             seen = allrows
-            after = {row_owner(r) for r in seen if id(r) not in bad}
-            if len(before) < 4 <= len(after):
+            after_rows = [r for r in seen if id(r) not in bad]
+            after = {row_owner(r) for r in after_rows}
+            qual_before = len(before) >= 4 and date_rule_ok(before_rows, start, entry, rule)
+            qual_after = len(after) >= 4 and date_rule_ok(after_rows, start, entry, rule)
+            if not qual_before and qual_after:
                 if bad:
                     stats['crossings_with_routine_rows_excluded'] += 1
                 if exclude_routine and issuer_routine_mode(by_issuer[key[0]], i, max(r['filing_date'] for r in new), tol, min_buyers):
@@ -183,6 +227,7 @@ def find_events_refined(rows, cal, exclude_routine, tol=SAME_PRICE_TOL, min_buye
                                  for r in seen if id(r) not in bad})
                 events.append({'issuer_cik': key[0], 'ticker': key[1], 'entry': entry, 'buyers': len(after),
                                'purchases': purchases, 'n_routine_rows': len(bad), 'owners': [list(o) for o in owners],
+                               'distinct_dates': len({d for d, _ in purchases}), 'match4': max_matching(owner_dates(after_rows, start, entry)) >= 4,
                                'window_start': start,
                                'rows': [{'acc': r['accession'], 'keys': r['transaction_row_keys']} for r in seen if id(r) not in bad]})
     return events, stats
@@ -234,10 +279,13 @@ def build_events(out):
     print(f'base events: {len(base)} (identical to cluster_counts_by_year.find_events)')
     print(f'refined events (D-064 applied): {len(refined)}; same issuer/ticker/entry in both: {len(both)}; '
           f'base only: {len(base) - len(both)}; refined only: {len(refined) - len(both)}')
-    print(f'refined run stats: {dict(stats)}')
+    print(f'refined run stats: {dict(stats)}  (DATE_RULE={DATE_RULE or "off"})')
+    dd = Counter(min(e['distinct_dates'], 5) for e in refined)
+    print('Distinct purchase dates among the counted purchases, refined events (5 = five or more): ' + ', '.join(f'{k}: {dd[k]}' for k in sorted(dd)))
+    print(f'Refined events where four buyers can each be given a different date: {sum(e["match4"] for e in refined)} of {len(refined)}')
     print('Sensitivity of the refined event count to the D-064 thresholds (counts only; base = %d):' % len(base))
     for tol, mb in ((0.0, 3), (0.005, 3), (0.01, 3), (0.02, 3), (0.01, 4), (0.0, 4)):
-        n = len(refined) if (tol, mb) == (SAME_PRICE_TOL, SAME_DAY_BUYERS) else len(find_events_refined(rows, cal, True, tol, mb)[0])
+        n = len(refined) if (tol, mb) == (SAME_PRICE_TOL, SAME_DAY_BUYERS) else len(find_events_refined(rows, cal, True, tol, mb, date_rule='')[0])
         print(f'  price tolerance ${tol:.3f}, min distinct same-day buyers {mb}: refined events {n}')
 
 
@@ -431,6 +479,26 @@ def selftest():
     ev, _ = find_events_refined(disc, cal, True)
     assert len(ev) == 1 and ev[0]['buyers'] == 4 and ev[0]['n_routine_rows'] == 0
     assert len(ev[0]['owners']) == 4 and all(o[1] == 'Director' for o in ev[0]['owners']), ev[0]['owners']   # buyer roles are carried
+    # 2b. distinct purchase dates (C41): same date at different prices is not routine, so the base keeps it; the date rules do not
+    oneday = [_row(c, cal[30], cal[31 + k], 10.0 + 0.5 * k) for k, c in enumerate('abcd')]
+    assert len(find_events_refined(oneday, cal, True, date_rule='')[0]) == 1
+    assert all(find_events_refined(oneday, cal, True, date_rule=r)[0] == [] for r in ('d2', 'd3', 'm4'))
+    twodays = [_row(c, cal[30 + (k // 2)], cal[31 + k], 10.0 + 0.5 * k) for k, c in enumerate('abcd')]
+    assert len(find_events_refined(twodays, cal, True, date_rule='d2')[0]) == 1
+    assert find_events_refined(twodays, cal, True, date_rule='d3')[0] == [] and find_events_refined(twodays, cal, True, date_rule='m4')[0] == []
+    ev, _ = find_events_refined(disc, cal, True, date_rule='m4')                   # four buyers on four different days
+    assert len(ev) == 1 and ev[0]['distinct_dates'] == 4 and ev[0]['match4']
+    # a buyer who bought on two days can supply the missing date: a on days 30 and 31, b, c on day 30, d on day 31 -> 4 buyers, only 2 dates -> m4 fails
+    shared = [dict(_row('a', cal[30], cal[32], 10.0), transaction_dates=[cal[30], cal[31]]), _row('b', cal[30], cal[33], 10.5),
+              _row('c', cal[30], cal[34], 11.0), _row('d', cal[31], cal[35], 11.5)]
+    assert find_events_refined(shared, cal, True, date_rule='m4')[0] == [] and len(find_events_refined(shared, cal, True, date_rule='d2')[0]) == 1
+    # the entry moves to the filing that makes the date rule true (not the filing that made the fourth buyer)
+    late_dates = [_row(c, cal[30], cal[31 + k], 10.0 + 0.5 * k) for k, c in enumerate('abcd')] + \
+                 [_row('e', cal[33], cal[36], 12.0), _row('f', cal[34], cal[38], 12.5)]
+    ev0, _ = find_events_refined(late_dates, cal, True, date_rule='')
+    ev3, _ = find_events_refined(late_dates, cal, True, date_rule='d3')
+    assert ev0[0]['entry'] == cal[35] and ev3[0]['entry'] == cal[39], (ev0[0]['entry'], ev3[0]['entry'])
+    assert find_events_refined(late_dates, cal, False, date_rule='d3')[0][0]['entry'] == cal[35]   # the base set ignores the date rule
     # 3. look-back only: a third same-price owner filing AFTER the entry cannot undo the event
     late = [_row('a', cal[30], cal[31], 10.0), _row('b', cal[30], cal[32], 10.0), _row('c', cal[31], cal[33], 10.5),
             _row('d', cal[32], cal[34], 11.0), _row('e', cal[30], cal[36], 10.0)]
