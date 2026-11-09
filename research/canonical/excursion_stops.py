@@ -23,7 +23,7 @@ DECLARED BEFORE RUNNING:
       A4   = a 4 ATR trailing stop: stop on session k = max(entry open - 4 ATR, highest HIGH of sessions 1..k-1 - 4 ATR), ATR fixed at the entry value, never lowered,
              active from the entry session.  R = stock ATR / 4.
     Per group and rule: n; mean R, median R, win rate, average win and loss in R, profit factor; stock / SPY / excess (ATR) and stock in percent; median stock
-    percent; sessions held mean and median; exit reasons; share exited on a gap below the stop; worst loss in R; the same net of 0.10 and 0.25 ATR round-trip cost;
+    percent; sessions held mean and median; exit reasons; share exited on a gap below the stop; worst loss in R; the same net of 0.10 ATR round-trip cost;
     week-block 95% range of the mean stock ATR; 2006-10 vs 2011-20; without 2008Q4 / 2011Q3 / 2020Q1.  Controls on the same events: close_21 and close_42
     (section A) and the 252-session no-stop hold.
  C. F by dollar-volume band (Entry 54 definition): n, median MAE_21, median MFE_21, mean close_21 in ATR and percent.
@@ -54,7 +54,7 @@ from stop_test import block_range, wk
 HORIZONS = (21, 42)
 MAX_HOLD = 252
 F_CUT = -15.0
-COSTS = (0.10, 0.25)
+COSTS = (0.10,)
 RULES = {'t20': {'risk': 2.0, 'label': 'T20 (2 ATR initial, 20-session low trail)'}, 'a4': {'risk': 4.0, 'label': 'A4 (4 ATR trail below the highest high)'}}
 
 
@@ -257,7 +257,7 @@ def stop_line(label, rows, rule):
             f'avg loss {statistics.fmean(los) if los else 0:+.2f}R  PF {pf:.2f}  worst {min(R):+.2f}R\n'
             f'      stock {statistics.fmean(sa):+.3f} ATR ({statistics.fmean(s["stock_pct"] for s in S):+.1%}, median {statistics.median(s["stock_pct"] for s in S):+.1%})  '
             f'SPY {statistics.fmean(s["spy_atr"] for s in S):+.3f} ({statistics.fmean(s["spy_pct"] for s in S):+.1%})  excess {statistics.fmean(s["excess_atr"] for s in S):+.3f}  '
-            f'| net of cost 0.10 / 0.25 ATR: {statistics.fmean(sa) - 0.10:+.3f} / {statistics.fmean(sa) - 0.25:+.3f}  | stock range [{rg[0]:+.3f}, {rg[1]:+.3f}]\n'
+            f'| net of cost 0.10 ATR: {statistics.fmean(sa) - 0.10:+.3f}  | stock range [{rg[0]:+.3f}, {rg[1]:+.3f}]\n'
             f'      held mean {statistics.fmean(s["sessions"] for s in S):.1f} median {statistics.median(s["sessions"] for s in S):.0f} sessions; exits ' +
             ', '.join(f'{k} {v}' for k, v in rs.most_common()))
 

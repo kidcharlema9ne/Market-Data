@@ -1,6 +1,6 @@
 """C30 (POST HOC, Michael 9 Nov 2026): realistic trading costs for the deep-fall rule F, and a wider stop x holding-period grid.
 
-Michael's challenge: the flat 0.10-0.25 ATR costs of Entries 28/45/69 are assumptions with no market data behind them, most F winners trade under $10M a day,
+Michael's challenge: the flat 0.10 ATR cost of Entries 28/45/69 is an assumption with no market data behind them, most F winners trade under $10M a day,
 and a quarter ATR (about 1.5% of price) looks too high for stocks.  He asks for real spreads in ATR units, more stop tests, and whether 2 months is the best hold.
 
 NEW CODE, PROVISIONAL.  Development entries only (D-068; exits may fall after 2020-12-31 as in Entries 43, 62, 69); no sealed return is read; the 2026 pilot is
@@ -26,7 +26,7 @@ DECLARED BEFORE RUNNING:
       HARSH     max(table x 2, CS floored incl. tick) + impact at 5% of daily volume,   Y = 1.0
     Impact: square-root law, I = Y * sigma * sqrt(Q/V) (Toth et al.; Y of order one); average price paid over the order = 2/3 of I; sigma taken as ATR percent
     (an over-estimate of daily volatility, conservative); one way = (2/3) * Y * sqrt(phi) ATR; two ways in a round trip.  A one-cent tick floor is applied to any
-    spread estimate.  Also printed for comparison: the Entry 45 assumptions (flat 0.10 / 0.25 ATR; price tiers 0.5% / 1% / 2% / 4% of price).
+    spread estimate.  Also printed for comparison: the Entry 45 assumptions (flat 0.10 ATR; price tiers 0.5% / 1% / 2% / 4% of price).
  C31 ADDITION (9 Nov 2026, declared BEFORE the run; Michael: 'try a 2 and a 2.5 ATR stop'): two more FIXED stops, 2 and 2.5 ATR below the entry open,
       added to the grid below (9 rules x 5 periods = 45 cells); every other cell is unchanged and must reproduce Entry 70.  Fixed 4 ATR not added (trail 4 exists).
  D. GRID.  Stop rules x holding periods, price only, fills at the stop or at the open on a gap, a series that ends early is closed at its last close ('delist'):
@@ -402,7 +402,7 @@ def scan(events, years, decl, regime, ret, sim_folder, dv_folder):
     spread_section('F, outside the episodes', [r for r in F if quarter(r['entry']) not in EPISODES])
     spread_section('NOT F (comparison)', [r for r in rows if not r['F']])
     print('\n=== C. Round-trip cost in ATR (F) ===')
-    print('  Entry 45 / 69 assumptions for comparison: flat 0.10 and 0.25 ATR; price tiers (0.5% / 1% / 2% / 4% of price) = mean {:.3f} ATR on F'.format(mean(entry45_tier(r) for r in F)))
+    print('  Entry 45 / 69 assumptions for comparison: flat 0.10 ATR; price tiers (0.5% / 1% / 2% / 4% of price) = mean {:.3f} ATR on F'.format(mean(entry45_tier(r) for r in F)))
     for scen in SCENARIOS:
         v = [cost_atr(r, scen) for r in F]
         v = [x for x in v if x is not None]

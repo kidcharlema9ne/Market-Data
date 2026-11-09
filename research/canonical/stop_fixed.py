@@ -11,7 +11,7 @@ Rule, declared in docs/CANDIDATES.md (C25) BEFORE any fixed-stop return was comp
              otherwise exit at the close of session H, H in {21, 42, 63, 126} = 1, 2, 3, 6 months
              a stock series that ends early is closed at its last close and flagged 'delist'
   returns    stock_atr = (exit - entry open) / ATR ; R = stock_atr / 2 ; SPY on the same window = (SPY close on the exit date / SPY open on entry - 1) * (entry open / ATR)
-             excess_atr = stock_atr - spy_atr. Price only; costs shown as extra columns (0.10 and 0.25 ATR round trip).
+             excess_atr = stock_atr - spy_atr. Price only; costs shown as an extra column (0.10 ATR round trip).
 Controls on the same events: the same horizon with NO stop (trade_outcome). The 21-session one must reproduce Entry 28 (n=1,372, excess +0.154).
 Development entries only (D-068). Exits may fall in 2021 (as in Entry 43); no 2021-2025 ENTRY return is computed. The 2026 pilot is not run.
 No variants of stop size, no trailing stop. Leads (FELL, Q1, BOTH) are not crossed with the stop.
@@ -32,7 +32,7 @@ from stop_test import block_range, clipped, wk
 
 HORIZONS = (21, 42, 63, 126)
 RISK_ATR = 2.0
-COSTS = (0.10, 0.25)
+COSTS = (0.10,)
 
 
 def simulate_fixed(dates, stock, spy, entry, horizons=HORIZONS):

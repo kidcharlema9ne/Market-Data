@@ -11,7 +11,7 @@ Rule, declared in docs/CANDIDATES.md (C24) BEFORE any stop-managed return was co
   exit         a session whose low touches the stop exits at the stop; if the session opens below the stop the exit is at the open (gap). No exit on the entry session at a price better than the stop.
   max hold     252 sessions (exit at that close). A stock series that ends early is closed at its last close and flagged 'delist'.
   returns      stock_atr = (exit - entry open) / ATR ; R = stock_atr / 2 ; SPY on the same window = (SPY close on the exit date / SPY open on the entry date - 1) * (entry open / ATR)
-               excess_atr = stock_atr - spy_atr. Price only; costs shown as extra columns (0.10 and 0.25 ATR round trip).
+               excess_atr = stock_atr - spy_atr. Price only; costs shown as an extra column (0.10 ATR round trip).
 Controls on the same events: 21-session hold (must reproduce Entry 28: development n=1,372, excess +0.154) and 252-session hold with no stop.
 Development entries only (D-068). Exits may fall in 2021 (as in Entry 43); no 2021-2025 ENTRY return is computed. The 2026 pilot is not run.
 No variants of stop length or risk size. Leads (FELL, Q1, BOTH) are not crossed with the stop here.
@@ -33,7 +33,7 @@ from refined_baseline import ATR_BARS, DEV_END, EPISODES, assert_allowed, quarte
 MAX_HOLD = 252
 TRAIL = 10
 RISK_ATR = 2.0
-COSTS = (0.10, 0.25)
+COSTS = (0.10,)
 SEED = 20261108
 
 
