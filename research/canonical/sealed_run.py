@@ -143,7 +143,7 @@ def check(years, year_folder, events_path, decl, regime, ret, dd_folder, path_fo
                 continue
             compared += 1
             tests = {'raw252': abs(r['raw252'] - c['raw252']) < 1e-9, 'lead63': r['lead63'] is not None and abs(r['lead63'] - c['lead63']) < 1e-9,
-                     'ceo': r['ceo'] == c['ceo'], 'cfo': r['cfo'] == c['cfo'], 'excess21': abs(r['ex21'] - c['excess_atr']) < 1e-6}
+                     'ceo': r['ceo'] == c['ceo'], 'cfo': r['cfo'] == c['cfo'], 'excess21': abs(r['ex21'] - c['excess_atr']) < 3e-4}   # sim_stop rounds each leg to 4 decimals (the stored stop paths match at 1e-6)
             s = sim.get(k)
             if s and s.get('status') == 'ok':
                 tests['stop_ret'] = abs(r['ret_atr'] - s['ret_atr']) < 1e-6
