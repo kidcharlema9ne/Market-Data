@@ -95,6 +95,16 @@ def year_job(year, primary_path, out):
                       'exit_date': dates[kk], 'exit_px': round(op + ret * atr, 6),
                       'days': [[dates[k], series[dates[k]][3] if dates[k] in series else None] for k in range(i, kk + 1)]})
             last_exit = max(last_exit, dates[kk])
+            # Entry 89b: the SAME trade with no stop (plain 42-session hold, time exit only), same sizing; mode 'none' in the scan reads this
+            rn = cf.sim_stop(dates, series, spy, e['entry'], ctx, 'none', STOP_K).get(H)
+            if rn is None:
+                r['ns'] = None
+            else:
+                nret, nspy, nsess, nwhy = rn
+                nk = i + nsess - 1
+                r['ns'] = {'ret_atr': nret, 'spy_atr': nspy, 'sess': nsess, 'why': nwhy, 'exit_date': dates[nk], 'exit_px': round(op + nret * atr, 6),
+                           'days': [[dates[k], series[dates[k]][3] if dates[k] in series else None] for k in range(i, nk + 1)]}
+                last_exit = max(last_exit, dates[nk])
             rows.append(r)
         spy_out = {d: spy[d][3] for d in dates if f'{year}-01-01' <= d <= last_exit and d in spy}
     Path(out).parent.mkdir(parents=True, exist_ok=True)
@@ -282,7 +292,7 @@ def load_dv_soft(folder):
     return dv
 
 
-def build_trades(cohort, sim, dv, add):
+def build_trades(cohort, sim, dv, add, mode='stop'):
     out, miss, atr_diff = [], Counter(), 0
     for r in cohort:
         k = (r['cik'], r['sym'], r['entry'])
@@ -296,17 +306,25 @@ def build_trades(cohort, sim, dv, add):
         if abs(s['atr'] - r['atr']) > 1e-9:
             atr_diff += 1
         t = {**{f: bool(r[f]) for f in FLAGS}, 'entry': r['entry'], 'sym': r['sym'], 'dv': dv.get(k), 'U': size_u(add, r)}
-        t.update({f: s[f] for f in ('atr', 'open', 'ret_atr', 'spy_atr', 'sess', 'why', 'exit_date', 'exit_px', 'days')})
+        src = s
+        if mode == 'none':
+            src = s.get('ns')
+            if src is None:
+                miss['no_nostop_path'] += 1
+                continue
+        t.update({'atr': s['atr'], 'open': s['open']})
+        t.update({f: src[f] for f in ('ret_atr', 'spy_atr', 'sess', 'why', 'exit_date', 'exit_px', 'days')})
         out.append(t)
     out.sort(key=lambda t: (t['entry'], t['sym']))
     return out, miss, atr_diff
 
 
-def run_scan(cohort, sim, spy, dv):
+def run_scan(cohort, sim, spy, dv, mode='stop'):
+    print(f'##### EXIT MODE: {"NO STOP (plain 42-session hold)" if mode == "none" else "3 ATR fixed stop + 42-session time exit"} #####')
     add = add_on_u()
     print('add-ons in U (Entry 78, Entry 67 model): ' + ', '.join(f'{k} {v:+.2f}' for k, v in add.items()) +
           f'; all four on {1 + sum(add.values()):.2f}U; 1U = {BASE_PCT}% of equity per 1 ATR here')
-    trades, miss, atr_diff = build_trades(cohort, sim, dv, add)
+    trades, miss, atr_diff = build_trades(cohort, sim, dv, add, mode)
     print(f'cohort {len(cohort)}; tradable paths {len(trades)}; not tradable {dict(miss)}; entry ATR differs from the Entry 36 file on {atr_diff}; '
           f'dollar-volume file lacks {sum(t["dv"] is None for t in trades)}')
     cal = sorted(spy)
@@ -478,7 +496,8 @@ def scan(events, years, decl, regime, ret, dd_folder, dv_folder, path_folder):
     for r in cohort:
         assert r['entry'] <= DEV_END
     sim, spy = load_paths(path_folder)
-    run_scan(cohort, sim, spy, load_dv_soft(dv_folder))
+    import os
+    run_scan(cohort, sim, spy, load_dv_soft(dv_folder), os.environ.get('PF_MODE', 'stop'))
 
 
 # ------------------------------------------------------------------ self test

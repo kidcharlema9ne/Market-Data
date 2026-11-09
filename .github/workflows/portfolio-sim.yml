@@ -129,6 +129,13 @@ jobs:
           pattern: pf-*
           merge-multiple: true
           path: reports/pf
-      - env:
+      - name: Summary, 3 ATR stop
+        env:
           PYTHONPATH: .
+          PF_MODE: stop
+        run: python -u research/canonical/portfolio_sim.py scan reports/events_refined.json reports/years reports/decl reports/feat reports/ret reports/dd reports/dv reports/pf
+      - name: Summary, NO stop (Entry 89b)
+        env:
+          PYTHONPATH: .
+          PF_MODE: none
         run: python -u research/canonical/portfolio_sim.py scan reports/events_refined.json reports/years reports/decl reports/feat reports/ret reports/dd reports/dv reports/pf
