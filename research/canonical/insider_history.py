@@ -25,6 +25,7 @@ Subcommands
   extract   events.json -> history rows (code P and S, Form 4/4A, common stock) for every buyer, filings <= 2020-12-31
   episodes  history rows -> ep_primary.json (input for refined_baseline.py year) and ep_detail.json
   summary   everything -> tables
+  robust    C41b: era, year, same-month, deep-fall and variant tests of the two leads, with a pass rule fixed in advance
   --selftest
 """
 import argparse, bisect, csv, hashlib, io, json, os, re, statistics, sys, zipfile
@@ -200,7 +201,7 @@ def build_episodes(rows_path, out_dir):
 
 
 # ------------------------------------------------------------------ event features
-def buyer_features(b, ev, hist, ep_by_owner, ep_res):
+def buyer_features(b, ev, hist, ep_by_owner, ep_res, min_gap=0, other_only=False):
     """b: buyer cik. ev: event with 'purchases', 'entry', 'issuer_cik'. Returns a dict of this buyer's point-in-time features."""
     entry, issuer = ev['entry'], ev['issuer_cik']
     first_buy = min(d for d, _ in ev['purchases'])
@@ -216,11 +217,12 @@ def buyer_features(b, ev, hist, ep_by_owner, ep_res):
     sells = [r for r in h['S'] if r['i'] == issuer and r['ad'] in ('D', '')]
     sold_any = any(start <= r['d'] < first_buy and r['f'] < entry for r in sells)
     vals = []
+    limit = (d2(first_buy) - timedelta(days=min_gap)).isoformat()     # C41b variant: the earlier buy must have ended min_gap days before the cluster began
     for e in ep_by_owner.get(b, []):
-        if e['f'] >= first_buy:
+        if e['f'] >= first_buy or (other_only and e['cik'] == issuer):
             continue
         r = ep_res.get((e['cik'], e['sym'], e['entry']))
-        if not r or r['status'] != 'complete' or r['exit'] >= entry:
+        if not r or r['status'] != 'complete' or r['exit'] >= entry or (min_gap and r['exit'] >= limit):
             continue
         if not (RATIO_LO <= e['px'] / r['entry_open'] <= RATIO_HI):
             continue
@@ -231,9 +233,9 @@ def buyer_features(b, ev, hist, ep_by_owner, ep_res):
             'prior_vals': vals}
 
 
-def event_flags(ev, hist, ep_by_owner, ep_res):
+def event_flags(ev, hist, ep_by_owner, ep_res, min_gap=0, other_only=False):
     buyers = sorted({o[0] for o in ev['owners']})
-    bf = {b: buyer_features(b, ev, hist, ep_by_owner, ep_res) for b in buyers}
+    bf = {b: buyer_features(b, ev, hist, ep_by_owner, ep_res, min_gap, other_only) for b in buyers}
     out = {'n_buyers': len(buyers)}
     for lvl, idx in (('weak', 0), ('strict', 1)):
         for m, _, _ in PERIODS:
@@ -298,11 +300,8 @@ def pair(label, flagged, rest, fr):
         print(f'    difference YES - NO: {d:+.3f}  (without the three large episodes: {dd:+.3f}; n {len(a)} vs {len(b)})')
 
 
-def summary(events_path, years, returns, decline, hist_path, ep_dir, epret_dir):
-    import numpy as np
+def load_all(events_path, years, returns, hist_path, ep_dir, epret_dir):
     import factor_roles as fr
-    import factor_decline as fd
-    from base_scan import diff_stats
     from archive_coverage_audit import normalize_ticker
     base = fr.load(events_path, years, returns)
     events = json.loads(Path(events_path).read_text())
@@ -324,6 +323,15 @@ def summary(events_path, years, returns, decline, hist_path, ep_dir, epret_dir):
             ep_res[(r['cik'], r['sym'], r['entry'])] = r
     print(f'earlier-buy episodes: {len(eps)}; priced rows: {len(ep_res)}; complete: {sum(r["status"] == "complete" for r in ep_res.values())}; '
           f'status mix: {dict(Counter(r["status"] for r in ep_res.values()))}')
+    return base, ev_by_key, hist, ep_by_owner, ep_res
+
+
+def summary(events_path, years, returns, decline, hist_path, ep_dir, epret_dir):
+    import numpy as np
+    import factor_roles as fr
+    import factor_decline as fd
+    from base_scan import diff_stats
+    base, ev_by_key, hist, ep_by_owner, ep_res = load_all(events_path, years, returns, hist_path, ep_dir, epret_dir)
     coh = []
     for r in base:
         if COHORT_START <= r['entry'] <= DEV_END:
@@ -427,6 +435,152 @@ def summary(events_path, years, returns, decline, hist_path, ep_dir, epret_dir):
           'owner, issuer, trade date, code, shares and price, so a corrected row can still count twice.')
 
 
+# ------------------------------------------------------------------ C41b: robustness of the two leads
+ERA_SPLIT = '2015-01-01'
+PASS_RULE = """PASS RULE (fixed before the run; a flag must pass ALL of its tests):
+  1 era:    flag-minus-rest difference > 0 in 2008-04..2014-12 AND in 2015-01..2020-12
+  2 years:  difference > 0 in at least two thirds of the calendar years that have >= 5 flagged and >= 5 other trades
+  3 month:  difference inside the SAME entry month (market timing removed) > 0, month-block 95% range entirely above 0
+  4 fall:   difference > 0 OUTSIDE the deep-fall group F (down 15+ ATR over 12 months), with >= 30 flagged trades there
+  5 flavor: earlier-buy flag: > 0 for both variants (earlier buys finished >= 365 days before the cluster began; other issuers only);
+            net-seller flag: > 0 with the plan-sales-only events dropped (primary definition only)"""
+
+
+def diff_of(rows, flag):
+    a = [r['excess_atr'] for r in rows if flag(r)]
+    b = [r['excess_atr'] for r in rows if not flag(r)]
+    return (statistics.fmean(a) - statistics.fmean(b)) if a and b else None
+
+
+def month_matched(rows, flag, draws=10000):
+    import random
+    by = defaultdict(lambda: ([], []))
+    for r in rows:
+        by[r['entry'][:7]][0 if flag(r) else 1].append(r['excess_atr'])
+    parts = [(statistics.fmean(a) - statistics.fmean(b), len(a)) for a, b in by.values() if a and b]
+    if not parts:
+        return None, None, None, 0
+    est = sum(d * w for d, w in parts) / sum(w for _, w in parts)
+    rng = random.Random(SEED)
+    sims = sorted(sum(d * w for d, w in smp) / sum(w for _, w in smp) for smp in (rng.choices(parts, k=len(parts)) for _ in range(draws)))
+    return est, sims[int(0.025 * draws)], sims[int(0.975 * draws)], len(parts)
+
+
+def evaluate(name, rows, flag, fr, in_f, variants):
+    """rows: the universe for this flag. flag(r) -> bool. in_f(r) -> True / False / None. variants: {label: flag function on the same rows or None}."""
+    res = {}
+    print(f'\n#### {name}: universe n={len(rows)}, flagged n={sum(flag(r) for r in rows)}')
+    pair('ALL', [r for r in rows if flag(r)], [r for r in rows if not flag(r)], fr)
+    eras = (('2008-04..2014-12', [r for r in rows if r['entry'] < ERA_SPLIT]), ('2015-01..2020-12', [r for r in rows if r['entry'] >= ERA_SPLIT]))
+    res['era'] = []
+    for lab, part in eras:
+        pair(f'ERA {lab}', [r for r in part if flag(r)], [r for r in part if not flag(r)], fr)
+        res['era'].append(diff_of(part, flag))
+    print('  by entry year (flagged n / mean | other n / mean | difference):')
+    pos = tot = 0
+    for y in range(2008, 2021):
+        part = [r for r in rows if r['entry'][:4] == str(y)]
+        a, b = [r['excess_atr'] for r in part if flag(r)], [r['excess_atr'] for r in part if not flag(r)]
+        if not a or not b:
+            print(f'    {y}: flagged {len(a)}, other {len(b)}')
+            continue
+        d = statistics.fmean(a) - statistics.fmean(b)
+        ok = len(a) >= 5 and len(b) >= 5
+        tot += ok
+        pos += ok and d > 0
+        print(f'    {y}: {len(a):3d} / {statistics.fmean(a):+.3f} | {len(b):3d} / {statistics.fmean(b):+.3f} | {d:+.3f}{"" if ok else "  (under 5, not counted)"}')
+    res['years'] = (pos, tot)
+    loo = [diff_of([r for r in rows if r['entry'][:4] != str(y)], flag) for y in range(2008, 2021)]
+    loo = [x for x in loo if x is not None]
+    print(f'  leave-one-year-out difference: min {min(loo):+.3f}, max {max(loo):+.3f}')
+    est, lo, hi, nm = month_matched(rows, flag)
+    print(f'  SAME-MONTH difference (flagged minus other trades entered the same calendar month; {nm} months with both): {est:+.3f}, month-block 95% {lo:+.3f} to {hi:+.3f}')
+    res['month'] = (est, lo, hi)
+    known = [r for r in rows if in_f(r) is not None]
+    fin, fout = [r for r in known if in_f(r)], [r for r in known if not in_f(r)]
+    pair('INSIDE deep-fall F', [r for r in fin if flag(r)], [r for r in fin if not flag(r)], fr)
+    pair('OUTSIDE deep-fall F', [r for r in fout if flag(r)], [r for r in fout if not flag(r)], fr)
+    res['outside'] = (diff_of(fout, flag), sum(flag(r) for r in fout))
+    res['variants'] = {}
+    for lab, vf in variants.items():
+        if vf is None:
+            continue
+        sub = [r for r in rows if vf[0](r)]
+        pair(f'VARIANT {lab}', [r for r in sub if vf[1](r)], [r for r in sub if not vf[1](r)], fr)
+        res['variants'][lab] = diff_of(sub, vf[1])
+    return res
+
+
+def verdict(name, res, flavor_ok):
+    gt = lambda x: x is not None and x > 0
+    tests = [('1 era (both eras positive)', all(gt(x) for x in res['era']) and len(res['era']) == 2),
+             (f'2 years ({res["years"][0]} of {res["years"][1]} years positive; need two thirds)', res['years'][1] > 0 and res['years'][0] >= 2 * res['years'][1] / 3),
+             (f'3 same-month (estimate {res["month"][0]:+.3f}, lower bound {res["month"][1]:+.3f}; need lower bound > 0)', gt(res['month'][1])),
+             (f'4 outside deep fall (difference {res["outside"][0]:+.3f}, flagged n={res["outside"][1]}; need > 0 and n >= 30)', gt(res['outside'][0]) and res['outside'][1] >= 30),
+             ('5 flavor', flavor_ok)]
+    print(f'\n  VERDICT {name}')
+    for t, ok in tests:
+        print(f'    {"PASS" if ok else "FAIL"}  {t}')
+    print(f'    => {"PASSES ALL FIVE" if all(ok for _, ok in tests) else "does NOT pass"}')
+
+
+def robust(events_path, years, returns, decline, hist_path, ep_dir, epret_dir):
+    import factor_roles as fr
+    import factor_decline as fd
+    base, ev_by_key, hist, ep_by_owner, ep_res = load_all(events_path, years, returns, hist_path, ep_dir, epret_dir)
+    drows = {(r['cik'], r['sym'], r['entry']): r for r in fd.load(decline, returns)}
+    coh = []
+    for r in base:
+        if COHORT_START <= r['entry'] <= DEV_END:
+            ev = ev_by_key[(r['cik'], r['sym'], r['entry'])][0]
+            f0 = event_flags(ev, hist, ep_by_owner, ep_res)
+            fg = event_flags(ev, hist, ep_by_owner, ep_res, min_gap=365)
+            fo = event_flags(ev, hist, ep_by_owner, ep_res, other_only=True)
+            raw = drows.get((r['cik'], r['sym'], r['entry']), {}).get('raw252')
+            coh.append({**r, **f0, 'eb_gap': fg['ret_mean2'], 'eb_oth': fo['ret_mean2'], 'in_f': None if raw is None else raw <= -15.0})
+    coh.sort(key=lambda r: r['entry'])
+    print(f'cohort n={len(coh)} (2008-04-01 .. {DEV_END}); with a 12-month-fall value {sum(r["in_f"] is not None for r in coh)}; inside F {sum(bool(r["in_f"]) for r in coh)}')
+    print(line('WHOLE COHORT', coh, fr))
+    print('\n' + PASS_RULE)
+
+    # -------- what the net-seller flag is made of
+    print('\n=== N0. Net-seller makeup (same issuer, 365 days before the cluster) ===')
+    disc = [r for r in coh if r['ns_nodisc'] >= 1]
+    plan_only = [r for r in coh if r['ns_all'] >= 1 and r['ns_nodisc'] == 0]
+    none = [r for r in coh if r['ns_all'] == 0]
+    print(line('net seller on discretionary (non-plan) sales', disc, fr))
+    print(line('net seller ONLY when plan (10b5-1) sales are counted', plan_only, fr))
+    print(line('not a net seller', none, fr))
+    for k, lab in ((0, '0 net-seller buyers'), (1, '1 net-seller buyer'), (2, '2+ net-seller buyers')):
+        print(line(f'all-sales count: {lab}', [r for r in coh if (r['ns_all'] == k if k < 2 else r['ns_all'] >= 2)], fr))
+
+    # -------- the two flags
+    in_f = lambda r: r['in_f']
+    ns = evaluate('NET SELLER (all sales, at least one buyer)', coh, lambda r: r['ns_all'] >= 1, fr, in_f,
+                  {'primary definition (plan sales ignored)': (lambda r: True, lambda r: r['ns_nodisc'] >= 1),
+                   'plan-only-seller events dropped': (lambda r: not (r['ns_all'] >= 1 and r['ns_nodisc'] == 0), lambda r: r['ns_nodisc'] >= 1)})
+    verdict('NET SELLER (all sales)', ns, gt_all(ns['variants'].get('plan-only-seller events dropped')))
+
+    sc = [r for r in coh if r['ret_mean2'] is not None]
+    eb = evaluate('EARLIER-BUY SCORE above 0 (min 2 earlier buys; scored events only)', sc, lambda r: r['ret_mean2'] > 0, fr, in_f,
+                  {'earlier buys ended >= 365 days before the cluster': (lambda r: r['eb_gap'] is not None, lambda r: r['eb_gap'] > 0),
+                   'other issuers only': (lambda r: r['eb_oth'] is not None, lambda r: r['eb_oth'] > 0)})
+    verdict('EARLIER-BUY SCORE', eb, all(gt_all(x) for x in eb['variants'].values()) and len(eb['variants']) == 2)
+
+    # -------- both together, for the record
+    print('\n=== B. Both flags together (scored events) ===')
+    for a in (True, False):
+        for b in (True, False):
+            sel = [r for r in sc if (r['ret_mean2'] > 0) == a and (r['ns_all'] >= 1) == b]
+            print(line(f'earlier-buy score > 0: {"YES" if a else "no "} | net seller (all sales): {"YES" if b else "no "}', sel, fr))
+    print('\nEXPLORATORY: both flags were found on this same cohort in Entry 85, so the era split is a consistency check, not an out-of-sample test; '
+          'the sealed years 2021-2025 stay closed. Gross of cost; development years only.')
+
+
+def gt_all(x):
+    return x is not None and x > 0
+
+
 # ------------------------------------------------------------------ selftest
 def selftest():
     # 1. slot hits: annual buyer (Mar 2019, Mar 2018) before an anchor in Mar 2020
@@ -480,6 +634,19 @@ def selftest():
     assert f['pl_strict_12'] == 1 and f['pl_strict_any'] == 1 and f['kept_strict'] is False and f['n_buyers'] == 4, f
     assert f['kept_weak'] is False and f['ns_nodisc'] == 0, f
     assert f['ret_n2'] == 0 and f['ret_mean2'] is None, f                 # only one usable earlier buy -> buyer not scored (needs 2)
+    # 5b. variants: a 365-day gap and 'other issuers only'
+    ep2 = {'a': [{'o': 'a', 'cik': '9', 'sym': 'ABC', 'f': '2017-06-08', 'entry': '2017-06-09', 'px': 10.0},
+                 {'o': 'a', 'cik': '5', 'sym': 'MMM', 'f': '2019-03-01', 'entry': '2019-03-04', 'px': 10.0}]}
+    res2 = {('9', 'ABC', '2017-06-09'): {'status': 'complete', 'exit': '2017-07-10', 'excess_atr': 1.5, 'entry_open': 10.5},
+            ('5', 'MMM', '2019-03-04'): {'status': 'complete', 'exit': '2019-04-02', 'excess_atr': 0.5, 'entry_open': 10.0}}
+    bf = buyer_features('a', ev, hist, ep2, res2)['prior_vals']; assert sorted(bf) == [0.5, 1.5], bf
+    bf = buyer_features('a', ev, hist, ep2, res2, min_gap=365)['prior_vals']; assert bf == [1.5], bf         # the March 2019 buy ended < 365 days before June 2019
+    bf = buyer_features('a', ev, hist, ep2, res2, other_only=True)['prior_vals']; assert bf == [0.5], bf       # the same-issuer buy is dropped
+    # 5c. same-month matching
+    rows_m = [{'entry': '2010-01-05', 'excess_atr': 1.0, 'f': 1}, {'entry': '2010-01-20', 'excess_atr': 0.0, 'f': 0},
+              {'entry': '2010-02-03', 'excess_atr': 3.0, 'f': 1}, {'entry': '2010-02-10', 'excess_atr': 1.0, 'f': 0}]
+    est, lo, hi, nm = month_matched(rows_m, lambda r: r['f'] == 1, draws=200)
+    assert abs(est - 1.5) < 1e-9 and nm == 2, (est, nm)
     # 6. ranks / spearman
     assert abs(spearman([1, 2, 3, 4], [2, 4, 6, 8]) - 1.0) < 1e-12 and abs(spearman([1, 2, 3, 4], [4, 3, 2, 1]) + 1.0) < 1e-12
     print('insider_history selftest passed')
@@ -487,7 +654,7 @@ def selftest():
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
-    ap.add_argument('cmd', nargs='?', choices=['extract', 'episodes', 'summary'])
+    ap.add_argument('cmd', nargs='?', choices=['extract', 'episodes', 'summary', 'robust'])
     ap.add_argument('--events')
     ap.add_argument('--rows')
     ap.add_argument('--out')
@@ -506,5 +673,7 @@ if __name__ == '__main__':
         build_episodes(a.rows, a.out)
     elif a.cmd == 'summary':
         summary(a.events, a.years, a.returns, a.decline, a.rows, a.ep_dir, a.epret_dir)
+    elif a.cmd == 'robust':
+        robust(a.events, a.years, a.returns, a.decline, a.rows, a.ep_dir, a.epret_dir)
     else:
         ap.error('give a subcommand or --selftest')
