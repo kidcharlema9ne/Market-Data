@@ -269,7 +269,7 @@ def analyze(folder, dry=False):
 
     print('\n=== H1: the sized system ($100,000, 3 ATR stop, 42 sessions, 0.10 ATR; SPY same dates) ===')
     trades = [{'entry': r['entry'], 'sym': r['sym'], 'open': r['open'], 'atr': r['atr'], 'exit_date': r['exit_date'], 'exit_px': r['exit_px'], 'why': r['why'], 'days': r['days'],
-               'U': r['U'], 'dv': None} for r in ok]
+               'sess': r['sess'], 'ret_atr': r['ret_atr'], 'spy_atr': r['spy_atr'], 'U': r['U'], 'dv': None} for r in ok]
     st, bs, n = cs.run_port(trades, spy)
     sf, _, nf = cs.run_port(trades, spy, flat=True)
     print(ps.fmt_stats('SIZED system', st, f'  trades {n}'))
