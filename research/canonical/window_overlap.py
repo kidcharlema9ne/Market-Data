@@ -17,6 +17,7 @@ rebuilt end to end (routine exclusion, identity test, $3M floor, one event per i
 Usage:  python window_overlap.py NEW_RETURNS_FOLDER OLD_RETURNS_FOLDER   |   --selftest
 """
 import json
+import os
 import statistics
 import sys
 from collections import defaultdict
@@ -26,6 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from refined_baseline import DEV_END, EPISODES, quarter, stats, week_bootstrap
 
 MONTHS = 180
+WIN = os.environ.get('CLUSTER_WINDOW', '21')   # label only; the data come from the folders
 
 
 def load(folder):
@@ -56,13 +58,13 @@ def split(new, old):
 def report(new, old):
     print('=== A. Development completed trades, 21-session hold, excess over same-window SPY (ATR) ===')
     line('15-session window (rule in force)', old)
-    line('21-session window (month)', new)
+    line(f'{WIN}-session window', new)
     same, other, dropped = split(new, old)
     print('\n=== B. Split of the 21-session set ===')
     line('SAME issuer and entry date as a 15-session trade', same)
     line('OTHER (earlier entry or a cluster the 15-session rule never saw)', other)
-    line('15-session trades NOT in the 21-session set', dropped)
-    print('\n=== C. By entry year (15-session n | 21-session n, mean excess) ===')
+    line(f'15-session trades NOT in the {WIN}-session set', dropped)
+    print('\n=== C. By entry year (15-session n | new-window n, mean excess) ===')
     yo, yn = defaultdict(list), defaultdict(list)
     for r in old:
         yo[r['entry'][:4]].append(r)
@@ -74,8 +76,8 @@ def report(new, old):
     print('\n=== D. Without the three large episodes ===')
     ne = lambda rs: [r for r in rs if quarter(r['entry']) not in EPISODES]
     line('15-session', ne(old))
-    line('21-session', ne(new))
-    line('21-session OTHER', ne(other))
+    line(f'{WIN}-session', ne(new))
+    line(f'{WIN}-session OTHER', ne(other))
 
 
 def selftest():
