@@ -806,3 +806,19 @@ Script `research/canonical/portfolio_sim.py` (PR #142), workflow id 412104937, r
 **No-CEO/CFO-only group (n=176):** gross excess -0.060 ATR, net P&L +$3,226 at MAIN sizes: about zero; negative in the declines, small positive outside.
 **Timing (entry date).** Any-flag trades n=804, gross excess +0.496: entered in the 2007-10 to 2009-03 decline 194 (24%, +0.839); in the 2020 decline 66 (8%, +0.418); outside both 544 (68%, +0.384). By calendar block: 2008-09 n=191 +1.230; 2020 n=114 +0.640; all other years n=499 +0.183 (P&L $69,733 of $167,191, 42%). Deep fall (n=268, +0.956): 2008-09 n=90 +1.803; 2020 n=18 +1.865; other years n=160 +0.378. Cluster-only trades lost most in 2020 (n=67, -1.019). Any-flag excess by year was negative in 2007, 2011, 2014, 2015, 2017. 60 of 61 quarters have a flagged entry; most: 2020Q1 81, 2008Q4 65, 2009Q1 43, 2018Q4 43.
 Next (recommended): the 8U open cap and a per-position cap on the flagged-only version, then an other-years-only run (2008-09 and 2020 removed).
+
+## Entry 84 | 9 Nov 2026 | Claude | PROPOSAL: top 10 research ideas to raise or falsify the edge (Michael: "look at every variable we have not changed since the beginning") | CONFIRMED (documentation only; no code run, no numbers produced); every idea is UNTESTED
+
+No script, no run. Read: LEADS_DIGEST, AGENTS, MICHAEL_DETERMINATIONS, Entries 80-83. Facts relied on (from those entries): base rule +0.154 ATR over SPY gross (Entry 28); flagged-only portfolio profit sits 58% in 2008-09 and 2020 (Entry 83, run 42627292601); deep fall other-years +0.378 (n=160) vs 2008-09 +1.803 (n=90) (Entry 83); wipe-out rate is the main open risk (Entry 65).
+Ideas, ranked by information gained per unit of work (proposed menu for a future declared exploration; none chosen by Michael yet):
+1. Matched-control test: does the four-buyer cluster add anything beyond "stock that fell a lot"? Controls matched on 12-month fall, liquidity, date, beta, no cluster.
+2. Beta and factor decomposition of the excess; beta-hedged version (index futures) of the same trades.
+3. Dose-response below four buyers (1, 2, 3, 4, 5+ distinct buyers) and its interaction with deep fall.
+4. Solvency screen from SEC XBRL (point-in-time by filing date) inside the deep-fall group, aimed at the wipe-out risk.
+5. Insider-level history: first purchase in years, prior track record, bought-after-selling (opportunistic vs routine, beyond D-064).
+6. Cluster tempo: days from first to fourth purchase, purchase-to-filing lag, price move since the first purchase.
+7. Earnings-cycle position and where in the hold the excess is earned (earnings day vs the rest).
+8. Date-demeaned excess (stock selection within a date) and market-wide insider-buying breadth as a state variable.
+9. Short interest (FINRA twice-monthly) as a two-sided modifier.
+10. Information-driven exit and add: follow-on buyers or a cluster member selling after entry.
+Next (recommended): ideas 1, 2 and 8 as one script (C41), because they decide whether the lead is about insiders at all. Needs Michael's go.
