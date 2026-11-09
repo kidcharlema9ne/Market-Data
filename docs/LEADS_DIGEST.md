@@ -17,6 +17,7 @@ Four or more distinct officers/directors bought (purchase date) within 15 sessio
 | C16 / N | Nasdaq lagging SPY over 63 sessions (lowest fifth) | +0.60; one-month effect; no mechanism | Lead; weaker in 2011-2020 | 37, 39, 41, 42, 58 |
 | D1 and N together | Both | +1.434 (n=52, 0.29 a month) | Thin | 51, 64 |
 | C26 percent drawdown (P) | Down 50%+ from the 252-session closing high | +0.468 (n=444, ~2.5 a month; +0.638 without the 3 episodes); a step at 50%, not a ladder; weaker than F; P and F together +0.662 (n=218), P adds an unproven +0.33 on top of F | Lead (second ruler for C8); graded points not supported | 66, 67 |
+| C29 excursions and stops on F | Absolute MAE/MFE and trailing stops on F (n=269) | 1 month stock +0.817 ATR (SPY +0.218); 2 months +1.559 (SPY +0.435); T20 stock +1.088 (SPY +0.197); A4 stock +1.464 (SPY +0.566); MAE reached -4 ATR in 6% (1 mo) / 16% (2 mo); stops do not beat the plain 2-month hold | Descriptive, post hoc, NEW CODE | 69 |
 | C23 basing | Inside D1, choppy last 2-3 months beats orderly slide | +0.80 (n=170) vs +0.17 (n=85) | Weak lead (best of 12 = 31.8%) | 59-61 |
 | Score (Michael's idea) | Points for R1 (no CEO/CFO), N, D1 | 0/1/2/3 points = -0.04/+0.29/+0.63/+1.21 (n=17) | Descriptive only; weights not set | 51, MICHAEL_DETERMINATIONS 1 |
 
