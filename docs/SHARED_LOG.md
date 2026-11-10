@@ -884,3 +884,7 @@ Next (only if Michael wants it, POST HOC): veto applied inside F only (the 33 tr
 **H2 deep fall (>=15 ATR):** n=104: stock -0.267 / SPY +0.049 = gross excess -0.317, net -0.417; rest +0.047 gross. Difference -0.364; shuffle chance 62.5%. FAIL.
 **H3 Nasdaq lagging:** n=115: stock +0.057 / SPY +0.150 = gross -0.093, net -0.193; rest -0.022. Difference -0.071; shuffle chance 84.0%. FAIL.
 **Reading.** The development edge did not carry out of sample; the deep-fall effect reversed sign. Nothing is changed after this run; sealed years are spent for this idea.
+
+
+## Entry 94 | 10 Nov 2026 | ChatGPT | Remove Pushover notifications | REPORTED (repository edits verified; no workflow run)
+Removed `.github/workflows/pushover-workflow-notifications.yml` and `.github/workflows/pushover-delivery-test.yml` from `main` at commits `b922272920f9fa6c1dfbd4089754e225e2b20ade` and `72768873c6a160690d921a591e8e6e1218458435`. These workflows sent completion and test Pushover messages. `scanner_alerts.py` remains unchanged: it formats alerts but does not deliver them. Research jobs and calculations were not modified. Script path: none (workflow YAML removal only). Branch: `main`. Workflow run link: none (no run initiated). Remaining Pushover references elsewhere have not been exhaustively audited.
