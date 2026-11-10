@@ -108,7 +108,7 @@ def build_cot(path):
 
 
 # ---------------------------------------------------------------- simulation
-def simulate(window, exit_rule, stop_k, markets, prices, subset="all"):
+def simulate(window, exit_rule, stop_k, markets, prices, subset="all", leak=False):
     trades, skipped = [], dict(no_price=0, short_hist=0, gap=0, bad_atr=0)
     for key, g in markets.items():
         ibkr = key.split("|")[0]
@@ -118,7 +118,7 @@ def simulate(window, exit_rule, stop_k, markets, prices, subset="all"):
             skipped["no_price"] += 1
             continue
         idx = g[f"idx{window}"].values
-        pub = g["pub"].values.astype("datetime64[D]")
+        pub = (g["date"] if leak else g["pub"]).values.astype("datetime64[D]")   # leak=True: DIAGNOSTIC ONLY (trades on Tuesday data before release)
         oi = g["oi"].values
         comm_net = g["comm"].values
         sess_after = np.searchsorted(s["d"], pub, side="right")      # first session dated after the release
@@ -284,6 +284,11 @@ def main():
         for ex in ("fixed42", "comm50"):
             df, _ = simulate(26, ex, None, markets, prices, sub)
             print(f"subset={sub:8s} exit={ex:8s} n={len(df):5d} mean={df['ret'].mean():+.2f} median={df['ret'].median():+.2f} hold={df['hold'].mean():.1f}")
+    print("\n=== DIAGNOSTIC ONLY (invalid, uses Tuesday data before the Friday release), 26-week, no stop")
+    for sub in ("all", "opposite_abs"):
+        for ex in ("fixed42", "comm50"):
+            df, _ = simulate(26, ex, None, markets, prices, sub, leak=True)
+            print(f"subset={sub:12s} exit={ex:8s} n={len(df):5d} mean={df['ret'].mean():+.2f} median={df['ret'].median():+.2f}")
     for SUB in ("all", "opposite_abs"):
         print("\n\n############ UNIVERSE:", SUB, "############")
         results, runs = [], {}
