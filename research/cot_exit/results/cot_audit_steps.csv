@@ -1,0 +1,40 @@
+population,step,2008-2017,2018-2021,2022-2026,all
+open interest up 3% only,1 eligible market codes (report universe),48,48,48,48
+open interest up 3% only,1b of which with a futures price series,48,48,48,48
+open interest up 3% only,2 market-weeks with a full 26-week index,21385,9547,12143,43075
+open interest up 3% only,3 fresh arrivals at 100 or 0,2103,962,1201,4266
+open interest up 3% only,"4 after 28-day rule, reading A (primary)",1514,638,840,2992
+open interest up 3% only,"4 (alt) after 28-day rule, reading B",1750,764,958,3472
+open interest up 3% only,"5a minimum open interest 45,000 (before)",1514,638,840,2992
+open interest up 3% only,"5b after the 45,000 floor",1382,600,816,2798
+open interest up 3% only,6 after open interest up 3%,494,176,285,955
+open interest up 3% only,8 valid post-publication entry and prior ATR,485,176,285,946
+open interest up 3% only,9 after removing overlapping same-market positions,427,155,256,837
+open interest up 3% only,10 with a complete 42-session price path,427,155,250,831
+price position only,1 eligible market codes (report universe),48,48,48,48
+price position only,1b of which with a futures price series,48,48,48,48
+price position only,2 market-weeks with a full 26-week index,21385,9547,12143,43075
+price position only,3 fresh arrivals at 100 or 0,2103,962,1201,4266
+price position only,"4 after 28-day rule, reading A (primary)",1514,638,840,2992
+price position only,"4 (alt) after 28-day rule, reading B",1750,764,958,3472
+price position only,"5a minimum open interest 45,000 (before)",1514,638,840,2992
+price position only,"5b after the 45,000 floor",1382,600,816,2798
+price position only,7a price filter not evaluable (no price history),23,0,4,27
+price position only,7 after favourable fifth of 20-session range,119,68,93,280
+price position only,8 valid post-publication entry and prior ATR,119,68,93,280
+price position only,9 after removing overlapping same-market positions,109,61,89,259
+price position only,10 with a complete 42-session price path,109,61,87,257
+both filters,1 eligible market codes (report universe),48,48,48,48
+both filters,1b of which with a futures price series,48,48,48,48
+both filters,2 market-weeks with a full 26-week index,21385,9547,12143,43075
+both filters,3 fresh arrivals at 100 or 0,2103,962,1201,4266
+both filters,"4 after 28-day rule, reading A (primary)",1514,638,840,2992
+both filters,"4 (alt) after 28-day rule, reading B",1750,764,958,3472
+both filters,"5a minimum open interest 45,000 (before)",1514,638,840,2992
+both filters,"5b after the 45,000 floor",1382,600,816,2798
+both filters,6 after open interest up 3%,494,176,285,955
+both filters,7a price filter not evaluable (no price history),13,0,0,13
+both filters,7 after favourable fifth of 20-session range,35,13,30,78
+both filters,8 valid post-publication entry and prior ATR,35,13,30,78
+both filters,9 after removing overlapping same-market positions,34,13,29,76
+both filters,10 with a complete 42-session price path,34,13,28,75

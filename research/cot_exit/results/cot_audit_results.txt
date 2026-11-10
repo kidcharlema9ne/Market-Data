@@ -1,0 +1,129 @@
+price rows 526297 -> 526297 (duplicate symbol-date rows seen: 0); symbols 132
+report universe 48 markets: 6A 6B 6C 6E 6J 6L 6M 6N 6S BZ CC CL CT DX ES GC GF HE HG HO KC KE LE MES MNQ NG NQ PL RB RTY SB SI SR1 SR3 TN UB VX YM ZB ZC ZF ZL ZM ZN ZQ ZS ZT ZW
+prices 2007-12-31 to 2026-11-06; arrival signals 6758 (long 3532, short 3226)
+COT weeks by market start (markets with history starting after 2008): {'UB': '2010-03-02', 'TN': '2016-03-08', 'BZ': '2011-10-18', 'SR3': '2018-07-24', 'SR1': '2018-07-03', 'MES': '2020-07-28', 'MNQ': '2020-08-04'}
+
+=== 1. POPULATIONS BY PERIOD (fixed 42 sessions; primary rules; net = gross minus 0.10 ATR)
+original claims for 2022-2026 (not reproduced, no script or trades recovered): open interest 227 trades +0.94 net; price position 87 trades +0.63; both about 22
+open interest up 3% only     2008-2017  n= 427 net=-0.61 (gross -0.51) median=-0.41 win=46% 95% range -1.10 to -0.15
+open interest up 3% only     2018-2021  n= 155 net=+0.09 (gross +0.19) median=-0.14 win=48% 95% range -0.84 to +1.12
+open interest up 3% only     2022-2026  n= 250 net=+0.51 (gross +0.61) median=+0.14 win=51% 95% range -0.08 to +1.11
+open interest up 3% only     all        n= 831 net=-0.15 (gross -0.05) median=-0.14 win=48% 95% range -0.52 to +0.21
+price position only          2008-2017  n= 109 net=+0.48 (gross +0.58) median=+0.81 win=55% 95% range -0.41 to +1.30
+price position only          2018-2021  n=  61 net=-1.11 (gross -1.01) median=+0.58 win=57% 95% range -5.42 to +1.65
+price position only          2022-2026  n=  87 net=+0.11 (gross +0.21) median=-0.46 win=46% 95% range -1.09 to +1.40
+price position only          all        n= 257 net=-0.02 (gross +0.08) median=+0.39 win=53% 95% range -1.23 to +0.89
+both filters                 2008-2017  n=  34 net=+0.01 (gross +0.11) median=+0.43 win=53% 95% range -1.86 to +1.82
+both filters                 2018-2021  n=  13 net=-0.84 (gross -0.74) median=+0.19 win=54% 95% range -3.66 to +1.91
+both filters                 2022-2026  n=  28 net=+0.51 (gross +0.61) median=-0.08 win=46% 95% range -1.36 to +2.64
+both filters                 all        n=  75 net=+0.05 (gross +0.15) median=+0.16 win=51% 95% range -1.17 to +1.28
+
+=== 2. ELIGIBILITY AUDIT (observations remaining after each step; periods by CFTC report date)
+
+-- open interest up 3% only
+step                                                        2008-2017  2018-2021  2022-2026        all
+1 eligible market codes (report universe)                          48         48         48         48
+1b of which with a futures price series                            48         48         48         48
+2 market-weeks with a full 26-week index                        21385       9547      12143      43075
+3 fresh arrivals at 100 or 0                                     2103        962       1201       4266
+4 after 28-day rule, reading A (primary)                         1514        638        840       2992
+4 (alt) after 28-day rule, reading B                             1750        764        958       3472
+5a minimum open interest 45,000 (before)                         1514        638        840       2992
+5b after the 45,000 floor                                        1382        600        816       2798
+6 after open interest up 3%                                       494        176        285        955
+8 valid post-publication entry and prior ATR                      485        176        285        946
+9 after removing overlapping same-market positions                427        155        256        837
+10 with a complete 42-session price path                          427        155        250        831
+
+-- price position only
+step                                                        2008-2017  2018-2021  2022-2026        all
+1 eligible market codes (report universe)                          48         48         48         48
+1b of which with a futures price series                            48         48         48         48
+2 market-weeks with a full 26-week index                        21385       9547      12143      43075
+3 fresh arrivals at 100 or 0                                     2103        962       1201       4266
+4 after 28-day rule, reading A (primary)                         1514        638        840       2992
+4 (alt) after 28-day rule, reading B                             1750        764        958       3472
+5a minimum open interest 45,000 (before)                         1514        638        840       2992
+5b after the 45,000 floor                                        1382        600        816       2798
+7a price filter not evaluable (no price history)                   23          0          4         27
+7 after favourable fifth of 20-session range                      119         68         93        280
+8 valid post-publication entry and prior ATR                      119         68         93        280
+9 after removing overlapping same-market positions                109         61         89        259
+10 with a complete 42-session price path                          109         61         87        257
+
+-- both filters
+step                                                        2008-2017  2018-2021  2022-2026        all
+1 eligible market codes (report universe)                          48         48         48         48
+1b of which with a futures price series                            48         48         48         48
+2 market-weeks with a full 26-week index                        21385       9547      12143      43075
+3 fresh arrivals at 100 or 0                                     2103        962       1201       4266
+4 after 28-day rule, reading A (primary)                         1514        638        840       2992
+4 (alt) after 28-day rule, reading B                             1750        764        958       3472
+5a minimum open interest 45,000 (before)                         1514        638        840       2992
+5b after the 45,000 floor                                        1382        600        816       2798
+6 after open interest up 3%                                       494        176        285        955
+7a price filter not evaluable (no price history)                   13          0          0         13
+7 after favourable fifth of 20-session range                       35         13         30         78
+8 valid post-publication entry and prior ATR                       35         13         30         78
+9 after removing overlapping same-market positions                 34         13         29         76
+10 with a complete 42-session price path                           34         13         28         75
+
+=== 3. FINAL TRADE COUNTS BY MARKET AND YEAR (2022-2026 populations; full tables in cot_audit_market_year.csv)
+open interest up 3% only: by year {2022: 50, 2023: 61, 2024: 44, 2025: 57, 2026: 38}
+   by market {'ZQ': 13, 'MES': 11, 'MNQ': 10, 'SR1': 10, '6B': 8, '6C': 8, '6J': 8, 'YM': 8, 'CC': 7, 'KC': 7, 'NQ': 7, 'PL': 7, 'SB': 7, 'SR3': 7, 'ZW': 7, '6N': 6, 'CT': 6, 'GF': 6, 'RB': 6, 'SI': 6, 'ZM': 6, '6A': 5, '6M': 5, '6S': 5, 'BZ': 5, 'HE': 5, 'HG': 5, 'RTY': 5, 'VX': 5, 'ZL': 5, '6E': 4, 'ES': 4, 'NG': 4, 'ZC': 4, 'ZF': 4, 'ZT': 4, 'GC': 3, 'KE': 3, 'ZS': 3, '6L': 2, 'CL': 2, 'LE': 2, 'ZN': 2, 'HO': 1, 'UB': 1, 'ZB': 1}
+price position only: by year {2022: 17, 2023: 20, 2024: 17, 2025: 19, 2026: 14}
+   by market {'ES': 7, 'NQ': 7, 'MES': 6, 'UB': 6, 'BZ': 5, 'MNQ': 4, 'RTY': 4, 'VX': 4, 'CC': 3, 'RB': 3, 'ZN': 3, 'CL': 2, 'DX': 2, 'NG': 2, 'SI': 2, 'SR1': 2, 'SR3': 2, 'TN': 2, 'YM': 2, 'ZF': 2, 'ZQ': 2, '6C': 1, '6N': 1, '6S': 1, 'CT': 1, 'GC': 1, 'GF': 1, 'HE': 1, 'HO': 1, 'KC': 1, 'SB': 1, 'ZB': 1, 'ZM': 1, 'ZS': 1, 'ZT': 1, 'ZW': 1}
+both filters: by year {2022: 4, 2023: 8, 2024: 3, 2025: 8, 2026: 5}
+   by market {'MES': 5, 'BZ': 3, 'MNQ': 3, 'NQ': 3, 'ES': 2, 'SR1': 2, 'VX': 2, '6C': 1, 'CL': 1, 'GF': 1, 'KC': 1, 'NG': 1, 'SR3': 1, 'YM': 1, 'ZM': 1}
+
+=== 4. IMPLEMENTATION CHOICES (net mean ATR / trades; fixed 42). 28-day reading A or B; 45,000 floor; one position; price range
+open interest up 3% only     2022-2026  trades 250-314; net mean +0.45 to +0.59 (primary +0.51); readings with net > 0: 8 of 8
+open interest up 3% only     all        trades 831-1174; net mean -0.20 to -0.09 (primary -0.15); readings with net > 0: 0 of 8
+price position only          2022-2026  trades 87-115; net mean -0.55 to +0.38 (primary +0.11); readings with net > 0: 6 of 16
+price position only          all        trades 257-377; net mean -0.11 to +0.19 (primary -0.02); readings with net > 0: 9 of 16
+both filters                 2022-2026  trades 28-32; net mean +0.24 to +0.68 (primary +0.51); readings with net > 0: 16 of 16
+both filters                 all        trades 75-103; net mean -0.21 to +0.21 (primary +0.05); readings with net > 0: 8 of 16
+
+=== 5. ROBUSTNESS (primary rules)
+placebo = 4000 random-entry-date draws with the same markets, directions, count and period, same 42-session hold and 0.10 cost. One-sided chance that random dates do at least as well. Bonferroni threshold for 9 populations-by-period tests = 0.0056 (the true number of strategies examined is larger than this and not recorded).
+open interest up 3% only     2008-2017  n= 427 net=-0.61 | random-date mean -0.22 (95% -0.73 to +0.29) | chance 0.941 | top 5 trades = n/a (no net gain) of total gain
+open interest up 3% only     2018-2021  n= 155 net=+0.09 | random-date mean -0.21 (95% -1.92 to +1.47) | chance 0.328 | top 5 trades = 683% of total gain
+open interest up 3% only     2022-2026  n= 250 net=+0.51 | random-date mean -0.32 (95% -0.93 to +0.30) | chance 0.004 | top 5 trades = 69% of total gain
+price position only          2008-2017  n= 109 net=+0.48 | random-date mean +0.35 (95% -0.87 to +1.94) | chance 0.373 | top 5 trades = 107% of total gain
+price position only          2018-2021  n=  61 net=-1.11 | random-date mean -0.33 (95% -4.03 to +2.65) | chance 0.767 | top 5 trades = n/a (no net gain) of total gain
+price position only          2022-2026  n=  87 net=+0.11 | random-date mean +0.37 (95% -0.56 to +1.35) | chance 0.709 | top 5 trades = 853% of total gain
+both filters                 2008-2017  n=  34 net=+0.01 | random-date mean +0.11 (95% -2.35 to +2.50) | chance 0.542 | top 5 trades = 9214% of total gain
+both filters                 2018-2021  n=  13 net=-0.84 | random-date mean -1.27 (95% -14.07 to +2.70) | chance 0.635 | top 5 trades = n/a (no net gain) of total gain
+both filters                 2022-2026  n=  28 net=+0.51 | random-date mean +0.32 (95% -1.34 to +2.09) | chance 0.409 | top 5 trades = 293% of total gain
+
+-- excluding rate contracts (ZB ZN ZF ZT TN UB SR1 SR3 ZQ)
+open interest up 3% only     2008-2017 n= 366 net=-0.73 (gross -0.63) median=-0.52 win=45% | 2018-2021 n= 128 net=-0.05 (gross +0.05) median=-0.18 win=47% | 2022-2026 n= 208 net=+0.50 (gross +0.60) median=+0.09 win=50%
+price position only          2008-2017 n=  78 net=+0.29 (gross +0.39) median=+0.72 win=54% | 2018-2021 n=  36 net=+1.43 (gross +1.53) median=+0.79 win=69% | 2022-2026 n=  66 net=+0.07 (gross +0.17) median=-1.14 win=45%
+both filters                 2008-2017 n=  26 net=-0.79 (gross -0.69) median=+0.08 win=50% | 2018-2021 n=   7 net=-0.12 (gross -0.02) median=+0.19 win=57% | 2022-2026 n=  25 net=+0.84 (gross +0.94) median=-0.06 win=48%
+
+-- by market group (2022-2026 | 2008-2017 and 2018-2021 combined), net mean / trades
+open interest up 3% only     currencies and dollar      2022-2026 n=  51 net=+0.64 (gross +0.74) median=+0.19 win=53% | earlier n= 167 net=-0.68 (gross -0.58) median=-0.80 win=43%
+open interest up 3% only     rates                      2022-2026 n=  42 net=+0.60 (gross +0.70) median=+0.36 win=52% | earlier n=  88 net=+0.29 (gross +0.39) median=+0.08 win=51%
+open interest up 3% only     stock indexes              2022-2026 n=  45 net=+0.38 (gross +0.48) median=-0.05 win=49% | earlier n=  59 net=-0.60 (gross -0.50) median=-0.42 win=44%
+open interest up 3% only     energy                     2022-2026 n=  18 net=+1.25 (gross +1.35) median=+1.09 win=61% | earlier n=  54 net=-0.63 (gross -0.53) median=-0.69 win=41%
+open interest up 3% only     metals                     2022-2026 n=  21 net=+1.28 (gross +1.38) median=+2.11 win=67% | earlier n=  60 net=+0.80 (gross +0.90) median=+0.97 win=57%
+open interest up 3% only     grains, softs, livestock   2022-2026 n=  68 net=-0.04 (gross +0.06) median=-0.36 win=43% | earlier n= 135 net=-0.60 (gross -0.50) median=-0.05 win=50%
+open interest up 3% only     volatility                 2022-2026 n=   5 net=+1.39 (gross +1.49) median=-1.89 win=40% | earlier n=  19 net=-3.12 (gross -3.02) median=-3.06 win=32%
+
+-- leave one market out, open interest filter, net mean range
+2008-2017  full -0.61; leaving one market out ranges -0.69 to -0.53
+2018-2021  full +0.09; leaving one market out ranges -0.22 to +0.22
+2022-2026  full +0.51; leaving one market out ranges +0.41 to +0.58
+
+-- commercial-50 exit vs fixed 42, same trades, net (paired difference with 95% week-cluster range)
+open interest up 3% only     2008-2017  fixed 42 -0.61/-0.41 | commercial-50 -0.43/+0.22 | difference +0.18 (-0.00 to +0.38)
+open interest up 3% only     2018-2021  fixed 42 +0.09/-0.14 | commercial-50 +0.00/+0.24 | difference -0.09 (-0.42 to +0.24)
+open interest up 3% only     2022-2026  fixed 42 +0.51/+0.14 | commercial-50 +0.66/+0.38 | difference +0.15 (-0.16 to +0.47)
+price position only          2008-2017  fixed 42 +0.48/+0.81 | commercial-50 +0.46/+0.80 | difference -0.02 (-0.44 to +0.38)
+price position only          2018-2021  fixed 42 -1.11/+0.58 | commercial-50 -1.10/+0.70 | difference +0.00 (-0.74 to +0.82)
+price position only          2022-2026  fixed 42 +0.11/-0.46 | commercial-50 +0.44/+0.08 | difference +0.34 (-0.10 to +0.76)
+both filters                 2008-2017  fixed 42 +0.01/+0.43 | commercial-50 -0.10/+0.27 | difference -0.11 (-0.79 to +0.56)
+both filters                 2018-2021  fixed 42 -0.84/+0.19 | commercial-50 -0.48/-0.13 | difference +0.36 (-1.00 to +1.87)
+both filters                 2022-2026  fixed 42 +0.51/-0.08 | commercial-50 +0.66/+0.59 | difference +0.15 (-0.63 to +0.94)
+
+Benchmark: not applicable to futures ATR returns (stock SPY benchmark rule); benchmark unavailable.

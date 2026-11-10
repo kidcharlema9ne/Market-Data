@@ -1,0 +1,835 @@
+population,market,year,trades
+open interest up 3% only,6A,2008,1
+open interest up 3% only,6A,2009,2
+open interest up 3% only,6A,2010,3
+open interest up 3% only,6A,2011,1
+open interest up 3% only,6A,2012,3
+open interest up 3% only,6A,2013,1
+open interest up 3% only,6A,2014,2
+open interest up 3% only,6A,2017,2
+open interest up 3% only,6A,2018,1
+open interest up 3% only,6A,2020,2
+open interest up 3% only,6A,2021,1
+open interest up 3% only,6A,2023,1
+open interest up 3% only,6A,2024,3
+open interest up 3% only,6A,2026,1
+open interest up 3% only,6B,2008,2
+open interest up 3% only,6B,2009,2
+open interest up 3% only,6B,2010,3
+open interest up 3% only,6B,2011,2
+open interest up 3% only,6B,2012,1
+open interest up 3% only,6B,2013,2
+open interest up 3% only,6B,2014,1
+open interest up 3% only,6B,2015,3
+open interest up 3% only,6B,2016,2
+open interest up 3% only,6B,2017,1
+open interest up 3% only,6B,2019,1
+open interest up 3% only,6B,2020,1
+open interest up 3% only,6B,2021,4
+open interest up 3% only,6B,2023,3
+open interest up 3% only,6B,2024,3
+open interest up 3% only,6B,2025,1
+open interest up 3% only,6B,2026,1
+open interest up 3% only,6C,2008,2
+open interest up 3% only,6C,2009,2
+open interest up 3% only,6C,2010,2
+open interest up 3% only,6C,2011,2
+open interest up 3% only,6C,2012,3
+open interest up 3% only,6C,2013,1
+open interest up 3% only,6C,2014,1
+open interest up 3% only,6C,2015,1
+open interest up 3% only,6C,2016,2
+open interest up 3% only,6C,2017,1
+open interest up 3% only,6C,2019,3
+open interest up 3% only,6C,2020,2
+open interest up 3% only,6C,2021,1
+open interest up 3% only,6C,2022,1
+open interest up 3% only,6C,2023,3
+open interest up 3% only,6C,2024,2
+open interest up 3% only,6C,2025,1
+open interest up 3% only,6C,2026,1
+open interest up 3% only,6E,2008,2
+open interest up 3% only,6E,2009,2
+open interest up 3% only,6E,2010,1
+open interest up 3% only,6E,2011,4
+open interest up 3% only,6E,2012,2
+open interest up 3% only,6E,2013,2
+open interest up 3% only,6E,2014,1
+open interest up 3% only,6E,2016,3
+open interest up 3% only,6E,2017,2
+open interest up 3% only,6E,2018,1
+open interest up 3% only,6E,2020,1
+open interest up 3% only,6E,2022,1
+open interest up 3% only,6E,2024,1
+open interest up 3% only,6E,2025,2
+open interest up 3% only,6J,2008,4
+open interest up 3% only,6J,2009,2
+open interest up 3% only,6J,2010,2
+open interest up 3% only,6J,2011,2
+open interest up 3% only,6J,2012,1
+open interest up 3% only,6J,2013,1
+open interest up 3% only,6J,2014,1
+open interest up 3% only,6J,2015,2
+open interest up 3% only,6J,2016,3
+open interest up 3% only,6J,2017,1
+open interest up 3% only,6J,2018,1
+open interest up 3% only,6J,2019,3
+open interest up 3% only,6J,2020,4
+open interest up 3% only,6J,2021,2
+open interest up 3% only,6J,2022,1
+open interest up 3% only,6J,2023,2
+open interest up 3% only,6J,2024,2
+open interest up 3% only,6J,2025,2
+open interest up 3% only,6J,2026,1
+open interest up 3% only,6L,2014,1
+open interest up 3% only,6L,2023,1
+open interest up 3% only,6L,2025,1
+open interest up 3% only,6M,2008,1
+open interest up 3% only,6M,2009,2
+open interest up 3% only,6M,2010,2
+open interest up 3% only,6M,2011,3
+open interest up 3% only,6M,2012,2
+open interest up 3% only,6M,2013,1
+open interest up 3% only,6M,2014,1
+open interest up 3% only,6M,2015,1
+open interest up 3% only,6M,2017,1
+open interest up 3% only,6M,2018,1
+open interest up 3% only,6M,2019,1
+open interest up 3% only,6M,2020,1
+open interest up 3% only,6M,2022,2
+open interest up 3% only,6M,2025,1
+open interest up 3% only,6M,2026,2
+open interest up 3% only,6N,2013,1
+open interest up 3% only,6N,2017,1
+open interest up 3% only,6N,2018,1
+open interest up 3% only,6N,2019,2
+open interest up 3% only,6N,2020,1
+open interest up 3% only,6N,2021,1
+open interest up 3% only,6N,2022,1
+open interest up 3% only,6N,2023,1
+open interest up 3% only,6N,2024,1
+open interest up 3% only,6N,2025,3
+open interest up 3% only,6S,2008,3
+open interest up 3% only,6S,2010,2
+open interest up 3% only,6S,2011,1
+open interest up 3% only,6S,2012,1
+open interest up 3% only,6S,2013,2
+open interest up 3% only,6S,2015,2
+open interest up 3% only,6S,2016,1
+open interest up 3% only,6S,2017,1
+open interest up 3% only,6S,2018,1
+open interest up 3% only,6S,2022,1
+open interest up 3% only,6S,2025,3
+open interest up 3% only,6S,2026,1
+open interest up 3% only,BZ,2014,1
+open interest up 3% only,BZ,2015,1
+open interest up 3% only,BZ,2016,1
+open interest up 3% only,BZ,2017,1
+open interest up 3% only,BZ,2018,1
+open interest up 3% only,BZ,2019,1
+open interest up 3% only,BZ,2021,1
+open interest up 3% only,BZ,2023,3
+open interest up 3% only,BZ,2026,2
+open interest up 3% only,CC,2009,1
+open interest up 3% only,CC,2010,1
+open interest up 3% only,CC,2011,1
+open interest up 3% only,CC,2012,2
+open interest up 3% only,CC,2013,1
+open interest up 3% only,CC,2015,1
+open interest up 3% only,CC,2016,1
+open interest up 3% only,CC,2017,1
+open interest up 3% only,CC,2019,2
+open interest up 3% only,CC,2020,2
+open interest up 3% only,CC,2021,2
+open interest up 3% only,CC,2022,3
+open interest up 3% only,CC,2023,2
+open interest up 3% only,CC,2026,2
+open interest up 3% only,CL,2008,3
+open interest up 3% only,CL,2010,1
+open interest up 3% only,CL,2014,1
+open interest up 3% only,CL,2017,1
+open interest up 3% only,CL,2023,1
+open interest up 3% only,CL,2025,1
+open interest up 3% only,CT,2009,2
+open interest up 3% only,CT,2010,1
+open interest up 3% only,CT,2011,1
+open interest up 3% only,CT,2014,1
+open interest up 3% only,CT,2015,2
+open interest up 3% only,CT,2016,2
+open interest up 3% only,CT,2017,1
+open interest up 3% only,CT,2018,1
+open interest up 3% only,CT,2020,2
+open interest up 3% only,CT,2022,1
+open interest up 3% only,CT,2023,2
+open interest up 3% only,CT,2025,1
+open interest up 3% only,CT,2026,2
+open interest up 3% only,DX,2010,1
+open interest up 3% only,DX,2011,1
+open interest up 3% only,DX,2014,1
+open interest up 3% only,DX,2015,2
+open interest up 3% only,DX,2016,1
+open interest up 3% only,DX,2017,2
+open interest up 3% only,DX,2018,1
+open interest up 3% only,DX,2019,2
+open interest up 3% only,ES,2008,2
+open interest up 3% only,ES,2009,1
+open interest up 3% only,ES,2010,1
+open interest up 3% only,ES,2012,2
+open interest up 3% only,ES,2013,1
+open interest up 3% only,ES,2014,2
+open interest up 3% only,ES,2016,1
+open interest up 3% only,ES,2017,1
+open interest up 3% only,ES,2018,1
+open interest up 3% only,ES,2019,1
+open interest up 3% only,ES,2022,1
+open interest up 3% only,ES,2023,1
+open interest up 3% only,ES,2025,2
+open interest up 3% only,GC,2009,2
+open interest up 3% only,GC,2010,1
+open interest up 3% only,GC,2012,2
+open interest up 3% only,GC,2015,2
+open interest up 3% only,GC,2016,1
+open interest up 3% only,GC,2017,2
+open interest up 3% only,GC,2018,1
+open interest up 3% only,GC,2019,1
+open interest up 3% only,GC,2020,1
+open interest up 3% only,GC,2021,1
+open interest up 3% only,GC,2022,1
+open interest up 3% only,GC,2023,1
+open interest up 3% only,GC,2024,1
+open interest up 3% only,GF,2011,1
+open interest up 3% only,GF,2017,2
+open interest up 3% only,GF,2020,1
+open interest up 3% only,GF,2022,3
+open interest up 3% only,GF,2023,1
+open interest up 3% only,GF,2025,2
+open interest up 3% only,HE,2009,1
+open interest up 3% only,HE,2010,1
+open interest up 3% only,HE,2011,1
+open interest up 3% only,HE,2012,1
+open interest up 3% only,HE,2016,2
+open interest up 3% only,HE,2017,1
+open interest up 3% only,HE,2018,1
+open interest up 3% only,HE,2019,1
+open interest up 3% only,HE,2021,1
+open interest up 3% only,HE,2023,1
+open interest up 3% only,HE,2024,2
+open interest up 3% only,HE,2025,1
+open interest up 3% only,HE,2026,1
+open interest up 3% only,HG,2008,1
+open interest up 3% only,HG,2009,4
+open interest up 3% only,HG,2010,1
+open interest up 3% only,HG,2012,1
+open interest up 3% only,HG,2013,3
+open interest up 3% only,HG,2014,2
+open interest up 3% only,HG,2015,2
+open interest up 3% only,HG,2016,2
+open interest up 3% only,HG,2017,1
+open interest up 3% only,HG,2018,3
+open interest up 3% only,HG,2019,2
+open interest up 3% only,HG,2020,1
+open interest up 3% only,HG,2023,1
+open interest up 3% only,HG,2024,1
+open interest up 3% only,HG,2025,2
+open interest up 3% only,HG,2026,1
+open interest up 3% only,HO,2008,1
+open interest up 3% only,HO,2009,2
+open interest up 3% only,HO,2010,1
+open interest up 3% only,HO,2012,2
+open interest up 3% only,HO,2013,2
+open interest up 3% only,HO,2014,1
+open interest up 3% only,HO,2016,2
+open interest up 3% only,HO,2019,2
+open interest up 3% only,HO,2021,1
+open interest up 3% only,HO,2022,1
+open interest up 3% only,KC,2008,2
+open interest up 3% only,KC,2009,2
+open interest up 3% only,KC,2010,1
+open interest up 3% only,KC,2012,2
+open interest up 3% only,KC,2013,1
+open interest up 3% only,KC,2014,2
+open interest up 3% only,KC,2015,1
+open interest up 3% only,KC,2016,1
+open interest up 3% only,KC,2017,1
+open interest up 3% only,KC,2018,2
+open interest up 3% only,KC,2022,2
+open interest up 3% only,KC,2023,2
+open interest up 3% only,KC,2024,1
+open interest up 3% only,KC,2025,1
+open interest up 3% only,KC,2026,1
+open interest up 3% only,KE,2009,1
+open interest up 3% only,KE,2010,2
+open interest up 3% only,KE,2013,1
+open interest up 3% only,KE,2015,2
+open interest up 3% only,KE,2017,1
+open interest up 3% only,KE,2018,1
+open interest up 3% only,KE,2020,2
+open interest up 3% only,KE,2023,1
+open interest up 3% only,KE,2025,1
+open interest up 3% only,KE,2026,1
+open interest up 3% only,LE,2011,1
+open interest up 3% only,LE,2013,1
+open interest up 3% only,LE,2016,2
+open interest up 3% only,LE,2017,1
+open interest up 3% only,LE,2018,1
+open interest up 3% only,LE,2021,1
+open interest up 3% only,LE,2022,1
+open interest up 3% only,LE,2023,1
+open interest up 3% only,MES,2021,1
+open interest up 3% only,MES,2022,2
+open interest up 3% only,MES,2023,2
+open interest up 3% only,MES,2024,1
+open interest up 3% only,MES,2025,3
+open interest up 3% only,MES,2026,3
+open interest up 3% only,MNQ,2022,2
+open interest up 3% only,MNQ,2023,2
+open interest up 3% only,MNQ,2024,3
+open interest up 3% only,MNQ,2025,2
+open interest up 3% only,MNQ,2026,1
+open interest up 3% only,NG,2009,2
+open interest up 3% only,NG,2010,2
+open interest up 3% only,NG,2012,3
+open interest up 3% only,NG,2016,2
+open interest up 3% only,NG,2017,3
+open interest up 3% only,NG,2019,1
+open interest up 3% only,NG,2023,1
+open interest up 3% only,NG,2024,1
+open interest up 3% only,NG,2026,2
+open interest up 3% only,NQ,2008,2
+open interest up 3% only,NQ,2009,3
+open interest up 3% only,NQ,2010,3
+open interest up 3% only,NQ,2011,1
+open interest up 3% only,NQ,2012,4
+open interest up 3% only,NQ,2013,1
+open interest up 3% only,NQ,2014,1
+open interest up 3% only,NQ,2015,2
+open interest up 3% only,NQ,2016,1
+open interest up 3% only,NQ,2019,2
+open interest up 3% only,NQ,2020,2
+open interest up 3% only,NQ,2022,1
+open interest up 3% only,NQ,2023,2
+open interest up 3% only,NQ,2024,2
+open interest up 3% only,NQ,2025,2
+open interest up 3% only,PL,2013,1
+open interest up 3% only,PL,2014,1
+open interest up 3% only,PL,2016,2
+open interest up 3% only,PL,2017,2
+open interest up 3% only,PL,2018,3
+open interest up 3% only,PL,2019,1
+open interest up 3% only,PL,2020,1
+open interest up 3% only,PL,2021,1
+open interest up 3% only,PL,2022,3
+open interest up 3% only,PL,2023,1
+open interest up 3% only,PL,2024,1
+open interest up 3% only,PL,2025,2
+open interest up 3% only,RB,2008,1
+open interest up 3% only,RB,2009,1
+open interest up 3% only,RB,2010,2
+open interest up 3% only,RB,2011,1
+open interest up 3% only,RB,2012,1
+open interest up 3% only,RB,2013,1
+open interest up 3% only,RB,2014,2
+open interest up 3% only,RB,2016,1
+open interest up 3% only,RB,2017,1
+open interest up 3% only,RB,2019,1
+open interest up 3% only,RB,2020,1
+open interest up 3% only,RB,2022,2
+open interest up 3% only,RB,2023,1
+open interest up 3% only,RB,2024,2
+open interest up 3% only,RB,2025,1
+open interest up 3% only,RTY,2017,1
+open interest up 3% only,RTY,2018,1
+open interest up 3% only,RTY,2019,2
+open interest up 3% only,RTY,2020,1
+open interest up 3% only,RTY,2021,1
+open interest up 3% only,RTY,2022,1
+open interest up 3% only,RTY,2023,1
+open interest up 3% only,RTY,2024,1
+open interest up 3% only,RTY,2025,2
+open interest up 3% only,SB,2009,1
+open interest up 3% only,SB,2010,2
+open interest up 3% only,SB,2012,1
+open interest up 3% only,SB,2013,1
+open interest up 3% only,SB,2015,1
+open interest up 3% only,SB,2017,1
+open interest up 3% only,SB,2018,2
+open interest up 3% only,SB,2019,2
+open interest up 3% only,SB,2022,1
+open interest up 3% only,SB,2023,1
+open interest up 3% only,SB,2024,1
+open interest up 3% only,SB,2025,2
+open interest up 3% only,SB,2026,2
+open interest up 3% only,SI,2009,1
+open interest up 3% only,SI,2010,1
+open interest up 3% only,SI,2014,1
+open interest up 3% only,SI,2015,1
+open interest up 3% only,SI,2016,1
+open interest up 3% only,SI,2017,2
+open interest up 3% only,SI,2018,1
+open interest up 3% only,SI,2019,2
+open interest up 3% only,SI,2021,1
+open interest up 3% only,SI,2022,2
+open interest up 3% only,SI,2023,1
+open interest up 3% only,SI,2024,2
+open interest up 3% only,SI,2025,1
+open interest up 3% only,SR1,2019,1
+open interest up 3% only,SR1,2020,1
+open interest up 3% only,SR1,2021,2
+open interest up 3% only,SR1,2022,2
+open interest up 3% only,SR1,2023,2
+open interest up 3% only,SR1,2024,2
+open interest up 3% only,SR1,2025,4
+open interest up 3% only,SR3,2019,1
+open interest up 3% only,SR3,2020,2
+open interest up 3% only,SR3,2022,3
+open interest up 3% only,SR3,2023,1
+open interest up 3% only,SR3,2024,1
+open interest up 3% only,SR3,2025,1
+open interest up 3% only,SR3,2026,1
+open interest up 3% only,TN,2016,1
+open interest up 3% only,TN,2017,2
+open interest up 3% only,TN,2018,1
+open interest up 3% only,TN,2019,1
+open interest up 3% only,TN,2020,1
+open interest up 3% only,UB,2011,1
+open interest up 3% only,UB,2012,1
+open interest up 3% only,UB,2013,1
+open interest up 3% only,UB,2014,2
+open interest up 3% only,UB,2016,1
+open interest up 3% only,UB,2017,1
+open interest up 3% only,UB,2018,2
+open interest up 3% only,UB,2020,1
+open interest up 3% only,UB,2024,1
+open interest up 3% only,VX,2008,1
+open interest up 3% only,VX,2010,2
+open interest up 3% only,VX,2013,2
+open interest up 3% only,VX,2014,3
+open interest up 3% only,VX,2015,2
+open interest up 3% only,VX,2016,2
+open interest up 3% only,VX,2017,2
+open interest up 3% only,VX,2019,2
+open interest up 3% only,VX,2020,2
+open interest up 3% only,VX,2021,1
+open interest up 3% only,VX,2023,2
+open interest up 3% only,VX,2025,2
+open interest up 3% only,VX,2026,1
+open interest up 3% only,YM,2008,1
+open interest up 3% only,YM,2009,3
+open interest up 3% only,YM,2010,2
+open interest up 3% only,YM,2011,1
+open interest up 3% only,YM,2012,2
+open interest up 3% only,YM,2013,2
+open interest up 3% only,YM,2016,1
+open interest up 3% only,YM,2017,2
+open interest up 3% only,YM,2018,1
+open interest up 3% only,YM,2020,2
+open interest up 3% only,YM,2022,2
+open interest up 3% only,YM,2023,2
+open interest up 3% only,YM,2024,1
+open interest up 3% only,YM,2025,1
+open interest up 3% only,YM,2026,2
+open interest up 3% only,ZB,2008,1
+open interest up 3% only,ZB,2010,1
+open interest up 3% only,ZB,2011,1
+open interest up 3% only,ZB,2012,1
+open interest up 3% only,ZB,2014,1
+open interest up 3% only,ZB,2016,1
+open interest up 3% only,ZB,2017,1
+open interest up 3% only,ZB,2021,1
+open interest up 3% only,ZB,2026,1
+open interest up 3% only,ZC,2009,1
+open interest up 3% only,ZC,2010,1
+open interest up 3% only,ZC,2013,1
+open interest up 3% only,ZC,2015,1
+open interest up 3% only,ZC,2016,1
+open interest up 3% only,ZC,2017,3
+open interest up 3% only,ZC,2023,1
+open interest up 3% only,ZC,2024,2
+open interest up 3% only,ZC,2026,1
+open interest up 3% only,ZF,2009,2
+open interest up 3% only,ZF,2010,2
+open interest up 3% only,ZF,2011,1
+open interest up 3% only,ZF,2012,1
+open interest up 3% only,ZF,2013,1
+open interest up 3% only,ZF,2014,2
+open interest up 3% only,ZF,2015,2
+open interest up 3% only,ZF,2016,1
+open interest up 3% only,ZF,2017,2
+open interest up 3% only,ZF,2019,1
+open interest up 3% only,ZF,2021,1
+open interest up 3% only,ZF,2022,1
+open interest up 3% only,ZF,2023,1
+open interest up 3% only,ZF,2024,1
+open interest up 3% only,ZF,2025,1
+open interest up 3% only,ZL,2009,2
+open interest up 3% only,ZL,2010,1
+open interest up 3% only,ZL,2011,1
+open interest up 3% only,ZL,2012,1
+open interest up 3% only,ZL,2016,2
+open interest up 3% only,ZL,2018,2
+open interest up 3% only,ZL,2019,2
+open interest up 3% only,ZL,2022,2
+open interest up 3% only,ZL,2023,1
+open interest up 3% only,ZL,2024,1
+open interest up 3% only,ZL,2025,1
+open interest up 3% only,ZM,2010,2
+open interest up 3% only,ZM,2011,1
+open interest up 3% only,ZM,2012,1
+open interest up 3% only,ZM,2013,2
+open interest up 3% only,ZM,2014,2
+open interest up 3% only,ZM,2017,1
+open interest up 3% only,ZM,2018,1
+open interest up 3% only,ZM,2023,2
+open interest up 3% only,ZM,2024,1
+open interest up 3% only,ZM,2026,3
+open interest up 3% only,ZN,2009,1
+open interest up 3% only,ZN,2010,1
+open interest up 3% only,ZN,2012,2
+open interest up 3% only,ZN,2013,3
+open interest up 3% only,ZN,2014,1
+open interest up 3% only,ZN,2015,1
+open interest up 3% only,ZN,2017,1
+open interest up 3% only,ZN,2018,1
+open interest up 3% only,ZN,2021,1
+open interest up 3% only,ZN,2023,1
+open interest up 3% only,ZN,2026,1
+open interest up 3% only,ZQ,2008,1
+open interest up 3% only,ZQ,2010,1
+open interest up 3% only,ZQ,2012,1
+open interest up 3% only,ZQ,2014,3
+open interest up 3% only,ZQ,2016,1
+open interest up 3% only,ZQ,2017,2
+open interest up 3% only,ZQ,2018,3
+open interest up 3% only,ZQ,2019,2
+open interest up 3% only,ZQ,2020,1
+open interest up 3% only,ZQ,2021,1
+open interest up 3% only,ZQ,2022,3
+open interest up 3% only,ZQ,2023,3
+open interest up 3% only,ZQ,2024,2
+open interest up 3% only,ZQ,2025,4
+open interest up 3% only,ZQ,2026,1
+open interest up 3% only,ZS,2009,1
+open interest up 3% only,ZS,2010,1
+open interest up 3% only,ZS,2011,1
+open interest up 3% only,ZS,2012,1
+open interest up 3% only,ZS,2013,1
+open interest up 3% only,ZS,2016,1
+open interest up 3% only,ZS,2017,1
+open interest up 3% only,ZS,2019,2
+open interest up 3% only,ZS,2020,2
+open interest up 3% only,ZS,2022,1
+open interest up 3% only,ZS,2023,1
+open interest up 3% only,ZS,2026,1
+open interest up 3% only,ZT,2009,1
+open interest up 3% only,ZT,2010,2
+open interest up 3% only,ZT,2012,1
+open interest up 3% only,ZT,2013,1
+open interest up 3% only,ZT,2014,2
+open interest up 3% only,ZT,2015,1
+open interest up 3% only,ZT,2016,1
+open interest up 3% only,ZT,2017,2
+open interest up 3% only,ZT,2019,1
+open interest up 3% only,ZT,2021,1
+open interest up 3% only,ZT,2023,3
+open interest up 3% only,ZT,2025,1
+open interest up 3% only,ZW,2011,1
+open interest up 3% only,ZW,2012,1
+open interest up 3% only,ZW,2013,1
+open interest up 3% only,ZW,2014,1
+open interest up 3% only,ZW,2015,1
+open interest up 3% only,ZW,2018,1
+open interest up 3% only,ZW,2019,1
+open interest up 3% only,ZW,2020,2
+open interest up 3% only,ZW,2021,1
+open interest up 3% only,ZW,2022,2
+open interest up 3% only,ZW,2023,1
+open interest up 3% only,ZW,2024,1
+open interest up 3% only,ZW,2025,2
+open interest up 3% only,ZW,2026,1
+price position only,6A,2010,1
+price position only,6A,2011,1
+price position only,6A,2012,1
+price position only,6A,2013,1
+price position only,6A,2017,1
+price position only,6A,2018,1
+price position only,6B,2009,1
+price position only,6B,2020,1
+price position only,6C,2017,2
+price position only,6C,2019,1
+price position only,6C,2023,1
+price position only,6E,2011,1
+price position only,6E,2015,1
+price position only,6E,2016,1
+price position only,6E,2019,1
+price position only,6E,2020,1
+price position only,6J,2009,1
+price position only,6J,2015,1
+price position only,6J,2020,1
+price position only,6L,2014,1
+price position only,6M,2009,1
+price position only,6M,2015,1
+price position only,6M,2019,1
+price position only,6M,2021,1
+price position only,6N,2019,1
+price position only,6N,2022,1
+price position only,6S,2025,1
+price position only,BZ,2014,1
+price position only,BZ,2015,1
+price position only,BZ,2016,1
+price position only,BZ,2017,2
+price position only,BZ,2018,1
+price position only,BZ,2019,2
+price position only,BZ,2022,1
+price position only,BZ,2023,1
+price position only,BZ,2026,3
+price position only,CC,2014,1
+price position only,CC,2019,1
+price position only,CC,2022,1
+price position only,CC,2023,1
+price position only,CC,2024,1
+price position only,CL,2008,1
+price position only,CL,2009,1
+price position only,CL,2012,1
+price position only,CL,2023,1
+price position only,CL,2026,1
+price position only,CT,2010,1
+price position only,CT,2011,1
+price position only,CT,2017,1
+price position only,CT,2020,1
+price position only,CT,2023,1
+price position only,DX,2012,1
+price position only,DX,2022,2
+price position only,ES,2009,3
+price position only,ES,2010,1
+price position only,ES,2011,1
+price position only,ES,2012,1
+price position only,ES,2013,2
+price position only,ES,2016,2
+price position only,ES,2018,1
+price position only,ES,2020,2
+price position only,ES,2021,1
+price position only,ES,2022,1
+price position only,ES,2023,1
+price position only,ES,2024,3
+price position only,ES,2025,2
+price position only,GC,2025,1
+price position only,GF,2014,1
+price position only,GF,2022,1
+price position only,HE,2008,1
+price position only,HE,2009,1
+price position only,HE,2020,1
+price position only,HE,2023,1
+price position only,HG,2019,1
+price position only,HO,2022,1
+price position only,KC,2015,1
+price position only,KC,2017,1
+price position only,KC,2025,1
+price position only,KE,2016,1
+price position only,LE,2008,1
+price position only,LE,2016,1
+price position only,LE,2019,1
+price position only,MES,2021,1
+price position only,MES,2022,1
+price position only,MES,2023,1
+price position only,MES,2024,2
+price position only,MES,2025,1
+price position only,MES,2026,1
+price position only,MNQ,2022,2
+price position only,MNQ,2023,1
+price position only,MNQ,2025,1
+price position only,NG,2010,1
+price position only,NG,2012,2
+price position only,NG,2013,1
+price position only,NG,2015,1
+price position only,NG,2020,1
+price position only,NG,2023,1
+price position only,NG,2026,1
+price position only,NQ,2008,1
+price position only,NQ,2014,2
+price position only,NQ,2015,1
+price position only,NQ,2017,1
+price position only,NQ,2019,1
+price position only,NQ,2020,1
+price position only,NQ,2021,1
+price position only,NQ,2022,1
+price position only,NQ,2023,1
+price position only,NQ,2024,1
+price position only,NQ,2025,2
+price position only,NQ,2026,2
+price position only,RB,2010,1
+price position only,RB,2014,2
+price position only,RB,2019,1
+price position only,RB,2020,1
+price position only,RB,2021,1
+price position only,RB,2022,1
+price position only,RB,2023,1
+price position only,RB,2025,1
+price position only,RTY,2008,1
+price position only,RTY,2020,1
+price position only,RTY,2021,1
+price position only,RTY,2023,1
+price position only,RTY,2025,1
+price position only,RTY,2026,2
+price position only,SB,2010,1
+price position only,SB,2023,1
+price position only,SI,2011,1
+price position only,SI,2018,1
+price position only,SI,2023,1
+price position only,SI,2024,1
+price position only,SR1,2020,1
+price position only,SR1,2022,1
+price position only,SR1,2025,1
+price position only,SR3,2019,1
+price position only,SR3,2021,5
+price position only,SR3,2024,1
+price position only,SR3,2026,1
+price position only,TN,2018,2
+price position only,TN,2020,1
+price position only,TN,2021,1
+price position only,TN,2022,1
+price position only,TN,2024,1
+price position only,UB,2010,1
+price position only,UB,2012,1
+price position only,UB,2013,1
+price position only,UB,2015,1
+price position only,UB,2017,1
+price position only,UB,2018,2
+price position only,UB,2021,1
+price position only,UB,2022,1
+price position only,UB,2023,2
+price position only,UB,2025,2
+price position only,UB,2026,1
+price position only,VX,2008,1
+price position only,VX,2011,1
+price position only,VX,2013,1
+price position only,VX,2014,1
+price position only,VX,2016,1
+price position only,VX,2017,1
+price position only,VX,2018,1
+price position only,VX,2021,1
+price position only,VX,2023,2
+price position only,VX,2024,1
+price position only,VX,2025,1
+price position only,YM,2008,1
+price position only,YM,2009,1
+price position only,YM,2013,2
+price position only,YM,2016,1
+price position only,YM,2019,1
+price position only,YM,2025,2
+price position only,ZB,2008,1
+price position only,ZB,2010,1
+price position only,ZB,2011,1
+price position only,ZB,2014,1
+price position only,ZB,2015,1
+price position only,ZB,2019,2
+price position only,ZB,2024,1
+price position only,ZC,2010,1
+price position only,ZF,2008,1
+price position only,ZF,2013,1
+price position only,ZF,2019,1
+price position only,ZF,2024,1
+price position only,ZF,2026,1
+price position only,ZM,2017,1
+price position only,ZM,2024,1
+price position only,ZN,2008,2
+price position only,ZN,2012,2
+price position only,ZN,2014,1
+price position only,ZN,2015,1
+price position only,ZN,2016,1
+price position only,ZN,2019,1
+price position only,ZN,2024,1
+price position only,ZN,2025,1
+price position only,ZN,2026,1
+price position only,ZQ,2009,2
+price position only,ZQ,2010,1
+price position only,ZQ,2011,2
+price position only,ZQ,2012,1
+price position only,ZQ,2013,1
+price position only,ZQ,2014,1
+price position only,ZQ,2016,1
+price position only,ZQ,2017,1
+price position only,ZQ,2018,1
+price position only,ZQ,2019,3
+price position only,ZQ,2020,1
+price position only,ZQ,2022,1
+price position only,ZQ,2025,1
+price position only,ZS,2017,1
+price position only,ZS,2023,1
+price position only,ZT,2010,1
+price position only,ZT,2016,1
+price position only,ZT,2018,1
+price position only,ZT,2019,1
+price position only,ZT,2024,1
+price position only,ZW,2009,1
+price position only,ZW,2020,1
+price position only,ZW,2024,1
+both filters,6A,2010,1
+both filters,6A,2012,1
+both filters,6B,2009,1
+both filters,6B,2020,1
+both filters,6C,2019,1
+both filters,6C,2023,1
+both filters,6E,2011,1
+both filters,6J,2009,1
+both filters,6J,2015,1
+both filters,6J,2020,1
+both filters,6L,2014,1
+both filters,6M,2009,1
+both filters,6N,2019,1
+both filters,BZ,2014,1
+both filters,BZ,2016,1
+both filters,BZ,2017,1
+both filters,BZ,2019,1
+both filters,BZ,2023,1
+both filters,BZ,2026,2
+both filters,CL,2023,1
+both filters,ES,2013,1
+both filters,ES,2025,2
+both filters,GF,2022,1
+both filters,HE,2009,1
+both filters,KC,2025,1
+both filters,MES,2021,1
+both filters,MES,2022,1
+both filters,MES,2023,1
+both filters,MES,2024,1
+both filters,MES,2025,1
+both filters,MES,2026,1
+both filters,MNQ,2022,1
+both filters,MNQ,2023,1
+both filters,MNQ,2025,1
+both filters,NG,2010,1
+both filters,NG,2012,2
+both filters,NG,2026,1
+both filters,NQ,2008,1
+both filters,NQ,2014,1
+both filters,NQ,2023,1
+both filters,NQ,2024,1
+both filters,NQ,2025,1
+both filters,RB,2014,1
+both filters,SI,2018,1
+both filters,SR1,2022,1
+both filters,SR1,2025,1
+both filters,SR3,2019,1
+both filters,SR3,2026,1
+both filters,TN,2018,1
+both filters,UB,2012,1
+both filters,UB,2017,1
+both filters,UB,2018,2
+both filters,VX,2008,1
+both filters,VX,2013,1
+both filters,VX,2014,1
+both filters,VX,2023,2
+both filters,YM,2008,1
+both filters,YM,2009,1
+both filters,YM,2013,1
+both filters,YM,2016,1
+both filters,YM,2025,1
+both filters,ZB,2010,1
+both filters,ZM,2024,1
+both filters,ZN,2012,1
+both filters,ZQ,2012,1
+both filters,ZQ,2014,1
+both filters,ZQ,2016,1
+both filters,ZQ,2017,1
+both filters,ZQ,2018,1
+both filters,ZQ,2019,1
