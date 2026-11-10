@@ -1,0 +1,74 @@
+name: COT breakout daily archive check
+on:
+  push:
+    branches:
+      - research/cot-extreme-breakout-20261110
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow
+      - name: Read verified R2 daily objects
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          python - <<'PYTHON'
+          import csv
+          import hashlib
+          import json
+          from contextlib import closing
+          from io import BytesIO
+          from pathlib import Path
+
+          import pyarrow.parquet as pq
+          from r2_storage import BUCKET, client
+
+          storage = client()
+          prefix = "marketparquet/futures_daily/"
+          pages = storage.get_paginator("list_objects_v2")
+          def keys(prefix):
+              return sorted(o["Key"] for p in pages.paginate(Bucket=BUCKET, Prefix=prefix) for o in p.get("Contents", []))
+          inventory = [key for key in keys(prefix) if key.endswith(".parquet")]
+          sessions = [key[len(prefix):-8] for key in inventory]
+          audit = {
+              "count": len(sessions), "first": sessions[0], "last": sessions[-1],
+              "sessions": sessions, "schemas": {},
+              "roll_metadata": [key for key in keys("marketparquet/") if "roll" in key or "contract_calendar" in key],
+          }
+          fields = ["session", "embedded", "symbol", "asset_type", "open", "high", "low", "close", "volume"]
+          with open("recent-futures-daily.csv", "w", newline="") as output:
+              writer = csv.DictWriter(output, fieldnames=fields)
+              writer.writeheader()
+              for session, key in zip(sessions, inventory):
+                  if not "2026-09-14" <= session <= "2026-11-10":
+                      continue
+                  obj = storage.get_object(Bucket=BUCKET, Key=key)
+                  with closing(obj["Body"]) as body:
+                      raw = body.read()
+                  if obj["Metadata"].get("verified-sha256") != hashlib.sha256(raw).hexdigest():
+                      raise RuntimeError("Missing or mismatched verified SHA-256 for " + session)
+                  parquet = pq.ParquetFile(BytesIO(raw))
+                  date_field = "date" if "date" in parquet.schema_arrow.names else "timestamp"
+                  audit["schemas"][session] = {col.name: str(col.type) for col in parquet.schema_arrow}
+                  for row in parquet.read(columns=[date_field, *fields[2:]]).to_pylist():
+                      writer.writerow(dict(row, session=session, embedded=row.pop(date_field)))
+          Path("futures-archive-audit.json").write_text(json.dumps(audit))
+          print({key: audit[key] for key in ("count", "first", "last", "roll_metadata")})
+          PYTHON
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cot-breakout-recent-20261110
+          path: |
+            recent-futures-daily.csv
+            futures-archive-audit.json
+          retention-days: 3
