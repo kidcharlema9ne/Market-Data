@@ -120,6 +120,7 @@ def simulate(window, exit_rule, stop_k, markets, prices, subset="all"):
         idx = g[f"idx{window}"].values
         pub = g["pub"].values.astype("datetime64[D]")
         oi = g["oi"].values
+        comm_net = g["comm"].values
         sess_after = np.searchsorted(s["d"], pub, side="right")      # first session dated after the release
         free_from = 0
         for w in range(1, len(g)):
@@ -133,10 +134,14 @@ def simulate(window, exit_rule, stop_k, markets, prices, subset="all"):
                 continue
             if oi[w] < MIN_OI:
                 continue
-            if subset == "aligned":   # report group 1: large and small specs each at 0 or 100 (26-week) in the same week
+            if subset in ("opposite", "opposite_abs"):
+                # report-style crowd setup: large AND small speculators sit at the opposite 26-week extreme
                 lg, sm = g["large26"].values[w], g["small26"].values[w]
-                if not (np.isfinite(lg) and np.isfinite(sm)) or not ((lg >= 100 - 1e-9 or lg <= 1e-9) and (sm >= 100 - 1e-9 or sm <= 1e-9)):
+                far = (lambda v: v <= 1e-9) if d == 1 else (lambda v: v >= 100 - 1e-9)
+                if not (np.isfinite(lg) and np.isfinite(sm) and far(lg) and far(sm)):
                     continue
+                if subset == "opposite_abs" and not ((d == 1 and comm_net[w] > 0) or (d == -1 and comm_net[w] < 0)):
+                    continue   # commercials must also be net long (for a long) / net short (for a short) in absolute terms
             e = sess_after[w]
             if e >= len(s["d"]) or e < 15 or e < free_from:
                 if e < 15 and e < len(s["d"]):
@@ -275,64 +280,67 @@ def main():
     last = max(v['d'][-1] for v in prices.values())
     print(f"price dates {first} to {last}")
     print("\n=== REPLICATION CHECK, 26-week, no stop (handoff: 227 trades, fixed42 +0.94 mean / +0.45 median, comm50 +0.91 / +0.67, 33 sessions)")
-    for sub in ("all", "aligned"):
+    for sub in ("all", "opposite", "opposite_abs"):
         for ex in ("fixed42", "comm50"):
             df, _ = simulate(26, ex, None, markets, prices, sub)
             print(f"subset={sub:8s} exit={ex:8s} n={len(df):5d} mean={df['ret'].mean():+.2f} median={df['ret'].median():+.2f} hold={df['hold'].mean():.1f}")
-    results, runs = [], {}
-    for w in WINDOWS:
-        for ex in EXITS:
+    for SUB in ("all", "opposite_abs"):
+        print("\n\n############ UNIVERSE:", SUB, "############")
+        results, runs = [], {}
+        for w in WINDOWS:
+            for ex in EXITS:
+                for sk in STOPS:
+                    df, sk_info = simulate(w, ex, sk, markets, prices, SUB)
+                    runs[(w, ex, sk)] = df
+                    row = dict(window=w, exit=ex, stop=fmt_stop(sk), **summarize(df))
+                    results.append(row)
+            print(f"window {w}: skipped counts (last config) {sk_info}", flush=True)
+        res = pd.DataFrame(results)
+        pd.set_option("display.width", 250, "display.max_columns", 30, "display.max_rows", 500)
+        cols = ["window", "exit", "stop", "n", "mean", "ci_lo", "ci_hi", "median", "win", "hold", "mfe", "mae", "maxdd",
+                "worst", "stop_pct"]
+        print("\n=== GRID (ATR units; ci = 95% week-cluster bootstrap for the mean; maxdd = cumulative ATR, trades by exit date)")
+        print(res[cols].round(2).to_string(index=False))
+
+        print("\n=== PAIRED DIFFERENCE vs fixed42 with the same window and stop (A minus B)")
+        rows = []
+        for w in WINDOWS:
             for sk in STOPS:
-                df, sk_info = simulate(w, ex, sk, markets, prices)
-                runs[(w, ex, sk)] = df
-                row = dict(window=w, exit=ex, stop=fmt_stop(sk), **summarize(df))
-                results.append(row)
-        print(f"window {w}: skipped counts (last config) {sk_info}", flush=True)
-    res = pd.DataFrame(results)
-    pd.set_option("display.width", 250, "display.max_columns", 30, "display.max_rows", 500)
-    cols = ["window", "exit", "stop", "n", "mean", "ci_lo", "ci_hi", "median", "win", "hold", "mfe", "mae", "maxdd",
-            "worst", "stop_pct"]
-    print("\n=== GRID (ATR units; ci = 95% week-cluster bootstrap for the mean; maxdd = cumulative ATR, trades by exit date)")
-    print(res[cols].round(2).to_string(index=False))
+                b = runs[(w, "fixed42", sk)]
+                for ex in ("comm50", "fixed21"):
+                    a = runs[(w, ex, sk)]
+                    rows.append(dict(window=w, stop=fmt_stop(sk), A=ex, **paired_diff(a, b)))
+        pdx = pd.DataFrame(rows)
+        print(pdx.round(3).to_string(index=False))
 
-    print("\n=== PAIRED DIFFERENCE vs fixed42 with the same window and stop (A minus B)")
-    rows = []
-    for w in WINDOWS:
-        for sk in STOPS:
-            b = runs[(w, "fixed42", sk)]
-            for ex in ("comm50", "fixed21"):
-                a = runs[(w, ex, sk)]
-                rows.append(dict(window=w, stop=fmt_stop(sk), A=ex, **paired_diff(a, b)))
-    pdx = pd.DataFrame(rows)
-    print(pdx.round(3).to_string(index=False))
+        print("\n=== comm50 vs fixed21 (matched), no stop")
+        rows = []
+        for w in WINDOWS:
+            rows.append(dict(window=w, **paired_diff(runs[(w, "comm50", None)], runs[(w, "fixed21", None)])))
+        print(pd.DataFrame(rows).round(3).to_string(index=False))
 
-    print("\n=== comm50 vs fixed21 (matched), no stop")
-    rows = []
-    for w in WINDOWS:
-        rows.append(dict(window=w, **paired_diff(runs[(w, "comm50", None)], runs[(w, "fixed21", None)])))
-    print(pd.DataFrame(rows).round(3).to_string(index=False))
+        print("\n=== SUBPERIODS, no stop (mean / median / n by entry year half)")
+        rows = []
+        for w in WINDOWS:
+            for ex in EXITS:
+                df = runs[(w, ex, None)]
+                for name, sub in (("2008-2016", df[df.year <= 2016]), ("2017-2026", df[df.year >= 2017]),
+                                  ("long", df[df.dir == 1]), ("short", df[df.dir == -1])):
+                    rows.append(dict(window=w, exit=ex, subset=name, n=len(sub), mean=sub["ret"].mean(),
+                                     median=sub["ret"].median()))
+        print(pd.DataFrame(rows).round(2).to_string(index=False))
 
-    print("\n=== SUBPERIODS, no stop (mean / median / n by entry year half)")
-    rows = []
-    for w in WINDOWS:
-        for ex in EXITS:
-            df = runs[(w, ex, None)]
-            for name, sub in (("2008-2016", df[df.year <= 2016]), ("2017-2026", df[df.year >= 2017]),
-                              ("long", df[df.dir == 1]), ("short", df[df.dir == -1])):
-                rows.append(dict(window=w, exit=ex, subset=name, n=len(sub), mean=sub["ret"].mean(),
-                                 median=sub["ret"].median()))
-    print(pd.DataFrame(rows).round(2).to_string(index=False))
+        print("\n=== comm50 exit reasons, no stop")
+        for w in WINDOWS:
+            df = runs[(w, "comm50", None)]
+            print(w, df["how"].value_counts().to_dict(), "avg hold", round(df["hold"].mean(), 1))
 
-    print("\n=== comm50 exit reasons, no stop")
-    for w in WINDOWS:
-        df = runs[(w, "comm50", None)]
-        print(w, df["how"].value_counts().to_dict(), "avg hold", round(df["hold"].mean(), 1))
+        print("\n=== concentration: comm50 no stop, mean after dropping the 5 best trades / by market count")
+        for w in WINDOWS:
+            df = runs[(w, "comm50", None)].sort_values("ret")
+            print(w, "mean", round(df["ret"].mean(), 2), "drop top5", round(df["ret"].iloc[:-5].mean(), 2),
+                  "markets", df["market"].nunique(), "top market share", round(df["market"].value_counts(normalize=True).iloc[0], 2))
 
-    print("\n=== concentration: comm50 no stop, mean after dropping the 5 best trades / by market count")
-    for w in WINDOWS:
-        df = runs[(w, "comm50", None)].sort_values("ret")
-        print(w, "mean", round(df["ret"].mean(), 2), "drop top5", round(df["ret"].iloc[:-5].mean(), 2),
-              "markets", df["market"].nunique(), "top market share", round(df["market"].value_counts(normalize=True).iloc[0], 2))
     print("\nBenchmark: not applicable to futures ATR returns (stock SPY benchmark rule); benchmark unavailable.")
     print(f"Comparisons run: {len(res)} configurations; treat p-values as uncorrected for multiple testing.")
 
