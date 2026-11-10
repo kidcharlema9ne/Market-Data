@@ -1,4 +1,4 @@
-name: COT breakout daily archive check
+name: COT breakout historical daily archive
 on:
   push:
     branches:
@@ -9,7 +9,7 @@ permissions:
 jobs:
   export:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -24,6 +24,8 @@ jobs:
         run: |
           python - <<'PYTHON'
           import csv
+          import gzip
+          from concurrent.futures import ThreadPoolExecutor
           import hashlib
           import json
           from contextlib import closing
@@ -46,29 +48,31 @@ jobs:
               "roll_metadata": [key for key in keys("marketparquet/") if "roll" in key or "contract_calendar" in key],
           }
           fields = ["session", "embedded", "symbol", "asset_type", "open", "high", "low", "close", "volume"]
-          with open("recent-futures-daily.csv", "w", newline="") as output:
+          roots = set("6Z A6 AD AIGCI ALI B6 BR BTC BZ CB CC CL CT DJUSRE DX E1 E6 EMD ES ESTR ETH GC GF HE HG HH HO HRC IQB J1 KC KE LBS LE M2K MBT MES MET MFS MGC MME MNQ MP MYM N6 NG NIY NQ OJ PA PL RB RP RSV RTY RY SB SI SOL SPXDIVAN SR1 SR3 TN UB US VX XRP YM ZC ZF ZL ZM ZN ZQ ZR ZS ZT ZW".split())
+          def extract(pair):
+              session, key = pair
+              obj = storage.get_object(Bucket=BUCKET, Key=key)
+              with closing(obj["Body"]) as body:
+                  raw = body.read()
+              if obj["Metadata"].get("verified-sha256") != hashlib.sha256(raw).hexdigest():
+                  raise RuntimeError("Missing or mismatched verified SHA-256 for " + session)
+              parquet = pq.ParquetFile(BytesIO(raw))
+              date_field = "date" if "date" in parquet.schema_arrow.names else "timestamp"
+              records = parquet.read(columns=[date_field, *fields[2:]]).to_pylist()
+              return [dict(row, session=session, embedded=row.pop(date_field)) for row in records if row["symbol"] in roots]
+          with gzip.open("historical-futures-daily.csv.gz", "wt", newline="") as output:
               writer = csv.DictWriter(output, fieldnames=fields)
               writer.writeheader()
-              for session, key in zip(sessions, inventory):
-                  if not "2026-09-14" <= session <= "2026-11-10":
-                      continue
-                  obj = storage.get_object(Bucket=BUCKET, Key=key)
-                  with closing(obj["Body"]) as body:
-                      raw = body.read()
-                  if obj["Metadata"].get("verified-sha256") != hashlib.sha256(raw).hexdigest():
-                      raise RuntimeError("Missing or mismatched verified SHA-256 for " + session)
-                  parquet = pq.ParquetFile(BytesIO(raw))
-                  date_field = "date" if "date" in parquet.schema_arrow.names else "timestamp"
-                  audit["schemas"][session] = {col.name: str(col.type) for col in parquet.schema_arrow}
-                  for row in parquet.read(columns=[date_field, *fields[2:]]).to_pylist():
-                      writer.writerow(dict(row, session=session, embedded=row.pop(date_field)))
+              with ThreadPoolExecutor(max_workers=20) as pool:
+                  for rows in pool.map(extract, zip(sessions, inventory)):
+                      writer.writerows(rows)
           Path("futures-archive-audit.json").write_text(json.dumps(audit))
           print({key: audit[key] for key in ("count", "first", "last", "roll_metadata")})
           PYTHON
       - uses: actions/upload-artifact@v4
         with:
-          name: cot-breakout-recent-20261110
+          name: cot-breakout-historical-20261110
           path: |
-            recent-futures-daily.csv
+            historical-futures-daily.csv.gz
             futures-archive-audit.json
           retention-days: 3
