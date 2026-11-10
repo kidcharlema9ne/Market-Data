@@ -1,4 +1,8 @@
-"""Commercial COT index exit test (futures, ATR units).
+"""INVALID RESULT (10 Nov 2026): this script ran on cot_weekly.csv.gz, which dropped pre-2022 history for about 25 renamed
+markets, and it lacked the open-interest and price-position filters. Superseded by cot_oi_exit_test.py. Its helpers are
+still imported by that script.
+
+Commercial COT index exit test (futures, ATR units).
 
 Question: does exiting when the commercial index returns to 50 beat fixed 21 / 42 session exits, and does it
 change with longer index windows (26 baseline, 50, 100 weeks) and with protective stops (1.5 / 2 / 2.5 / 3 ATR)?

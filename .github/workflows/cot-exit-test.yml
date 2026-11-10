@@ -1,8 +1,8 @@
-name: COT commercial-50 exit test on the open-interest populations (futures; reads cot-history directly)
+name: COT commercial-50 exit test on the open-interest populations (futures; full-history COT extract)
 on:
   push:
     branches: [claude/cot-commercial50-exit-20261110]
-    paths: [.github/workflows/cot-exit-test.yml, research/cot_exit/*.py]
+    paths: [.github/workflows/cot-exit-test.yml, research/cot_exit/*.py, research/cot_exit/cot_weekly_full.csv.gz]
   workflow_dispatch:
 permissions:
   contents: read
@@ -12,11 +12,6 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
-        with:
-          repository: kidcharlema9ne/cot-history
-          token: ${{ secrets.COT_HISTORY_SYNC_TOKEN }}
-          path: cot-history
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -29,8 +24,7 @@ jobs:
         run: python research/cot_exit/fetch_futures_prices.py
       - name: Run the exit test
         run: |
-          echo "cot-history commit: $(git -C cot-history rev-parse HEAD)" | tee cot_oi_results.txt
-          python research/cot_exit/cot_oi_exit_test.py cot-history futures_prices.parquet | tee -a cot_oi_results.txt
+          python research/cot_exit/cot_oi_exit_test.py research/cot_exit/cot_weekly_full.csv.gz futures_prices.parquet | tee cot_oi_results.txt
       - uses: actions/upload-artifact@v4
         with:
           name: cot_oi_results

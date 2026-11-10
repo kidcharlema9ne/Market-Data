@@ -1,7 +1,7 @@
 """Commercial-50 exit vs fixed 42-session exit on the ORIGINAL open-interest populations (futures, ATR units).
 
 Corrected specification (Michael, 10 Nov 2026)
-- COT data is read straight from the cot-history repo (its own loader, all history back to 1992), NOT from the
+- COT data comes from make_cot_extract.py (cot-history's own loader, full history back to 1992), NOT from the
   committed extract cot_weekly.csv.gz. That extract lost pre-2022 history for about 25 renamed markets (CL, ES, ZN, ZB,
   NG, HG, DX ...), which invalidated the earlier run.
 - Legacy futures-only commercial net = commercial long - commercial short; 26-week index, current week included.
@@ -23,7 +23,7 @@ Corrected specification (Michael, 10 Nov 2026)
   is skipped ("blocked"). A run with no blocking is shown as a sensitivity. Both exits are evaluated on the SAME entries.
 - No costs. Prices: vendor ratio back-adjusted continuous daily bars from R2.
 
-Usage: python cot_oi_exit_test.py <cot-history repo> [futures_prices.parquet]
+Usage: python cot_oi_exit_test.py <cot_weekly_full.csv.gz from make_cot_extract.py> [futures_prices.parquet]
        (without prices it only counts signals)
 """
 import importlib.util
@@ -40,10 +40,6 @@ PRICE_PATH = sys.argv[2] if len(sys.argv) > 2 else None
 sys.argv = sys.argv[:1]                       # cot_exit_test reads argv at import; keep its defaults
 import cot_exit_test as base                  # noqa: E402  (helpers: price loading, publication dates, statistics)
 
-spec = importlib.util.spec_from_file_location("cot_report", REPO / "scripts" / "cot_report.py")
-cr = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(cr)
-
 WINDOW = 26
 GAP_DAYS = 28
 OI_RISE = 0.03
@@ -53,20 +49,15 @@ TOP = 0.8
 
 
 def build_markets():
-    df = cr.load(REPO)
+    df = pd.read_csv(REPO, parse_dates=["date"], dtype={"code": str})
     markets = {}
     for code, g in df.groupby("code"):
         g = g.sort_values("date").reset_index(drop=True)
-        nm = g["name"].iloc[-1]
-        if nm not in cr.IBKR or len(g) < WINDOW + 2:
+        if len(g) < WINDOW + 2 or g["ibkr"].iloc[-1] in base.THIN:
             continue
-        ibkr = cr.IBKR[nm][0]
-        if ibkr in cr.THIN:
-            continue
-        g["ibkr"] = ibkr
         g["pub"] = base.pub_dates(pd.DatetimeIndex(g["date"]))
         g["idx"] = base.cot_index(g["comm"], WINDOW)
-        markets[ibkr + "|" + code] = g
+        markets[g["ibkr"].iloc[-1] + "|" + code] = g
     return markets
 
 
@@ -91,7 +82,7 @@ def candidates(markets, prices):
             if prev is not None and (dates[w] - prev).astype(int) < GAP_DAYS:
                 continue
             rec = dict(market=ibkr, dir=d, signal=pd.Timestamp(dates[w]), w=w,
-                       liquid=bool(oi[w] >= cr.MIN_OI),
+                       liquid=bool(oi[w] >= base.MIN_OI),
                        oi_up=bool(w >= 1 and (dates[w] - dates[w - 1]).astype(int) <= 10 and oi[w - 1] > 0
                                   and oi[w] / oi[w - 1] - 1 >= OI_RISE - 1e-12),
                        pos_in=False, pos_out=False, ok=False)
