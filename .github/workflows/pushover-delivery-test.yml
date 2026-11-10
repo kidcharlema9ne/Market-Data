@@ -1,0 +1,37 @@
+name: Pushover delivery test
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/pushover-delivery-test.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    if: ${{ false }} # Temporarily disabled; remove this line to re-enable.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Pushover test to iPad
+        env:
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
+        run: |
+          if [ -z "$PUSHOVER_TOKEN" ] || [ -z "$PUSHOVER_USER" ]; then
+            echo "::error::Missing PUSHOVER_TOKEN or PUSHOVER_USER in this repository."
+            exit 1
+          fi
+          python - <<'PY'
+          import json, os, urllib.parse, urllib.request
+          data = urllib.parse.urlencode({
+            "token": os.environ["PUSHOVER_TOKEN"],
+            "user": os.environ["PUSHOVER_USER"],
+            "title": "Insider research: Pushover test",
+            "message": "Success! GitHub Actions can send notifications to your iPad.",
+          }).encode()
+          with urllib.request.urlopen(urllib.request.Request("https://api.pushover.net/1/messages.json",data=data,method="POST"),timeout=20) as response:
+            result=json.load(response)
+          if result.get("status") != 1:
+            raise RuntimeError("Pushover did not accept the message")
+          print("Pushover API accepted test notification.")
+          PY
