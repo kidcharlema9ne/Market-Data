@@ -173,8 +173,19 @@ def population_mask(cand, name, liquid, price_variant):
     return m
 
 
+TRADES = []
+
+
 def full_report(title, sel, prices):
     fx, cm = run_rule(sel, prices, "fixed42"), run_rule(sel, prices, "comm50")
+    if len(fx):
+        TRADES.append(fx.assign(population=title, exit_rule="fixed 42"))
+        TRADES.append(cm.assign(population=title, exit_rule="commercial-50"))
+        print("  entries per year:", fx["year"].value_counts().sort_index().to_dict())
+        print("  worst five fixed-42 trades (market, dir, signal week, entry, ATR return):")
+        for _, r in fx.nsmallest(5, "ret").iterrows():
+            print("   ", r["market"], int(r["dir"]), r["signal"].date(), pd.Timestamp(r["entry_date"]).date(), round(r["ret"], 1))
+        print("  best five:", [(r["market"], round(r["ret"], 1)) for _, r in fx.nlargest(5, "ret").iterrows()])
     print(f"\n----- {title} -----")
     print("trades:", len(sel), "| longs", int((sel['dir'] == 1).sum()), "shorts", int((sel['dir'] == -1).sum()),
           "| markets", sel["market"].nunique(), "| signal weeks", sel["signal"].nunique(),
@@ -240,6 +251,8 @@ def main():
     for title, pop in (("open-interest filter alone", "oi"), ("price-position filter alone", "price"),
                        ("both filters combined", "both")):
         full_report(title, pick(cand, population_mask(cand, pop, True, "in"), True), prices)
+    if TRADES:
+        pd.concat(TRADES).to_csv("cot_oi_trades.csv", index=False)
     print("\nBenchmark: not applicable to futures ATR returns (stock SPY benchmark rule); benchmark unavailable.")
 
 

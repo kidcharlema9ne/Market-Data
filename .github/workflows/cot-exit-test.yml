@@ -28,5 +28,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: cot_oi_results
-          path: cot_oi_results.txt
+          path: |
+            cot_oi_results.txt
+            cot_oi_trades.csv
           retention-days: 14
