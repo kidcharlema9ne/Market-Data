@@ -1,0 +1,31 @@
+name: COT commercial-50 exit test (futures; windows 26/50/100 weeks; stops; fixed 21/42)
+on:
+  push:
+    branches: [claude/cot-commercial50-exit-20261110]
+    paths: [.github/workflows/cot-exit-test.yml, research/cot_exit/*.py, research/cot_exit/cot_weekly.csv.gz]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas numpy
+      - name: Fetch futures prices from R2
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python research/cot_exit/fetch_futures_prices.py
+      - name: Run the exit test
+        run: python research/cot_exit/cot_exit_test.py research/cot_exit/cot_weekly.csv.gz futures_prices.parquet | tee cot_exit_results.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cot_exit_results
+          path: cot_exit_results.txt
+          retention-days: 14
