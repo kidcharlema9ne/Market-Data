@@ -120,10 +120,11 @@ def candidates(markets, prices):
 
 
 def evaluate(r, s, rule):
-    e, d, atr, end_cap = r["e"], r["dir"], r["atr"], r["end_cap"]
+    e, d, atr, end_cap = int(r["e"]), int(r["dir"]), float(r["atr"]), int(r["end_cap"])
     entry = s["o"][e]
-    if rule == "comm50" and r["open_exit"] is not None:
-        exit_i, how, exit_px = r["open_exit"], "open", s["o"][r["open_exit"]]
+    if rule == "comm50" and pd.notna(r["open_exit"]):
+        exit_i = int(r["open_exit"])
+        how, exit_px = "open", s["o"][exit_i]
     else:
         exit_i, how, exit_px = end_cap, "close", s["c"][end_cap]
     last = exit_i - 1 if how == "open" else exit_i
