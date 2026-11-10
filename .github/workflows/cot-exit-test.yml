@@ -1,11 +1,11 @@
-name: COT commercial-50 exit test on the open-interest populations (futures; full-history COT extract)
+name: COT commercial-50 exit test reconciliation audit on the 48-market report universe
 on:
   push:
     branches: [claude/cot-commercial50-exit-20261110]
-    paths: [.github/workflows/cot-exit-test.yml, research/cot_exit/*.py, research/cot_exit/cot_weekly_full.csv.gz]
+    paths: [.github/workflows/cot-exit-test.yml, research/cot_exit/*.py, research/cot_exit/cot_weekly_full.csv.gz, research/cot_exit/cot_universe_report.csv]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -22,13 +22,19 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: python research/cot_exit/fetch_futures_prices.py
-      - name: Run the exit test
+      - name: Run the reconciliation audit
         run: |
-          python research/cot_exit/cot_oi_exit_test.py research/cot_exit/cot_weekly_full.csv.gz futures_prices.parquet | tee cot_oi_results.txt
+          mkdir -p research/cot_exit/results
+          python research/cot_exit/cot_audit.py research/cot_exit/cot_weekly_full.csv.gz research/cot_exit/cot_universe_report.csv futures_prices.parquet research/cot_exit/results | tee research/cot_exit/results/cot_audit_results.txt
+      - name: Save results on the branch
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add research/cot_exit/results
+          git commit -m "COT audit results (workflow run ${{ github.run_id }})" || echo "nothing to commit"
+          git push origin HEAD:${{ github.ref_name }}
       - uses: actions/upload-artifact@v4
         with:
-          name: cot_oi_results
-          path: |
-            cot_oi_results.txt
-            cot_oi_trades.csv
+          name: cot_audit_results
+          path: research/cot_exit/results
           retention-days: 14
