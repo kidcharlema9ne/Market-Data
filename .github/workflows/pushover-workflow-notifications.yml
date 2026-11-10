@@ -1,0 +1,47 @@
+name: Research workflow Pushover notifications
+on:
+  workflow_run:
+    workflows:
+      - SEC Form 4 master-index reconciliation
+      - EDGAR free-year coverage audit
+      - EDGAR free-year batch to R2
+      - Free-year research smoke test
+      - R2 SEC filing storage inventory
+      - MarketParquet free year to R2
+    types: [completed]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  notify:
+    if: ${{ false }} # Temporarily disabled; remove this line to re-enable.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Pushover result
+        env:
+          PUSHOVER_APP_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER }}
+          RUN_NAME: ${{ github.event.workflow_run.name }}
+          RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+        run: |
+          if [ -z "$PUSHOVER_APP_TOKEN" ] || [ -z "$PUSHOVER_USER_KEY" ]; then
+            echo "::warning::Pushover secrets missing; notification skipped."
+            exit 0
+          fi
+          python - <<'PY'
+          import os, urllib.parse, urllib.request
+          conclusion = os.environ["RUN_CONCLUSION"]
+          data = urllib.parse.urlencode({
+              "token": os.environ["PUSHOVER_APP_TOKEN"],
+              "user": os.environ["PUSHOVER_USER_KEY"],
+              "title": f"GitHub research: {conclusion}",
+              "message": f'{os.environ["RUN_NAME"]}: {conclusion}',
+              "url": os.environ["RUN_URL"],
+              "url_title": "Open GitHub run",
+              "priority": "1" if conclusion != "success" else "0",
+          }).encode()
+          request = urllib.request.Request("https://api.pushover.net/1/messages.json", data=data, method="POST")
+          with urllib.request.urlopen(request, timeout=20) as response:
+              print("Pushover response status:", response.status)
+          PY
