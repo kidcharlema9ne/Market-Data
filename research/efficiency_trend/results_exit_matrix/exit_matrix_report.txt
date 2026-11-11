@@ -273,8 +273,8 @@ symbol direction entry_date  entry_price  atr_pct  sessions  final reason
     B6     short 2008-08-14         1.94     0.92      3340  32.31 forced
     HO     short 2008-08-05         2.55     3.73      3339  16.81 forced
     HE     short 2008-08-29       229.73     2.29      3320  29.02 forced
-    CL     short 2008-09-15       324.15     4.65      3315  18.56 forced
     ZW     short 2008-09-12      5247.77     4.42      3315  16.65 forced
+    CL     short 2008-09-15       324.15     4.65      3315  18.56 forced
     KE     short 2008-09-12      4293.08     3.52      3315  21.53 forced
   trades over 250 sessions: 68 of 377; their total result 2,349 ATR out of 1,746 ATR
 
@@ -324,3 +324,178 @@ initial_stop_atr
 3.0                 0.76    0.47              17.87               38.93
 4.0                 0.74    0.45              17.87               40.04
 5.0                 0.76    0.48              18.74               39.55
+
+
+==================== SENSITIVITY: the same 80 cells WITHOUT ZQ (47 markets) ====================
+
+==================== 20-session ratio 0.6, without ZQ ====================
+
+--- average return per year, %, without ZQ ---
+                                  2 ATR stop  3 ATR stop  4 ATR stop  5 ATR stop
+exit                                                                            
+fixed stop, 60-session cap             11.74       18.02       18.44       20.29
+fixed stop, 90-session cap             12.73       15.37       15.89       17.62
+fixed stop, 120-session cap            15.79       19.31       19.46       19.42
+fixed stop, no cap                     30.01       26.47       24.31       25.59
+40-session channel trail, no cap       14.71       18.74       19.29       20.51
+20-session channel trail, no cap       11.36       15.10       15.88       15.43
+4 ATR trail, 60-session cap             6.66       10.10       10.89       10.87
+4 ATR trail, no cap                     7.49       10.19       11.06       11.04
+6 ATR trail, 60-session cap             9.88       14.69       14.66       16.26
+6 ATR trail, no cap                     8.89       12.76       14.77       15.60
+
+--- Sharpe ratio, without ZQ ---
+                                  2 ATR stop  3 ATR stop  4 ATR stop  5 ATR stop
+exit                                                                            
+fixed stop, 60-session cap              0.65        0.85        0.82        0.87
+fixed stop, 90-session cap              0.61        0.63        0.61        0.66
+fixed stop, 120-session cap             0.69        0.74        0.71        0.68
+fixed stop, no cap                      0.88        0.73        0.68        0.74
+40-session channel trail, no cap        0.63        0.69        0.68        0.70
+20-session channel trail, no cap        0.64        0.74        0.76        0.73
+4 ATR trail, 60-session cap             0.50        0.66        0.68        0.68
+4 ATR trail, no cap                     0.54        0.64        0.67        0.67
+6 ATR trail, 60-session cap             0.63        0.79        0.75        0.82
+6 ATR trail, no cap                     0.51        0.64        0.71        0.74
+
+--- worst drawdown, %, without ZQ ---
+                                  2 ATR stop  3 ATR stop  4 ATR stop  5 ATR stop
+exit                                                                            
+fixed stop, 60-session cap             33.16       28.34       30.59       29.69
+fixed stop, 90-session cap             31.68       36.73       37.84       38.15
+fixed stop, 120-session cap            38.99       42.31       41.91       58.82
+fixed stop, no cap                     48.59       65.27       64.96       57.87
+40-session channel trail, no cap       42.15       49.96       45.17       40.02
+20-session channel trail, no cap       29.11       36.06       37.07       39.32
+4 ATR trail, 60-session cap            27.66       31.26       31.95       31.95
+4 ATR trail, no cap                    27.46       31.03       33.05       33.05
+6 ATR trail, 60-session cap            29.76       29.04       30.51       28.38
+6 ATR trail, no cap                    28.54       33.48       35.37       33.02
+
+--- average drawdown (all days), %, without ZQ ---
+                                  2 ATR stop  3 ATR stop  4 ATR stop  5 ATR stop
+exit                                                                            
+fixed stop, 60-session cap             11.60       11.34       11.53       10.41
+fixed stop, 90-session cap             14.60       14.61       15.47       14.85
+fixed stop, 120-session cap            13.01       13.66       13.60       16.82
+fixed stop, no cap                     14.05       20.15       18.41       18.35
+40-session channel trail, no cap       19.52       22.32       21.83       20.80
+20-session channel trail, no cap       14.02       14.88       15.13       15.70
+4 ATR trail, 60-session cap            10.36       11.04       10.94       10.95
+4 ATR trail, no cap                    10.67       11.56       11.63       11.65
+6 ATR trail, 60-session cap            10.44       11.07       11.70       10.41
+6 ATR trail, no cap                    12.85       14.86       14.44       12.98
+
+--- Calmar ratio, without ZQ ---
+                                  2 ATR stop  3 ATR stop  4 ATR stop  5 ATR stop
+exit                                                                            
+fixed stop, 60-session cap              0.35        0.64        0.60        0.68
+fixed stop, 90-session cap              0.40        0.42        0.42        0.46
+fixed stop, 120-session cap             0.40        0.46        0.46        0.33
+fixed stop, no cap                      0.62        0.41        0.37        0.44
+40-session channel trail, no cap        0.35        0.38        0.43        0.51
+20-session channel trail, no cap        0.39        0.42        0.43        0.39
+4 ATR trail, 60-session cap             0.24        0.32        0.34        0.34
+4 ATR trail, no cap                     0.27        0.33        0.33        0.33
+6 ATR trail, 60-session cap             0.33        0.51        0.48        0.57
+6 ATR trail, no cap                     0.31        0.38        0.42        0.47
+
+--- trades, without ZQ ---
+                                  2 ATR stop  3 ATR stop  4 ATR stop  5 ATR stop
+exit                                                                            
+fixed stop, 60-session cap               984         944         924         903
+fixed stop, 90-session cap               931         876         846         815
+fixed stop, 120-session cap              894         832         798         764
+fixed stop, no cap                       341         290         224         195
+40-session channel trail, no cap         907         854         833         814
+20-session channel trail, no cap         969         933         924         923
+4 ATR trail, 60-session cap             1013         981         973         973
+4 ATR trail, no cap                      957         919         907         907
+6 ATR trail, 60-session cap              992         951         937         923
+6 ATR trail, no cap                      856         775         719         679
+
+==================== 15-session ratio 0.7, without ZQ ====================
+
+--- average return per year, %, without ZQ ---
+                                  2 ATR stop  3 ATR stop  4 ATR stop  5 ATR stop
+exit                                                                            
+fixed stop, 60-session cap             14.17       17.28       16.98       16.86
+fixed stop, 90-session cap             11.02       13.34       14.91       14.86
+fixed stop, 120-session cap            13.49       15.46       16.91       18.09
+fixed stop, no cap                     26.48       20.87       23.23       27.52
+40-session channel trail, no cap       13.62       15.75       16.95       17.35
+20-session channel trail, no cap       11.73       15.34       15.64       15.85
+4 ATR trail, 60-session cap             7.27        9.86       10.28       10.25
+4 ATR trail, no cap                     7.21       10.41       11.06       11.04
+6 ATR trail, 60-session cap            10.03       12.91       12.72       13.38
+6 ATR trail, no cap                     8.87       10.34       11.89       13.50
+
+--- Sharpe ratio, without ZQ ---
+                                  2 ATR stop  3 ATR stop  4 ATR stop  5 ATR stop
+exit                                                                            
+fixed stop, 60-session cap              0.73        0.77        0.70        0.69
+fixed stop, 90-session cap              0.51        0.54        0.57        0.56
+fixed stop, 120-session cap             0.58        0.59        0.62        0.65
+fixed stop, no cap                      0.80        0.64        0.69        0.80
+40-session channel trail, no cap        0.56        0.57        0.57        0.58
+20-session channel trail, no cap        0.63        0.71        0.69        0.70
+4 ATR trail, 60-session cap             0.52        0.61        0.62        0.62
+4 ATR trail, no cap                     0.50        0.63        0.65        0.65
+6 ATR trail, 60-session cap             0.61        0.68        0.62        0.65
+6 ATR trail, no cap                     0.50        0.52        0.56        0.62
+
+--- worst drawdown, %, without ZQ ---
+                                  2 ATR stop  3 ATR stop  4 ATR stop  5 ATR stop
+exit                                                                            
+fixed stop, 60-session cap             24.89       32.89       41.60       39.65
+fixed stop, 90-session cap             48.75       41.27       49.03       44.95
+fixed stop, 120-session cap            36.50       52.95       60.19       57.16
+fixed stop, no cap                     53.39       59.87       59.56       51.18
+40-session channel trail, no cap       50.56       51.00       48.02       47.37
+20-session channel trail, no cap       35.68       40.55       38.04       36.87
+4 ATR trail, 60-session cap            33.58       38.41       36.03       36.03
+4 ATR trail, no cap                    34.05       34.95       31.76       31.76
+6 ATR trail, 60-session cap            30.38       36.18       36.99       38.93
+6 ATR trail, no cap                    43.30       44.31       33.73       33.91
+
+--- average drawdown (all days), %, without ZQ ---
+                                  2 ATR stop  3 ATR stop  4 ATR stop  5 ATR stop
+exit                                                                            
+fixed stop, 60-session cap             11.08       13.35       14.47       14.33
+fixed stop, 90-session cap             18.18       17.04       16.33       16.22
+fixed stop, 120-session cap            12.87       15.12       15.05       14.10
+fixed stop, no cap                     17.73       22.15       18.49       15.88
+40-session channel trail, no cap       23.27       25.62       23.94       22.59
+20-session channel trail, no cap       15.82       17.08       17.27       16.81
+4 ATR trail, 60-session cap            12.49       14.40       14.53       14.61
+4 ATR trail, no cap                    12.61       13.31       12.95       13.00
+6 ATR trail, 60-session cap            11.21       13.19       14.23       14.36
+6 ATR trail, no cap                    16.49       17.07       14.79       14.20
+
+--- Calmar ratio, without ZQ ---
+                                  2 ATR stop  3 ATR stop  4 ATR stop  5 ATR stop
+exit                                                                            
+fixed stop, 60-session cap              0.57        0.53        0.41        0.43
+fixed stop, 90-session cap              0.23        0.32        0.30        0.33
+fixed stop, 120-session cap             0.37        0.29        0.28        0.32
+fixed stop, no cap                      0.50        0.35        0.39        0.54
+40-session channel trail, no cap        0.27        0.31        0.35        0.37
+20-session channel trail, no cap        0.33        0.38        0.41        0.43
+4 ATR trail, 60-session cap             0.22        0.26        0.29        0.28
+4 ATR trail, no cap                     0.21        0.30        0.35        0.35
+6 ATR trail, 60-session cap             0.33        0.36        0.34        0.34
+6 ATR trail, no cap                     0.20        0.23        0.35        0.40
+
+--- trades, without ZQ ---
+                                  2 ATR stop  3 ATR stop  4 ATR stop  5 ATR stop
+exit                                                                            
+fixed stop, 60-session cap              1064        1019         998         967
+fixed stop, 90-session cap               990         929         879         839
+fixed stop, 120-session cap              957         884         834         782
+fixed stop, no cap                       373         328         243         200
+40-session channel trail, no cap         976         923         893         868
+20-session channel trail, no cap        1052        1023        1016        1012
+4 ATR trail, 60-session cap             1099        1073        1066        1066
+4 ATR trail, no cap                     1018         975         964         964
+6 ATR trail, 60-session cap             1072        1032        1013         992
+6 ATR trail, no cap                      889         803         761         733
