@@ -1,0 +1,98 @@
+price rows 526297 -> 526277; symbols 132; 2007-12-31 to 2026-11-06
+trades 997, total profit 284.0718% of equity
+Per-market profit split checks out: 997 trades, 284.07% of equity in total (equals the committed in-sample result).
+
+==================== 2008: total 62.0% of equity (28 markets up, 9 down) ====================
+Top 12 markets:
+                                             market  profit_pct
+ZQ               FED FUNDS - CHICAGO BOARD OF TRADE         9.7
+MP       MEXICAN PESO - CHICAGO MERCANTILE EXCHANGE         7.2
+BZ    BRENT LAST DAY - NEW YORK MERCANTILE EXCHANGE         4.9
+B6      BRITISH POUND - CHICAGO MERCANTILE EXCHANGE         4.6
+E6            EURO FX - CHICAGO MERCANTILE EXCHANGE         4.5
+A6  AUSTRALIAN DOLLAR - CHICAGO MERCANTILE EXCHANGE         4.4
+DX                     USD INDEX - ICE FUTURES U.S.         4.2
+PL          PLATINUM - NEW YORK MERCANTILE EXCHANGE         3.3
+NQ        NASDAQ MINI - CHICAGO MERCANTILE EXCHANGE         3.2
+HO    NY HARBOR ULSD - NEW YORK MERCANTILE EXCHANGE         2.7
+N6          NZ DOLLAR - CHICAGO MERCANTILE EXCHANGE         2.4
+GF      FEEDER CATTLE - CHICAGO MERCANTILE EXCHANGE         2.0
+
+Bottom 6 markets:
+                                       market  profit_pct
+KC                COFFEE C - ICE FUTURES U.S.        -0.6
+GC             GOLD - COMMODITY EXCHANGE INC.        -0.7
+LE  LIVE CATTLE - CHICAGO MERCANTILE EXCHANGE        -0.8
+SB            SUGAR NO. 11 - ICE FUTURES U.S.        -1.5
+ZM      SOYBEAN MEAL - CHICAGO BOARD OF TRADE        -1.5
+CC                   COCOA - ICE FUTURES U.S.        -2.2
+
+Top 5 add 30.9, top 10 add 48.7; ZQ alone 9.7.
+
+By month (% of equity):
+1      0.0
+2      3.9
+3     -2.8
+4     -4.9
+5      1.7
+6      0.9
+7     -7.0
+8      2.2
+9     21.1
+10    38.7
+11     6.6
+12     1.4
+
+Trades entered in the year, by direction (result of each trade in full):
+           size   sum
+direction            
+long         27  12.0
+short        39  47.4
+
+==================== 2020: total 78.2% of equity (29 markets up, 16 down) ====================
+Top 12 markets:
+                                                          market  profit_pct
+ZQ                            FED FUNDS - CHICAGO BOARD OF TRADE        21.1
+SR1                        SOFR-1M - CHICAGO MERCANTILE EXCHANGE        11.6
+CL                   WTI-PHYSICAL - NEW YORK MERCANTILE EXCHANGE         5.8
+ZS                             SOYBEANS - CHICAGO BOARD OF TRADE         5.2
+HO                 NY HARBOR ULSD - NEW YORK MERCANTILE EXCHANGE         4.9
+RB                  GASOLINE RBOB - NEW YORK MERCANTILE EXCHANGE         4.7
+LE                     LIVE CATTLE - CHICAGO MERCANTILE EXCHANGE         3.8
+SR3                        SOFR-3M - CHICAGO MERCANTILE EXCHANGE         3.6
+ZL                          SOYBEAN OIL - CHICAGO BOARD OF TRADE         3.1
+AD                 CANADIAN DOLLAR - CHICAGO MERCANTILE EXCHANGE         2.9
+ZM                         SOYBEAN MEAL - CHICAGO BOARD OF TRADE         2.4
+MNQ  MICRO E-MINI NASDAQ-100 INDEX - CHICAGO MERCANTILE EXCHANGE         2.3
+
+Bottom 6 markets:
+                                           market  profit_pct
+ZW             WHEAT-SRW - CHICAGO BOARD OF TRADE        -0.8
+TN         ULTRA UST 10Y - CHICAGO BOARD OF TRADE        -0.8
+CT                COTTON NO. 2 - ICE FUTURES U.S.        -0.9
+BZ  BRENT LAST DAY - NEW YORK MERCANTILE EXCHANGE        -0.9
+E1      SWISS FRANC - CHICAGO MERCANTILE EXCHANGE        -1.3
+GC                 GOLD - COMMODITY EXCHANGE INC.        -1.5
+
+Top 5 add 48.5, top 10 add 66.5; ZQ alone 21.1.
+
+By month (% of equity):
+1     -5.5
+2     17.5
+3     56.7
+4      1.3
+5     -4.2
+6     -4.0
+7      4.3
+8      5.9
+9     -5.6
+10     1.3
+11     3.1
+12     7.4
+
+Trades entered in the year, by direction (result of each trade in full):
+           size   sum
+direction            
+long         53  71.3
+short        35  24.7
+
