@@ -268,6 +268,26 @@ def main(price_path, universe_path, out_dir):
     emit("\nAverages across all cells by exit and by initial stop (Sharpe / Calmar):\n"
          + g.groupby("exit")[["sharpe", "calmar", "annual_return_pct", "worst_drawdown_pct"]].mean().loc[order].round(2).to_string() + "\n\n"
          + g.groupby("initial_stop_atr")[["sharpe", "calmar", "annual_return_pct", "worst_drawdown_pct"]].mean().round(2).to_string())
+    # Sensitivity: ZQ (30-day fed funds) has an ATR of about 0.01% of price, so 0.25% of equity per ATR is a position worth about 25 times equity; one trade made +76%
+    # of equity. Rerun every cell without it to see how much of the grid is that one market.
+    sub_report = [x for x in report if x != "ZQ"]
+    cands2 = {name: {sym: candidates(prices[sym], lb, thr) for sym in sub_report} for name, (lb, thr) in SYSTEMS.items()}
+    rows2 = []
+    for name in SYSTEMS:
+        for label, kind, param, cap in EXITS:
+            for stop in INITIAL_STOPS:
+                trades, pnl, opens = run_cell(prices, cands2[name], stop, kind, param, cap)
+                rows2.append(dict(system=name, exit=label, initial_stop_atr=stop, **cell_stats(trades, pnl, opens, days)))
+    g2 = pd.DataFrame(rows2)
+    g2.to_csv(f"{out_dir}/exit_matrix_cells_without_ZQ.csv", index=False)
+    emit("\n\n==================== SENSITIVITY: the same 80 cells WITHOUT ZQ (47 markets) ====================")
+    for name in SYSTEMS:
+        sub = g2[g2["system"] == name]
+        emit(f"\n==================== {name}, without ZQ ====================")
+        for col, title in METRICS:
+            pv = sub.pivot(index="exit", columns="initial_stop_atr", values=col).loc[order]
+            pv.columns = [f"{c:g} ATR stop" for c in pv.columns]
+            emit(f"\n--- {title}, without ZQ ---\n" + (pv.round(0).astype(int) if col == "trades" else pv.round(2)).to_string())
     open(f"{out_dir}/exit_matrix_report.txt", "w").write("\n".join(log))
 
 
