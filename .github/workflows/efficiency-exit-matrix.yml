@@ -1,0 +1,49 @@
+name: Efficiency ratio stop-width and exit matrix (IN-SAMPLE ONLY)
+on:
+  push:
+    branches: [claude/outside-inside-day-20261111]
+    paths: [.github/workflows/efficiency-exit-matrix.yml, research/efficiency_trend/exit_matrix.py]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  study:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas numpy scikit-learn
+      - name: Tests
+        run: |
+          python research/outside_inside/test_exit_grid.py
+          python research/outside_inside/test_trend_filter.py
+          python research/outside_inside/test_trail_stats.py
+          python research/efficiency_trend/test_efficiency_trend.py
+          python research/efficiency_trend/test_grid_nn.py
+          python research/efficiency_trend/test_exit_matrix.py
+      - name: Fetch futures prices from R2
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python futures_data/fetch_futures_prices.py
+      - name: Stop-width and exit matrix
+        run: |
+          mkdir -p research/efficiency_trend/results_exit_matrix
+          python research/efficiency_trend/exit_matrix.py futures_prices.parquet futures_data/report_universe_48_markets.csv research/efficiency_trend/results_exit_matrix | tee research/efficiency_trend/results_exit_matrix/run_output.txt
+      - name: Save results on the branch
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add research/efficiency_trend/results_exit_matrix
+          git commit -m "Efficiency ratio exit matrix (workflow run ${{ github.run_id }})" || echo "nothing to commit"
+          git pull --rebase origin ${{ github.ref_name }}
+          git push origin HEAD:${{ github.ref_name }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: efficiency_exit_matrix
+          path: research/efficiency_trend/results_exit_matrix
+          retention-days: 14
