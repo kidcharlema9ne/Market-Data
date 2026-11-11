@@ -147,7 +147,8 @@ def run_cell(prices, cands, stop_atr, kind, param, cap):
             if r is None:
                 continue
             path, j, reason, atr = r
-            trades.append(dict(symbol=sym, setup_date=d[i], entry_idx=j, direction=direction, final=path[-1], sessions=len(path), reason=reason))
+            trades.append(dict(symbol=sym, setup_date=d[i], entry_idx=j, direction=direction, final=path[-1], sessions=len(path), reason=reason,
+                               entry_price=float(s["o"][j]), atr_pct=atr / float(s["o"][j]) * 100))
             delta = np.diff(np.r_[0.0, path])
             for day, x in zip(d[j:j + len(path)], delta):
                 pnl[day] = pnl.get(day, 0.0) + x
@@ -177,7 +178,10 @@ def cell_stats(trades, pnl, opens, days):
                 worst_drawdown_pct=worst, average_drawdown_pct=-dd.mean() * 100, calmar=ann / worst if worst > 0 else np.nan, trades=len(trades),
                 total_profit_pct=eq.iloc[-1] * 100, win_rate_pct=(finals > 0).mean() * 100, mean_result_atr=finals.mean(), average_sessions_held=sess.mean(),
                 share_ended_by_stop_pct=100 * reasons.get("stop", 0) / len(trades), share_ended_by_cap_pct=100 * reasons.get("cap", 0) / len(trades),
-                forced_closes=int(reasons.get("forced", 0)), average_open_trades=open_count.mean(), max_open_trades=int(open_count.max()), longest_hold_sessions=int(sess.max()),
+                forced_closes=int(reasons.get("forced", 0)),
+                forced_close_profit_pct=sum(x["final"] for x in trades if x["reason"] == "forced") * ATR_EQUITY * 100,
+                top10_longest_trades_profit_pct=sum(x["final"] for x in sorted(trades, key=lambda z: -z["sessions"])[:10]) * ATR_EQUITY * 100,
+                average_open_trades=open_count.mean(), max_open_trades=int(open_count.max()), longest_hold_sessions=int(sess.max()),
                 best_trade_atr=finals.max(), worst_trade_atr=finals.min())
 
 
@@ -243,9 +247,21 @@ def main(price_path, universe_path, out_dir):
             pv.columns = [f"{c:g} ATR stop" for c in pv.columns]
             emit(f"\n--- {title} (rows: exit; columns: initial stop) ---\n" + (pv.round(0).astype(int) if col == "trades" else pv.round(2)).to_string())
         extra = sub[sub["initial_stop_atr"] == 3.0].set_index("exit").loc[order][["volatility_pct", "win_rate_pct", "average_sessions_held", "longest_hold_sessions",
-                                                                                 "share_ended_by_stop_pct", "share_ended_by_cap_pct", "forced_closes", "average_open_trades",
-                                                                                 "max_open_trades"]]
+                                                                                 "share_ended_by_stop_pct", "share_ended_by_cap_pct", "forced_closes", "forced_close_profit_pct",
+                                                                                 "top10_longest_trades_profit_pct", "total_profit_pct", "average_open_trades", "max_open_trades"]]
         emit("\n--- Extra detail at the 3 ATR initial stop ---\n" + extra.round(1).to_string())
+    emit("\n==================== DIAGNOSTIC: the longest trades in the uncapped cells ====================")
+    for name in SYSTEMS:
+        for label, stop in (("fixed stop, no cap", 3.0), ("4 ATR trail, no cap", 3.0), ("fixed stop, no cap", 2.0)):
+            _, kind, param, cap = next(e for e in EXITS if e[0] == label)
+            trades, _, _ = run_cell(prices, cands_by_system[name], stop, kind, param, cap)
+            tdf = pd.DataFrame(trades)
+            tdf["entry_date"] = [str(prices[a]["d"][b]) for a, b in zip(tdf["symbol"], tdf["entry_idx"])]
+            tdf["direction"] = tdf["direction"].map({1: "long", -1: "short"})
+            top = tdf.sort_values("sessions", ascending=False).head(8)[["symbol", "direction", "entry_date", "entry_price", "atr_pct", "sessions", "final", "reason"]]
+            emit(f"\n--- {name}, {label}, {stop:g} ATR initial stop: 8 longest trades (final = result in ATR; atr_pct = ATR as % of entry price) ---\n" + top.round(2).to_string(index=False)
+                 + f"\n  trades over 250 sessions: {(tdf['sessions'] > 250).sum()} of {len(tdf)}; their total result {tdf[tdf['sessions'] > 250]['final'].sum():,.0f} ATR out of {tdf['final'].sum():,.0f} ATR")
+            tdf.to_csv(f"{out_dir}/trades_{name[:2]}session_{label.replace(' ', '_').replace(',', '')}_{stop:g}ATR.csv.gz", index=False)
     for col, title in (("sharpe", "Sharpe"), ("calmar", "Calmar")):
         top = g.sort_values(col, ascending=False).head(10)[["system", "exit", "initial_stop_atr", "annual_return_pct", "sharpe", "worst_drawdown_pct", "average_drawdown_pct", "calmar", "trades"]]
         emit(f"\n--- Top 10 cells by {title} (biased upward: best of 80) ---\n" + top.round(2).to_string(index=False))
