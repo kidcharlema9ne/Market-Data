@@ -1,6 +1,6 @@
 # Outside day then inside day: futures research (running write-up)
 
-Owner: Michael. Last updated 11 Nov 2026 (after Entry 102). Branch `claude/outside-inside-day-20261111`. Data: see [FUTURES_DATA.md](../FUTURES_DATA.md). Full numbers live in `research/outside_inside/results*/` and `docs/SHARED_LOG.md` Entries 99-102; this page is the plain-words summary.
+Owner: Michael. Last updated 11 Nov 2026 (after Entry 103). Branch `claude/outside-inside-day-20261111`. Data: see [FUTURES_DATA.md](../FUTURES_DATA.md). Full numbers live in `research/outside_inside/results*/` and `docs/SHARED_LOG.md` Entries 99-102; this page is the plain-words summary.
 
 ## The idea (Michael's rules)
 1. Outside day: today's high is above yesterday's high AND today's low is below yesterday's low.
@@ -24,13 +24,26 @@ Owner: Michael. Last updated 11 Nov 2026 (after Entry 102). Branch `claude/outsi
 2. **18 exits (Entry 101):** in-sample 2008 to mid-2021, the trend-style exits looked positive: hold until stopped +0.22 (+-0.17), close of session 40 +0.18, trail 4 ATR +0.15 (1,834 trades; win rate about 22-26%, median result -1.0: a few big winners pay for many -1 losses). Short exits (3-10 sessions), fixed targets of 1-3 units and tight trails were near zero. **On the sealed last 5 years these did not hold up** (-0.00, -0.07, -0.06; about +0.03 on all contracts). Longs and shorts split in those years (long -0.17, short +0.16) where in-sample they matched.
 3. **Controls (Entry 101):** in-sample the pattern beat outside days with no inside day (+0.22 vs +0.10) and ordinary days (+0.02). That gap vanished in the sealed years.
 4. **20-day efficiency-ratio trend filter (Entry 102, in-sample only):** trading only in the direction of the 20-day trend lifts the hold-until-stopped result from +0.21 to +0.30 (988 trades, +-0.22). Requiring a higher efficiency ratio raises it further but on fewer trades: ratio >= 0.3 +0.41 (305 trades, +-0.40), >= 0.4 +0.45 (163), >= 0.5 +0.59 (79, +-0.72), >= 0.6 +0.56 (33). Positive in both in-sample halves at every threshold through 0.6. Trend-style exits (hold, trail 4 ATR, session 40) gain; short time exits and 1-unit targets stay near zero. **But**: (a) none of the lifts is distinguishable from the unfiltered +0.21 given the error bands, (b) the same filter lifts the controls even more (outside day with no inside day: +0.10 to +0.29 at ratio >= 0.3 and +0.53 at >= 0.5), so most of the improvement is "outside day with a trend", not the inside day, (c) ordinary days barely move (+0.02 to +0.07), and (d) trades taken against the trend are about flat for the pattern (-0.06 at ratio >= 0.3) and clearly negative for ordinary days.
+5. **10-day efficiency ratio (Entry 103, in-sample only):** no trend effect. Hold-until-stopped: no filter +0.22; with the 10-day trend +0.17 (979 trades); ratio >= 0.3 +0.10; >= 0.5 +0.28 (219, +-0.40); >= 0.7 +0.30 (71). Trades AGAINST the 10-day trend did as well or better (+0.27 overall). So the apparent help from the 20-day trend is not confirmed by the 10-day version, which points to noise or a slow-trend effect only.
+6. **Portfolio statistics for the 4 ATR trailing stop (Entry 103, in-sample, 0.5% of equity risked per trade, added not compounded, 48 markets, no costs):**
+
+| Strategy | Trades/yr | Win rate | Profit factor | Annual return | Volatility | Sharpe | Max drawdown | Longest time under a peak |
+|---|---|---|---|---|---|---|---|---|
+| All pattern trades | 133 | 26% | 1.21 | 9.9% | 17.2% | 0.58 | 37% | 3.2 yrs |
+| With the 20-day trend | 72 | 26% | 1.31 | 7.7% | 13.4% | 0.57 | 28% | 2.3 yrs |
+| 20-day trend, ratio >= 0.3 | 22 | 29% | 1.56 | 4.1% | 6.5% | 0.63 | 13% | 3.5 yrs |
+| 20-day trend, ratio >= 0.5 | 6 | 33% | 1.76 | 1.4% | 3.1% | 0.47 | 6% | 3.4 yrs |
+| With the 10-day trend | 71 | 26% | 1.23 | 5.8% | 13.0% | 0.45 | 24% | 2.1 yrs |
+| 10-day trend, ratio >= 0.5 | 16 | 26% | 1.38 | 2.1% | 5.4% | 0.40 | 14% | 4.2 yrs |
+
+The filter mostly shrinks the book: Sharpe stays about 0.45-0.63 whatever the filter, so risk-adjusted performance is about the same, with fewer trades and smaller drawdowns (a 20-day-trend, ratio >= 0.3 book scaled to the unfiltered volatility would earn about 10.8% with about a 33% drawdown versus 9.9% and 37%: no meaningful difference). An assumed cost of 0.05 risk units per trade cuts the Sharpe of the unfiltered book from 0.58 to 0.38 and the 20-day-trend, ratio >= 0.3 book from 0.63 to 0.54. Drawdowns are large because up to 29 trades can be open at once and they are correlated. Both halves of the in-sample years are positive but the second half is weaker (unfiltered Sharpe 0.77 in 2008-2014 vs 0.36 in 2015-mid 2021). Years: unfiltered-style books lose in 2009 and have long flat stretches; one year (2014) supplies a big share of the 20-day-trend, ratio >= 0.3 book's return (+25%).
 
 ## Honest status
 Nothing here is an edge yet. In-sample selection among 18 exits and now 10 trend filters carries a multiple-testing haircut, and the one look at the sealed years for exits showed the in-sample result fading. The trend filter is the first idea since then that was developed without touching the sealed years.
 
 ## Next steps (open; Michael to choose)
 - Break the in-sample years down by market group (rates, currencies, energy, metals, grains, indices) and by year to see where the trend-filtered result comes from.
-- Try other trend lookbacks (10 and 40 sessions) and a trend-slope or moving-average version, in-sample only; compare with the efficiency ratio.
+- Try a 40-session trend lookback and a trend-slope or moving-average version, in-sample only (10 sessions did not help).
 - Test whether the inside day adds anything once the trend filter is on (pattern vs outside-day-only at the same filter), with matched trade counts.
 - Add costs and slippage (a rough per-contract cost in risk units) before believing any small positive.
 - Condition on COT positioning (separate question; COT data in `cot-history`).
