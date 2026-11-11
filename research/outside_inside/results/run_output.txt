@@ -1,0 +1,908 @@
+price rows 526297 -> 526277 (duplicate symbol-date rows seen: 0); symbols 132; 2007-12-31 to 2026-11-06
+sample: outside days from 2022-11-06 to 2026-11-06 (4 years)
+report universe: 48 markets with prices; no price series: []
+=== report universe; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case) ===
+trades 563 | distinct outside-day dates 310 | markets 48
+gap fills 3.2% | stopped on the entry bar 6.0% (ambiguous same-bar 6.0%) | stopped later 59.9% | survived all 20 sessions 34.1%
+risk per trade: median 1.30 ATR, 2.02% of price (10th pct 0.92 ATR, 90th pct 1.90 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.13 / 1.48 / 1.73 ATR | 1.65 / 2.91 / 4.44 %
+with the stop in place, best run  median/75th/90th pct: 0.95 / 1.92 / 3.00 risk units | 1.28 / 2.55 / 3.91 ATR | 1.64 / 4.20 / 7.87 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.011 (+-0.101) | median -0.13 | win rate 45.5% | in ATR mean -0.033
+  session 10: mean -0.075 (+-0.125) | median -0.68 | win rate 38.1% | in ATR mean -0.128
+  session 20: mean -0.148 (+-0.169) | median -1.00 | win rate 27.2% | in ATR mean -0.236
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 66.3% | mean result +0.004
+  target 1.0 risk units: reached 48.0% | mean result -0.000
+  target 1.5 risk units: reached 32.9% | mean result -0.072
+  target 2.0 risk units: reached 24.0% | mean result -0.073
+  target 3.0 risk units: reached 9.9% | mean result -0.129
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.75 / 1.70 | run 0.69 / 1.92
+  within 10 sessions: dip 0.98 / 2.47 | run 0.94 / 2.49
+  within 20 sessions: dip 1.32 / 3.87 | run 1.23 / 3.45
+
+=== report universe; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); long only ===
+trades 289 | distinct outside-day dates 193 | markets 47
+gap fills 4.8% | stopped on the entry bar 5.9% (ambiguous same-bar 5.9%) | stopped later 62.3% | survived all 20 sessions 31.8%
+risk per trade: median 1.30 ATR, 2.00% of price (10th pct 0.89 ATR, 90th pct 1.94 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.15 / 1.47 / 1.76 ATR | 1.59 / 2.84 / 3.85 %
+with the stop in place, best run  median/75th/90th pct: 0.88 / 1.81 / 3.00 risk units | 1.10 / 2.43 / 4.27 ATR | 1.53 / 4.27 / 7.78 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.010 (+-0.147) | median -0.21 | win rate 44.3% | in ATR mean -0.056
+  session 10: mean -0.101 (+-0.184) | median -1.00 | win rate 33.4% | in ATR mean -0.180
+  session 20: mean -0.173 (+-0.265) | median -1.00 | win rate 26.6% | in ATR mean -0.274
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 65.1% | mean result -0.017
+  target 1.0 risk units: reached 46.0% | mean result -0.037
+  target 1.5 risk units: reached 31.5% | mean result -0.098
+  target 2.0 risk units: reached 20.8% | mean result -0.129
+  target 3.0 risk units: reached 10.0% | mean result -0.178
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.76 / 1.58 | run 0.64 / 1.94
+  within 10 sessions: dip 1.00 / 2.45 | run 0.82 / 2.55
+  within 20 sessions: dip 1.35 / 3.31 | run 1.24 / 3.72
+
+=== report universe; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); short only ===
+trades 274 | distinct outside-day dates 174 | markets 47
+gap fills 1.5% | stopped on the entry bar 6.2% (ambiguous same-bar 6.2%) | stopped later 57.3% | survived all 20 sessions 36.5%
+risk per trade: median 1.30 ATR, 2.08% of price (10th pct 0.96 ATR, 90th pct 1.86 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.11 / 1.48 / 1.72 ATR | 1.79 / 2.98 / 4.88 %
+with the stop in place, best run  median/75th/90th pct: 1.00 / 2.08 / 2.99 risk units | 1.42 / 2.70 / 3.72 ATR | 1.69 / 4.18 / 8.11 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.011 (+-0.136) | median -0.07 | win rate 46.7% | in ATR mean -0.009
+  session 10: mean -0.047 (+-0.168) | median -0.51 | win rate 43.1% | in ATR mean -0.073
+  session 20: mean -0.121 (+-0.210) | median -1.00 | win rate 27.9% | in ATR mean -0.196
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 67.5% | mean result +0.026
+  target 1.0 risk units: reached 50.0% | mean result +0.038
+  target 1.5 risk units: reached 34.3% | mean result -0.044
+  target 2.0 risk units: reached 27.4% | mean result -0.015
+  target 3.0 risk units: reached 9.9% | mean result -0.077
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.74 / 1.73 | run 0.76 / 1.80
+  within 10 sessions: dip 0.98 / 2.62 | run 0.99 / 2.47
+  within 20 sessions: dip 1.29 / 4.02 | run 1.22 / 3.29
+
+=== report universe; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); only trades whose risk is at least 0.25 ATR ===
+trades 563 | distinct outside-day dates 310 | markets 48
+gap fills 3.2% | stopped on the entry bar 6.0% (ambiguous same-bar 6.0%) | stopped later 59.9% | survived all 20 sessions 34.1%
+risk per trade: median 1.30 ATR, 2.02% of price (10th pct 0.92 ATR, 90th pct 1.90 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.13 / 1.48 / 1.73 ATR | 1.65 / 2.91 / 4.44 %
+with the stop in place, best run  median/75th/90th pct: 0.95 / 1.92 / 3.00 risk units | 1.28 / 2.55 / 3.91 ATR | 1.64 / 4.20 / 7.87 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.011 (+-0.101) | median -0.13 | win rate 45.5% | in ATR mean -0.033
+  session 10: mean -0.075 (+-0.125) | median -0.68 | win rate 38.1% | in ATR mean -0.128
+  session 20: mean -0.148 (+-0.169) | median -1.00 | win rate 27.2% | in ATR mean -0.236
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 66.3% | mean result +0.004
+  target 1.0 risk units: reached 48.0% | mean result -0.000
+  target 1.5 risk units: reached 32.9% | mean result -0.072
+  target 2.0 risk units: reached 24.0% | mean result -0.073
+  target 3.0 risk units: reached 9.9% | mean result -0.129
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.75 / 1.70 | run 0.69 / 1.92
+  within 10 sessions: dip 0.98 / 2.47 | run 0.94 / 2.49
+  within 20 sessions: dip 1.32 / 3.87 | run 1.23 / 3.45
+
+--- report universe; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case): by year and direction ---
+                trades  mean_result_session_10  stopped_share
+year direction                                               
+2022 long           12                   0.304          0.500
+     short           7                  -0.460          0.857
+2023 long           69                  -0.179          0.725
+     short          65                   0.117          0.646
+2024 long           87                  -0.165          0.770
+     short          69                   0.099          0.507
+2025 long           66                   0.018          0.576
+     short          71                  -0.197          0.718
+2026 long           55                  -0.135          0.655
+     short          62                  -0.166          0.645
+--- report universe; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case): by market ---
+        trades  mean_result_session_10  median_worst_dip  median_best_run
+symbol                                                                   
+SI          19                  -0.058             1.000            1.013
+HG          16                  -0.155             1.000            0.893
+KC          16                  -0.348             1.000            1.188
+HE          16                  -0.102             1.000            1.487
+BZ          15                   0.022             1.000            1.183
+DX          15                  -0.332             1.000            0.613
+A6          15                  -0.113             1.000            0.892
+AD          15                   0.348             1.000            1.476
+MNQ         15                   0.057             1.000            0.790
+NQ          15                   0.061             1.000            0.792
+UB          15                   0.027             1.000            0.881
+YM          15                  -1.000             1.000            0.193
+RB          14                  -0.271             1.000            0.551
+PL          14                  -0.269             1.000            0.628
+CL          14                  -0.297             1.000            1.067
+BR          14                  -0.121             1.000            0.604
+ZF          13                  -0.044             1.000            0.989
+ZM          13                   0.002             1.000            0.819
+HO          13                  -0.685             1.000            0.281
+ZN          13                   0.129             1.000            0.935
+N6          13                   0.081             1.000            0.950
+B6          13                  -0.293             1.000            0.534
+E1          13                   0.188             0.967            0.852
+E6          13                   0.087             1.000            1.208
+MP          12                  -0.293             1.000            1.383
+MES         12                  -0.174             1.000            0.691
+RTY         12                  -0.374             1.000            0.864
+J1          11                   0.463             1.000            1.383
+CT          11                  -0.705             1.000            0.436
+GC          11                   0.508             1.000            1.366
+ES          11                  -0.096             1.000            0.850
+GF          11                  -0.041             1.000            1.229
+ZT          11                   0.054             1.000            0.988
+CC          10                   0.157             1.000            1.401
+US          10                   0.192             0.883            1.231
+NG          10                   0.222             1.000            1.115
+TN          10                  -0.562             1.000            0.650
+SR3          9                   0.143             1.000            0.373
+LE           9                   0.587             0.789            2.506
+SB           9                   0.605             0.870            1.443
+VX           8                  -0.131             1.000            1.059
+ZW           8                  -0.020             0.994            1.458
+ZC           8                   0.052             0.940            0.911
+ZS           7                   0.251             1.000            1.691
+ZL           6                  -0.185             0.794            1.762
+SR1          5                  -0.449             1.000            0.588
+KE           4                   0.503             0.629            2.213
+ZQ           1                  -1.000             1.000            0.124
+
+=== all vendor contracts; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case) ===
+trades 1564 | distinct outside-day dates 601 | markets 129
+gap fills 12.0% | stopped on the entry bar 5.6% (ambiguous same-bar 5.2%) | stopped later 60.1% | survived all 20 sessions 34.3%
+risk per trade: median 1.30 ATR, 1.87% of price (10th pct 0.89 ATR, 90th pct 2.06 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.14 / 1.49 / 1.92 ATR | 1.59 / 2.81 / 4.73 %
+with the stop in place, best run  median/75th/90th pct: 0.94 / 1.98 / 3.56 risk units | 1.27 / 2.72 / 4.57 ATR | 1.57 / 4.27 / 8.56 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.004 (+-0.071) | median -0.16 | win rate 44.9% | in ATR mean -0.026
+  session 10: mean -0.034 (+-0.088) | median -0.78 | win rate 37.8% | in ATR mean -0.073
+  session 20: mean -0.049 (+-0.122) | median -1.00 | win rate 27.9% | in ATR mean -0.136
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 65.5% | mean result -0.016
+  target 1.0 risk units: reached 47.6% | mean result -0.022
+  target 1.5 risk units: reached 34.1% | mean result -0.069
+  target 2.0 risk units: reached 24.7% | mean result -0.067
+  target 3.0 risk units: reached 12.9% | mean result -0.077
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.76 / 1.73 | run 0.69 / 1.94
+  within 10 sessions: dip 0.98 / 2.66 | run 0.99 / 2.72
+  within 20 sessions: dip 1.36 / 3.89 | run 1.29 / 4.01
+
+=== all vendor contracts; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); long only ===
+trades 794 | distinct outside-day dates 405 | markets 127
+gap fills 14.0% | stopped on the entry bar 5.5% (ambiguous same-bar 4.9%) | stopped later 60.1% | survived all 20 sessions 34.4%
+risk per trade: median 1.31 ATR, 1.83% of price (10th pct 0.87 ATR, 90th pct 2.06 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.15 / 1.48 / 1.93 ATR | 1.56 / 2.75 / 4.47 %
+with the stop in place, best run  median/75th/90th pct: 0.95 / 1.94 / 3.70 risk units | 1.22 / 2.76 / 4.88 ATR | 1.56 / 4.50 / 9.55 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.002 (+-0.094) | median -0.21 | win rate 43.9% | in ATR mean -0.025
+  session 10: mean -0.028 (+-0.123) | median -0.83 | win rate 36.5% | in ATR mean -0.038
+  session 20: mean -0.032 (+-0.181) | median -1.00 | win rate 28.7% | in ATR mean -0.068
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 66.0% | mean result -0.008
+  target 1.0 risk units: reached 48.1% | mean result -0.011
+  target 1.5 risk units: reached 35.1% | mean result -0.045
+  target 2.0 risk units: reached 23.7% | mean result -0.062
+  target 3.0 risk units: reached 13.5% | mean result -0.047
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.76 / 1.73 | run 0.69 / 1.94
+  within 10 sessions: dip 0.97 / 2.66 | run 0.96 / 2.79
+  within 20 sessions: dip 1.39 / 3.84 | run 1.32 / 4.13
+
+=== all vendor contracts; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); short only ===
+trades 770 | distinct outside-day dates 374 | markets 127
+gap fills 10.0% | stopped on the entry bar 5.7% (ambiguous same-bar 5.5%) | stopped later 60.1% | survived all 20 sessions 34.2%
+risk per trade: median 1.28 ATR, 1.91% of price (10th pct 0.90 ATR, 90th pct 2.06 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.13 / 1.50 / 1.90 ATR | 1.66 / 2.84 / 4.87 %
+with the stop in place, best run  median/75th/90th pct: 0.94 / 2.06 / 3.45 risk units | 1.27 / 2.65 / 4.18 ATR | 1.59 / 4.13 / 8.17 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.010 (+-0.108) | median -0.10 | win rate 45.8% | in ATR mean -0.026
+  session 10: mean -0.040 (+-0.130) | median -0.73 | win rate 39.2% | in ATR mean -0.108
+  session 20: mean -0.066 (+-0.159) | median -1.00 | win rate 27.0% | in ATR mean -0.206
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 64.9% | mean result -0.025
+  target 1.0 risk units: reached 47.0% | mean result -0.033
+  target 1.5 risk units: reached 33.0% | mean result -0.093
+  target 2.0 risk units: reached 25.8% | mean result -0.073
+  target 3.0 risk units: reached 12.2% | mean result -0.108
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.76 / 1.73 | run 0.70 / 1.92
+  within 10 sessions: dip 0.99 / 2.66 | run 1.00 / 2.64
+  within 20 sessions: dip 1.35 / 4.00 | run 1.25 / 3.82
+
+=== all vendor contracts; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); only trades whose risk is at least 0.25 ATR ===
+trades 1564 | distinct outside-day dates 601 | markets 129
+gap fills 12.0% | stopped on the entry bar 5.6% (ambiguous same-bar 5.2%) | stopped later 60.1% | survived all 20 sessions 34.3%
+risk per trade: median 1.30 ATR, 1.87% of price (10th pct 0.89 ATR, 90th pct 2.06 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.14 / 1.49 / 1.92 ATR | 1.59 / 2.81 / 4.73 %
+with the stop in place, best run  median/75th/90th pct: 0.94 / 1.98 / 3.56 risk units | 1.27 / 2.72 / 4.57 ATR | 1.57 / 4.27 / 8.56 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.004 (+-0.071) | median -0.16 | win rate 44.9% | in ATR mean -0.026
+  session 10: mean -0.034 (+-0.088) | median -0.78 | win rate 37.8% | in ATR mean -0.073
+  session 20: mean -0.049 (+-0.122) | median -1.00 | win rate 27.9% | in ATR mean -0.136
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 65.5% | mean result -0.016
+  target 1.0 risk units: reached 47.6% | mean result -0.022
+  target 1.5 risk units: reached 34.1% | mean result -0.069
+  target 2.0 risk units: reached 24.7% | mean result -0.067
+  target 3.0 risk units: reached 12.9% | mean result -0.077
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.76 / 1.73 | run 0.69 / 1.94
+  within 10 sessions: dip 0.98 / 2.66 | run 0.99 / 2.72
+  within 20 sessions: dip 1.36 / 3.89 | run 1.29 / 4.01
+
+=== report universe; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case) ===
+trades 563 | distinct outside-day dates 310 | markets 48
+gap fills 3.2% | stopped on the entry bar 0.0% (ambiguous same-bar 0.0%) | stopped later 64.8% | survived all 20 sessions 35.2%
+risk per trade: median 1.30 ATR, 2.02% of price (10th pct 0.92 ATR, 90th pct 1.90 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.11 / 1.47 / 1.72 ATR | 1.48 / 2.84 / 4.41 %
+with the stop in place, best run  median/75th/90th pct: 0.99 / 2.00 / 3.02 risk units | 1.34 / 2.63 / 3.92 ATR | 1.74 / 4.35 / 8.06 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.013 (+-0.102) | median -0.09 | win rate 46.5% | in ATR mean -0.003
+  session 10: mean -0.052 (+-0.125) | median -0.54 | win rate 38.9% | in ATR mean -0.096
+  session 20: mean -0.113 (+-0.171) | median -1.00 | win rate 28.3% | in ATR mean -0.190
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 68.4% | mean result +0.034
+  target 1.0 risk units: reached 49.7% | mean result +0.033
+  target 1.5 risk units: reached 33.9% | mean result -0.047
+  target 2.0 risk units: reached 25.0% | mean result -0.043
+  target 3.0 risk units: reached 10.3% | mean result -0.101
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.60 / 1.82 | run 0.72 / 1.94
+  within 10 sessions: dip 0.96 / 2.67 | run 1.00 / 2.58
+  within 20 sessions: dip 1.43 / 3.97 | run 1.29 / 3.64
+
+=== report universe; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case); long only ===
+trades 289 | distinct outside-day dates 193 | markets 47
+gap fills 4.8% | stopped on the entry bar 0.0% (ambiguous same-bar 0.0%) | stopped later 66.8% | survived all 20 sessions 33.2%
+risk per trade: median 1.30 ATR, 2.00% of price (10th pct 0.89 ATR, 90th pct 1.94 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.12 / 1.45 / 1.73 ATR | 1.48 / 2.79 / 3.88 %
+with the stop in place, best run  median/75th/90th pct: 0.90 / 1.85 / 3.00 risk units | 1.21 / 2.52 / 4.29 ATR | 1.63 / 4.42 / 7.78 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.022 (+-0.157) | median -0.17 | win rate 45.3% | in ATR mean -0.011
+  session 10: mean -0.068 (+-0.187) | median -0.86 | win rate 34.1% | in ATR mean -0.133
+  session 20: mean -0.117 (+-0.271) | median -1.00 | win rate 28.0% | in ATR mean -0.200
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 66.4% | mean result +0.005
+  target 1.0 risk units: reached 47.1% | mean result -0.015
+  target 1.5 risk units: reached 32.5% | mean result -0.071
+  target 2.0 risk units: reached 21.8% | mean result -0.097
+  target 3.0 risk units: reached 10.4% | mean result -0.142
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.65 / 1.77 | run 0.65 / 1.98
+  within 10 sessions: dip 0.97 / 2.53 | run 0.95 / 2.69
+  within 20 sessions: dip 1.45 / 3.50 | run 1.29 / 4.08
+
+=== report universe; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case); short only ===
+trades 274 | distinct outside-day dates 174 | markets 47
+gap fills 1.5% | stopped on the entry bar 0.0% (ambiguous same-bar 0.0%) | stopped later 62.8% | survived all 20 sessions 37.2%
+risk per trade: median 1.30 ATR, 2.08% of price (10th pct 0.96 ATR, 90th pct 1.86 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.11 / 1.48 / 1.70 ATR | 1.48 / 2.89 / 4.87 %
+with the stop in place, best run  median/75th/90th pct: 1.10 / 2.10 / 3.04 risk units | 1.48 / 2.73 / 3.81 ATR | 1.87 / 4.26 / 8.31 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.003 (+-0.137) | median -0.06 | win rate 47.8% | in ATR mean +0.006
+  session 10: mean -0.036 (+-0.170) | median -0.48 | win rate 43.8% | in ATR mean -0.057
+  session 20: mean -0.109 (+-0.211) | median -1.00 | win rate 28.7% | in ATR mean -0.180
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 70.4% | mean result +0.065
+  target 1.0 risk units: reached 52.6% | mean result +0.084
+  target 1.5 risk units: reached 35.4% | mean result -0.021
+  target 2.0 risk units: reached 28.5% | mean result +0.013
+  target 3.0 risk units: reached 10.2% | mean result -0.057
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.55 / 1.83 | run 0.82 / 1.82
+  within 10 sessions: dip 0.94 / 2.78 | run 1.05 / 2.52
+  within 20 sessions: dip 1.39 / 4.32 | run 1.29 / 3.30
+
+=== report universe; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case); only trades whose risk is at least 0.25 ATR ===
+trades 563 | distinct outside-day dates 310 | markets 48
+gap fills 3.2% | stopped on the entry bar 0.0% (ambiguous same-bar 0.0%) | stopped later 64.8% | survived all 20 sessions 35.2%
+risk per trade: median 1.30 ATR, 2.02% of price (10th pct 0.92 ATR, 90th pct 1.90 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.11 / 1.47 / 1.72 ATR | 1.48 / 2.84 / 4.41 %
+with the stop in place, best run  median/75th/90th pct: 0.99 / 2.00 / 3.02 risk units | 1.34 / 2.63 / 3.92 ATR | 1.74 / 4.35 / 8.06 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.013 (+-0.102) | median -0.09 | win rate 46.5% | in ATR mean -0.003
+  session 10: mean -0.052 (+-0.125) | median -0.54 | win rate 38.9% | in ATR mean -0.096
+  session 20: mean -0.113 (+-0.171) | median -1.00 | win rate 28.3% | in ATR mean -0.190
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 68.4% | mean result +0.034
+  target 1.0 risk units: reached 49.7% | mean result +0.033
+  target 1.5 risk units: reached 33.9% | mean result -0.047
+  target 2.0 risk units: reached 25.0% | mean result -0.043
+  target 3.0 risk units: reached 10.3% | mean result -0.101
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.60 / 1.82 | run 0.72 / 1.94
+  within 10 sessions: dip 0.96 / 2.67 | run 1.00 / 2.58
+  within 20 sessions: dip 1.43 / 3.97 | run 1.29 / 3.64
+
+=== all vendor contracts; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case) ===
+trades 1564 | distinct outside-day dates 601 | markets 129
+gap fills 12.0% | stopped on the entry bar 0.4% (ambiguous same-bar 0.0%) | stopped later 64.6% | survived all 20 sessions 35.0%
+risk per trade: median 1.30 ATR, 1.87% of price (10th pct 0.89 ATR, 90th pct 2.06 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.12 / 1.49 / 1.91 ATR | 1.47 / 2.74 / 4.68 %
+with the stop in place, best run  median/75th/90th pct: 0.98 / 2.06 / 3.65 risk units | 1.30 / 2.76 / 4.62 ATR | 1.66 / 4.34 / 8.66 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.029 (+-0.071) | median -0.10 | win rate 46.3% | in ATR mean +0.003
+  session 10: mean -0.008 (+-0.089) | median -0.65 | win rate 38.8% | in ATR mean -0.044
+  session 20: mean -0.027 (+-0.123) | median -1.00 | win rate 28.6% | in ATR mean -0.108
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 67.8% | mean result +0.016
+  target 1.0 risk units: reached 49.3% | mean result +0.010
+  target 1.5 risk units: reached 35.4% | mean result -0.039
+  target 2.0 risk units: reached 25.9% | mean result -0.034
+  target 3.0 risk units: reached 13.3% | mean result -0.053
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.64 / 1.88 | run 0.73 / 2.00
+  within 10 sessions: dip 0.95 / 2.86 | run 1.01 / 2.86
+  within 20 sessions: dip 1.46 / 4.07 | run 1.38 / 4.17
+
+=== all vendor contracts; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case); long only ===
+trades 794 | distinct outside-day dates 405 | markets 127
+gap fills 14.0% | stopped on the entry bar 0.6% (ambiguous same-bar 0.0%) | stopped later 64.1% | survived all 20 sessions 35.3%
+risk per trade: median 1.31 ATR, 1.83% of price (10th pct 0.87 ATR, 90th pct 2.06 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.12 / 1.46 / 1.92 ATR | 1.45 / 2.71 / 4.47 %
+with the stop in place, best run  median/75th/90th pct: 0.99 / 1.98 / 3.79 risk units | 1.30 / 2.84 / 4.99 ATR | 1.64 / 4.71 / 9.60 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.032 (+-0.098) | median -0.16 | win rate 45.4% | in ATR mean +0.015
+  session 10: mean +0.004 (+-0.125) | median -0.65 | win rate 37.4% | in ATR mean +0.000
+  session 20: mean -0.002 (+-0.183) | median -1.00 | win rate 29.6% | in ATR mean -0.026
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 68.4% | mean result +0.027
+  target 1.0 risk units: reached 49.9% | mean result +0.023
+  target 1.5 risk units: reached 36.5% | mean result -0.011
+  target 2.0 risk units: reached 24.8% | mean result -0.026
+  target 3.0 risk units: reached 14.1% | mean result -0.011
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.63 / 1.87 | run 0.73 / 1.99
+  within 10 sessions: dip 0.94 / 2.81 | run 1.00 / 2.94
+  within 20 sessions: dip 1.47 / 3.94 | run 1.44 / 4.27
+
+=== all vendor contracts; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case); short only ===
+trades 770 | distinct outside-day dates 374 | markets 127
+gap fills 10.0% | stopped on the entry bar 0.3% (ambiguous same-bar 0.0%) | stopped later 65.1% | survived all 20 sessions 34.7%
+risk per trade: median 1.28 ATR, 1.91% of price (10th pct 0.90 ATR, 90th pct 2.06 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.12 / 1.50 / 1.90 ATR | 1.51 / 2.78 / 4.86 %
+with the stop in place, best run  median/75th/90th pct: 0.98 / 2.11 / 3.46 risk units | 1.32 / 2.68 / 4.19 ATR | 1.68 / 4.15 / 8.21 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.026 (+-0.108) | median -0.07 | win rate 47.1% | in ATR mean -0.010
+  session 10: mean -0.021 (+-0.133) | median -0.65 | win rate 40.3% | in ATR mean -0.089
+  session 20: mean -0.052 (+-0.161) | median -1.00 | win rate 27.5% | in ATR mean -0.192
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 67.1% | mean result +0.004
+  target 1.0 risk units: reached 48.7% | mean result -0.004
+  target 1.5 risk units: reached 34.2% | mean result -0.069
+  target 2.0 risk units: reached 27.0% | mean result -0.043
+  target 3.0 risk units: reached 12.5% | mean result -0.095
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.65 / 1.90 | run 0.73 / 2.00
+  within 10 sessions: dip 0.96 / 2.92 | run 1.01 / 2.74
+  within 20 sessions: dip 1.45 / 4.33 | run 1.33 / 3.89
+
+=== all vendor contracts; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case); only trades whose risk is at least 0.25 ATR ===
+trades 1564 | distinct outside-day dates 601 | markets 129
+gap fills 12.0% | stopped on the entry bar 0.4% (ambiguous same-bar 0.0%) | stopped later 64.6% | survived all 20 sessions 35.0%
+risk per trade: median 1.30 ATR, 1.87% of price (10th pct 0.89 ATR, 90th pct 2.06 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.12 / 1.49 / 1.91 ATR | 1.47 / 2.74 / 4.68 %
+with the stop in place, best run  median/75th/90th pct: 0.98 / 2.06 / 3.65 risk units | 1.30 / 2.76 / 4.62 ATR | 1.66 / 4.34 / 8.66 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.029 (+-0.071) | median -0.10 | win rate 46.3% | in ATR mean +0.003
+  session 10: mean -0.008 (+-0.089) | median -0.65 | win rate 38.8% | in ATR mean -0.044
+  session 20: mean -0.027 (+-0.123) | median -1.00 | win rate 28.6% | in ATR mean -0.108
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 67.8% | mean result +0.016
+  target 1.0 risk units: reached 49.3% | mean result +0.010
+  target 1.5 risk units: reached 35.4% | mean result -0.039
+  target 2.0 risk units: reached 25.9% | mean result -0.034
+  target 3.0 risk units: reached 13.3% | mean result -0.053
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.64 / 1.88 | run 0.73 / 2.00
+  within 10 sessions: dip 0.95 / 2.86 | run 1.01 / 2.86
+  within 20 sessions: dip 1.46 / 4.07 | run 1.38 / 4.17
+
+=== report universe; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 5 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case) ===
+trades 959 | distinct outside-day dates 437 | markets 48
+gap fills 3.1% | stopped on the entry bar 5.4% (ambiguous same-bar 5.3%) | stopped later 57.0% | survived all 20 sessions 37.5%
+risk per trade: median 1.37 ATR, 2.04% of price (10th pct 0.97 ATR, 90th pct 2.10 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.18 / 1.54 / 1.89 ATR | 1.67 / 2.96 / 4.64 %
+with the stop in place, best run  median/75th/90th pct: 0.88 / 1.87 / 3.17 risk units | 1.27 / 2.66 / 4.29 ATR | 1.69 / 4.35 / 8.73 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.013 (+-0.071) | median -0.09 | win rate 46.4% | in ATR mean -0.058
+  session 10: mean -0.044 (+-0.094) | median -0.54 | win rate 38.3% | in ATR mean -0.110
+  session 20: mean -0.066 (+-0.126) | median -1.00 | win rate 30.1% | in ATR mean -0.160
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 64.7% | mean result -0.015
+  target 1.0 risk units: reached 46.2% | mean result -0.019
+  target 1.5 risk units: reached 33.0% | mean result -0.041
+  target 2.0 risk units: reached 22.6% | mean result -0.061
+  target 3.0 risk units: reached 10.5% | mean result -0.076
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.72 / 1.66 | run 0.62 / 1.72
+  within 10 sessions: dip 0.96 / 2.41 | run 0.83 / 2.41
+  within 20 sessions: dip 1.28 / 3.60 | run 1.15 / 3.48
+
+=== report universe; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 5 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); long only ===
+trades 504 | distinct outside-day dates 293 | markets 48
+gap fills 4.0% | stopped on the entry bar 5.2% (ambiguous same-bar 5.2%) | stopped later 57.1% | survived all 20 sessions 37.7%
+risk per trade: median 1.37 ATR, 2.01% of price (10th pct 0.94 ATR, 90th pct 2.10 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.19 / 1.52 / 1.85 ATR | 1.60 / 2.85 / 4.58 %
+with the stop in place, best run  median/75th/90th pct: 0.88 / 1.85 / 3.65 risk units | 1.22 / 2.69 / 4.57 ATR | 1.73 / 4.42 / 9.22 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.008 (+-0.107) | median -0.12 | win rate 45.6% | in ATR mean -0.026
+  session 10: mean +0.010 (+-0.144) | median -0.63 | win rate 36.1% | in ATR mean -0.033
+  session 20: mean +0.012 (+-0.198) | median -1.00 | win rate 30.9% | in ATR mean -0.037
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 63.7% | mean result -0.027
+  target 1.0 risk units: reached 46.0% | mean result -0.016
+  target 1.5 risk units: reached 33.1% | mean result -0.030
+  target 2.0 risk units: reached 21.8% | mean result -0.060
+  target 3.0 risk units: reached 12.1% | mean result -0.054
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.74 / 1.55 | run 0.62 / 1.80
+  within 10 sessions: dip 0.96 / 2.35 | run 0.79 / 2.65
+  within 20 sessions: dip 1.27 / 3.26 | run 1.21 / 4.08
+
+=== report universe; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 5 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); short only ===
+trades 455 | distinct outside-day dates 260 | markets 48
+gap fills 2.2% | stopped on the entry bar 5.7% (ambiguous same-bar 5.5%) | stopped later 56.9% | survived all 20 sessions 37.4%
+risk per trade: median 1.38 ATR, 2.09% of price (10th pct 0.98 ATR, 90th pct 2.10 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.17 / 1.57 / 1.90 ATR | 1.79 / 3.08 / 4.78 %
+with the stop in place, best run  median/75th/90th pct: 0.88 / 1.89 / 2.92 risk units | 1.34 / 2.63 / 3.91 ATR | 1.68 / 4.19 / 8.09 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.036 (+-0.098) | median -0.06 | win rate 47.3% | in ATR mean -0.094
+  session 10: mean -0.104 (+-0.125) | median -0.48 | win rate 40.7% | in ATR mean -0.195
+  session 20: mean -0.153 (+-0.166) | median -1.00 | win rate 29.3% | in ATR mean -0.297
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 65.7% | mean result -0.002
+  target 1.0 risk units: reached 46.4% | mean result -0.022
+  target 1.5 risk units: reached 32.7% | mean result -0.053
+  target 2.0 risk units: reached 23.5% | mean result -0.061
+  target 3.0 risk units: reached 8.8% | mean result -0.102
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.69 / 1.73 | run 0.64 / 1.67
+  within 10 sessions: dip 0.96 / 2.51 | run 0.86 / 2.21
+  within 20 sessions: dip 1.29 / 4.03 | run 1.07 / 2.98
+
+=== report universe; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 5 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); only trades whose risk is at least 0.25 ATR ===
+trades 959 | distinct outside-day dates 437 | markets 48
+gap fills 3.1% | stopped on the entry bar 5.4% (ambiguous same-bar 5.3%) | stopped later 57.0% | survived all 20 sessions 37.5%
+risk per trade: median 1.37 ATR, 2.04% of price (10th pct 0.97 ATR, 90th pct 2.10 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.18 / 1.54 / 1.89 ATR | 1.67 / 2.96 / 4.64 %
+with the stop in place, best run  median/75th/90th pct: 0.88 / 1.87 / 3.17 risk units | 1.27 / 2.66 / 4.29 ATR | 1.69 / 4.35 / 8.73 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.013 (+-0.071) | median -0.09 | win rate 46.4% | in ATR mean -0.058
+  session 10: mean -0.044 (+-0.094) | median -0.54 | win rate 38.3% | in ATR mean -0.110
+  session 20: mean -0.066 (+-0.126) | median -1.00 | win rate 30.1% | in ATR mean -0.160
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 64.7% | mean result -0.015
+  target 1.0 risk units: reached 46.2% | mean result -0.019
+  target 1.5 risk units: reached 33.0% | mean result -0.041
+  target 2.0 risk units: reached 22.6% | mean result -0.061
+  target 3.0 risk units: reached 10.5% | mean result -0.076
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.72 / 1.66 | run 0.62 / 1.72
+  within 10 sessions: dip 0.96 / 2.41 | run 0.83 / 2.41
+  within 20 sessions: dip 1.28 / 3.60 | run 1.15 / 3.48
+
+=== all vendor contracts; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 5 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case) ===
+trades 2546 | distinct outside-day dates 732 | markets 130
+gap fills 10.9% | stopped on the entry bar 5.0% (ambiguous same-bar 4.6%) | stopped later 57.5% | survived all 20 sessions 37.5%
+risk per trade: median 1.37 ATR, 1.95% of price (10th pct 0.93 ATR, 90th pct 2.21 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.18 / 1.55 / 1.97 ATR | 1.62 / 2.85 / 4.87 %
+with the stop in place, best run  median/75th/90th pct: 0.90 / 1.90 / 3.44 risk units | 1.30 / 2.78 / 4.71 ATR | 1.64 / 4.38 / 8.98 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.005 (+-0.054) | median -0.10 | win rate 45.6% | in ATR mean -0.019
+  session 10: mean -0.026 (+-0.070) | median -0.60 | win rate 38.3% | in ATR mean -0.058
+  session 20: mean -0.024 (+-0.096) | median -1.00 | win rate 30.1% | in ATR mean -0.092
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 65.3% | mean result -0.012
+  target 1.0 risk units: reached 46.3% | mean result -0.021
+  target 1.5 risk units: reached 33.3% | mean result -0.048
+  target 2.0 risk units: reached 23.6% | mean result -0.056
+  target 3.0 risk units: reached 12.4% | mean result -0.054
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.73 / 1.72 | run 0.64 / 1.85
+  within 10 sessions: dip 0.95 / 2.52 | run 0.90 / 2.57
+  within 20 sessions: dip 1.31 / 3.74 | run 1.21 / 3.80
+
+=== all vendor contracts; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 5 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); long only ===
+trades 1312 | distinct outside-day dates 535 | markets 129
+gap fills 11.7% | stopped on the entry bar 4.9% (ambiguous same-bar 4.4%) | stopped later 57.3% | survived all 20 sessions 37.8%
+risk per trade: median 1.37 ATR, 1.92% of price (10th pct 0.92 ATR, 90th pct 2.23 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.18 / 1.54 / 1.95 ATR | 1.58 / 2.85 / 4.90 %
+with the stop in place, best run  median/75th/90th pct: 0.91 / 1.92 / 3.70 risk units | 1.29 / 2.85 / 5.14 ATR | 1.65 / 4.63 / 9.76 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.008 (+-0.077) | median -0.14 | win rate 44.7% | in ATR mean -0.003
+  session 10: mean +0.019 (+-0.103) | median -0.59 | win rate 37.7% | in ATR mean +0.026
+  session 20: mean +0.040 (+-0.143) | median -1.00 | win rate 31.2% | in ATR mean +0.042
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 65.8% | mean result -0.004
+  target 1.0 risk units: reached 47.5% | mean result -0.000
+  target 1.5 risk units: reached 34.6% | mean result -0.020
+  target 2.0 risk units: reached 23.6% | mean result -0.035
+  target 3.0 risk units: reached 13.4% | mean result -0.015
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.74 / 1.69 | run 0.65 / 1.89
+  within 10 sessions: dip 0.95 / 2.48 | run 0.89 / 2.76
+  within 20 sessions: dip 1.31 / 3.56 | run 1.27 / 4.08
+
+=== all vendor contracts; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 5 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); short only ===
+trades 1234 | distinct outside-day dates 496 | markets 129
+gap fills 10.0% | stopped on the entry bar 5.2% (ambiguous same-bar 4.9%) | stopped later 57.6% | survived all 20 sessions 37.2%
+risk per trade: median 1.37 ATR, 1.97% of price (10th pct 0.94 ATR, 90th pct 2.20 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.18 / 1.57 / 1.98 ATR | 1.68 / 2.86 / 4.83 %
+with the stop in place, best run  median/75th/90th pct: 0.88 / 1.88 / 3.27 risk units | 1.31 / 2.64 / 4.30 ATR | 1.62 / 4.19 / 8.35 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.001 (+-0.078) | median -0.07 | win rate 46.5% | in ATR mean -0.037
+  session 10: mean -0.073 (+-0.095) | median -0.60 | win rate 38.9% | in ATR mean -0.147
+  session 20: mean -0.093 (+-0.121) | median -1.00 | win rate 29.0% | in ATR mean -0.235
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 64.7% | mean result -0.021
+  target 1.0 risk units: reached 45.1% | mean result -0.043
+  target 1.5 risk units: reached 31.8% | mean result -0.078
+  target 2.0 risk units: reached 23.7% | mean result -0.078
+  target 3.0 risk units: reached 11.3% | mean result -0.094
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.71 / 1.73 | run 0.63 / 1.79
+  within 10 sessions: dip 0.95 / 2.55 | run 0.91 / 2.41
+  within 20 sessions: dip 1.32 / 3.87 | run 1.15 / 3.54
+
+=== all vendor contracts; STOP AT THE OUTSIDE DAY'S FAR SIDE; entry order live 5 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); only trades whose risk is at least 0.25 ATR ===
+trades 2546 | distinct outside-day dates 732 | markets 130
+gap fills 10.9% | stopped on the entry bar 5.0% (ambiguous same-bar 4.6%) | stopped later 57.5% | survived all 20 sessions 37.5%
+risk per trade: median 1.37 ATR, 1.95% of price (10th pct 0.93 ATR, 90th pct 2.21 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 1.18 / 1.55 / 1.97 ATR | 1.62 / 2.85 / 4.87 %
+with the stop in place, best run  median/75th/90th pct: 0.90 / 1.90 / 3.44 risk units | 1.30 / 2.78 / 4.71 ATR | 1.64 / 4.38 / 8.98 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.005 (+-0.054) | median -0.10 | win rate 45.6% | in ATR mean -0.019
+  session 10: mean -0.026 (+-0.070) | median -0.60 | win rate 38.3% | in ATR mean -0.058
+  session 20: mean -0.024 (+-0.096) | median -1.00 | win rate 30.1% | in ATR mean -0.092
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 65.3% | mean result -0.012
+  target 1.0 risk units: reached 46.3% | mean result -0.021
+  target 1.5 risk units: reached 33.3% | mean result -0.048
+  target 2.0 risk units: reached 23.6% | mean result -0.056
+  target 3.0 risk units: reached 12.4% | mean result -0.054
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.73 / 1.72 | run 0.64 / 1.85
+  within 10 sessions: dip 0.95 / 2.52 | run 0.90 / 2.57
+  within 20 sessions: dip 1.31 / 3.74 | run 1.21 / 3.80
+
+=== report universe; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case) ===
+trades 563 | distinct outside-day dates 310 | markets 48
+gap fills 3.2% | stopped on the entry bar 22.4% (ambiguous same-bar 22.2%) | stopped later 56.5% | survived all 20 sessions 21.1%
+risk per trade: median 0.92 ATR, 1.47% of price (10th pct 0.62 ATR, 90th pct 1.40 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.86 / 1.07 / 1.27 ATR | 1.36 / 2.29 / 3.32 %
+with the stop in place, best run  median/75th/90th pct: 0.83 / 2.15 / 3.42 risk units | 0.77 / 2.04 / 3.65 ATR | 0.94 / 3.04 / 6.88 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.139 (+-0.120) | median -1.00 | win rate 36.4% | in ATR mean -0.133
+  session 10: mean -0.202 (+-0.147) | median -1.00 | win rate 27.6% | in ATR mean -0.205
+  session 20: mean -0.278 (+-0.184) | median -1.00 | win rate 18.1% | in ATR mean -0.286
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 58.3% | mean result -0.124
+  target 1.0 risk units: reached 44.8% | mean result -0.098
+  target 1.5 risk units: reached 35.9% | mean result -0.079
+  target 2.0 risk units: reached 27.0% | mean result -0.140
+  target 3.0 risk units: reached 14.6% | mean result -0.231
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 1.03 / 2.16 | run 0.81 / 2.41
+  within 10 sessions: dip 1.20 / 3.38 | run 1.06 / 3.29
+  within 20 sessions: dip 1.58 / 5.15 | run 1.38 / 4.49
+
+=== report universe; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); long only ===
+trades 289 | distinct outside-day dates 193 | markets 47
+gap fills 4.8% | stopped on the entry bar 22.5% (ambiguous same-bar 22.1%) | stopped later 55.7% | survived all 20 sessions 21.8%
+risk per trade: median 0.91 ATR, 1.39% of price (10th pct 0.62 ATR, 90th pct 1.44 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.86 / 1.06 / 1.31 ATR | 1.27 / 2.21 / 3.08 %
+with the stop in place, best run  median/75th/90th pct: 0.76 / 2.05 / 3.98 risk units | 0.67 / 1.94 / 3.84 ATR | 0.90 / 3.25 / 7.32 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.125 (+-0.173) | median -1.00 | win rate 35.9% | in ATR mean -0.130
+  session 10: mean -0.183 (+-0.217) | median -1.00 | win rate 24.7% | in ATR mean -0.213
+  session 20: mean -0.250 (+-0.278) | median -1.00 | win rate 18.2% | in ATR mean -0.281
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 58.1% | mean result -0.123
+  target 1.0 risk units: reached 40.8% | mean result -0.168
+  target 1.5 risk units: reached 33.6% | mean result -0.133
+  target 2.0 risk units: reached 25.6% | mean result -0.178
+  target 3.0 risk units: reached 14.9% | mean result -0.236
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 1.03 / 2.09 | run 0.78 / 2.56
+  within 10 sessions: dip 1.27 / 3.41 | run 1.00 / 3.33
+  within 20 sessions: dip 1.66 / 5.02 | run 1.37 / 4.68
+
+=== report universe; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); short only ===
+trades 274 | distinct outside-day dates 174 | markets 47
+gap fills 1.5% | stopped on the entry bar 22.3% (ambiguous same-bar 22.3%) | stopped later 57.3% | survived all 20 sessions 20.4%
+risk per trade: median 0.94 ATR, 1.63% of price (10th pct 0.63 ATR, 90th pct 1.37 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.86 / 1.07 / 1.26 ATR | 1.46 / 2.44 / 3.63 %
+with the stop in place, best run  median/75th/90th pct: 0.94 / 2.22 / 3.35 risk units | 0.86 / 2.11 / 3.45 ATR | 1.15 / 3.00 / 6.83 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.154 (+-0.159) | median -1.00 | win rate 36.9% | in ATR mean -0.136
+  session 10: mean -0.221 (+-0.185) | median -1.00 | win rate 30.7% | in ATR mean -0.197
+  session 20: mean -0.307 (+-0.230) | median -1.00 | win rate 18.0% | in ATR mean -0.291
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 58.4% | mean result -0.126
+  target 1.0 risk units: reached 48.9% | mean result -0.024
+  target 1.5 risk units: reached 38.3% | mean result -0.023
+  target 2.0 risk units: reached 28.5% | mean result -0.100
+  target 3.0 risk units: reached 14.2% | mean result -0.226
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 1.03 / 2.17 | run 0.85 / 2.32
+  within 10 sessions: dip 1.13 / 3.38 | run 1.20 / 3.20
+  within 20 sessions: dip 1.43 / 5.16 | run 1.45 / 4.28
+
+=== report universe; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); only trades whose risk is at least 0.25 ATR ===
+trades 563 | distinct outside-day dates 310 | markets 48
+gap fills 3.2% | stopped on the entry bar 22.4% (ambiguous same-bar 22.2%) | stopped later 56.5% | survived all 20 sessions 21.1%
+risk per trade: median 0.92 ATR, 1.47% of price (10th pct 0.62 ATR, 90th pct 1.40 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.86 / 1.07 / 1.27 ATR | 1.36 / 2.29 / 3.32 %
+with the stop in place, best run  median/75th/90th pct: 0.83 / 2.15 / 3.42 risk units | 0.77 / 2.04 / 3.65 ATR | 0.94 / 3.04 / 6.88 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.139 (+-0.120) | median -1.00 | win rate 36.4% | in ATR mean -0.133
+  session 10: mean -0.202 (+-0.147) | median -1.00 | win rate 27.6% | in ATR mean -0.205
+  session 20: mean -0.278 (+-0.184) | median -1.00 | win rate 18.1% | in ATR mean -0.286
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 58.3% | mean result -0.124
+  target 1.0 risk units: reached 44.8% | mean result -0.098
+  target 1.5 risk units: reached 35.9% | mean result -0.079
+  target 2.0 risk units: reached 27.0% | mean result -0.140
+  target 3.0 risk units: reached 14.6% | mean result -0.231
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 1.03 / 2.16 | run 0.81 / 2.41
+  within 10 sessions: dip 1.20 / 3.38 | run 1.06 / 3.29
+  within 20 sessions: dip 1.58 / 5.15 | run 1.38 / 4.49
+
+=== all vendor contracts; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case) ===
+trades 1564 | distinct outside-day dates 601 | markets 129
+gap fills 12.0% | stopped on the entry bar 20.5% (ambiguous same-bar 19.2%) | stopped later 56.9% | survived all 20 sessions 22.6%
+risk per trade: median 0.92 ATR, 1.32% of price (10th pct 0.58 ATR, 90th pct 1.44 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.87 / 1.08 / 1.40 ATR | 1.22 / 2.14 / 3.44 %
+with the stop in place, best run  median/75th/90th pct: 0.84 / 2.25 / 4.32 risk units | 0.78 / 2.18 / 4.15 ATR | 0.94 / 3.26 / 7.79 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.085 (+-0.092) | median -1.00 | win rate 37.1% | in ATR mean -0.091
+  session 10: mean -0.159 (+-0.106) | median -1.00 | win rate 27.8% | in ATR mean -0.147
+  session 20: mean -0.143 (+-0.140) | median -1.00 | win rate 20.0% | in ATR mean -0.143
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 59.3% | mean result -0.120
+  target 1.0 risk units: reached 45.6% | mean result -0.093
+  target 1.5 risk units: reached 36.0% | mean result -0.093
+  target 2.0 risk units: reached 28.2% | mean result -0.124
+  target 3.0 risk units: reached 17.6% | mean result -0.134
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 1.03 / 2.33 | run 0.84 / 2.62
+  within 10 sessions: dip 1.23 / 3.54 | run 1.17 / 3.72
+  within 20 sessions: dip 1.62 / 5.33 | run 1.53 / 5.17
+
+=== all vendor contracts; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); long only ===
+trades 794 | distinct outside-day dates 405 | markets 127
+gap fills 14.0% | stopped on the entry bar 18.6% (ambiguous same-bar 17.0%) | stopped later 57.1% | survived all 20 sessions 24.3%
+risk per trade: median 0.93 ATR, 1.35% of price (10th pct 0.58 ATR, 90th pct 1.51 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.87 / 1.10 / 1.43 ATR | 1.21 / 2.11 / 3.43 %
+with the stop in place, best run  median/75th/90th pct: 0.83 / 2.24 / 4.58 risk units | 0.81 / 2.32 / 4.48 ATR | 0.97 / 3.61 / 8.08 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.078 (+-0.124) | median -1.00 | win rate 37.3% | in ATR mean -0.085
+  session 10: mean -0.128 (+-0.147) | median -1.00 | win rate 27.7% | in ATR mean -0.119
+  session 20: mean -0.103 (+-0.202) | median -1.00 | win rate 21.4% | in ATR mean -0.085
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 61.5% | mean result -0.086
+  target 1.0 risk units: reached 44.1% | mean result -0.117
+  target 1.5 risk units: reached 36.3% | mean result -0.082
+  target 2.0 risk units: reached 28.7% | mean result -0.098
+  target 3.0 risk units: reached 18.3% | mean result -0.085
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 1.01 / 2.38 | run 0.83 / 2.71
+  within 10 sessions: dip 1.28 / 3.64 | run 1.11 / 3.75
+  within 20 sessions: dip 1.72 / 5.30 | run 1.59 / 5.23
+
+=== all vendor contracts; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); short only ===
+trades 770 | distinct outside-day dates 374 | markets 127
+gap fills 10.0% | stopped on the entry bar 22.5% (ambiguous same-bar 21.6%) | stopped later 56.8% | survived all 20 sessions 20.8%
+risk per trade: median 0.90 ATR, 1.30% of price (10th pct 0.59 ATR, 90th pct 1.38 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.85 / 1.07 / 1.37 ATR | 1.23 / 2.17 / 3.44 %
+with the stop in place, best run  median/75th/90th pct: 0.87 / 2.27 / 4.17 risk units | 0.75 / 2.11 / 3.74 ATR | 0.81 / 3.02 / 6.91 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.093 (+-0.134) | median -1.00 | win rate 36.9% | in ATR mean -0.097
+  session 10: mean -0.190 (+-0.148) | median -1.00 | win rate 27.8% | in ATR mean -0.176
+  session 20: mean -0.184 (+-0.183) | median -1.00 | win rate 18.5% | in ATR mean -0.203
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 57.1% | mean result -0.155
+  target 1.0 risk units: reached 47.1% | mean result -0.069
+  target 1.5 risk units: reached 35.7% | mean result -0.106
+  target 2.0 risk units: reached 27.7% | mean result -0.152
+  target 3.0 risk units: reached 17.0% | mean result -0.185
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 1.03 / 2.28 | run 0.85 / 2.60
+  within 10 sessions: dip 1.21 / 3.39 | run 1.22 / 3.71
+  within 20 sessions: dip 1.57 / 5.37 | run 1.51 / 5.11
+
+=== all vendor contracts; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar stop-or-entry ambiguity counted as STOPPED (worst case); only trades whose risk is at least 0.25 ATR ===
+trades 1554 | distinct outside-day dates 599 | markets 129
+gap fills 11.9% | stopped on the entry bar 20.3% (ambiguous same-bar 19.0%) | stopped later 57.0% | survived all 20 sessions 22.7%
+risk per trade: median 0.92 ATR, 1.34% of price (10th pct 0.59 ATR, 90th pct 1.45 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.87 / 1.08 / 1.40 ATR | 1.23 / 2.15 / 3.44 %
+with the stop in place, best run  median/75th/90th pct: 0.84 / 2.25 / 4.30 risk units | 0.79 / 2.19 / 4.17 ATR | 0.94 / 3.27 / 7.79 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.088 (+-0.091) | median -1.00 | win rate 37.2% | in ATR mean -0.092
+  session 10: mean -0.151 (+-0.107) | median -1.00 | win rate 27.9% | in ATR mean -0.147
+  session 20: mean -0.135 (+-0.142) | median -1.00 | win rate 20.1% | in ATR mean -0.143
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 59.5% | mean result -0.116
+  target 1.0 risk units: reached 45.7% | mean result -0.089
+  target 1.5 risk units: reached 36.1% | mean result -0.089
+  target 2.0 risk units: reached 28.2% | mean result -0.121
+  target 3.0 risk units: reached 17.6% | mean result -0.132
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 1.03 / 2.30 | run 0.83 / 2.60
+  within 10 sessions: dip 1.23 / 3.48 | run 1.16 / 3.69
+  within 20 sessions: dip 1.62 / 5.25 | run 1.53 / 5.09
+
+=== report universe; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case) ===
+trades 563 | distinct outside-day dates 310 | markets 48
+gap fills 3.2% | stopped on the entry bar 0.2% (ambiguous same-bar 0.0%) | stopped later 74.6% | survived all 20 sessions 25.2%
+risk per trade: median 0.92 ATR, 1.47% of price (10th pct 0.62 ATR, 90th pct 1.40 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.83 / 1.06 / 1.28 ATR | 1.23 / 2.19 / 3.31 %
+with the stop in place, best run  median/75th/90th pct: 1.15 / 2.36 / 4.17 risk units | 1.04 / 2.34 / 3.85 ATR | 1.37 / 3.94 / 7.77 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.018 (+-0.134) | median -0.41 | win rate 42.1% | in ATR mean +0.013
+  session 10: mean -0.045 (+-0.171) | median -1.00 | win rate 32.6% | in ATR mean -0.061
+  session 20: mean -0.101 (+-0.225) | median -1.00 | win rate 22.2% | in ATR mean -0.125
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 70.2% | mean result +0.041
+  target 1.0 risk units: reached 53.3% | mean result +0.062
+  target 1.5 risk units: reached 41.9% | mean result +0.067
+  target 2.0 risk units: reached 31.4% | mean result -0.007
+  target 3.0 risk units: reached 17.4% | mean result -0.090
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.89 / 2.55 | run 0.99 / 2.62
+  within 10 sessions: dip 1.41 / 3.95 | run 1.47 / 3.56
+  within 20 sessions: dip 2.05 / 5.95 | run 1.88 / 4.94
+
+=== report universe; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case); long only ===
+trades 289 | distinct outside-day dates 193 | markets 47
+gap fills 4.8% | stopped on the entry bar 0.3% (ambiguous same-bar 0.0%) | stopped later 73.0% | survived all 20 sessions 26.6%
+risk per trade: median 0.91 ATR, 1.39% of price (10th pct 0.62 ATR, 90th pct 1.44 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.83 / 1.06 / 1.29 ATR | 1.19 / 2.08 / 3.05 %
+with the stop in place, best run  median/75th/90th pct: 0.94 / 2.27 / 4.65 risk units | 0.94 / 2.36 / 4.20 ATR | 1.37 / 4.02 / 7.76 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.057 (+-0.209) | median -0.45 | win rate 42.2% | in ATR mean +0.026
+  session 10: mean +0.010 (+-0.259) | median -1.00 | win rate 30.0% | in ATR mean -0.053
+  session 20: mean -0.011 (+-0.361) | median -1.00 | win rate 23.1% | in ATR mean -0.081
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 70.6% | mean result +0.051
+  target 1.0 risk units: reached 48.1% | mean result -0.031
+  target 1.5 risk units: reached 39.8% | mean result +0.019
+  target 2.0 risk units: reached 30.8% | mean result -0.017
+  target 3.0 risk units: reached 17.6% | mean result -0.071
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.91 / 2.52 | run 0.91 / 2.79
+  within 10 sessions: dip 1.46 / 3.89 | run 1.34 / 3.68
+  within 20 sessions: dip 2.18 / 5.58 | run 1.89 / 5.16
+
+=== report universe; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case); short only ===
+trades 274 | distinct outside-day dates 174 | markets 47
+gap fills 1.5% | stopped on the entry bar 0.0% (ambiguous same-bar 0.0%) | stopped later 76.3% | survived all 20 sessions 23.7%
+risk per trade: median 0.94 ATR, 1.63% of price (10th pct 0.63 ATR, 90th pct 1.37 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.83 / 1.07 / 1.28 ATR | 1.31 / 2.23 / 3.50 %
+with the stop in place, best run  median/75th/90th pct: 1.32 / 2.43 / 3.74 risk units | 1.16 / 2.33 / 3.68 ATR | 1.38 / 3.56 / 7.76 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean -0.023 (+-0.171) | median -0.37 | win rate 42.0% | in ATR mean -0.000
+  session 10: mean -0.102 (+-0.215) | median -1.00 | win rate 35.4% | in ATR mean -0.068
+  session 20: mean -0.196 (+-0.258) | median -1.00 | win rate 21.3% | in ATR mean -0.172
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 69.7% | mean result +0.030
+  target 1.0 risk units: reached 58.8% | mean result +0.159
+  target 1.5 risk units: reached 44.2% | mean result +0.117
+  target 2.0 risk units: reached 32.1% | mean result +0.003
+  target 3.0 risk units: reached 17.2% | mean result -0.111
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.86 / 2.66 | run 1.10 / 2.57
+  within 10 sessions: dip 1.33 / 4.06 | run 1.52 / 3.52
+  within 20 sessions: dip 2.00 / 6.48 | run 1.82 / 4.57
+
+=== report universe; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case); only trades whose risk is at least 0.25 ATR ===
+trades 563 | distinct outside-day dates 310 | markets 48
+gap fills 3.2% | stopped on the entry bar 0.2% (ambiguous same-bar 0.0%) | stopped later 74.6% | survived all 20 sessions 25.2%
+risk per trade: median 0.92 ATR, 1.47% of price (10th pct 0.62 ATR, 90th pct 1.40 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.83 / 1.06 / 1.28 ATR | 1.23 / 2.19 / 3.31 %
+with the stop in place, best run  median/75th/90th pct: 1.15 / 2.36 / 4.17 risk units | 1.04 / 2.34 / 3.85 ATR | 1.37 / 3.94 / 7.77 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.018 (+-0.134) | median -0.41 | win rate 42.1% | in ATR mean +0.013
+  session 10: mean -0.045 (+-0.171) | median -1.00 | win rate 32.6% | in ATR mean -0.061
+  session 20: mean -0.101 (+-0.225) | median -1.00 | win rate 22.2% | in ATR mean -0.125
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 70.2% | mean result +0.041
+  target 1.0 risk units: reached 53.3% | mean result +0.062
+  target 1.5 risk units: reached 41.9% | mean result +0.067
+  target 2.0 risk units: reached 31.4% | mean result -0.007
+  target 3.0 risk units: reached 17.4% | mean result -0.090
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.89 / 2.55 | run 0.99 / 2.62
+  within 10 sessions: dip 1.41 / 3.95 | run 1.47 / 3.56
+  within 20 sessions: dip 2.05 / 5.95 | run 1.88 / 4.94
+
+=== all vendor contracts; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case) ===
+trades 1564 | distinct outside-day dates 601 | markets 129
+gap fills 12.0% | stopped on the entry bar 1.3% (ambiguous same-bar 0.0%) | stopped later 72.9% | survived all 20 sessions 25.8%
+risk per trade: median 0.92 ATR, 1.32% of price (10th pct 0.58 ATR, 90th pct 1.44 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.84 / 1.08 / 1.41 ATR | 1.10 / 2.07 / 3.40 %
+with the stop in place, best run  median/75th/90th pct: 1.15 / 2.59 / 4.85 risk units | 1.01 / 2.50 / 4.43 ATR | 1.27 / 3.94 / 8.23 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.095 (+-0.118) | median -0.47 | win rate 42.2% | in ATR mean +0.026
+  session 10: mean +0.023 (+-0.130) | median -1.00 | win rate 32.0% | in ATR mean -0.027
+  session 20: mean +0.072 (+-0.183) | median -1.00 | win rate 23.1% | in ATR mean -0.012
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 69.8% | mean result +0.026
+  target 1.0 risk units: reached 53.4% | mean result +0.053
+  target 1.5 risk units: reached 41.8% | mean result +0.042
+  target 2.0 risk units: reached 32.7% | mean result +0.003
+  target 3.0 risk units: reached 20.8% | mean result -0.004
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.92 / 2.67 | run 1.01 / 2.89
+  within 10 sessions: dip 1.40 / 4.01 | run 1.50 / 4.17
+  within 20 sessions: dip 2.12 / 6.16 | run 2.00 / 5.84
+
+=== all vendor contracts; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case); long only ===
+trades 794 | distinct outside-day dates 405 | markets 127
+gap fills 14.0% | stopped on the entry bar 1.6% (ambiguous same-bar 0.0%) | stopped later 70.3% | survived all 20 sessions 28.1%
+risk per trade: median 0.93 ATR, 1.35% of price (10th pct 0.58 ATR, 90th pct 1.51 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.85 / 1.09 / 1.42 ATR | 1.06 / 2.03 / 3.39 %
+with the stop in place, best run  median/75th/90th pct: 1.05 / 2.60 / 5.03 risk units | 1.01 / 2.60 / 4.82 ATR | 1.34 / 4.10 / 8.67 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.083 (+-0.154) | median -0.44 | win rate 42.4% | in ATR mean +0.042
+  session 10: mean +0.073 (+-0.194) | median -1.00 | win rate 31.9% | in ATR mean +0.032
+  session 20: mean +0.159 (+-0.282) | median -1.00 | win rate 25.1% | in ATR mean +0.084
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 71.9% | mean result +0.061
+  target 1.0 risk units: reached 51.3% | mean result +0.021
+  target 1.5 risk units: reached 42.2% | mean result +0.059
+  target 2.0 risk units: reached 33.4% | mean result +0.036
+  target 3.0 risk units: reached 21.3% | mean result +0.052
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.91 / 2.58 | run 0.97 / 2.92
+  within 10 sessions: dip 1.37 / 3.92 | run 1.45 / 4.21
+  within 20 sessions: dip 2.18 / 5.82 | run 1.99 / 5.89
+
+=== all vendor contracts; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case); short only ===
+trades 770 | distinct outside-day dates 374 | markets 127
+gap fills 10.0% | stopped on the entry bar 0.9% (ambiguous same-bar 0.0%) | stopped later 75.6% | survived all 20 sessions 23.5%
+risk per trade: median 0.90 ATR, 1.30% of price (10th pct 0.59 ATR, 90th pct 1.38 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.01 risk units | 0.82 / 1.07 / 1.39 ATR | 1.13 / 2.09 / 3.40 %
+with the stop in place, best run  median/75th/90th pct: 1.19 / 2.57 / 4.69 risk units | 1.02 / 2.33 / 4.08 ATR | 1.25 / 3.50 / 7.62 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.107 (+-0.182) | median -0.50 | win rate 42.0% | in ATR mean +0.010
+  session 10: mean -0.028 (+-0.182) | median -1.00 | win rate 32.0% | in ATR mean -0.087
+  session 20: mean -0.018 (+-0.224) | median -1.00 | win rate 21.0% | in ATR mean -0.110
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 67.7% | mean result -0.011
+  target 1.0 risk units: reached 55.6% | mean result +0.085
+  target 1.5 risk units: reached 41.4% | mean result +0.025
+  target 2.0 risk units: reached 32.1% | mean result -0.030
+  target 3.0 risk units: reached 20.3% | mean result -0.061
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.93 / 2.69 | run 1.06 / 2.85
+  within 10 sessions: dip 1.41 / 4.08 | run 1.52 / 4.15
+  within 20 sessions: dip 2.07 / 6.46 | run 2.00 / 5.78
+
+=== all vendor contracts; STOP AT THE INSIDE DAY'S FAR SIDE; entry order live 1 session(s); same-bar ambiguity: low assumed BEFORE the break (best case); only trades whose risk is at least 0.25 ATR ===
+trades 1554 | distinct outside-day dates 599 | markets 129
+gap fills 11.9% | stopped on the entry bar 1.3% (ambiguous same-bar 0.0%) | stopped later 72.8% | survived all 20 sessions 25.9%
+risk per trade: median 0.92 ATR, 1.34% of price (10th pct 0.59 ATR, 90th pct 1.45 ATR)
+with the stop in place, worst dip median/75th/90th pct: 1.00 / 1.00 / 1.00 risk units | 0.84 / 1.08 / 1.41 ATR | 1.11 / 2.07 / 3.41 %
+with the stop in place, best run  median/75th/90th pct: 1.15 / 2.56 / 4.76 risk units | 1.01 / 2.47 / 4.42 ATR | 1.27 / 3.94 / 8.19 %
+exit at close of session N, stop honored (result in risk units; +-2 standard errors clustered by outside-day date):
+  session  5: mean +0.050 (+-0.098) | median -0.47 | win rate 42.2% | in ATR mean +0.022
+  session 10: mean -0.008 (+-0.120) | median -1.00 | win rate 32.0% | in ATR mean -0.030
+  session 20: mean +0.034 (+-0.167) | median -1.00 | win rate 23.1% | in ATR mean -0.018
+fixed target with the 1-unit stop, time exit at the close of session 20 (reach = target before stop):
+  target 0.5 risk units: reached 69.8% | mean result +0.027
+  target 1.0 risk units: reached 53.2% | mean result +0.052
+  target 1.5 risk units: reached 41.6% | mean result +0.040
+  target 2.0 risk units: reached 32.5% | mean result -0.001
+  target 3.0 risk units: reached 20.5% | mean result -0.012
+ignoring the stop (what the market did anyway), median/90th pct worst dip | best run in risk units:
+  within  5 sessions: dip 0.92 / 2.63 | run 1.00 / 2.84
+  within 10 sessions: dip 1.40 / 3.97 | run 1.48 / 4.12
+  within 20 sessions: dip 2.11 / 6.04 | run 1.98 / 5.78
+
