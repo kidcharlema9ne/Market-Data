@@ -1,4 +1,4 @@
-name: Efficiency ratio system: profit by market in 2008 and 2020 (IN-SAMPLE)
+name: Efficiency ratio system - profit by market in 2008 and 2020 (IN-SAMPLE)
 on:
   push:
     branches: [claude/outside-inside-day-20261111]
