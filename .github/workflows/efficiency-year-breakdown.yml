@@ -1,0 +1,44 @@
+name: Efficiency ratio system: profit by market in 2008 and 2020 (IN-SAMPLE)
+on:
+  push:
+    branches: [claude/outside-inside-day-20261111]
+    paths: [.github/workflows/efficiency-year-breakdown.yml, research/efficiency_trend/year_breakdown.py]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  study:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas numpy scikit-learn
+      - name: Tests
+        run: |
+          python research/efficiency_trend/test_oos_single.py
+      - name: Fetch futures prices from R2
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python futures_data/fetch_futures_prices.py
+      - name: Profit by market, 2008 and 2020
+        run: |
+          mkdir -p research/efficiency_trend/results_year_breakdown
+          python research/efficiency_trend/year_breakdown.py futures_prices.parquet futures_data/report_universe_48_markets.csv research/efficiency_trend/results_year_breakdown | tee research/efficiency_trend/results_year_breakdown/run_output.txt
+      - name: Save results on the branch
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add research/efficiency_trend/results_year_breakdown
+          git commit -m "Efficiency ratio profit by market 2008 and 2020 (workflow run ${{ github.run_id }})" || echo "nothing to commit"
+          git pull --rebase origin ${{ github.ref_name }}
+          git push origin HEAD:${{ github.ref_name }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: efficiency_year_breakdown
+          path: research/efficiency_trend/results_year_breakdown
+          retention-days: 14
