@@ -2,7 +2,7 @@ name: Outside day then inside day study (futures, 4 years)
 on:
   push:
     branches: [claude/outside-inside-day-20261111]
-    paths: [.github/workflows/outside-inside-day.yml, research/outside_inside/*.py]
+    paths: [.github/workflows/outside-inside-day.yml, research/outside_inside/outside_inside_day.py, research/outside_inside/test_outside_inside_day.py]
   workflow_dispatch:
 permissions:
   contents: write
