@@ -1,0 +1,110 @@
+Efficiency-ratio grid, IN-SAMPLE signals 2008 to mid-2021 (last 5 years sealed), 48 report markets, no costs, 0.5% of equity risked per trade.
+750 settings run, 725 with at least 100 trades.
+
+=== Share of settings with a positive Sharpe: 99%; median Sharpe 0.55; best 0.96 ===
+
+=== TOP 15 settings by full in-sample Sharpe (biased upward: best of many) ===
+ window  threshold  initial_stop_atr                           exit  trades  mean_result_risk_units  mean_result_atr  plus_minus_2se  annual_return_pct  volatility_pct  sharpe  max_drawdown_pct  sharpe_first_half  sharpe_second_half
+     15        0.7               3.0 stop only (hold until stopped)    1068                    0.38             1.15            0.18              14.96           15.53    0.96             21.16               1.12                0.73
+     20        0.6               3.0 stop only (hold until stopped)     997                    0.38             1.14            0.15              13.80           14.39    0.96             19.19               0.97                0.88
+     20        0.6               4.0 stop only (hold until stopped)     969                    0.30             1.22            0.12              10.76           11.45    0.94             14.91               0.93                0.89
+     30        0.7               4.0 stop only (hold until stopped)     118                    0.73             2.92            0.65               3.27            3.52    0.93              5.41               0.79                1.18
+     10        0.7               1.0 stop only (hold until stopped)    2952                    0.45             0.45            0.21              48.70           52.72    0.92             83.33               1.05                0.76
+      5        0.6               4.0 stop only (hold until stopped)    2869                    0.15             0.59            0.08              15.41           16.71    0.92             17.44               1.08                0.72
+     30        0.7               4.0                    trail 6 ATR     119                    0.49             1.97            0.34               2.23            2.46    0.91              3.43               0.66                1.12
+      5        0.7               3.0 stop only (hold until stopped)    3146                    0.18             0.53            0.08              19.99           22.25    0.90             34.29               0.91                0.83
+     30        0.7               3.0 stop only (hold until stopped)     118                    0.89             2.67            0.85               4.00            4.47    0.89              6.37               0.85                1.01
+     30        0.7               2.0 stop only (hold until stopped)     120                    1.24             2.47            1.25               5.74            6.46    0.89              8.31               0.84                1.03
+     15        0.7               2.0 stop only (hold until stopped)    1124                    0.42             0.84            0.19              17.22           19.53    0.88             25.54               1.10                0.59
+     40        0.6               4.0 stop only (hold until stopped)     126                    0.70             2.81            0.77               3.34            3.81    0.88              5.38               1.06                0.54
+     15        0.7               4.0 stop only (hold until stopped)    1046                    0.29             1.14            0.14              10.91           12.46    0.88             18.50               1.04                0.64
+     20        0.6               3.0                    trail 6 ATR    1009                    0.28             0.85            0.12              10.45           12.09    0.86             20.09               0.85                0.82
+     40        0.3               1.0 stop only (hold until stopped)    2116                    0.49             0.49            0.30              38.17           44.33    0.86             57.99               0.92                0.75
+
+=== HONEST CHECK: top 15 settings chosen using only the FIRST half (to 2014); same settings in the SECOND half (2015 to mid-2021) ===
+ window  threshold  initial_stop_atr                           exit  trades  mean_result_risk_units  mean_result_atr  plus_minus_2se  annual_return_pct  volatility_pct  sharpe  max_drawdown_pct  sharpe_first_half  sharpe_second_half
+     15        0.7               3.0 stop only (hold until stopped)    1068                    0.38             1.15            0.18              14.96           15.53    0.96             21.16               1.12                0.73
+     15        0.7               2.0 stop only (hold until stopped)    1124                    0.42             0.84            0.19              17.22           19.53    0.88             25.54               1.10                0.59
+      5        0.6               4.0 stop only (hold until stopped)    2869                    0.15             0.59            0.08              15.41           16.71    0.92             17.44               1.08                0.72
+     10        0.7               1.0                    trail 4 ATR    3124                    0.27             0.27            0.14              31.36           38.86    0.81             76.02               1.08                0.46
+     40        0.6               4.0 stop only (hold until stopped)     126                    0.70             2.81            0.77               3.34            3.81    0.88              5.38               1.06                0.54
+     15        0.7               4.0                    trail 3 ATR    1178                    0.10             0.40            0.06               4.32            6.23    0.69             13.62               1.06                0.23
+     15        0.7               3.0                    trail 3 ATR    1178                    0.13             0.40            0.08               5.78            8.31    0.70             18.17               1.06                0.24
+     10        0.7               1.0 stop only (hold until stopped)    2952                    0.45             0.45            0.21              48.70           52.72    0.92             83.33               1.05                0.76
+     15        0.7               4.0 stop only (hold until stopped)    1046                    0.29             1.14            0.14              10.91           12.46    0.88             18.50               1.04                0.64
+     15        0.7               2.0                    trail 3 ATR    1197                    0.18             0.36            0.10               7.99           11.68    0.68             25.20               1.04                0.24
+     10        0.7               1.5                    trail 4 ATR    2902                    0.21             0.31            0.11              22.07           29.55    0.75             69.36               1.03                0.39
+     15        0.7               3.0                    trail 4 ATR    1129                    0.19             0.57            0.10               7.80           10.52    0.74             23.76               1.02                0.39
+      5        0.7               4.0 stop only (hold until stopped)    2826                    0.12             0.46            0.07              11.86           17.02    0.70             44.50               1.01                0.37
+     10        0.7               3.0                    trail 4 ATR    2563                    0.12             0.36            0.07              11.39           16.56    0.69             47.27               1.00                0.30
+     30        0.7               4.0                    trail 3 ATR     123                    0.18             0.72            0.19               0.85            1.50    0.57              3.38               0.99               -0.08
+Average second-half Sharpe of these 15: 0.43. Average second-half Sharpe of ALL settings: 0.39. Rank correlation between first-half and second-half Sharpe across all settings: 0.26.
+
+=== Reverse check: top 10 by SECOND half, and what they did in the first half ===
+ window  threshold  initial_stop_atr                           exit  trades  mean_result_risk_units  mean_result_atr  plus_minus_2se  annual_return_pct  volatility_pct  sharpe  max_drawdown_pct  sharpe_first_half  sharpe_second_half
+     30        0.7               4.0 stop only (hold until stopped)     118                    0.73             2.92            0.65               3.27            3.52    0.93              5.41               0.79                1.18
+     30        0.7               4.0                    trail 6 ATR     119                    0.49             1.97            0.34               2.23            2.46    0.91              3.43               0.66                1.12
+     30        0.7               1.0 stop only (hold until stopped)     130                    0.87             0.87            1.09               4.40            7.42    0.59             13.39               0.11                1.10
+     30        0.7               1.0                    trail 6 ATR     131                    0.96             0.96            1.03               4.89            6.60    0.74             10.92               0.37                1.05
+     30        0.7               2.0 stop only (hold until stopped)     120                    1.24             2.47            1.25               5.74            6.46    0.89              8.31               0.84                1.03
+     30        0.7               3.0 stop only (hold until stopped)     118                    0.89             2.67            0.85               4.00            4.47    0.89              6.37               0.85                1.01
+     30        0.7               1.5 stop only (hold until stopped)     124                    0.67             1.00            0.80               3.19            5.67    0.56             10.06               0.21                0.98
+     30        0.7               2.0                    trail 6 ATR     121                    0.77             1.54            0.64               3.60            4.22    0.85              6.85               0.71                0.97
+     30        0.7               3.0                    trail 6 ATR     119                    0.58             1.73            0.44               2.61            3.03    0.86              4.57               0.74                0.95
+     30        0.7               1.5                    trail 6 ATR     125                    0.73             1.09            0.75               3.53            5.16    0.68              8.85               0.43                0.93
+
+=== Average over all other settings, by efficiency window (sessions) ===
+        settings  avg_trades  avg_sharpe  avg_first_half  avg_second_half  avg_mean_result_atr  avg_max_drawdown_pct
+window                                                                                                              
+5            125     6159.83        0.53            0.63             0.39                 0.17                 58.58
+10           125     4469.02        0.55            0.73             0.32                 0.22                 68.86
+15           125     3155.20        0.53            0.67             0.36                 0.28                 56.32
+20           125     2233.94        0.54            0.62             0.42                 0.35                 46.80
+30           125     1199.64        0.53            0.57             0.45                 0.52                 26.10
+40           100      868.45        0.50            0.58             0.39                 0.48                 20.55
+
+=== Average over all other settings, by ratio threshold ===
+           settings  avg_trades  avg_sharpe  avg_first_half  avg_second_half  avg_mean_result_atr  avg_max_drawdown_pct
+threshold                                                                                                              
+0.3             150     4404.39        0.53            0.68             0.35                 0.23                 65.56
+0.4             150     3647.03        0.49            0.60             0.34                 0.25                 55.01
+0.5             150     2902.67        0.52            0.60             0.40                 0.32                 45.39
+0.6             150     2261.47        0.51            0.58             0.41                 0.38                 36.44
+0.7             125     2053.70        0.62            0.75             0.45                 0.50                 30.22
+
+=== Average over all other settings, by initial stop (ATR) ===
+                  settings  avg_trades  avg_sharpe  avg_first_half  avg_second_half  avg_mean_result_atr  avg_max_drawdown_pct
+initial_stop_atr                                                                                                              
+1.0                    145     3858.93        0.53            0.62             0.41                 0.22                 78.03
+1.5                    145     3271.89        0.51            0.62             0.37                 0.26                 58.29
+2.0                    145     2969.62        0.54            0.66             0.37                 0.34                 44.10
+3.0                    145     2717.21        0.55            0.65             0.40                 0.42                 31.23
+4.0                    145     2624.06        0.53            0.63             0.39                 0.43                 23.79
+
+=== Average over all other settings, by exit ===
+                                settings  avg_trades  avg_sharpe  avg_first_half  avg_second_half  avg_mean_result_atr  avg_max_drawdown_pct
+exit                                                                                                                                        
+stop only (hold until stopped)       145     2440.43        0.69            0.74             0.61                 0.63                 47.57
+trail 2 ATR                          145     4402.77        0.36            0.52             0.16                 0.10                 42.31
+trail 3 ATR                          145     3258.46        0.47            0.64             0.24                 0.19                 45.92
+trail 4 ATR                          145     2806.39        0.54            0.66             0.38                 0.30                 50.82
+trail 6 ATR                          145     2533.66        0.61            0.63             0.54                 0.44                 48.81
+
+=== Stop only: Sharpe by window (rows) and initial stop in ATR (columns), averaged over thresholds ===
+initial_stop_atr   1.0   1.5   2.0   3.0   4.0
+window                                        
+5                 0.68  0.70  0.70  0.62  0.67
+10                0.74  0.64  0.65  0.67  0.61
+15                0.75  0.73  0.74  0.74  0.62
+20                0.69  0.70  0.71  0.73  0.74
+30                0.63  0.61  0.77  0.82  0.81
+40                0.58  0.58  0.57  0.77  0.79
+
+=== Initial stop 2 ATR: Sharpe by exit (rows) and window (columns), averaged over thresholds ===
+window                            5     10    15    20    30    40
+exit                                                              
+stop only (hold until stopped)  0.70  0.65  0.74  0.71  0.77  0.57
+trail 2 ATR                     0.40  0.35  0.28  0.43  0.35  0.34
+trail 3 ATR                     0.47  0.59  0.50  0.47  0.42  0.41
+trail 4 ATR                     0.53  0.61  0.57  0.50  0.53  0.57
+trail 6 ATR                     0.65  0.59  0.61  0.58  0.66  0.61
