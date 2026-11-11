@@ -3,8 +3,9 @@
 Setup (all strict, daily bars)
 - Outside day: high above the prior day's high AND low below the prior day's low.
 - Inside day: the next session; high below the outside day's high AND low above the outside day's low.
-- Long trade: buy the break of the outside day's HIGH. Stop (risk) = the inside day's LOW.
-- Short trade: sell the break of the outside day's LOW. Stop (risk) = the inside day's HIGH.
+- Long trade: buy the break of the outside day's HIGH. Stop (risk) = the outside day's LOW (primary, per Michael 11 Nov 13:14).
+- Short trade: sell the break of the outside day's LOW. Stop (risk) = the outside day's HIGH.
+- Comparison only: stop at the inside day's far side (Michael's first wording).
 - The entry order is live from the session after the inside day for ENTRY_WINDOW sessions (primary 1, variant 5). It is cancelled if
   the stop level trades before the trigger does. A session that opens beyond the trigger fills at the open (gap fill).
 - Entry session = session 1. A time exit is at the close of session 5 / 10 / 20.
@@ -52,17 +53,19 @@ def load_prices(path):
     return out
 
 
-def simulate(s, outside_i, direction, entry_window, entry_bar_rule="stopped"):
+def simulate(s, outside_i, direction, entry_window, entry_bar_rule="stopped", stop_rule="outside"):
     """One hypothetical trade. Returns a dict, or None if the order never filled. direction = +1 long, -1 short."""
     inside_i = outside_i + 1
     sign = direction
     # Work in a long-only frame: for a short, flip prices so that the same code applies.
     if sign == 1:
         o, h, l, c = s["o"], s["h"], s["l"], s["c"]
-        trigger, stop = s["h"][outside_i], s["l"][inside_i]
+        trigger = s["h"][outside_i]
+        stop = s["l"][outside_i] if stop_rule == "outside" else s["l"][inside_i]
     else:
         o, h, l, c = -s["o"], -s["l"], -s["h"], -s["c"]
-        trigger, stop = -s["l"][outside_i], -s["h"][inside_i]
+        trigger = -s["l"][outside_i]
+        stop = -s["h"][outside_i] if stop_rule == "outside" else -s["h"][inside_i]
     n = len(c)
     d = s["d"]
     entry_i = None
@@ -163,7 +166,7 @@ def _finish(rec, risk, atr, entry):
     return out
 
 
-def find_trades(prices, symbols, start_date, entry_window, entry_bar_rule="stopped"):
+def find_trades(prices, symbols, start_date, entry_window, entry_bar_rule="stopped", stop_rule="outside"):
     rows = []
     for sym in symbols:
         s = prices.get(sym)
@@ -180,7 +183,7 @@ def find_trades(prices, symbols, start_date, entry_window, entry_bar_rule="stopp
             if max((d[i] - d[i - 1]).astype(int), (d[i + 1] - d[i]).astype(int)) > MAX_CALENDAR_GAP:
                 continue
             for direction in (1, -1):
-                rec = simulate(s, i, direction, entry_window, entry_bar_rule)
+                rec = simulate(s, i, direction, entry_window, entry_bar_rule, stop_rule)
                 if rec:
                     rec["symbol"] = sym
                     rows.append(rec)
@@ -250,20 +253,21 @@ def main(price_path, universe_path, out_dir):
     print(f"report universe: {len(report_symbols)} markets with prices; no price series: {missing}")
     universes = {"report universe": report_symbols, "all vendor contracts": sorted(prices)}
     text = []
-    for window, rule in ((1, "stopped"), (1, "ignored"), (5, "stopped")):
+    for stop_rule, window, rule in (("outside", 1, "stopped"), ("outside", 1, "ignored"), ("outside", 5, "stopped"),
+                                    ("inside", 1, "stopped"), ("inside", 1, "ignored")):
         for name, syms in universes.items():
-            df = find_trades(prices, syms, start, window, rule)
-            tag = f"{name.replace(' ', '_')}_wait{window}_{rule}"
+            df = find_trades(prices, syms, start, window, rule, stop_rule)
+            tag = f"{name.replace(' ', '_')}_stop{stop_rule}_wait{window}_{rule}"
             df.to_csv(f"{out_dir}/trades_{tag}.csv", index=False)
             rule_text = ("same-bar stop-or-entry ambiguity counted as STOPPED (worst case)" if rule == "stopped"
                          else "same-bar ambiguity: low assumed BEFORE the break (best case)")
-            title = f"{name}; entry order live {window} session(s); {rule_text}"
+            title = f"{name}; STOP AT THE {stop_rule.upper()} DAY'S FAR SIDE; entry order live {window} session(s); {rule_text}"
             block = [summarize(df, title)]
             for d in ("long", "short"):
                 block.append(summarize(df[df["direction"] == d], f"{title}; {d} only"))
             if not df.empty:
                 block.append(summarize(df[df["risk_in_atr"] >= 0.25], f"{title}; only trades whose risk is at least 0.25 ATR"))
-            if window == 1 and rule == "stopped" and name == "report universe":
+            if stop_rule == "outside" and window == 1 and rule == "stopped" and name == "report universe":
                 block.append(breakdowns(df, title))
             text.append("\n".join(block))
     result = "\n".join(text)

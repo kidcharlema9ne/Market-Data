@@ -23,9 +23,9 @@ outside = (100, 105, 95, 100)      # high 105 > 101, low 95 < 99
 inside = (100, 103, 97, 100)       # high 103 < 105, low 97 > 95 -> long stop 97, short stop 103; risk long 8 from 105; short 8 from 95
 
 
-def run(after, direction=1, window=1):
+def run(after, direction=1, window=1, stop_rule="inside"):
     s = series(quiet + [prior, outside, inside] + after)
-    return m.simulate(s, 15, direction, window)   # index 15 = outside day
+    return m.simulate(s, 15, direction, window, "stopped", stop_rule)   # index 15 = outside day
 
 
 def check(cond, msg):
@@ -69,9 +69,19 @@ r = run([(96, 97, 94, 95)] + [(95, 96, 86, 88)] + [(88, 89, 87, 88)] * 20, direc
 check(r["entry_price"] == 95 and r["stop_price"] == 103, "short entry at outside low, stop at inside high")
 check(r["result_target_1.0"] == 1.0 and abs(r["best_run_risk_units"] - 9 / 8) < 1e-9, "short run measured downward")
 
+# 7b. stop at the outside day's far side: long stop 95 (outside low), risk 10 from 105; short stop 105, risk 10 from 95
+r = run([(104, 106, 100, 105)] + [(105, 125, 104, 120)] + [(120, 121, 119, 120)] * 20, stop_rule="outside")
+check(r["stop_price"] == 95 and abs(r["risk_pct_of_price"] - 10 / 105 * 100) < 1e-9 and r["result_target_1.0"] == 1.0 and abs(r["best_run_risk_units"] - 2.0) < 1e-9, "long with outside-day stop: stop 95, risk 10, run measured in those units")
+r = run([(104, 106, 96, 100)] + [(100, 101, 99, 100)] * 20, stop_rule="outside")
+check(r["exit_reason"] != "stopped_on_entry_bar" and r["stop_price"] == 95, "entry bar low 96 stays above the outside-day stop (it would have hit the inside-day stop)")
+r = run([(100, 104, 96.5, 100), (100, 106, 99, 105)] + [(105, 106, 104, 105)] * 20, window=5, stop_rule="outside")
+check(r is not None and r["sessions_waited"] == 2, "outside-day stop: a dip to 96.5 does not cancel the order")
+r = run([(96, 97, 94, 95)] + [(95, 96, 86, 88)] + [(88, 89, 87, 88)] * 20, direction=-1, stop_rule="outside")
+check(r["entry_price"] == 95 and r["stop_price"] == 105, "short with outside-day stop at the outside high")
+
 # 8. setup finder: needs strict outside then strict inside
 s = series(quiet + [prior, outside, inside, (104, 106, 100, 105)] + [(105, 106, 104, 105)] * 20)
-df = m.find_trades({"X": s}, ["X"], np.datetime64("2026-01-01"), 1)
+df = m.find_trades({"X": s}, ["X"], np.datetime64("2026-01-01"), 1, "stopped", "inside")
 check(len(df) == 1 and df.iloc[0]["direction"] == "long", "finder produces one long trade, no short (low never broke)")
 s2 = series(quiet + [prior, outside, (100, 105, 97, 100), (104, 106, 100, 105)] + [(105, 106, 104, 105)] * 20)
 check(m.find_trades({"X": s2}, ["X"], np.datetime64("2026-01-01"), 1).empty, "inside day equal to the outside high is not strictly inside")
