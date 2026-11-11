@@ -51,3 +51,6 @@ Nothing here is an edge yet. In-sample selection among 18 exits and now 10 trend
 
 ## How to reproduce
 Workflows (manual or branch push): `outside-inside-trend-filter.yml` (in-sample only), `outside-inside-exit-grid.yml` (opens the sealed years; manual only), `futures-prices.yml` (fetch prices). Scripts and tests in `research/outside_inside/`.
+
+## Addendum (11 Nov 2026): efficiency ratio alone, no pattern (Entry 104)
+Dropping the outside/inside day and trading only "20-session efficiency ratio >= 0.5, in the trend direction, 2 ATR stop" gives +0.29 risk units per trade for hold until stopped (1,815 trades, +-0.15), Sharpe 0.76, max drawdown 34%, positive in both halves. Against the trend loses (-0.14). The earlier pattern results were therefore mostly the trend, not the inside day. Costs of 0.05 per trade cut the Sharpe to 0.63; trail 4 ATR becomes about zero. Returns are concentrated in 2008, 2014, 2020. Still in-sample only; the last 5 years remain sealed. Full tables: `research/efficiency_trend/results/efficiency_trend_results.txt`.
