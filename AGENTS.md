@@ -1,5 +1,7 @@
 # Insider Buying Research operating instructions
 
+**Futures data.** For ANY futures task ("find my futures"), read [FUTURES_DATA.md](FUTURES_DATA.md) first: where the daily futures prices live (Cloudflare R2, readable only through GitHub Actions secrets in this repo), how to fetch them, and the standing rules for futures work.
+
 **Read order (keep it small).** Read [docs/LEADS_DIGEST.md](docs/LEADS_DIGEST.md) first (one page: base rule, leads, not-supported list, caveats, open items), then only the last two entries of the log (`grep -n '^## Entry' docs/SHARED_LOG.md | tail -3`, then read from the second-to-last heading). Open older entries one at a time, only when the digest points to them. Refresh the digest when a lead's status changes.
 
 **Shared log (ChatGPT + Claude).** The full log is [docs/SHARED_LOG.md](docs/SHARED_LOG.md); do not read all of it. Before ending a chat, append a dated entry there with your results, the exact script, the branch and the workflow run link. Do not quote a number that has no committed script and run link. Mark entries CONFIRMED, REPORTED or PROVISIONAL as described in the log.
