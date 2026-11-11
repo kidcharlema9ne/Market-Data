@@ -1,0 +1,338 @@
+# Efficiency-ratio systems B and A: full risk/reward report (in-sample only)
+
+Written 11 Nov 2026. Code `research/efficiency_trend/system_report.py`; run https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/43105703017; results `research/efficiency_trend/results_systems/`. Last 5 years sealed (signals after 2021-08-06 cannot be built; last trade closes in Oct 2021).
+
+## The two systems (the exact rules)
+- **System B:** 20-session efficiency ratio >= 0.6. **System A:** 15-session efficiency ratio >= 0.7.
+- Entry: the first session the ratio reaches the threshold in a given trend direction. Buy if the change over the window is up, sell if down. Enter at the next session's open.
+- **Stop: ONE fixed stop 3 ATR from the entry (ATR = 14-session average true range at the signal close). It never moves. There is no trailing stop.** The stop is checked every session; a gap through it fills at the open. If the stop is not hit, the trade is closed at the close of the 60th session (a time cap).
+- One risk unit = the 3 ATR stop distance (on average 5.4% of price). One position per market at a time. 48 report markets. 0.5% of equity risked per trade, profits added (not compounded). No costs unless shown.
+- Picked as the best-looking of 750 grid settings (Entry 105), so the numbers are biased upward. A third setting (40-session, ratio 0.7) scored 1.03 on only 46 trades and was dropped.
+
+## Full report (output of the script)
+```
+Efficiency-ratio systems, full risk/reward report. IN-SAMPLE only (last 5 years sealed). 48 report markets, 0.5% of equity risked per trade, profits added, no costs unless shown.
+Stop: ONE fixed stop 3 ATR from the entry that never moves (no trailing stop); a trade also ends at the close of session 60 if the stop was not hit.
+
+
+
+==================== SYSTEM B: 20-session ratio >= 0.6, 3 ATR stop ====================
+PERIOD: 2008-02-06 to 2021-10-27 (13.7 years)
+
+--- RETURN ---
+  total profit, % of starting equity (added): 189.38
+  average return per year, % (added): 13.80
+  compounded annual growth rate, %: 13.58
+  average return per month, %: 1.15
+  median month, %: 0.42
+  average daily return, %: 0.05
+
+--- RISK ---
+  annual volatility, %: 14.39
+  Sharpe ratio (no risk-free rate): 0.93
+  Sortino ratio: 1.49
+  downside deviation, % a year: 9.27
+  worst day, %: -6.13
+  best day, %: 11.04
+  daily 5% value at risk, %: -1.24
+  average of the worst 5% of days, %: -2.00
+  skewness of daily returns: 1.08
+  excess kurtosis of daily returns: 17.14
+  % of days positive: 51.16
+  % of days with no change (no open trade): 3.13
+
+--- DRAWDOWNS (equity fall from its prior high, in % of starting equity) ---
+  worst drawdown, %: -19.19
+  worst drawdown, risk units: -38.38
+  worst drawdown if compounded, %: -18.14
+  average drawdown over ALL days (time-weighted), %: -7.49
+  number of drawdown episodes: 78
+  average depth of an episode, %: -3.14
+  median depth of an episode, %: -1.15
+  number of episodes deeper than 5%: 16
+  average length of an episode, calendar days (peak to new high): 62.27
+  median length of an episode, days: 5.00
+  average length of episodes deeper than 5%, days: 273.81
+  longest time below a peak, days: 1014
+  average days from peak to the bottom: 26.58
+  % of all days spent below a prior peak: 94.82
+  Ulcer index (root mean square of drawdown), %: 8.72
+  Calmar ratio (annual return / worst drawdown): 0.72
+  recovery factor (total profit / worst drawdown): 9.87
+
+--- MONTHS AND YEARS ---
+  % of months positive: 56.97
+  best month, %: 37.80
+  worst month, %: -10.35
+  % of years positive: 78.57
+  best calendar year, %: 52.16
+  worst calendar year, %: -4.49
+  average rolling 12-month return, %: 13.12
+  best rolling 12 months, %: 61.57
+  worst rolling 12 months, %: -16.02
+  % of rolling 12-month windows negative: 23.51
+
+--- TRADES ---
+  trades: 997
+  trades per year: 72.66
+  win rate, %: 42.83
+  average winner, risk units: 2.13
+  average loser, risk units: -0.93
+  payoff ratio (average winner / average loser): 2.28
+  profit factor: 1.71
+  expectancy per trade, risk units: 0.38
+  expectancy per trade, ATR: 1.14
+  expectancy per trade, % of equity at 0.5% risk: 0.19
+  median trade, risk units: -1.00
+  standard deviation of a trade, risk units: 2.12
+  best trade, risk units: 26.23
+  worst trade, risk units: -1.27
+  plus or minus 2 standard errors on the average (clustered by date): 0.15
+  largest single winner as % of total profit: 6.93
+  top 10 winners as % of total profit: 30.68
+  longest losing streak (trades in the order they close): 14
+  average sessions held, all trades: 40.10
+  average sessions held, winners: 60.00
+  average sessions held, losers: 25.07
+  % of trades ended by the stop (before session 60): 50.45
+  % of trades ended by the 60-session time cap: 49.55
+  long trades: 550
+  average of long trades, risk units: 0.35
+  short trades: 447
+  average of short trades, risk units: 0.41
+  average stop distance, % of price: 5.36
+
+--- EXPOSURE ---
+  average trades open at once: 11.19
+  most trades open at once: 30.00
+
+--- 8 worst drawdowns ---
+ peak_date trough_date recovery_date  depth_pct  days_peak_to_trough  days_peak_to_recovery  ongoing
+2012-06-01  2012-12-10    2014-09-04      -19.2                  192                    825    False
+2018-01-26  2018-06-08    2020-01-02      -14.9                  133                    706    False
+2008-12-05  2010-07-27    2010-10-08      -14.7                  599                    672    False
+2015-03-13  2016-06-23    2017-12-21      -14.2                  468                   1014    False
+2010-11-09  2010-11-16    2011-01-12      -12.2                    7                     64    False
+2011-08-10  2011-10-27    2012-03-16      -11.1                   78                    219    False
+2008-09-16  2008-09-22    2008-09-29      -10.9                    6                     13    False
+2020-03-18  2020-06-18    2020-12-17      -10.7                   92                    274    False
+
+--- By calendar year (return in % of equity) ---
+      return_pct  trades  mean_risk_units  win_rate
+2008       41.33      67             1.17     55.22
+2009       -2.34      56             0.04     41.07
+2010       17.38      77             0.67     44.16
+2011       12.75      63             0.10     41.27
+2012       -4.49      80            -0.04     31.25
+2013        6.49      77             0.12     37.66
+2014       33.44      86             0.87     53.49
+2015        1.02      76            -0.19     31.58
+2016       -0.27      74             0.05     39.19
+2017        8.40      79             0.29     40.51
+2018        6.66      71            -0.00     42.25
+2019        2.18      64             0.23     40.62
+2020       52.16      87             1.48     58.62
+2021       14.66      40             0.09     37.50
+
+--- Best 8 and worst 8 markets (8+ trades) ---
+        trades  mean_risk_units  total_risk_units
+symbol                                           
+SR1         11             0.93             10.28
+ZQ          53             0.91             48.08
+CL          21             0.86             17.96
+E6          17             0.83             14.03
+HO          21             0.82             17.30
+B6          16             0.78             12.46
+NQ          26             0.77             20.07
+N6          18             0.76             13.70
+ZN          19             0.11              2.15
+ZM          22             0.01              0.15
+PL          20            -0.00             -0.00
+LE          15            -0.02             -0.23
+AD          17            -0.19             -3.28
+E1          28            -0.23             -6.45
+GC          23            -0.35             -7.95
+CC          26            -0.60            -15.67
+
+--- Halves ---
+                                trades  mean_risk_units  win_rate_pct
+first half (to 2014)             506.0            0.434        43.478
+second half (2015 to mid-2021)   491.0            0.324        42.159
+
+--- Cost scenarios (cost per trade as a share of the 3 ATR stop; 0.05 = 0.15 ATR) ---
+                                annual return, %  Sharpe  worst drawdown, %  expectancy, risk units
+cost 0.00 risk units per trade             13.80    0.93             -19.19                    0.38
+cost 0.05 risk units per trade             11.98    0.81             -20.38                    0.33
+cost 0.10 risk units per trade             10.17    0.68             -22.25                    0.28
+
+--- Position size scaling (added, not compounded; everything scales in proportion) ---
+                        annual return, %  volatility, %  worst drawdown, %  average drawdown, %
+0.25% risked per trade               6.9           7.19              -9.59                -3.74
+0.50% risked per trade              13.8          14.39             -19.19                -7.49
+1.00% risked per trade              27.6          28.78             -38.38               -14.98
+
+
+==================== SYSTEM A: 15-session ratio >= 0.7, 3 ATR stop ====================
+PERIOD: 2008-01-30 to 2021-10-04 (13.7 years)
+
+--- RETURN ---
+  total profit, % of starting equity (added): 204.67
+  average return per year, % (added): 14.96
+  compounded annual growth rate, %: 14.72
+  average return per month, %: 1.23
+  median month, %: 0.57
+  average daily return, %: 0.06
+
+--- RISK ---
+  annual volatility, %: 15.53
+  Sharpe ratio (no risk-free rate): 0.93
+  Sortino ratio: 1.55
+  downside deviation, % a year: 9.63
+  worst day, %: -7.28
+  best day, %: 13.50
+  daily 5% value at risk, %: -1.24
+  average of the worst 5% of days, %: -2.07
+  skewness of daily returns: 1.91
+  excess kurtosis of daily returns: 26.57
+  % of days positive: 51.50
+  % of days with no change (no open trade): 2.75
+
+--- DRAWDOWNS (equity fall from its prior high, in % of starting equity) ---
+  worst drawdown, %: -21.16
+  worst drawdown, risk units: -42.31
+  worst drawdown if compounded, %: -19.85
+  average drawdown over ALL days (time-weighted), %: -8.02
+  number of drawdown episodes: 71
+  average depth of an episode, %: -3.62
+  median depth of an episode, %: -1.00
+  number of episodes deeper than 5%: 19
+  average length of an episode, calendar days (peak to new high): 68.27
+  median length of an episode, days: 5.00
+  average length of episodes deeper than 5%, days: 240.58
+  longest time below a peak, days: 1060
+  average days from peak to the bottom: 35.07
+  % of all days spent below a prior peak: 95.00
+  Ulcer index (root mean square of drawdown), %: 9.27
+  Calmar ratio (annual return / worst drawdown): 0.71
+  recovery factor (total profit / worst drawdown): 9.67
+
+--- MONTHS AND YEARS ---
+  % of months positive: 53.61
+  best month, %: 44.61
+  worst month, %: -9.72
+  % of years positive: 78.57
+  best calendar year, %: 65.60
+  worst calendar year, %: -6.07
+  average rolling 12-month return, %: 13.81
+  best rolling 12 months, %: 65.13
+  worst rolling 12 months, %: -10.45
+  % of rolling 12-month windows negative: 26.07
+
+--- TRADES ---
+  trades: 1068
+  trades per year: 78.08
+  win rate, %: 44.01
+  average winner, risk units: 2.07
+  average loser, risk units: -0.94
+  payoff ratio (average winner / average loser): 2.20
+  profit factor: 1.73
+  expectancy per trade, risk units: 0.38
+  expectancy per trade, ATR: 1.15
+  expectancy per trade, % of equity at 0.5% risk: 0.19
+  median trade, risk units: -1.00
+  standard deviation of a trade, risk units: 2.42
+  best trade, risk units: 44.03
+  worst trade, risk units: -1.23
+  plus or minus 2 standard errors on the average (clustered by date): 0.18
+  largest single winner as % of total profit: 10.76
+  top 10 winners as % of total profit: 36.61
+  longest losing streak (trades in the order they close): 14
+  average sessions held, all trades: 40.47
+  average sessions held, winners: 60.00
+  average sessions held, losers: 25.12
+  % of trades ended by the stop (before session 60): 50.37
+  % of trades ended by the 60-session time cap: 49.63
+  long trades: 599
+  average of long trades, risk units: 0.34
+  short trades: 469
+  average of short trades, risk units: 0.43
+  average stop distance, % of price: 5.38
+
+--- EXPOSURE ---
+  average trades open at once: 12.14
+  most trades open at once: 32.00
+
+--- 8 worst drawdowns ---
+ peak_date trough_date recovery_date  depth_pct  days_peak_to_trough  days_peak_to_recovery  ongoing
+2008-12-05  2010-07-27    2010-11-02      -21.2                  599                    697    False
+2012-06-01  2012-11-02    2014-08-19      -18.3                  154                    809    False
+2020-03-18  2020-09-25    2021-02-24      -17.3                  191                    343    False
+2015-01-23  2017-01-23    2017-12-18      -14.9                  731                   1060    False
+2019-01-03  2019-10-21    2020-02-24      -13.9                  291                    417    False
+2008-09-16  2008-09-22    2008-09-29      -12.7                    6                     13    False
+2018-01-26  2018-03-20    2018-12-21      -12.0                   53                    329    False
+2010-11-09  2010-11-16    2011-01-12      -10.3                    7                     64    False
+
+--- By calendar year (return in % of equity) ---
+      return_pct  trades  mean_risk_units  win_rate
+2008       65.60      72             1.70     56.94
+2009       -6.07      69            -0.05     37.68
+2010       12.94      91             0.43     45.05
+2011       12.39      72             0.19     38.89
+2012        1.17      76             0.09     43.42
+2013        3.79      90            -0.02     40.00
+2014       38.80      86             1.07     60.47
+2015        1.20      84            -0.20     33.33
+2016       -5.64      88             0.04     39.77
+2017       11.26      71             0.28     43.66
+2018        9.41      70             0.03     38.57
+2019       -1.69      65             0.09     38.46
+2020       50.46      89             1.26     52.81
+2021       11.04      45             0.30     44.44
+
+--- Best 8 and worst 8 markets (8+ trades) ---
+        trades  mean_risk_units  total_risk_units
+symbol                                           
+ZQ          49             1.88             92.21
+SR1          9             1.52             13.66
+NQ          25             0.90             22.62
+VX          23             0.80             18.51
+N6          18             0.73             13.22
+ZS          28             0.63             17.65
+ZW          19             0.63             11.91
+E6          21             0.62             13.08
+PL          19             0.04              0.79
+E1          28             0.02              0.48
+BR          21            -0.04             -0.91
+RB          28            -0.06             -1.61
+NG          24            -0.06             -1.45
+UB          12            -0.06             -0.74
+ZM          25            -0.19             -4.85
+CC          33            -0.53            -17.60
+
+--- Halves ---
+                                trades  mean_risk_units  win_rate_pct
+first half (to 2014)             556.0            0.482        46.223
+second half (2015 to mid-2021)   512.0            0.276        41.602
+
+--- Cost scenarios (cost per trade as a share of the 3 ATR stop; 0.05 = 0.15 ATR) ---
+                                annual return, %  Sharpe  worst drawdown, %  expectancy, risk units
+cost 0.00 risk units per trade             14.96    0.93             -21.16                    0.38
+cost 0.05 risk units per trade             13.01    0.81             -24.26                    0.33
+cost 0.10 risk units per trade             11.06    0.69             -27.36                    0.28
+
+--- Position size scaling (added, not compounded; everything scales in proportion) ---
+                        annual return, %  volatility, %  worst drawdown, %  average drawdown, %
+0.25% risked per trade              7.48           7.76             -10.58                -4.01
+0.50% risked per trade             14.96          15.53             -21.16                -8.02
+1.00% risked per trade             29.93          31.05             -42.31               -16.04
+
+
+Correlation of the two systems' daily returns: 0.91```
+
+## Reading it
+- Both systems earn about 14-15% a year at 0.5% risk per trade with a Sharpe of 0.93 and a worst drawdown of 19-21%. They are 91% correlated: they are the same idea, so owning both is not diversification.
+- Half of all trades are stopped out at -1; the other half run to the 60-session cap and are the winners (average 2.1 risk units, best 26-44). A few huge winners matter: the top 10 trades are 31-37% of all profit.
+- The equity curve is below a prior peak 95% of the time (profits arrive in bursts: 2008, 2014, 2020), with a median drawdown episode of 5 days but 16-19 episodes deeper than 5% lasting 8-9 months on average and 2.8-2.9 years at the longest.
+- Costs of 0.05-0.10 risk units per trade cut the Sharpe to 0.81 / 0.68. The second half of the sample is weaker than the first (system A: +0.28 vs +0.48 risk units per trade).
+- Not tested: the sealed years; real position limits; costs by market; margin.
