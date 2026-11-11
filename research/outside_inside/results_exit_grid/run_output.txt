@@ -1,0 +1,134 @@
+price rows 526297 -> 526277; symbols 132; 2007-12-31 to 2026-11-06
+report universe 48 markets (no price series: []); all contracts 132
+Exit grid: outside day then inside day; stop on the outside day's far side; in-sample outside days to 2021-08-06, purge to 2021-11-07, out-of-sample from 2021-11-08.
+
+##### report universe: pattern trades in-sample 1834, out-of-sample 684; control A 16942, control B 41042 (both samples)
+
+##### all vendor contracts: pattern trades in-sample 4056, out-of-sample 1837
+
+=== IN-SAMPLE (2008 to mid-2021), report universe, all 18 exits ranked by mean result in risk units (worst-case entry-bar rule) ===
+                                                            trades  mean_result  plus_minus_2se  median  win_rate  profit_factor  mean_in_atr  avg_sessions  avg_worst_dip  avg_best_run  exited_on_a_stop_or_trail  first_half_mean  second_half_mean  long_mean  short_mean
+exit                                                                                                                                                                                                                                                                         
+hold until stopped (cap 60 sessions)                        1834.0        0.216           0.169  -1.000     0.219          1.278        0.293        22.551          0.913         2.289                      0.773            0.253             0.181      0.213       0.220
+time exit, close of session 40                              1834.0        0.179           0.162  -1.000     0.248          1.241        0.231        17.600          0.897         2.005                      0.732            0.173             0.185      0.173       0.186
+trail 4 ATR below the highest high                          1834.0        0.152           0.131  -1.000     0.262          1.219        0.212        18.609          0.864         2.075                      0.896            0.233             0.073      0.162       0.142
+stop to entry after +1 risk unit, exit session 20           1834.0        0.104           0.159  -0.328     0.218          1.209        0.125         9.544          0.773         1.470                      0.768            0.093             0.115      0.094       0.115
+time exit, close of session 20                              1834.0        0.104           0.165  -1.000     0.317          1.158        0.112        11.383          0.859         1.596                      0.637            0.098             0.110      0.100       0.108
+trail 3 ATR below the highest high                          1834.0        0.097           0.114  -1.000     0.291          1.153        0.132        15.033          0.823         1.868                      0.954            0.188             0.007      0.118       0.075
+trail under the 3-session low                               1834.0        0.092           0.105  -0.321     0.381          1.218        0.111         6.300          0.667         1.266                      1.000            0.076             0.108      0.135       0.046
+exit when the close breaks the prior session's extreme      1834.0        0.079           0.123  -0.305     0.367          1.185        0.094         5.511          0.696         1.228                      0.270            0.059             0.098      0.064       0.094
+trail under the 10-session low                              1834.0        0.077           0.137  -1.000     0.302          1.127        0.101        13.139          0.802         1.828                      0.991            0.096             0.058      0.041       0.114
+trail under the 5-session low                               1834.0        0.075           0.127  -0.480     0.346          1.150        0.094         8.547          0.725         1.487                      1.000            0.057             0.092      0.082       0.068
+stop to entry after +1 risk unit, then trail 5-session low  1834.0        0.073           0.128  -0.684     0.346          1.144        0.098         9.399          0.777         1.496                      0.998            0.070             0.075      0.050       0.096
+trail 2 ATR below the highest high                          1834.0        0.054           0.092  -0.553     0.347          1.105        0.083         9.678          0.743         1.484                      0.991            0.058             0.051      0.045       0.064
+time exit, close of session 10                              1834.0        0.049           0.090  -1.000     0.390          1.089        0.061         7.124          0.801         1.216                      0.516            0.043             0.054      0.046       0.052
+time exit, close of session 5                               1834.0        0.040           0.063  -0.112     0.468          1.099        0.060         4.243          0.724         0.877                      0.346            0.027             0.054      0.052       0.028
+time exit, close of session 3                               1834.0        0.023           0.050  -0.013     0.491          1.069        0.047         2.770          0.664         0.678                      0.229           -0.004             0.049      0.039       0.006
+target 3 risk units (else stop, else session 20)            1834.0        0.009           0.087  -1.000     0.327          1.014        0.028        10.041          0.856         1.329                      0.630            0.035            -0.017      0.023      -0.006
+target 1 risk unit (else stop, else session 20)             1834.0       -0.002           0.057  -0.098     0.498          0.995        0.027         5.265          0.773         0.828                      0.488           -0.033             0.028      0.027      -0.032
+target 2 risk units (else stop, else session 20)            1834.0       -0.002           0.075  -1.000     0.363          0.996        0.024         8.462          0.841         1.151                      0.606            0.011            -0.015      0.011      -0.016
+
+Finalists (best 3 in-sample whose mean is positive in both halves): ['hold until stopped (cap 60 sessions)', 'time exit, close of session 40', 'trail 4 ATR below the highest high']
+
+Multiple-testing note: 18 exits were compared in-sample; the best of 18 looks better than it is. The out-of-sample test is the check.
+
+=== OUT-OF-SAMPLE (last 5 years), report universe, FINALISTS ONLY (worst-case rule) ===
+                                      trades  mean_result  plus_minus_2se  median  win_rate  profit_factor  mean_in_atr  avg_sessions  avg_worst_dip  avg_best_run  exited_on_a_stop_or_trail  first_half_mean  second_half_mean  long_mean  short_mean
+exit                                                                                                                                                                                                                                                   
+hold until stopped (cap 60 sessions)   684.0       -0.001           0.223    -1.0     0.211          0.999       -0.043        22.308          0.920         2.001                      0.782              NaN            -0.001     -0.166       0.158
+time exit, close of session 40         684.0       -0.066           0.196    -1.0     0.243          0.912       -0.114        17.592          0.905         1.806                      0.743              NaN            -0.066     -0.166       0.030
+trail 4 ATR below the highest high     684.0       -0.062           0.181    -1.0     0.251          0.913       -0.150        18.269          0.876         1.853                      0.904              NaN            -0.062     -0.198       0.068
+
+=== FINALISTS, best-case entry-bar rule (in-sample then out-of-sample) ===
+                                      trades  mean_result  plus_minus_2se  median  win_rate  profit_factor  mean_in_atr  avg_sessions  avg_worst_dip  avg_best_run  exited_on_a_stop_or_trail  first_half_mean  second_half_mean  long_mean  short_mean
+exit                                                                                                                                                                                                                                                   
+hold until stopped (cap 60 sessions)  1834.0        0.260           0.174    -1.0     0.225          1.333        0.341        23.321          0.876         2.413                      0.766            0.267             0.253      0.290       0.228
+time exit, close of session 40        1834.0        0.220           0.167    -1.0     0.257          1.297        0.274        18.213          0.853         2.115                      0.723            0.205             0.236      0.239       0.201
+trail 4 ATR below the highest high    1834.0        0.194           0.138    -1.0     0.273          1.280        0.257        19.168          0.800         2.191                      0.895            0.266             0.123      0.234       0.152
+--
+                                      trades  mean_result  plus_minus_2se  median  win_rate  profit_factor  mean_in_atr  avg_sessions  avg_worst_dip  avg_best_run  exited_on_a_stop_or_trail  first_half_mean  second_half_mean  long_mean  short_mean
+exit                                                                                                                                                                                                                                                   
+hold until stopped (cap 60 sessions)   684.0        0.045           0.221    -1.0     0.221          1.058        0.016        23.092          0.878         2.084                      0.772              NaN             0.045     -0.092       0.177
+time exit, close of session 40         684.0       -0.014           0.196    -1.0     0.254          0.982       -0.049        18.146          0.855         1.882                      0.731              NaN            -0.014     -0.084       0.053
+trail 4 ATR below the highest high     684.0       -0.028           0.179    -1.0     0.263          0.961       -0.105        18.870          0.813         1.929                      0.899              NaN            -0.028     -0.137       0.077
+
+=== FINALISTS on all vendor contracts: in-sample then out-of-sample ===
+                                      trades  mean_result  plus_minus_2se  median  win_rate  profit_factor  mean_in_atr  avg_sessions  avg_worst_dip  avg_best_run  exited_on_a_stop_or_trail  first_half_mean  second_half_mean  long_mean  short_mean
+exit                                                                                                                                                                                                                                                   
+hold until stopped (cap 60 sessions)  4056.0        0.252           0.125    -1.0     0.219          1.320        0.348        22.643          0.918         2.341                      0.772            0.146             0.347      0.301       0.198
+time exit, close of session 40        4056.0        0.176           0.107    -1.0     0.250          1.234        0.240        17.681          0.900         2.039                      0.732            0.054             0.284      0.210       0.138
+trail 4 ATR below the highest high    4056.0        0.157           0.096    -1.0     0.269          1.226        0.212        18.121          0.856         2.095                      0.903            0.108             0.200      0.171       0.142
+--
+                                      trades  mean_result  plus_minus_2se  median  win_rate  profit_factor  mean_in_atr  avg_sessions  avg_worst_dip  avg_best_run  exited_on_a_stop_or_trail  first_half_mean  second_half_mean  long_mean  short_mean
+exit                                                                                                                                                                                                                                                   
+hold until stopped (cap 60 sessions)  1837.0        0.025           0.146    -1.0     0.206          1.031       -0.011        22.420          0.935         2.180                      0.783              NaN             0.025     -0.020       0.070
+time exit, close of session 40        1837.0        0.042           0.143    -1.0     0.240          1.055        0.006        17.673          0.917         1.980                      0.738              NaN             0.042     -0.017       0.101
+trail 4 ATR below the highest high    1837.0        0.029           0.127    -1.0     0.260          1.040       -0.026        17.869          0.876         1.996                      0.913              NaN             0.029     -0.052       0.110
+
+=== DOES THE INSIDE DAY ADD ANYTHING? finalist exits on the pattern vs the two controls (mean result, risk units) ===
+                                                                                   trades  mean_result
+exit                                 sample group                                                     
+hold until stopped (cap 60 sessions) in     pattern                                  1834        0.216
+time exit, close of session 40       in     pattern                                  1834        0.179
+trail 4 ATR below the highest high   in     pattern                                  1834        0.152
+hold until stopped (cap 60 sessions) out    pattern                                   684       -0.001
+time exit, close of session 40       out    pattern                                   684       -0.066
+trail 4 ATR below the highest high   out    pattern                                   684       -0.062
+hold until stopped (cap 60 sessions) in     control A: outside day, no inside day   11938        0.101
+time exit, close of session 40       in     control A: outside day, no inside day   11938        0.041
+trail 4 ATR below the highest high   in     control A: outside day, no inside day   11938        0.024
+hold until stopped (cap 60 sessions) out    control A: outside day, no inside day    5004       -0.020
+time exit, close of session 40       out    control A: outside day, no inside day    5004        0.025
+trail 4 ATR below the highest high   out    control A: outside day, no inside day    5004       -0.007
+hold until stopped (cap 60 sessions) in     control B: ordinary days                29486        0.019
+time exit, close of session 40       in     control B: ordinary days                29486       -0.027
+trail 4 ATR below the highest high   in     control B: ordinary days                29486       -0.037
+hold until stopped (cap 60 sessions) out    control B: ordinary days                11556       -0.078
+time exit, close of session 40       out    control B: ordinary days                11556       -0.099
+trail 4 ATR below the highest high   out    control B: ordinary days                11556       -0.108
+
+=== OUT-OF-SAMPLE, ALL 18 exits (for completeness ONLY; selection was frozen in-sample; do not pick from this) ===
+                                                            trades  mean_result  plus_minus_2se  median  win_rate  profit_factor  mean_in_atr  avg_sessions  avg_worst_dip  avg_best_run  exited_on_a_stop_or_trail  first_half_mean  second_half_mean  long_mean  short_mean
+exit                                                                                                                                                                                                                                                                         
+hold until stopped (cap 60 sessions)                         684.0       -0.001           0.223  -1.000     0.211          0.999       -0.043        22.308          0.920         2.001                      0.782              NaN            -0.001     -0.166       0.158
+time exit, close of session 40                               684.0       -0.066           0.196  -1.000     0.243          0.912       -0.114        17.592          0.905         1.806                      0.743              NaN            -0.066     -0.166       0.030
+trail 4 ATR below the highest high                           684.0       -0.062           0.181  -1.000     0.251          0.913       -0.150        18.269          0.876         1.853                      0.904              NaN            -0.062     -0.198       0.068
+stop to entry after +1 risk unit, exit session 20            684.0       -0.044           0.146  -0.294     0.183          0.910       -0.116         9.952          0.777         1.332                      0.784              NaN            -0.044     -0.098       0.008
+time exit, close of session 20                               684.0       -0.077           0.162  -1.000     0.287          0.886       -0.168        11.722          0.874         1.435                      0.646              NaN            -0.077     -0.173       0.015
+trail 3 ATR below the highest high                           684.0       -0.047           0.161  -1.000     0.266          0.927       -0.117        15.050          0.827         1.710                      0.955              NaN            -0.047     -0.176       0.077
+trail under the 3-session low                                684.0       -0.028           0.101  -0.311     0.349          0.932       -0.072         6.102          0.647         1.113                      1.000              NaN            -0.028     -0.042      -0.014
+exit when the close breaks the prior session's extreme       684.0       -0.023           0.097  -0.270     0.351          0.941       -0.062         5.227          0.669         1.058                      0.211              NaN            -0.023     -0.044      -0.003
+trail under the 10-session low                               684.0       -0.083           0.155  -0.952     0.285          0.863       -0.168        13.146          0.803         1.678                      0.993              NaN            -0.083     -0.166      -0.004
+trail under the 5-session low                                684.0       -0.074           0.120  -0.466     0.339          0.849       -0.148         8.284          0.715         1.311                      1.000              NaN            -0.074     -0.110      -0.039
+stop to entry after +1 risk unit, then trail 5-session low   684.0       -0.073           0.123  -0.373     0.346          0.854       -0.150        10.012          0.785         1.344                      0.993              NaN            -0.073     -0.117      -0.031
+trail 2 ATR below the highest high                           684.0       -0.065           0.119  -0.537     0.316          0.871       -0.125         9.064          0.726         1.336                      0.996              NaN            -0.065     -0.123      -0.008
+time exit, close of session 10                               684.0       -0.022           0.130  -0.666     0.386          0.959       -0.079         7.442          0.802         1.164                      0.491              NaN            -0.022     -0.108       0.060
+time exit, close of session 5                                684.0        0.016           0.098  -0.167     0.440          1.039        0.001         4.363          0.713         0.854                      0.304              NaN             0.016      0.007       0.024
+time exit, close of session 3                                684.0        0.024           0.081  -0.002     0.491          1.078        0.028         2.825          0.645         0.655                      0.208              NaN             0.024      0.007       0.040
+target 3 risk units (else stop, else session 20)             684.0       -0.055           0.143  -1.000     0.304          0.917       -0.116        10.535          0.866         1.277                      0.630              NaN            -0.055     -0.161       0.048
+target 1 risk unit (else stop, else session 20)              684.0        0.006           0.095  -0.048     0.499          1.013       -0.026         5.906          0.777         0.820                      0.468              NaN             0.006     -0.026       0.037
+target 2 risk units (else stop, else session 20)             684.0       -0.039           0.122  -1.000     0.344          0.938       -0.100         9.168          0.848         1.125                      0.602              NaN            -0.039     -0.136       0.054
+
+=== Full 18-exit grid for the controls, in-sample then out-of-sample mean result (risk units) ===
+                                                           control A        control B       
+                                                                  in    out        in    out
+exit                                                                                        
+exit when the close breaks the prior session's extreme        -0.046 -0.074    -0.096 -0.184
+hold until stopped (cap 60 sessions)                           0.101 -0.020     0.019 -0.078
+stop to entry after +1 risk unit, exit session 20             -0.010 -0.035    -0.070 -0.157
+stop to entry after +1 risk unit, then trail 5-session low    -0.040 -0.056    -0.081 -0.148
+target 1 risk unit (else stop, else session 20)               -0.053 -0.056    -0.125 -0.156
+target 2 risk units (else stop, else session 20)              -0.031 -0.010    -0.115 -0.136
+target 3 risk units (else stop, else session 20)              -0.013 -0.002    -0.103 -0.149
+time exit, close of session 10                                -0.034 -0.027    -0.093 -0.145
+time exit, close of session 20                                 0.018 -0.001    -0.063 -0.145
+time exit, close of session 3                                 -0.032 -0.062    -0.109 -0.151
+time exit, close of session 40                                 0.041  0.025    -0.027 -0.099
+time exit, close of session 5                                 -0.032 -0.044    -0.103 -0.159
+trail 2 ATR below the highest high                            -0.037 -0.019    -0.086 -0.163
+trail 3 ATR below the highest high                            -0.003 -0.001    -0.062 -0.132
+trail 4 ATR below the highest high                             0.024 -0.007    -0.037 -0.108
+trail under the 10-session low                                 0.014 -0.003    -0.077 -0.118
+trail under the 3-session low                                 -0.041 -0.068    -0.081 -0.181
+trail under the 5-session low                                 -0.036 -0.045    -0.082 -0.140
+
