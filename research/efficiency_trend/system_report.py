@@ -163,7 +163,7 @@ def main(price_path, universe_path, out_dir):
             e[c] = pd.to_datetime(e[c]).dt.date
         emit("\n--- 8 worst drawdowns ---\n" + e.round(1).to_string(index=False))
         e.to_csv(f"{out_dir}/worst_drawdowns_{name[0]}.csv", index=False)
-        y = pd.DataFrame({"return_pct": year * RISK * 100})
+        y = pd.DataFrame({"return_pct": year * 100})
         pdy = df.assign(y=pd.to_datetime(df["setup_date"]).dt.year).groupby("y")["result"].agg(trades="size", mean_risk_units="mean", win_rate=lambda x: (x > 0).mean() * 100)
         emit("\n--- By calendar year (return in % of equity) ---\n" + y.join(pdy).round(2).to_string())
         mk = df.groupby("symbol")["result"].agg(trades="size", mean_risk_units="mean", total_risk_units="sum").query("trades >= 8").sort_values("mean_risk_units", ascending=False)
