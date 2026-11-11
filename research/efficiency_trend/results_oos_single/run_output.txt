@@ -1,0 +1,198 @@
+price rows 526297 -> 526277; symbols 132; 2007-12-31 to 2026-11-06
+ONE-TIME OUT-OF-SAMPLE TEST. System: 20-session ratio 0.6, fixed 3 ATR stop, 60-session cap, one ATR = 0.25% of equity (stop risks 0.75%), no costs.
+48 report markets with prices; last price in the data 2026-11-06. Out-of-sample signals from 2021-11-08.
+
+verification all 48 markets: equals the committed in-sample cell (997 trades, 20.64% a year, Sharpe 0.93, worst drawdown 28.78%)
+verification without ZQ (47 markets): equals the committed in-sample cell (944 trades, 18.02% a year, Sharpe 0.85, worst drawdown 28.34%)
+Verification passed: the in-sample window rerun with this code equals the committed in-sample matrix cell (with and without ZQ).
+
+==================== all 48 markets ====================
+(returns in % of starting equity, added not compounded; mean_result_atr = average trade in ATR units, divide by 3 for risk units)
+window                   in-sample 2008-2021 (reference)  OUT OF SAMPLE, complete paths  OUT OF SAMPLE, including open positions
+signals                                          1641.00                         522.00                                   522.00
+annual_return_pct                                  20.64                           7.66                                     6.19
+volatility_pct                                     21.63                          18.11                                    18.43
+sharpe                                              0.93                           0.41                                     0.33
+worst_drawdown_pct                                 28.78                          26.00                                    26.00
+average_drawdown_pct                               11.21                           9.15                                     9.30
+calmar                                              0.72                           0.29                                     0.24
+trades                                            997.00                         324.00                                   352.00
+win_rate_pct                                       42.83                          38.27                                    37.78
+mean_result_atr                                     1.14                           0.47                                     0.35
+average_sessions_held                              40.10                          38.02                                    36.70
+share_ended_by_stop_pct                            50.95                          54.94                                    54.83
+share_ended_by_cap_pct                             49.05                          45.06                                    41.48
+forced_closes                                       0.00                           0.00                                    13.00
+average_open_trades                                11.24                           9.53                                     9.99
+max_open_trades                                    30.00                          21.00                                    21.00
+total_profit_pct                                  284.07                          38.28                                    30.89
+
+==================== without ZQ (47 markets) ====================
+(returns in % of starting equity, added not compounded; mean_result_atr = average trade in ATR units, divide by 3 for risk units)
+window                   in-sample 2008-2021 (reference)  OUT OF SAMPLE, complete paths  OUT OF SAMPLE, including open positions
+signals                                          1536.00                         494.00                                   494.00
+annual_return_pct                                  18.02                           7.57                                     6.09
+volatility_pct                                     20.69                          18.01                                    18.33
+sharpe                                              0.85                           0.41                                     0.32
+worst_drawdown_pct                                 28.34                          26.09                                    26.09
+average_drawdown_pct                               11.34                           9.25                                     9.39
+calmar                                              0.64                           0.29                                     0.23
+trades                                            944.00                         312.00                                   340.00
+win_rate_pct                                       42.90                          38.14                                    37.65
+mean_result_atr                                     1.05                           0.48                                     0.36
+average_sessions_held                              40.03                          37.64                                    36.31
+share_ended_by_stop_pct                            50.85                          55.45                                    55.29
+share_ended_by_cap_pct                             49.15                          44.55                                    40.88
+forced_closes                                       0.00                           0.00                                    13.00
+average_open_trades                                10.62                           9.08                                     9.55
+max_open_trades                                    29.00                          21.00                                    21.00
+total_profit_pct                                  248.01                          37.79                                    30.40
+
+==================== all 48 markets: OUT OF SAMPLE, complete paths ====================
+Mean trade 0.47 ATR (= 0.16 risk units), standard error 0.29 ATR if trades were independent (they are clustered, so this is too small).
+Sharpe 0.41; 21-day block bootstrap of the out-of-sample daily returns: 5th / 50th / 95th percentile -0.20 / 0.42 / 1.02; share of resamples with Sharpe <= 0: 12.7%.
+
+By calendar year (first and last year are partial):
+      return_pct  trades_entered  win_rate_pct
+2021        -5.9              11           9.1
+2022        25.6              76          43.4
+2023        -6.3              65          27.7
+2024        23.1              69          46.4
+2025         3.6              56          35.7
+2026        -1.8              47          42.6
+
+Long vs short:
+           trades  win_rate_pct  mean_atr  profit_pct
+direction                                            
+long          169         35.50      0.42       17.72
+short         155         41.29      0.53       20.55
+
+Best 6 and worst 6 markets (total profit, % of equity):
+        trades  profit_pct
+symbol                    
+CC           7         8.0
+HO          10         7.6
+SR3         12         7.2
+ZT           4         3.4
+VX          10         3.3
+E6           3         3.0
+HG           5        -2.2
+E1           5        -2.2
+CL           8        -2.3
+ZC           5        -2.3
+MP           9        -2.4
+PL           8        -2.7
+
+Concentration: total 38.3%; the 5 best trades add 26.1%, the 5 worst -4.2%; best single trade CC 6.7%.
+
+==================== all 48 markets: OUT OF SAMPLE, including open positions ====================
+Mean trade 0.35 ATR (= 0.12 risk units), standard error 0.27 ATR if trades were independent (they are clustered, so this is too small).
+Sharpe 0.33; 21-day block bootstrap of the out-of-sample daily returns: 5th / 50th / 95th percentile -0.27 / 0.36 / 0.97; share of resamples with Sharpe <= 0: 16.9%.
+
+By calendar year (first and last year are partial):
+      return_pct  trades_entered  win_rate_pct
+2021        -5.9              11           9.1
+2022        25.6              76          43.4
+2023        -6.3              65          27.7
+2024        23.1              69          46.4
+2025         3.6              56          35.7
+2026        -9.1              75          38.7
+
+Long vs short:
+           trades  win_rate_pct  mean_atr  profit_pct
+direction                                            
+long          179         34.08      0.26       11.80
+short         173         41.62      0.44       19.09
+
+Best 6 and worst 6 markets (total profit, % of equity):
+        trades  profit_pct
+symbol                    
+CC           7         8.0
+HO          10         7.6
+SR3         13         6.4
+E6           4         3.5
+NQ           6         3.0
+MNQ          6         3.0
+HG           5        -2.2
+E1           5        -2.2
+MP          11        -2.4
+ZC           7        -2.6
+PL           8        -2.7
+CL           9        -3.1
+
+Concentration: total 30.9%; the 5 best trades add 26.1%, the 5 worst -4.2%; best single trade CC 6.7%.
+
+==================== without ZQ (47 markets): OUT OF SAMPLE, complete paths ====================
+Mean trade 0.48 ATR (= 0.16 risk units), standard error 0.30 ATR if trades were independent (they are clustered, so this is too small).
+Sharpe 0.41; 21-day block bootstrap of the out-of-sample daily returns: 5th / 50th / 95th percentile -0.18 / 0.42 / 1.01; share of resamples with Sharpe <= 0: 12.3%.
+
+By calendar year (first and last year are partial):
+      return_pct  trades_entered  win_rate_pct
+2021        -5.9              11           9.1
+2022        22.5              73          41.1
+2023        -4.0              62          29.0
+2024        21.8              68          45.6
+2025         3.8              52          36.5
+2026        -0.4              46          43.5
+
+Long vs short:
+           trades  win_rate_pct  mean_atr  profit_pct
+direction                                            
+long          161         35.40      0.41       16.69
+short         151         41.06      0.56       21.10
+
+Best 6 and worst 6 markets (total profit, % of equity):
+        trades  profit_pct
+symbol                    
+CC           7         8.0
+HO          10         7.6
+SR3         12         7.2
+ZT           4         3.4
+VX          10         3.3
+E6           3         3.0
+HG           5        -2.2
+E1           5        -2.2
+CL           8        -2.3
+ZC           5        -2.3
+MP           9        -2.4
+PL           8        -2.7
+
+Concentration: total 37.8%; the 5 best trades add 26.1%, the 5 worst -4.2%; best single trade CC 6.7%.
+
+==================== without ZQ (47 markets): OUT OF SAMPLE, including open positions ====================
+Mean trade 0.36 ATR (= 0.12 risk units), standard error 0.28 ATR if trades were independent (they are clustered, so this is too small).
+Sharpe 0.32; 21-day block bootstrap of the out-of-sample daily returns: 5th / 50th / 95th percentile -0.25 / 0.36 / 0.95; share of resamples with Sharpe <= 0: 16.3%.
+
+By calendar year (first and last year are partial):
+      return_pct  trades_entered  win_rate_pct
+2021        -5.9              11           9.1
+2022        22.5              73          41.1
+2023        -4.0              62          29.0
+2024        21.8              68          45.6
+2025         3.8              52          36.5
+2026        -7.8              74          39.2
+
+Long vs short:
+           trades  win_rate_pct  mean_atr  profit_pct
+direction                                            
+long          171         33.92      0.25       10.77
+short         169         41.42      0.46       19.63
+
+Best 6 and worst 6 markets (total profit, % of equity):
+        trades  profit_pct
+symbol                    
+CC           7         8.0
+HO          10         7.6
+SR3         13         6.4
+E6           4         3.5
+NQ           6         3.0
+MNQ          6         3.0
+HG           5        -2.2
+E1           5        -2.2
+MP          11        -2.4
+ZC           7        -2.6
+PL           8        -2.7
+CL           9        -3.1
+
+Concentration: total 30.4%; the 5 best trades add 26.1%, the 5 worst -4.2%; best single trade CC 6.7%.
+
