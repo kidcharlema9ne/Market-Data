@@ -4,7 +4,7 @@ THE LAST 5 YEARS (outside days from 2021-11-08) ARE SEALED. This script never bu
 an in-sample trade's 60-session path ends before 2021-11-08, so no sealed price bar is used. Unsealing needs a deliberate code change plus
 Michael's say-so. (The window was opened once, for the 18-exit test in Entry 101, so it is no longer pristine for those exits.)
 
-Efficiency ratio (Kaufman), 20 sessions, measured at the close of the inside day (known before the entry order):
+Efficiency ratio (Kaufman), 20 sessions by default (10 via the optional 4th argument), measured at the close of the inside day (known before the entry order):
     efficiency ratio = |close_today - close_20_sessions_ago| / sum of |daily close-to-close changes| over those 20 sessions   (0 = pure chop, 1 = straight line)
 Trend direction = sign of close_today - close_20_sessions_ago. A trade is WITH the trend if a long has a positive 20-session change or a short a negative one.
 Filters tested: no filter; with the trend at any efficiency; with the trend and efficiency >= 0.1 ... 0.7; and, as a diagnostic, AGAINST the trend at
@@ -21,7 +21,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 import exit_grid as eg
 
 ER_LOOKBACK = 20
-THRESHOLDS = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7]
+LOOKBACKS = (10, 20)
+THRESHOLDS = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
 AGAINST_THRESHOLDS = [0.0, 0.3, 0.5]
 KEY_EXITS = [e for e in eg.EXITS if e[0] in (
     "hold until stopped (cap 60 sessions)", "time exit, close of session 40", "trail 4 ATR below the highest high",
@@ -38,17 +39,18 @@ def efficiency_arrays(close, n=ER_LOOKBACK):
     return er.values, net.values
 
 
-def add_trend(prices):
+def add_trend(prices, lookbacks=LOOKBACKS):
     for s in prices.values():
-        s["er"], s["net"] = efficiency_arrays(s["c"])
+        for n in lookbacks:
+            s[f"er{n}"], s[f"net{n}"] = efficiency_arrays(s["c"], n)
 
 
-def gen_trades(prices, symbols, kind):
+def gen_trades(prices, symbols, kind, lookback=ER_LOOKBACK):
     out = []
     for sym in symbols:
         s = prices[sym]
         d, h, l = s["d"], s["h"], s["l"]
-        for i in range(max(1, ER_LOOKBACK), len(d) - 2):
+        for i in range(max(1, lookback), len(d) - 2):
             if d[i] > eg.IN_END:                       # SEALED: nothing after 2021-08-06 is ever built
                 break
             if kind == "pattern":
@@ -66,10 +68,10 @@ def gen_trades(prices, symbols, kind):
             for direction in (1, -1):
                 t = eg.build_trade(s, last_i, i, i, direction, "stopped")
                 if t:
-                    net = s["net"][last_i]
-                    if np.isnan(s["er"][last_i]):
+                    net = s[f"net{lookback}"][last_i]
+                    if np.isnan(s[f"er{lookback}"][last_i]):
                         continue
-                    t.update(symbol=sym, setup_date=d[i], group=label, er=s["er"][last_i],
+                    t.update(symbol=sym, setup_date=d[i], group=label, er=s[f"er{lookback}"][last_i], entry_idx=last_i + 1,
                              with_trend=bool((direction == 1 and net > 0) or (direction == -1 and net < 0)))
                     out.append(t)
     return out
@@ -86,9 +88,9 @@ def evaluate(trades):
     return pd.DataFrame(rows)
 
 
-def filters():
+def filters(lookback=ER_LOOKBACK):
     f = [("no filter", lambda d: d["er"] >= 0)]
-    f.append(("with the 20-day trend, any efficiency", lambda d: d["with_trend"]))
+    f.append((f"with the {lookback}-day trend, any efficiency", lambda d: d["with_trend"]))
     for x in THRESHOLDS:
         f.append((f"with the trend, efficiency ratio >= {x}", (lambda x: lambda d: d["with_trend"] & (d["er"] >= x))(x)))
     for x in AGAINST_THRESHOLDS:
@@ -96,10 +98,10 @@ def filters():
     return f
 
 
-def grid(df):
+def grid(df, lookback=ER_LOOKBACK):
     names = [e[0] for e in KEY_EXITS]
     rows = []
-    for label, fn in filters():
+    for label, fn in filters(lookback):
         sub = df[fn(df)]
         if sub.empty:
             continue
@@ -123,7 +125,7 @@ def er_buckets(df):
     return t
 
 
-def main(price_path, universe_path, out_dir):
+def main(price_path, universe_path, out_dir, lookback=ER_LOOKBACK):
     os.makedirs(out_dir, exist_ok=True)
     prices = eg.load_prices(price_path)
     add_trend(prices)
@@ -136,12 +138,12 @@ def main(price_path, universe_path, out_dir):
         print(x)
         log.append(x)
 
-    emit("Trend filter (20-day efficiency ratio), in-sample only: outside days 2007-12-31 to 2021-08-06. Last 5 years sealed.\n"
+    emit(f"Trend filter ({lookback}-day efficiency ratio), in-sample only: outside days 2007-12-31 to 2021-08-06. Last 5 years sealed.\n"
          "Results are mean result in risk units (1.0 = entry to the outside day's far-side stop), worst-case entry-bar rule, no costs.\n")
     res = {}
     for label, kind, syms in (("pattern", "pattern", report), ("control A", "control A", report), ("control B", "control B", report),
                               ("pattern, all vendor contracts", "pattern", sorted(prices))):
-        df = evaluate(gen_trades(prices, syms, kind))
+        df = evaluate(gen_trades(prices, syms, kind, lookback))
         res[label] = df
         if label == "pattern":
             df.to_csv(f"{out_dir}/pattern_report_universe_key_exits.csv.gz", index=False)
@@ -149,11 +151,11 @@ def main(price_path, universe_path, out_dir):
         emit(f"##### {label}: {n} trades (in-sample)")
     pd.set_option("display.width", 250)
     for label in res:
-        g = grid(res[label])
+        g = grid(res[label], lookback)
         emit(f"\n=== {label.upper()}: mean result by filter and exit (in-sample); main exit = hold until stopped ===\n" + g.round(3).to_string())
     emit("\n=== PATTERN: hold-until-stopped mean result by efficiency bucket, with vs against the trend ===\n" + er_buckets(res["pattern"]).round(3).to_string())
     open(f"{out_dir}/trend_filter_results.txt", "w").write("\n".join(log))
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2], sys.argv[3])
+    main(sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4]) if len(sys.argv) > 4 else ER_LOOKBACK)

@@ -1,8 +1,6 @@
 name: Outside day then inside day trend filter (efficiency ratio), IN-SAMPLE ONLY
 on:
-  push:
-    branches: [claude/outside-inside-day-20261111]
-    paths: [.github/workflows/outside-inside-trend-filter.yml, research/outside_inside/trend_filter.py, research/outside_inside/test_trend_filter.py]
+  # Push trigger removed 11 Nov 2026: superseded by outside-inside-trail-stats.yml, which reruns this study (20-day) and adds the 10-day version.
   workflow_dispatch:
 permissions:
   contents: write
