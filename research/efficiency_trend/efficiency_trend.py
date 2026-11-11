@@ -62,7 +62,7 @@ def make_trade(s, i, direction, stop_atr=STOP_ATR):
                 risk_pct=risk / abs(entry) * 100)
 
 
-def run_system(prices, symbols, exit_spec, threshold, lookback, mode="fresh", side="with"):
+def run_system(prices, symbols, exit_spec, threshold, lookback, mode="fresh", side="with", stop_atr=STOP_ATR):
     """One pass per exit (positions gate the next signal). Returns a list of trade records with the daily profit path in risk units."""
     out = []
     for sym in symbols:
@@ -81,7 +81,7 @@ def run_system(prices, symbols, exit_spec, threshold, lookback, mode="fresh", si
             if mode == "fresh" and i > 0 and er[i - 1] >= threshold and net[i - 1] * net[i] > 0:
                 continue
             direction = trend if side == "with" else -trend
-            t = make_trade(s, i, direction)
+            t = make_trade(s, i, direction, stop_atr)
             if not t:
                 continue
             path = ts.daily_path(t, exit_spec)
