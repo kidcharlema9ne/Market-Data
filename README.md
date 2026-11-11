@@ -2,6 +2,7 @@
 
 This project studies how discretionary insider purchases perform after public disclosure. A separate SEC scanner is planned to use the research findings.
 
+- [FUTURES_DATA.md](FUTURES_DATA.md): where Michael's daily futures prices live and how to fetch them (any futures task starts here)
 - [Master specification](docs/MASTER_SPECIFICATION.md)
 - [Decision log](docs/DECISION_LOG.md)
 - [Infrastructure](docs/INFRASTRUCTURE.md)

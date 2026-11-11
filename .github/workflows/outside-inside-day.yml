@@ -1,8 +1,6 @@
 name: Outside day then inside day study (futures, 4 years)
 on:
-  push:
-    branches: [claude/outside-inside-day-20261111]
-    paths: [.github/workflows/outside-inside-day.yml, research/outside_inside/outside_inside_day.py, research/outside_inside/test_outside_inside_day.py]
+  # Push trigger removed 11 Nov 2026 so re-pushing the scripts cannot reopen the sealed out-of-sample years. Run by hand only.
   workflow_dispatch:
 permissions:
   contents: write

@@ -1,8 +1,6 @@
 name: Outside day then inside day exit grid (in-sample 2008-2021, out-of-sample last 5 years)
 on:
-  push:
-    branches: [claude/outside-inside-day-20261111]
-    paths: [.github/workflows/outside-inside-exit-grid.yml, research/outside_inside/exit_grid.py, research/outside_inside/test_exit_grid.py]
+  # Push trigger removed 11 Nov 2026 so re-pushing the scripts cannot reopen the sealed out-of-sample years. Run by hand only.
   workflow_dispatch:
 permissions:
   contents: write
