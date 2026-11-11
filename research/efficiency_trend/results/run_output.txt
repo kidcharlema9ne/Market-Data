@@ -1,0 +1,197 @@
+price rows 526297 -> 526277; symbols 132; 2007-12-31 to 2026-11-06
+Efficiency-ratio trend rule alone (no pattern), 2 ATR initial stop, IN-SAMPLE signals 2008 to mid-2021, last 5 years sealed. 48 report markets, no costs.
+One risk unit = 2 ATR. Results are mean result per trade in risk units unless stated.
+
+=== PRIMARY: efficiency ratio >= 0.5 (20-session), WITH the trend, entry mode: FRESH -- per-trade statistics ===
+                                      trades  mean_result  plus_minus_2se  median  win_rate  profit_factor  avg_sessions  first_half_mean  second_half_mean  long_mean  short_mean
+time exit, close of session 10        2494.0        0.071           0.062  -0.038     0.477          1.177         8.379            0.069             0.074      0.074       0.068
+time exit, close of session 20        2183.0        0.106           0.086  -0.743     0.423          1.202        14.189            0.116             0.096      0.113       0.099
+time exit, close of session 40        1983.0        0.197           0.115  -1.000     0.352          1.313        22.908            0.237             0.155      0.170       0.230
+hold until stopped (cap 60 sessions)  1815.0        0.291           0.149  -1.000     0.306          1.423        30.157            0.364             0.216      0.258       0.330
+trail 2 ATR below the highest high    2325.0        0.053           0.054  -0.275     0.377          1.146         9.978            0.066             0.040      0.056       0.051
+trail 3 ATR below the highest high    2057.0        0.078           0.078  -0.512     0.371          1.157        17.167            0.128             0.027      0.066       0.093
+trail 4 ATR below the highest high    1932.0        0.143           0.099  -0.882     0.345          1.249        23.057            0.216             0.068      0.147       0.138
+
+=== PRIMARY (FRESH): portfolio statistics, 0.5% of equity risked per trade ===
+                                time exit, close of session 10  time exit, close of session 20  time exit, close of session 40  hold until stopped (cap 60 sessions)  trail 2 ATR below the highest high  trail 3 ATR below the highest high  trail 4 ATR below the highest high
+trades                                                 2494.00                         2183.00                         1983.00                               1815.00                             2325.00                             2057.00                             1932.00
+trades_per_year                                         184.18                          160.75                          145.73                                132.82                              171.70                              151.38                              141.61
+win_rate                                                  0.48                            0.42                            0.35                                  0.31                                0.38                                0.37                                0.35
+average_win_R                                             0.99                            1.50                            2.35                                  3.19                                1.11                                1.55                                2.07
+average_loss_R                                           -0.78                           -0.92                           -0.97                                 -0.99                               -0.59                               -0.79                               -0.87
+profit_factor                                             1.18                            1.20                            1.31                                  1.42                                1.15                                1.16                                1.25
+expectancy_R_per_trade                                    0.07                            0.11                            0.20                                  0.29                                0.05                                0.08                                0.14
+best_trade_R                                             33.46                           36.41                           38.26                                 39.34                               12.75                               12.75                               12.75
+worst_trade_R                                            -2.09                           -2.09                           -2.09                                 -1.90                               -1.90                               -1.83                               -1.90
+annual_return_pct                                         6.57                            8.55                           14.38                                 19.32                                4.58                                5.92                               10.11
+annual_volatility_pct                                    13.28                           17.15                           22.31                                 25.47                               11.66                               16.34                               19.53
+sharpe                                                    0.49                            0.50                            0.64                                  0.76                                0.39                                0.36                                0.52
+sortino                                                   0.75                            0.74                            0.98                                  1.15                                0.57                                0.52                                0.75
+max_drawdown_pct                                         27.14                           37.19                           34.08                                 33.86                               34.90                               38.06                               50.35
+max_drawdown_R                                           54.28                           74.38                           68.16                                 67.73                               69.79                               76.13                              100.71
+calmar                                                    0.24                            0.23                            0.42                                  0.57                                0.13                                0.16                                0.20
+longest_time_below_a_peak_days                         1851.00                         1855.00                         1858.00                               1049.00                             2722.00                             1862.00                             1862.00
+positive_months_pct                                      48.47                           48.47                           51.83                                 53.33                               47.24                               48.17                               50.00
+worst_month_pct                                          -7.61                           -8.75                          -11.69                                -20.62                               -6.80                               -8.87                              -12.57
+best_month_pct                                           32.87                           37.16                           54.29                                 55.40                               13.24                               18.42                               23.15
+average_open_trades                                       5.93                            8.76                           12.82                                 15.38                                6.58                                9.98                               12.54
+max_open_trades                                          28.00                           34.00                           35.00                                 35.00                               22.00                               26.00                               29.00
+
+=== PRIMARY: efficiency ratio >= 0.5 (20-session), WITH the trend, entry mode: WHEN FLAT -- per-trade statistics ===
+                                      trades  mean_result  plus_minus_2se  median  win_rate  profit_factor  avg_sessions  first_half_mean  second_half_mean  long_mean  short_mean
+time exit, close of session 10        2984.0        0.072           0.055  -0.022     0.479          1.181         8.415            0.079             0.064      0.082       0.060
+time exit, close of session 20        2291.0        0.104           0.083  -0.690     0.425          1.199        14.232            0.118             0.090      0.106       0.102
+time exit, close of session 40        2033.0        0.197           0.113  -1.000     0.352          1.314        22.979            0.241             0.152      0.171       0.228
+hold until stopped (cap 60 sessions)  1860.0        0.307           0.147  -1.000     0.311          1.450        30.363            0.387             0.225      0.281       0.338
+trail 2 ATR below the highest high    2631.0        0.050           0.051  -0.274     0.382          1.137         9.884            0.048             0.052      0.053       0.046
+trail 3 ATR below the highest high    2159.0        0.082           0.077  -0.509     0.374          1.165        17.265            0.126             0.037      0.073       0.093
+trail 4 ATR below the highest high    1993.0        0.160           0.099  -0.862     0.350          1.282        23.221            0.233             0.085      0.165       0.154
+
+=== PRIMARY (WHEN FLAT): portfolio statistics, 0.5% of equity risked per trade ===
+                                time exit, close of session 10  time exit, close of session 20  time exit, close of session 40  hold until stopped (cap 60 sessions)  trail 2 ATR below the highest high  trail 3 ATR below the highest high  trail 4 ATR below the highest high
+trades                                                 2984.00                         2291.00                         2033.00                               1860.00                             2631.00                             2159.00                             1993.00
+trades_per_year                                         220.36                          168.71                          149.41                                136.12                              194.29                              158.89                              146.09
+win_rate                                                  0.48                            0.42                            0.35                                  0.31                                0.38                                0.37                                0.35
+average_win_R                                             0.98                            1.48                            2.35                                  3.18                                1.09                                1.55                                2.08
+average_loss_R                                           -0.78                           -0.92                           -0.97                                 -0.99                               -0.59                               -0.79                               -0.87
+profit_factor                                             1.18                            1.20                            1.31                                  1.45                                1.14                                1.16                                1.28
+expectancy_R_per_trade                                    0.07                            0.10                            0.20                                  0.31                                0.05                                0.08                                0.16
+best_trade_R                                             33.46                           36.41                           38.26                                 39.34                               12.75                               12.75                               13.54
+worst_trade_R                                            -2.81                           -2.81                           -1.83                                 -1.83                               -2.81                               -1.83                               -1.83
+annual_return_pct                                         7.91                            8.80                           14.74                                 20.89                                4.85                                6.52                               11.68
+annual_volatility_pct                                    15.02                           17.83                           22.86                                 25.98                               12.93                               17.13                               20.10
+sharpe                                                    0.53                            0.49                            0.64                                  0.80                                0.37                                0.38                                0.58
+sortino                                                   0.79                            0.73                            0.98                                  1.23                                0.56                                0.55                                0.85
+max_drawdown_pct                                         28.03                           39.32                           34.87                                 27.97                               39.74                               40.40                               47.25
+max_drawdown_R                                           56.07                           78.63                           69.74                                 55.94                               79.48                               80.79                               94.51
+calmar                                                    0.28                            0.22                            0.42                                  0.75                                0.12                                0.16                                0.25
+longest_time_below_a_peak_days                         1858.00                         1858.00                         1858.00                               1040.00                             2728.00                             1862.00                             1862.00
+positive_months_pct                                      51.53                           47.85                           51.22                                 55.15                               43.56                               46.34                               51.83
+worst_month_pct                                          -8.05                           -9.25                          -12.15                                -20.62                               -6.51                               -9.18                              -12.46
+best_month_pct                                           37.34                           40.16                           57.87                                 58.77                               17.62                               21.46                               29.35
+average_open_trades                                       7.12                            9.22                           13.19                                 15.87                                7.38                               10.54                               13.03
+max_open_trades                                          33.00                           35.00                           36.00                                 36.00                               32.00                               33.00                               33.00
+
+=== PRIMARY (FRESH) with an ASSUMED cost of 0.05 risk units (0.1 ATR) per trade ===
+                        time exit, close of session 10  time exit, close of session 20  time exit, close of session 40  hold until stopped (cap 60 sessions)  trail 2 ATR below the highest high  trail 3 ATR below the highest high  trail 4 ATR below the highest high
+trades                                         2494.00                         2183.00                         1983.00                               1815.00                             2325.00                             2057.00                             1932.00
+expectancy_R_per_trade                            0.02                            0.06                            0.15                                  0.24                                0.00                                0.03                                0.09
+annual_return_pct                                 1.96                            4.54                           10.74                                 16.00                                0.29                                2.14                                6.57
+sharpe                                            0.15                            0.26                            0.48                                  0.63                                0.02                                0.13                                0.34
+max_drawdown_pct                                 44.26                           47.96                           43.44                                 42.24                               50.18                               47.59                               59.60
+
+=== PRIMARY (FRESH): return by calendar year, % of equity at 0.5% risk per trade ===
+      time exit, close of session 20  hold until stopped (cap 60 sessions)  trail 4 ATR below the highest high
+2008                            28.3                                  68.9                                31.8
+2009                           -14.1                                   2.1                                -2.5
+2010                            22.5                                  32.3                                22.8
+2011                           -10.6                                   3.8                                 5.8
+2012                            22.7                                   1.0                                10.6
+2013                           -10.0                                   5.4                                -5.9
+2014                            23.6                                  46.9                                38.3
+2015                            -9.8                                  -3.0                               -12.1
+2016                             1.4                                  -6.7                               -11.9
+2017                            -9.8                                   6.9                                -3.2
+2018                            11.8                                  10.8                                13.8
+2019                             2.9                                  -6.3                                -7.5
+2020                            47.8                                  76.5                                46.4
+2021                             9.4                                  25.3                                11.3
+
+=== PRIMARY (FRESH), trail 4 ATR: mean result by market (markets with 10+ trades) ===
+        trades  mean_result
+symbol                     
+BZ          39         1.02
+VX          47         0.80
+ZQ          73         0.55
+RB          43         0.51
+HO          45         0.48
+CL          45         0.39
+ZF          36         0.37
+ZS          44         0.35
+ZL          45         0.35
+ES          45         0.33
+TN          15         0.30
+YM          49         0.26
+PL          33         0.23
+A6          34         0.22
+SR1         17         0.22
+ZM          41         0.22
+NQ          47         0.19
+E6          42         0.19
+GF          44         0.16
+ZW          37         0.15
+ZN          39         0.14
+UB          31         0.10
+US          37         0.07
+RTY         35         0.07
+B6          37         0.07
+DX          46         0.06
+BR          41         0.05
+HE          54         0.04
+HG          46         0.04
+N6          39         0.03
+CT          47         0.03
+KE          45         0.03
+LE          36         0.03
+GC          52         0.03
+ZT          39        -0.00
+J1          40        -0.01
+MP          50        -0.04
+NG          38        -0.06
+SI          52        -0.07
+ZC          44        -0.08
+SB          55        -0.11
+E1          45        -0.14
+AD          41        -0.22
+CC          48        -0.31
+KC          49        -0.48
+SR3         10        -0.59
+
+=== COMPARISON (20-session): with vs against the trend, ratio >= 0.5 vs any ratio (any-ratio rows use the WHEN FLAT mode) ===
+                                                                              trades  mean_result  plus_minus_2se  sharpe
+WITH the trend, ratio >= 0.5 (primary) time exit, close of session 20         2183.0        0.106           0.086   0.499
+                                       hold until stopped (cap 60 sessions)   1815.0        0.291           0.149   0.759
+                                       trail 4 ATR below the highest high     1932.0        0.143           0.099   0.518
+AGAINST the trend, ratio >= 0.5        time exit, close of session 20         2482.0       -0.088           0.061  -0.582
+                                       hold until stopped (cap 60 sessions)   2122.0       -0.135           0.099  -0.670
+                                       trail 4 ATR below the highest high     2232.0       -0.100           0.083  -0.569
+WITH the trend, any ratio (>= 0)       time exit, close of session 20        10191.0        0.057           0.039   0.543
+                                       hold until stopped (cap 60 sessions)   4824.0        0.160           0.084   0.658
+                                       trail 4 ATR below the highest high     5945.0        0.077           0.052   0.481
+AGAINST the trend, any ratio           time exit, close of session 20        10504.0       -0.002           0.034  -0.026
+                                       hold until stopped (cap 60 sessions)   5371.0       -0.086           0.065  -0.537
+                                       trail 4 ATR below the highest high     6253.0       -0.031           0.052  -0.245
+
+=== SENSITIVITY (FRESH signal, WITH the trend): lookback x threshold x exit ===
+                                                                       trades  mean_result  plus_minus_2se  win_rate  sharpe  max_drawdown_pct
+10-session lookback ratio >= 0.3 hold until stopped (cap 60 sessions)  4010.0        0.160           0.090     0.307   0.670            58.212
+                                 trail 4 ATR below the highest high    4678.0        0.085           0.061     0.342   0.516            60.112
+                    ratio >= 0.4 hold until stopped (cap 60 sessions)  3923.0        0.152           0.097     0.304   0.600            55.658
+                                 trail 4 ATR below the highest high    4563.0        0.097           0.067     0.342   0.559            76.461
+                    ratio >= 0.5 hold until stopped (cap 60 sessions)  3610.0        0.183           0.105     0.310   0.664            48.327
+                                 trail 4 ATR below the highest high    4162.0        0.127           0.067     0.347   0.683            52.726
+                    ratio >= 0.6 hold until stopped (cap 60 sessions)  3157.0        0.165           0.095     0.307   0.579            58.343
+                                 trail 4 ATR below the highest high    3596.0        0.108           0.073     0.343   0.540            76.491
+                    ratio >= 0.7 hold until stopped (cap 60 sessions)  2482.0        0.263           0.135     0.314   0.759            47.686
+                                 trail 4 ATR below the highest high    2746.0        0.177           0.086     0.357   0.748            51.009
+20-session lookback ratio >= 0.3 hold until stopped (cap 60 sessions)  3399.0        0.178           0.112     0.300   0.615            67.302
+                                 trail 4 ATR below the highest high    3916.0        0.090           0.070     0.337   0.443            86.942
+                    ratio >= 0.4 hold until stopped (cap 60 sessions)  2693.0        0.217           0.119     0.302   0.667            57.253
+                                 trail 4 ATR below the highest high    2978.0        0.098           0.079     0.338   0.426            79.097
+                    ratio >= 0.5 hold until stopped (cap 60 sessions)  1815.0        0.291           0.149     0.306   0.759            33.864
+                                 trail 4 ATR below the highest high    1932.0        0.143           0.099     0.345   0.518            50.353
+                    ratio >= 0.6 hold until stopped (cap 60 sessions)  1044.0        0.382           0.204     0.309   0.792            30.679
+                                 trail 4 ATR below the highest high    1077.0        0.199           0.129     0.359   0.592            28.520
+                    ratio >= 0.7 hold until stopped (cap 60 sessions)   482.0        0.453           0.337     0.330   0.693            15.729
+                                 trail 4 ATR below the highest high     491.0        0.225           0.171     0.387   0.506            14.057
+40-session lookback ratio >= 0.3 hold until stopped (cap 60 sessions)  1639.0        0.355           0.204     0.322   0.790            33.639
+                                 trail 4 ATR below the highest high    1759.0        0.231           0.115     0.367   0.747            36.183
+                    ratio >= 0.4 hold until stopped (cap 60 sessions)   875.0        0.311           0.202     0.314   0.565            26.993
+                                 trail 4 ATR below the highest high     925.0        0.226           0.140     0.371   0.595            21.438
+                    ratio >= 0.5 hold until stopped (cap 60 sessions)   362.0        0.433           0.319     0.307   0.590            20.220
+                                 trail 4 ATR below the highest high     372.0        0.314           0.217     0.384   0.617            14.030
+                    ratio >= 0.6 hold until stopped (cap 60 sessions)   129.0        0.358           0.680     0.248   0.353            10.362
+                                 trail 4 ATR below the highest high     133.0        0.232           0.385     0.361   0.308             7.567
+                    ratio >= 0.7 hold until stopped (cap 60 sessions)    47.0        1.482           2.739     0.213   0.581             7.756
+                                 trail 4 ATR below the highest high      47.0        1.049           1.205     0.362   0.780             3.108
+
