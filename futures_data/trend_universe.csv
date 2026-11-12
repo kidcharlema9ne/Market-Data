@@ -68,6 +68,8 @@ FTUK,FTUK,FTSE 100 (UK),foreign stock indexes,no,10,GBP,6000,12000,sure,index po
 FCE,FCE,CAC 40 (France),foreign stock indexes,no,10,EUR,5000,9000,sure,index points; Euronext
 FTI,FTI,AEX (Netherlands),foreign stock indexes,no,200,EUR,600,1200,check,index points; Euronext
 BFX,BFX,BEL 20 (Belgium),foreign stock indexes,no,10,EUR,3000,6000,check,index points; Euronext
+MME,MME,MSCI Emerging Markets mini (ICE US),foreign stock indexes,no,50,USD,500,3000,check,index points; ICE US; dollar multiplier from memory
+MFS,MFS,MSCI EAFE mini (ICE US),foreign stock indexes,no,50,USD,1500,5000,check,index points; ICE US; dollar multiplier from memory
 NKD,NKD,Nikkei 225 in dollars,foreign stock indexes,no,5,USD,20000,60000,sure,index points; CME
 NIY,NIY,Nikkei 225 in yen,foreign stock indexes,no,500,JPY,20000,60000,sure,index points; CME
 B,B,Brent crude (ICE Europe),foreign commodities,no,1000,USD,20,150,sure,dollars per barrel

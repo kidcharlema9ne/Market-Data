@@ -75,6 +75,8 @@ for _, u in uni.iterrows():
     row["contract_value_usd"] = last * mult_usd
     row["contract_value_pct_of_account"] = 100 * last * mult_usd / account
     row["avg_daily_dollar_volume_usd"] = row["avg_volume_60d"] * last * mult_usd
+    # liquidity rule: at least 5,000 contracts a day on average and traded in at least 55 of the last 60 sessions
+    row["liquid_enough"] = "yes" if (row["avg_volume_60d"] >= 5000 and row["sessions_with_volume_of_60"] >= 55) else "NO"
     out.append(row)
 
 res = pd.DataFrame(out)
@@ -82,7 +84,7 @@ res.to_csv(f"{out_dir}/contract_size_atr20.csv", index=False)
 liq.to_csv(f"{out_dir}/liquidity_all_symbols.csv", index=False)
 pd.set_option("display.width", 250, "display.max_rows", 500, "display.max_columns", 30)
 cols = ["price_symbol", "name", "last_close", "atr20_points", "atr20_usd_per_contract", "atr20_pct_of_account",
-        "contract_value_pct_of_account", "avg_volume_60d", "sessions_with_volume_of_60", "status"]
+        "contract_value_pct_of_account", "avg_volume_60d", "sessions_with_volume_of_60", "liquid_enough", "status"]
 print(f"\n=== one contract, account {account:,.0f}, 20-day ATR ===")
 print(res[cols].round(4).to_string(index=False))
 print("\n=== liquidity, all symbols (60-session average volume) ===")
