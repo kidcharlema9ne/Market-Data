@@ -1,0 +1,11 @@
+budget_percent_vol_per_market,contracts_above_budget,of_which_with_measured_etf,etf_cash_dollars,etf_cash_percent_of_account,above_budget_no_etf,futures_only_markets,futures_contracts_total
+0.05,63,44,820939,273.6,"FBTS(1.6x), FGBS(1.0x), FDXS(3.2x), BR(2.2x), MP(2.2x), N6(3.1x), HO(57.4x), EBM(1.8x), RM(6.2x), RS(1.1x), KE(4.6x), ZL(5.2x), ZM(4.5x), CC(15.1x), CT(4.4x), KC(25.7x), GF(15.7x), HE(4.7x), LE(7.3x)",5,10
+0.1,58,43,1623579,541.2,"FDXS(1.6x), BR(1.1x), MP(1.1x), N6(1.6x), HO(28.7x), RM(3.1x), KE(2.3x), ZL(2.6x), ZM(2.2x), CC(7.5x), CT(2.2x), KC(12.9x), GF(7.9x), HE(2.3x), LE(3.6x)",10,28
+0.15,49,36,1749519,583.2,"FDXS(1.1x), N6(1.0x), HO(19.1x), RM(2.1x), KE(1.5x), ZL(1.7x), ZM(1.5x), CC(5.0x), CT(1.5x), KC(8.6x), GF(5.2x), HE(1.6x), LE(2.4x)",19,52
+0.2,41,30,1689465,563.2,"HO(14.3x), RM(1.5x), KE(1.1x), ZL(1.3x), ZM(1.1x), CC(3.8x), CT(1.1x), KC(6.4x), GF(3.9x), HE(1.2x), LE(1.8x)",27,78
+0.25,33,26,1764652,588.2,"HO(11.5x), RM(1.2x), ZL(1.0x), CC(3.0x), KC(5.1x), GF(3.1x), LE(1.5x)",35,108
+0.3,27,21,1439734,479.9,"HO(9.6x), RM(1.0x), CC(2.5x), KC(4.3x), GF(2.6x), LE(1.2x)",41,135
+0.4,20,16,1093158,364.4,"HO(7.2x), CC(1.9x), KC(3.2x), GF(2.0x)",48,192
+0.5,17,13,917391,305.8,"HO(5.7x), CC(1.5x), KC(2.6x), GF(1.6x)",51,238
+0.75,11,7,830901,277.0,"HO(3.8x), CC(1.0x), KC(1.7x), GF(1.0x)",57,366
+1.0,7,5,730791,243.6,"HO(2.9x), KC(1.3x)",61,496
