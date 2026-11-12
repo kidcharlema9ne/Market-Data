@@ -91,6 +91,14 @@ for sym, src in mapping.items():
     c = g["close"].to_numpy(float)
     o = g["open"].fillna(g["close"]).to_numpy(float)
     h, l = g["high"].to_numpy(float), g["low"].to_numpy(float)
+    # unit glitch repair: a one-day close ratio near a power of ten (e.g. 98.5 -> 985.5) is a quoting change, not a move; rescale everything before it
+    for k in range(1, len(c)):
+        r = c[k] / c[k - 1]
+        if r > 5 or r < 0.2:
+            f = 10.0 ** round(np.log10(r))
+            if f != 1.0:
+                print(f"  unit glitch in {sym} (from {src}) at {g['file_date'].iloc[k].date()}: close ratio {r:.2f}; scaling earlier bars by {f:g}")
+                c[:k] *= f; o[:k] *= f; h[:k] *= f; l[:k] *= f
     pc = np.r_[np.nan, c[:-1]]
     tr = np.maximum.reduce([h - l, np.abs(h - pc), np.abs(l - pc)])
     tr[0] = h[0] - l[0]
