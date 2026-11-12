@@ -279,6 +279,13 @@ ER_GRID = [0.20, 0.225, 0.25, 0.275, 0.30, 0.325, 0.35, 0.375, 0.40, 0.425, 0.45
 CL_GRID = [0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85]
 er_best, _ = run_step("STEP 1: efficiency ratio target (high-low version)", "er_min", ER_GRID, START, "step1_efficiency_ratio_target")
 fixed = dict(START, er_min=er_best)
+_r, _M, _A, _T = evaluate("hl", 0.20, 3.0, 3.0, None, detail=True)
+_st = _M.stack()
+print("DIAGNOSTIC single market-days with the largest absolute dollar move (target 0.20, reference budget):")
+for (d, sym), v in _st.reindex(_st.abs().sort_values(ascending=False).index).head(8).items():
+    m = mk[sym]
+    j = list(m.idx).index(calendar.get_loc(d))
+    print(f"  {sym} {d.date()} pnl {v:,.0f}; open/high/low/close {m.o[j]:.4f}/{m.h[j]:.4f}/{m.l[j]:.4f}/{m.c[j]:.4f}; previous close {m.c[j-1]:.4f}; atr {m.atr[j]:.5f}")
 # ---- sensitivity: close-based efficiency ratio
 run_step("SENSITIVITY: close-based efficiency ratio target (older definition)", "er_min", CL_GRID, dict(START, kind="close", er_min=0.6), "sensitivity_close_based_ratio")
 _r, _M, _A, _T = evaluate("close", 0.30, 3.0, 3.0, None, detail=True)
