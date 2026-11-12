@@ -1,13 +1,7 @@
 name: Trend following - one-contract size and 20-day ATR
-# Reads only the latest sessions. Runs by hand, or on a push to this branch that changes the universe table or the script.
+# Reads only the latest sessions. Runs by hand only (trend-micro-list.yml runs the same script on push).
 on:
   workflow_dispatch:
-  push:
-    branches: ['claude/trend-universe-contract-size-20261112']
-    paths:
-      - 'futures_data/trend_universe.csv'
-      - 'research/trend_following/contract_size_atr20.py'
-      - '.github/workflows/trend-contract-size.yml'
 permissions:
   contents: write
 jobs:
