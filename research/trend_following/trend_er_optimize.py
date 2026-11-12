@@ -115,6 +115,8 @@ for sym, src in mapping.items():
     path = pd.Series(np.abs(np.diff(c, prepend=np.nan))).rolling(W).sum()
     er_close = (cs - cs.shift(W)).abs() / path
     m.er = {"hl": er_hl.tolist(), "close": er_close.tolist()}
+    m.lo = {n: pd.Series(l).rolling(n).min().tolist() for n in (20, 40, 55, 100)}
+    m.hi = {n: pd.Series(h).rolling(n).max().tolist() for n in (20, 40, 55, 100)}
     m.dir = np.sign(cs - cs.shift(W)).fillna(0).astype(int).tolist()
     mk[sym] = m
 print(f"{len(mk)} markets in the test; first date of the shortest series: {min(m.first_date for m in mk.values()).date()} to {max(m.first_date for m in mk.values()).date()}")
@@ -124,7 +126,7 @@ for k in ("hl", "close"):
     print(f"efficiency ratio ({k}) across all market-days: percentiles 10/25/50/75/90/95 = " + " ".join(f"{np.percentile(allv, q):.2f}" for q in (10, 25, 50, 75, 90, 95)))
 
 
-def run_market(m, kind, er_min, init_atr, trail_atr, tmax, risk, want_trades=False):
+def run_market(m, kind, er_min, init_atr, trail, tmax, risk, want_trades=False):
     o, h, l, c, atr = m.o, m.h, m.l, m.c, m.atr
     er, dr = m.er[kind], m.dir
     n = len(c)
@@ -170,10 +172,13 @@ def run_market(m, kind, er_min, init_atr, trail_atr, tmax, risk, want_trades=Fal
                 else:
                     if c[i] < best:
                         best = c[i]
-                if trail_atr is not None:
-                    a = atr[i]
-                    if a == a:
-                        new = best - side * trail_atr * a
+                if trail is not None:
+                    if trail[0] == "atr":
+                        a = atr[i]
+                        new = best - side * trail[1] * a if a == a else float("nan")
+                    else:
+                        new = (m.lo[trail[1]][i] if side == 1 else m.hi[trail[1]][i])
+                    if new == new:
                         if side == 1:
                             if new > stop:
                                 stop = new
@@ -212,6 +217,10 @@ def sharpe_of(x):
     return float(x.mean() * 252 / sd) if sd > 0 else np.nan
 
 
+def tlabel(t):
+    return "none" if t is None else (f"{t[1]:g} ATR from best close" if t[0] == "atr" else f"{t[1]}-session channel")
+
+
 def evaluate(kind, er_min, init_atr, trail_atr, tmax, detail=False):
     risk = REF / 100 * ACCOUNT
     tot = np.zeros(NCAL)
@@ -237,7 +246,7 @@ def evaluate(kind, er_min, init_atr, trail_atr, tmax, detail=False):
     yrs = NCAL / 252
     ann = tot.sum() / yrs
     dd = max_dd(tot)
-    r = dict(er_target=er_min, initial_stop_atr=init_atr, trailing_stop_atr=trail_atr if trail_atr is not None else np.nan,
+    r = dict(er_target=er_min, initial_stop_atr=init_atr, trailing_stop_atr=tlabel(trail_atr),
              time_stop_sessions=tmax if tmax is not None else np.nan, trades=ntr, win_rate=nwin / ntr if ntr else np.nan,
              annual_pnl=ann, sharpe=sharpe_of(tot), max_drawdown=dd, annual_over_drawdown=ann / dd if dd > 0 else np.nan,
              sharpe_first_half=sharpe_of(tot[first_half]), sharpe_second_half=sharpe_of(tot[~first_half]),
@@ -253,8 +262,8 @@ def pick(sh):
 
 
 pd.set_option("display.width", 250, "display.max_rows", 500, "display.max_columns", 40)
-START = dict(kind="hl", er_min=0.30, init_atr=3.0, trail_atr=3.0, tmax=None)
-print(f"\nstarting values before any step: efficiency ratio target 0.30 (high-low scale), initial stop 3 ATR, trailing stop 3 ATR, no time stop. Budget {REF} percent per market, annual profit in dollars at that budget.")
+START = dict(kind="close", er_min=0.55, init_atr=3.0, trail_atr=("atr", 3.0), tmax=None)
+print(f"\nstarting values before any step: close-based efficiency ratio target 0.55, initial stop 3 ATR, trailing stop 3 ATR from the best close, no time stop. Budget {REF} percent per market, annual profit in dollars at that budget.")
 base = evaluate(**START)
 print("starting point:", {k: round(v, 3) for k, v in base.items() if k in ("trades", "annual_pnl", "sharpe", "max_drawdown", "sharpe_first_half", "sharpe_second_half")})
 
@@ -280,38 +289,59 @@ def run_step(title, key, values, fixed, fname):
     return values[ib], df
 
 
-# ---- step 1: efficiency ratio target
-# The high-low ratio (range over the sum of true ranges) lives between about 0.10 and 0.50 in practice (95th percentile 0.35), so the grid sits there; the first run used 0.30-0.85 and
-# produced almost no trades above 0.45 (invalid grid for this definition).
-ER_GRID = [0.20, 0.225, 0.25, 0.275, 0.30, 0.325, 0.35, 0.375, 0.40, 0.425, 0.45, 0.50]
-CL_GRID = [0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85]
-er_best, _ = run_step("STEP 1: efficiency ratio target (high-low version)", "er_min", ER_GRID, START, "step1_efficiency_ratio_target")
+# Michael (12 Nov 2026): a trailing stop is mandatory, no holding for hundreds of sessions, efficiency ratio expected in the 0.5-0.6 range for a 20-session window
+# (that range only makes sense for the close-based ratio: net close change over the sum of daily close changes), so the close-based ratio is now the primary version.
+CL_GRID = [0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80]
+HL_GRID = [0.20, 0.25, 0.30, 0.35, 0.40, 0.45]
+
+
+def run_step(title, key, values, fixed, fname, groups=None, drop_last_from_choice=False):
+    rows = []
+    for v in values:
+        p = dict(fixed)
+        p[key] = v
+        rows.append(evaluate(**p))
+    df = pd.DataFrame(rows)
+    sh = df["sharpe"].to_numpy()
+    n = len(sh) - 1 if drop_last_from_choice else len(sh)
+    g = groups if groups is not None else [0] * len(sh)
+    sm = []
+    for i in range(len(sh)):
+        nb = [j for j in (i - 1, i, i + 1) if 0 <= j < len(sh) and g[j] == g[i]]
+        sm.append(float(np.nanmean(sh[nb])))
+    df["sharpe_smoothed"] = sm
+    ib = int(np.nanargmax(np.array(sm[:n])))
+    ir = int(np.nanargmax(sh[:n]))
+    df.to_csv(f"{out_dir}/{fname}.csv", index=False)
+    show = df[["er_target", "initial_stop_atr", "trailing_stop_atr", "time_stop_sessions", "trades", "win_rate", "annual_pnl", "sharpe", "sharpe_smoothed",
+               "max_drawdown", "annual_over_drawdown", "sharpe_first_half", "sharpe_second_half", "mean_markets_in_trade"]]
+    print(f"\n=== {title} ===")
+    print(show.round(3).to_string(index=False))
+    bh1 = int(np.nanargmax(df["sharpe_first_half"].to_numpy()[:n]))
+    bh2 = int(np.nanargmax(df["sharpe_second_half"].to_numpy()[:n]))
+    print(f"CHOSEN (best smoothed Sharpe): row {ib}; raw best Sharpe row {ir}; best in first half row {bh1}; best in second half row {bh2}")
+    return values[ib], df
+
+
+# ---- step 1: efficiency ratio target (close-based, primary)
+er_best, _ = run_step("STEP 1: efficiency ratio target (close-based, 20 sessions)", "er_min", CL_GRID, START, "step1_efficiency_ratio_target")
 fixed = dict(START, er_min=er_best)
-_r, _M, _A, _T = evaluate("hl", 0.20, 3.0, 3.0, None, detail=True)
-_st = _M.stack()
-print("DIAGNOSTIC single market-days with the largest absolute dollar move (target 0.20, reference budget):")
-for (d, sym), v in _st.reindex(_st.abs().sort_values(ascending=False).index).head(8).items():
-    m = mk[sym]
-    j = list(m.idx).index(calendar.get_loc(d))
-    print(f"  {sym} {d.date()} pnl {v:,.0f}; open/high/low/close {m.o[j]:.4f}/{m.h[j]:.4f}/{m.l[j]:.4f}/{m.c[j]:.4f}; previous close {m.c[j-1]:.4f}; atr {m.atr[j]:.5f}")
-# ---- sensitivity: close-based efficiency ratio
-run_step("SENSITIVITY: close-based efficiency ratio target (older definition)", "er_min", CL_GRID, dict(START, kind="close", er_min=0.6), "sensitivity_close_based_ratio")
-_r, _M, _A, _T = evaluate("close", 0.30, 3.0, 3.0, None, detail=True)
-print("worst five trades of the close-based run at 0.30 (checking the blown-up drawdown):")
-print(_T.sort_values("pnl_dollars").head(5)[["symbol", "side", "entry_date", "exit_date", "shares", "atr_at_entry", "entry_price", "exit_price", "pnl_dollars", "pnl_in_atr"]].to_string(index=False))
+run_step("SENSITIVITY: high-low efficiency ratio target (range over summed true ranges)", "er_min", HL_GRID, dict(START, kind="hl", er_min=0.30), "sensitivity_high_low_ratio")
 # ---- step 2: initial stop
 INIT_GRID = [1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 6.0, 8.0]
-init_best, _ = run_step(f"STEP 2: initial stop in ATR (efficiency ratio target {er_best})", "init_atr", INIT_GRID, fixed, "step2_initial_stop")
+init_best, _ = run_step(f"STEP 2: initial stop in ATR (efficiency ratio target {er_best}, trailing 3 ATR)", "init_atr", INIT_GRID, fixed, "step2_initial_stop")
 fixed = dict(fixed, init_atr=init_best)
-# ---- step 3: trailing stop (None = no trailing stop)
-TRAIL_GRID = [1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 6.0, 8.0, None]
-trail_best, _ = run_step(f"STEP 3: trailing stop in ATR from the best close (target {er_best}, initial stop {init_best}); the last row is no trailing stop", "trail_atr", TRAIL_GRID, fixed, "step3_trailing_stop")
+# ---- step 3: trailing stop, mandatory: ATR from the best close, or the N-session lowest low (long) / highest high (short)
+TRAIL_GRID = [("atr", 2.0), ("atr", 2.5), ("atr", 3.0), ("atr", 4.0), ("atr", 5.0), ("atr", 6.0), ("atr", 8.0),
+              ("chan", 20), ("chan", 40), ("chan", 55), ("chan", 100)]
+TRAIL_GROUPS = [0] * 7 + [1] * 4
+trail_best, _ = run_step(f"STEP 3: trailing stop, ATR or channel (target {er_best}, initial stop {init_best} ATR)", "trail_atr", TRAIL_GRID, fixed, "step3_trailing_stop", groups=TRAIL_GROUPS)
 fixed = dict(fixed, trail_atr=trail_best)
-# ---- step 4: time stop (None = no time stop)
-TIME_GRID = [10, 15, 20, 30, 40, 60, 90, 120, None]
-time_best, _ = run_step(f"STEP 4: time stop in sessions (target {er_best}, initial {init_best}, trailing {trail_best}); the last row is no time stop", "tmax", TIME_GRID, fixed, "step4_time_stop")
+# ---- step 4: time stop; the last row (no time stop) is shown for reference only and cannot be chosen
+TIME_GRID = [20, 30, 40, 60, 90, 120, None]
+time_best, _ = run_step(f"STEP 4: time stop in sessions (target {er_best}, initial {init_best}, trailing {tlabel(trail_best)}); the last row is no time stop, reference only", "tmax", TIME_GRID, fixed, "step4_time_stop", drop_last_from_choice=True)
 fixed = dict(fixed, tmax=time_best)
-print(f"\nFINAL PARAMETERS: efficiency ratio target {er_best}; initial stop {init_best} ATR; trailing stop {trail_best} ATR; time stop {time_best} sessions")
+print(f"\nFINAL PARAMETERS: efficiency ratio target {er_best}; initial stop {init_best} ATR; trailing stop {tlabel(trail_best)}; time stop {time_best} sessions")
 
 # ---- final book
 r, M, A, T = evaluate(detail=True, **fixed)
@@ -319,9 +349,10 @@ T.to_csv(f"{out_dir}/final_trades.csv.gz", index=False)
 tot = M.sum(axis=1).to_numpy()
 yrs = NCAL / 252
 print("\n=== FINAL BOOK at the reference budget (0.10 percent per market) ===")
-print({k: round(float(v), 3) for k, v in r.items()})
+print({k: (v if isinstance(v, str) else round(float(v), 3)) for k, v in r.items()})
 print(f"average trade {T['pnl_in_atr'].mean():.2f} ATR, winners average {T.loc[T.pnl_dollars > 0, 'pnl_in_atr'].mean():.2f} ATR, losers {T.loc[T.pnl_dollars <= 0, 'pnl_in_atr'].mean():.2f} ATR, "
       f"average {T['sessions'].mean():.1f} sessions; exits: {T['exit_reason'].value_counts().to_dict()}; most markets in trade at once {int(A.sum(axis=1).max())}")
+print("holding period in sessions, percentiles 10/50/90/99:", [int(np.percentile(T['sessions'], q)) for q in (10, 50, 90, 99)], f"; longest {int(T['sessions'].max())}")
 print(f"before optimization (starting values): annual {base['annual_pnl']:.0f}, Sharpe {base['sharpe']:.2f}, max drawdown {base['max_drawdown']:.0f}")
 
 by_year = pd.DataFrame({"pnl_dollars": M.sum(axis=1).groupby(M.index.year).sum(),
