@@ -40,3 +40,4 @@ jobs:
           git commit -m "44-market portfolio baseline results (workflow run ${{ github.run_id }})" || echo "nothing to commit"
           git pull --rebase origin ${{ github.ref_name }}
           git push origin HEAD:${{ github.ref_name }}
+# rerun trigger 1794509841
