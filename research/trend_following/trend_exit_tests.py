@@ -333,6 +333,11 @@ for trail in (5.0, 8.0):
         for vol, rs in ((None, False), (3.0, False), (2.0, False), (None, True), (3.0, True)):
             add("E. volatility exit and resizing", er_min=0.60, trail_atr=trail, er_exit=er_exit, minmove=2.0, rearm="reset", vol_exit=vol, resize=rs)
 
+# F. ratio-fall exit at lower levels (the 0.3 and 0.2 levels cut winners short)
+for trail in (5.0, 8.0):
+    for ex in (0.15, 0.10, 0.05):
+        add("F. ratio-fall exit at lower levels", er_min=0.60, trail_atr=trail, er_exit=ex, minmove=0.0, rearm=None)
+
 rows = []
 t1 = time.time()
 for sec, p in systems:
@@ -352,3 +357,31 @@ for sec in df["section"].unique():
     print(d.round(2).to_string(index=False))
 print("\n=== all systems ranked by annual percent over drawdown percent (top 25) ===")
 print(df.sort_values("annual_over_drawdown", ascending=False).head(25)[["system", "annual_pct", "sharpe", "max_drawdown_pct", "trades", "fed_funds_trades", "fed_funds_share_pct"]].round(2).to_string(index=False))
+
+
+# direction flips right after an exit, for three complete systems
+def flip_stats(p, label):
+    risk = REF / 100 * ACCOUNT
+    recs = []
+    for sym, m in mk.items():
+        _, _, _, _, trades = run_market2(m, p, risk, True)
+        trades = sorted(trades, key=lambda t: t[2])
+        for j, t in enumerate(trades):
+            gap = t[2] - trades[j - 1][3] if j > 0 else None
+            recs.append(dict(symbol=sym, side=t[1], gap=gap, prev_side=trades[j - 1][1] if j > 0 else 0, atr_pnl=t[8] / (t[4] * t[5])))
+    d = pd.DataFrame(recs)
+    d2 = d.dropna(subset=["gap"])
+    imm = d2[d2["gap"] <= 3]
+    flip = imm[imm["side"] != imm["prev_side"]]
+    same = imm[imm["side"] == imm["prev_side"]]
+    rest = d[~d.index.isin(flip.index)]
+    print(f"{label}: trades {len(d)}; entries within 3 sessions of the previous exit {len(imm)} ({100 * len(imm) / len(d2):.1f}%); of these opposite direction (flips) {len(flip)}, same direction {len(same)}; "
+          f"average result in ATR: flips {flip['atr_pnl'].mean():.2f}, same-direction immediate {same['atr_pnl'].mean():.2f}, all other trades {rest['atr_pnl'].mean():.2f}; flips in fed funds {int((flip['symbol'] == 'ZQ').sum())}")
+    return dict(system=label, trades=len(d), immediate_entries=len(imm), flips=len(flip), same_direction_immediate=len(same),
+                flip_avg_atr=flip["atr_pnl"].mean(), same_immediate_avg_atr=same["atr_pnl"].mean(), other_avg_atr=rest["atr_pnl"].mean(), flips_in_fed_funds=int((flip["symbol"] == "ZQ").sum()))
+
+print("\n=== direction flips right after an exit (entry within 3 sessions, opposite direction) ===")
+fl = [flip_stats(dict(er_min=0.60, init_atr=4.0, chan=100, tmax=90), "current system (100-session channel + 90-session time stop)"),
+      flip_stats(dict(er_min=0.60, init_atr=4.0, trail_atr=5.0), "5 ATR trailing stop, no time stop"),
+      flip_stats(dict(er_min=0.60, init_atr=4.0, trail_atr=8.0), "8 ATR trailing stop, no time stop")]
+pd.DataFrame(fl).round(3).to_csv(f"{out_dir}/flip_statistics.csv", index=False)
