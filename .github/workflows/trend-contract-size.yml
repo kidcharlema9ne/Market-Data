@@ -1,0 +1,40 @@
+name: Trend following - one-contract size and 20-day ATR
+# Reads only the latest sessions. Runs by hand, or on a push to this branch that changes the universe table or the script.
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/trend-universe-contract-size-20261112']
+    paths:
+      - 'futures_data/trend_universe.csv'
+      - 'research/trend_following/contract_size_atr20.py'
+      - '.github/workflows/trend-contract-size.yml'
+permissions:
+  contents: write
+jobs:
+  size:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas numpy
+      - name: Fetch futures prices from R2
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python futures_data/fetch_futures_prices.py
+      - name: Contract size and 20-day ATR
+        run: |
+          mkdir -p research/trend_following/results
+          python research/trend_following/contract_size_atr20.py futures_prices.parquet futures_data/trend_universe.csv research/trend_following/results 300000 | tee research/trend_following/results/run_output.txt
+      - name: Save results on the branch
+        run: |
+          echo "workflow run ${{ github.run_id }}" > research/trend_following/results/RUN_ID.txt
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add research/trend_following/results
+          git commit -m "Contract size results (workflow run ${{ github.run_id }})" || echo "nothing to commit"
+          git push origin HEAD:${{ github.ref_name }}

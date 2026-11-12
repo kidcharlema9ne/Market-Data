@@ -1,0 +1,77 @@
+price_symbol,ibkr_root,name,group,in_original_48,multiplier,currency,expected_low,expected_high,multiplier_confidence,note
+ZW,ZW,Chicago wheat,grains,yes,50,USD,300,1500,sure,cents per bushel; 5000 bu
+KE,KE,Kansas City wheat,grains,yes,50,USD,300,1500,sure,cents per bushel; 5000 bu
+ZC,ZC,Corn,grains,yes,50,USD,250,900,sure,cents per bushel; 5000 bu
+ZS,ZS,Soybeans,grains,yes,50,USD,700,1800,sure,cents per bushel; 5000 bu
+ZL,ZL,Soybean oil,grains,yes,600,USD,25,90,sure,cents per lb; 60000 lb
+ZM,ZM,Soybean meal,grains,yes,100,USD,200,600,sure,dollars per short ton; 100 tons
+HO,HO,Heating oil (ULSD),energy,yes,42000,USD,1,5,sure,dollars per gallon
+NG,NG,Natural gas (Henry Hub),energy,yes,10000,USD,1,10,sure,dollars per mmBtu
+CL,CL,WTI crude oil,energy,yes,1000,USD,20,150,sure,dollars per barrel
+BZ,BZ,Brent last-day financial (NYMEX),energy,yes,1000,USD,20,150,sure,dollars per barrel
+RB,RB,RBOB gasoline,energy,yes,42000,USD,1,5,sure,dollars per gallon
+CT,CT,Cotton,softs,yes,500,USD,50,150,sure,cents per lb; 50000 lb
+CC,CC,Cocoa (New York),softs,yes,10,USD,2000,13000,sure,dollars per tonne
+SB,SB,Sugar No. 11,softs,yes,1120,USD,8,35,sure,cents per lb; 112000 lb
+KC,KC,Coffee (arabica),softs,yes,375,USD,100,450,sure,cents per lb; 37500 lb
+HE,HE,Lean hogs,meats,yes,400,USD,50,130,sure,cents per lb; 40000 lb
+LE,LE,Live cattle,meats,yes,400,USD,100,260,sure,cents per lb; 40000 lb
+GF,GF,Feeder cattle,meats,yes,500,USD,120,380,sure,cents per lb; 50000 lb
+PL,PL,Platinum,metals,yes,50,USD,600,3500,sure,dollars per oz
+SI,SI,Silver,metals,yes,5000,USD,10,120,sure,dollars per oz
+HG,HG,Copper,metals,yes,25000,USD,2,7,sure,dollars per lb
+GC,GC,Gold,metals,yes,100,USD,1000,6000,sure,dollars per oz
+A6,6A,Australian dollar,currencies,yes,100000,USD,0.5,0.9,sure,US dollars per AUD
+B6,6B,British pound,currencies,yes,62500,USD,1.0,1.7,sure,US dollars per GBP
+AD,6C,Canadian dollar,currencies,yes,100000,USD,0.6,0.85,sure,US dollars per CAD
+E6,6E,Euro,currencies,yes,125000,USD,0.9,1.4,sure,US dollars per EUR
+J1,6J,Japanese yen,currencies,yes,12500000,USD,0.004,0.012,sure,US dollars per yen
+MP,6M,Mexican peso,currencies,yes,500000,USD,0.03,0.08,sure,US dollars per peso
+BR,6L,Brazilian real,currencies,yes,100000,USD,0.12,0.3,sure,US dollars per real
+N6,6N,New Zealand dollar,currencies,yes,100000,USD,0.4,0.9,sure,US dollars per NZD
+E1,6S,Swiss franc,currencies,yes,125000,USD,0.8,1.4,sure,US dollars per CHF
+DX,DX,US dollar index,currencies,yes,1000,USD,85,115,sure,index points
+VX,VX,VIX futures,volatility,yes,1000,USD,10,80,sure,index points
+US,ZB,US 30-year bond,us rates,yes,1000,USD,90,150,sure,price points
+UB,UB,US ultra bond,us rates,yes,1000,USD,100,170,sure,price points
+ZN,ZN,US 10-year note,us rates,yes,1000,USD,100,125,sure,price points
+TN,TN,US ultra 10-year note,us rates,yes,1000,USD,105,130,sure,price points
+ZF,ZF,US 5-year note,us rates,yes,1000,USD,100,125,sure,price points
+ZT,ZT,US 2-year note,us rates,yes,2000,USD,100,110,sure,price points
+ZQ,ZQ,30-day fed funds,us rates,yes,4167,USD,94,100,sure,100 minus rate; about 41.67 dollars per basis point
+SR1,SR1,1-month SOFR,us rates,yes,4167,USD,94,100,sure,100 minus rate; about 41.67 dollars per basis point
+SR3,SR3,3-month SOFR,us rates,yes,2500,USD,94,100,sure,100 minus rate; 25 dollars per basis point
+YM,YM,Dow mini,stock indexes,yes,5,USD,20000,60000,sure,index points
+ES,ES,S&P 500 e-mini,stock indexes,yes,50,USD,3000,9000,sure,index points
+MES,MES,S&P 500 micro,stock indexes,yes,5,USD,3000,9000,sure,index points
+NQ,NQ,Nasdaq-100 e-mini,stock indexes,yes,20,USD,10000,30000,sure,index points
+MNQ,MNQ,Nasdaq-100 micro,stock indexes,yes,2,USD,10000,30000,sure,index points
+RTY,RTY,Russell 2000 e-mini,stock indexes,yes,50,USD,1500,3500,sure,index points
+FGBL,FGBL,Euro Bund (10-year German),foreign bonds,no,1000,EUR,120,150,sure,price points; Eurex
+FGBM,FGBM,Euro Bobl (5-year German),foreign bonds,no,1000,EUR,110,140,sure,price points; Eurex
+FGBS,FGBS,Euro Schatz (2-year German),foreign bonds,no,1000,EUR,105,120,sure,price points; Eurex
+FGBX,FGBX,Euro Buxl (30-year German),foreign bonds,no,1000,EUR,90,190,sure,price points; Eurex
+FBTP,FBTP,Euro BTP (long Italian),foreign bonds,no,1000,EUR,100,140,sure,price points; Eurex
+FBTS,FBTS,Short-term Euro BTP (Italian),foreign bonds,no,1000,EUR,100,125,sure,price points; Eurex
+FOAT,FOAT,Euro OAT (French),foreign bonds,no,1000,EUR,110,150,sure,price points; Eurex
+FBON,FBON,Euro BONO (Spanish),foreign bonds,no,1000,EUR,100,140,sure,price points; Eurex
+G,G,Long Gilt (UK 10-year),foreign bonds,no,1000,GBP,85,140,sure,price points; ICE Europe
+FEU3,FEU3,3-month Euribor (Eurex),foreign short rates,no,2500,EUR,94,102,sure,100 minus rate; 25 euros per basis point
+ER,ER,3-month Euribor (ICE),foreign short rates,no,2500,EUR,94,102,check,100 minus rate; overlaps with Eurex version
+SO3,SO3,3-month SONIA (UK),foreign short rates,no,2500,GBP,94,102,sure,100 minus rate; 25 pounds per basis point
+FDAX,FDAX,DAX 40 (Germany),foreign stock indexes,no,25,EUR,10000,30000,sure,index points; Eurex
+FDXM,FDXM,Mini DAX,foreign stock indexes,no,5,EUR,10000,30000,sure,index points; Eurex
+FDXS,FDXS,Micro DAX,foreign stock indexes,no,1,EUR,10000,30000,sure,index points; Eurex
+FESX,FESX,Euro Stoxx 50,foreign stock indexes,no,10,EUR,3000,7000,sure,index points; Eurex
+FXXP,FXXP,Stoxx Europe 600,foreign stock indexes,no,50,EUR,350,700,sure,index points; Eurex
+FTUK,FTUK,FTSE 100 (UK),foreign stock indexes,no,10,GBP,6000,12000,sure,index points; ICE Europe
+FCE,FCE,CAC 40 (France),foreign stock indexes,no,10,EUR,5000,9000,sure,index points; Euronext
+FTI,FTI,AEX (Netherlands),foreign stock indexes,no,200,EUR,600,1200,check,index points; Euronext
+BFX,BFX,BEL 20 (Belgium),foreign stock indexes,no,10,EUR,3000,6000,check,index points; Euronext
+NKD,NKD,Nikkei 225 in dollars,foreign stock indexes,no,5,USD,20000,60000,sure,index points; CME
+NIY,NIY,Nikkei 225 in yen,foreign stock indexes,no,500,JPY,20000,60000,sure,index points; CME
+B,B,Brent crude (ICE Europe),foreign commodities,no,1000,USD,20,150,sure,dollars per barrel
+C,C,Cocoa (London),foreign commodities,no,10,GBP,1500,10000,sure,pounds per tonne; ICE Europe
+RM,RM,Robusta coffee,foreign commodities,no,10,USD,1000,6000,sure,dollars per tonne; ICE Europe
+EBM,EBM,Milling wheat (Euronext),foreign commodities,no,50,EUR,150,400,sure,euros per tonne; Euronext
+RS,RS,Canola (ICE),foreign commodities,no,20,CAD,400,1200,sure,Canadian dollars per tonne; ICE
