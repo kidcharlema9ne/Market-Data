@@ -1,0 +1,22 @@
+period,pair,daily_corr,daily_n,weekly_corr,weekly_n
+development years (2007-12-31 to 2021-08-06),London cocoa vs New York cocoa (London in pounds),0.8694296773626777,3182,0.8437846780530981,700
+development years (2007-12-31 to 2021-08-06),London cocoa converted to dollars vs New York cocoa,0.914797838263863,3182,0.9182157893754188,700
+development years (2007-12-31 to 2021-08-06),Robusta vs arabica coffee (New York),0.6209475330091392,3059,0.5654092117163952,676
+development years (2007-12-31 to 2021-08-06),Robusta vs New York cocoa,0.15779746351925444,3059,0.18668831843134948,676
+development years (2007-12-31 to 2021-08-06),London cocoa vs Robusta,0.0800740238840454,3191,0.13636401841559614,676
+development years (2007-12-31 to 2021-08-06),London cocoa (pounds) vs British pound,-0.01543002866948623,3186,-0.022471819800664074,700
+development years (2007-12-31 to 2021-08-06),Robusta vs New York sugar,0.19895723982944205,3055,0.180906935050412,676
+recent years (2021-11-08 to 2026-11-06),London cocoa vs New York cocoa (London in pounds),0.9261773313504914,1178,0.9034274366291335,261
+recent years (2021-11-08 to 2026-11-06),London cocoa converted to dollars vs New York cocoa,0.9362671479981886,1174,0.9330502838472279,261
+recent years (2021-11-08 to 2026-11-06),Robusta vs arabica coffee (New York),0.7016066604120901,1178,0.6166968022948559,261
+recent years (2021-11-08 to 2026-11-06),Robusta vs New York cocoa,0.13786591256789194,1178,0.20126380054038287,261
+recent years (2021-11-08 to 2026-11-06),London cocoa vs Robusta,0.12778112867070987,1238,0.1360465162258779,261
+recent years (2021-11-08 to 2026-11-06),London cocoa (pounds) vs British pound,-0.05509503472328388,1174,-0.1586228298975047,261
+recent years (2021-11-08 to 2026-11-06),Robusta vs New York sugar,0.07678630133080158,1178,0.07290594074461203,261
+all years,London cocoa vs New York cocoa (London in pounds),0.8979930738601988,4421,0.8722612395690396,974
+all years,London cocoa converted to dollars vs New York cocoa,0.9246058221410605,4417,0.925036593792142,974
+all years,Robusta vs arabica coffee (New York),0.6493746949198393,4298,0.5821284453282815,950
+all years,Robusta vs New York cocoa,0.1473027266523296,4298,0.19582391245168235,950
+all years,London cocoa vs Robusta,0.10236558317006747,4492,0.13615583817122381,950
+all years,London cocoa (pounds) vs British pound,-0.028757571306707714,4421,-0.06465247694313306,974
+all years,Robusta vs New York sugar,0.15987990665704588,4294,0.14732458844520124,950
