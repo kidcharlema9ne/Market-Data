@@ -1,0 +1,52 @@
+,group,pnl_dollars,trades,share_of_sessions_in_trade,price_path_from,share_of_total_profit_pct
+GC,metals,-8626.233,22,0.363,GC,-2.363
+SI,metals,-7860.952,25,0.419,SI,-2.154
+LE,meats,-5075.262,14,0.212,LE,-1.39
+AD,currencies,-3708.493,16,0.291,AD,-1.016
+C,foreign commodities,-3076.9,25,0.34,C,-0.843
+ZC,grains,-1851.11,20,0.285,ZC,-0.507
+EBM,foreign commodities,-1472.303,20,0.287,EBM,-0.403
+RM,foreign commodities,138.92,23,0.322,RM,0.038
+FESX,foreign stock indexes,652.8,17,0.293,FESX,0.179
+FBTP,foreign bonds,947.697,19,0.275,FBTP,0.26
+KE,grains,1507.147,23,0.357,KE,0.413
+E1,currencies,1511.945,24,0.454,E1,0.414
+UB,us rates,1716.291,11,0.219,UB,0.47
+ZM,grains,2016.572,21,0.404,ZM,0.552
+SO3,foreign short rates,2065.324,24,0.403,L,0.566
+SB,softs,2437.716,23,0.426,SB,0.668
+NG,energy,2533.301,15,0.258,NG,0.694
+PL,metals,2623.632,18,0.33,PL,0.719
+N6,currencies,2734.867,17,0.35,N6,0.749
+ZT,us rates,2895.608,17,0.328,ZT,0.793
+HG,metals,3497.267,21,0.412,HG,0.958
+A6,currencies,3735.134,14,0.275,A6,1.023
+RB,energy,4792.281,21,0.315,RB,1.313
+DX,currencies,4818.485,23,0.421,DX,1.32
+SR3,us rates,4975.403,5,0.092,SR3,1.363
+CT,softs,5038.317,20,0.294,CT,1.38
+ZW,grains,5162.529,17,0.334,ZW,1.414
+BR,currencies,5632.591,21,0.332,BR,1.543
+RTY,stock indexes,5667.046,20,0.422,RTY,1.553
+ZF,us rates,5761.715,19,0.36,ZF,1.578
+FGBL,foreign bonds,5883.014,21,0.367,FGBL,1.612
+G,foreign bonds,6369.619,14,0.25,G,1.745
+ZN,us rates,6444.489,17,0.366,ZN,1.765
+CL,energy,6484.46,20,0.346,CL,1.776
+MP,currencies,6625.216,18,0.326,MP,1.815
+HE,meats,7303.55,23,0.385,HE,2.001
+ER,foreign short rates,8177.938,27,0.554,ER,2.24
+VX,volatility,8559.646,27,0.526,VX,2.345
+E6,currencies,9101.575,17,0.304,E6,2.493
+J1,currencies,9182.684,13,0.215,J1,2.516
+TN,us rates,10196.104,7,0.178,TN,2.793
+B6,currencies,10392.294,16,0.324,B6,2.847
+BZ,energy,11023.609,24,0.366,BZ,3.02
+ZL,grains,12950.353,28,0.45,ZL,3.548
+NQ,stock indexes,13177.78,21,0.375,NQ,3.61
+US,us rates,13627.533,13,0.31,US,3.733
+ZS,grains,14389.542,22,0.372,ZS,3.942
+YM,stock indexes,14605.806,23,0.422,YM,4.001
+ES,stock indexes,15532.669,23,0.452,ES,4.255
+SR1,us rates,18152.486,7,0.112,SR1,4.973
+ZQ,us rates,115653.849,48,0.779,ZQ,31.684
