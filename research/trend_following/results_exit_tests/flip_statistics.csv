@@ -1,0 +1,4 @@
+system,trades,immediate_entries,flips,same_direction_immediate,flip_avg_atr,same_immediate_avg_atr,other_avg_atr,flips_in_fed_funds
+current system (100-session channel + 90-session time stop),1004,83,56,27,5.137,0.356,0.98,18
+"5 ATR trailing stop, no time stop",997,34,33,1,1.503,13.544,1.148,14
+"8 ATR trailing stop, no time stop",847,65,64,1,2.239,10.653,1.688,12
