@@ -327,6 +327,10 @@ def run_step(title, key, values, fixed, fname, groups=None, drop_last_from_choic
 
 # ---- step 1: efficiency ratio target (close-based, primary)
 er_best, _ = run_step("STEP 1: efficiency ratio target (Kaufman, closes only, 20 sessions)", "er_min", CL_GRID, START, "step1_efficiency_ratio_target")
+import os
+if os.environ.get("FORCE_ER"):
+    er_best = float(os.environ["FORCE_ER"])
+    print(f"RATIO TARGET FORCED to {er_best} (Michael expects 0.5 to 0.6); later steps optimized around it")
 fixed = dict(START, er_min=er_best)
 run_step("COMPARISON: ATR-yardstick ratio (net close change over the sum of 20 true ranges; its scale tops out near 0.3, so 0.5 to 0.6 almost never occurs)", "er_min", ER_GRID, dict(START, kind="atr", er_min=0.25), "comparison_atr_yardstick_ratio")
 # ---- step 2: initial stop
