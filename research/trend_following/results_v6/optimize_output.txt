@@ -8,29 +8,12 @@ efficiency ratio (atr) across all market-days: percentiles 10/25/50/75/90/95 = 0
 efficiency ratio (close) across all market-days: percentiles 10/25/50/75/90/95 = 0.04 0.10 0.21 0.35 0.49 0.58
 efficiency ratio (hl) across all market-days: percentiles 10/25/50/75/90/95 = 0.16 0.18 0.22 0.27 0.32 0.35
 
-starting values before any step: efficiency ratio (net close change over summed true ranges) target 0.40, initial stop 3 ATR, trailing stop 3 ATR from the best close, no time stop. Budget 0.1 percent per market, annual profit in dollars at that budget.
-starting point: {'trades': 199, 'annual_pnl': np.float64(2790.776), 'sharpe': 0.431, 'max_drawdown': 16221.744, 'sharpe_first_half': 0.43, 'sharpe_second_half': 0.438}
+starting values before any step: efficiency ratio (Kaufman, closes only) target 0.55, initial stop 3 ATR, trailing stop 3 ATR from the best close, no time stop. Budget 0.1 percent per market, annual profit in dollars at that budget.
+starting point: {'trades': 1583, 'annual_pnl': np.float64(13425.793), 'sharpe': 0.564, 'max_drawdown': 40866.066, 'sharpe_first_half': 0.7, 'sharpe_second_half': 0.434}
 
-=== STEP 1: efficiency ratio target (net close change over the sum of 20 true ranges) ===
+=== STEP 1: efficiency ratio target (Kaufman, closes only, 20 sessions) ===
  er_target  initial_stop_atr     trailing_stop_atr  time_stop_sessions  trades  win_rate  annual_pnl  sharpe  sharpe_smoothed  max_drawdown  annual_over_drawdown  sharpe_first_half  sharpe_second_half  mean_markets_in_trade
-      0.20               3.0 3 ATR from best close                 NaN    3066     0.362   14969.556   0.406            0.439     85711.073                 0.175              0.433               0.380                 21.582
-      0.25               3.0 3 ATR from best close                 NaN    1974     0.373   13310.251   0.471            0.435     51892.670                 0.256              0.412               0.528                 13.882
-      0.30               3.0 3 ATR from best close                 NaN    1121     0.386    8607.601   0.428            0.451     45022.606                 0.191              0.439               0.421                  7.742
-      0.35               3.0 3 ATR from best close                 NaN     513     0.409    5351.531   0.455            0.438     19717.315                 0.271              0.389               0.517                  3.526
-      0.40               3.0 3 ATR from best close                 NaN     199     0.407    2790.776   0.431            0.449     16221.744                 0.172              0.430               0.438                  1.396
-      0.45               3.0 3 ATR from best close                 NaN      61     0.377    1669.391   0.460            0.512      8468.122                 0.197              0.011               0.749                  0.427
-      0.50               3.0 3 ATR from best close                 NaN      23     0.435    1843.103   0.644            0.546      4203.485                 0.438              0.046               0.998                  0.167
-      0.55               3.0 3 ATR from best close                 NaN      10     0.500    1374.358   0.533            0.558      2566.600                 0.535             -0.077               0.834                  0.079
-      0.60               3.0 3 ATR from best close                 NaN       7     0.571     684.650   0.498            0.406      2394.733                 0.286             -0.166               0.778                  0.063
-      0.65               3.0 3 ATR from best close                 NaN       6     0.500     120.320   0.186            0.340      2673.285                 0.045             -0.187               0.421                  0.047
-      0.70               3.0 3 ATR from best close                 NaN       1     1.000      88.328   0.337            0.262       605.959                 0.146              0.470                 NaN                  0.015
-CHOSEN (best smoothed Sharpe): row 7; raw best Sharpe row 6; best in first half row 10; best in second half row 6
-
-=== COMPARISON: Kaufman close-only ratio (net close change over the sum of daily close changes) ===
- er_target  initial_stop_atr     trailing_stop_atr  time_stop_sessions  trades  win_rate  annual_pnl  sharpe  sharpe_smoothed  max_drawdown  annual_over_drawdown  sharpe_first_half  sharpe_second_half  mean_markets_in_trade
-      0.30               3.0 3 ATR from best close                 NaN    4308     0.359   12602.416   0.290            0.319    131859.777                 0.096              0.298               0.284                 30.474
-      0.35               3.0 3 ATR from best close                 NaN    3677     0.363   13807.473   0.347            0.309    106412.102                 0.130              0.376               0.317                 26.217
-      0.40               3.0 3 ATR from best close                 NaN    3163     0.360   10568.368   0.289            0.336    106625.059                 0.099              0.325               0.253                 22.477
+      0.40               3.0 3 ATR from best close                 NaN    3163     0.360   10568.368   0.289            0.330    106625.059                 0.099              0.325               0.253                 22.477
       0.45               3.0 3 ATR from best close                 NaN    2611     0.372   12091.247   0.372            0.366     83590.276                 0.145              0.348               0.396                 18.707
       0.50               3.0 3 ATR from best close                 NaN    2068     0.373   12202.558   0.436            0.457     61773.082                 0.198              0.440               0.433                 14.827
       0.55               3.0 3 ATR from best close                 NaN    1583     0.381   13425.793   0.564            0.550     40866.066                 0.329              0.700               0.434                 11.568
@@ -39,160 +22,170 @@ CHOSEN (best smoothed Sharpe): row 7; raw best Sharpe row 6; best in first half 
       0.70               3.0 3 ATR from best close                 NaN     544     0.414    7052.272   0.571            0.635     18909.521                 0.373              0.621               0.545                  4.105
       0.75               3.0 3 ATR from best close                 NaN     338     0.426    6458.701   0.689            0.676     10829.202                 0.596              0.575               0.794                  2.752
       0.80               3.0 3 ATR from best close                 NaN     217     0.447    5088.829   0.768            0.728      7818.666                 0.651              0.828               0.732                  1.892
-CHOSEN (best smoothed Sharpe): row 10; raw best Sharpe row 10; best in first half row 10; best in second half row 9
+CHOSEN (best smoothed Sharpe): row 8; raw best Sharpe row 8; best in first half row 8; best in second half row 7
 
-=== STEP 2: initial stop in ATR (efficiency ratio target 0.55, trailing 3 ATR) ===
+=== COMPARISON: ATR-yardstick ratio (net close change over the sum of 20 true ranges; its scale tops out near 0.3, so 0.5 to 0.6 almost never occurs) ===
  er_target  initial_stop_atr     trailing_stop_atr  time_stop_sessions  trades  win_rate  annual_pnl  sharpe  sharpe_smoothed  max_drawdown  annual_over_drawdown  sharpe_first_half  sharpe_second_half  mean_markets_in_trade
-      0.55               1.0 3 ATR from best close                 NaN      14     0.286    1258.010   0.531            0.531      2118.850                 0.594             -0.295               0.831                  0.068
-      0.55               1.5 3 ATR from best close                 NaN      11     0.364    1345.464   0.531            0.532      2763.144                 0.487             -0.215               0.856                  0.071
-      0.55               2.0 3 ATR from best close                 NaN      10     0.400    1354.554   0.533            0.535      2635.416                 0.514             -0.169               0.849                  0.071
-      0.55               2.5 3 ATR from best close                 NaN      10     0.500    1388.181   0.539            0.535      2566.600                 0.541             -0.071               0.841                  0.079
-      0.55               3.0 3 ATR from best close                 NaN      10     0.500    1374.358   0.533            0.532      2566.600                 0.535             -0.077               0.834                  0.079
-      0.55               4.0 3 ATR from best close                 NaN      10     0.500    1353.008   0.523            0.523      2676.818                 0.505             -0.077               0.818                  0.079
-      0.55               5.0 3 ATR from best close                 NaN      10     0.500    1331.659   0.513            0.513      2976.818                 0.447             -0.077               0.802                  0.079
-      0.55               6.0 3 ATR from best close                 NaN      10     0.500    1310.309   0.502            0.510      3276.818                 0.400             -0.077               0.785                  0.079
-      0.55               8.0 3 ATR from best close                 NaN      10     0.500    1336.096   0.515            0.508      2914.467                 0.458             -0.077               0.805                  0.079
-CHOSEN (best smoothed Sharpe): row 3; raw best Sharpe row 3; best in first half row 3; best in second half row 1
+      0.15               3.0 3 ATR from best close                 NaN    4288     0.361   15085.749   0.342            0.374    108908.931                 0.139              0.339               0.346                 30.367
+      0.20               3.0 3 ATR from best close                 NaN    3066     0.362   14969.556   0.406            0.407     85711.073                 0.175              0.433               0.380                 21.582
+      0.25               3.0 3 ATR from best close                 NaN    1974     0.373   13310.251   0.471            0.435     51892.670                 0.256              0.412               0.528                 13.882
+      0.30               3.0 3 ATR from best close                 NaN    1121     0.386    8607.601   0.428            0.451     45022.606                 0.191              0.439               0.421                  7.742
+      0.35               3.0 3 ATR from best close                 NaN     513     0.409    5351.531   0.455            0.438     19717.315                 0.271              0.389               0.517                  3.526
+      0.40               3.0 3 ATR from best close                 NaN     199     0.407    2790.776   0.431            0.443     16221.744                 0.172              0.430               0.438                  1.396
+CHOSEN (best smoothed Sharpe): row 3; raw best Sharpe row 2; best in first half row 3; best in second half row 2
 
-=== STEP 3: trailing stop, ATR or channel (target 0.55, initial stop 2.5 ATR) ===
+=== STEP 2: initial stop in ATR (efficiency ratio target 0.8, trailing 3 ATR) ===
+ er_target  initial_stop_atr     trailing_stop_atr  time_stop_sessions  trades  win_rate  annual_pnl  sharpe  sharpe_smoothed  max_drawdown  annual_over_drawdown  sharpe_first_half  sharpe_second_half  mean_markets_in_trade
+       0.8               1.0 3 ATR from best close                 NaN     273     0.234    2803.509   0.548            0.544      9351.409                 0.300              0.500               0.596                  1.195
+       0.8               1.5 3 ATR from best close                 NaN     245     0.314    3031.246   0.541            0.562     10056.485                 0.301              0.470               0.607                  1.433
+       0.8               2.0 3 ATR from best close                 NaN     230     0.370    3495.631   0.597            0.624      9373.381                 0.373              0.649               0.558                  1.613
+       0.8               2.5 3 ATR from best close                 NaN     217     0.433    4787.155   0.736            0.700      7552.304                 0.634              0.760               0.729                  1.782
+       0.8               3.0 3 ATR from best close                 NaN     217     0.447    5088.829   0.768            0.762      7818.666                 0.651              0.828               0.732                  1.892
+       0.8               4.0 3 ATR from best close                 NaN     217     0.456    5221.113   0.783            0.777      8000.059                 0.653              0.852               0.739                  1.911
+       0.8               5.0 3 ATR from best close                 NaN     217     0.456    5199.764   0.779            0.779      8000.059                 0.650              0.852               0.732                  1.911
+       0.8               6.0 3 ATR from best close                 NaN     217     0.456    5178.414   0.775            0.778      8000.059                 0.647              0.852               0.726                  1.911
+       0.8               8.0 3 ATR from best close                 NaN     217     0.456    5204.201   0.780            0.778      8000.059                 0.651              0.852               0.734                  1.911
+CHOSEN (best smoothed Sharpe): row 6; raw best Sharpe row 5; best in first half row 5; best in second half row 5
+
+=== STEP 3: trailing stop, ATR or channel (target 0.8, initial stop 5.0 ATR) ===
  er_target  initial_stop_atr       trailing_stop_atr  time_stop_sessions  trades  win_rate  annual_pnl  sharpe  sharpe_smoothed  max_drawdown  annual_over_drawdown  sharpe_first_half  sharpe_second_half  mean_markets_in_trade
-      0.55               2.5   2 ATR from best close                 NaN      11     0.455     729.397   0.505            0.532      2299.681                 0.317             -0.054               0.814                  0.062
-      0.55               2.5 2.5 ATR from best close                 NaN      10     0.500    1431.993   0.560            0.535      2456.952                 0.583             -0.005               0.844                  0.075
-      0.55               2.5   3 ATR from best close                 NaN      10     0.500    1388.181   0.539            0.562      2566.600                 0.541             -0.071               0.841                  0.079
-      0.55               2.5   4 ATR from best close                 NaN       9     0.556    1526.638   0.587            0.560      2700.504                 0.565              0.162               0.837                  0.095
-      0.55               2.5   5 ATR from best close                 NaN       9     0.556    1458.655   0.555            0.553      3094.198                 0.471              0.061               0.833                  0.108
-      0.55               2.5   6 ATR from best close                 NaN       9     0.556    1369.150   0.518            0.532      4037.700                 0.339             -0.052               0.827                  0.111
-      0.55               2.5   8 ATR from best close                 NaN       9     0.556    1416.613   0.523            0.521      4728.388                 0.300              0.033               0.817                  0.145
-      0.55               2.5      20-session channel                 NaN       9     0.667    1454.190   0.555            0.548      3274.556                 0.444              0.044               0.838                  0.099
-      0.55               2.5      40-session channel                 NaN       9     0.556    1453.451   0.540            0.532      4206.631                 0.346              0.101               0.806                  0.136
-      0.55               2.5      55-session channel                 NaN       9     0.444    1358.068   0.500            0.554      5210.071                 0.261             -0.008               0.802                  0.155
-      0.55               2.5     100-session channel                 NaN       8     0.500    1780.523   0.621            0.561      4904.078                 0.363              0.377               0.807                  0.378
-CHOSEN (best smoothed Sharpe): row 2; raw best Sharpe row 10; best in first half row 10; best in second half row 1
+       0.8               5.0   2 ATR from best close                 NaN     241     0.411     815.546   0.183            0.366     10478.926                 0.078              0.287               0.094                  1.086
+       0.8               5.0 2.5 ATR from best close                 NaN     227     0.410    3122.334   0.548            0.504      8125.539                 0.384              0.670               0.465                  1.455
+       0.8               5.0   3 ATR from best close                 NaN     217     0.456    5199.764   0.779            0.757      8000.059                 0.650              0.852               0.732                  1.911
+       0.8               5.0   4 ATR from best close                 NaN     204     0.490    8377.999   0.942            0.900     11234.255                 0.746              1.151               0.756                  2.795
+       0.8               5.0   5 ATR from best close                 NaN     195     0.462   11638.075   0.979            0.944     13835.310                 0.841              0.891               1.069                  3.801
+       0.8               5.0   6 ATR from best close                 NaN     190     0.453   12043.891   0.910            0.963     18888.764                 0.638              0.767               1.041                  4.570
+       0.8               5.0   8 ATR from best close                 NaN     179     0.413   15635.173   0.999            0.955     23914.157                 0.654              0.985               1.017                  5.585
+       0.8               5.0      20-session channel                 NaN     239     0.431    5501.950   0.624            0.660     16845.343                 0.327              0.790               0.485                  2.375
+       0.8               5.0      40-session channel                 NaN     202     0.436    9088.097   0.696            0.740     21278.220                 0.427              0.594               0.790                  4.022
+       0.8               5.0      55-session channel                 NaN     191     0.419   13701.670   0.899            0.826     23123.843                 0.593              1.067               0.732                  5.046
+       0.8               5.0     100-session channel                 NaN     172     0.413   16838.375   0.883            0.891     30165.605                 0.558              0.963               0.811                  7.499
+CHOSEN (best smoothed Sharpe): row 5; raw best Sharpe row 6; best in first half row 3; best in second half row 4
 
-=== STEP 4: time stop in sessions (target 0.55, initial 2.5, trailing 3 ATR from best close); the last row is no time stop, reference only ===
+=== STEP 4: time stop in sessions (target 0.8, initial 5.0, trailing 6 ATR from best close); the last row is no time stop, reference only ===
  er_target  initial_stop_atr     trailing_stop_atr  time_stop_sessions  trades  win_rate  annual_pnl  sharpe  sharpe_smoothed  max_drawdown  annual_over_drawdown  sharpe_first_half  sharpe_second_half  mean_markets_in_trade
-      0.55               2.5 3 ATR from best close                20.0      10       0.5    1380.354   0.542            0.524      2800.118                 0.493             -0.004               0.818                  0.040
-      0.55               2.5 3 ATR from best close                30.0      10       0.5    1294.271   0.506            0.531      2800.118                 0.462             -0.151               0.816                  0.053
-      0.55               2.5 3 ATR from best close                40.0      10       0.5    1391.065   0.543            0.530      2566.600                 0.542             -0.053               0.840                  0.064
-      0.55               2.5 3 ATR from best close                60.0      10       0.5    1388.181   0.539            0.541      2566.600                 0.541             -0.071               0.841                  0.078
-      0.55               2.5 3 ATR from best close                90.0      10       0.5    1388.181   0.539            0.539      2566.600                 0.541             -0.071               0.841                  0.079
-      0.55               2.5 3 ATR from best close               120.0      10       0.5    1388.181   0.539            0.539      2566.600                 0.541             -0.071               0.841                  0.079
-      0.55               2.5 3 ATR from best close                 NaN      10       0.5    1388.181   0.539            0.539      2566.600                 0.541             -0.071               0.841                  0.079
-CHOSEN (best smoothed Sharpe): row 3; raw best Sharpe row 2; best in first half row 0; best in second half row 4
+       0.8               5.0 6 ATR from best close                20.0     259     0.548    2681.689   0.444            0.572     12386.211                 0.217              0.562               0.365                  1.373
+       0.8               5.0 6 ATR from best close                30.0     236     0.576    5136.398   0.701            0.630     10031.407                 0.512              0.844               0.610                  1.803
+       0.8               5.0 6 ATR from best close                40.0     229     0.568    6141.121   0.747            0.735      9200.310                 0.667              0.931               0.599                  2.204
+       0.8               5.0 6 ATR from best close                60.0     215     0.563    7079.557   0.756            0.770     10741.417                 0.659              0.755               0.761                  2.855
+       0.8               5.0 6 ATR from best close                90.0     205     0.493    9529.802   0.808            0.808     18233.395                 0.523              0.899               0.743                  3.432
+       0.8               5.0 6 ATR from best close               120.0     200     0.475   10512.237   0.860            0.859     18233.395                 0.577              0.785               0.934                  3.826
+       0.8               5.0 6 ATR from best close                 NaN     190     0.453   12043.891   0.910            0.885     18888.764                 0.638              0.767               1.041                  4.570
+CHOSEN (best smoothed Sharpe): row 5; raw best Sharpe row 5; best in first half row 2; best in second half row 5
 
-FINAL PARAMETERS: efficiency ratio target 0.55; initial stop 2.5 ATR; trailing stop 3 ATR from best close; time stop 60 sessions
+FINAL PARAMETERS: efficiency ratio target 0.8; initial stop 5.0 ATR; trailing stop 6 ATR from best close; time stop 120 sessions
 
 === FINAL BOOK at the reference budget (0.10 percent per market) ===
-{'er_target': 0.55, 'initial_stop_atr': 2.5, 'trailing_stop_atr': '3 ATR from best close', 'time_stop_sessions': 60.0, 'trades': 10.0, 'win_rate': 0.5, 'annual_pnl': 1388.181, 'sharpe': 0.539, 'max_drawdown': 2566.6, 'annual_over_drawdown': 0.541, 'sharpe_first_half': -0.071, 'sharpe_second_half': 0.841, 'mean_markets_in_trade': 0.078}
-average trade 6.50 ATR, winners average 15.03 ATR, losers -2.03 ATR, average 27.6 sessions; exits: {'stop': 9, 'time': 1}; most markets in trade at once 3
-holding period in sessions, percentiles 10/50/90/99: [2, 19, 52, 59] ; longest 60
-before optimization (starting values): annual 2791, Sharpe 0.43, max drawdown 16222
+{'er_target': 0.8, 'initial_stop_atr': 5.0, 'trailing_stop_atr': '6 ATR from best close', 'time_stop_sessions': 120.0, 'trades': 200.0, 'win_rate': 0.475, 'annual_pnl': 10512.237, 'sharpe': 0.86, 'max_drawdown': 18233.395, 'annual_over_drawdown': 0.577, 'sharpe_first_half': 0.785, 'sharpe_second_half': 0.934, 'mean_markets_in_trade': 3.826}
+average trade 2.46 ATR, winners average 8.84 ATR, losers -3.31 ATR, average 67.7 sessions; exits: {'stop': 159, 'time': 41}; most markets in trade at once 15
+holding period in sessions, percentiles 10/50/90/99: [14, 64, 120, 120] ; longest 120
+before optimization (starting values): annual 13426, Sharpe 0.56, max drawdown 40866
 
 by calendar year (reference budget)
       pnl_dollars  max_drawdown_inside_year  mean_markets_in_trade
 2007          0.0                       0.0                    0.0
-2008          0.0                       0.0                    0.0
-2009      -1228.0                    2026.0                    0.0
-2010        276.0                    1984.0                    0.0
-2011        745.0                     606.0                    0.0
-2012       -815.0                     847.0                    0.0
-2013          0.0                       0.0                    0.0
-2014        436.0                    1447.0                    0.0
-2015          0.0                       0.0                    0.0
-2016          0.0                       0.0                    0.0
-2017          0.0                       0.0                    0.0
-2018       -780.0                     780.0                    0.0
-2019          0.0                       0.0                    0.0
-2020      20871.0                    2217.0                    1.0
-2021          0.0                       0.0                    0.0
+2008      15902.0                    9364.0                    3.0
+2009       3255.0                    5384.0                    5.0
+2010       7353.0                    7533.0                    3.0
+2011       6158.0                    5967.0                    4.0
+2012       7158.0                    8064.0                    3.0
+2013      15069.0                    8881.0                    4.0
+2014       6612.0                   11245.0                    6.0
+2015       5040.0                    7471.0                    4.0
+2016        205.0                    7906.0                    2.0
+2017      15634.0                    3941.0                    3.0
+2018       -861.0                   18233.0                    4.0
+2019       6031.0                    5812.0                    3.0
+2020      48422.0                   10429.0                    5.0
+2021      11735.0                    7601.0                    2.0
 
 by market, sorted by profit (reference budget)
                       group  pnl_dollars  share_of_total_profit_pct  trades  share_of_sessions_in_trade price_path_from
-ZQ                 us rates     12539.46                      64.28     1.0                        0.02              ZQ
-SR1                us rates      6056.90                      31.05     1.0                        0.01             SR1
-SR3                us rates      2275.07                      11.66     1.0                        0.01             SR3
-HE                    meats       435.60                       2.23     1.0                        0.01              HE
-EBM     foreign commodities       426.60                       2.19     2.0                        0.02             EBM
-ZM                   grains         0.00                       0.00     0.0                        0.00              ZM
-ZL                   grains         0.00                       0.00     0.0                        0.00              ZL
-ZC                   grains         0.00                       0.00     0.0                        0.00              ZC
-ZS                   grains         0.00                       0.00     0.0                        0.00              ZS
-RB                   energy         0.00                       0.00     0.0                        0.00              RB
-NG                   energy         0.00                       0.00     0.0                        0.00              NG
-CT                    softs         0.00                       0.00     0.0                        0.00              CT
-C       foreign commodities         0.00                       0.00     0.0                        0.00               C
-SB                    softs         0.00                       0.00     0.0                        0.00              SB
-RM      foreign commodities         0.00                       0.00     0.0                        0.00              RM
-CL                   energy         0.00                       0.00     0.0                        0.00              CL
-BZ                   energy         0.00                       0.00     0.0                        0.00              BZ
-KE                   grains         0.00                       0.00     0.0                        0.00              KE
-ZW                   grains         0.00                       0.00     0.0                        0.00              ZW
-HG                   metals         0.00                       0.00     0.0                        0.00              HG
-SI                   metals         0.00                       0.00     0.0                        0.00              SI
-PL                   metals         0.00                       0.00     0.0                        0.00              PL
-LE                    meats         0.00                       0.00     0.0                        0.00              LE
-GC                   metals         0.00                       0.00     0.0                        0.00              GC
-A6               currencies         0.00                       0.00     0.0                        0.00              A6
-B6               currencies         0.00                       0.00     0.0                        0.00              B6
-AD               currencies         0.00                       0.00     0.0                        0.00              AD
-ZN                 us rates         0.00                       0.00     0.0                        0.00              ZN
-E1               currencies         0.00                       0.00     0.0                        0.00              E1
-DX               currencies         0.00                       0.00     0.0                        0.00              DX
-US                 us rates         0.00                       0.00     0.0                        0.00              US
-E6               currencies         0.00                       0.00     0.0                        0.00              E6
-J1               currencies         0.00                       0.00     0.0                        0.00              J1
-MP               currencies         0.00                       0.00     0.0                        0.00              MP
-N6               currencies         0.00                       0.00     0.0                        0.00              N6
-NQ            stock indexes         0.00                       0.00     0.0                        0.00              NQ
-RTY           stock indexes         0.00                       0.00     0.0                        0.00             RTY
-UB                 us rates         0.00                       0.00     0.0                        0.00              UB
-TN                 us rates         0.00                       0.00     0.0                        0.00              TN
-ZF                 us rates         0.00                       0.00     0.0                        0.00              ZF
-YM            stock indexes         0.00                       0.00     0.0                        0.00              YM
-ES            stock indexes         0.00                       0.00     0.0                        0.00              ES
-ZT                 us rates         0.00                       0.00     0.0                        0.00              ZT
-FESX  foreign stock indexes         0.00                       0.00     0.0                        0.00            FESX
-G             foreign bonds         0.00                       0.00     0.0                        0.00               G
-FGBL          foreign bonds         0.00                       0.00     0.0                        0.00            FGBL
+ZQ                 us rates     61063.22                      41.34    29.0                        0.63              ZQ
+ER      foreign short rates     14403.05                       9.75    10.0                        0.21              ER
+YM            stock indexes     12950.06                       8.77     6.0                        0.13              YM
+BZ                   energy      8723.99                       5.91     2.0                        0.06              BZ
+RTY           stock indexes      8132.91                       5.51     5.0                        0.14             RTY
+ZS                   grains      6574.36                       4.45     6.0                        0.12              ZS
+EBM     foreign commodities      5666.66                       3.84     5.0                        0.09             EBM
+ZL                   grains      5465.54                       3.70     5.0                        0.11              ZL
+N6               currencies      5240.60                       3.55     4.0                        0.10              N6
+B6               currencies      4838.94                       3.28     2.0                        0.05              B6
+SR1                us rates      4455.42                       3.02     2.0                        0.02             SR1
+SO3     foreign short rates      4041.14                       2.74     7.0                        0.13               L
+CL                   energy      3761.62                       2.55     3.0                        0.05              CL
+A6               currencies      3746.35                       2.54     2.0                        0.05              A6
+NQ            stock indexes      3682.44                       2.49     5.0                        0.10              NQ
+ZC                   grains      3394.50                       2.30     1.0                        0.03              ZC
+SR3                us rates      3075.80                       2.08     2.0                        0.05             SR3
+TN                 us rates      2981.20                       2.02     2.0                        0.04              TN
+J1               currencies      2950.95                       2.00     3.0                        0.10              J1
+HG                   metals      2825.37                       1.91     4.0                        0.12              HG
+KE                   grains      2820.55                       1.91     5.0                        0.11              KE
+SI                   metals      2652.94                       1.80     5.0                        0.09              SI
+ZN                 us rates      2403.83                       1.63     2.0                        0.04              ZN
+SB                    softs      2392.59                       1.62     3.0                        0.07              SB
+US                 us rates      2316.21                       1.57     3.0                        0.04              US
+FGBL          foreign bonds      1506.70                       1.02     3.0                        0.07            FGBL
+ZW                   grains      1357.94                       0.92     4.0                        0.08              ZW
+E1               currencies      1263.85                       0.86     5.0                        0.09              E1
+E6               currencies       944.14                       0.64     3.0                        0.07              E6
+ZF                 us rates       613.43                       0.42     1.0                        0.03              ZF
+MP               currencies       562.94                       0.38     2.0                        0.06              MP
 FBTP          foreign bonds         0.00                       0.00     0.0                        0.00            FBTP
-ER      foreign short rates         0.00                       0.00     0.0                        0.00              ER
-SO3     foreign short rates         0.00                       0.00     0.0                        0.00               L
-VX               volatility      -780.00                      -4.00     1.0                        0.00              VX
-BR               currencies     -1447.49                      -7.42     3.0                        0.01              BR
+ZM                   grains      -171.18                      -0.12     3.0                        0.06              ZM
+PL                   metals      -553.68                      -0.37     4.0                        0.08              PL
+VX               volatility      -562.07                      -0.38     7.0                        0.08              VX
+G             foreign bonds      -607.97                      -0.41     1.0                        0.01               G
+CT                    softs     -1182.76                      -0.80     2.0                        0.02              CT
+NG                   energy     -1303.30                      -0.88     1.0                        0.00              NG
+UB                 us rates     -1530.00                      -1.04     1.0                        0.00              UB
+BR               currencies     -1530.00                      -1.04     1.0                        0.00              BR
+LE                    meats     -1530.00                      -1.04     1.0                        0.00              LE
+RB                   energy     -1584.56                      -1.07     3.0                        0.05              RB
+AD               currencies     -2002.49                      -1.36     2.0                        0.03              AD
+ES            stock indexes     -2037.85                      -1.38     5.0                        0.06              ES
+DX               currencies     -2264.06                      -1.53     3.0                        0.06              DX
+RM      foreign commodities     -2630.55                      -1.78     2.0                        0.02              RM
+C       foreign commodities     -2926.51                      -1.98     7.0                        0.09               C
+HE                    meats     -3214.08                      -2.18     4.0                        0.06              HE
+ZT                 us rates     -3705.32                      -2.51     4.0                        0.06              ZT
+FESX  foreign stock indexes     -3926.68                      -2.66     3.0                        0.02            FESX
+GC                   metals     -5832.57                      -3.95     5.0                        0.05              GC
 
 by market group
                        markets  pnl_dollars  trades  share_of_total_profit_pct
 group                                                                         
-currencies                  10      -1447.5     3.0                       -7.4
-energy                       4          0.0     0.0                        0.0
-foreign bonds                3          0.0     0.0                        0.0
-foreign commodities          3        426.6     2.0                        2.2
-foreign short rates          2          0.0     0.0                        0.0
-foreign stock indexes        1          0.0     0.0                        0.0
-grains                       6          0.0     0.0                        0.0
-meats                        2        435.6     1.0                        2.2
-metals                       4          0.0     0.0                        0.0
-softs                        2          0.0     0.0                        0.0
-stock indexes                4          0.0     0.0                        0.0
-us rates                     9      20871.4     3.0                      107.0
-volatility                   1       -780.0     1.0                       -4.0
+currencies                  10      13751.2    27.0                        9.3
+energy                       4       9597.7     9.0                        6.5
+foreign bonds                3        898.7     4.0                        0.6
+foreign commodities          3        109.6    14.0                        0.1
+foreign short rates          2      18444.2    17.0                       12.5
+foreign stock indexes        1      -3926.7     3.0                       -2.7
+grains                       6      19441.7    24.0                       13.2
+meats                        2      -4744.1     5.0                       -3.2
+metals                       4       -907.9    18.0                       -0.6
+softs                        2       1209.8     5.0                        0.8
+stock indexes                4      22727.6    21.0                       15.4
+us rates                     9      71673.8    46.0                       48.5
+volatility                   1       -562.1     7.0                       -0.4
 
-short-rate markets ['ZQ', 'SR1', 'SR3', 'ER', 'SO3']: 20871 dollars = 107.0 percent of profit; fed funds alone 64.3 percent
-book without fed funds (ZQ): annual 496, Sharpe 0.39, max drawdown 2567
-book without all short rates: annual -97, Sharpe -0.12, max drawdown 2567
-the earlier 44 markets only: annual 1358, Sharpe 0.53, max drawdown 2603
-the 7 added European markets only ['FGBL', 'FBTP', 'EBM', 'FESX', 'G', 'ER', 'SO3']: annual 30, Sharpe 0.11, max drawdown 1421
+short-rate markets ['ZQ', 'SR1', 'SR3', 'ER', 'SO3']: 87039 dollars = 58.9 percent of profit; fed funds alone 41.3 percent
+book without fed funds (ZQ): annual 6167, Sharpe 0.60, max drawdown 18218
+book without all short rates: annual 4318, Sharpe 0.45, max drawdown 18218
+the earlier 44 markets only: annual 9012, Sharpe 0.79, max drawdown 18233
+the 7 added European markets only ['FGBL', 'FBTP', 'EBM', 'FESX', 'G', 'ER', 'SO3']: annual 1500, Sharpe 0.38, max drawdown 10039
 
 === final book: profit and drawdown by budget per market ===
  budget_percent_per_market  annual_pnl  annual_pnl_pct_of_account  historical_max_drawdown  historical_max_dd_pct  resampled_median_dd  resampled_95th_dd  resampled_95th_dd_pct  resampled_99th_dd  summed_budget_when_busiest_pct  mean_summed_budget_pct
-                      0.05      694.09                       0.23                  1283.30                   0.43              1547.06            2986.88                   1.00            3934.97                            0.15                    0.00
-                      0.10     1388.18                       0.46                  2566.60                   0.86              3094.13            5973.76                   1.99            7869.94                            0.30                    0.01
-                      0.15     2082.27                       0.69                  3849.90                   1.28              4641.19            8960.64                   2.99           11804.91                            0.45                    0.01
-                      0.17     2359.91                       0.79                  4363.22                   1.45              5260.02           10155.39                   3.39           13378.90                            0.51                    0.01
-                      0.20     2776.36                       0.93                  5133.20                   1.71              6188.26           11947.52                   3.98           15739.88                            0.60                    0.02
-                      0.25     3470.45                       1.16                  6416.50                   2.14              7735.32           14934.39                   4.98           19674.85                            0.75                    0.02
-                      0.30     4164.54                       1.39                  7699.80                   2.57              9282.39           17921.27                   5.97           23609.83                            0.90                    0.02
-budget per market that keeps the 95th-percentile resampled drawdown at 90,000: 1.507 percent; the historical maximum at 90,000: 3.507 percent
-budget per market that keeps the 95th-percentile resampled drawdown at 100,000: 1.674 percent; the historical maximum at 100,000: 3.896 percent
+                      0.05     5256.12                       1.75                  9116.70                   3.04              9633.43           15689.01                   5.23           19721.03                            0.75                    0.19
+                      0.10    10512.24                       3.50                 18233.39                   6.08             19266.87           31378.03                  10.46           39442.06                            1.50                    0.38
+                      0.15    15768.36                       5.26                 27350.09                   9.12             28900.30           47067.04                  15.69           59163.08                            2.25                    0.57
+                      0.17    17870.80                       5.96                 30996.77                  10.33             32753.67           53342.65                  17.78           67051.49                            2.55                    0.65
+                      0.20    21024.47                       7.01                 36466.79                  12.16             38533.73           62756.06                  20.92           78884.11                            3.00                    0.77
+                      0.25    26280.59                       8.76                 45583.49                  15.19             48167.16           78445.07                  26.15           98605.14                            3.75                    0.96
+                      0.30    31536.71                      10.51                 54700.18                  18.23             57800.60           94134.09                  31.38          118326.17                            4.50                    1.15
+budget per market that keeps the 95th-percentile resampled drawdown at 90,000: 0.287 percent; the historical maximum at 90,000: 0.494 percent
+budget per market that keeps the 95th-percentile resampled drawdown at 100,000: 0.319 percent; the historical maximum at 100,000: 0.548 percent
 
 DONE in 3 seconds
