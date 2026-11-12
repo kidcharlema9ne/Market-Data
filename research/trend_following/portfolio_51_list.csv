@@ -1,0 +1,52 @@
+price_symbol,name,group
+ZW,Chicago wheat,grains
+KE,Kansas City wheat,grains
+ZC,Corn,grains
+ZS,Soybeans,grains
+ZL,Soybean oil,grains
+ZM,Soybean meal,grains
+NG,Natural gas (Henry Hub),energy
+CL,WTI crude oil,energy
+BZ,Brent last-day financial (NYMEX),energy
+RB,RBOB gasoline,energy
+CT,Cotton,softs
+C,Cocoa (London),foreign commodities
+SB,Sugar No. 11,softs
+RM,Robusta coffee,foreign commodities
+HE,Lean hogs,meats
+LE,Live cattle,meats
+PL,Platinum,metals
+SI,Silver,metals
+HG,Copper,metals
+GC,Gold,metals
+A6,Australian dollar,currencies
+B6,British pound,currencies
+AD,Canadian dollar,currencies
+E6,Euro,currencies
+J1,Japanese yen,currencies
+MP,Mexican peso,currencies
+BR,Brazilian real,currencies
+N6,New Zealand dollar,currencies
+E1,Swiss franc,currencies
+DX,US dollar index,currencies
+VX,VIX futures,volatility
+US,US 30-year bond,us rates
+UB,US ultra bond,us rates
+ZN,US 10-year note,us rates
+TN,US ultra 10-year note,us rates
+ZF,US 5-year note,us rates
+ZT,US 2-year note,us rates
+ZQ,30-day fed funds,us rates
+SR1,1-month SOFR,us rates
+SR3,3-month SOFR,us rates
+YM,Dow mini,stock indexes
+ES,S&P 500 e-mini,stock indexes
+NQ,Nasdaq-100 e-mini,stock indexes
+RTY,Russell 2000 e-mini,stock indexes
+FGBL,Euro Bund (10-year German),foreign bonds
+FBTP,Euro BTP (long Italian),foreign bonds
+EBM,Milling wheat (Euronext),foreign commodities
+FESX,Euro Stoxx 50,foreign stock indexes
+G,Long Gilt (UK 10-year),foreign bonds
+ER,3-month Euribor (ICE),foreign short rates
+SO3,3-month SONIA (UK),foreign short rates
