@@ -1,25 +1,41 @@
-trailing_stop_atr,markets,one_contract_cap_pct,basis,note
-5.0,all markets,0.5,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 111,972"
-5.0,all markets,0.5,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 250,214"
-5.0,all markets,0.35,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 108,608"
-5.0,all markets,0.35,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 231,289"
-5.0,all markets,0.25,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 105,400"
-5.0,all markets,0.25,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 225,735"
-5.0,without fed funds,0.5,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 120,894"
-5.0,without fed funds,0.5,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 261,449"
-5.0,without fed funds,0.35,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 109,921"
-5.0,without fed funds,0.35,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 237,701"
-5.0,without fed funds,0.25,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 106,713"
-5.0,without fed funds,0.25,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 232,598"
-8.0,all markets,0.5,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 154,373"
-8.0,all markets,0.5,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 304,602"
-8.0,all markets,0.35,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 154,259"
-8.0,all markets,0.35,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 273,450"
-8.0,all markets,0.25,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 151,375"
-8.0,all markets,0.25,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 266,811"
-8.0,without fed funds,0.5,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 164,470"
-8.0,without fed funds,0.5,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 312,373"
-8.0,without fed funds,0.35,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 159,792"
-8.0,without fed funds,0.35,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 283,308"
-8.0,without fed funds,0.25,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 156,284"
-8.0,without fed funds,0.25,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 276,101"
+trailing_stop_atr,markets,one_contract_cap_pct,basis,note,budget_percent_per_market,annual_dollars,annual_pct,sharpe,historical_max_drawdown_dollars,resampled_95th_drawdown_dollars,trades
+5.0,all markets,0.5,historical maximum drawdown,first grid point already above the target,,,,,,,
+5.0,all markets,0.5,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 190,467",,,,,,,
+5.0,all markets,0.35,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.208,48885.573,16.295,0.739,99966.948,207219.069,982.0
+5.0,all markets,0.35,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 132,476",,,,,,,
+5.0,all markets,0.25,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.225,57031.675,19.011,0.813,101311.706,209451.362,957.0
+5.0,all markets,0.25,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 105,902",,,,,,,
+5.0,all markets,0.2,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.231,57428.449,19.143,0.824,96707.53,204605.188,910.0
+5.0,all markets,0.2,95th percentile of resampled drawdowns,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.089,23128.926,7.71,0.726,52877.109,100343.485,910.0
+5.0,all markets,0.15,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.244,57949.15,19.316,0.815,99748.961,208665.93,892.0
+5.0,all markets,0.15,95th percentile of resampled drawdowns,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.114,28204.115,9.401,0.829,45850.052,99208.852,892.0
+5.0,without fed funds,0.5,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 109,294",,,,,,,
+5.0,without fed funds,0.5,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 200,045",,,,,,,
+5.0,without fed funds,0.35,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.16,30916.559,10.306,0.591,101546.838,188445.552,946.0
+5.0,without fed funds,0.35,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 140,608",,,,,,,
+5.0,without fed funds,0.25,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.18,36316.043,12.105,0.65,106793.938,190544.148,921.0
+5.0,without fed funds,0.25,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 111,255",,,,,,,
+5.0,without fed funds,0.2,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.178,35175.365,11.725,0.665,102937.612,175757.958,874.0
+5.0,without fed funds,0.2,95th percentile of resampled drawdowns,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.078,17048.196,5.683,0.588,55497.686,99930.939,874.0
+5.0,without fed funds,0.15,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.188,37245.18,12.415,0.703,100502.187,174121.09,856.0
+5.0,without fed funds,0.15,95th percentile of resampled drawdowns,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.106,21136.163,7.045,0.694,56257.55,98742.142,856.0
+8.0,all markets,0.5,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 110,030",,,,,,,
+8.0,all markets,0.5,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 242,029",,,,,,,
+8.0,all markets,0.35,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.175,52781.39,17.594,0.714,102373.879,259035.265,833.0
+8.0,all markets,0.35,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 177,107",,,,,,,
+8.0,all markets,0.25,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.201,63389.737,21.13,0.775,101152.344,267053.643,813.0
+8.0,all markets,0.25,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 142,527",,,,,,,
+8.0,all markets,0.2,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.218,68854.86,22.952,0.812,107013.044,268328.997,771.0
+8.0,all markets,0.2,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 103,597",,,,,,,
+8.0,all markets,0.15,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.223,69824.457,23.275,0.831,104676.051,262766.333,755.0
+8.0,all markets,0.15,95th percentile of resampled drawdowns,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.077,23978.349,7.993,0.779,37156.507,100078.194,755.0
+8.0,without fed funds,0.5,historical maximum drawdown,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 116,411",,,,,,,
+8.0,without fed funds,0.5,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 252,514",,,,,,,
+8.0,without fed funds,0.35,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.134,30940.635,10.314,0.513,96617.669,237703.383,807.0
+8.0,without fed funds,0.35,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 187,923",,,,,,,
+8.0,without fed funds,0.25,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.161,39964.898,13.322,0.605,103769.361,241296.856,787.0
+8.0,without fed funds,0.25,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 151,406",,,,,,,
+8.0,without fed funds,0.2,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.185,42731.876,14.244,0.613,102295.169,250407.149,745.0
+8.0,without fed funds,0.2,95th percentile of resampled drawdowns,"drawdown already above 100,000 at 0.05 percent (the one-contract floor decides); lowest tested 109,128",,,,,,,
+8.0,without fed funds,0.15,historical maximum drawdown,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.19,43961.162,14.654,0.641,97390.937,244144.32,729.0
+8.0,without fed funds,0.15,95th percentile of resampled drawdowns,interpolated between grid points; whole-contract drawdown is not exactly linear in the budget,0.071,17171.767,5.724,0.614,41062.209,101289.29,729.0
