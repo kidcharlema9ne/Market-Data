@@ -1,0 +1,46 @@
+name: Trend following - MYM swap, ETF stand-ins by budget, baseline breakout (development years only)
+# Reads every futures daily file (the baseline needs 2007 onward) and the latest ~45 sessions of the ETFs. Sealed years (2021-11-08 on) are cut at load inside baseline_breakout.py.
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/trend-universe-contract-size-20261112']
+    paths:
+      - 'research/trend_following/etf_cap_standins.py'
+      - 'research/trend_following/baseline_breakout.py'
+      - '.github/workflows/trend-etf-cap-and-baseline.yml'
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas numpy
+      - name: Fetch futures prices and recent ETF prices from R2
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          python futures_data/fetch_futures_prices.py
+          python research/trend_following/fetch_etf_recent.py etf_recent.parquet $(python research/trend_following/etf_cap_standins.py --tickers)
+      - name: MYM swap and ETF stand-ins by budget
+        run: |
+          mkdir -p research/trend_following/results_v3
+          python research/trend_following/etf_cap_standins.py research/trend_following/results_v2/micro_first_list.csv etf_recent.parquet research/trend_following/results_v3 300000 | tee research/trend_following/results_v3/etf_cap_output.txt
+      - name: Baseline breakout, development years only
+        run: |
+          python research/trend_following/baseline_breakout.py futures_prices.parquet futures_data/trend_universe.csv research/trend_following/results_v3/micro_first_list_v3.csv research/trend_following/results_v3 300000 | tee research/trend_following/results_v3/baseline_output.txt
+      - name: Save results on the branch
+        run: |
+          echo "workflow run ${{ github.run_id }}" > research/trend_following/results_v3/RUN_ID.txt
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add research/trend_following/results_v3
+          git commit -m "ETF cap and baseline breakout results (workflow run ${{ github.run_id }})" || echo "nothing to commit"
+          git pull --rebase origin ${{ github.ref_name }}
+          git push origin HEAD:${{ github.ref_name }}
