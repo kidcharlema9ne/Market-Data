@@ -1,0 +1,116 @@
+KEPT 68 contracts (account 300,000)
+price_symbol                                name                 group                                 contract_desc  last_close  contract_value_usd  atr20_usd_per_contract  percent_volatility  avg_volume_60d in_original_48
+         SR1                        1-month SOFR              us rates         1-month SOFR ($41.67 per basis point)      95.965          399886.155                 147.928               0.049       31018.800            yes
+         SR3                        3-month SOFR              us rates            3-month SOFR ($25 per basis point)      95.855          239637.500                 138.125               0.046      554360.100            yes
+          TN               US ultra 10-year note              us rates              $100,000 face ultra 10-year note     108.734          108734.375                 767.969               0.256      742791.967            yes
+          UB                       US ultra bond              us rates                      $100,000 face ultra bond     110.031          110031.250                1350.000               0.450      497769.500            yes
+          US                     US 30-year bond              us rates                    $100,000 face 30-year bond     108.469          108468.750                1159.375               0.386      640103.900            yes
+          ZF                      US 5-year note              us rates                     $100,000 face 5-year note     105.203          105203.125                 427.344               0.142     1802990.700            yes
+          ZN                     US 10-year note              us rates                    $100,000 face 10-year note     107.109          107109.375                 621.875               0.207     2519640.917            yes
+          ZQ                    30-day fed funds              us rates $5 million fed funds ($41.67 per basis point)      96.122          400542.458                  30.732               0.010       77016.050            yes
+          ZT                      US 2-year note              us rates                     $200,000 face 2-year note     102.395          204789.062                 365.234               0.122     1176346.617            yes
+        FBTP             Euro BTP (long Italian)         foreign bonds             EUR 100,000 face long Italian BTP     113.230          126325.050                 887.500               0.296      400882.717             no
+        FBTS       Short-term Euro BTP (Italian)         foreign bonds            EUR 100,000 face short Italian BTP     105.180          117344.067                 237.076               0.079      272969.200             no
+        FGBL          Euro Bund (10-year German)         foreign bonds                 EUR 100,000 face 10-year Bund     123.120          137358.828                 706.764               0.236     1371871.333             no
+        FGBM           Euro Bobl (5-year German)         foreign bonds                  EUR 100,000 face 5-year Bobl     113.680          126827.092                 411.675               0.137     1245272.450             no
+        FGBS         Euro Schatz (2-year German)         foreign bonds                EUR 100,000 face 2-year Schatz     105.170          117332.911                 156.749               0.052     1106198.767             no
+        FGBX          Euro Buxl (30-year German)         foreign bonds                 EUR 100,000 face 30-year Buxl     106.840          119196.046                1199.324               0.400      209869.517             no
+        FOAT                   Euro OAT (French)         foreign bonds                   EUR 100,000 face French OAT     110.030          122754.970                1235.025               0.412      388920.117             no
+           G              Long Gilt (UK 10-year)         foreign bonds                    GBP 100,000 face Long Gilt      86.740          115815.248                1096.867               0.366      279860.483             no
+          ER               3-month Euribor (ICE)   foreign short rates      3-month Euribor (EUR 25 per basis point)      97.145          270949.548                  81.582               0.027      233220.867             no
+         SO3                  3-month SONIA (UK)   foreign short rates        3-month SONIA (GBP 25 per basis point)      95.785          319730.330                 103.478               0.034      104357.867             no
+         M2K                  Russell 2000 micro         stock indexes                     $5 x Russell 2000 (micro)    2760.500           13802.500                 274.175               0.091       78283.033             no
+         MES                       S&P 500 micro         stock indexes                          $5 x S&P 500 (micro)    7402.000           37010.000                 589.500               0.196     1092300.800            yes
+         MNQ                    Nasdaq-100 micro         stock indexes                       $2 x Nasdaq-100 (micro)   27085.250           54170.500                1571.375               0.524     2553232.300            yes
+          YM                            Dow mini         stock indexes                               $5 x Dow (mini)   51385.000          256925.000                4119.500               1.373       83401.233            yes
+         FCE                     CAC 40 (France) foreign stock indexes                               EUR 10 x CAC 40    8155.370           90985.385                1299.319               0.433       42971.950             no
+        FDXS                           Micro DAX foreign stock indexes                           EUR 1 x DAX (micro)   25875.000           28867.444                 475.211               0.158       21260.367             no
+        FESX                       Euro Stoxx 50 foreign stock indexes                        EUR 10 x Euro Stoxx 50    6176.000           68902.544                1097.800               0.366      627633.183             no
+         FTI                   AEX (Netherlands) foreign stock indexes                                 EUR 200 x AEX    1121.230          250180.050                3031.779               1.011        8870.300             no
+        FTUK                       FTSE 100 (UK) foreign stock indexes                             GBP 10 x FTSE 100   10686.500          142686.148                2000.130               0.667       78505.183             no
+        FXXP                    Stoxx Europe 600 foreign stock indexes                     EUR 50 x Stoxx Europe 600     649.100           36208.421                 474.151               0.158      116357.967             no
+         MFS             MSCI EAFE mini (ICE US) foreign stock indexes                        $50 x MSCI EAFE (mini)    3057.000          152850.000                2286.750               0.762       48975.783             no
+         MME MSCI Emerging Markets mini (ICE US) foreign stock indexes            $50 x MSCI Emerging Markets (mini)    1515.700           75785.000                2086.000               0.695      120890.100             no
+         NIY                   Nikkei 225 in yen foreign stock indexes                          JPY 500 x Nikkei 225   58235.000          184226.422                6546.863               2.182       22526.333             no
+          A6                   Australian dollar            currencies                    100,000 Australian dollars       0.686           68595.000                 518.000               0.173       89846.083            yes
+          AD                     Canadian dollar            currencies                      100,000 Canadian dollars       0.709           70870.000                 347.000               0.116       86301.333            yes
+          B6                       British pound            currencies                         62,500 British pounds       1.335           83450.000                 455.938               0.152       89932.917            yes
+          BR                      Brazilian real            currencies                       100,000 Brazilian reais       0.181           18095.000                 323.750               0.108       12541.933            yes
+          DX                     US dollar index            currencies                      $1,000 x US dollar index     102.179          102179.000                 506.650               0.169       15590.217            yes
+          E1                         Swiss franc            currencies                          125,000 Swiss francs       1.224          152975.000                1051.875               0.351       32957.300            yes
+          E6                                Euro            currencies                                 125,000 euros       1.116          139456.250                 815.625               0.272      209878.950            yes
+          J1                        Japanese yen            currencies                              12.5 million yen       0.006           79087.500                 453.750               0.151      196158.567            yes
+          MP                        Mexican peso            currencies                         500,000 Mexican pesos       0.054           26765.000                 332.000               0.111       82578.483            yes
+          N6                  New Zealand dollar            currencies                   100,000 New Zealand dollars       0.555           55495.000                 467.000               0.156       42163.283            yes
+          VX                         VIX futures            volatility                                  $1,000 x VIX      22.184           22183.700                1691.265               0.564       99987.767            yes
+          HO                  Heating oil (ULSD)                energy                    42,000 gallons heating oil       4.332          181931.400                8606.640               2.869       39230.967            yes
+         MCL                     WTI crude micro                energy                 100 barrels WTI crude (micro)      90.830            9083.000                 441.700               0.147      158445.867             no
+          NG             Natural gas (Henry Hub)                energy                      10,000 mmBtu natural gas       2.998           29980.000                1532.000               0.511      185536.417            yes
+          RB                       RBOB gasoline                energy                       42,000 gallons gasoline       2.732          114765.000                4861.290               1.620       47440.850            yes
+           B            Brent crude (ICE Europe)   foreign commodities                     1,000 barrels Brent (ICE)      98.320           98320.000                4629.500               1.543      387376.517             no
+         EBM            Milling wheat (Euronext)   foreign commodities            50 tonnes milling wheat (Euronext)     225.500           12578.954                 268.453               0.089       43783.100             no
+          RM                      Robusta coffee   foreign commodities                      10 tonnes Robusta coffee    3270.000           32700.000                 923.950               0.308       10311.950             no
+          RS                        Canola (ICE)   foreign commodities                        20 tonnes canola (ICE)     752.200           10661.683                 166.474               0.055       35830.800             no
+          KE                   Kansas City wheat                grains               5,000 bushels Kansas City wheat     632.500           31625.000                 688.750               0.230       33742.550            yes
+          ZC                                Corn                grains                            5,000 bushels corn     441.500           22075.000                 355.625               0.119      265032.800            yes
+          ZL                         Soybean oil                grains                         60,000 lb soybean oil      62.260           37356.000                 783.300               0.261       55026.167            yes
+          ZM                        Soybean meal                grains                         100 tons soybean meal     319.200           31920.000                 675.000               0.225       61673.917            yes
+          ZS                            Soybeans                grains                        5,000 bushels soybeans    1193.750           59687.500                 833.550               0.278      131293.400            yes
+          ZW                       Chicago wheat                grains                   5,000 bushels Chicago wheat     591.250           29562.500                 689.375               0.230       84952.650            yes
+          CC                    Cocoa (New York)                 softs                    10 tonnes cocoa (New York)    5267.000           52670.000                2258.000               0.753       18687.967            yes
+          CT                              Cotton                 softs                              50,000 lb cotton      79.110           39555.000                 656.750               0.219       15747.917            yes
+          KC                    Coffee (arabica)                 softs                      37,500 lb arabica coffee     280.000          105000.000                3856.875               1.286       16555.583            yes
+          SB                        Sugar No. 11                 softs                              112,000 lb sugar      18.240           20428.800                 612.640               0.204       90835.217            yes
+          GF                       Feeder cattle                 meats                       50,000 lb feeder cattle     318.375          159187.500                2356.225               0.785        5985.417            yes
+          HE                           Lean hogs                 meats                           40,000 lb lean hogs      53.525           21410.000                 701.000               0.234       30549.033            yes
+          LE                         Live cattle                 meats                         40,000 lb live cattle     214.050           85620.000                1093.500               0.365       25980.533            yes
+          HG                              Copper                metals                              25,000 lb copper       6.238          155937.500                3571.250               1.190       44825.317            yes
+         MGC                          Gold micro                metals                            10 oz gold (micro)    4074.900           40749.000                 806.450               0.269      165080.633             no
+          PL                            Platinum                metals                                50 oz platinum    1536.900           76845.000                2540.000               0.847       19167.500            yes
+         SIL                        Silver micro                metals                       1,000 oz silver (micro)      51.942           51942.000                2144.650               0.715       54074.517             no
+
+SUM of percent volatility, one contract each: 29.998
+                       count    sum
+group                              
+currencies                10  1.757
+energy                     4  5.147
+foreign bonds              8  1.977
+foreign commodities        4  1.996
+foreign short rates        2  0.062
+foreign stock indexes      9  6.433
+grains                     6  1.342
+meats                      3  1.384
+metals                     4  3.021
+softs                      4  2.461
+stock indexes              4  2.185
+us rates                   9  1.670
+volatility                 1  0.564
+
+DROPPED (with reason columns)
+price_symbol                             name  family  size_rank liquid_enough  avg_volume_60d  sessions_with_volume_of_60                                       status
+          CL                    WTI crude oil     wti          3           yes        298482.9                          60                                           ok
+          BZ Brent last-day financial (NYMEX)   brent          3           yes         44335.4                          60                                           ok
+          SI                           Silver  silver          3           yes         47225.4                          60                                           ok
+          GC                             Gold    gold          3           yes        168762.9                          60                                           ok
+          ES                   S&P 500 e-mini   sp500          3           yes       1633711.1                          60                                           ok
+          NQ                Nasdaq-100 e-mini  nasdaq          3           yes        615145.5                          60                                           ok
+         RTY              Russell 2000 e-mini russell          2           yes        182161.3                          60                                           ok
+        FBON              Euro BONO (Spanish)    FBON          3            NO            62.2                          59                                           ok
+        FEU3          3-month Euribor (Eurex) euribor          3           yes         14174.7                          60                                           ok
+        FDAX                 DAX 40 (Germany)     dax          3           yes         29436.5                          60                                           ok
+        FDXM                         Mini DAX     dax          2           yes         24286.6                          60                                           ok
+         BFX                 BEL 20 (Belgium)     BFX          3            NO             0.0                           0 LAST CLOSE 6000.5 OUTSIDE EXPECTED 3000-6000
+         NKD            Nikkei 225 in dollars     NKD          3            NO          4841.8                          60                                           ok
+           C                   Cocoa (London)   cocoa          3           yes          7088.5                          60                                           ok
+
+=== ETF stand-ins: dollars needed for a 0.1 percent volatility position ===
+futures  futures_percent_volatility  futures_atr_percent_of_price        etf      feed  last_date  last_close  atr20_per_share  etf_atr_percent_of_price  shares_for_0.1pct  dollars_for_0.1pct  avg_dollar_volume_20d  avg_shares_20d                           note
+     YM                       1.373                         1.603        DIA etf_daily 2026-11-06      512.22            6.764                     1.321             44.353           22718.315           2.037636e+09      3916372.70                            NaN
+    FTI                       1.011                         1.212        EWN etf_daily 2026-11-06       63.38            1.006                     1.588            298.092           18893.084           6.227181e+06        96644.00                            NaN
+    NIY                       2.182                         3.554        EWJ etf_daily 2026-11-06       88.26            1.414                     1.602            212.232           18731.629           4.225050e+08      4529015.90                            NaN
+    NIY                       2.182                         3.554        DXJ etf_daily 2026-11-06       56.40            0.884                     1.567            339.359           19139.838           3.922982e+07       665369.65                            NaN
+     HO                       2.869                         4.731 none found       NaN        NaN         NaN              NaN                       NaN                NaN                 NaN                    NaN             NaN               no US-listed ETF
+     RB                       1.620                         4.236        UGA etf_daily 2026-11-06      128.26            4.029                     3.142             74.453            9549.348           6.324566e+06        44902.90                            NaN
+      B                       1.543                         4.709        BNO etf_daily 2026-11-06       62.22            2.174                     3.494            137.987            8585.523           1.287321e+08      1938898.75                            NaN
+     KC                       1.286                         3.673         JO       NaN        NaN         NaN              NaN                       NaN                NaN                 NaN                    NaN             NaN only 0 sessions in the archive
+     HG                       1.190                         2.290       CPER etf_daily 2026-11-06       37.67            0.652                     1.732            459.770           17319.540           1.836162e+07       469640.45                            NaN

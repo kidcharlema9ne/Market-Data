@@ -1,0 +1,15 @@
+price_symbol,name,family,size_rank,liquid_enough,avg_volume_60d,sessions_with_volume_of_60,status
+CL,WTI crude oil,wti,3,yes,298482.86666666664,60,ok
+BZ,Brent last-day financial (NYMEX),brent,3,yes,44335.4,60,ok
+SI,Silver,silver,3,yes,47225.45,60,ok
+GC,Gold,gold,3,yes,168762.88333333333,60,ok
+ES,S&P 500 e-mini,sp500,3,yes,1633711.0666666667,60,ok
+NQ,Nasdaq-100 e-mini,nasdaq,3,yes,615145.4666666667,60,ok
+RTY,Russell 2000 e-mini,russell,2,yes,182161.33333333334,60,ok
+FBON,Euro BONO (Spanish),FBON,3,NO,62.233333333333334,59,ok
+FEU3,3-month Euribor (Eurex),euribor,3,yes,14174.733333333334,60,ok
+FDAX,DAX 40 (Germany),dax,3,yes,29436.533333333333,60,ok
+FDXM,Mini DAX,dax,2,yes,24286.583333333332,60,ok
+BFX,BEL 20 (Belgium),BFX,3,NO,0.0,0,LAST CLOSE 6000.5 OUTSIDE EXPECTED 3000-6000
+NKD,Nikkei 225 in dollars,NKD,3,NO,4841.783333333334,60,ok
+C,Cocoa (London),cocoa,3,yes,7088.466666666666,60,ok
