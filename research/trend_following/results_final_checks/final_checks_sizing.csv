@@ -1,0 +1,25 @@
+trailing_stop_atr,markets,drawdown_basis,budget_percent_per_market,annual_profit_dollars,annual_pct_of_account,historical_max_drawdown_dollars,resampled_95th_drawdown_dollars,risk_budget_summed_over_markets_in_trade_average_pct,risk_budget_summed_when_busiest_pct
+4.0,all 51 markets,historical maximum drawdown,0.251,49206.017,16.402,100000.0,188687.763,3.128,7.517
+4.0,all 51 markets,95th percentile of resampled drawdowns,0.133,26078.011,8.693,52997.607,100000.0,1.658,3.984
+4.0,without fed funds,historical maximum drawdown,0.244,38906.632,12.969,100000.0,198229.463,2.863,7.067
+4.0,without fed funds,95th percentile of resampled drawdowns,0.123,19627.068,6.542,50446.588,100000.0,1.444,3.565
+4.0,without all five short-rate markets,historical maximum drawdown,0.219,29456.712,9.819,100000.0,180731.644,2.364,5.914
+4.0,without all five short-rate markets,95th percentile of resampled drawdowns,0.121,16298.591,5.433,55330.654,100000.0,1.308,3.272
+5.0,all 51 markets,historical maximum drawdown,0.217,53700.33,17.9,100000.0,200590.717,3.534,8.264
+5.0,all 51 markets,95th percentile of resampled drawdowns,0.108,26771.094,8.924,49852.756,100000.0,1.762,4.12
+5.0,without fed funds,historical maximum drawdown,0.171,34757.233,11.586,100000.0,169995.114,2.645,6.324
+5.0,without fed funds,95th percentile of resampled drawdowns,0.101,20446.019,6.815,58825.22,100000.0,1.556,3.72
+5.0,without all five short-rate markets,historical maximum drawdown,0.15,27260.884,9.087,100000.0,152528.794,2.14,5.266
+5.0,without all five short-rate markets,95th percentile of resampled drawdowns,0.099,17872.615,5.958,65561.392,100000.0,1.403,3.453
+6.0,all 51 markets,historical maximum drawdown,0.194,48743.566,16.248,100000.0,211151.426,3.731,7.555
+6.0,all 51 markets,95th percentile of resampled drawdowns,0.092,23084.649,7.695,47359.377,100000.0,1.767,3.578
+6.0,without fed funds,historical maximum drawdown,0.184,39115.401,13.038,100000.0,211191.52,3.4,6.996
+6.0,without fed funds,95th percentile of resampled drawdowns,0.087,18521.294,6.174,47350.386,100000.0,1.61,3.313
+6.0,without all five short-rate markets,historical maximum drawdown,0.166,31046.543,10.349,100000.0,192253.304,2.842,5.968
+6.0,without all five short-rate markets,95th percentile of resampled drawdowns,0.086,16148.77,5.383,52014.711,100000.0,1.478,3.104
+8.0,all 51 markets,historical maximum drawdown,0.185,57942.32,19.314,100000.0,240524.191,4.388,7.593
+8.0,all 51 markets,95th percentile of resampled drawdowns,0.077,24090.018,8.03,41575.86,100000.0,1.824,3.157
+8.0,without fed funds,historical maximum drawdown,0.15,35212.031,11.737,100000.0,210388.462,3.427,6.001
+8.0,without fed funds,95th percentile of resampled drawdowns,0.071,16736.674,5.579,47531.124,100000.0,1.629,2.852
+8.0,without all five short-rate markets,historical maximum drawdown,0.138,28740.653,9.58,100000.0,194183.075,2.944,4.956
+8.0,without all five short-rate markets,95th percentile of resampled drawdowns,0.071,14800.802,4.934,51497.794,100000.0,1.516,2.552

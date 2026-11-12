@@ -1,0 +1,169 @@
+trailing_stop_atr,markets,year,return_pct_of_account,worst_drop_inside_year_pct,trades_entered,sessions
+4.0,all 51 markets,2008,21.03,6.114,75,262
+4.0,all 51 markets,2009,-1.051,6.958,62,261
+4.0,all 51 markets,2010,13.587,6.213,78,260
+4.0,all 51 markets,2011,5.639,7.158,59,260
+4.0,all 51 markets,2012,-0.48,9.711,84,261
+4.0,all 51 markets,2013,-2.346,7.444,90,260
+4.0,all 51 markets,2014,18.49,6.508,85,260
+4.0,all 51 markets,2015,-1.446,9.043,77,260
+4.0,all 51 markets,2016,0.562,5.844,82,260
+4.0,all 51 markets,2017,1.841,5.764,80,260
+4.0,all 51 markets,2018,2.66,12.081,75,260
+4.0,all 51 markets,2019,-2.057,7.232,72,260
+4.0,all 51 markets,2020,30.137,9.525,98,262
+4.0,all 51 markets,2021,5.413,5.612,47,155
+4.0,without fed funds,2008,20.841,5.782,70,262
+4.0,without fed funds,2009,-2.729,7.08,60,261
+4.0,without fed funds,2010,13.581,6.186,74,260
+4.0,without fed funds,2011,3.991,7.418,56,260
+4.0,without fed funds,2012,-1.935,10.034,81,261
+4.0,without fed funds,2013,-1.976,7.878,85,260
+4.0,without fed funds,2014,17.938,6.278,82,260
+4.0,without fed funds,2015,-1.095,8.7,73,260
+4.0,without fed funds,2016,1.191,5.998,78,260
+4.0,without fed funds,2017,-1.51,6.996,79,260
+4.0,without fed funds,2018,3.117,11.488,72,260
+4.0,without fed funds,2019,-2.224,7.518,69,260
+4.0,without fed funds,2020,20.151,10.709,96,262
+4.0,without fed funds,2021,5.441,5.612,47,155
+4.0,without all five short-rate markets,2008,17.118,5.782,65,262
+4.0,without all five short-rate markets,2009,-3.822,7.254,56,261
+4.0,without all five short-rate markets,2010,13.651,6.186,69,260
+4.0,without all five short-rate markets,2011,4.351,7.418,54,260
+4.0,without all five short-rate markets,2012,-2.046,10.076,78,261
+4.0,without all five short-rate markets,2013,-0.869,7.46,79,260
+4.0,without all five short-rate markets,2014,17.553,5.894,79,260
+4.0,without all five short-rate markets,2015,-1.339,9.118,71,260
+4.0,without all five short-rate markets,2016,-0.881,5.614,75,260
+4.0,without all five short-rate markets,2017,-1.64,7.197,76,260
+4.0,without all five short-rate markets,2018,4.367,10.547,63,260
+4.0,without all five short-rate markets,2019,-3.713,7.06,64,260
+4.0,without all five short-rate markets,2020,13.823,10.589,84,262
+4.0,without all five short-rate markets,2021,6.441,5.563,42,155
+5.0,all 51 markets,2008,25.344,7.554,73,262
+5.0,all 51 markets,2009,-5.055,9.242,61,261
+5.0,all 51 markets,2010,15.215,9.238,74,260
+5.0,all 51 markets,2011,7.758,8.255,55,260
+5.0,all 51 markets,2012,-1.769,11.825,82,261
+5.0,all 51 markets,2013,-2.025,7.978,83,260
+5.0,all 51 markets,2014,22.651,5.705,83,260
+5.0,all 51 markets,2015,1.258,11.446,70,260
+5.0,all 51 markets,2016,-0.979,5.762,76,260
+5.0,all 51 markets,2017,2.345,5.769,71,260
+5.0,all 51 markets,2018,-0.576,15.328,75,260
+5.0,all 51 markets,2019,3.077,10.388,67,260
+5.0,all 51 markets,2020,33.39,10.476,90,262
+5.0,all 51 markets,2021,15.027,7.643,37,155
+5.0,without fed funds,2008,25.421,7.226,68,262
+5.0,without fed funds,2009,-6.537,9.899,60,261
+5.0,without fed funds,2010,15.457,9.359,70,260
+5.0,without fed funds,2011,6.588,8.515,52,260
+5.0,without fed funds,2012,-3.061,12.001,79,261
+5.0,without fed funds,2013,-1.371,8.836,78,260
+5.0,without fed funds,2014,22.468,5.627,80,260
+5.0,without fed funds,2015,-0.382,12.95,68,260
+5.0,without fed funds,2016,-0.541,5.449,73,260
+5.0,without fed funds,2017,-0.96,6.982,71,260
+5.0,without fed funds,2018,0.066,14.573,72,260
+5.0,without fed funds,2019,3.102,10.642,64,260
+5.0,without fed funds,2020,19.89,11.89,89,262
+5.0,without fed funds,2021,15.109,7.643,37,155
+5.0,without all five short-rate markets,2008,21.874,7.425,63,262
+5.0,without all five short-rate markets,2009,-7.495,10.024,56,261
+5.0,without all five short-rate markets,2010,15.73,9.333,65,260
+5.0,without all five short-rate markets,2011,7.139,8.515,50,260
+5.0,without all five short-rate markets,2012,-3.262,12.038,76,261
+5.0,without all five short-rate markets,2013,0.044,8.279,72,260
+5.0,without all five short-rate markets,2014,22.815,5.199,77,260
+5.0,without all five short-rate markets,2015,-1.353,13.309,66,260
+5.0,without all five short-rate markets,2016,-1.815,5.867,72,260
+5.0,without all five short-rate markets,2017,-1.543,7.632,68,260
+5.0,without all five short-rate markets,2018,1.694,13.226,63,260
+5.0,without all five short-rate markets,2019,1.704,9.528,59,260
+5.0,without all five short-rate markets,2020,14.209,11.548,77,262
+5.0,without all five short-rate markets,2021,15.121,7.764,34,155
+6.0,all 51 markets,2008,28.884,8.224,69,262
+6.0,all 51 markets,2009,-4.637,9.776,59,261
+6.0,all 51 markets,2010,13.881,10.797,71,260
+6.0,all 51 markets,2011,6.558,8.72,52,260
+6.0,all 51 markets,2012,-3.61,10.215,80,261
+6.0,all 51 markets,2013,-3.472,9.527,81,260
+6.0,all 51 markets,2014,26.533,5.668,80,260
+6.0,all 51 markets,2015,6.989,11.645,62,260
+6.0,all 51 markets,2016,0.308,5.705,70,260
+6.0,all 51 markets,2017,0.573,8.313,69,260
+6.0,all 51 markets,2018,-2.756,17.206,73,260
+6.0,all 51 markets,2019,6.709,12.017,60,260
+6.0,all 51 markets,2020,29.546,11.255,89,262
+6.0,all 51 markets,2021,12.344,10.427,35,155
+6.0,without fed funds,2008,29.23,7.597,64,262
+6.0,without fed funds,2009,-6.344,10.402,58,261
+6.0,without fed funds,2010,14.203,10.956,68,260
+6.0,without fed funds,2011,5.562,8.98,49,260
+6.0,without fed funds,2012,-4.669,10.231,77,261
+6.0,without fed funds,2013,-2.459,9.748,76,260
+6.0,without fed funds,2014,26.882,5.531,76,260
+6.0,without fed funds,2015,6.084,12.462,60,260
+6.0,without fed funds,2016,0.242,5.629,68,260
+6.0,without fed funds,2017,-2.733,9.565,69,260
+6.0,without fed funds,2018,-1.977,16.385,70,260
+6.0,without fed funds,2019,6.917,12.271,57,260
+6.0,without fed funds,2020,16.09,12.623,88,262
+6.0,without fed funds,2021,12.48,10.427,35,155
+6.0,without all five short-rate markets,2008,26.096,7.755,59,262
+6.0,without all five short-rate markets,2009,-7.115,10.521,54,261
+6.0,without all five short-rate markets,2010,14.607,10.93,63,260
+6.0,without all five short-rate markets,2011,6.342,8.98,47,260
+6.0,without all five short-rate markets,2012,-5.705,11.086,75,261
+6.0,without all five short-rate markets,2013,-0.752,9.196,70,260
+6.0,without all five short-rate markets,2014,26.673,5.376,73,260
+6.0,without all five short-rate markets,2015,3.602,13.659,60,260
+6.0,without all five short-rate markets,2016,-0.979,5.811,67,260
+6.0,without all five short-rate markets,2017,-2.972,10.094,66,260
+6.0,without all five short-rate markets,2018,-0.414,15.103,62,260
+6.0,without all five short-rate markets,2019,5.633,10.57,52,260
+6.0,without all five short-rate markets,2020,10.382,12.3,76,262
+6.0,without all five short-rate markets,2021,12.322,9.781,33,155
+8.0,all 51 markets,2008,43.781,7.326,64,262
+8.0,all 51 markets,2009,-1.2,13.993,48,261
+8.0,all 51 markets,2010,16.151,11.218,64,260
+8.0,all 51 markets,2011,7.954,12.271,46,260
+8.0,all 51 markets,2012,-4.023,10.394,73,261
+8.0,all 51 markets,2013,0.618,8.532,68,260
+8.0,all 51 markets,2014,27.25,4.665,70,260
+8.0,all 51 markets,2015,10.32,14.719,50,260
+8.0,all 51 markets,2016,-0.611,7.922,65,260
+8.0,all 51 markets,2017,0.789,8.748,59,260
+8.0,all 51 markets,2018,-5.203,17.565,69,260
+8.0,all 51 markets,2019,7.111,14.402,54,260
+8.0,all 51 markets,2020,31.62,13.61,83,262
+8.0,all 51 markets,2021,11.979,12.982,34,155
+8.0,without fed funds,2008,27.089,7.75,62,262
+8.0,without fed funds,2009,-3.742,15.347,48,261
+8.0,without fed funds,2010,16.66,11.377,61,260
+8.0,without fed funds,2011,7.386,12.637,43,260
+8.0,without fed funds,2012,-4.48,9.864,70,261
+8.0,without fed funds,2013,1.148,8.777,65,260
+8.0,without fed funds,2014,26.782,4.513,69,260
+8.0,without fed funds,2015,8.905,15.005,48,260
+8.0,without fed funds,2016,-0.909,7.755,63,260
+8.0,without fed funds,2017,-2.516,9.159,59,260
+8.0,without fed funds,2018,-4.292,16.33,66,260
+8.0,without fed funds,2019,7.483,14.402,51,260
+8.0,without fed funds,2020,18.254,13.755,82,262
+8.0,without fed funds,2021,12.169,12.947,34,155
+8.0,without all five short-rate markets,2008,24.097,7.949,58,262
+8.0,without all five short-rate markets,2009,-4.61,15.46,45,261
+8.0,without all five short-rate markets,2010,17.11,11.351,57,260
+8.0,without all five short-rate markets,2011,8.536,12.052,41,260
+8.0,without all five short-rate markets,2012,-5.463,10.256,68,261
+8.0,without all five short-rate markets,2013,2.825,8.006,60,260
+8.0,without all five short-rate markets,2014,26.453,4.485,66,260
+8.0,without all five short-rate markets,2015,6.424,15.525,48,260
+8.0,without all five short-rate markets,2016,-2.083,7.776,62,260
+8.0,without all five short-rate markets,2017,-2.429,10.029,56,260
+8.0,without all five short-rate markets,2018,-2.617,15.411,59,260
+8.0,without all five short-rate markets,2019,4.87,11.563,48,260
+8.0,without all five short-rate markets,2020,12.766,14.0,70,262
+8.0,without all five short-rate markets,2021,11.896,12.42,32,155

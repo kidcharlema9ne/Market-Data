@@ -1,0 +1,220 @@
+development rows 355,303; 2007-12-31 to 2021-08-06; sealed years removed at load
+price path taken from a different contract: {'SO3': 'L'}
+no development-year data: []
+  unit glitch in SO3 (from L) at 2015-12-04: close ratio 10.00; scaling earlier bars by 10
+  unit glitch in SO3 (from L) at 2015-12-07: close ratio 0.10; scaling earlier bars by 0.1
+51 markets in the test; first date of the shortest series: 2007-12-31 to 2018-05-07
+efficiency ratio (atr) across all market-days: percentiles 10/25/50/75/90/95 = 0.02 0.05 0.10 0.17 0.24 0.28
+efficiency ratio (close) across all market-days: percentiles 10/25/50/75/90/95 = 0.04 0.10 0.21 0.35 0.49 0.58
+efficiency ratio (hl) across all market-days: percentiles 10/25/50/75/90/95 = 0.16 0.18 0.22 0.27 0.32 0.35
+ran 4 trailing stops x 51 markets in 0 seconds
+
+=== 1. with and without fed funds (and without all short-rate markets) ===
+ trailing_stop_atr                             markets  annual_pct  sharpe  sharpe_lower_5pct  sharpe_upper_95pct  max_drawdown_pct  resampled_95th_drawdown_pct  annual_over_drawdown  trades  average_hold_sessions  markets_in_trade_average  sharpe_before_2015  sharpe_2015_on  fed_funds_trades  fed_funds_share_pct  short_rate_share_pct
+               4.0                      all 51 markets        6.55    0.77               0.32                1.19             13.30                        25.10                  0.49    1064                  41.55                     12.48                0.92            0.62                42                18.70                 31.52
+               4.0                   without fed funds        5.32    0.65               0.23                1.06             13.68                        27.12                  0.39    1022                  40.71                     11.75                0.83            0.45                 0                 0.00                 15.76
+               4.0 without all five short-rate markets        4.48    0.57               0.17                0.97             15.22                        27.51                  0.29     955                  40.02                     10.79                0.78            0.33                 0                 0.00                  0.00
+               5.0                      all 51 markets        8.23    0.80               0.36                1.24             15.33                        30.75                  0.54     997                  57.72                     16.25                0.84            0.75                36                17.65                 26.63
+               5.0                   without fed funds        6.78    0.68               0.27                1.09             19.50                        33.15                  0.35     961                  57.02                     15.48                0.80            0.55                 0                 0.00                 10.90
+               5.0 without all five short-rate markets        6.04    0.62               0.22                1.02             22.15                        33.79                  0.27     898                  56.09                     14.23                0.78            0.44                 0                 0.00                  0.00
+               6.0                      all 51 markets        8.39    0.73               0.31                1.15             17.21                        36.33                  0.49     950                  71.78                     19.26                0.78            0.68                35                15.56                 25.57
+               6.0                   without fed funds        7.08    0.64               0.23                1.05             18.10                        38.24                  0.39     915                  71.47                     18.47                0.77            0.50                 0                 0.00                 11.85
+               6.0 without all five short-rate markets        6.24    0.58               0.17                0.99             20.11                        38.66                  0.31     857                  70.83                     17.14                0.75            0.39                 0                 0.00                  0.00
+               8.0                      all 51 markets       10.43    0.79               0.35                1.24             18.00                        43.29                  0.58     847                  99.04                     23.69                0.96            0.61                26                24.98                 33.28
+               8.0                   without fed funds        7.82    0.62               0.19                1.04             22.22                        46.75                  0.35     821                  98.53                     22.84                0.77            0.45                 0                 0.00                 11.06
+               8.0 without all five short-rate markets        6.96    0.56               0.15                0.99             24.21                        47.01                  0.29     770                  98.34                     21.38                0.76            0.35                 0                 0.00                  0.00
+
+=== 2. year by year: percent of the 300,000 account earned (0.10 percent budget per market) ===
+
+--- 5 ATR trailing stop: return of the account in the year (percent) ---
+markets  all 51 markets  without all five short-rate markets  without fed funds
+year                                                                           
+2008              25.34                                21.87              25.42
+2009              -5.06                                -7.50              -6.54
+2010              15.22                                15.73              15.46
+2011               7.76                                 7.14               6.59
+2012              -1.77                                -3.26              -3.06
+2013              -2.02                                 0.04              -1.37
+2014              22.65                                22.81              22.47
+2015               1.26                                -1.35              -0.38
+2016              -0.98                                -1.82              -0.54
+2017               2.35                                -1.54              -0.96
+2018              -0.58                                 1.69               0.07
+2019               3.08                                 1.70               3.10
+2020              33.39                                14.21              19.89
+2021              15.03                                15.12              15.11
+--- 5 ATR trailing stop: worst drop inside the year (percent of account) ---
+markets  all 51 markets  without all five short-rate markets  without fed funds
+year                                                                           
+2008               7.55                                 7.43               7.23
+2009               9.24                                10.02               9.90
+2010               9.24                                 9.33               9.36
+2011               8.25                                 8.51               8.51
+2012              11.83                                12.04              12.00
+2013               7.98                                 8.28               8.84
+2014               5.70                                 5.20               5.63
+2015              11.45                                13.31              12.95
+2016               5.76                                 5.87               5.45
+2017               5.77                                 7.63               6.98
+2018              15.33                                13.23              14.57
+2019              10.39                                 9.53              10.64
+2020              10.48                                11.55              11.89
+2021               7.64                                 7.76               7.64
+--- 5 ATR trailing stop: trades entered in the year ---
+markets  all 51 markets  without all five short-rate markets  without fed funds
+year                                                                           
+2008                 73                                   63                 68
+2009                 61                                   56                 60
+2010                 74                                   65                 70
+2011                 55                                   50                 52
+2012                 82                                   76                 79
+2013                 83                                   72                 78
+2014                 83                                   77                 80
+2015                 70                                   66                 68
+2016                 76                                   72                 73
+2017                 71                                   68                 71
+2018                 75                                   63                 72
+2019                 67                                   59                 64
+2020                 90                                   77                 89
+2021                 37                                   34                 37
+
+--- 8 ATR trailing stop: return of the account in the year (percent) ---
+markets  all 51 markets  without all five short-rate markets  without fed funds
+year                                                                           
+2008              43.78                                24.10              27.09
+2009              -1.20                                -4.61              -3.74
+2010              16.15                                17.11              16.66
+2011               7.95                                 8.54               7.39
+2012              -4.02                                -5.46              -4.48
+2013               0.62                                 2.83               1.15
+2014              27.25                                26.45              26.78
+2015              10.32                                 6.42               8.91
+2016              -0.61                                -2.08              -0.91
+2017               0.79                                -2.43              -2.52
+2018              -5.20                                -2.62              -4.29
+2019               7.11                                 4.87               7.48
+2020              31.62                                12.77              18.25
+2021              11.98                                11.90              12.17
+--- 8 ATR trailing stop: worst drop inside the year (percent of account) ---
+markets  all 51 markets  without all five short-rate markets  without fed funds
+year                                                                           
+2008               7.33                                 7.95               7.75
+2009              13.99                                15.46              15.35
+2010              11.22                                11.35              11.38
+2011              12.27                                12.05              12.64
+2012              10.39                                10.26               9.86
+2013               8.53                                 8.01               8.78
+2014               4.66                                 4.49               4.51
+2015              14.72                                15.53              15.01
+2016               7.92                                 7.78               7.75
+2017               8.75                                10.03               9.16
+2018              17.57                                15.41              16.33
+2019              14.40                                11.56              14.40
+2020              13.61                                14.00              13.76
+2021              12.98                                12.42              12.95
+--- 8 ATR trailing stop: trades entered in the year ---
+markets  all 51 markets  without all five short-rate markets  without fed funds
+year                                                                           
+2008                 64                                   58                 62
+2009                 48                                   45                 48
+2010                 64                                   57                 61
+2011                 46                                   41                 43
+2012                 73                                   68                 70
+2013                 68                                   60                 65
+2014                 70                                   66                 69
+2015                 50                                   48                 48
+2016                 65                                   62                 63
+2017                 59                                   56                 59
+2018                 69                                   59                 66
+2019                 54                                   48                 51
+2020                 83                                   70                 82
+2021                 34                                   32                 34
+(2008 includes the one session of 2007-12-31; 2021 ends 2021-08-06, so it is a partial year)
+
+=== 2b. concentration across years ===
+ trailing_stop_atr                             markets  positive_years  years  best_year  best_year_pct_of_account  best_year_share_of_total_profit_pct  annual_pct  annual_pct_without_best_year
+               4.0                      all 51 markets               9     14       2020                     30.14                                32.76        6.55                          4.74
+               4.0                   without fed funds               8     14       2008                     20.84                                27.87        5.32                          4.13
+               4.0 without all five short-rate markets               7     14       2014                     17.55                                27.86        4.48                          3.48
+               5.0                      all 51 markets               9     14       2020                     33.39                                28.87        8.23                          6.30
+               5.0                   without fed funds               8     14       2008                     25.42                                26.69        6.78                          5.35
+               5.0 without all five short-rate markets               9     14       2014                     22.81                                26.88        6.04                          4.75
+               6.0                      all 51 markets              10     14       2020                     29.55                                25.07        8.39                          6.77
+               6.0                   without fed funds               9     14       2008                     29.23                                29.37        7.08                          5.38
+               6.0 without all five short-rate markets               8     14       2014                     26.67                                30.41        6.24                          4.68
+               8.0                      all 51 markets              10     14       2008                     43.78                                29.88       10.43                          7.87
+               8.0                   without fed funds               9     14       2008                     27.09                                24.64        7.82                          6.35
+               8.0 without all five short-rate markets               9     14       2014                     26.45                                27.05        6.96                          5.46
+
+=== 3. profit by market group (percent of the book's total profit) ===
+
+--- 5 ATR trailing stop ---
+markets                all 51 markets  without all five short-rate markets  without fed funds
+group                                                                                        
+currencies                       18.8                                 25.6               22.8
+energy                           11.9                                 16.2               14.4
+foreign bonds                     5.1                                  6.9                6.1
+foreign commodities              -2.4                                 -3.3               -2.9
+foreign short rates               4.8                                  NaN                5.9
+foreign stock indexes            -0.7                                 -0.9               -0.8
+grains                           11.9                                 16.2               14.4
+meats                             2.8                                  3.8                3.4
+metals                           -0.4                                 -0.6               -0.5
+softs                             1.1                                  1.5                1.3
+stock indexes                    15.8                                 21.5               19.2
+us rates                         29.5                                 10.5               14.3
+volatility                        1.9                                  2.6                2.4
+
+--- 8 ATR trailing stop ---
+markets                all 51 markets  without all five short-rate markets  without fed funds
+group                                                                                        
+currencies                       17.6                                 26.4               23.4
+energy                            7.0                                 10.5                9.3
+foreign bonds                     2.5                                  3.8                3.4
+foreign commodities              -1.4                                 -2.1               -1.9
+foreign short rates               3.4                                  NaN                4.5
+foreign stock indexes             0.5                                  0.8                0.7
+grains                            7.6                                 11.3               10.1
+meats                             0.8                                  1.2                1.1
+metals                           -0.4                                 -0.6               -0.6
+softs                             2.3                                  3.4                3.0
+stock indexes                    11.4                                 17.1               15.2
+us rates                         46.7                                 25.2               28.9
+volatility                        2.0                                  3.0                2.7
+
+=== 3b. five largest markets by profit share ===
+5 ATR, all 51 markets: ZQ 17.6%; NQ 5.6%; FGBL 5.3%; BZ 4.7%; E6 4.6%
+5 ATR, without fed funds: NQ 6.8%; FGBL 6.5%; BZ 5.7%; E6 5.6%; ZS 5.4%
+5 ATR, without all five short-rate markets: NQ 7.6%; FGBL 7.3%; BZ 6.4%; E6 6.2%; ZS 6.0%
+8 ATR, all 51 markets: ZQ 25.0%; US 4.1%; E6 4.0%; ZL 3.8%; SR1 3.6%
+8 ATR, without fed funds: US 5.5%; E6 5.3%; ZL 5.1%; SR1 4.8%; ZT 4.6%
+8 ATR, without all five short-rate markets: US 6.2%; E6 6.0%; ZL 5.8%; ZT 5.2%; ES 5.0%
+
+=== 4. budget per market that holds the drawdown at 100,000 ===
+ trailing_stop_atr                             markets                         drawdown_basis  budget_percent_per_market  annual_profit_dollars  annual_pct_of_account  historical_max_drawdown_dollars  resampled_95th_drawdown_dollars  risk_budget_summed_over_markets_in_trade_average_pct  risk_budget_summed_when_busiest_pct
+               4.0                      all 51 markets            historical maximum drawdown                      0.251              49206.017                 16.402                       100000.000                       188687.763                                                 3.128                                7.517
+               4.0                      all 51 markets 95th percentile of resampled drawdowns                      0.133              26078.011                  8.693                        52997.607                       100000.000                                                 1.658                                3.984
+               4.0                   without fed funds            historical maximum drawdown                      0.244              38906.632                 12.969                       100000.000                       198229.463                                                 2.863                                7.067
+               4.0                   without fed funds 95th percentile of resampled drawdowns                      0.123              19627.068                  6.542                        50446.588                       100000.000                                                 1.444                                3.565
+               4.0 without all five short-rate markets            historical maximum drawdown                      0.219              29456.712                  9.819                       100000.000                       180731.644                                                 2.364                                5.914
+               4.0 without all five short-rate markets 95th percentile of resampled drawdowns                      0.121              16298.591                  5.433                        55330.654                       100000.000                                                 1.308                                3.272
+               5.0                      all 51 markets            historical maximum drawdown                      0.217              53700.330                 17.900                       100000.000                       200590.717                                                 3.534                                8.264
+               5.0                      all 51 markets 95th percentile of resampled drawdowns                      0.108              26771.094                  8.924                        49852.756                       100000.000                                                 1.762                                4.120
+               5.0                   without fed funds            historical maximum drawdown                      0.171              34757.233                 11.586                       100000.000                       169995.114                                                 2.645                                6.324
+               5.0                   without fed funds 95th percentile of resampled drawdowns                      0.101              20446.019                  6.815                        58825.220                       100000.000                                                 1.556                                3.720
+               5.0 without all five short-rate markets            historical maximum drawdown                      0.150              27260.884                  9.087                       100000.000                       152528.794                                                 2.140                                5.266
+               5.0 without all five short-rate markets 95th percentile of resampled drawdowns                      0.099              17872.615                  5.958                        65561.392                       100000.000                                                 1.403                                3.453
+               6.0                      all 51 markets            historical maximum drawdown                      0.194              48743.566                 16.248                       100000.000                       211151.426                                                 3.731                                7.555
+               6.0                      all 51 markets 95th percentile of resampled drawdowns                      0.092              23084.649                  7.695                        47359.377                       100000.000                                                 1.767                                3.578
+               6.0                   without fed funds            historical maximum drawdown                      0.184              39115.401                 13.038                       100000.000                       211191.520                                                 3.400                                6.996
+               6.0                   without fed funds 95th percentile of resampled drawdowns                      0.087              18521.294                  6.174                        47350.386                       100000.000                                                 1.610                                3.313
+               6.0 without all five short-rate markets            historical maximum drawdown                      0.166              31046.543                 10.349                       100000.000                       192253.304                                                 2.842                                5.968
+               6.0 without all five short-rate markets 95th percentile of resampled drawdowns                      0.086              16148.770                  5.383                        52014.711                       100000.000                                                 1.478                                3.104
+               8.0                      all 51 markets            historical maximum drawdown                      0.185              57942.320                 19.314                       100000.000                       240524.191                                                 4.388                                7.593
+               8.0                      all 51 markets 95th percentile of resampled drawdowns                      0.077              24090.018                  8.030                        41575.860                       100000.000                                                 1.824                                3.157
+               8.0                   without fed funds            historical maximum drawdown                      0.150              35212.031                 11.737                       100000.000                       210388.462                                                 3.427                                6.001
+               8.0                   without fed funds 95th percentile of resampled drawdowns                      0.071              16736.674                  5.579                        47531.124                       100000.000                                                 1.629                                2.852
+               8.0 without all five short-rate markets            historical maximum drawdown                      0.138              28740.653                  9.580                       100000.000                       194183.075                                                 2.944                                4.956
+               8.0 without all five short-rate markets 95th percentile of resampled drawdowns                      0.071              14800.802                  4.934                        51497.794                       100000.000                                                 1.516                                2.552
+
+DONE in 3 seconds

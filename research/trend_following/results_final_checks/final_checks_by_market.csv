@@ -1,0 +1,589 @@
+trailing_stop_atr,markets,symbol,group,profit_share_pct,annual_pct_of_account,trades
+4.0,all 51 markets,ZW,grains,1.506,0.099,18
+4.0,all 51 markets,KE,grains,0.414,0.027,25
+4.0,all 51 markets,ZC,grains,3.168,0.207,20
+4.0,all 51 markets,ZS,grains,3.338,0.219,23
+4.0,all 51 markets,ZL,grains,1.415,0.093,30
+4.0,all 51 markets,ZM,grains,0.604,0.04,21
+4.0,all 51 markets,NG,energy,2.115,0.138,15
+4.0,all 51 markets,CL,energy,3.578,0.234,21
+4.0,all 51 markets,BZ,energy,6.514,0.426,26
+4.0,all 51 markets,RB,energy,3.125,0.205,22
+4.0,all 51 markets,CT,softs,-1.773,-0.116,20
+4.0,all 51 markets,C,foreign commodities,-0.862,-0.056,26
+4.0,all 51 markets,SB,softs,0.18,0.012,24
+4.0,all 51 markets,RM,foreign commodities,-2.37,-0.155,26
+4.0,all 51 markets,HE,meats,4.754,0.311,23
+4.0,all 51 markets,LE,meats,0.585,0.038,15
+4.0,all 51 markets,PL,metals,-0.541,-0.035,20
+4.0,all 51 markets,SI,metals,-0.088,-0.006,28
+4.0,all 51 markets,HG,metals,-0.307,-0.02,23
+4.0,all 51 markets,GC,metals,-0.203,-0.013,22
+4.0,all 51 markets,A6,currencies,2.355,0.154,14
+4.0,all 51 markets,B6,currencies,0.917,0.06,17
+4.0,all 51 markets,AD,currencies,-0.037,-0.002,16
+4.0,all 51 markets,E6,currencies,3.248,0.213,17
+4.0,all 51 markets,J1,currencies,2.714,0.178,14
+4.0,all 51 markets,MP,currencies,4.803,0.314,20
+4.0,all 51 markets,BR,currencies,1.69,0.111,23
+4.0,all 51 markets,N6,currencies,4.093,0.268,18
+4.0,all 51 markets,E1,currencies,-1.494,-0.098,26
+4.0,all 51 markets,DX,currencies,0.963,0.063,24
+4.0,all 51 markets,VX,volatility,1.205,0.079,33
+4.0,all 51 markets,US,us rates,2.821,0.185,13
+4.0,all 51 markets,UB,us rates,0.272,0.018,13
+4.0,all 51 markets,ZN,us rates,-0.755,-0.049,18
+4.0,all 51 markets,TN,us rates,2.248,0.147,8
+4.0,all 51 markets,ZF,us rates,-0.292,-0.019,20
+4.0,all 51 markets,ZT,us rates,0.41,0.027,18
+4.0,all 51 markets,ZQ,us rates,18.699,1.224,42
+4.0,all 51 markets,SR1,us rates,3.312,0.217,12
+4.0,all 51 markets,SR3,us rates,1.554,0.102,5
+4.0,all 51 markets,YM,stock indexes,4.132,0.27,25
+4.0,all 51 markets,ES,stock indexes,2.101,0.138,27
+4.0,all 51 markets,NQ,stock indexes,7.651,0.501,22
+4.0,all 51 markets,RTY,stock indexes,1.727,0.113,23
+4.0,all 51 markets,FGBL,foreign bonds,4.763,0.312,19
+4.0,all 51 markets,FBTP,foreign bonds,0.163,0.011,24
+4.0,all 51 markets,EBM,foreign commodities,-1.496,-0.098,21
+4.0,all 51 markets,FESX,foreign stock indexes,-1.362,-0.089,20
+4.0,all 51 markets,G,foreign bonds,0.493,0.032,14
+4.0,all 51 markets,ER,foreign short rates,3.937,0.258,26
+4.0,all 51 markets,SO3,foreign short rates,4.013,0.263,24
+4.0,without fed funds,ZW,grains,1.852,0.099,18
+4.0,without fed funds,KE,grains,0.51,0.027,25
+4.0,without fed funds,ZC,grains,3.897,0.207,20
+4.0,without fed funds,ZS,grains,4.106,0.219,23
+4.0,without fed funds,ZL,grains,1.741,0.093,30
+4.0,without fed funds,ZM,grains,0.742,0.04,21
+4.0,without fed funds,NG,energy,2.602,0.138,15
+4.0,without fed funds,CL,energy,4.401,0.234,21
+4.0,without fed funds,BZ,energy,8.013,0.426,26
+4.0,without fed funds,RB,energy,3.843,0.205,22
+4.0,without fed funds,CT,softs,-2.181,-0.116,20
+4.0,without fed funds,C,foreign commodities,-1.061,-0.056,26
+4.0,without fed funds,SB,softs,0.222,0.012,24
+4.0,without fed funds,RM,foreign commodities,-2.915,-0.155,26
+4.0,without fed funds,HE,meats,5.847,0.311,23
+4.0,without fed funds,LE,meats,0.719,0.038,15
+4.0,without fed funds,PL,metals,-0.665,-0.035,20
+4.0,without fed funds,SI,metals,-0.109,-0.006,28
+4.0,without fed funds,HG,metals,-0.377,-0.02,23
+4.0,without fed funds,GC,metals,-0.25,-0.013,22
+4.0,without fed funds,A6,currencies,2.897,0.154,14
+4.0,without fed funds,B6,currencies,1.128,0.06,17
+4.0,without fed funds,AD,currencies,-0.046,-0.002,16
+4.0,without fed funds,E6,currencies,3.995,0.213,17
+4.0,without fed funds,J1,currencies,3.338,0.178,14
+4.0,without fed funds,MP,currencies,5.908,0.314,20
+4.0,without fed funds,BR,currencies,2.079,0.111,23
+4.0,without fed funds,N6,currencies,5.034,0.268,18
+4.0,without fed funds,E1,currencies,-1.838,-0.098,26
+4.0,without fed funds,DX,currencies,1.185,0.063,24
+4.0,without fed funds,VX,volatility,1.483,0.079,33
+4.0,without fed funds,US,us rates,3.47,0.185,13
+4.0,without fed funds,UB,us rates,0.334,0.018,13
+4.0,without fed funds,ZN,us rates,-0.929,-0.049,18
+4.0,without fed funds,TN,us rates,2.765,0.147,8
+4.0,without fed funds,ZF,us rates,-0.36,-0.019,20
+4.0,without fed funds,ZT,us rates,0.504,0.027,18
+4.0,without fed funds,SR1,us rates,4.074,0.217,12
+4.0,without fed funds,SR3,us rates,1.911,0.102,5
+4.0,without fed funds,YM,stock indexes,5.082,0.27,25
+4.0,without fed funds,ES,stock indexes,2.584,0.138,27
+4.0,without fed funds,NQ,stock indexes,9.411,0.501,22
+4.0,without fed funds,RTY,stock indexes,2.125,0.113,23
+4.0,without fed funds,FGBL,foreign bonds,5.858,0.312,19
+4.0,without fed funds,FBTP,foreign bonds,0.201,0.011,24
+4.0,without fed funds,EBM,foreign commodities,-1.839,-0.098,21
+4.0,without fed funds,FESX,foreign stock indexes,-1.675,-0.089,20
+4.0,without fed funds,G,foreign bonds,0.606,0.032,14
+4.0,without fed funds,ER,foreign short rates,4.842,0.258,26
+4.0,without fed funds,SO3,foreign short rates,4.936,0.263,24
+4.0,without all five short-rate markets,ZW,grains,2.198,0.099,18
+4.0,without all five short-rate markets,KE,grains,0.605,0.027,25
+4.0,without all five short-rate markets,ZC,grains,4.627,0.207,20
+4.0,without all five short-rate markets,ZS,grains,4.874,0.219,23
+4.0,without all five short-rate markets,ZL,grains,2.066,0.093,30
+4.0,without all five short-rate markets,ZM,grains,0.881,0.04,21
+4.0,without all five short-rate markets,NG,energy,3.089,0.138,15
+4.0,without all five short-rate markets,CL,energy,5.224,0.234,21
+4.0,without all five short-rate markets,BZ,energy,9.512,0.426,26
+4.0,without all five short-rate markets,RB,energy,4.563,0.205,22
+4.0,without all five short-rate markets,CT,softs,-2.59,-0.116,20
+4.0,without all five short-rate markets,C,foreign commodities,-1.259,-0.056,26
+4.0,without all five short-rate markets,SB,softs,0.263,0.012,24
+4.0,without all five short-rate markets,RM,foreign commodities,-3.461,-0.155,26
+4.0,without all five short-rate markets,HE,meats,6.941,0.311,23
+4.0,without all five short-rate markets,LE,meats,0.854,0.038,15
+4.0,without all five short-rate markets,PL,metals,-0.789,-0.035,20
+4.0,without all five short-rate markets,SI,metals,-0.129,-0.006,28
+4.0,without all five short-rate markets,HG,metals,-0.448,-0.02,23
+4.0,without all five short-rate markets,GC,metals,-0.297,-0.013,22
+4.0,without all five short-rate markets,A6,currencies,3.439,0.154,14
+4.0,without all five short-rate markets,B6,currencies,1.339,0.06,17
+4.0,without all five short-rate markets,AD,currencies,-0.055,-0.002,16
+4.0,without all five short-rate markets,E6,currencies,4.742,0.213,17
+4.0,without all five short-rate markets,J1,currencies,3.963,0.178,14
+4.0,without all five short-rate markets,MP,currencies,7.014,0.314,20
+4.0,without all five short-rate markets,BR,currencies,2.468,0.111,23
+4.0,without all five short-rate markets,N6,currencies,5.976,0.268,18
+4.0,without all five short-rate markets,E1,currencies,-2.182,-0.098,26
+4.0,without all five short-rate markets,DX,currencies,1.406,0.063,24
+4.0,without all five short-rate markets,VX,volatility,1.76,0.079,33
+4.0,without all five short-rate markets,US,us rates,4.119,0.185,13
+4.0,without all five short-rate markets,UB,us rates,0.396,0.018,13
+4.0,without all five short-rate markets,ZN,us rates,-1.103,-0.049,18
+4.0,without all five short-rate markets,TN,us rates,3.282,0.147,8
+4.0,without all five short-rate markets,ZF,us rates,-0.427,-0.019,20
+4.0,without all five short-rate markets,ZT,us rates,0.599,0.027,18
+4.0,without all five short-rate markets,YM,stock indexes,6.033,0.27,25
+4.0,without all five short-rate markets,ES,stock indexes,3.068,0.138,27
+4.0,without all five short-rate markets,NQ,stock indexes,11.172,0.501,22
+4.0,without all five short-rate markets,RTY,stock indexes,2.522,0.113,23
+4.0,without all five short-rate markets,FGBL,foreign bonds,6.954,0.312,19
+4.0,without all five short-rate markets,FBTP,foreign bonds,0.238,0.011,24
+4.0,without all five short-rate markets,EBM,foreign commodities,-2.184,-0.098,21
+4.0,without all five short-rate markets,FESX,foreign stock indexes,-1.989,-0.089,20
+4.0,without all five short-rate markets,G,foreign bonds,0.72,0.032,14
+5.0,all 51 markets,ZW,grains,1.217,0.1,18
+5.0,all 51 markets,KE,grains,-0.261,-0.021,25
+5.0,all 51 markets,ZC,grains,2.03,0.167,19
+5.0,all 51 markets,ZS,grains,4.432,0.365,21
+5.0,all 51 markets,ZL,grains,4.325,0.356,25
+5.0,all 51 markets,ZM,grains,0.128,0.011,21
+5.0,all 51 markets,NG,energy,2.161,0.178,15
+5.0,all 51 markets,CL,energy,2.434,0.2,20
+5.0,all 51 markets,BZ,energy,4.664,0.384,25
+5.0,all 51 markets,RB,energy,2.607,0.215,22
+5.0,all 51 markets,CT,softs,0.959,0.079,18
+5.0,all 51 markets,C,foreign commodities,-1.852,-0.152,26
+5.0,all 51 markets,SB,softs,0.136,0.011,23
+5.0,all 51 markets,RM,foreign commodities,-2.719,-0.224,25
+5.0,all 51 markets,HE,meats,2.779,0.229,22
+5.0,all 51 markets,LE,meats,0.028,0.002,15
+5.0,all 51 markets,PL,metals,-1.61,-0.132,20
+5.0,all 51 markets,SI,metals,-1.257,-0.103,28
+5.0,all 51 markets,HG,metals,3.402,0.28,18
+5.0,all 51 markets,GC,metals,-0.967,-0.08,21
+5.0,all 51 markets,A6,currencies,1.654,0.136,13
+5.0,all 51 markets,B6,currencies,0.29,0.024,16
+5.0,all 51 markets,AD,currencies,-0.725,-0.06,16
+5.0,all 51 markets,E6,currencies,4.574,0.377,16
+5.0,all 51 markets,J1,currencies,1.434,0.118,14
+5.0,all 51 markets,MP,currencies,2.829,0.233,19
+5.0,all 51 markets,BR,currencies,1.891,0.156,23
+5.0,all 51 markets,N6,currencies,1.862,0.153,18
+5.0,all 51 markets,E1,currencies,1.279,0.105,22
+5.0,all 51 markets,DX,currencies,3.721,0.306,22
+5.0,all 51 markets,VX,volatility,1.94,0.16,29
+5.0,all 51 markets,US,us rates,1.396,0.115,13
+5.0,all 51 markets,UB,us rates,1.205,0.099,11
+5.0,all 51 markets,ZN,us rates,1.276,0.105,17
+5.0,all 51 markets,TN,us rates,2.356,0.194,7
+5.0,all 51 markets,ZF,us rates,1.639,0.135,20
+5.0,all 51 markets,ZT,us rates,-0.199,-0.016,18
+5.0,all 51 markets,ZQ,us rates,17.65,1.453,36
+5.0,all 51 markets,SR1,us rates,2.498,0.206,11
+5.0,all 51 markets,SR3,us rates,1.633,0.134,4
+5.0,all 51 markets,YM,stock indexes,4.34,0.357,23
+5.0,all 51 markets,ES,stock indexes,4.141,0.341,24
+5.0,all 51 markets,NQ,stock indexes,5.565,0.458,21
+5.0,all 51 markets,RTY,stock indexes,1.732,0.143,20
+5.0,all 51 markets,FGBL,foreign bonds,5.32,0.438,16
+5.0,all 51 markets,FBTP,foreign bonds,-0.142,-0.012,23
+5.0,all 51 markets,EBM,foreign commodities,2.158,0.178,18
+5.0,all 51 markets,FESX,foreign stock indexes,-0.678,-0.056,18
+5.0,all 51 markets,G,foreign bonds,-0.122,-0.01,14
+5.0,all 51 markets,ER,foreign short rates,2.367,0.195,25
+5.0,all 51 markets,SO3,foreign short rates,2.48,0.204,23
+5.0,without fed funds,ZW,grains,1.477,0.1,18
+5.0,without fed funds,KE,grains,-0.317,-0.021,25
+5.0,without fed funds,ZC,grains,2.465,0.167,19
+5.0,without fed funds,ZS,grains,5.382,0.365,21
+5.0,without fed funds,ZL,grains,5.252,0.356,25
+5.0,without fed funds,ZM,grains,0.156,0.011,21
+5.0,without fed funds,NG,energy,2.624,0.178,15
+5.0,without fed funds,CL,energy,2.955,0.2,20
+5.0,without fed funds,BZ,energy,5.664,0.384,25
+5.0,without fed funds,RB,energy,3.165,0.215,22
+5.0,without fed funds,CT,softs,1.165,0.079,18
+5.0,without fed funds,C,foreign commodities,-2.248,-0.152,26
+5.0,without fed funds,SB,softs,0.165,0.011,23
+5.0,without fed funds,RM,foreign commodities,-3.302,-0.224,25
+5.0,without fed funds,HE,meats,3.375,0.229,22
+5.0,without fed funds,LE,meats,0.034,0.002,15
+5.0,without fed funds,PL,metals,-1.955,-0.132,20
+5.0,without fed funds,SI,metals,-1.526,-0.103,28
+5.0,without fed funds,HG,metals,4.132,0.28,18
+5.0,without fed funds,GC,metals,-1.174,-0.08,21
+5.0,without fed funds,A6,currencies,2.009,0.136,13
+5.0,without fed funds,B6,currencies,0.353,0.024,16
+5.0,without fed funds,AD,currencies,-0.881,-0.06,16
+5.0,without fed funds,E6,currencies,5.554,0.377,16
+5.0,without fed funds,J1,currencies,1.741,0.118,14
+5.0,without fed funds,MP,currencies,3.435,0.233,19
+5.0,without fed funds,BR,currencies,2.296,0.156,23
+5.0,without fed funds,N6,currencies,2.261,0.153,18
+5.0,without fed funds,E1,currencies,1.553,0.105,22
+5.0,without fed funds,DX,currencies,4.518,0.306,22
+5.0,without fed funds,VX,volatility,2.356,0.16,29
+5.0,without fed funds,US,us rates,1.695,0.115,13
+5.0,without fed funds,UB,us rates,1.463,0.099,11
+5.0,without fed funds,ZN,us rates,1.549,0.105,17
+5.0,without fed funds,TN,us rates,2.86,0.194,7
+5.0,without fed funds,ZF,us rates,1.99,0.135,20
+5.0,without fed funds,ZT,us rates,-0.242,-0.016,18
+5.0,without fed funds,SR1,us rates,3.033,0.206,11
+5.0,without fed funds,SR3,us rates,1.983,0.134,4
+5.0,without fed funds,YM,stock indexes,5.27,0.357,23
+5.0,without fed funds,ES,stock indexes,5.028,0.341,24
+5.0,without fed funds,NQ,stock indexes,6.758,0.458,21
+5.0,without fed funds,RTY,stock indexes,2.104,0.143,20
+5.0,without fed funds,FGBL,foreign bonds,6.46,0.438,16
+5.0,without fed funds,FBTP,foreign bonds,-0.172,-0.012,23
+5.0,without fed funds,EBM,foreign commodities,2.621,0.178,18
+5.0,without fed funds,FESX,foreign stock indexes,-0.823,-0.056,18
+5.0,without fed funds,G,foreign bonds,-0.148,-0.01,14
+5.0,without fed funds,ER,foreign short rates,2.874,0.195,25
+5.0,without fed funds,SO3,foreign short rates,3.012,0.204,23
+5.0,without all five short-rate markets,ZW,grains,1.658,0.1,18
+5.0,without all five short-rate markets,KE,grains,-0.355,-0.021,25
+5.0,without all five short-rate markets,ZC,grains,2.767,0.167,19
+5.0,without all five short-rate markets,ZS,grains,6.04,0.365,21
+5.0,without all five short-rate markets,ZL,grains,5.895,0.356,25
+5.0,without all five short-rate markets,ZM,grains,0.175,0.011,21
+5.0,without all five short-rate markets,NG,energy,2.945,0.178,15
+5.0,without all five short-rate markets,CL,energy,3.317,0.2,20
+5.0,without all five short-rate markets,BZ,energy,6.357,0.384,25
+5.0,without all five short-rate markets,RB,energy,3.553,0.215,22
+5.0,without all five short-rate markets,CT,softs,1.307,0.079,18
+5.0,without all five short-rate markets,C,foreign commodities,-2.524,-0.152,26
+5.0,without all five short-rate markets,SB,softs,0.185,0.011,23
+5.0,without all five short-rate markets,RM,foreign commodities,-3.706,-0.224,25
+5.0,without all five short-rate markets,HE,meats,3.788,0.229,22
+5.0,without all five short-rate markets,LE,meats,0.038,0.002,15
+5.0,without all five short-rate markets,PL,metals,-2.194,-0.132,20
+5.0,without all five short-rate markets,SI,metals,-1.713,-0.103,28
+5.0,without all five short-rate markets,HG,metals,4.637,0.28,18
+5.0,without all five short-rate markets,GC,metals,-1.318,-0.08,21
+5.0,without all five short-rate markets,A6,currencies,2.254,0.136,13
+5.0,without all five short-rate markets,B6,currencies,0.396,0.024,16
+5.0,without all five short-rate markets,AD,currencies,-0.989,-0.06,16
+5.0,without all five short-rate markets,E6,currencies,6.234,0.377,16
+5.0,without all five short-rate markets,J1,currencies,1.954,0.118,14
+5.0,without all five short-rate markets,MP,currencies,3.856,0.233,19
+5.0,without all five short-rate markets,BR,currencies,2.577,0.156,23
+5.0,without all five short-rate markets,N6,currencies,2.538,0.153,18
+5.0,without all five short-rate markets,E1,currencies,1.743,0.105,22
+5.0,without all five short-rate markets,DX,currencies,5.071,0.306,22
+5.0,without all five short-rate markets,VX,volatility,2.644,0.16,29
+5.0,without all five short-rate markets,US,us rates,1.902,0.115,13
+5.0,without all five short-rate markets,UB,us rates,1.642,0.099,11
+5.0,without all five short-rate markets,ZN,us rates,1.739,0.105,17
+5.0,without all five short-rate markets,TN,us rates,3.21,0.194,7
+5.0,without all five short-rate markets,ZF,us rates,2.234,0.135,20
+5.0,without all five short-rate markets,ZT,us rates,-0.271,-0.016,18
+5.0,without all five short-rate markets,YM,stock indexes,5.915,0.357,23
+5.0,without all five short-rate markets,ES,stock indexes,5.643,0.341,24
+5.0,without all five short-rate markets,NQ,stock indexes,7.585,0.458,21
+5.0,without all five short-rate markets,RTY,stock indexes,2.361,0.143,20
+5.0,without all five short-rate markets,FGBL,foreign bonds,7.251,0.438,16
+5.0,without all five short-rate markets,FBTP,foreign bonds,-0.193,-0.012,23
+5.0,without all five short-rate markets,EBM,foreign commodities,2.942,0.178,18
+5.0,without all five short-rate markets,FESX,foreign stock indexes,-0.924,-0.056,18
+5.0,without all five short-rate markets,G,foreign bonds,-0.166,-0.01,14
+6.0,all 51 markets,ZW,grains,0.692,0.058,18
+6.0,all 51 markets,KE,grains,0.37,0.031,24
+6.0,all 51 markets,ZC,grains,1.057,0.089,19
+6.0,all 51 markets,ZS,grains,2.927,0.246,21
+6.0,all 51 markets,ZL,grains,3.21,0.269,25
+6.0,all 51 markets,ZM,grains,1.16,0.097,20
+6.0,all 51 markets,NG,energy,0.165,0.014,14
+6.0,all 51 markets,CL,energy,1.933,0.162,20
+6.0,all 51 markets,BZ,energy,4.599,0.386,24
+6.0,all 51 markets,RB,energy,1.844,0.155,21
+6.0,all 51 markets,CT,softs,-0.159,-0.013,18
+6.0,all 51 markets,C,foreign commodities,-2.81,-0.236,26
+6.0,all 51 markets,SB,softs,0.663,0.056,22
+6.0,all 51 markets,RM,foreign commodities,-2.823,-0.237,24
+6.0,all 51 markets,HE,meats,2.018,0.169,21
+6.0,all 51 markets,LE,meats,-0.153,-0.013,14
+6.0,all 51 markets,PL,metals,1.618,0.136,16
+6.0,all 51 markets,SI,metals,-2.593,-0.218,28
+6.0,all 51 markets,HG,metals,2.589,0.217,18
+6.0,all 51 markets,GC,metals,-1.962,-0.165,21
+6.0,all 51 markets,A6,currencies,1.498,0.126,13
+6.0,all 51 markets,B6,currencies,3.12,0.262,15
+6.0,all 51 markets,AD,currencies,-0.074,-0.006,14
+6.0,all 51 markets,E6,currencies,5.396,0.453,15
+6.0,all 51 markets,J1,currencies,2.386,0.2,12
+6.0,all 51 markets,MP,currencies,3.32,0.278,18
+6.0,all 51 markets,BR,currencies,0.623,0.052,23
+6.0,all 51 markets,N6,currencies,2.435,0.204,16
+6.0,all 51 markets,E1,currencies,1.263,0.106,21
+6.0,all 51 markets,DX,currencies,3.27,0.274,22
+6.0,all 51 markets,VX,volatility,2.959,0.248,27
+6.0,all 51 markets,US,us rates,3.956,0.332,11
+6.0,all 51 markets,UB,us rates,2.211,0.185,9
+6.0,all 51 markets,ZN,us rates,2.252,0.189,16
+6.0,all 51 markets,TN,us rates,2.597,0.218,6
+6.0,all 51 markets,ZF,us rates,3.238,0.272,18
+6.0,all 51 markets,ZT,us rates,-0.988,-0.083,18
+6.0,all 51 markets,ZQ,us rates,15.563,1.305,35
+6.0,all 51 markets,SR1,us rates,2.747,0.23,10
+6.0,all 51 markets,SR3,us rates,1.752,0.147,4
+6.0,all 51 markets,YM,stock indexes,3.748,0.314,22
+6.0,all 51 markets,ES,stock indexes,2.318,0.194,23
+6.0,all 51 markets,NQ,stock indexes,4.333,0.363,21
+6.0,all 51 markets,RTY,stock indexes,2.814,0.236,19
+6.0,all 51 markets,FGBL,foreign bonds,4.487,0.376,16
+6.0,all 51 markets,FBTP,foreign bonds,0.807,0.068,21
+6.0,all 51 markets,EBM,foreign commodities,1.802,0.151,18
+6.0,all 51 markets,FESX,foreign stock indexes,-0.039,-0.003,16
+6.0,all 51 markets,G,foreign bonds,0.358,0.03,13
+6.0,all 51 markets,ER,foreign short rates,4.101,0.344,21
+6.0,all 51 markets,SO3,foreign short rates,1.403,0.118,23
+6.0,without fed funds,ZW,grains,0.82,0.058,18
+6.0,without fed funds,KE,grains,0.438,0.031,24
+6.0,without fed funds,ZC,grains,1.251,0.089,19
+6.0,without fed funds,ZS,grains,3.467,0.246,21
+6.0,without fed funds,ZL,grains,3.802,0.269,25
+6.0,without fed funds,ZM,grains,1.374,0.097,20
+6.0,without fed funds,NG,energy,0.196,0.014,14
+6.0,without fed funds,CL,energy,2.29,0.162,20
+6.0,without fed funds,BZ,energy,5.447,0.386,24
+6.0,without fed funds,RB,energy,2.184,0.155,21
+6.0,without fed funds,CT,softs,-0.189,-0.013,18
+6.0,without fed funds,C,foreign commodities,-3.327,-0.236,26
+6.0,without fed funds,SB,softs,0.786,0.056,22
+6.0,without fed funds,RM,foreign commodities,-3.344,-0.237,24
+6.0,without fed funds,HE,meats,2.39,0.169,21
+6.0,without fed funds,LE,meats,-0.181,-0.013,14
+6.0,without fed funds,PL,metals,1.916,0.136,16
+6.0,without fed funds,SI,metals,-3.071,-0.218,28
+6.0,without fed funds,HG,metals,3.066,0.217,18
+6.0,without fed funds,GC,metals,-2.324,-0.165,21
+6.0,without fed funds,A6,currencies,1.774,0.126,13
+6.0,without fed funds,B6,currencies,3.695,0.262,15
+6.0,without fed funds,AD,currencies,-0.088,-0.006,14
+6.0,without fed funds,E6,currencies,6.391,0.453,15
+6.0,without fed funds,J1,currencies,2.826,0.2,12
+6.0,without fed funds,MP,currencies,3.932,0.278,18
+6.0,without fed funds,BR,currencies,0.738,0.052,23
+6.0,without fed funds,N6,currencies,2.884,0.204,16
+6.0,without fed funds,E1,currencies,1.496,0.106,21
+6.0,without fed funds,DX,currencies,3.873,0.274,22
+6.0,without fed funds,VX,volatility,3.504,0.248,27
+6.0,without fed funds,US,us rates,4.685,0.332,11
+6.0,without fed funds,UB,us rates,2.619,0.185,9
+6.0,without fed funds,ZN,us rates,2.667,0.189,16
+6.0,without fed funds,TN,us rates,3.075,0.218,6
+6.0,without fed funds,ZF,us rates,3.835,0.272,18
+6.0,without fed funds,ZT,us rates,-1.17,-0.083,18
+6.0,without fed funds,SR1,us rates,3.253,0.23,10
+6.0,without fed funds,SR3,us rates,2.074,0.147,4
+6.0,without fed funds,YM,stock indexes,4.439,0.314,22
+6.0,without fed funds,ES,stock indexes,2.746,0.194,23
+6.0,without fed funds,NQ,stock indexes,5.132,0.363,21
+6.0,without fed funds,RTY,stock indexes,3.333,0.236,19
+6.0,without fed funds,FGBL,foreign bonds,5.314,0.376,16
+6.0,without fed funds,FBTP,foreign bonds,0.956,0.068,21
+6.0,without fed funds,EBM,foreign commodities,2.134,0.151,18
+6.0,without fed funds,FESX,foreign stock indexes,-0.047,-0.003,16
+6.0,without fed funds,G,foreign bonds,0.424,0.03,13
+6.0,without fed funds,ER,foreign short rates,4.856,0.344,21
+6.0,without fed funds,SO3,foreign short rates,1.662,0.118,23
+6.0,without all five short-rate markets,ZW,grains,0.93,0.058,18
+6.0,without all five short-rate markets,KE,grains,0.497,0.031,24
+6.0,without all five short-rate markets,ZC,grains,1.419,0.089,19
+6.0,without all five short-rate markets,ZS,grains,3.933,0.246,21
+6.0,without all five short-rate markets,ZL,grains,4.313,0.269,25
+6.0,without all five short-rate markets,ZM,grains,1.559,0.097,20
+6.0,without all five short-rate markets,NG,energy,0.222,0.014,14
+6.0,without all five short-rate markets,CL,energy,2.597,0.162,20
+6.0,without all five short-rate markets,BZ,energy,6.179,0.386,24
+6.0,without all five short-rate markets,RB,energy,2.478,0.155,21
+6.0,without all five short-rate markets,CT,softs,-0.214,-0.013,18
+6.0,without all five short-rate markets,C,foreign commodities,-3.775,-0.236,26
+6.0,without all five short-rate markets,SB,softs,0.891,0.056,22
+6.0,without all five short-rate markets,RM,foreign commodities,-3.793,-0.237,24
+6.0,without all five short-rate markets,HE,meats,2.711,0.169,21
+6.0,without all five short-rate markets,LE,meats,-0.205,-0.013,14
+6.0,without all five short-rate markets,PL,metals,2.174,0.136,16
+6.0,without all five short-rate markets,SI,metals,-3.484,-0.218,28
+6.0,without all five short-rate markets,HG,metals,3.478,0.217,18
+6.0,without all five short-rate markets,GC,metals,-2.636,-0.165,21
+6.0,without all five short-rate markets,A6,currencies,2.012,0.126,13
+6.0,without all five short-rate markets,B6,currencies,4.191,0.262,15
+6.0,without all five short-rate markets,AD,currencies,-0.1,-0.006,14
+6.0,without all five short-rate markets,E6,currencies,7.25,0.453,15
+6.0,without all five short-rate markets,J1,currencies,3.206,0.2,12
+6.0,without all five short-rate markets,MP,currencies,4.46,0.278,18
+6.0,without all five short-rate markets,BR,currencies,0.838,0.052,23
+6.0,without all five short-rate markets,N6,currencies,3.271,0.204,16
+6.0,without all five short-rate markets,E1,currencies,1.697,0.106,21
+6.0,without all five short-rate markets,DX,currencies,4.393,0.274,22
+6.0,without all five short-rate markets,VX,volatility,3.975,0.248,27
+6.0,without all five short-rate markets,US,us rates,5.315,0.332,11
+6.0,without all five short-rate markets,UB,us rates,2.97,0.185,9
+6.0,without all five short-rate markets,ZN,us rates,3.025,0.189,16
+6.0,without all five short-rate markets,TN,us rates,3.489,0.218,6
+6.0,without all five short-rate markets,ZF,us rates,4.35,0.272,18
+6.0,without all five short-rate markets,ZT,us rates,-1.327,-0.083,18
+6.0,without all five short-rate markets,YM,stock indexes,5.036,0.314,22
+6.0,without all five short-rate markets,ES,stock indexes,3.115,0.194,23
+6.0,without all five short-rate markets,NQ,stock indexes,5.822,0.363,21
+6.0,without all five short-rate markets,RTY,stock indexes,3.781,0.236,19
+6.0,without all five short-rate markets,FGBL,foreign bonds,6.028,0.376,16
+6.0,without all five short-rate markets,FBTP,foreign bonds,1.084,0.068,21
+6.0,without all five short-rate markets,EBM,foreign commodities,2.42,0.151,18
+6.0,without all five short-rate markets,FESX,foreign stock indexes,-0.053,-0.003,16
+6.0,without all five short-rate markets,G,foreign bonds,0.48,0.03,13
+8.0,all 51 markets,ZW,grains,0.098,0.01,16
+8.0,all 51 markets,KE,grains,0.174,0.018,21
+8.0,all 51 markets,ZC,grains,0.809,0.084,18
+8.0,all 51 markets,ZS,grains,2.542,0.265,20
+8.0,all 51 markets,ZL,grains,3.838,0.4,22
+8.0,all 51 markets,ZM,grains,0.088,0.009,20
+8.0,all 51 markets,NG,energy,0.382,0.04,12
+8.0,all 51 markets,CL,energy,1.487,0.155,18
+8.0,all 51 markets,BZ,energy,3.173,0.331,23
+8.0,all 51 markets,RB,energy,1.939,0.202,20
+8.0,all 51 markets,CT,softs,1.506,0.157,15
+8.0,all 51 markets,C,foreign commodities,-1.956,-0.204,21
+8.0,all 51 markets,SB,softs,0.772,0.081,21
+8.0,all 51 markets,RM,foreign commodities,-0.111,-0.012,20
+8.0,all 51 markets,HE,meats,0.362,0.038,21
+8.0,all 51 markets,LE,meats,0.452,0.047,14
+8.0,all 51 markets,PL,metals,0.231,0.024,15
+8.0,all 51 markets,SI,metals,-0.502,-0.052,23
+8.0,all 51 markets,HG,metals,1.759,0.183,16
+8.0,all 51 markets,GC,metals,-1.902,-0.198,19
+8.0,all 51 markets,A6,currencies,1.235,0.129,12
+8.0,all 51 markets,B6,currencies,1.695,0.177,15
+8.0,all 51 markets,AD,currencies,-0.417,-0.044,13
+8.0,all 51 markets,E6,currencies,3.993,0.416,14
+8.0,all 51 markets,J1,currencies,2.933,0.306,11
+8.0,all 51 markets,MP,currencies,2.577,0.269,16
+8.0,all 51 markets,BR,currencies,2.708,0.282,21
+8.0,all 51 markets,N6,currencies,0.645,0.067,16
+8.0,all 51 markets,E1,currencies,-0.065,-0.007,19
+8.0,all 51 markets,DX,currencies,2.283,0.238,21
+8.0,all 51 markets,VX,volatility,2.026,0.211,23
+8.0,all 51 markets,US,us rates,4.108,0.428,10
+8.0,all 51 markets,UB,us rates,2.651,0.277,8
+8.0,all 51 markets,ZN,us rates,2.758,0.288,13
+8.0,all 51 markets,TN,us rates,1.811,0.189,6
+8.0,all 51 markets,ZF,us rates,2.027,0.211,17
+8.0,all 51 markets,ZT,us rates,3.446,0.359,13
+8.0,all 51 markets,ZQ,us rates,24.977,2.605,26
+8.0,all 51 markets,SR1,us rates,3.632,0.379,7
+8.0,all 51 markets,SR3,us rates,1.28,0.134,4
+8.0,all 51 markets,YM,stock indexes,2.982,0.311,18
+8.0,all 51 markets,ES,stock indexes,3.303,0.344,18
+8.0,all 51 markets,NQ,stock indexes,3.171,0.331,18
+8.0,all 51 markets,RTY,stock indexes,1.984,0.207,16
+8.0,all 51 markets,FGBL,foreign bonds,2.717,0.283,15
+8.0,all 51 markets,FBTP,foreign bonds,-0.46,-0.048,19
+8.0,all 51 markets,EBM,foreign commodities,0.677,0.071,18
+8.0,all 51 markets,FESX,foreign stock indexes,0.527,0.055,13
+8.0,all 51 markets,G,foreign bonds,0.266,0.028,12
+8.0,all 51 markets,ER,foreign short rates,2.971,0.31,19
+8.0,all 51 markets,SO3,foreign short rates,0.415,0.043,21
+8.0,without fed funds,ZW,grains,0.131,0.01,16
+8.0,without fed funds,KE,grains,0.233,0.018,21
+8.0,without fed funds,ZC,grains,1.078,0.084,18
+8.0,without fed funds,ZS,grains,3.389,0.265,20
+8.0,without fed funds,ZL,grains,5.116,0.4,22
+8.0,without fed funds,ZM,grains,0.118,0.009,20
+8.0,without fed funds,NG,energy,0.509,0.04,12
+8.0,without fed funds,CL,energy,1.982,0.155,18
+8.0,without fed funds,BZ,energy,4.23,0.331,23
+8.0,without fed funds,RB,energy,2.584,0.202,20
+8.0,without fed funds,CT,softs,2.007,0.157,15
+8.0,without fed funds,C,foreign commodities,-2.607,-0.204,21
+8.0,without fed funds,SB,softs,1.029,0.081,21
+8.0,without fed funds,RM,foreign commodities,-0.148,-0.012,20
+8.0,without fed funds,HE,meats,0.482,0.038,21
+8.0,without fed funds,LE,meats,0.603,0.047,14
+8.0,without fed funds,PL,metals,0.308,0.024,15
+8.0,without fed funds,SI,metals,-0.67,-0.052,23
+8.0,without fed funds,HG,metals,2.344,0.183,16
+8.0,without fed funds,GC,metals,-2.536,-0.198,19
+8.0,without fed funds,A6,currencies,1.646,0.129,12
+8.0,without fed funds,B6,currencies,2.26,0.177,15
+8.0,without fed funds,AD,currencies,-0.556,-0.044,13
+8.0,without fed funds,E6,currencies,5.323,0.416,14
+8.0,without fed funds,J1,currencies,3.91,0.306,11
+8.0,without fed funds,MP,currencies,3.435,0.269,16
+8.0,without fed funds,BR,currencies,3.61,0.282,21
+8.0,without fed funds,N6,currencies,0.86,0.067,16
+8.0,without fed funds,E1,currencies,-0.086,-0.007,19
+8.0,without fed funds,DX,currencies,3.043,0.238,21
+8.0,without fed funds,VX,volatility,2.701,0.211,23
+8.0,without fed funds,US,us rates,5.476,0.428,10
+8.0,without fed funds,UB,us rates,3.534,0.277,8
+8.0,without fed funds,ZN,us rates,3.676,0.288,13
+8.0,without fed funds,TN,us rates,2.414,0.189,6
+8.0,without fed funds,ZF,us rates,2.702,0.211,17
+8.0,without fed funds,ZT,us rates,4.593,0.359,13
+8.0,without fed funds,SR1,us rates,4.841,0.379,7
+8.0,without fed funds,SR3,us rates,1.707,0.134,4
+8.0,without fed funds,YM,stock indexes,3.974,0.311,18
+8.0,without fed funds,ES,stock indexes,4.402,0.344,18
+8.0,without fed funds,NQ,stock indexes,4.227,0.331,18
+8.0,without fed funds,RTY,stock indexes,2.644,0.207,16
+8.0,without fed funds,FGBL,foreign bonds,3.621,0.283,15
+8.0,without fed funds,FBTP,foreign bonds,-0.613,-0.048,19
+8.0,without fed funds,EBM,foreign commodities,0.903,0.071,18
+8.0,without fed funds,FESX,foreign stock indexes,0.702,0.055,13
+8.0,without fed funds,G,foreign bonds,0.354,0.028,12
+8.0,without fed funds,ER,foreign short rates,3.961,0.31,19
+8.0,without fed funds,SO3,foreign short rates,0.553,0.043,21
+8.0,without all five short-rate markets,ZW,grains,0.147,0.01,16
+8.0,without all five short-rate markets,KE,grains,0.261,0.018,21
+8.0,without all five short-rate markets,ZC,grains,1.212,0.084,18
+8.0,without all five short-rate markets,ZS,grains,3.81,0.265,20
+8.0,without all five short-rate markets,ZL,grains,5.752,0.4,22
+8.0,without all five short-rate markets,ZM,grains,0.132,0.009,20
+8.0,without all five short-rate markets,NG,energy,0.572,0.04,12
+8.0,without all five short-rate markets,CL,energy,2.229,0.155,18
+8.0,without all five short-rate markets,BZ,energy,4.756,0.331,23
+8.0,without all five short-rate markets,RB,energy,2.905,0.202,20
+8.0,without all five short-rate markets,CT,softs,2.257,0.157,15
+8.0,without all five short-rate markets,C,foreign commodities,-2.932,-0.204,21
+8.0,without all five short-rate markets,SB,softs,1.157,0.081,21
+8.0,without all five short-rate markets,RM,foreign commodities,-0.166,-0.012,20
+8.0,without all five short-rate markets,HE,meats,0.542,0.038,21
+8.0,without all five short-rate markets,LE,meats,0.678,0.047,14
+8.0,without all five short-rate markets,PL,metals,0.346,0.024,15
+8.0,without all five short-rate markets,SI,metals,-0.753,-0.052,23
+8.0,without all five short-rate markets,HG,metals,2.636,0.183,16
+8.0,without all five short-rate markets,GC,metals,-2.851,-0.198,19
+8.0,without all five short-rate markets,A6,currencies,1.851,0.129,12
+8.0,without all five short-rate markets,B6,currencies,2.541,0.177,15
+8.0,without all five short-rate markets,AD,currencies,-0.626,-0.044,13
+8.0,without all five short-rate markets,E6,currencies,5.985,0.416,14
+8.0,without all five short-rate markets,J1,currencies,4.396,0.306,11
+8.0,without all five short-rate markets,MP,currencies,3.862,0.269,16
+8.0,without all five short-rate markets,BR,currencies,4.059,0.282,21
+8.0,without all five short-rate markets,N6,currencies,0.967,0.067,16
+8.0,without all five short-rate markets,E1,currencies,-0.097,-0.007,19
+8.0,without all five short-rate markets,DX,currencies,3.422,0.238,21
+8.0,without all five short-rate markets,VX,volatility,3.037,0.211,23
+8.0,without all five short-rate markets,US,us rates,6.157,0.428,10
+8.0,without all five short-rate markets,UB,us rates,3.974,0.277,8
+8.0,without all five short-rate markets,ZN,us rates,4.134,0.288,13
+8.0,without all five short-rate markets,TN,us rates,2.714,0.189,6
+8.0,without all five short-rate markets,ZF,us rates,3.038,0.211,17
+8.0,without all five short-rate markets,ZT,us rates,5.164,0.359,13
+8.0,without all five short-rate markets,YM,stock indexes,4.469,0.311,18
+8.0,without all five short-rate markets,ES,stock indexes,4.95,0.344,18
+8.0,without all five short-rate markets,NQ,stock indexes,4.753,0.331,18
+8.0,without all five short-rate markets,RTY,stock indexes,2.973,0.207,16
+8.0,without all five short-rate markets,FGBL,foreign bonds,4.072,0.283,15
+8.0,without all five short-rate markets,FBTP,foreign bonds,-0.689,-0.048,19
+8.0,without all five short-rate markets,EBM,foreign commodities,1.015,0.071,18
+8.0,without all five short-rate markets,FESX,foreign stock indexes,0.79,0.055,13
+8.0,without all five short-rate markets,G,foreign bonds,0.398,0.028,12
