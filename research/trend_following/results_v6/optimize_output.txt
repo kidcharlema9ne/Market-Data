@@ -1,0 +1,196 @@
+development rows 355,303; 2007-12-31 to 2021-08-06; sealed years removed at load
+price path taken from a different contract: {'SO3': 'L'}
+no development-year data: []
+51 markets in the test; first date of the shortest series: 2007-12-31 to 2018-05-07
+efficiency ratio (hl) across all market-days: percentiles 10/25/50/75/90/95 = 0.16 0.18 0.22 0.27 0.32 0.35
+efficiency ratio (close) across all market-days: percentiles 10/25/50/75/90/95 = 0.04 0.10 0.21 0.35 0.49 0.58
+
+starting values before any step: efficiency ratio target 0.6, initial stop 3 ATR, trailing stop 3 ATR, no time stop. Budget 0.1 percent per market, annual profit in dollars at that budget.
+starting point: {'trades': 10, 'annual_pnl': np.float64(1483.048), 'sharpe': 0.516, 'max_drawdown': 3495.273, 'sharpe_first_half': -0.155, 'sharpe_second_half': 0.774}
+
+=== STEP 1: efficiency ratio target (high-low version) ===
+ er_target  initial_stop_atr  trailing_stop_atr  time_stop_sessions  trades  win_rate  annual_pnl  sharpe  sharpe_smoothed  max_drawdown  sharpe_first_half  sharpe_second_half  mean_markets_in_trade
+      0.30               3.0                3.0                 NaN    2500     0.382   17854.607   0.528            0.488     60034.422              0.568               0.497                 17.694
+      0.35               3.0                3.0                 NaN    1290     0.388   10365.889   0.449            0.436     46575.492              0.614               0.325                  8.951
+      0.40               3.0                3.0                 NaN     595     0.385    4608.297   0.333            0.405     30650.866              0.326               0.348                  4.042
+      0.45               3.0                3.0                 NaN     223     0.390    3554.992   0.435            0.394     12129.071              0.233               0.581                  1.546
+      0.50               3.0                3.0                 NaN      70     0.314    2358.833   0.416            0.451     10543.629             -0.343               0.756                  0.395
+      0.55               3.0                3.0                 NaN      27     0.296    2531.984   0.503            0.478      6672.791             -0.336               0.815                  0.186
+      0.60               3.0                3.0                 NaN      10     0.400    1483.048   0.516            0.519      3495.273             -0.155               0.774                  0.108
+      0.65               3.0                3.0                 NaN       8     0.500    1271.899   0.537            0.554      2493.836             -0.187               0.806                  0.101
+      0.70               3.0                3.0                 NaN       4     0.750    1017.167   0.610            0.492      1383.073              0.470               0.811                  0.083
+      0.75               3.0                3.0                 NaN       2     0.500      86.234   0.329            0.190       635.388              0.470              -0.530                  0.053
+      0.80               3.0                3.0                 NaN       1     0.000      -2.094  -0.369           -0.137        29.429                NaN              -0.530                  0.038
+      0.85               3.0                3.0                 NaN       1     0.000      -2.094  -0.369           -0.369        29.429                NaN              -0.530                  0.038
+CHOSEN (best smoothed Sharpe): row 7; raw best Sharpe row 8; best in first half row 1; best in second half row 5
+
+=== SENSITIVITY: close-based efficiency ratio target (older definition) ===
+ er_target  initial_stop_atr  trailing_stop_atr  time_stop_sessions  trades  win_rate  annual_pnl  sharpe  sharpe_smoothed  max_drawdown  sharpe_first_half  sharpe_second_half  mean_markets_in_trade
+      0.30               3.0                3.0                 NaN    4310     0.359   12537.843   0.002            0.002  17971082.916              0.298               0.001                 30.458
+      0.35               3.0                3.0                 NaN    3678     0.362   13809.062   0.002            0.002  17379109.841              0.376               0.001                 26.199
+      0.40               3.0                3.0                 NaN    3164     0.360   10592.627   0.001            0.125  19929682.386              0.325               0.001                 22.460
+      0.45               3.0                3.0                 NaN    2611     0.371   12055.534   0.371            0.269     83590.276              0.348               0.394                 18.714
+      0.50               3.0                3.0                 NaN    2068     0.373   12170.171   0.435            0.456     61773.082              0.440               0.431                 14.838
+      0.55               3.0                3.0                 NaN    1583     0.380   13382.573   0.562            0.550     41473.380              0.700               0.431                 11.601
+      0.60               3.0                3.0                 NaN    1154     0.394   12851.283   0.653            0.622     37253.366              0.656               0.655                  8.533
+      0.65               3.0                3.0                 NaN     822     0.391   10404.521   0.650            0.626     23761.056              0.674               0.637                  6.126
+      0.70               3.0                3.0                 NaN     544     0.414    7099.604   0.576            0.645     18909.521              0.621               0.552                  4.141
+      0.75               3.0                3.0                 NaN     339     0.428    6676.273   0.711            0.687     10829.202              0.617               0.803                  2.806
+      0.80               3.0                3.0                 NaN     217     0.447    5136.162   0.776            0.708      7818.666              0.828               0.746                  1.927
+      0.85               3.0                3.0                 NaN     128     0.406    2889.268   0.638            0.707      7649.941              0.650               0.644                  1.269
+CHOSEN (best smoothed Sharpe): row 10; raw best Sharpe row 10; best in first half row 10; best in second half row 9
+
+=== STEP 2: initial stop in ATR (efficiency ratio target 0.65) ===
+ er_target  initial_stop_atr  trailing_stop_atr  time_stop_sessions  trades  win_rate  annual_pnl  sharpe  sharpe_smoothed  max_drawdown  sharpe_first_half  sharpe_second_half  mean_markets_in_trade
+      0.65               1.0                3.0                 NaN      10     0.400    1377.182   0.586            0.572      2107.470              0.090               0.837                  0.100
+      0.65               1.5                3.0                 NaN       9     0.444    1313.123   0.558            0.570      2107.470             -0.172               0.830                  0.099
+      0.65               2.0                3.0                 NaN       8     0.500    1332.887   0.565            0.557      2107.470             -0.018               0.822                  0.099
+      0.65               2.5                3.0                 NaN       8     0.500    1293.138   0.547            0.550      2195.388             -0.143               0.814                  0.101
+      0.65               3.0                3.0                 NaN       8     0.500    1271.899   0.537            0.537      2493.836             -0.187               0.806                  0.101
+      0.65               4.0                3.0                 NaN       8     0.500    1250.549   0.526            0.526      2793.836             -0.187               0.790                  0.101
+      0.65               5.0                3.0                 NaN       8     0.500    1229.199   0.515            0.514      3093.836             -0.187               0.773                  0.101
+      0.65               6.0                3.0                 NaN       8     0.500    1207.849   0.502            0.511      3393.836             -0.187               0.755                  0.101
+      0.65               8.0                3.0                 NaN       8     0.500    1233.636   0.517            0.510      3031.485             -0.187               0.777                  0.101
+CHOSEN (best smoothed Sharpe): row 0; raw best Sharpe row 0; best in first half row 0; best in second half row 0
+
+=== STEP 3: trailing stop in ATR from the best close (target 0.65, initial stop 1.0); the last row is no trailing stop ===
+ er_target  initial_stop_atr  trailing_stop_atr  time_stop_sessions  trades  win_rate  annual_pnl  sharpe  sharpe_smoothed  max_drawdown  sharpe_first_half  sharpe_second_half  mean_markets_in_trade
+      0.65               1.0                1.5                 NaN      12     0.333     396.794   0.401            0.450      1322.909             -0.248               0.656                  0.039
+      0.65               1.0                2.0                 NaN      12     0.333     515.095   0.499            0.497      1390.717             -0.196               0.793                  0.064
+      0.65               1.0                2.5                 NaN      10     0.400    1387.890   0.591            0.558      2107.470              0.123               0.839                  0.073
+      0.65               1.0                3.0                 NaN      10     0.400    1377.182   0.586            0.585      2107.470              0.090               0.837                  0.100
+      0.65               1.0                4.0                 NaN      10     0.400    1357.993   0.577            0.577      2107.470              0.027               0.833                  0.118
+      0.65               1.0                5.0                 NaN      10     0.400    1338.640   0.569            0.568      2107.470             -0.033               0.829                  0.123
+      0.65               1.0                6.0                 NaN      10     0.400    1316.739   0.559            0.556      2133.059             -0.090               0.823                  0.125
+      0.65               1.0                8.0                 NaN      10     0.400    1274.590   0.540            0.529      2499.786             -0.191               0.813                  0.136
+      0.65               1.0                NaN                 NaN      10     0.300    1162.731   0.486            0.513      3485.307             -0.418               0.780                  0.734
+CHOSEN (best smoothed Sharpe): row 3; raw best Sharpe row 2; best in first half row 2; best in second half row 2
+
+=== STEP 4: time stop in sessions (target 0.65, initial 1.0, trailing 3.0); the last row is no time stop ===
+ er_target  initial_stop_atr  trailing_stop_atr  time_stop_sessions  trades  win_rate  annual_pnl  sharpe  sharpe_smoothed  max_drawdown  sharpe_first_half  sharpe_second_half  mean_markets_in_trade
+      0.65               1.0                3.0                10.0      10       0.4    1117.076   0.489            0.505       2107.47             -0.338               0.738                  0.017
+      0.65               1.0                3.0                15.0      10       0.4    1211.087   0.521            0.517       2107.47             -0.207               0.772                  0.024
+      0.65               1.0                3.0                20.0      10       0.4    1266.927   0.543            0.540       2107.47             -0.199               0.805                  0.031
+      0.65               1.0                3.0                30.0      10       0.4    1295.666   0.555            0.563       2107.47             -0.058               0.808                  0.045
+      0.65               1.0                3.0                40.0      10       0.4    1381.127   0.591            0.577       2107.47              0.157               0.836                  0.059
+      0.65               1.0                3.0                60.0      10       0.4    1377.166   0.586            0.587       2107.47              0.090               0.837                  0.078
+      0.65               1.0                3.0                90.0      10       0.4    1377.166   0.586            0.586       2107.47              0.090               0.837                  0.087
+      0.65               1.0                3.0               120.0      10       0.4    1377.180   0.586            0.586       2107.47              0.090               0.837                  0.096
+      0.65               1.0                3.0                 NaN      10       0.4    1377.182   0.586            0.586       2107.47              0.090               0.837                  0.100
+CHOSEN (best smoothed Sharpe): row 5; raw best Sharpe row 4; best in first half row 4; best in second half row 8
+
+FINAL PARAMETERS: efficiency ratio target 0.65; initial stop 1.0 ATR; trailing stop 3.0 ATR; time stop 60 sessions
+
+=== FINAL BOOK at the reference budget (0.10 percent per market) ===
+{'er_target': 0.65, 'initial_stop_atr': 1.0, 'trailing_stop_atr': 3.0, 'time_stop_sessions': 60.0, 'trades': 10.0, 'win_rate': 0.4, 'annual_pnl': 1377.166, 'sharpe': 0.586, 'max_drawdown': 2107.47, 'annual_over_drawdown': 0.653, 'sharpe_first_half': 0.09, 'sharpe_second_half': 0.837, 'mean_markets_in_trade': 0.078}
+average trade 6.45 ATR, winners average 17.53 ATR, losers -0.93 ATR, average 27.6 sessions; exits: {'stop': 8, 'time': 2}; most markets in trade at once 3
+before optimization (starting values): annual 1483, Sharpe 0.52, max drawdown 3495
+
+by calendar year (reference budget)
+      pnl_dollars  max_drawdown_inside_year  mean_markets_in_trade
+2007          0.0                       0.0                    0.0
+2008          0.0                       0.0                    0.0
+2009       -330.0                     330.0                    0.0
+2010        563.0                     330.0                    0.0
+2011        692.0                     565.0                    0.0
+2012       -660.0                     660.0                    0.0
+2013          0.0                       0.0                    0.0
+2014          0.0                       0.0                    0.0
+2015        -15.0                      15.0                    0.0
+2016        -15.0                      15.0                    0.0
+2017          0.0                       0.0                    0.0
+2018       -330.0                     330.0                    0.0
+2019          0.0                       0.0                    0.0
+2020      19445.0                    2107.0                    1.0
+2021          0.0                       0.0                    0.0
+
+by market, sorted by profit (reference budget)
+                      group  pnl_dollars  share_of_total_profit_pct  trades  share_of_sessions_in_trade price_path_from
+ZQ                 us rates     12539.46                      64.80     1.0                        0.02              ZQ
+SR1                us rates      4790.22                      24.75     1.0                        0.01             SR1
+SR3                us rates      2115.51                      10.93     1.0                        0.01             SR3
+EBM     foreign commodities       595.84                       3.08     4.0                        0.02             EBM
+ZL                   grains         0.00                       0.00     0.0                        0.00              ZL
+ZM                   grains         0.00                       0.00     0.0                        0.00              ZM
+NG                   energy         0.00                       0.00     0.0                        0.00              NG
+ZS                   grains         0.00                       0.00     0.0                        0.00              ZS
+BZ                   energy         0.00                       0.00     0.0                        0.00              BZ
+RB                   energy         0.00                       0.00     0.0                        0.00              RB
+CT                    softs         0.00                       0.00     0.0                        0.00              CT
+C       foreign commodities         0.00                       0.00     0.0                        0.00               C
+SB                    softs         0.00                       0.00     0.0                        0.00              SB
+RM      foreign commodities         0.00                       0.00     0.0                        0.00              RM
+HE                    meats         0.00                       0.00     0.0                        0.00              HE
+CL                   energy         0.00                       0.00     0.0                        0.00              CL
+ZW                   grains         0.00                       0.00     0.0                        0.00              ZW
+KE                   grains         0.00                       0.00     0.0                        0.00              KE
+ZC                   grains         0.00                       0.00     0.0                        0.00              ZC
+HG                   metals         0.00                       0.00     0.0                        0.00              HG
+SI                   metals         0.00                       0.00     0.0                        0.00              SI
+PL                   metals         0.00                       0.00     0.0                        0.00              PL
+LE                    meats         0.00                       0.00     0.0                        0.00              LE
+GC                   metals         0.00                       0.00     0.0                        0.00              GC
+A6               currencies         0.00                       0.00     0.0                        0.00              A6
+B6               currencies         0.00                       0.00     0.0                        0.00              B6
+AD               currencies         0.00                       0.00     0.0                        0.00              AD
+ZN                 us rates         0.00                       0.00     0.0                        0.00              ZN
+E1               currencies         0.00                       0.00     0.0                        0.00              E1
+DX               currencies         0.00                       0.00     0.0                        0.00              DX
+US                 us rates         0.00                       0.00     0.0                        0.00              US
+E6               currencies         0.00                       0.00     0.0                        0.00              E6
+J1               currencies         0.00                       0.00     0.0                        0.00              J1
+MP               currencies         0.00                       0.00     0.0                        0.00              MP
+N6               currencies         0.00                       0.00     0.0                        0.00              N6
+NQ            stock indexes         0.00                       0.00     0.0                        0.00              NQ
+RTY           stock indexes         0.00                       0.00     0.0                        0.00             RTY
+UB                 us rates         0.00                       0.00     0.0                        0.00              UB
+TN                 us rates         0.00                       0.00     0.0                        0.00              TN
+ZF                 us rates         0.00                       0.00     0.0                        0.00              ZF
+YM            stock indexes         0.00                       0.00     0.0                        0.00              YM
+ES            stock indexes         0.00                       0.00     0.0                        0.00              ES
+ZT                 us rates         0.00                       0.00     0.0                        0.00              ZT
+FESX  foreign stock indexes         0.00                       0.00     0.0                        0.00            FESX
+G             foreign bonds         0.00                       0.00     0.0                        0.00               G
+FGBL          foreign bonds         0.00                       0.00     0.0                        0.00            FGBL
+FBTP          foreign bonds         0.00                       0.00     0.0                        0.00            FBTP
+ER      foreign short rates         0.00                       0.00     0.0                        0.00              ER
+SO3     foreign short rates       -29.66                      -0.15     1.0                        0.02               L
+VX               volatility      -330.00                      -1.71     1.0                        0.00              VX
+BR               currencies      -330.00                      -1.71     1.0                        0.00              BR
+
+by market group
+                       markets  pnl_dollars  trades  share_of_total_profit_pct
+group                                                                         
+currencies                  10       -330.0     1.0                       -1.7
+energy                       4          0.0     0.0                        0.0
+foreign bonds                3          0.0     0.0                        0.0
+foreign commodities          3        595.8     4.0                        3.1
+foreign short rates          2        -29.7     1.0                       -0.2
+foreign stock indexes        1          0.0     0.0                        0.0
+grains                       6          0.0     0.0                        0.0
+meats                        2          0.0     0.0                        0.0
+metals                       4          0.0     0.0                        0.0
+softs                        2          0.0     0.0                        0.0
+stock indexes                4          0.0     0.0                        0.0
+us rates                     9      19445.2     3.0                      100.5
+volatility                   1       -330.0     1.0                       -1.7
+
+short-rate markets ['ZQ', 'SR1', 'SR3', 'ER', 'SO3']: 19416 dollars = 100.3 percent of profit; fed funds alone 64.8 percent
+book without fed funds (ZQ): annual 485, Sharpe 0.54, max drawdown 1585
+book without all short rates: annual -5, Sharpe -0.01, max drawdown 1555
+the earlier 44 markets only: annual 1337, Sharpe 0.57, max drawdown 2107
+the 7 added European markets only ['FGBL', 'FBTP', 'EBM', 'FESX', 'G', 'ER', 'SO3']: annual 40, Sharpe 0.14, max drawdown 1255
+
+=== final book: profit and drawdown by budget per market ===
+ budget_percent_per_market  annual_pnl  annual_pnl_pct_of_account  historical_max_drawdown  historical_max_dd_pct  resampled_median_dd  resampled_95th_dd  resampled_95th_dd_pct  resampled_99th_dd  summed_budget_when_busiest_pct  mean_summed_budget_pct
+                      0.05      688.58                       0.23                  1053.74                   0.35              1053.74            1391.39                   0.46            1882.41                            0.15                    0.00
+                      0.10     1377.17                       0.46                  2107.47                   0.70              2107.47            2782.78                   0.93            3764.81                            0.30                    0.01
+                      0.15     2065.75                       0.69                  3161.21                   1.05              3161.21            4174.17                   1.39            5647.22                            0.45                    0.01
+                      0.17     2341.18                       0.78                  3582.70                   1.19              3582.70            4730.72                   1.58            6400.18                            0.51                    0.01
+                      0.20     2754.33                       0.92                  4214.94                   1.40              4214.94            5565.55                   1.86            7529.63                            0.60                    0.02
+                      0.25     3442.91                       1.15                  5268.68                   1.76              5268.68            6956.94                   2.32            9412.03                            0.75                    0.02
+                      0.30     4131.50                       1.38                  6322.41                   2.11              6322.41            8348.33                   2.78           11294.44                            0.90                    0.02
+budget per market that keeps the 95th-percentile resampled drawdown at 90,000: 3.234 percent; the historical maximum at 90,000: 4.271 percent
+budget per market that keeps the 95th-percentile resampled drawdown at 100,000: 3.594 percent; the historical maximum at 100,000: 4.745 percent
+
+DONE in 2 seconds

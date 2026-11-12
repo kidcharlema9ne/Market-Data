@@ -1,0 +1,2 @@
+step,er_target,initial_stop_atr,trailing_stop_atr,time_stop_sessions,trades,win_rate,annual_pnl,sharpe,max_drawdown,annual_over_drawdown,sharpe_first_half,sharpe_second_half,mean_markets_in_trade
+starting values,0.6,3.0,3.0,,10,0.4,1483.0477242373167,0.5157610158489956,3495.2733125856066,0.42430093203219105,-0.15539749916959208,0.7739642685423374,0.10787913018921208
