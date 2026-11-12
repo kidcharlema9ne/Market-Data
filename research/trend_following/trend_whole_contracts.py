@@ -13,14 +13,16 @@ Instrument rules (Entry 101, Michael 12 Nov 2026):
 - Smallest contract that exists: micro wherever CME lists one (ratio to the full contract in MICRO_RATIO, from CME specifications, PROVISIONAL until checked at the broker), otherwise full size.
 - If ONE contract of that size is above the CAP (0.5 percent of the account in 20-day ATR is Michael's rule; 0.35 and 0.25 are also tested, using the 2026-11-06 ATR in contract_size_atr20.csv),
   the market is traded through an ETF stand-in if a US-listed ETF exists (ETF_AVAILABLE, the pairings of etf_cap_standins.py, PROVISIONAL), otherwise it is LEFT OUT.
-- Futures: contracts = max(1, round(budget dollars / (ATR at the signal day x dollars per point))). A market whose single contract is bigger than the budget is still traded at one contract, so its
-  real risk is above the budget. The count is fixed at entry (no resizing).
+- Futures: contracts = max(1, round(budget dollars / (ATR as a fraction of price at the signal day x the value of ONE contract at TODAY'S price))). A market whose single contract is bigger than
+  the budget is still traded at one contract, so its real risk is above the budget. The count is fixed at entry (no resizing). Profit and loss = contracts x today's contract value x the percent move.
+  So this is the portfolio as it would be built at today's prices (Entry 101's basis), tested on the percent moves of 2008 to 2021.
 - ETF stand-in: dollars sized so the position's own 20-day ATR equals the budget. The ETF is modelled as moving with the futures percent moves (so the maths equals fractional sizing; real ETFs
   such as BNO, UGA, VXX lose to futures roll costs and tracking error, which is NOT modelled). Cash used = position dollars; shorts are counted the same as longs.
 - Futures margin is NOT modelled; gross notional is reported instead.
 
-Known approximation: the archive is ratio back-adjusted, so old adjusted prices are not the real historical price levels; the ATR in dollars per contract in early years (and so the contract counts and
-the effect of the one-contract floor) is approximate for markets with large roll adjustments. Dollars per point for euro and sterling contracts use today's exchange rate for all years.
+Why today's prices and not the archive's old prices: the archive is ratio back-adjusted, so old adjusted prices are not real historical price levels, and for markets with heavy roll costs the gap is
+enormous (a first run that converted adjusted points to dollars made one micro natural gas contract carry 21 times its budget and 54 percent of all profit; that run was discarded). Percent moves are
+unaffected by the adjustment, so only percent moves are used. Not modelled: futures margin, commissions beyond the 0.05 ATR cost, ETF tracking error and roll drag, euro and sterling exchange rates over time.
 """
 import os
 import sys
@@ -40,7 +42,7 @@ MICRO_RATIO = {"ZW": 0.1, "ZC": 0.1, "ZS": 0.1, "ZL": 0.1, "ZM": 0.1, "NG": 0.1,
 ETF_NAME = {"ZT": "SHY", "ZF": "IEI", "ZN": "IEF", "TN": "IEF", "US": "TLT", "UB": "EDV", "FGBL": "BWX", "FBTP": "BWX", "G": "BWX", "ES": "SPY", "NQ": "QQQ", "RTY": "IWM",
             "YM": "DIA", "FESX": "FEZ", "E6": "FXE", "E1": "FXF", "B6": "FXB", "A6": "FXA", "AD": "FXC", "J1": "FXY", "DX": "UUP", "VX": "VXX", "NG": "UNG", "RB": "UGA",
             "BZ": "BNO", "CL": "USO", "ZC": "CORN", "ZS": "SOYB", "ZW": "WEAT", "SB": "CANE", "CT": "BAL", "HG": "CPER", "GC": "GLD", "SI": "SLV", "PL": "PPLT", "C": "COCO (London cocoa ETC)"}
-CAPS = [0.5, 0.35, 0.25]                      # percent of the account: largest one-contract 20-day ATR a market may have before it must use an ETF (or be left out)
+CAPS = [0.5, 0.35, 0.25, 0.20, 0.15]                      # percent of the account: largest one-contract 20-day ATR a market may have before it must use an ETF (or be left out)
 TRAILS = [5.0, 8.0]
 BUDGETS = [0.05, 0.075, 0.10, 0.125, 0.15, 0.20, 0.25, 0.30]   # percent of the account, 20-day ATR per market
 UNIVERSES = {"all markets": [], "without fed funds": ["ZQ"]}
@@ -58,7 +60,7 @@ def build_inst(cap):
         full_mult = float(size.loc[s, "dollars_per_point_usd"])
         pct = 100 * float(size.loc[s, "atr20_usd_per_contract"]) * ratio / ACCOUNT
         if pct <= cap:
-            vehicle, unit = "futures", full_mult * ratio
+            vehicle, unit = "futures", float(size.loc[s, "contract_value_usd"]) * ratio
             label = f"{s} micro (x{ratio:g} of full size)" if ratio < 1 else f"{s} full size"
         elif s in ETF_NAME:
             vehicle, unit, label = "ETF", None, f"{ETF_NAME[s]} ETF stand-in"
@@ -77,7 +79,7 @@ print("  " + ", ".join(f"{s} {INST[0.5][s]['one_unit_pct']:.3f}" for s in syms))
 
 
 def run_whole(m, trail, risk, unit, init_atr=4.0, er_min=0.60):
-    """Copy of run_market2 for one system; unit = dollars per point of the traded contract (None = fractional / ETF sizing)."""
+    """Copy of run_market2 for one system; unit = value in dollars of ONE traded contract at today's price (None = fractional / ETF sizing)."""
     o, h, l, c, atr = m.o, m.h, m.l, m.c, m.atr
     er, dr = m.er["close"], m.dir
     n = len(c)
@@ -86,7 +88,7 @@ def run_whole(m, trail, risk, unit, init_atr=4.0, er_min=0.60):
     notional = [0.0] * n
     trades = []
     side = pending = 0
-    pend_atr = atr0 = stop = stop0 = best = prev = entry = shares = tpnl = 0.0
+    pend_atr = pend_px = atr0 = stop = stop0 = best = prev = entry = shares = tpnl = 0.0
     ncon = 0.0
     eff = 1.0
     start = 0
@@ -94,8 +96,8 @@ def run_whole(m, trail, risk, unit, init_atr=4.0, er_min=0.60):
         if pending:
             side, atr0, entry = pending, pend_atr, o[i]
             if unit:
-                ncon = max(1, int(round(risk / (atr0 * unit))))
-                shares = ncon * unit
+                ncon = max(1, int(round(risk / (atr0 / pend_px * unit))))
+                shares = ncon * unit / entry
             else:
                 shares = risk / atr0
                 ncon = shares
@@ -153,7 +155,7 @@ def run_whole(m, trail, risk, unit, init_atr=4.0, er_min=0.60):
             e, a = er[i], atr[i]
             if e == e and a == a:
                 if a > 1e-5 * c[i] and e >= er_min and dr[i] != 0:
-                    pending, pend_atr = dr[i], a
+                    pending, pend_atr, pend_px = dr[i], a, c[i]
     return pnl, inpos, notional, trades
 
 
