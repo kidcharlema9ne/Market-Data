@@ -1,0 +1,40 @@
+name: Trend following - exit and re-entry tests (trailing stops, ratio-fall exit, volatility exit, resizing)
+# trend_exit_tests.py: share of sessions with the 20-session close-based efficiency ratio at or above 0.60, per market, plus tick size and drift. Development years only.
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/trend-exit-tests-20261112']
+    paths:
+      - 'research/trend_following/trend_exit_tests.py'
+      - '.github/workflows/trend-exit-tests.yml'
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas numpy
+      - name: Fetch futures prices from R2
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python futures_data/fetch_futures_prices.py
+      - name: Exit and re-entry tests
+        run: |
+          mkdir -p research/trend_following/results_exit_tests
+          python research/trend_following/trend_exit_tests.py futures_prices.parquet futures_data/trend_universe.csv research/trend_following/portfolio_51_list.csv research/trend_following/results_exit_tests | tee research/trend_following/results_exit_tests/exit_tests_output.txt
+      - name: Save results on the branch
+        run: |
+          echo "workflow run ${{ github.run_id }}" > research/trend_following/results_exit_tests/RUN_ID.txt
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add research/trend_following/results_exit_tests
+          git commit -m "Exit and re-entry tests (workflow run ${{ github.run_id }})" || echo "nothing to commit"
+          git pull --rebase origin ${{ github.ref_name }} || true
+          git push origin HEAD:${{ github.ref_name }}
