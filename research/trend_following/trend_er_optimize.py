@@ -18,7 +18,7 @@ THE RULE (Michael, 12 Nov 2026: "no 20-day high or low entry, just the efficienc
 - Cost 0.05 ATR per side (declared, not measured).
 
 OPTIMIZATION (sequential, as Michael asked): efficiency ratio target first, then the initial stop, then the trailing stop, then the time stop. Each step holds the earlier
-steps at their chosen values. Starting values before a step is optimized: target 0.6, initial stop 3 ATR, trailing stop 3 ATR, no time stop.
+steps at their chosen values. Starting values before a step is optimized: target 0.30, initial stop 3 ATR, trailing stop 3 ATR, no time stop.
 Objective: Sharpe (annual profit over annual volatility of the daily book). To avoid picking a lone spike, the value chosen is the one whose average Sharpe with its two
 neighbours is highest; the raw best is shown beside it. Each table also shows the first half (before 2015) and second half (2015 on) so stability can be judged.
 Everything chosen here was chosen after looking at the development years, so it is a lead, not a rule.
@@ -189,7 +189,7 @@ def run_market(m, kind, er_min, init_atr, trail_atr, tmax, risk, want_trades=Fal
                 side = 0
         if side == 0 and i < n - 1:
             e, a = er[i], atr[i]
-            if e == e and a == a and e >= er_min and dr[i] != 0:
+            if e == e and a == a and a > 1e-5 * c[i] and e >= er_min and dr[i] != 0:
                 pending, pend_atr = dr[i], a
     return pnl, inpos, ntr, nwin, trades
 
@@ -245,8 +245,8 @@ def pick(sh):
 
 
 pd.set_option("display.width", 250, "display.max_rows", 500, "display.max_columns", 40)
-START = dict(kind="hl", er_min=0.6, init_atr=3.0, trail_atr=3.0, tmax=None)
-print(f"\nstarting values before any step: efficiency ratio target 0.6, initial stop 3 ATR, trailing stop 3 ATR, no time stop. Budget {REF} percent per market, annual profit in dollars at that budget.")
+START = dict(kind="hl", er_min=0.30, init_atr=3.0, trail_atr=3.0, tmax=None)
+print(f"\nstarting values before any step: efficiency ratio target 0.30 (high-low scale), initial stop 3 ATR, trailing stop 3 ATR, no time stop. Budget {REF} percent per market, annual profit in dollars at that budget.")
 base = evaluate(**START)
 print("starting point:", {k: round(v, 3) for k, v in base.items() if k in ("trades", "annual_pnl", "sharpe", "max_drawdown", "sharpe_first_half", "sharpe_second_half")})
 
@@ -273,11 +273,17 @@ def run_step(title, key, values, fixed, fname):
 
 
 # ---- step 1: efficiency ratio target
-ER_GRID = [0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85]
+# The high-low ratio (range over the sum of true ranges) lives between about 0.10 and 0.50 in practice (95th percentile 0.35), so the grid sits there; the first run used 0.30-0.85 and
+# produced almost no trades above 0.45 (invalid grid for this definition).
+ER_GRID = [0.20, 0.225, 0.25, 0.275, 0.30, 0.325, 0.35, 0.375, 0.40, 0.425, 0.45, 0.50]
+CL_GRID = [0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85]
 er_best, _ = run_step("STEP 1: efficiency ratio target (high-low version)", "er_min", ER_GRID, START, "step1_efficiency_ratio_target")
 fixed = dict(START, er_min=er_best)
 # ---- sensitivity: close-based efficiency ratio
-run_step("SENSITIVITY: close-based efficiency ratio target (older definition)", "er_min", ER_GRID, dict(START, kind="close"), "sensitivity_close_based_ratio")
+run_step("SENSITIVITY: close-based efficiency ratio target (older definition)", "er_min", CL_GRID, dict(START, kind="close", er_min=0.6), "sensitivity_close_based_ratio")
+_r, _M, _A, _T = evaluate("close", 0.30, 3.0, 3.0, None, detail=True)
+print("worst five trades of the close-based run at 0.30 (checking the blown-up drawdown):")
+print(_T.sort_values("pnl_dollars").head(5)[["symbol", "side", "entry_date", "exit_date", "shares", "atr_at_entry", "entry_price", "exit_price", "pnl_dollars", "pnl_in_atr"]].to_string(index=False))
 # ---- step 2: initial stop
 INIT_GRID = [1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 6.0, 8.0]
 init_best, _ = run_step(f"STEP 2: initial stop in ATR (efficiency ratio target {er_best})", "init_atr", INIT_GRID, fixed, "step2_initial_stop")
