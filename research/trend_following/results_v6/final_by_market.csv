@@ -1,52 +1,52 @@
 ,group,pnl_dollars,trades,share_of_sessions_in_trade,price_path_from,share_of_total_profit_pct
-GC,metals,-5832.567,5.0,0.054,GC,-3.949
-FESX,foreign stock indexes,-3926.678,3.0,0.02,FESX,-2.658
-ZT,us rates,-3705.316,4.0,0.056,ZT,-2.508
-HE,meats,-3214.08,4.0,0.056,HE,-2.176
-C,foreign commodities,-2926.509,7.0,0.092,C,-1.981
-RM,foreign commodities,-2630.546,2.0,0.018,RM,-1.781
-DX,currencies,-2264.056,3.0,0.058,DX,-1.533
-ES,stock indexes,-2037.851,5.0,0.061,ES,-1.38
-AD,currencies,-2002.492,2.0,0.03,AD,-1.356
-RB,energy,-1584.56,3.0,0.048,RB,-1.073
-LE,meats,-1530.0,1.0,0.001,LE,-1.036
-BR,currencies,-1530.0,1.0,0.005,BR,-1.036
-UB,us rates,-1530.0,1.0,0.001,UB,-1.036
-NG,energy,-1303.301,1.0,0.003,NG,-0.882
-CT,softs,-1182.764,2.0,0.021,CT,-0.801
-G,foreign bonds,-607.966,1.0,0.01,G,-0.412
-VX,volatility,-562.066,7.0,0.079,VX,-0.381
-PL,metals,-553.677,4.0,0.08,PL,-0.375
-ZM,grains,-171.178,3.0,0.055,ZM,-0.116
+BR,currencies,-1447.488,3.0,0.009,BR,-7.421
+VX,volatility,-780.0,1.0,0.0,VX,-3.999
+ZW,grains,0.0,0.0,0.0,ZW,0.0
+KE,grains,0.0,0.0,0.0,KE,0.0
+ZL,grains,0.0,0.0,0.0,ZL,0.0
+ZM,grains,0.0,0.0,0.0,ZM,0.0
+ZC,grains,0.0,0.0,0.0,ZC,0.0
+ZS,grains,0.0,0.0,0.0,ZS,0.0
+BZ,energy,0.0,0.0,0.0,BZ,0.0
+RB,energy,0.0,0.0,0.0,RB,0.0
+CT,softs,0.0,0.0,0.0,CT,0.0
+C,foreign commodities,0.0,0.0,0.0,C,0.0
+SB,softs,0.0,0.0,0.0,SB,0.0
+RM,foreign commodities,0.0,0.0,0.0,RM,0.0
+NG,energy,0.0,0.0,0.0,NG,0.0
+CL,energy,0.0,0.0,0.0,CL,0.0
+E6,currencies,0.0,0.0,0.0,E6,0.0
+LE,meats,0.0,0.0,0.0,LE,0.0
+PL,metals,0.0,0.0,0.0,PL,0.0
+SI,metals,0.0,0.0,0.0,SI,0.0
+A6,currencies,0.0,0.0,0.0,A6,0.0
+B6,currencies,0.0,0.0,0.0,B6,0.0
+HG,metals,0.0,0.0,0.0,HG,0.0
+GC,metals,0.0,0.0,0.0,GC,0.0
+N6,currencies,0.0,0.0,0.0,N6,0.0
+AD,currencies,0.0,0.0,0.0,AD,0.0
+MP,currencies,0.0,0.0,0.0,MP,0.0
+J1,currencies,0.0,0.0,0.0,J1,0.0
+DX,currencies,0.0,0.0,0.0,DX,0.0
+E1,currencies,0.0,0.0,0.0,E1,0.0
+US,us rates,0.0,0.0,0.0,US,0.0
+UB,us rates,0.0,0.0,0.0,UB,0.0
+FGBL,foreign bonds,0.0,0.0,0.0,FGBL,0.0
+ZN,us rates,0.0,0.0,0.0,ZN,0.0
+TN,us rates,0.0,0.0,0.0,TN,0.0
+ZF,us rates,0.0,0.0,0.0,ZF,0.0
+ZT,us rates,0.0,0.0,0.0,ZT,0.0
+NQ,stock indexes,0.0,0.0,0.0,NQ,0.0
+ES,stock indexes,0.0,0.0,0.0,ES,0.0
+YM,stock indexes,0.0,0.0,0.0,YM,0.0
+ER,foreign short rates,0.0,0.0,0.0,ER,0.0
 FBTP,foreign bonds,0.0,0.0,0.0,FBTP,0.0
-MP,currencies,562.935,2.0,0.061,MP,0.381
-ZF,us rates,613.431,1.0,0.034,ZF,0.415
-E6,currencies,944.143,3.0,0.071,E6,0.639
-E1,currencies,1263.854,5.0,0.089,E1,0.856
-ZW,grains,1357.94,4.0,0.076,ZW,0.919
-FGBL,foreign bonds,1506.696,3.0,0.069,FGBL,1.02
-US,us rates,2316.207,3.0,0.044,US,1.568
-SB,softs,2392.587,3.0,0.067,SB,1.62
-ZN,us rates,2403.834,2.0,0.036,ZN,1.627
-SI,metals,2652.943,5.0,0.086,SI,1.796
-KE,grains,2820.545,5.0,0.114,KE,1.909
-HG,metals,2825.365,4.0,0.118,HG,1.913
-J1,currencies,2950.945,3.0,0.097,J1,1.998
-TN,us rates,2981.203,2.0,0.035,TN,2.018
-SR3,us rates,3075.804,2.0,0.052,SR3,2.082
-ZC,grains,3394.496,1.0,0.028,ZC,2.298
-NQ,stock indexes,3682.439,5.0,0.105,NQ,2.493
-A6,currencies,3746.347,2.0,0.049,A6,2.536
-CL,energy,3761.624,3.0,0.049,CL,2.547
-SO3,foreign short rates,4041.136,7.0,0.127,L,2.736
-SR1,us rates,4455.416,2.0,0.025,SR1,3.016
-B6,currencies,4838.937,2.0,0.053,B6,3.276
-N6,currencies,5240.599,4.0,0.097,N6,3.548
-ZL,grains,5465.541,5.0,0.108,ZL,3.7
-EBM,foreign commodities,5666.659,5.0,0.094,EBM,3.836
-ZS,grains,6574.363,6.0,0.124,ZS,4.451
-RTY,stock indexes,8132.911,5.0,0.138,RTY,5.506
-BZ,energy,8723.985,2.0,0.056,BZ,5.906
-YM,stock indexes,12950.064,6.0,0.132,YM,8.767
-ER,foreign short rates,14403.049,10.0,0.214,ER,9.751
-ZQ,us rates,61063.219,29.0,0.631,ZQ,41.339
+FESX,foreign stock indexes,0.0,0.0,0.0,FESX,0.0
+RTY,stock indexes,0.0,0.0,0.0,RTY,0.0
+G,foreign bonds,0.0,0.0,0.0,G,0.0
+SO3,foreign short rates,0.0,0.0,0.0,L,0.0
+EBM,foreign commodities,426.605,2.0,0.018,EBM,2.187
+HE,meats,435.598,1.0,0.007,HE,2.233
+SR3,us rates,2275.072,1.0,0.014,SR3,11.663
+SR1,us rates,6056.902,1.0,0.014,SR1,31.051
+ZQ,us rates,12539.456,1.0,0.017,ZQ,64.285
