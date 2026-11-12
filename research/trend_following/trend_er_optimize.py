@@ -263,8 +263,8 @@ def pick(sh):
 
 
 pd.set_option("display.width", 250, "display.max_rows", 500, "display.max_columns", 40)
-START = dict(kind="atr", er_min=0.40, init_atr=3.0, trail_atr=("atr", 3.0), tmax=None)
-print(f"\nstarting values before any step: efficiency ratio (net close change over summed true ranges) target 0.40, initial stop 3 ATR, trailing stop 3 ATR from the best close, no time stop. Budget {REF} percent per market, annual profit in dollars at that budget.")
+START = dict(kind="close", er_min=0.55, init_atr=3.0, trail_atr=("atr", 3.0), tmax=None)
+print(f"\nstarting values before any step: efficiency ratio (Kaufman, closes only) target 0.55, initial stop 3 ATR, trailing stop 3 ATR from the best close, no time stop. Budget {REF} percent per market, annual profit in dollars at that budget.")
 base = evaluate(**START)
 print("starting point:", {k: round(v, 3) for k, v in base.items() if k in ("trades", "annual_pnl", "sharpe", "max_drawdown", "sharpe_first_half", "sharpe_second_half")})
 
@@ -292,8 +292,8 @@ def run_step(title, key, values, fixed, fname):
 
 # Michael (12 Nov 2026): a trailing stop is mandatory, no holding for hundreds of sessions, efficiency ratio expected in the 0.5-0.6 range for a 20-session window
 # (that range only makes sense for the close-based ratio: net close change over the sum of daily close changes), so the close-based ratio is now the primary version.
-ER_GRID = [0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70]
-CL_GRID = [0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80]
+CL_GRID = [0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80]
+ER_GRID = [0.15, 0.20, 0.25, 0.30, 0.35, 0.40]
 HL_GRID = [0.20, 0.25, 0.30, 0.35, 0.40, 0.45]
 
 
@@ -326,9 +326,9 @@ def run_step(title, key, values, fixed, fname, groups=None, drop_last_from_choic
 
 
 # ---- step 1: efficiency ratio target (close-based, primary)
-er_best, _ = run_step("STEP 1: efficiency ratio target (net close change over the sum of 20 true ranges)", "er_min", ER_GRID, START, "step1_efficiency_ratio_target")
+er_best, _ = run_step("STEP 1: efficiency ratio target (Kaufman, closes only, 20 sessions)", "er_min", CL_GRID, START, "step1_efficiency_ratio_target")
 fixed = dict(START, er_min=er_best)
-run_step("COMPARISON: Kaufman close-only ratio (net close change over the sum of daily close changes)", "er_min", CL_GRID, dict(START, kind="close", er_min=0.55), "comparison_close_only_ratio")
+run_step("COMPARISON: ATR-yardstick ratio (net close change over the sum of 20 true ranges; its scale tops out near 0.3, so 0.5 to 0.6 almost never occurs)", "er_min", ER_GRID, dict(START, kind="atr", er_min=0.25), "comparison_atr_yardstick_ratio")
 # ---- step 2: initial stop
 INIT_GRID = [1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 6.0, 8.0]
 init_best, _ = run_step(f"STEP 2: initial stop in ATR (efficiency ratio target {er_best}, trailing 3 ATR)", "init_atr", INIT_GRID, fixed, "step2_initial_stop")
