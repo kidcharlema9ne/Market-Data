@@ -88,9 +88,9 @@ for sym, src in mapping.items():
     if len(g) < 150:
         print(f"  skipped {sym}: only {len(g)} development sessions")
         continue
-    c = g["close"].to_numpy(float)
-    o = g["open"].fillna(g["close"]).to_numpy(float)
-    h, l = g["high"].to_numpy(float), g["low"].to_numpy(float)
+    c = g["close"].to_numpy(float).copy()
+    o = g["open"].fillna(g["close"]).to_numpy(float).copy()
+    h, l = g["high"].to_numpy(float).copy(), g["low"].to_numpy(float).copy()
     # unit glitch repair: a one-day close ratio near a power of ten (e.g. 98.5 -> 985.5) is a quoting change, not a move; rescale everything before it
     for k in range(1, len(c)):
         r = c[k] / c[k - 1]
