@@ -139,3 +139,8 @@ jobs:
           PYTHONPATH: .
           PF_MODE: none
         run: python -u research/canonical/portfolio_sim.py scan reports/events_refined.json reports/years reports/decl reports/feat reports/ret reports/dd reports/dv reports/pf
+      - name: Summary, 3 ATR initial then 4 ATR trailing stop, 252-session maximum (C50)
+        env:
+          PYTHONPATH: .
+          PF_MODE: trail
+        run: python -u research/canonical/portfolio_sim.py scan reports/events_refined.json reports/years reports/decl reports/feat reports/ret reports/dd reports/dv reports/pf
