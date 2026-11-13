@@ -40,6 +40,9 @@ before entry (dollars); atr20p / atr90p the same with each true range divided by
 C49 (13 Nov 2026, declared in docs/CANDIDATES.md before the run): ratio grid for the volatility gate.  PRIMARY skip if vol20 > k x vol90; SECONDARY (literal wording) skip if
 vol90 > k x vol20; k = 1.2 ... 2.0 step 0.1 (1.0 = Entry 98).  Flagged trades, Sharpe objective, out-of-era check (fit 2006-2010 -> apply 2011-2020 and back), random-skip check.
 
+C50 (13 Nov 2026, declared in docs/CANDIDATES.md before the run): exit mode PF_MODE=trail = 3 ATR initial stop, then a 4 ATR trailing stop below the highest high (stop = the higher of the
+two, never lowered, ATR fixed at entry), 252-session maximum hold, no 42-session exit.  Stage 1 stores it under row['tr'].
+
 Usage:  python portfolio_sim.py year YEAR --primary FILE --out FILE
         python portfolio_sim.py scan EVENTS.json YEAR_FOLDER DECLINE_FOLDER REGIME_FOLDER RETURNS_FOLDER DD_FOLDER DV_FOLDER PATH_FOLDER
         python portfolio_sim.py --selftest
@@ -117,11 +120,56 @@ def year_job(year, primary_path, out):
                 r['ns'] = {'ret_atr': nret, 'spy_atr': nspy, 'sess': nsess, 'why': nwhy, 'exit_date': dates[nk], 'exit_px': round(op + nret * atr, 6),
                            'days': [[dates[k], series[dates[k]][3] if dates[k] in series else None] for k in range(i, nk + 1)]}
                 last_exit = max(last_exit, dates[nk])
+            rt = sim_trail(dates, series, spy, e['entry'], ctx)
+            if rt is None:
+                r['tr'] = None
+            else:
+                tret, tspy, tsess, twhy = rt[:4]
+                tk = i + tsess - 1
+                r['tr'] = {'ret_atr': tret, 'spy_atr': tspy, 'sess': tsess, 'why': twhy, 'exit_date': dates[tk], 'exit_px': round(op + tret * atr, 6),
+                           'days': [[dates[k], series[dates[k]][3] if dates[k] in series else None] for k in range(i, tk + 1)]}
+                last_exit = max(last_exit, dates[tk])
             rows.append(r)
         spy_out = {d: spy[d][3] for d in dates if f'{year}-01-01' <= d <= last_exit and d in spy}
     Path(out).parent.mkdir(parents=True, exist_ok=True)
     Path(out).write_text(json.dumps({'year': year, 'rows': rows, 'spy': spy_out}))
     print(f'{year}: status {dict(Counter(r["status"] for r in rows))}; SPY closes {len(spy_out)}')
+
+
+INIT_K, TRAIL_K, MAXH_TRAIL = 3.0, 4.0, 252
+
+
+def sim_trail(dates, stock, spy, entry, ctx, init_k=INIT_K, trail_k=TRAIL_K, maxh=MAXH_TRAIL):
+    """C50: stop = max(entry open - init_k ATR, highest HIGH of earlier sessions (entry open counts first) - trail_k ATR), never lowered, ATR fixed at entry.
+    A session whose low touches the stop exits that session at the stop (at the open on a gap).  No stop by session maxh -> exit at that close ('time'); a series
+    that ends early closes at its last bar ('delist').  Returns [ret_atr, spy_atr, sessions, why] or None (path not complete / no SPY mark)."""
+    i, atr, op = ctx
+    if i + maxh - 1 >= len(dates):
+        return None
+    level, top = op - init_k * atr, op
+    hit = None
+    for kk in range(i, i + maxh):
+        d = dates[kk]
+        if d not in stock:
+            continue
+        o, h, l, c = stock[d]
+        level = max(level, top - trail_k * atr)
+        if l <= level:
+            gap = kk > i and o <= level
+            hit = (kk, o if gap else level, 'gap' if gap else 'stop')
+            break
+        top = max(top, h)
+    if hit is not None:
+        kk, px, why = hit
+    else:
+        kk = next((x for x in range(i + maxh - 1, i - 1, -1) if dates[x] in stock), None)
+        if kk is None:
+            return None
+        px, why = stock[dates[kk]][3], ('time' if kk == i + maxh - 1 else 'delist')
+    ed = dates[kk]
+    if ed not in spy or entry not in spy:
+        return None
+    return [round((px - op) / atr, 4), round((spy[ed][3] / spy[entry][0] - 1) * op / atr, 4), kk - i + 1, why]
 
 
 def hist_vols(dates, series, i):
@@ -359,6 +407,11 @@ def build_trades(cohort, sim, dv, add, mode='stop'):
             if src is None:
                 miss['no_nostop_path'] += 1
                 continue
+        elif mode == 'trail':
+            src = s.get('tr')
+            if src is None:
+                miss['no_trail_path'] += 1
+                continue
         t.update({'atr': s['atr'], 'open': s['open']})
         t.update({f: src[f] for f in ('ret_atr', 'spy_atr', 'sess', 'why', 'exit_date', 'exit_px', 'days')})
         out.append(t)
@@ -367,7 +420,7 @@ def build_trades(cohort, sim, dv, add, mode='stop'):
 
 
 def run_scan(cohort, sim, spy, dv, mode='stop'):
-    print(f'##### EXIT MODE: {"NO STOP (plain 42-session hold)" if mode == "none" else "3 ATR fixed stop + 42-session time exit"} #####')
+    print(f'##### EXIT MODE: {"NO STOP (plain 42-session hold)" if mode == "none" else "3 ATR initial stop, then 4 ATR trailing stop below the highest high, 252-session maximum hold (C50)" if mode == "trail" else "3 ATR fixed stop + 42-session time exit"} #####')
     add = add_on_u()
     print('add-ons in U (Entry 78, Entry 67 model): ' + ', '.join(f'{k} {v:+.2f}' for k, v in add.items()) +
           f'; all four on {1 + sum(add.values()):.2f}U; 1U = {BASE_PCT}% of equity per 1 ATR here')
@@ -410,7 +463,7 @@ def run_scan(cohort, sim, spy, dv, mode='stop'):
         kw = dict(kw)
         curve, recs, cnt = simulate(kw.pop('sel', trades), cal_run, **kw)
         res[name] = (curve, recs, cnt, curve_stats(curve, START))
-    print('\n=== 1. Portfolio, all variants ($100,000 start; 3 ATR stop; 42-session exit) ===')
+    print('\n=== 1. Portfolio, all variants ($100,000 start; exit as in the mode header above) ===')
     for name, _ in variants:
         curve, recs, cnt, st = res[name]
         inv = [c[2] / c[1] for c in curve]
@@ -537,7 +590,7 @@ def era_cal(cal_run, trades_era):
 
 def section_grid(flagged, cal_run, res):
     import random
-    print('\n=== 7. C49 ratio grid on the historical-volatility gate (flagged trades, 3 ATR stop, 42 sessions) ===')
+    print('\n=== 7. C49 ratio grid on the historical-volatility gate (flagged trades; exit as in the mode header) ===')
     ex_ = lambda g: statistics.fmean(t['ret_atr'] - t['spy_atr'] for t in g) if g else float('nan')
     base_full = res['FLAGGED only'][3]
     tables = {}
@@ -792,7 +845,34 @@ def selftest():
     assert a20 > a90 > 0 and p20 > p90 > 0, (a20, a90, p20, p90)
     assert hist_atrs(ds, bars, 60)[0] is not None and hist_atrs(ds, bars, 60)[1] is None
     assert hist_atrs(ds, {d: b for d, b in bars.items() if d != ds[90]}, 95)[0] is None
-    print('portfolio_sim selftest ok: ATR reading, volatility reading, sizing, entry/exit costs, stop, cash cap, volume cap, flat sizing, drawdown, calendar years')
+    # C50 trailing exit: entry open 100, ATR 2 -> initial stop 94; highs rise to 120 -> trail = 120 - 8 = 112; a later low of 111 exits at 112
+    ds2 = [f'e{k:03d}' for k in range(300)]
+    st2 = {ds2[k]: (100.0, 101.0, 99.5, 100.0) for k in range(300)}
+    st2[ds2[5]] = (110.0, 120.0, 109.0, 118.0)
+    st2[ds2[6]] = (118.0, 119.0, 117.0, 118.0)
+    st2[ds2[7]] = (116.0, 117.0, 111.0, 112.0)
+    spy2 = {d: (100.0, 100.0, 100.0, 100.0) for d in ds2}
+    r = sim_trail(ds2, st2, spy2, ds2[0], (0, 2.0, 100.0))
+    assert r[3] == 'stop' and r[2] == 8 and abs(r[0] - (112.0 - 100.0) / 2.0) < 1e-9, r
+    # initial 3 ATR stop first: low 93 on session 3 exits at 94
+    st3 = dict(st2)
+    st3 = {d: b for d, b in st3.items()}
+    st3[ds2[5]] = (100.0, 101.0, 99.5, 100.0)
+    st3[ds2[7]] = (100.0, 101.0, 99.5, 100.0)
+    st3[ds2[2]] = (99.0, 99.5, 93.0, 94.0)
+    r3 = sim_trail(ds2, st3, spy2, ds2[0], (0, 2.0, 100.0))
+    assert r3[3] == 'stop' and r3[2] == 3 and abs(r3[0] + 3.0) < 1e-9, r3
+    # gap: opens below the stop on a later session -> exit at the open
+    st4 = {d: (100.0, 101.0, 99.5, 100.0) for d in ds2}
+    st4[ds2[4]] = (90.0, 91.0, 88.0, 90.0)
+    r4 = sim_trail(ds2, st4, spy2, ds2[0], (0, 2.0, 100.0))
+    assert r4[3] == 'gap' and abs(r4[0] + 5.0) < 1e-9, r4
+    # no stop in 252 sessions -> time exit at session 252; too little history -> None
+    st5 = {d: (100.0, 101.0, 99.5, 100.5) for d in ds2}
+    r5 = sim_trail(ds2, st5, spy2, ds2[0], (0, 2.0, 100.0))
+    assert r5[3] == 'time' and r5[2] == 252, r5
+    assert sim_trail(ds2[:200], {d: st5[d] for d in ds2[:200]}, {d: spy2[d] for d in ds2[:200]}, ds2[0], (0, 2.0, 100.0)) is None
+    print('portfolio_sim selftest ok: trailing exit, ATR reading, volatility reading, sizing, entry/exit costs, stop, cash cap, volume cap, flat sizing, drawdown, calendar years')
 
 
 if __name__ == '__main__':
