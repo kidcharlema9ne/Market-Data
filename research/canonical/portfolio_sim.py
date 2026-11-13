@@ -37,6 +37,9 @@ Stage 1 now loads 100 earlier sessions (was 25) so the 90-day window exists in J
 C48 (13 Nov 2026, declared in docs/CANDIDATES.md before the run): the same gate built on ATR.  atr20 / atr90 = mean true range of the 20 / 90 sessions ending at the close
 before entry (dollars); atr20p / atr90p the same with each true range divided by the previous close.  Skip if atr20 > atr90 (raw) or atr20p > atr90p (percent of price).
 
+C49 (13 Nov 2026, declared in docs/CANDIDATES.md before the run): ratio grid for the volatility gate.  PRIMARY skip if vol20 > k x vol90; SECONDARY (literal wording) skip if
+vol90 > k x vol20; k = 1.2 ... 2.0 step 0.1 (1.0 = Entry 98).  Flagged trades, Sharpe objective, out-of-era check (fit 2006-2010 -> apply 2011-2020 and back), random-skip check.
+
 Usage:  python portfolio_sim.py year YEAR --primary FILE --out FILE
         python portfolio_sim.py scan EVENTS.json YEAR_FOLDER DECLINE_FOLDER REGIME_FOLDER RETURNS_FOLDER DD_FOLDER DV_FOLDER PATH_FOLDER
         python portfolio_sim.py --selftest
@@ -496,11 +499,111 @@ def run_scan(cohort, sim, spy, dv, mode='stop'):
     print(f'  months up {sum(x > 0 for x, _ in mr)} of {len(mr)}')
     section5(recs, res, bs)
     section_vol(trades, flagged, skip, res, bs, cal_run)
+    section_grid(flagged, cal_run, res)
     for key in ('atr', 'atrp'):
         lab, sk_f = gates[key]
         section_vol(trades, flagged, sk_f, res, bs, cal_run, label=lab, gate_name=f'FLAGGED + {lab}', other=skip, other_label='historical-volatility gate (Entry 98)')
     print('\nPOST HOC; sizes and flags are Claude\'s Entry 78 judgment on post hoc leads; costs are 0.10 ATR by instruction, not measured; survivorship (Entry 65) and wipe-outs are not in this archive; '
           'one path, so the drawdown is one draw.')
+
+
+GRID = (1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0)
+GRID_ERAS = (('2006-2010', lambda e: e < '2011-01-01'), ('2011-2020', lambda e: e >= '2011-01-01'))
+
+
+def ratio_skip(direction, k):
+    def f(t):
+        a, b = t.get('vol20'), t.get('vol90')
+        if a is None or b is None:
+            return False
+        return a > k * b if direction == 'recent' else b > k * a
+    return f
+
+
+def grid_run(sel, cal):
+    """Simulate `sel` over the calendar `cal` (truncated by the caller); returns stats or None if nothing traded."""
+    if not sel:
+        return None
+    curve, recs, cnt = simulate(sel, cal)
+    return curve_stats(curve, START), recs, curve
+
+
+def era_cal(cal_run, trades_era):
+    d0 = min(t['entry'] for t in trades_era)
+    d1 = max(t['exit_date'] for t in trades_era)
+    prior = [d for d in cal_run if d < d0]
+    return [d for d in cal_run if (prior[-1] if prior else cal_run[0]) <= d <= d1]
+
+
+def section_grid(flagged, cal_run, res):
+    import random
+    print('\n=== 7. C49 ratio grid on the historical-volatility gate (flagged trades, 3 ATR stop, 42 sessions) ===')
+    ex_ = lambda g: statistics.fmean(t['ret_atr'] - t['spy_atr'] for t in g) if g else float('nan')
+    base_full = res['FLAGGED only'][3]
+    tables = {}
+    for direction, desc in (('recent', 'PRIMARY: skip if vol20 > k x vol90'), ('longer', 'SECONDARY (literal wording): skip if vol90 > k x vol20')):
+        print(f'\n  {desc}')
+        print('    k      skipped  trades  Sharpe  Sortino  Calmar  max DD   CAGR   vol    invested  kept excess(ATR)')
+        rows = {}
+        for k in (None, 1.0) + GRID:
+            if k is None:
+                sel, st, label = flagged, base_full, 'none'
+                rc = None
+            else:
+                f = ratio_skip(direction, k)
+                sel = [t for t in flagged if not f(t)]
+                label = f'{k:.1f}'
+                out = grid_run(sel, cal_run)
+                if out is None:
+                    print(f'    {label:5s} no trades')
+                    continue
+                st = out[0]
+            n_sk = len(flagged) - len(sel)
+            inv = None
+            if k is not None:
+                inv = statistics.fmean(c[2] / c[1] for c in out[2])
+            else:
+                inv = statistics.fmean(c[2] / c[1] for c in res['FLAGGED only'][0])
+            rows[k] = (st, len(sel), n_sk)
+            print(f'    {label:5s} {n_sk / len(flagged):6.0%}  {len(sel):6d}  {st["sharpe"]:6.2f}  {st["sortino"]:7.2f}  {st["calmar"]:6.2f}  {st["mdd"]:+6.1%}  {st["cagr"]:+5.2%}  {st["vol"]:5.1%}  {inv:7.0%}  {ex_(sel):+8.3f}')
+        tables[direction] = rows
+        # full-period best k
+        cand = [k for k in (1.0,) + GRID if k in rows]
+        best = max(cand, key=lambda k: rows[k][0]['sharpe'])
+        print(f'    best full-period Sharpe (of the grid and 1.0): k={best} Sharpe {rows[best][0]["sharpe"]:.2f} vs no gate {rows["none" if False else None][0]["sharpe"]:.2f}')
+        # random skip for the best k
+        n_skip = rows[best][2]
+        rng_ = random.Random(49)
+        sh = []
+        for _ in range(200):
+            drop = set(rng_.sample(range(len(flagged)), n_skip))
+            sh.append(curve_stats(simulate([t for j, t in enumerate(flagged) if j not in drop], cal_run)[0], START)['sharpe'])
+        print(f'    random skip of the same count ({n_skip}), 200 draws: Sharpe median {statistics.median(sh):.2f} (5th-95th {sorted(sh)[10]:.2f} to {sorted(sh)[189]:.2f}); '
+              f'draws as good as k={best}: {sum(x >= rows[best][0]["sharpe"] for x in sh) / 200:.0%}')
+        # out-of-era
+        print(f'    OUT OF ERA ({desc.split(":")[0].lower()}):')
+        passes = []
+        eras = {nm: [t for t in flagged if f(t['entry'])] for nm, f in GRID_ERAS}
+        ecal = {nm: era_cal(cal_run, g) for nm, g in eras.items()}
+        era_tab = {}
+        for nm, g in eras.items():
+            era_tab[nm] = {}
+            for k in (None, 1.0) + GRID:
+                sel = g if k is None else [t for t in g if not ratio_skip(direction, k)(t)]
+                out = grid_run(sel, ecal[nm])
+                era_tab[nm][k] = out[0] if out else None
+        for nm, g in eras.items():
+            print(f'      {nm} (n={len(g)}) Sharpe by k: ' + ', '.join(f'{("none" if k is None else k)} {era_tab[nm][k]["sharpe"]:.2f}' for k in (None, 1.0) + GRID if era_tab[nm][k]))
+        for train, test in (('2006-2010', '2011-2020'), ('2011-2020', '2006-2010')):
+            ks = [k for k in (1.0,) + GRID if era_tab[train][k]]
+            kb = max(ks, key=lambda k: era_tab[train][k]['sharpe'])
+            a, b = era_tab[test][kb], era_tab[test][None]
+            ok = bool(a) and a['sharpe'] > b['sharpe'] and a['calmar'] > b['calmar']
+            passes.append(ok)
+            print(f'      train {train}: best k={kb} (Sharpe {era_tab[train][kb]["sharpe"]:.2f} vs none {era_tab[train][None]["sharpe"]:.2f}); on {test}: gated Sharpe {a["sharpe"]:.2f} Calmar {a["calmar"]:.2f} max DD {a["mdd"]:+.1%} CAGR {a["cagr"]:+.2%} '
+                  f'vs no gate Sharpe {b["sharpe"]:.2f} Calmar {b["calmar"]:.2f} max DD {b["mdd"]:+.1%} CAGR {b["cagr"]:+.2%} -> {"beats" if ok else "does not beat"} no gate on both')
+        print(f'    PASS RULE ({desc.split(":")[0]}): {"PASS" if all(passes) else "NOT SHOWN"} ({sum(passes)} of 2 out-of-era tests beat no gate on Sharpe and Calmar)')
+    print('\n  Looks counted: 9 k values x 2 directions = 18 plus references; the best of 18 is a lead at most.')
 
 
 def section_vol(trades, flagged, skip, res, bs, cal_run, label='vol gate', gate_name='FLAGGED + vol gate', other=None, other_label=''):
