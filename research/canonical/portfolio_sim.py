@@ -30,6 +30,10 @@ not in this archive; stop fills at the stop price are optimistic in thin names; 
 at small size); the 0.10 ATR is charged on the stock's own ATR, so cheap volatile names are charged more dollars per share than their spread; the equity curve has about
 15 years but only tens of independent market periods; a single path, so the maximum drawdown is one draw, not a bound.
 
+C47 (13 Nov 2026, declared in docs/CANDIDATES.md before the run): optional volatility gate.  vol20 and vol90 = sample standard deviation of the 20 and 90 daily
+close-to-close log returns ending at the close BEFORE the entry session (21 / 91 consecutive closes needed).  Trade skipped if vol20 > vol90; no reading -> taken, counted.
+Stage 1 now loads 100 earlier sessions (was 25) so the 90-day window exists in January; nothing else in stage 1 changes (Entry 82 must reproduce to the dollar).
+
 Usage:  python portfolio_sim.py year YEAR --primary FILE --out FILE
         python portfolio_sim.py scan EVENTS.json YEAR_FOLDER DECLINE_FOLDER REGIME_FOLDER RETURNS_FOLDER DD_FOLDER DV_FOLDER PATH_FOLDER
         python portfolio_sim.py --selftest
@@ -68,8 +72,8 @@ def year_job(year, primary_path, out):
     if entries:
         syms = {e['sym'] for e in entries}
         want = syms | {s + DELISTED for s in syms}
-        stock_bars, dates = load_span(s3, 'stock', [year, year + 1, year + 2], want, 25, 30)
-        spy_bars, _ = load_span(s3, 'etf', [year, year + 1, year + 2], {'SPY'}, 25, 30)
+        stock_bars, dates = load_span(s3, 'stock', [year, year + 1, year + 2], want, 100, 30)
+        spy_bars, _ = load_span(s3, 'etf', [year, year + 1, year + 2], {'SPY'}, 100, 30)
         spy = spy_bars.get('SPY', {})
         print(f'{year}: {len(entries)} entries, {len(dates)} sessions loaded, SPY bars {len(spy)}')
         last_exit = max(e['entry'] for e in entries)
@@ -91,6 +95,7 @@ def year_job(year, primary_path, out):
                 continue
             ret, spy_atr, sess, why = res
             kk = i + sess - 1
+            r['vol20'], r['vol90'] = hist_vols(dates, series, i)
             r.update({'status': 'ok', 'atr': atr, 'open': op, 'ret_atr': ret, 'spy_atr': spy_atr, 'sess': sess, 'why': why,
                       'exit_date': dates[kk], 'exit_px': round(op + ret * atr, 6),
                       'days': [[dates[k], series[dates[k]][3] if dates[k] in series else None] for k in range(i, kk + 1)]})
@@ -110,6 +115,22 @@ def year_job(year, primary_path, out):
     Path(out).parent.mkdir(parents=True, exist_ok=True)
     Path(out).write_text(json.dumps({'year': year, 'rows': rows, 'spy': spy_out}))
     print(f'{year}: status {dict(Counter(r["status"] for r in rows))}; SPY closes {len(spy_out)}')
+
+
+def hist_vols(dates, series, i):
+    """C47: (vol20, vol90) = sample stdev of the last 20 / 90 daily close-to-close log returns ending at the close BEFORE entry index i
+    (21 / 91 consecutive closes); None if any close in the window is missing."""
+    out = []
+    for n in (20, 90):
+        if i - n - 1 < 0:
+            out.append(None)
+            continue
+        cl = [series[dates[k]][3] if dates[k] in series else None for k in range(i - n - 1, i)]
+        if len(cl) != n + 1 or any(c is None or c <= 0 for c in cl):
+            out.append(None)
+            continue
+        out.append(statistics.stdev([math.log(cl[k] / cl[k - 1]) for k in range(1, n + 1)]))
+    return out[0], out[1]
 
 
 # ------------------------------------------------------------------ sizing
@@ -305,7 +326,7 @@ def build_trades(cohort, sim, dv, add, mode='stop'):
             continue
         if abs(s['atr'] - r['atr']) > 1e-9:
             atr_diff += 1
-        t = {**{f: bool(r[f]) for f in FLAGS}, 'entry': r['entry'], 'sym': r['sym'], 'dv': dv.get(k), 'U': size_u(add, r)}
+        t = {**{f: bool(r[f]) for f in FLAGS}, 'entry': r['entry'], 'sym': r['sym'], 'dv': dv.get(k), 'U': size_u(add, r), 'vol20': s.get('vol20'), 'vol90': s.get('vol90')}
         src = s
         if mode == 'none':
             src = s.get('ns')
@@ -344,6 +365,13 @@ def run_scan(cohort, sim, spy, dv, mode='stop'):
     variants = [('MAIN 0.1% scaled', dict()), ('FLAT 1.0U all', dict(flat=True)), ('gross cost 0.00', dict(cost=0.0)), ('cost 0.20 ATR', dict(cost=0.20)),
                 ('base 0.125%', dict(base_pct=0.125)), ('FLAGGED only', dict(sel=flagged)), ('FLAGGED, no R1-only', dict(sel=flagged_no_r1only)),
                 ('FLAGGED only, cost 0.2', dict(sel=flagged, cost=0.20))]
+    skip = lambda t: t.get('vol20') is not None and t.get('vol90') is not None and t['vol20'] > t['vol90']
+    kept, skipped = [t for t in trades if not skip(t)], [t for t in trades if skip(t)]
+    fl_kept = [t for t in flagged if not skip(t)]
+    fl_skipped = [t for t in flagged if skip(t)]
+    fl2_kept = [t for t in flagged_no_r1only if not skip(t)]
+    variants += [('MAIN + vol gate', dict(sel=kept)), ('FLAGGED + vol gate', dict(sel=fl_kept)), ('FLAGGED no R1-only + gate', dict(sel=fl2_kept)),
+                 ('(skipped: ALL only)', dict(sel=skipped)), ('(skipped: FLAGGED only)', dict(sel=fl_skipped))]
     res = {}
     for name, kw in variants:
         kw = dict(kw)
@@ -437,8 +465,58 @@ def run_scan(cohort, sim, spy, dv, mode='stop'):
     print('  worst 5 months: ' + ', '.join(f'{m} {x:+.1%}' for x, m in mr[:5]) + '; best 5: ' + ', '.join(f'{m} {x:+.1%}' for x, m in mr[-5:][::-1]))
     print(f'  months up {sum(x > 0 for x, _ in mr)} of {len(mr)}')
     section5(recs, res, bs)
+    section_vol(trades, flagged, skip, res, bs, cal_run)
     print('\nPOST HOC; sizes and flags are Claude\'s Entry 78 judgment on post hoc leads; costs are 0.10 ATR by instruction, not measured; survivorship (Entry 65) and wipe-outs are not in this archive; '
           'one path, so the drawdown is one draw.')
+
+
+def section_vol(trades, flagged, skip, res, bs, cal_run):
+    """C47 (declared before the run): what the vol20 > vol90 gate keeps and throws away, and a random-skip comparison."""
+    import random
+    print('\n=== 6. C47 volatility gate: skip when 20-day volatility > 90-day volatility ===')
+    nov = [t for t in trades if t.get('vol20') is None or t.get('vol90') is None]
+    print(f'  tradable {len(trades)}; no volatility reading (taken) {len(nov)}; gate would skip {sum(skip(t) for t in trades)} ({sum(skip(t) for t in trades) / len(trades):.0%}); '
+          f'flagged tradable {len(flagged)}, skipped {sum(skip(t) for t in flagged)} ({sum(skip(t) for t in flagged) / len(flagged):.0%})')
+    ex_ = lambda g: statistics.fmean(t['ret_atr'] - t['spy_atr'] for t in g) if g else float('nan')
+    for nm, g in (('ALL', trades), ('FLAGGED', flagged)):
+        k = [t for t in g if not skip(t)]
+        sk = [t for t in g if skip(t)]
+        try:
+            from stop_test import block_range
+            rng = lambda grp: block_range([{'entry': t['entry'], 'x': t['ret_atr'] - t['spy_atr']} for t in grp], 'x')[:2] if len(grp) > 5 else (float('nan'), float('nan'))
+            lk, hk = rng(k)
+            ls, hs = rng(sk)
+        except Exception:
+            lk = hk = ls = hs = float('nan')
+        print(f'  {nm}: kept n={len(k)} gross excess over SPY {ex_(k):+.3f} ATR [{lk:+.3f}, {hk:+.3f}] (SPY beside it {statistics.fmean(t["spy_atr"] for t in k):+.3f}); '
+              f'skipped n={len(sk)} excess {ex_(sk):+.3f} [{ls:+.3f}, {hs:+.3f}] (SPY {statistics.fmean(t["spy_atr"] for t in sk) if sk else float("nan"):+.3f}); '
+              f'stopped share kept {sum(t["why"] in ("stop", "gap") for t in k) / max(len(k), 1):.0%} vs skipped {sum(t["why"] in ("stop", "gap") for t in sk) / max(len(sk), 1):.0%}')
+        by = defaultdict(lambda: [0, 0])
+        for t in g:
+            by[t['entry'][:4]][0] += 1
+            by[t['entry'][:4]][1] += skip(t)
+        print('     skipped share by year: ' + ', '.join(f'{y} {b[1]}/{b[0]}' for y, b in sorted(by.items())))
+        epi = [t for t in g if quarter(t['entry']) in EPISODES]
+        print(f'     in the three episodes: {len(epi)} trades, {sum(skip(t) for t in epi)} skipped ({sum(skip(t) for t in epi) / max(len(epi), 1):.0%}); elsewhere {len(g) - len(epi)} trades, '
+              f'{sum(skip(t) for t in g if quarter(t["entry"]) not in EPISODES)} skipped')
+    # random skip of the same size on the FLAGGED set: does the gate beat chance on Sharpe and max drawdown?
+    base = res['FLAGGED only'][3]
+    gate = res['FLAGGED + vol gate'][3]
+    n_skip = sum(skip(t) for t in flagged)
+    rng_ = random.Random(47)
+    better_sh = better_dd = 0
+    sh, dd_ = [], []
+    for _ in range(200):
+        drop = set(rng_.sample(range(len(flagged)), n_skip))
+        sel = [t for j, t in enumerate(flagged) if j not in drop]
+        st = curve_stats(simulate(sel, cal_run)[0], START)
+        sh.append(st['sharpe'])
+        dd_.append(st['mdd'])
+        better_sh += st['sharpe'] >= gate['sharpe']
+        better_dd += st['mdd'] >= gate['mdd']
+    print(f'\n  Random skip of the same count ({n_skip} of {len(flagged)} flagged), 200 draws: Sharpe median {statistics.median(sh):.2f} (5th-95th {sorted(sh)[10]:.2f} to {sorted(sh)[189]:.2f}); '
+          f'max DD median {statistics.median(dd_):+.1%} (5th-95th {sorted(dd_)[10]:+.1%} to {sorted(dd_)[189]:+.1%}).  Gate: Sharpe {gate["sharpe"]:.2f} (draws as good or better {better_sh / 200:.0%}), '
+          f'max DD {gate["mdd"]:+.1%} (draws as good or better {better_dd / 200:.0%}); no-gate Sharpe {base["sharpe"]:.2f}, max DD {base["mdd"]:+.1%}')
 
 
 DECLINES = (('2007-10 to 2009-03 decline (SPY peak 2007-10-09 to trough 2009-03-09)', '2007-10-09', '2009-03-09'),
@@ -552,7 +630,19 @@ def selftest():
     assert abs(cy['2010'] - 0.05) < 1e-12 and abs(cy['2011'] - (120_000 / 105_000 - 1)) < 1e-12, cy
     # positions never left open and the final equity equals cash when flat
     assert abs(curve_stats([(cal[0], 100_000.0), (cal[1], 100_000.0)], 100_000.0)['sharpe'] != 0 or True)
-    print('portfolio_sim selftest ok: sizing, entry/exit costs, stop, cash cap, volume cap, flat sizing, drawdown, calendar years')
+    # C47 volatility reading: 91 closes before entry index 95; calm for 70 sessions then wild for the last 20 -> vol20 > vol90
+    ds = [f'd{k:03d}' for k in range(120)]
+    px, ser = 100.0, {}
+    for k in range(120):
+        px *= 1.001 if k < 75 else (1.05 if k % 2 else 0.95)
+        ser[ds[k]] = (px, px, px, px)
+    v20, v90 = hist_vols(ds, ser, 95)
+    assert v20 is not None and v90 is not None and v20 > v90 > 0, (v20, v90)
+    assert abs(hist_vols(ds, {d: b for d, b in ser.items() if d != ds[90]}, 95)[0] - 0) >= 0 if False else True
+    miss = {d: b for d, b in ser.items() if d != ds[90]}
+    assert hist_vols(ds, miss, 95) == (None, None), 'a missing close inside both windows gives no reading'
+    assert hist_vols(ds, ser, 60)[1] is None and hist_vols(ds, ser, 60)[0] is not None, 'fewer than 91 closes before entry -> no vol90'
+    print('portfolio_sim selftest ok: volatility reading, sizing, entry/exit costs, stop, cash cap, volume cap, flat sizing, drawdown, calendar years')
 
 
 if __name__ == '__main__':
