@@ -34,6 +34,9 @@ C47 (13 Nov 2026, declared in docs/CANDIDATES.md before the run): optional volat
 close-to-close log returns ending at the close BEFORE the entry session (21 / 91 consecutive closes needed).  Trade skipped if vol20 > vol90; no reading -> taken, counted.
 Stage 1 now loads 100 earlier sessions (was 25) so the 90-day window exists in January; nothing else in stage 1 changes (Entry 82 must reproduce to the dollar).
 
+C48 (13 Nov 2026, declared in docs/CANDIDATES.md before the run): the same gate built on ATR.  atr20 / atr90 = mean true range of the 20 / 90 sessions ending at the close
+before entry (dollars); atr20p / atr90p the same with each true range divided by the previous close.  Skip if atr20 > atr90 (raw) or atr20p > atr90p (percent of price).
+
 Usage:  python portfolio_sim.py year YEAR --primary FILE --out FILE
         python portfolio_sim.py scan EVENTS.json YEAR_FOLDER DECLINE_FOLDER REGIME_FOLDER RETURNS_FOLDER DD_FOLDER DV_FOLDER PATH_FOLDER
         python portfolio_sim.py --selftest
@@ -96,6 +99,7 @@ def year_job(year, primary_path, out):
             ret, spy_atr, sess, why = res
             kk = i + sess - 1
             r['vol20'], r['vol90'] = hist_vols(dates, series, i)
+            r['atr20'], r['atr90'], r['atr20p'], r['atr90p'] = hist_atrs(dates, series, i)
             r.update({'status': 'ok', 'atr': atr, 'open': op, 'ret_atr': ret, 'spy_atr': spy_atr, 'sess': sess, 'why': why,
                       'exit_date': dates[kk], 'exit_px': round(op + ret * atr, 6),
                       'days': [[dates[k], series[dates[k]][3] if dates[k] in series else None] for k in range(i, kk + 1)]})
@@ -131,6 +135,24 @@ def hist_vols(dates, series, i):
             continue
         out.append(statistics.stdev([math.log(cl[k] / cl[k - 1]) for k in range(1, n + 1)]))
     return out[0], out[1]
+
+
+def hist_atrs(dates, series, i):
+    """C48: (atr20, atr90, atr20p, atr90p): mean true range of the last 20 / 90 sessions ending at the close before entry index i, in dollars and as a percent of the
+    previous close; None if any bar in the window (plus the bar before it) is missing."""
+    from refined_baseline import true_range
+    out = []
+    for n in (20, 90):
+        if i - n - 1 < 0:
+            out.append((None, None))
+            continue
+        w = [series.get(dates[k]) for k in range(i - n - 1, i)]
+        if len(w) != n + 1 or any(b is None or b[3] <= 0 for b in w):
+            out.append((None, None))
+            continue
+        trs = [true_range(w[k], w[k - 1][3]) for k in range(1, n + 1)]
+        out.append((sum(trs) / n, sum(tr / w[k - 1][3] for k, tr in zip(range(1, n + 1), trs)) / n))
+    return out[0][0], out[1][0], out[0][1], out[1][1]
 
 
 # ------------------------------------------------------------------ sizing
@@ -326,7 +348,8 @@ def build_trades(cohort, sim, dv, add, mode='stop'):
             continue
         if abs(s['atr'] - r['atr']) > 1e-9:
             atr_diff += 1
-        t = {**{f: bool(r[f]) for f in FLAGS}, 'entry': r['entry'], 'sym': r['sym'], 'dv': dv.get(k), 'U': size_u(add, r), 'vol20': s.get('vol20'), 'vol90': s.get('vol90')}
+        t = {**{f: bool(r[f]) for f in FLAGS}, 'entry': r['entry'], 'sym': r['sym'], 'dv': dv.get(k), 'U': size_u(add, r), 'vol20': s.get('vol20'), 'vol90': s.get('vol90'),
+             'atr20': s.get('atr20'), 'atr90': s.get('atr90'), 'atr20p': s.get('atr20p'), 'atr90p': s.get('atr90p')}
         src = s
         if mode == 'none':
             src = s.get('ns')
@@ -372,6 +395,13 @@ def run_scan(cohort, sim, spy, dv, mode='stop'):
     fl2_kept = [t for t in flagged_no_r1only if not skip(t)]
     variants += [('MAIN + vol gate', dict(sel=kept)), ('FLAGGED + vol gate', dict(sel=fl_kept)), ('FLAGGED no R1-only + gate', dict(sel=fl2_kept)),
                  ('(skipped: ALL only)', dict(sel=skipped)), ('(skipped: FLAGGED only)', dict(sel=fl_skipped))]
+    gates = {'hv': ('vol gate', skip)}
+    for key, lab, a, b in (('atr', 'ATR gate', 'atr20', 'atr90'), ('atrp', 'ATR% gate', 'atr20p', 'atr90p')):
+        sk_f = (lambda a, b: (lambda t: t.get(a) is not None and t.get(b) is not None and t[a] > t[b]))(a, b)
+        gates[key] = (lab, sk_f)
+        variants += [(f'MAIN + {lab}', dict(sel=[t for t in trades if not sk_f(t)])), (f'FLAGGED + {lab}', dict(sel=[t for t in flagged if not sk_f(t)])),
+                     (f'FLAGGED no R1-only + {lab[:8]}', dict(sel=[t for t in flagged_no_r1only if not sk_f(t)])),
+                     (f'(skipped by {lab}: ALL)', dict(sel=[t for t in trades if sk_f(t)])), (f'(skipped by {lab}: FLAGGED)', dict(sel=[t for t in flagged if sk_f(t)]))]
     res = {}
     for name, kw in variants:
         kw = dict(kw)
@@ -466,15 +496,22 @@ def run_scan(cohort, sim, spy, dv, mode='stop'):
     print(f'  months up {sum(x > 0 for x, _ in mr)} of {len(mr)}')
     section5(recs, res, bs)
     section_vol(trades, flagged, skip, res, bs, cal_run)
+    for key in ('atr', 'atrp'):
+        lab, sk_f = gates[key]
+        section_vol(trades, flagged, sk_f, res, bs, cal_run, label=lab, gate_name=f'FLAGGED + {lab}', other=skip, other_label='historical-volatility gate (Entry 98)')
     print('\nPOST HOC; sizes and flags are Claude\'s Entry 78 judgment on post hoc leads; costs are 0.10 ATR by instruction, not measured; survivorship (Entry 65) and wipe-outs are not in this archive; '
           'one path, so the drawdown is one draw.')
 
 
-def section_vol(trades, flagged, skip, res, bs, cal_run):
+def section_vol(trades, flagged, skip, res, bs, cal_run, label='vol gate', gate_name='FLAGGED + vol gate', other=None, other_label=''):
     """C47 (declared before the run): what the vol20 > vol90 gate keeps and throws away, and a random-skip comparison."""
     import random
-    print('\n=== 6. C47 volatility gate: skip when 20-day volatility > 90-day volatility ===')
-    nov = [t for t in trades if t.get('vol20') is None or t.get('vol90') is None]
+    print(f'\n=== 6. {label}: skip when the 20-day reading > the 90-day reading ===')
+    if other:
+        both = sum(skip(t) and other(t) for t in trades)
+        print(f'  overlap with the {other_label}: skipped by both {both}; only this gate {sum(skip(t) and not other(t) for t in trades)}; only the other {sum(other(t) and not skip(t) for t in trades)}; '
+              f'neither {sum(not skip(t) and not other(t) for t in trades)} (of {len(trades)}); flagged only: both {sum(skip(t) and other(t) for t in flagged)}, this only {sum(skip(t) and not other(t) for t in flagged)}, other only {sum(other(t) and not skip(t) for t in flagged)}')
+    nov = [t for t in trades if t.get('vol20') is None or t.get('vol90') is None or t.get('atr20') is None or t.get('atr90') is None]
     print(f'  tradable {len(trades)}; no volatility reading (taken) {len(nov)}; gate would skip {sum(skip(t) for t in trades)} ({sum(skip(t) for t in trades) / len(trades):.0%}); '
           f'flagged tradable {len(flagged)}, skipped {sum(skip(t) for t in flagged)} ({sum(skip(t) for t in flagged) / len(flagged):.0%})')
     ex_ = lambda g: statistics.fmean(t['ret_atr'] - t['spy_atr'] for t in g) if g else float('nan')
@@ -501,7 +538,7 @@ def section_vol(trades, flagged, skip, res, bs, cal_run):
               f'{sum(skip(t) for t in g if quarter(t["entry"]) not in EPISODES)} skipped')
     # random skip of the same size on the FLAGGED set: does the gate beat chance on Sharpe and max drawdown?
     base = res['FLAGGED only'][3]
-    gate = res['FLAGGED + vol gate'][3]
+    gate = res[gate_name][3]
     n_skip = sum(skip(t) for t in flagged)
     rng_ = random.Random(47)
     better_sh = better_dd = 0
@@ -642,7 +679,17 @@ def selftest():
     miss = {d: b for d, b in ser.items() if d != ds[90]}
     assert hist_vols(ds, miss, 95) == (None, None), 'a missing close inside both windows gives no reading'
     assert hist_vols(ds, ser, 60)[1] is None and hist_vols(ds, ser, 60)[0] is not None, 'fewer than 91 closes before entry -> no vol90'
-    print('portfolio_sim selftest ok: volatility reading, sizing, entry/exit costs, stop, cash cap, volume cap, flat sizing, drawdown, calendar years')
+    # C48 ATR reading: bars calm then wide -> atr20 > atr90 in dollars and in percent; short history -> no atr90
+    bars = {}
+    for k in range(120):
+        c = 100 + (0.2 if k < 75 else 3) * (k % 2)
+        w = 0.5 if k < 75 else 4
+        bars[ds[k]] = (c, c + w, c - w, c)
+    a20, a90, p20, p90 = hist_atrs(ds, bars, 95)
+    assert a20 > a90 > 0 and p20 > p90 > 0, (a20, a90, p20, p90)
+    assert hist_atrs(ds, bars, 60)[0] is not None and hist_atrs(ds, bars, 60)[1] is None
+    assert hist_atrs(ds, {d: b for d, b in bars.items() if d != ds[90]}, 95)[0] is None
+    print('portfolio_sim selftest ok: ATR reading, volatility reading, sizing, entry/exit costs, stop, cash cap, volume cap, flat sizing, drawdown, calendar years')
 
 
 if __name__ == '__main__':
