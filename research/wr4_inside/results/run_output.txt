@@ -1,0 +1,47 @@
+SELFTEST PASS
+PILOT JOINS AND TRADES market  horizon
+6E      5          13
+        10         13
+        21         13
+        42         13
+CL      5           2
+        10          2
+        21          2
+        42          2
+ES      5           1
+        10          1
+        21          1
+        42          1
+GC      5           8
+        10          8
+        21          8
+        42          8
+ZN      5           1
+        10          1
+        21          1
+        42          1
+CONTROL DONE 5 cot_conditioned_random_open 274
+CONTROL DONE 5 pattern_without_cot 273
+CONTROL DONE 10 cot_conditioned_random_open 274
+CONTROL DONE 10 pattern_without_cot 273
+CONTROL DONE 21 cot_conditioned_random_open 274
+CONTROL DONE 21 pattern_without_cot 273
+CONTROL DONE 42 cot_conditioned_random_open 274
+CONTROL DONE 42 pattern_without_cot 273
+# Approximate COT + WR4 / inside-day backtest
+Run: https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/43741855157
+Script commit: bcafe916c5153c6d8505beebe10a2da809d66105
+User authorized using available data despite audit limitations on 2026-11-15.
+Development only: prices/outcomes end 2021-08-06; final five years remain sealed. All reported trades have full 42-session outcomes.
+Approximations: nominal ticks on ratio-adjusted prices; estimated Friday/holiday publication dates, strict prior-date setup join; no shutdown backlog correction; unknown roll trades and revision vintages; missing sessions screened only by >7-day gaps. No costs/slippage beyond opening gaps.
+ATR is simple mean of 14 pre-entry true ranges. Entry is session 1. COT evaluated at completed inside day; WR4 ties qualify, strict inside day, breakout only Day 3/4. Every setup is counted, including overlaps.
+Primary universe excludes MES/MNQ duplicates; literal 48-market output is separate. Independent validation of economic contract mappings remains incomplete.
+Unstopped MFE follows breakout; entry-bar MAE has lower/upper bounds. Stop-constrained MFE has conservative/optimistic daily-order bounds. Stops touched on intraday entry bars are conservatively charged and separately flagged as ambiguous. Stop-bar MFE is never assumed achievable in the conservative column.
+Controls: 10,000 draws, same market/year/direction; conditional random opens match each observed initial stop distance in ATR. Pattern control uses non-COT WR4 events. No volatility matching; control p-values assume independent matched resampling, so serial dependence can make them optimistic. 90-calendar-day clustered bootstrap shown separately. Holm correction spans all reported control tests. Exploratory, not a proof of edge.
+Unique primary trades: 275; pilot: 25; literal 48: 275.
+              mfe   mae_low  mae_high  prestop_mfe_low  prestop_mfe_high  prestop_mae  stop_conservative  entry_stop_ambiguous  return_unstopped  return_stopped
+horizon                                                                                                                                                         
+5        1.167465  1.005740  1.213970         1.094550          1.113043     1.001552           0.276364              0.043636          0.057953        0.026003
+10       1.644324  1.608695  1.735123         1.475392          1.493886     1.139826           0.461818              0.043636         -0.057031       -0.037509
+21       2.448120  2.376008  2.466187         1.973614          1.992107     1.215790           0.589091              0.043636          0.073528        0.060612
+42       3.635138  3.407946  3.482433         2.582210          2.600704     1.288747           0.712727              0.043636          0.137676        0.107262

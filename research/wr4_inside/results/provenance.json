@@ -1,0 +1,9 @@
+{
+  "run": "43741855157",
+  "script_commit": "bcafe916c5153c6d8505beebe10a2da809d66105",
+  "seed": 20261115,
+  "draws": 10000,
+  "end": "2021-08-06",
+  "cot_sha256": "b0c054bd1784d5df71c7ff0f20e2fa8e7970d4bc15534949ba36c19f6dc60376",
+  "price_sha256": "0bc568a0e063dffd953a0d3a5e59b2c56d21c9a9c22b1de9d39d004fd3fa1cbf"
+}
