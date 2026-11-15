@@ -13,7 +13,7 @@ OUT=Path('research/wr4_inside/trailing_results')
 
 
 def arrays(p):
-    a={x:p[x].to_numpy() for x in ['open','high','low','close','atr','date']}
+    a={x:p[x].to_numpy(copy=True) for x in ['open','high','low','close','atr','date']}
     for n in WINDOWS:
         # shift(1): today's extrema NEVER influence today's stop.
         a[f'lo{n}']=p.low.rolling(n,min_periods=n).min().shift(1).to_numpy()
