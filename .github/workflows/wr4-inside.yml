@@ -1,0 +1,53 @@
+name: Approximate COT WR4 inside-day backtest
+on:
+  push:
+    branches: [research/wr4-inside-run-20261115]
+    paths:
+      - research/wr4_inside/run.py
+      - .github/workflows/wr4-inside.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  study:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas numpy tabulate
+      - name: Trigger and sequencing tests
+        run: python research/wr4_inside/run.py --selftest
+      - name: Fetch verified daily prices
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python futures_data/fetch_futures_prices.py
+      - name: Pilot then full development universe with random controls
+        run: |
+          set -o pipefail
+          mkdir -p research/wr4_inside/results
+          python -u research/wr4_inside/run.py | tee research/wr4_inside/results/run_output.txt
+      - name: Save results and shared checkpoint
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          p=Path('docs/SHARED_LOG.md')
+          with p.open('a') as f:
+              f.write('\n\n## 15 Nov 2026 | ChatGPT | Approximate COT WR4/inside-day run | PROVISIONAL\nUser authorized proceeding with available data despite audit limitations. Script: research/wr4_inside/run.py. Branch: research/wr4-inside-run-20261115. Run: https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/'+os.environ['GITHUB_RUN_ID']+'. Results: research/wr4_inside/results/REPORT.md and CSVs. Development only through 2021-08-06. Nominal ticks on adjusted prices and estimated publication dates; no actual-release/roll certification. Daily sequencing bounds and 10,000 randomized controls included. Existing COT report unchanged. See report for findings and limitations.\n')
+          PY
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add research/wr4_inside/results docs/SHARED_LOG.md
+          git commit -m "Record approximate WR4 backtest results, run ${{ github.run_id }}"
+          git push origin HEAD:${{ github.ref_name }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wr4_inside_results
+          path: research/wr4_inside/results
+          retention-days: 30
