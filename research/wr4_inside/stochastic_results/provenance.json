@@ -1,0 +1,21 @@
+{
+  "run": "43742994743",
+  "sha": "348b17f20469732bb298d1f0450f89c776c19244",
+  "seed": 2026111502,
+  "draws": 10000,
+  "periods": [
+    5,
+    10,
+    14,
+    21,
+    42
+  ],
+  "thresholds": [
+    5,
+    10,
+    20,
+    30
+  ],
+  "baseline_trades_sha256": "48532a8fdca9c304657b44389d35bfc1b60fdf33c88411824af0557f7d4efd08",
+  "prices_sha256": "0bc568a0e063dffd953a0d3a5e59b2c56d21c9a9c22b1de9d39d004fd3fa1cbf"
+}

@@ -944,3 +944,7 @@ Branch `research/wr4-inside-audit-20261115`; record `research/wr4_inside/AUDIT_A
 
 ## 15 Nov 2026 | ChatGPT | Approximate COT WR4/inside-day run | PROVISIONAL
 User authorized proceeding with available data despite audit limitations. Script: research/wr4_inside/run.py. Branch: research/wr4-inside-run-20261115. Run: https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/43741855157. Results: research/wr4_inside/results/REPORT.md and CSVs. Development only through 2021-08-06. Nominal ticks on adjusted prices and estimated publication dates; no actual-release/roll certification. Daily sequencing bounds and 10,000 randomized controls included. Existing COT report unchanged. See report for findings and limitations.
+
+
+## 15 Nov 2026 | ChatGPT | Stochastic reversal grid on COT WR4 | PROVISIONAL
+Script research/wr4_inside/stochastic.py; branch research/wr4-stochastic-20261115. Run https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/43742994743. Reproduces all 275 prior trades and all horizons before applying 20 predeclared raw stochastic settings (5/10/14/21/42 sessions, buy <=5/10/20/30 and mirrored sells). Results in research/wr4_inside/stochastic_results/REPORT.md; full grid, cross-era selection, calendar-block intervals and 10,000 joint within-market/direction/year permutations with maximum-statistic correction. Development years only; original price/timing approximations retained. No trailing-stop optimization; report script unchanged.
