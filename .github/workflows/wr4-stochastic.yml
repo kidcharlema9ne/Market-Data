@@ -1,0 +1,52 @@
+name: COT WR4 reversal stochastic grid
+on:
+  push:
+    branches: [research/wr4-stochastic-20261115]
+    paths:
+      - research/wr4_inside/stochastic.py
+      - .github/workflows/wr4-stochastic.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  study:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas numpy tabulate
+      - name: Indicator tests
+        run: python research/wr4_inside/stochastic.py --selftest
+      - name: Fetch verified daily prices
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python futures_data/fetch_futures_prices.py
+      - name: Reproduce baseline then run reversal grid
+        run: |
+          set -o pipefail
+          mkdir -p research/wr4_inside/stochastic_results
+          python -u research/wr4_inside/stochastic.py | tee research/wr4_inside/stochastic_results/run_output.txt
+      - name: Save results and checkpoint
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          with Path('docs/SHARED_LOG.md').open('a') as f:
+              f.write('\n\n## 15 Nov 2026 | ChatGPT | Stochastic reversal grid on COT WR4 | PROVISIONAL\nScript research/wr4_inside/stochastic.py; branch research/wr4-stochastic-20261115. Run https://github.com/kidcharlema9ne/insider-buying-research/actions/runs/'+os.environ['GITHUB_RUN_ID']+'. Reproduces all 275 prior trades and all horizons before applying 20 predeclared raw stochastic settings (5/10/14/21/42 sessions, buy <=5/10/20/30 and mirrored sells). Results in research/wr4_inside/stochastic_results/REPORT.md; full grid, cross-era selection, calendar-block intervals and 10,000 joint within-market/direction/year permutations with maximum-statistic correction. Development years only; original price/timing approximations retained. No trailing-stop optimization; report script unchanged.\n')
+          PY
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add research/wr4_inside/stochastic_results docs/SHARED_LOG.md
+          git commit -m "Record stochastic reversal sweep, run ${{ github.run_id }}"
+          git push origin HEAD:${{ github.ref_name }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wr4_stochastic_results
+          path: research/wr4_inside/stochastic_results
+          retention-days: 30
