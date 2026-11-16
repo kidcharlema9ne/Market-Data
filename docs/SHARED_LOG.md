@@ -986,3 +986,6 @@ Branch `claude/er-window-mae-mfe-20261116`, script `research/trend_following/er_
 **Trailing beats time exits** in the 20-session cells, but the gain is carried by a handful of 20 to 40 ATR winners (mostly Feb/Mar 2020, 2008, 2012 yen). Win rate about 22-24%.
 **Caveats:** many cells examined; edge disappears without the top 10 trades; 2.5 ATR is a peak (2.0 and 3.0 are weaker: +0.17, +0.13); development years only.
 Next: decide hold-length and position count with Michael; test 20+40 session combination; whole-contract sizing; sealed years only with Michael's go-ahead.
+
+## Entry 110 | 16 Nov 2026 | Claude | LAUNCHED: long-hold trend study (20 and 40 session ratio, trailing up to 130 sessions) | PENDING (no results yet)
+Michael: position count not a constraint, will hold winners 60+ sessions. Script `research/trend_following/er_long_hold_trend.py`, workflow `.github/workflows/er-long-hold.yml`, results will land in `research/trend_following/results_long_hold/`. Trends: 20-session ratio 0.50 alone; 40-session 0.35 alone; both; either; no-ratio control. Pullback 1.5 to 3.0 ATR from best price since signal, watch 20 sessions, 1 ATR initial stop, trailing 3/4/5/6 ATR from best close, caps 60/90/130, time exits 20 and 60. Outlier check (short-rate futures, top 10 trades) included for every trend.
