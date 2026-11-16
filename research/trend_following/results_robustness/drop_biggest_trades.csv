@@ -1,0 +1,64 @@
+sizing,trades_removed,ranked_by,system,return_per_year_pct,sharpe,max_drawdown_pct,total_profit_usd,trades_left,avg_ATR_per_trade_left,years_positive
+"whole contracts, 0.15% of the account per ATR",0,dollars,frozen rule,6.02,0.87,-13.32,347593.73,1022.0,0.73,13 of 19
+"whole contracts, 0.15% of the account per ATR",0,dollars,earlier system,2.88,0.42,-10.01,166204.62,682.0,0.64,12 of 19
+"whole contracts, 0.15% of the account per ATR",0,dollars,50/50 mix,4.45,0.75,-7.27,256899.17,,,
+"whole contracts, 0.15% of the account per ATR",1,dollars,frozen rule,5.3,0.78,-13.32,305695.21,1021.0,0.64,13 of 19
+"whole contracts, 0.15% of the account per ATR",1,dollars,earlier system,2.25,0.34,-10.78,129876.07,681.0,0.5,12 of 19
+"whole contracts, 0.15% of the account per ATR",1,dollars,50/50 mix,3.77,0.67,-7.27,217785.64,,,
+"whole contracts, 0.15% of the account per ATR",3,dollars,frozen rule,3.94,0.62,-13.32,227252.78,1019.0,0.42,13 of 19
+"whole contracts, 0.15% of the account per ATR",3,dollars,earlier system,1.55,0.24,-11.78,89680.71,679.0,0.37,12 of 19
+"whole contracts, 0.15% of the account per ATR",3,dollars,50/50 mix,2.75,0.51,-7.41,158466.74,,,
+"whole contracts, 0.15% of the account per ATR",5,dollars,frozen rule,3.31,0.52,-14.52,191102.62,1017.0,0.35,13 of 19
+"whole contracts, 0.15% of the account per ATR",5,dollars,earlier system,1.17,0.19,-12.54,67318.18,677.0,0.31,11 of 19
+"whole contracts, 0.15% of the account per ATR",5,dollars,50/50 mix,2.24,0.43,-10.01,129210.4,,,
+"whole contracts, 0.15% of the account per ATR",10,dollars,frozen rule,2.0,0.33,-18.76,115444.28,1012.0,0.2,12 of 19
+"whole contracts, 0.15% of the account per ATR",10,dollars,earlier system,0.39,0.07,-13.94,22697.5,672.0,0.2,11 of 19
+"whole contracts, 0.15% of the account per ATR",10,dollars,50/50 mix,1.2,0.24,-11.69,69070.89,,,
+"whole contracts, 0.15% of the account per ATR",20,dollars,frozen rule,0.24,0.04,-24.85,13645.82,1002.0,0.04,9 of 19
+"whole contracts, 0.15% of the account per ATR",20,dollars,earlier system,-0.7,-0.12,-21.9,-40287.11,662.0,0.03,7 of 19
+"whole contracts, 0.15% of the account per ATR",20,dollars,50/50 mix,-0.23,-0.05,-17.41,-13320.65,,,
+"whole contracts, 0.15% of the account per ATR",10,ATR result,frozen rule,2.23,0.36,-20.95,128945.08,1012.0,0.2,12 of 19
+"whole contracts, 0.15% of the account per ATR",10,ATR result,earlier system,0.59,0.1,-14.93,33866.97,672.0,0.16,10 of 19
+"whole contracts, 0.15% of the account per ATR",10,ATR result,50/50 mix,1.41,0.28,-13.48,81406.03,,,
+"whole contracts, 0.25% of the account per ATR",0,dollars,frozen rule,6.47,0.55,-32.61,373413.46,1391.0,0.47,12 of 19
+"whole contracts, 0.25% of the account per ATR",0,dollars,earlier system,6.15,0.48,-15.0,355196.71,916.0,0.55,10 of 19
+"whole contracts, 0.25% of the account per ATR",0,dollars,50/50 mix,6.31,0.6,-16.59,364305.09,,,
+"whole contracts, 0.25% of the account per ATR",1,dollars,frozen rule,5.26,0.46,-32.61,303582.6,1390.0,0.4,12 of 19
+"whole contracts, 0.25% of the account per ATR",1,dollars,earlier system,5.19,0.41,-15.0,299618.07,915.0,0.5,10 of 19
+"whole contracts, 0.25% of the account per ATR",1,dollars,50/50 mix,5.22,0.5,-17.62,301600.34,,,
+"whole contracts, 0.25% of the account per ATR",3,dollars,frozen rule,3.86,0.35,-32.66,222847.07,1388.0,0.25,11 of 19
+"whole contracts, 0.25% of the account per ATR",3,dollars,earlier system,3.52,0.29,-20.65,203312.91,913.0,0.4,9 of 19
+"whole contracts, 0.25% of the account per ATR",3,dollars,50/50 mix,3.69,0.37,-17.62,213079.99,,,
+"whole contracts, 0.25% of the account per ATR",5,dollars,frozen rule,2.57,0.23,-35.59,148511.27,1386.0,0.19,10 of 19
+"whole contracts, 0.25% of the account per ATR",5,dollars,earlier system,2.24,0.19,-23.42,129410.24,911.0,0.26,8 of 19
+"whole contracts, 0.25% of the account per ATR",5,dollars,50/50 mix,2.41,0.25,-20.75,138960.76,,,
+"whole contracts, 0.25% of the account per ATR",10,dollars,frozen rule,0.33,0.03,-48.06,18915.34,1381.0,0.07,9 of 19
+"whole contracts, 0.25% of the account per ATR",10,dollars,earlier system,0.59,0.05,-28.33,34030.04,906.0,0.15,7 of 19
+"whole contracts, 0.25% of the account per ATR",10,dollars,50/50 mix,0.46,0.05,-31.02,26472.69,,,
+"whole contracts, 0.25% of the account per ATR",20,dollars,frozen rule,-2.23,-0.22,-60.19,-128506.86,1371.0,-0.05,7 of 19
+"whole contracts, 0.25% of the account per ATR",20,dollars,earlier system,-1.6,-0.15,-44.55,-92403.5,896.0,0.01,4 of 19
+"whole contracts, 0.25% of the account per ATR",20,dollars,50/50 mix,-1.91,-0.22,-49.21,-110455.18,,,
+"whole contracts, 0.25% of the account per ATR",10,ATR result,frozen rule,0.33,0.03,-48.06,18915.34,1381.0,0.07,9 of 19
+"whole contracts, 0.25% of the account per ATR",10,ATR result,earlier system,0.89,0.08,-27.3,51107.26,906.0,0.12,8 of 19
+"whole contracts, 0.25% of the account per ATR",10,ATR result,50/50 mix,0.61,0.06,-28.84,35011.3,,,
+"fractional, 0.25% of the account per ATR",0,dollars,frozen rule,8.06,0.6,-26.2,465078.68,1891.0,0.39,10 of 19
+"fractional, 0.25% of the account per ATR",0,dollars,earlier system,6.01,0.43,-17.47,347140.78,1179.0,0.48,11 of 19
+"fractional, 0.25% of the account per ATR",0,dollars,50/50 mix,7.04,0.58,-16.13,406109.73,,,
+"fractional, 0.25% of the account per ATR",1,dollars,frozen rule,6.85,0.52,-26.2,395247.82,1890.0,0.34,10 of 19
+"fractional, 0.25% of the account per ATR",1,dollars,earlier system,5.29,0.38,-17.47,305140.42,1178.0,0.43,11 of 19
+"fractional, 0.25% of the account per ATR",1,dollars,50/50 mix,6.07,0.51,-16.13,350194.12,,,
+"fractional, 0.25% of the account per ATR",3,dollars,frozen rule,5.51,0.43,-26.24,317861.79,1888.0,0.22,10 of 19
+"fractional, 0.25% of the account per ATR",3,dollars,earlier system,4.12,0.31,-17.47,237647.34,1176.0,0.32,11 of 19
+"fractional, 0.25% of the account per ATR",3,dollars,50/50 mix,4.81,0.42,-16.61,277754.57,,,
+"fractional, 0.25% of the account per ATR",5,dollars,frozen rule,4.52,0.35,-27.67,260762.69,1886.0,0.18,10 of 19
+"fractional, 0.25% of the account per ATR",5,dollars,earlier system,3.09,0.23,-22.24,178169.0,1174.0,0.25,10 of 19
+"fractional, 0.25% of the account per ATR",5,dollars,50/50 mix,3.8,0.33,-17.59,219465.85,,,
+"fractional, 0.25% of the account per ATR",10,dollars,frozen rule,2.52,0.2,-32.52,145667.59,1881.0,0.1,9 of 19
+"fractional, 0.25% of the account per ATR",10,dollars,earlier system,1.37,0.1,-26.69,78797.11,1169.0,0.14,9 of 19
+"fractional, 0.25% of the account per ATR",10,dollars,50/50 mix,1.94,0.17,-24.76,112232.35,,,
+"fractional, 0.25% of the account per ATR",20,dollars,frozen rule,-0.11,-0.01,-41.1,-6187.34,1871.0,-0.01,6 of 19
+"fractional, 0.25% of the account per ATR",20,dollars,earlier system,-0.69,-0.06,-40.12,-39830.51,1159.0,0.0,7 of 19
+"fractional, 0.25% of the account per ATR",20,dollars,50/50 mix,-0.4,-0.04,-32.66,-23008.92,,,
+"fractional, 0.25% of the account per ATR",10,ATR result,frozen rule,2.52,0.2,-32.52,145667.59,1881.0,0.1,9 of 19
+"fractional, 0.25% of the account per ATR",10,ATR result,earlier system,1.51,0.11,-26.25,87047.15,1169.0,0.12,9 of 19
+"fractional, 0.25% of the account per ATR",10,ATR result,50/50 mix,2.02,0.18,-25.39,116357.37,,,

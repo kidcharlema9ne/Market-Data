@@ -1,0 +1,43 @@
+sizing,limit,system,return_per_year_pct,sharpe,max_drawdown_pct,short_rate_trades_cut_down,short_rate_trades_skipped,highest_net_exposure_usd_per_bp,highest_gross_exposure_usd_per_bp,loss_if_50bp_move_pct_of_account,loss_if_100bp_move_pct_of_account,worst_day_of_short_rate_book_pct_of_account,short_rate_profit_usd,short_rate_share_of_profit_pct
+"whole contracts, 0.15% of the account per ATR","current rule: 10 contracts per trade, no combined limit",frozen rule,6.02,0.87,-13.32,0.0,0.0,850.06,1067.4,14.17,28.34,-1.5,103289.23,29.72
+"whole contracts, 0.15% of the account per ATR","current rule: 10 contracts per trade, no combined limit",earlier system,2.88,0.42,-10.01,0.0,0.0,1083.4,1083.4,18.06,36.11,-2.0,92420.54,55.61
+"whole contracts, 0.15% of the account per ATR","current rule: 10 contracts per trade, no combined limit",50/50 mix,4.45,0.75,-7.27,,,750.05,820.05,12.5,25.0,,,
+"whole contracts, 0.15% of the account per ATR",combined limit $250 per basis point,frozen rule,5.34,0.81,-13.14,99.0,13.0,250.0,786.39,4.17,8.33,-1.32,64039.37,20.77
+"whole contracts, 0.15% of the account per ATR",combined limit $250 per basis point,earlier system,1.95,0.31,-11.79,81.0,11.0,250.0,531.03,4.17,8.33,-0.7,38730.41,34.42
+"whole contracts, 0.15% of the account per ATR",combined limit $250 per basis point,50/50 mix,3.65,0.67,-7.8,,,248.68,507.52,4.14,8.29,,,
+"whole contracts, 0.15% of the account per ATR",combined limit $500 per basis point,frozen rule,5.83,0.86,-13.1,22.0,1.0,494.7,1067.4,8.25,16.49,-1.32,92489.48,27.46
+"whole contracts, 0.15% of the account per ATR",combined limit $500 per basis point,earlier system,2.51,0.38,-10.61,20.0,4.0,497.37,781.05,8.29,16.58,-1.23,70833.62,48.98
+"whole contracts, 0.15% of the account per ATR",combined limit $500 per basis point,50/50 mix,4.17,0.73,-7.28,,,494.7,820.05,8.25,16.49,,,
+"whole contracts, 0.15% of the account per ATR",combined limit $750 per basis point,frozen rule,6.03,0.87,-13.29,8.0,0.0,733.39,1067.4,12.22,24.45,-1.5,103983.82,29.86
+"whole contracts, 0.15% of the account per ATR",combined limit $750 per basis point,earlier system,2.88,0.42,-9.96,6.0,1.0,747.39,989.4,12.46,24.91,-1.82,92603.75,55.66
+"whole contracts, 0.15% of the account per ATR",combined limit $750 per basis point,50/50 mix,4.46,0.75,-7.15,,,687.54,820.05,11.46,22.92,,,
+"whole contracts, 0.15% of the account per ATR","combined limit $1,000 per basis point",frozen rule,6.02,0.87,-13.32,0.0,0.0,850.06,1067.4,14.17,28.34,-1.5,103289.23,29.72
+"whole contracts, 0.15% of the account per ATR","combined limit $1,000 per basis point",earlier system,2.88,0.42,-10.01,1.0,0.0,958.39,989.4,15.97,31.95,-2.0,92559.75,55.64
+"whole contracts, 0.15% of the account per ATR","combined limit $1,000 per basis point",50/50 mix,4.45,0.75,-7.27,,,750.05,820.05,12.5,25.0,,,
+"whole contracts, 0.15% of the account per ATR","combined limit $1,500 per basis point",frozen rule,6.02,0.87,-13.32,0.0,0.0,850.06,1067.4,14.17,28.34,-1.5,103289.23,29.72
+"whole contracts, 0.15% of the account per ATR","combined limit $1,500 per basis point",earlier system,2.88,0.42,-10.01,0.0,0.0,1083.4,1083.4,18.06,36.11,-2.0,92420.54,55.61
+"whole contracts, 0.15% of the account per ATR","combined limit $1,500 per basis point",50/50 mix,4.45,0.75,-7.27,,,750.05,820.05,12.5,25.0,,,
+"whole contracts, 0.15% of the account per ATR",no limit of any kind (reference),frozen rule,6.69,0.9,-12.54,0.0,0.0,3041.91,3109.23,50.7,101.4,-2.62,141701.53,36.71
+"whole contracts, 0.15% of the account per ATR",no limit of any kind (reference),earlier system,3.3,0.47,-9.82,0.0,0.0,3466.85,3466.85,57.78,115.56,-2.22,116909.52,61.31
+"whole contracts, 0.15% of the account per ATR",no limit of any kind (reference),50/50 mix,5.0,0.79,-6.75,,,2316.81,2316.81,38.61,77.23,,,
+"whole contracts, 0.25% of the account per ATR","current rule: 10 contracts per trade, no combined limit",frozen rule,6.47,0.55,-32.61,0.0,0.0,1008.4,1223.4,16.81,33.61,-2.19,148866.81,39.87
+"whole contracts, 0.25% of the account per ATR","current rule: 10 contracts per trade, no combined limit",earlier system,6.15,0.48,-15.0,0.0,0.0,1083.4,1083.4,18.06,36.11,-2.72,125237.88,35.26
+"whole contracts, 0.25% of the account per ATR","current rule: 10 contracts per trade, no combined limit",50/50 mix,6.31,0.6,-16.59,,,876.56,937.05,14.61,29.22,,,
+"whole contracts, 0.25% of the account per ATR",combined limit $250 per basis point,frozen rule,5.13,0.46,-31.86,111.0,17.0,250.0,867.06,4.17,8.33,-1.32,71329.77,24.11
+"whole contracts, 0.25% of the account per ATR",combined limit $250 per basis point,earlier system,4.65,0.39,-17.08,87.0,12.0,250.0,692.37,4.17,8.33,-1.05,38403.61,14.31
+"whole contracts, 0.25% of the account per ATR",combined limit $250 per basis point,50/50 mix,4.89,0.5,-16.98,,,248.68,598.35,4.14,8.29,,,
+"whole contracts, 0.25% of the account per ATR",combined limit $500 per basis point,frozen rule,6.1,0.53,-32.11,30.0,3.0,498.34,1223.4,8.31,16.61,-2.19,127350.52,36.19
+"whole contracts, 0.25% of the account per ATR",combined limit $500 per basis point,earlier system,5.37,0.44,-14.95,25.0,5.0,497.37,942.39,8.29,16.58,-1.27,80158.32,25.85
+"whole contracts, 0.25% of the account per ATR",combined limit $500 per basis point,50/50 mix,5.73,0.56,-16.51,,,493.36,937.05,8.22,16.45,,,
+"whole contracts, 0.25% of the account per ATR",combined limit $750 per basis point,frozen rule,6.5,0.55,-32.57,11.0,0.0,740.02,1223.4,12.33,24.67,-2.19,150641.21,40.15
+"whole contracts, 0.25% of the account per ATR",combined limit $750 per basis point,earlier system,5.84,0.47,-15.0,12.0,1.0,747.39,1067.4,12.46,24.91,-1.81,107102.55,31.78
+"whole contracts, 0.25% of the account per ATR",combined limit $750 per basis point,50/50 mix,6.17,0.59,-16.59,,,720.89,937.05,12.01,24.03,,,
+"whole contracts, 0.25% of the account per ATR","combined limit $1,000 per basis point",frozen rule,6.47,0.55,-32.61,2.0,0.0,983.4,1223.4,16.39,32.78,-2.19,149102.56,39.9
+"whole contracts, 0.25% of the account per ATR","combined limit $1,000 per basis point",earlier system,6.12,0.48,-15.0,4.0,1.0,994.72,1067.4,16.58,33.16,-2.37,123317.22,34.91
+"whole contracts, 0.25% of the account per ATR","combined limit $1,000 per basis point",50/50 mix,6.3,0.6,-16.59,,,837.56,937.05,13.96,27.92,,,
+"whole contracts, 0.25% of the account per ATR","combined limit $1,500 per basis point",frozen rule,6.47,0.55,-32.61,0.0,0.0,1008.4,1223.4,16.81,33.61,-2.19,148866.81,39.87
+"whole contracts, 0.25% of the account per ATR","combined limit $1,500 per basis point",earlier system,6.15,0.48,-15.0,0.0,0.0,1083.4,1083.4,18.06,36.11,-2.72,125237.88,35.26
+"whole contracts, 0.25% of the account per ATR","combined limit $1,500 per basis point",50/50 mix,6.31,0.6,-16.59,,,876.56,937.05,14.61,29.22,,,
+"whole contracts, 0.25% of the account per ATR",no limit of any kind (reference),frozen rule,7.92,0.62,-31.61,0.0,0.0,5083.74,5140.38,84.73,169.46,-4.36,232559.39,50.88
+"whole contracts, 0.25% of the account per ATR",no limit of any kind (reference),earlier system,7.44,0.56,-14.14,0.0,0.0,5741.97,5741.97,95.7,191.4,-3.73,199545.19,46.46
+"whole contracts, 0.25% of the account per ATR",no limit of any kind (reference),50/50 mix,7.68,0.67,-14.44,,,3850.23,3850.23,64.17,128.34,,,

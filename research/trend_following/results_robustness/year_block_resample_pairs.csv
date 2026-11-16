@@ -1,0 +1,22 @@
+sizing,question,value,unit
+"whole contracts, 0.15% of the account per ATR",frozen rule has the higher Sharpe than the earlier system (same drawn years),96.99,% of draws
+"whole contracts, 0.15% of the account per ATR",frozen rule has the higher return,96.6,% of draws
+"whole contracts, 0.15% of the account per ATR",frozen rule has the shallower worst drawdown,81.1,% of draws
+"whole contracts, 0.15% of the account per ATR",50/50 mix has the higher Sharpe than the frozen rule,11.09,% of draws
+"whole contracts, 0.15% of the account per ATR",50/50 mix has the shallower worst drawdown than the frozen rule,75.18,% of draws
+"whole contracts, 0.15% of the account per ATR","frozen rule Sharpe in draws that contain neither 2020 nor 2022, median",0.46,Sharpe
+"whole contracts, 0.15% of the account per ATR","earlier system Sharpe in draws that contain neither 2020 nor 2022, median",0.16,Sharpe
+"whole contracts, 0.25% of the account per ATR",frozen rule has the higher Sharpe than the earlier system (same drawn years),59.03,% of draws
+"whole contracts, 0.25% of the account per ATR",frozen rule has the higher return,51.91,% of draws
+"whole contracts, 0.25% of the account per ATR",frozen rule has the shallower worst drawdown,48.31,% of draws
+"whole contracts, 0.25% of the account per ATR",50/50 mix has the higher Sharpe than the frozen rule,62.66,% of draws
+"whole contracts, 0.25% of the account per ATR",50/50 mix has the shallower worst drawdown than the frozen rule,92.54,% of draws
+"whole contracts, 0.25% of the account per ATR","frozen rule Sharpe in draws that contain neither 2020 nor 2022, median",0.18,Sharpe
+"whole contracts, 0.25% of the account per ATR","earlier system Sharpe in draws that contain neither 2020 nor 2022, median",0.33,Sharpe
+"fractional, 0.25% of the account per ATR",frozen rule has the higher Sharpe than the earlier system (same drawn years),77.24,% of draws
+"fractional, 0.25% of the account per ATR",frozen rule has the higher return,72.17,% of draws
+"fractional, 0.25% of the account per ATR",frozen rule has the shallower worst drawdown,61.5,% of draws
+"fractional, 0.25% of the account per ATR",50/50 mix has the higher Sharpe than the frozen rule,40.26,% of draws
+"fractional, 0.25% of the account per ATR",50/50 mix has the shallower worst drawdown than the frozen rule,82.42,% of draws
+"fractional, 0.25% of the account per ATR","frozen rule Sharpe in draws that contain neither 2020 nor 2022, median",0.3,Sharpe
+"fractional, 0.25% of the account per ATR","earlier system Sharpe in draws that contain neither 2020 nor 2022, median",0.27,Sharpe

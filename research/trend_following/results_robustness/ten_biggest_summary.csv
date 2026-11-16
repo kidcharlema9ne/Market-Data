@@ -1,0 +1,7 @@
+sizing,system,trades,total_profit_usd,ten_biggest_profit_usd,ten_biggest_share_pct,biggest_single_share_pct,profit_of_all_other_trades_usd,entry_years_of_the_ten,distinct_markets_in_ten,short_rate_trades_in_ten,ten_in_other_systems_top_ten
+"whole contracts, 0.15% of the account per ATR",frozen rule,1022,347593.73,232149.45,66.79,12.05,115444.28,"2012x1, 2014x3, 2020x4, 2021x2",9,3,3
+"whole contracts, 0.15% of the account per ATR",earlier system,682,166204.62,143507.12,86.34,21.86,22697.5,"2008x1, 2010x1, 2012x1, 2014x1, 2016x1, 2020x5",10,3,3
+"whole contracts, 0.25% of the account per ATR",frozen rule,1391,373413.46,354498.12,94.93,18.7,18915.34,"2012x1, 2014x3, 2020x4, 2021x1, 2024x1",10,3,3
+"whole contracts, 0.25% of the account per ATR",earlier system,916,355196.71,321166.67,90.42,15.65,34030.04,"2008x1, 2010x1, 2011x1, 2012x1, 2014x2, 2017x1, 2020x2, 2024x1",10,2,3
+"fractional, 0.25% of the account per ATR",frozen rule,1891,465078.68,319411.09,68.68,15.01,145667.59,"2012x1, 2014x3, 2020x4, 2021x1, 2024x1",10,3,3
+"fractional, 0.25% of the account per ATR",earlier system,1179,347140.78,268343.67,77.3,12.1,78797.11,"2008x1, 2012x1, 2014x4, 2017x1, 2020x2, 2024x1",10,2,3

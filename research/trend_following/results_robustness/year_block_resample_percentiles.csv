@@ -1,0 +1,37 @@
+sizing,system,measure,p05,p25,median,p75,p95
+"whole contracts, 0.15% of the account per ATR",frozen rule,return_per_year_pct,2.2,4.16,5.78,7.62,10.61
+"whole contracts, 0.15% of the account per ATR",frozen rule,sharpe,0.35,0.64,0.84,1.06,1.37
+"whole contracts, 0.15% of the account per ATR",frozen rule,max_drawdown_pct,-16.93,-11.89,-9.27,-7.43,-5.64
+"whole contracts, 0.15% of the account per ATR",frozen rule,share of draws with a negative return (%),,,0.09,,
+"whole contracts, 0.15% of the account per ATR",earlier system,return_per_year_pct,0.05,1.52,2.73,4.06,6.35
+"whole contracts, 0.15% of the account per ATR",earlier system,sharpe,0.01,0.24,0.4,0.57,0.8
+"whole contracts, 0.15% of the account per ATR",earlier system,max_drawdown_pct,-25.16,-17.36,-13.67,-11.07,-8.53
+"whole contracts, 0.15% of the account per ATR",earlier system,share of draws with a negative return (%),,,4.55,,
+"whole contracts, 0.15% of the account per ATR",50/50 mix,return_per_year_pct,1.44,2.91,4.23,5.73,8.28
+"whole contracts, 0.15% of the account per ATR",50/50 mix,sharpe,0.28,0.53,0.72,0.91,1.18
+"whole contracts, 0.15% of the account per ATR",50/50 mix,max_drawdown_pct,-13.03,-9.55,-7.94,-6.75,-5.49
+"whole contracts, 0.15% of the account per ATR",50/50 mix,share of draws with a negative return (%),,,0.25,,
+"whole contracts, 0.25% of the account per ATR",frozen rule,return_per_year_pct,0.91,3.85,6.23,8.75,12.87
+"whole contracts, 0.25% of the account per ATR",frozen rule,sharpe,0.08,0.34,0.53,0.72,0.99
+"whole contracts, 0.25% of the account per ATR",frozen rule,max_drawdown_pct,-41.54,-27.01,-20.57,-15.77,-11.33
+"whole contracts, 0.25% of the account per ATR",frozen rule,share of draws with a negative return (%),,,2.48,,
+"whole contracts, 0.25% of the account per ATR",earlier system,return_per_year_pct,1.06,3.8,5.97,8.29,12.02
+"whole contracts, 0.25% of the account per ATR",earlier system,sharpe,0.09,0.32,0.47,0.62,0.83
+"whole contracts, 0.25% of the account per ATR",earlier system,max_drawdown_pct,-36.96,-25.48,-19.85,-15.85,-12.1
+"whole contracts, 0.25% of the account per ATR",earlier system,share of draws with a negative return (%),,,2.01,,
+"whole contracts, 0.25% of the account per ATR",50/50 mix,return_per_year_pct,1.86,4.14,6.04,8.18,11.71
+"whole contracts, 0.25% of the account per ATR",50/50 mix,sharpe,0.2,0.42,0.58,0.74,0.96
+"whole contracts, 0.25% of the account per ATR",50/50 mix,max_drawdown_pct,-24.4,-17.37,-14.09,-11.97,-9.22
+"whole contracts, 0.25% of the account per ATR",50/50 mix,share of draws with a negative return (%),,,0.36,,
+"fractional, 0.25% of the account per ATR",frozen rule,return_per_year_pct,1.85,5.2,7.79,10.62,14.99
+"fractional, 0.25% of the account per ATR",frozen rule,sharpe,0.15,0.41,0.59,0.76,1.01
+"fractional, 0.25% of the account per ATR",frozen rule,max_drawdown_pct,-42.79,-28.05,-21.37,-16.65,-11.96
+"fractional, 0.25% of the account per ATR",frozen rule,share of draws with a negative return (%),,,1.25,,
+"fractional, 0.25% of the account per ATR",earlier system,return_per_year_pct,0.38,3.49,5.84,8.37,12.3
+"fractional, 0.25% of the account per ATR",earlier system,sharpe,0.03,0.26,0.42,0.56,0.77
+"fractional, 0.25% of the account per ATR",earlier system,max_drawdown_pct,-47.16,-31.56,-24.43,-19.23,-14.37
+"fractional, 0.25% of the account per ATR",earlier system,share of draws with a negative return (%),,,3.94,,
+"fractional, 0.25% of the account per ATR",50/50 mix,return_per_year_pct,1.82,4.6,6.78,9.19,13.08
+"fractional, 0.25% of the account per ATR",50/50 mix,sharpe,0.18,0.4,0.56,0.71,0.93
+"fractional, 0.25% of the account per ATR",50/50 mix,max_drawdown_pct,-29.5,-20.72,-16.75,-13.77,-10.44
+"fractional, 0.25% of the account per ATR",50/50 mix,share of draws with a negative return (%),,,0.82,,
