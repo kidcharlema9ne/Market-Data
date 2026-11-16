@@ -257,6 +257,10 @@ MULT_BY_ROOT = dict(zip(tu["ibkr_root"], tu["multiplier"]))
 MICRO = {"ES": 5, "NQ": 2, "GC": 10, "CL": 100, "SI": 1000, "RTY": 5}      # micro contracts traded on the (identical-price) full-size history
 MULT = np.array([MICRO.get(ib, MULT_BY_ROOT.get(ib, np.nan)) for ib in names], float)
 assert np.isfinite(MULT).all(), [ib for ib, mu in zip(names, MULT) if not np.isfinite(mu)]
+cs_ = pd.read_csv(str(Path(__file__).resolve().parent / "results" / "contract_size_atr20.csv"))
+LAST_CLOSE = dict(zip(cs_["price_symbol"], cs_["last_close"]))      # today's real front-contract prices (ratio back-adjusted series end on the real price)
+REFPX = np.array([LAST_CLOSE.get(PRICE_MAP.get(ib, ib), np.nan) for ib in names], float)
+assert np.isfinite(REFPX).all(), [ib for ib, v_ in zip(names, REFPX) if not np.isfinite(v_)]
 ALLD = pd.DatetimeIndex(sorted(set(np.concatenate(MDATES))))
 ALLD = ALLD[(ALLD >= DEV_START) & (ALLD <= DEV_END)]
 pos_of = {d_: i_ for i_, d_ in enumerate(ALLD)}
@@ -312,7 +316,7 @@ for nm in METHODS:
     kp = nonoverlap(rows0, held_all)
     rows, d, res, held, px = rows0[kp], d0[kp], res_all[kp], held_all[kp], px0[kp]
     sr = np.isin(mkt_names[rows], SHORT_RATES)
-    atr_d = ATR0[rows] * MULT[MK[rows]]                       # dollars per 1 ATR per contract at entry
+    atr_d = (ATR0[rows] / px) * REFPX[MK[rows]] * MULT[MK[rows]]    # dollars per 1 ATR per contract in TODAY's contract terms: the trade's ATR as a percent of price times today's contract value
     for sizing, tgt_pct in (("fractional contracts", 0.25), ("whole contracts", 0.15), ("whole contracts", 0.25), ("whole contracts", 0.35)):
         tgt = CAPITAL * tgt_pct / 100.0
         if sizing.startswith("fractional"):
