@@ -1,0 +1,209 @@
+development rows 355,303; 2007-12-31 to 2021-08-06; sealed years removed at load
+48 markets; 147,433 decision days; 894,224 entries across 72 combinations; 3s
+pooled ratio (any of 5, 10, 20 X=0.5 N=10: 18952 entries (3s)
+pooled ratio (any of 5, 10, 20 X=0.5 N=20: 19098 entries (4s)
+pooled ratio (any of 5, 10, 20 X=0.5 N=40: 19102 entries (4s)
+pooled ratio (any of 5, 10, 20 X=1.0 N=10: 17060 entries (5s)
+pooled ratio (any of 5, 10, 20 X=1.0 N=20: 18848 entries (5s)
+pooled ratio (any of 5, 10, 20 X=1.0 N=40: 19090 entries (6s)
+pooled ratio (any of 5, 10, 20 X=1.5 N=10: 13489 entries (6s)
+pooled ratio (any of 5, 10, 20 X=1.5 N=20: 17638 entries (7s)
+pooled ratio (any of 5, 10, 20 X=1.5 N=40: 18969 entries (7s)
+pooled ratio (any of 5, 10, 20 X=2.0 N=10: 9707 entries (7s)
+pooled ratio (any of 5, 10, 20 X=2.0 N=20: 15205 entries (8s)
+pooled ratio (any of 5, 10, 20 X=2.0 N=40: 18325 entries (8s)
+pooled ratio (any of 5, 10, 20 X=2.5 N=10: 6397 entries (8s)
+pooled ratio (any of 5, 10, 20 X=2.5 N=20: 12229 entries (9s)
+pooled ratio (any of 5, 10, 20 X=2.5 N=40: 17029 entries (9s)
+pooled ratio (any of 5, 10, 20 X=3.0 N=10: 4087 entries (9s)
+pooled ratio (any of 5, 10, 20 X=3.0 N=20: 9553 entries (10s)
+pooled ratio (any of 5, 10, 20 X=3.0 N=40: 15087 entries (10s)
+10-session ratio at least 0.45 X=0.5 N=10: 11313 entries (10s)
+10-session ratio at least 0.45 X=0.5 N=20: 11391 entries (10s)
+10-session ratio at least 0.45 X=0.5 N=40: 11393 entries (11s)
+10-session ratio at least 0.45 X=1.0 N=10: 10200 entries (11s)
+10-session ratio at least 0.45 X=1.0 N=20: 11235 entries (11s)
+10-session ratio at least 0.45 X=1.0 N=40: 11385 entries (12s)
+10-session ratio at least 0.45 X=1.5 N=10: 8071 entries (12s)
+10-session ratio at least 0.45 X=1.5 N=20: 10546 entries (12s)
+10-session ratio at least 0.45 X=1.5 N=40: 11315 entries (12s)
+10-session ratio at least 0.45 X=2.0 N=10: 5837 entries (12s)
+10-session ratio at least 0.45 X=2.0 N=20: 9072 entries (13s)
+10-session ratio at least 0.45 X=2.0 N=40: 10904 entries (13s)
+10-session ratio at least 0.45 X=2.5 N=10: 3839 entries (13s)
+10-session ratio at least 0.45 X=2.5 N=20: 7315 entries (13s)
+10-session ratio at least 0.45 X=2.5 N=40: 10097 entries (13s)
+10-session ratio at least 0.45 X=3.0 N=10: 2457 entries (13s)
+10-session ratio at least 0.45 X=3.0 N=20: 5707 entries (14s)
+10-session ratio at least 0.45 X=3.0 N=40: 8910 entries (14s)
+20-session ratio at least 0.50 X=0.5 N=10: 3370 entries (14s)
+20-session ratio at least 0.50 X=0.5 N=20: 3384 entries (14s)
+20-session ratio at least 0.50 X=0.5 N=40: 3384 entries (14s)
+20-session ratio at least 0.50 X=1.0 N=10: 3080 entries (14s)
+20-session ratio at least 0.50 X=1.0 N=20: 3347 entries (14s)
+20-session ratio at least 0.50 X=1.0 N=40: 3378 entries (14s)
+20-session ratio at least 0.50 X=1.5 N=10: 2452 entries (14s)
+20-session ratio at least 0.50 X=1.5 N=20: 3147 entries (14s)
+20-session ratio at least 0.50 X=1.5 N=40: 3360 entries (14s)
+20-session ratio at least 0.50 X=2.0 N=10: 1751 entries (14s)
+20-session ratio at least 0.50 X=2.0 N=20: 2673 entries (14s)
+20-session ratio at least 0.50 X=2.0 N=40: 3228 entries (15s)
+20-session ratio at least 0.50 X=2.5 N=10: 1205 entries (15s)
+20-session ratio at least 0.50 X=2.5 N=20: 2181 entries (15s)
+20-session ratio at least 0.50 X=2.5 N=40: 3004 entries (15s)
+20-session ratio at least 0.50 X=3.0 N=10: 759 entries (15s)
+20-session ratio at least 0.50 X=3.0 N=20: 1649 entries (15s)
+20-session ratio at least 0.50 X=3.0 N=40: 2573 entries (15s)
+control: no ratio, every 5th s X=0.5 N=10: 29033 entries (16s)
+control: no ratio, every 5th s X=0.5 N=20: 29185 entries (16s)
+control: no ratio, every 5th s X=0.5 N=40: 29187 entries (17s)
+control: no ratio, every 5th s X=1.0 N=10: 26487 entries (18s)
+control: no ratio, every 5th s X=1.0 N=20: 28893 entries (19s)
+control: no ratio, every 5th s X=1.0 N=40: 29166 entries (20s)
+control: no ratio, every 5th s X=1.5 N=10: 21152 entries (20s)
+control: no ratio, every 5th s X=1.5 N=20: 27118 entries (21s)
+control: no ratio, every 5th s X=1.5 N=40: 29006 entries (22s)
+control: no ratio, every 5th s X=2.0 N=10: 15241 entries (22s)
+control: no ratio, every 5th s X=2.0 N=20: 23394 entries (23s)
+control: no ratio, every 5th s X=2.0 N=40: 28035 entries (23s)
+control: no ratio, every 5th s X=2.5 N=10: 10234 entries (24s)
+control: no ratio, every 5th s X=2.5 N=20: 18868 entries (24s)
+control: no ratio, every 5th s X=2.5 N=40: 25966 entries (25s)
+control: no ratio, every 5th s X=3.0 N=10: 6653 entries (25s)
+control: no ratio, every 5th s X=3.0 N=20: 14779 entries (25s)
+control: no ratio, every 5th s X=3.0 N=40: 23050 entries (26s)
+
+==== pooled ratio (any of 5, 10, 20 sessions): average result in ATR by pullback size, watch length and exit ====
+exit                                            time exit 5  time exit 10  time exit 20  trail 2 ATR, max 40  trail 3 ATR, max 40  trail 3 ATR, max 60  trail 4 ATR, max 60
+pullback_x_atr watch_sessions n     per_month                                                                                                                              
+0.5            10             18952 116.136803       -0.090        -0.078        -0.048               -0.058               -0.030               -0.005                0.041
+               20             19098 117.031483       -0.090        -0.076        -0.046               -0.057               -0.027               -0.002                0.045
+               40             19102 117.055995       -0.090        -0.076        -0.046               -0.057               -0.027               -0.002                0.045
+1.0            10             17060 104.542732       -0.094        -0.078        -0.077               -0.079               -0.054               -0.040                0.010
+               20             18848 115.499497       -0.095        -0.079        -0.078               -0.080               -0.055               -0.041                0.008
+               40             19090 116.982459       -0.093        -0.078        -0.076               -0.081               -0.055               -0.041                0.006
+1.5            10             13489 82.659842        -0.063        -0.064        -0.067               -0.041               -0.032               -0.012                0.011
+               20             17638 108.084684       -0.055        -0.062        -0.066               -0.044               -0.019                0.001                0.017
+               40             18969 116.240978       -0.057        -0.061        -0.065               -0.041               -0.013                0.008                0.025
+2.0            10             9707  59.483957        -0.065        -0.061        -0.033               -0.038                0.001                0.029                0.066
+               20             15205 93.175395        -0.074        -0.074        -0.058               -0.060               -0.019                0.007                0.032
+               40             18325 112.294582       -0.082        -0.078        -0.058               -0.064               -0.021                0.007                0.038
+2.5            10             6397  39.200461        -0.103        -0.080        -0.032               -0.017                0.075                0.082                0.117
+               20             12229 74.938632        -0.094        -0.094        -0.054               -0.039                0.036                0.052                0.077
+               40             17029 104.352766       -0.086        -0.086        -0.033               -0.032                0.028                0.051                0.085
+3.0            10             4087  25.044909        -0.105        -0.094        -0.069               -0.072                0.050                0.056                0.077
+               20             9553  58.540253        -0.098        -0.092        -0.064               -0.052                0.036                0.055                0.065
+               40             15087 92.452298        -0.094        -0.083        -0.037               -0.038                0.026                0.053                0.071
+
+==== 10-session ratio at least 0.45 alone: average result in ATR by pullback size, watch length and exit ====
+exit                                           time exit 5  time exit 10  time exit 20  trail 2 ATR, max 40  trail 3 ATR, max 40  trail 3 ATR, max 60  trail 4 ATR, max 60
+pullback_x_atr watch_sessions n     per_month                                                                                                                             
+0.5            10             11313 69.325435       -0.082        -0.057        -0.029               -0.044                0.022                0.037                0.086
+               20             11391 69.803415       -0.079        -0.053        -0.026               -0.041                0.026                0.041                0.090
+               40             11393 69.815671       -0.079        -0.053        -0.026               -0.041                0.026                0.041                0.090
+1.0            10             10200 62.505033       -0.088        -0.063        -0.070               -0.072               -0.011               -0.010                0.045
+               20             11235 68.847456       -0.085        -0.057        -0.064               -0.067               -0.004                0.002                0.056
+               40             11385 69.766647       -0.082        -0.054        -0.060               -0.064               -0.000                0.004                0.056
+1.5            10             8071  49.458640       -0.050        -0.053        -0.058               -0.010                0.014                0.020                0.027
+               20             10546 64.625302       -0.044        -0.047        -0.054               -0.013                0.020                0.032                0.043
+               40             11315 69.337691       -0.039        -0.036        -0.043               -0.001                0.039                0.055                0.069
+2.0            10             5837  35.768812       -0.057        -0.060        -0.043               -0.018                0.040                0.056                0.072
+               20             9072  55.592712       -0.067        -0.069        -0.058               -0.043                0.007                0.027                0.039
+               40             10904 66.819106       -0.077        -0.069        -0.051               -0.046                0.012                0.033                0.062
+2.5            10             3839  23.525179       -0.072        -0.061         0.003                0.030                0.147                0.161                0.186
+               20             7315  44.825914       -0.074        -0.081        -0.025               -0.001                0.078                0.097                0.112
+               40             10097 61.873855       -0.068        -0.072        -0.007                0.001                0.085                0.108                0.134
+3.0            10             2457  15.056359       -0.076        -0.053         0.053                0.066                0.196                0.214                0.214
+               20             5707  34.972179       -0.077        -0.082        -0.025               -0.006                0.076                0.102                0.108
+               40             8910  54.599985       -0.072        -0.060         0.011                0.012                0.099                0.132                0.139
+
+==== 20-session ratio at least 0.50 alone: average result in ATR by pullback size, watch length and exit ====
+exit                                          time exit 5  time exit 10  time exit 20  trail 2 ATR, max 40  trail 3 ATR, max 40  trail 3 ATR, max 60  trail 4 ATR, max 60
+pullback_x_atr watch_sessions n    per_month                                                                                                                             
+0.5            10             3370 20.651173       -0.066        -0.025        -0.008               -0.025                0.027                0.067                0.114
+               20             3384 20.736964       -0.065        -0.024        -0.007               -0.024                0.032                0.074                0.120
+               40             3384 20.736964       -0.065        -0.024        -0.007               -0.024                0.032                0.074                0.120
+1.0            10             3080 18.874069       -0.074        -0.039        -0.052               -0.024                0.010                0.016                0.073
+               20             3347 20.510230       -0.078        -0.047        -0.052               -0.037                0.003                0.012                0.068
+               40             3378 20.700196       -0.079        -0.049        -0.056               -0.040               -0.001                0.007                0.061
+1.5            10             2452 15.025720       -0.061        -0.019        -0.024               -0.019                0.048                0.038                0.092
+               20             3147 19.284641       -0.058        -0.014        -0.005                0.009                0.100                0.102                0.142
+               40             3360 20.589893       -0.066        -0.018        -0.012                0.007                0.106                0.114                0.146
+2.0            10             1751 10.730031       -0.084        -0.052         0.015               -0.020                0.080                0.100                0.168
+               20             2673 16.379995       -0.063        -0.003         0.087                0.034                0.147                0.166                0.217
+               40             3228 19.781005       -0.095        -0.034         0.036               -0.004                0.094                0.111                0.151
+2.5            10             1205 7.384173        -0.040        -0.021         0.093                0.063                0.252                0.273                0.315
+               20             2181 13.365047       -0.032         0.025         0.147                0.086                0.234                0.241                0.291
+               40             3004 18.408345       -0.047        -0.004         0.108                0.059                0.199                0.228                0.270
+3.0            10             759  4.651110        -0.105        -0.089        -0.134               -0.105                0.044                0.053                0.075
+               20             1649 10.104980       -0.077        -0.043        -0.009               -0.016                0.061                0.070                0.085
+               40             2573 15.767201       -0.066         0.000         0.061                0.056                0.113                0.138                0.133
+
+==== control: no ratio, every 5th session, 20-session direction: average result in ATR by pullback size, watch length and exit ====
+exit                                            time exit 5  time exit 10  time exit 20  trail 2 ATR, max 40  trail 3 ATR, max 40  trail 3 ATR, max 60  trail 4 ATR, max 60
+pullback_x_atr watch_sessions n     per_month                                                                                                                              
+0.5            10             29033 177.912611       -0.089        -0.070        -0.018               -0.034                0.015                0.034                0.066
+               20             29185 178.844058       -0.087        -0.068        -0.017               -0.032                0.017                0.037                0.070
+               40             29187 178.856314       -0.087        -0.068        -0.017               -0.032                0.017                0.037                0.070
+1.0            10             26487 162.310864       -0.090        -0.072        -0.041               -0.049               -0.013                0.005                0.038
+               20             28893 177.054699       -0.088        -0.064        -0.038               -0.047               -0.011                0.005                0.039
+               40             29166 178.727627       -0.087        -0.063        -0.036               -0.047               -0.009                0.006                0.040
+1.5            10             21152 129.618281       -0.062        -0.053        -0.045               -0.028                0.004                0.021                0.029
+               20             27118 166.177597       -0.055        -0.041        -0.037               -0.018                0.015                0.031                0.037
+               40             29006 177.747156       -0.052        -0.034        -0.033               -0.010                0.027                0.042                0.051
+2.0            10             15241 93.396001        -0.083        -0.077        -0.039               -0.052               -0.011                0.010                0.020
+               20             23394 143.357132       -0.077        -0.065        -0.026               -0.040                0.002                0.025                0.038
+               40             28035 171.796922       -0.086        -0.068        -0.033               -0.048                0.000                0.026                0.045
+2.5            10             10234 62.713383        -0.103        -0.098        -0.038               -0.040                0.018                0.026                0.036
+               20             18868 115.622056       -0.086        -0.077        -0.017               -0.022                0.031                0.046                0.055
+               40             25966 159.118205       -0.084        -0.074        -0.013               -0.020                0.051                0.073                0.092
+3.0            10             6653  40.769214        -0.087        -0.072        -0.044               -0.039                0.057                0.073                0.056
+               20             14779 90.564891        -0.087        -0.071        -0.037               -0.033                0.029                0.047                0.042
+               40             23050 141.249119       -0.081        -0.062        -0.018               -0.011                0.060                0.088                0.094
+
+==== HEADLINE (pooled, pullback 1.5 ATR, watch 20 sessions): every exit ====
+               exit     n  per_month  avg_ATR  win_rate_pct  avg_sessions  pct_held_over_20  first_half  second_half  t_stat  pct_years_positive  best_winner_ATR  avg_winner  avg_loser
+        time exit 5 17638    108.085   -0.055        40.413         3.846             0.000      -0.053       -0.057  -5.088              21.429           53.538       1.276     -0.958
+       time exit 10 17638    108.085   -0.062        33.604         6.154             0.000      -0.052       -0.073  -4.283              28.571           80.347       1.889     -1.050
+       time exit 20 17638    108.085   -0.066        25.428         9.444             0.000      -0.073       -0.059  -3.528              21.429           87.438       2.929     -1.088
+trail 2 ATR, max 20 17638    108.085   -0.058        28.252         8.143             0.000      -0.051       -0.065  -3.569              21.429           83.554       2.312     -0.991
+trail 2 ATR, max 40 17638    108.085   -0.044        27.719         9.319            12.524      -0.023       -0.065  -2.292              28.571          124.711       2.417     -0.987
+trail 2 ATR, max 60 17638    108.085   -0.038        27.719         9.493            12.524      -0.018       -0.059  -1.972              28.571          128.391       2.437     -0.987
+trail 3 ATR, max 20 17638    108.085   -0.060        25.700         9.200             0.000      -0.069       -0.051  -3.250              21.429           87.438       2.818     -1.056
+trail 3 ATR, max 40 17638    108.085   -0.019        22.650        12.219            23.035      -0.014       -0.024  -0.840              28.571          124.711       3.472     -1.041
+trail 3 ATR, max 60 17638    108.085    0.001        22.440        13.320            23.035       0.004       -0.003   0.036              35.714          128.391       3.596     -1.039
+trail 4 ATR, max 20 17638    108.085   -0.062        25.490         9.409             0.000      -0.069       -0.056  -3.332              21.429           87.438       2.914     -1.081
+trail 4 ATR, max 40 17638    108.085   -0.010        20.246        13.480            26.658       0.002       -0.022  -0.435              28.571          124.711       4.176     -1.073
+trail 4 ATR, max 60 17638    108.085    0.017        19.441        15.669            26.658       0.033        0.001   0.679              42.857          128.391       4.517     -1.069
+
+by year:
+exit  time exit 10  trail 3 ATR, max 40  trail 3 ATR, max 60
+year                                                        
+2008         0.054                0.162                0.192
+2009        -0.068               -0.197               -0.172
+2010        -0.138               -0.102               -0.058
+2011        -0.095               -0.241               -0.243
+2012         0.001                0.118                0.099
+2013        -0.018               -0.030               -0.030
+2014        -0.078                0.246                0.306
+2015        -0.164               -0.189               -0.195
+2016        -0.226               -0.233               -0.239
+2017        -0.055               -0.043                0.043
+2018        -0.122               -0.125               -0.152
+2019        -0.148               -0.264               -0.257
+2020         0.222                0.720                0.794
+2021         0.006               -0.144               -0.132
+
+by group:
+exit           time exit 10  trail 3 ATR, max 40  trail 3 ATR, max 60
+group                                                                
+currencies           -0.077               -0.110               -0.098
+energy                0.002                0.212                0.263
+grains               -0.140               -0.075               -0.075
+meats                 0.002                0.055                0.071
+metals               -0.118               -0.052               -0.020
+rates                -0.040                0.030                0.048
+softs                -0.045                0.036                0.071
+stock indexes        -0.086               -0.215               -0.212
+volatility            0.185                0.385                0.449
+done 26s
