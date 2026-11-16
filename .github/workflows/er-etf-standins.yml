@@ -1,4 +1,4 @@
-name: Frozen rule, whole history: short rates removed, micro and ETF stand-ins, profit by market and year
+name: "Frozen rule re-cut over whole history (short rates removed, micro and ETF stand-ins, profit by market and year)"
 # er_etf_standins.py. No tuning; sealed years already used (Entry 122).
 on:
   workflow_dispatch:
