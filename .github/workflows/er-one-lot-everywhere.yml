@@ -1,0 +1,39 @@
+name: "At least one contract in every market (0.25% per ATR)"
+# er_one_lot_everywhere.py. No tuning; sealed years already used (Entry 122).
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/er-window-mae-mfe-20261116']
+    paths:
+      - 'research/trend_following/er_one_lot_everywhere.py'
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas numpy
+      - name: Fetch futures prices from R2
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python futures_data/fetch_futures_prices.py
+      - name: One-lot-everywhere tests
+        run: |
+          mkdir -p research/trend_following/results_one_lot_everywhere
+          python research/trend_following/er_one_lot_everywhere.py futures_prices.parquet futures_data/report_universe_48_markets.csv research/trend_following/results_one_lot_everywhere | tee research/trend_following/results_one_lot_everywhere/output.txt
+      - name: Save results on the branch
+        run: |
+          echo "workflow run ${{ github.run_id }}" > research/trend_following/results_one_lot_everywhere/RUN_ID.txt
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add research/trend_following/results_one_lot_everywhere
+          git commit -m "One-lot-everywhere results (workflow run ${{ github.run_id }})" || echo "nothing to commit"
+          git pull --rebase origin ${{ github.ref_name }}
+          git push origin HEAD:${{ github.ref_name }}
