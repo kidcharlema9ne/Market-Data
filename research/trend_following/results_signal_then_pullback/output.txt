@@ -1,209 +1,682 @@
 development rows 355,303; 2007-12-31 to 2021-08-06; sealed years removed at load
-48 markets; 147,433 decision days; 894,224 entries across 72 combinations; 3s
-pooled ratio (any of 5, 10, 20 X=0.5 N=10: 18952 entries (3s)
-pooled ratio (any of 5, 10, 20 X=0.5 N=20: 19098 entries (4s)
-pooled ratio (any of 5, 10, 20 X=0.5 N=40: 19102 entries (4s)
-pooled ratio (any of 5, 10, 20 X=1.0 N=10: 17060 entries (5s)
-pooled ratio (any of 5, 10, 20 X=1.0 N=20: 18848 entries (5s)
-pooled ratio (any of 5, 10, 20 X=1.0 N=40: 19090 entries (6s)
-pooled ratio (any of 5, 10, 20 X=1.5 N=10: 13489 entries (6s)
-pooled ratio (any of 5, 10, 20 X=1.5 N=20: 17638 entries (7s)
-pooled ratio (any of 5, 10, 20 X=1.5 N=40: 18969 entries (7s)
-pooled ratio (any of 5, 10, 20 X=2.0 N=10: 9707 entries (7s)
-pooled ratio (any of 5, 10, 20 X=2.0 N=20: 15205 entries (8s)
-pooled ratio (any of 5, 10, 20 X=2.0 N=40: 18325 entries (8s)
-pooled ratio (any of 5, 10, 20 X=2.5 N=10: 6397 entries (8s)
-pooled ratio (any of 5, 10, 20 X=2.5 N=20: 12229 entries (9s)
-pooled ratio (any of 5, 10, 20 X=2.5 N=40: 17029 entries (9s)
-pooled ratio (any of 5, 10, 20 X=3.0 N=10: 4087 entries (9s)
-pooled ratio (any of 5, 10, 20 X=3.0 N=20: 9553 entries (10s)
-pooled ratio (any of 5, 10, 20 X=3.0 N=40: 15087 entries (10s)
-10-session ratio at least 0.45 X=0.5 N=10: 11313 entries (10s)
-10-session ratio at least 0.45 X=0.5 N=20: 11391 entries (10s)
-10-session ratio at least 0.45 X=0.5 N=40: 11393 entries (11s)
-10-session ratio at least 0.45 X=1.0 N=10: 10200 entries (11s)
-10-session ratio at least 0.45 X=1.0 N=20: 11235 entries (11s)
-10-session ratio at least 0.45 X=1.0 N=40: 11385 entries (12s)
-10-session ratio at least 0.45 X=1.5 N=10: 8071 entries (12s)
-10-session ratio at least 0.45 X=1.5 N=20: 10546 entries (12s)
-10-session ratio at least 0.45 X=1.5 N=40: 11315 entries (12s)
-10-session ratio at least 0.45 X=2.0 N=10: 5837 entries (12s)
-10-session ratio at least 0.45 X=2.0 N=20: 9072 entries (13s)
-10-session ratio at least 0.45 X=2.0 N=40: 10904 entries (13s)
-10-session ratio at least 0.45 X=2.5 N=10: 3839 entries (13s)
-10-session ratio at least 0.45 X=2.5 N=20: 7315 entries (13s)
-10-session ratio at least 0.45 X=2.5 N=40: 10097 entries (13s)
-10-session ratio at least 0.45 X=3.0 N=10: 2457 entries (13s)
-10-session ratio at least 0.45 X=3.0 N=20: 5707 entries (14s)
-10-session ratio at least 0.45 X=3.0 N=40: 8910 entries (14s)
-20-session ratio at least 0.50 X=0.5 N=10: 3370 entries (14s)
-20-session ratio at least 0.50 X=0.5 N=20: 3384 entries (14s)
-20-session ratio at least 0.50 X=0.5 N=40: 3384 entries (14s)
-20-session ratio at least 0.50 X=1.0 N=10: 3080 entries (14s)
-20-session ratio at least 0.50 X=1.0 N=20: 3347 entries (14s)
-20-session ratio at least 0.50 X=1.0 N=40: 3378 entries (14s)
-20-session ratio at least 0.50 X=1.5 N=10: 2452 entries (14s)
-20-session ratio at least 0.50 X=1.5 N=20: 3147 entries (14s)
-20-session ratio at least 0.50 X=1.5 N=40: 3360 entries (14s)
-20-session ratio at least 0.50 X=2.0 N=10: 1751 entries (14s)
-20-session ratio at least 0.50 X=2.0 N=20: 2673 entries (14s)
-20-session ratio at least 0.50 X=2.0 N=40: 3228 entries (15s)
-20-session ratio at least 0.50 X=2.5 N=10: 1205 entries (15s)
-20-session ratio at least 0.50 X=2.5 N=20: 2181 entries (15s)
-20-session ratio at least 0.50 X=2.5 N=40: 3004 entries (15s)
-20-session ratio at least 0.50 X=3.0 N=10: 759 entries (15s)
-20-session ratio at least 0.50 X=3.0 N=20: 1649 entries (15s)
-20-session ratio at least 0.50 X=3.0 N=40: 2573 entries (15s)
-control: no ratio, every 5th s X=0.5 N=10: 29033 entries (16s)
-control: no ratio, every 5th s X=0.5 N=20: 29185 entries (16s)
-control: no ratio, every 5th s X=0.5 N=40: 29187 entries (17s)
-control: no ratio, every 5th s X=1.0 N=10: 26487 entries (18s)
-control: no ratio, every 5th s X=1.0 N=20: 28893 entries (19s)
-control: no ratio, every 5th s X=1.0 N=40: 29166 entries (20s)
-control: no ratio, every 5th s X=1.5 N=10: 21152 entries (20s)
-control: no ratio, every 5th s X=1.5 N=20: 27118 entries (21s)
-control: no ratio, every 5th s X=1.5 N=40: 29006 entries (22s)
-control: no ratio, every 5th s X=2.0 N=10: 15241 entries (22s)
-control: no ratio, every 5th s X=2.0 N=20: 23394 entries (23s)
-control: no ratio, every 5th s X=2.0 N=40: 28035 entries (23s)
-control: no ratio, every 5th s X=2.5 N=10: 10234 entries (24s)
-control: no ratio, every 5th s X=2.5 N=20: 18868 entries (24s)
-control: no ratio, every 5th s X=2.5 N=40: 25966 entries (25s)
-control: no ratio, every 5th s X=3.0 N=10: 6653 entries (25s)
-control: no ratio, every 5th s X=3.0 N=20: 14779 entries (25s)
-control: no ratio, every 5th s X=3.0 N=40: 23050 entries (26s)
+48 markets; 147,433 decision days; 894,224 entries across 72 combinations; 2s
+pooled ratio (any of 5, 10, 20 X=0.5 N=10: 18150 distinct entries (3s)
+pooled ratio (any of 5, 10, 20 X=0.5 N=20: 18246 distinct entries (3s)
+pooled ratio (any of 5, 10, 20 X=0.5 N=40: 18250 distinct entries (3s)
+pooled ratio (any of 5, 10, 20 X=1.0 N=10: 14469 distinct entries (4s)
+pooled ratio (any of 5, 10, 20 X=1.0 N=20: 15153 distinct entries (4s)
+pooled ratio (any of 5, 10, 20 X=1.0 N=40: 15221 distinct entries (4s)
+pooled ratio (any of 5, 10, 20 X=1.5 N=10: 10925 distinct entries (5s)
+pooled ratio (any of 5, 10, 20 X=1.5 N=20: 12191 distinct entries (5s)
+pooled ratio (any of 5, 10, 20 X=1.5 N=40: 12359 distinct entries (5s)
+pooled ratio (any of 5, 10, 20 X=2.0 N=10: 8048 distinct entries (5s)
+pooled ratio (any of 5, 10, 20 X=2.0 N=20: 9875 distinct entries (5s)
+pooled ratio (any of 5, 10, 20 X=2.0 N=40: 10172 distinct entries (6s)
+pooled ratio (any of 5, 10, 20 X=2.5 N=10: 5478 distinct entries (6s)
+pooled ratio (any of 5, 10, 20 X=2.5 N=20: 7966 distinct entries (6s)
+pooled ratio (any of 5, 10, 20 X=2.5 N=40: 8449 distinct entries (6s)
+pooled ratio (any of 5, 10, 20 X=3.0 N=10: 3604 distinct entries (6s)
+pooled ratio (any of 5, 10, 20 X=3.0 N=20: 6434 distinct entries (6s)
+pooled ratio (any of 5, 10, 20 X=3.0 N=40: 7218 distinct entries (6s)
+10-session ratio at least 0.45 X=0.5 N=10: 10782 distinct entries (7s)
+10-session ratio at least 0.45 X=0.5 N=20: 10829 distinct entries (7s)
+10-session ratio at least 0.45 X=0.5 N=40: 10830 distinct entries (7s)
+10-session ratio at least 0.45 X=1.0 N=10: 8795 distinct entries (7s)
+10-session ratio at least 0.45 X=1.0 N=20: 9203 distinct entries (7s)
+10-session ratio at least 0.45 X=1.0 N=40: 9222 distinct entries (8s)
+10-session ratio at least 0.45 X=1.5 N=10: 6726 distinct entries (8s)
+10-session ratio at least 0.45 X=1.5 N=20: 7667 distinct entries (8s)
+10-session ratio at least 0.45 X=1.5 N=40: 7744 distinct entries (8s)
+10-session ratio at least 0.45 X=2.0 N=10: 4924 distinct entries (8s)
+10-session ratio at least 0.45 X=2.0 N=20: 6411 distinct entries (8s)
+10-session ratio at least 0.45 X=2.0 N=40: 6666 distinct entries (9s)
+10-session ratio at least 0.45 X=2.5 N=10: 3331 distinct entries (9s)
+10-session ratio at least 0.45 X=2.5 N=20: 5268 distinct entries (9s)
+10-session ratio at least 0.45 X=2.5 N=40: 5801 distinct entries (9s)
+10-session ratio at least 0.45 X=3.0 N=10: 2194 distinct entries (9s)
+10-session ratio at least 0.45 X=3.0 N=20: 4234 distinct entries (9s)
+10-session ratio at least 0.45 X=3.0 N=40: 5063 distinct entries (9s)
+20-session ratio at least 0.50 X=0.5 N=10: 3255 distinct entries (9s)
+20-session ratio at least 0.50 X=0.5 N=20: 3262 distinct entries (9s)
+20-session ratio at least 0.50 X=0.5 N=40: 3262 distinct entries (9s)
+20-session ratio at least 0.50 X=1.0 N=10: 2682 distinct entries (9s)
+20-session ratio at least 0.50 X=1.0 N=20: 2798 distinct entries (10s)
+20-session ratio at least 0.50 X=1.0 N=40: 2811 distinct entries (10s)
+20-session ratio at least 0.50 X=1.5 N=10: 2059 distinct entries (10s)
+20-session ratio at least 0.50 X=1.5 N=20: 2379 distinct entries (10s)
+20-session ratio at least 0.50 X=1.5 N=40: 2435 distinct entries (10s)
+20-session ratio at least 0.50 X=2.0 N=10: 1496 distinct entries (10s)
+20-session ratio at least 0.50 X=2.0 N=20: 1960 distinct entries (10s)
+20-session ratio at least 0.50 X=2.0 N=40: 2148 distinct entries (10s)
+20-session ratio at least 0.50 X=2.5 N=10: 1049 distinct entries (10s)
+20-session ratio at least 0.50 X=2.5 N=20: 1608 distinct entries (10s)
+20-session ratio at least 0.50 X=2.5 N=40: 1937 distinct entries (10s)
+20-session ratio at least 0.50 X=3.0 N=10: 690 distinct entries (10s)
+20-session ratio at least 0.50 X=3.0 N=20: 1256 distinct entries (10s)
+20-session ratio at least 0.50 X=3.0 N=40: 1685 distinct entries (10s)
+control: no ratio, every 5th s X=0.5 N=10: 27600 distinct entries (11s)
+control: no ratio, every 5th s X=0.5 N=20: 27601 distinct entries (11s)
+control: no ratio, every 5th s X=0.5 N=40: 27601 distinct entries (12s)
+control: no ratio, every 5th s X=1.0 N=10: 21413 distinct entries (12s)
+control: no ratio, every 5th s X=1.0 N=20: 21458 distinct entries (13s)
+control: no ratio, every 5th s X=1.0 N=40: 21458 distinct entries (13s)
+control: no ratio, every 5th s X=1.5 N=10: 15633 distinct entries (13s)
+control: no ratio, every 5th s X=1.5 N=20: 15911 distinct entries (14s)
+control: no ratio, every 5th s X=1.5 N=40: 15913 distinct entries (14s)
+control: no ratio, every 5th s X=2.0 N=10: 11497 distinct entries (14s)
+control: no ratio, every 5th s X=2.0 N=20: 12392 distinct entries (15s)
+control: no ratio, every 5th s X=2.0 N=40: 12433 distinct entries (15s)
+control: no ratio, every 5th s X=2.5 N=10: 8110 distinct entries (15s)
+control: no ratio, every 5th s X=2.5 N=20: 10031 distinct entries (15s)
+control: no ratio, every 5th s X=2.5 N=40: 10216 distinct entries (16s)
+control: no ratio, every 5th s X=3.0 N=10: 5599 distinct entries (16s)
+control: no ratio, every 5th s X=3.0 N=20: 8280 distinct entries (16s)
+control: no ratio, every 5th s X=3.0 N=40: 8761 distinct entries (16s)
 
 ==== pooled ratio (any of 5, 10, 20 sessions): average result in ATR by pullback size, watch length and exit ====
-exit                                            time exit 5  time exit 10  time exit 20  trail 2 ATR, max 40  trail 3 ATR, max 40  trail 3 ATR, max 60  trail 4 ATR, max 60
-pullback_x_atr watch_sessions n     per_month                                                                                                                              
-0.5            10             18952 116.136803       -0.090        -0.078        -0.048               -0.058               -0.030               -0.005                0.041
-               20             19098 117.031483       -0.090        -0.076        -0.046               -0.057               -0.027               -0.002                0.045
-               40             19102 117.055995       -0.090        -0.076        -0.046               -0.057               -0.027               -0.002                0.045
-1.0            10             17060 104.542732       -0.094        -0.078        -0.077               -0.079               -0.054               -0.040                0.010
-               20             18848 115.499497       -0.095        -0.079        -0.078               -0.080               -0.055               -0.041                0.008
-               40             19090 116.982459       -0.093        -0.078        -0.076               -0.081               -0.055               -0.041                0.006
-1.5            10             13489 82.659842        -0.063        -0.064        -0.067               -0.041               -0.032               -0.012                0.011
-               20             17638 108.084684       -0.055        -0.062        -0.066               -0.044               -0.019                0.001                0.017
-               40             18969 116.240978       -0.057        -0.061        -0.065               -0.041               -0.013                0.008                0.025
-2.0            10             9707  59.483957        -0.065        -0.061        -0.033               -0.038                0.001                0.029                0.066
-               20             15205 93.175395        -0.074        -0.074        -0.058               -0.060               -0.019                0.007                0.032
-               40             18325 112.294582       -0.082        -0.078        -0.058               -0.064               -0.021                0.007                0.038
-2.5            10             6397  39.200461        -0.103        -0.080        -0.032               -0.017                0.075                0.082                0.117
-               20             12229 74.938632        -0.094        -0.094        -0.054               -0.039                0.036                0.052                0.077
-               40             17029 104.352766       -0.086        -0.086        -0.033               -0.032                0.028                0.051                0.085
-3.0            10             4087  25.044909        -0.105        -0.094        -0.069               -0.072                0.050                0.056                0.077
-               20             9553  58.540253        -0.098        -0.092        -0.064               -0.052                0.036                0.055                0.065
-               40             15087 92.452298        -0.094        -0.083        -0.037               -0.038                0.026                0.053                0.071
-
-==== 10-session ratio at least 0.45 alone: average result in ATR by pullback size, watch length and exit ====
 exit                                           time exit 5  time exit 10  time exit 20  trail 2 ATR, max 40  trail 3 ATR, max 40  trail 3 ATR, max 60  trail 4 ATR, max 60
 pullback_x_atr watch_sessions n     per_month                                                                                                                             
-0.5            10             11313 69.325435       -0.082        -0.057        -0.029               -0.044                0.022                0.037                0.086
-               20             11391 69.803415       -0.079        -0.053        -0.026               -0.041                0.026                0.041                0.090
-               40             11393 69.815671       -0.079        -0.053        -0.026               -0.041                0.026                0.041                0.090
-1.0            10             10200 62.505033       -0.088        -0.063        -0.070               -0.072               -0.011               -0.010                0.045
-               20             11235 68.847456       -0.085        -0.057        -0.064               -0.067               -0.004                0.002                0.056
-               40             11385 69.766647       -0.082        -0.054        -0.060               -0.064               -0.000                0.004                0.056
-1.5            10             8071  49.458640       -0.050        -0.053        -0.058               -0.010                0.014                0.020                0.027
-               20             10546 64.625302       -0.044        -0.047        -0.054               -0.013                0.020                0.032                0.043
-               40             11315 69.337691       -0.039        -0.036        -0.043               -0.001                0.039                0.055                0.069
-2.0            10             5837  35.768812       -0.057        -0.060        -0.043               -0.018                0.040                0.056                0.072
-               20             9072  55.592712       -0.067        -0.069        -0.058               -0.043                0.007                0.027                0.039
-               40             10904 66.819106       -0.077        -0.069        -0.051               -0.046                0.012                0.033                0.062
-2.5            10             3839  23.525179       -0.072        -0.061         0.003                0.030                0.147                0.161                0.186
-               20             7315  44.825914       -0.074        -0.081        -0.025               -0.001                0.078                0.097                0.112
-               40             10097 61.873855       -0.068        -0.072        -0.007                0.001                0.085                0.108                0.134
-3.0            10             2457  15.056359       -0.076        -0.053         0.053                0.066                0.196                0.214                0.214
-               20             5707  34.972179       -0.077        -0.082        -0.025               -0.006                0.076                0.102                0.108
-               40             8910  54.599985       -0.072        -0.060         0.011                0.012                0.099                0.132                0.139
+0.5            10             7116  43.606453          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.060
+                              8099  49.630222          NaN           NaN           NaN                  NaN                  NaN                0.022                  NaN
+                              8608  52.749346          NaN           NaN           NaN                  NaN                0.012                  NaN                  NaN
+                              10123 62.033181          NaN           NaN        -0.035                  NaN                  NaN                  NaN                  NaN
+                              10215 62.596952          NaN           NaN           NaN               -0.039                  NaN                  NaN                  NaN
+                              12799 78.431561          NaN        -0.072           NaN                  NaN                  NaN                  NaN                  NaN
+                              15568 95.399839       -0.091           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             7141  43.759651          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.063
+                              8134  49.844700          NaN           NaN           NaN                  NaN                  NaN                0.023                  NaN
+                              8643  52.963824          NaN           NaN           NaN                  NaN                0.013                  NaN                  NaN
+                              10169 62.315067          NaN           NaN        -0.034                  NaN                  NaN                  NaN                  NaN
+                              10266 62.909478          NaN           NaN           NaN               -0.039                  NaN                  NaN                  NaN
+                              12882 78.940180          NaN        -0.071           NaN                  NaN                  NaN                  NaN                  NaN
+                              15656 95.939098       -0.091           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             7143  43.771907          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.062
+                              8136  49.856956          NaN           NaN           NaN                  NaN                  NaN                0.022                  NaN
+                              8645  52.976080          NaN           NaN           NaN                  NaN                0.013                  NaN                  NaN
+                              10172 62.333451          NaN           NaN        -0.033                  NaN                  NaN                  NaN                  NaN
+                              10268 62.921733          NaN           NaN           NaN               -0.039                  NaN                  NaN                  NaN
+                              12886 78.964692          NaN        -0.071           NaN                  NaN                  NaN                  NaN                  NaN
+                              15660 95.963610       -0.091           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+1.0            10             6446  39.500730          NaN           NaN           NaN                  NaN                  NaN                  NaN               -0.014
+                              7183  44.017025          NaN           NaN           NaN                  NaN                  NaN               -0.038                  NaN
+                              7585  46.480459          NaN           NaN           NaN                  NaN               -0.051                  NaN                  NaN
+                              8726  53.472443          NaN           NaN        -0.075                  NaN                  NaN                  NaN                  NaN
+                              8881  54.422275          NaN           NaN           NaN               -0.081                  NaN                  NaN                  NaN
+                              10876 66.647524          NaN        -0.070           NaN                  NaN                  NaN                  NaN                  NaN
+                              12804 78.462201       -0.098           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             6639  40.683423          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.015
+                              7419  45.463220          NaN           NaN           NaN                  NaN                  NaN               -0.022                  NaN
+                              7848  48.092108          NaN           NaN           NaN                  NaN               -0.033                  NaN                  NaN
+                              9104  55.788806          NaN           NaN        -0.066                  NaN                  NaN                  NaN                  NaN
+                              9242  56.634462          NaN           NaN           NaN               -0.081                  NaN                  NaN                  NaN
+                              11399 69.852439          NaN        -0.065           NaN                  NaN                  NaN                  NaN                  NaN
+                              13400 82.114455       -0.094           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             6663  40.830494          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.017
+                              7443  45.610290          NaN           NaN           NaN                  NaN                  NaN               -0.019                  NaN
+                              7879  48.282074          NaN           NaN           NaN                  NaN               -0.032                  NaN                  NaN
+                              9153  56.089075          NaN           NaN        -0.064                  NaN                  NaN                  NaN                  NaN
+                              9277  56.848941          NaN           NaN           NaN               -0.080                  NaN                  NaN                  NaN
+                              11451 70.171092          NaN        -0.065           NaN                  NaN                  NaN                  NaN                  NaN
+                              13461 82.488260       -0.093           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+1.5            10             5449  33.391169          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.032
+                              5991  36.712515          NaN           NaN           NaN                  NaN                  NaN               -0.002                  NaN
+                              6268  38.409956          NaN           NaN           NaN                  NaN               -0.013                  NaN                  NaN
+                              7075  43.355207          NaN           NaN        -0.045                  NaN                  NaN                  NaN                  NaN
+                              7378  45.211974          NaN           NaN           NaN               -0.038                  NaN                  NaN                  NaN
+                              8511  52.154935          NaN        -0.056           NaN                  NaN                  NaN                  NaN                  NaN
+                              9762  59.820994       -0.058           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             5830  35.725916          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.060
+                              6431  39.408811          NaN           NaN           NaN                  NaN                  NaN                0.031                  NaN
+                              6767  41.467800          NaN           NaN           NaN                  NaN                0.016                  NaN                  NaN
+                              7753  47.509953          NaN           NaN        -0.028                  NaN                  NaN                  NaN                  NaN
+                              8041  49.274801          NaN           NaN           NaN               -0.031                  NaN                  NaN                  NaN
+                              9455  57.939715          NaN        -0.041           NaN                  NaN                  NaN                  NaN                  NaN
+                              10854 66.512709       -0.046           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             5883  36.050697          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.075
+                              6499  39.825511          NaN           NaN           NaN                  NaN                  NaN                0.041                  NaN
+                              6848  41.964163          NaN           NaN           NaN                  NaN                0.024                  NaN                  NaN
+                              7871  48.233051          NaN           NaN        -0.027                  NaN                  NaN                  NaN                  NaN
+                              8159  49.997899          NaN           NaN           NaN               -0.031                  NaN                  NaN                  NaN
+                              9594  58.791499          NaN        -0.038           NaN                  NaN                  NaN                  NaN                  NaN
+                              11001 67.413517       -0.046           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+2.0            10             4547  27.863763          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.049
+                              4988  30.566187          NaN           NaN           NaN                  NaN                  NaN               -0.007                  NaN
+                              5159  31.614065          NaN           NaN           NaN                  NaN               -0.038                  NaN                  NaN
+                              5684  34.831236          NaN           NaN        -0.081                  NaN                  NaN                  NaN                  NaN
+                              6165  37.778777          NaN           NaN           NaN               -0.070                  NaN                  NaN                  NaN
+                              6549  40.131908          NaN        -0.081           NaN                  NaN                  NaN                  NaN                  NaN
+                              7375  45.193590       -0.067           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             5157  31.601809          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.058
+                              5689  34.861876          NaN           NaN           NaN                  NaN                  NaN                0.032                  NaN
+                              5943  36.418374          NaN           NaN           NaN                  NaN               -0.001                  NaN                  NaN
+                              6729  41.234938          NaN           NaN        -0.044                  NaN                  NaN                  NaN                  NaN
+                              7273  44.568540          NaN           NaN           NaN               -0.040                  NaN                  NaN                  NaN
+                              7903  48.429145          NaN        -0.055           NaN                  NaN                  NaN                  NaN                  NaN
+                              8955  54.875742       -0.060           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             5242  32.122685          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.087
+                              5796  35.517566          NaN           NaN           NaN                  NaN                  NaN                0.060                  NaN
+                              6077  37.239518          NaN           NaN           NaN                  NaN                0.027                  NaN                  NaN
+                              6903  42.301200          NaN           NaN        -0.022                  NaN                  NaN                  NaN                  NaN
+                              7443  45.610290          NaN           NaN           NaN               -0.017                  NaN                  NaN                  NaN
+                              8122  49.771165          NaN        -0.045           NaN                  NaN                  NaN                  NaN                  NaN
+                              9208  56.426112       -0.057           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+2.5            10             3638  22.293462          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.080
+                              3983  24.407603          NaN           NaN           NaN                  NaN                  NaN                0.035                  NaN
+                              4085  25.032653          NaN           NaN           NaN                  NaN                0.024                  NaN                  NaN
+                              4293  26.307265          NaN           NaN        -0.075                  NaN                  NaN                  NaN                  NaN
+                              4575  28.035346          NaN           NaN           NaN               -0.043                  NaN                  NaN                  NaN
+                              4722  28.936154          NaN        -0.088           NaN                  NaN                  NaN                  NaN                  NaN
+                              5213  31.944974       -0.109           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             4581  28.072113          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.096
+                              5122  31.387331          NaN           NaN           NaN                  NaN                  NaN                0.046                  NaN
+                              5306  32.514873          NaN           NaN           NaN                  NaN                0.035                  NaN                  NaN
+                              5803  35.560462          NaN           NaN        -0.046                  NaN                  NaN                  NaN                  NaN
+                              6184  37.895208          NaN           NaN           NaN               -0.026                  NaN                  NaN                  NaN
+                              6650  40.750830          NaN        -0.076           NaN                  NaN                  NaN                  NaN                  NaN
+                              7430  45.530627       -0.088           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             4733  29.003561          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.116
+                              5314  32.563897          NaN           NaN           NaN                  NaN                  NaN                0.076                  NaN
+                              5523  33.844637          NaN           NaN           NaN                  NaN                0.061                  NaN                  NaN
+                              6083  37.276286          NaN           NaN        -0.016                  NaN                  NaN                  NaN                  NaN
+                              6479  39.702952          NaN           NaN           NaN               -0.005                  NaN                  NaN                  NaN
+                              7004  42.920123          NaN        -0.065           NaN                  NaN                  NaN                  NaN                  NaN
+                              7844  48.067596       -0.084           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+3.0            10             2738  16.778312          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.044
+                              2967  18.181611          NaN           NaN           NaN                  NaN                  NaN               -0.002                  NaN
+                              3010  18.445113          NaN           NaN           NaN                  NaN               -0.006                  NaN                  NaN
+                              3062  18.763766          NaN           NaN        -0.056                  NaN                  NaN                  NaN                  NaN
+                              3165  19.394944          NaN           NaN           NaN               -0.057                  NaN                  NaN                  NaN
+                              3231  19.799388          NaN        -0.085           NaN                  NaN                  NaN                  NaN                  NaN
+                              3497  21.429422       -0.118           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             4129  25.302283          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.026
+                              4685  28.709420          NaN           NaN           NaN                  NaN                  NaN               -0.032                  NaN
+                              4787  29.334470          NaN           NaN           NaN                  NaN               -0.044                  NaN                  NaN
+                              4971  30.462012          NaN           NaN        -0.081                  NaN                  NaN                  NaN                  NaN
+                              5159  31.614065          NaN           NaN           NaN               -0.067                  NaN                  NaN                  NaN
+                              5568  34.120395          NaN        -0.085           NaN                  NaN                  NaN                  NaN                  NaN
+                              6099  37.374333       -0.108           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             4395  26.932316          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.036
+                              5035  30.854200          NaN           NaN           NaN                  NaN                  NaN               -0.005                  NaN
+                              5165  31.650833          NaN           NaN           NaN                  NaN               -0.025                  NaN                  NaN
+                              5437  33.317634          NaN           NaN        -0.050                  NaN                  NaN                  NaN                  NaN
+                              5613  34.396152          NaN           NaN           NaN               -0.041                  NaN                  NaN                  NaN
+                              6132  37.576555          NaN        -0.079           NaN                  NaN                  NaN                  NaN                  NaN
+                              6764  41.449416       -0.113           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+
+==== 10-session ratio at least 0.45 alone: average result in ATR by pullback size, watch length and exit ====
+exit                                          time exit 5  time exit 10  time exit 20  trail 2 ATR, max 40  trail 3 ATR, max 40  trail 3 ATR, max 60  trail 4 ATR, max 60
+pullback_x_atr watch_sessions n    per_month                                                                                                                             
+0.5            10             5671 34.751573          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.077
+                              6181 37.876825          NaN           NaN           NaN                  NaN                  NaN                0.039                  NaN
+                              6480 39.709080          NaN           NaN           NaN                  NaN                0.032                  NaN                  NaN
+                              7058 43.251032          NaN           NaN           NaN               -0.045                  NaN                  NaN                  NaN
+                              7299 44.727866          NaN           NaN        -0.027                  NaN                  NaN                  NaN                  NaN
+                              8520 52.210087          NaN        -0.061           NaN                  NaN                  NaN                  NaN                  NaN
+                              9604 58.852778       -0.091           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             5690 34.868004          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.077
+                              6204 38.017767          NaN           NaN           NaN                  NaN                  NaN                0.039                  NaN
+                              6505 39.862279          NaN           NaN           NaN                  NaN                0.032                  NaN                  NaN
+                              7081 43.391975          NaN           NaN           NaN               -0.043                  NaN                  NaN                  NaN
+                              7326 44.893321          NaN           NaN        -0.026                  NaN                  NaN                  NaN                  NaN
+                              8558 52.442948          NaN        -0.058           NaN                  NaN                  NaN                  NaN                  NaN
+                              9650 59.134664       -0.089           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             5691 34.874132          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.077
+                              6205 38.023895          NaN           NaN           NaN                  NaN                  NaN                0.038                  NaN
+                              6506 39.868406          NaN           NaN           NaN                  NaN                0.032                  NaN                  NaN
+                              7082 43.398102          NaN           NaN           NaN               -0.043                  NaN                  NaN                  NaN
+                              7327 44.899449          NaN           NaN        -0.026                  NaN                  NaN                  NaN                  NaN
+                              8559 52.449076          NaN        -0.058           NaN                  NaN                  NaN                  NaN                  NaN
+                              9651 59.140792       -0.089           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+1.0            10             5232 32.061405          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.008
+                              5650 34.622886          NaN           NaN           NaN                  NaN                  NaN               -0.019                  NaN
+                              5870 35.971034          NaN           NaN           NaN                  NaN               -0.004                  NaN                  NaN
+                              6441 39.470090          NaN           NaN           NaN               -0.068                  NaN                  NaN                  NaN
+                              6514 39.917430          NaN           NaN        -0.073                  NaN                  NaN                  NaN                  NaN
+                              7613 46.652041          NaN        -0.054           NaN                  NaN                  NaN                  NaN                  NaN
+                              8316 50.959986       -0.092           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             5386 33.005109          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.034
+                              5833 35.744300          NaN           NaN           NaN                  NaN                  NaN               -0.002                  NaN
+                              6069 37.190495          NaN           NaN           NaN                  NaN                0.013                  NaN                  NaN
+                              6694 41.020460          NaN           NaN           NaN               -0.061                  NaN                  NaN                  NaN
+                              6798 41.657766          NaN           NaN        -0.058                  NaN                  NaN                  NaN                  NaN
+                              7959 48.772310          NaN        -0.044           NaN                  NaN                  NaN                  NaN                  NaN
+                              8701 53.319245       -0.084           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             5393 33.048004          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.039
+                              5841 35.793323          NaN           NaN           NaN                  NaN                  NaN                0.002                  NaN
+                              6078 37.245646          NaN           NaN           NaN                  NaN                0.017                  NaN                  NaN
+                              6704 41.081739          NaN           NaN           NaN               -0.057                  NaN                  NaN                  NaN
+                              6810 41.731302          NaN           NaN        -0.056                  NaN                  NaN                  NaN                  NaN
+                              7973 48.858101          NaN        -0.041           NaN                  NaN                  NaN                  NaN                  NaN
+                              8717 53.417292       -0.082           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+1.5            10             4495 27.545110          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.056
+                              4824 29.561204          NaN           NaN           NaN                  NaN                  NaN                0.040                  NaN
+                              5008 30.688746          NaN           NaN           NaN                  NaN                0.025                  NaN                  NaN
+                              5477 33.562752          NaN           NaN        -0.045                  NaN                  NaN                  NaN                  NaN
+                              5559 34.065243          NaN           NaN           NaN               -0.033                  NaN                  NaN                  NaN
+                              6209 38.048407          NaN        -0.045           NaN                  NaN                  NaN                  NaN                  NaN
+                              6530 40.015477       -0.050           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             4911 30.094335          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.093
+                              5304 32.502617          NaN           NaN           NaN                  NaN                  NaN                0.064                  NaN
+                              5539 33.942684          NaN           NaN           NaN                  NaN                0.041                  NaN                  NaN
+                              6184 37.895208          NaN           NaN        -0.034                  NaN                  NaN                  NaN                  NaN
+                              6217 38.097431          NaN           NaN           NaN               -0.033                  NaN                  NaN                  NaN
+                              7052 43.214264          NaN        -0.031           NaN                  NaN                  NaN                  NaN                  NaN
+                              7432 45.542883       -0.040           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             4941 30.278173          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.106
+                              5335 32.692584          NaN           NaN           NaN                  NaN                  NaN                0.075                  NaN
+                              5577 34.175546          NaN           NaN           NaN                  NaN                0.051                  NaN                  NaN
+                              6244 38.262885          NaN           NaN        -0.027                  NaN                  NaN                  NaN                  NaN
+                              6275 38.452851          NaN           NaN           NaN               -0.027                  NaN                  NaN                  NaN
+                              7124 43.655476          NaN        -0.026           NaN                  NaN                  NaN                  NaN                  NaN
+                              7508 46.008607       -0.037           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+2.0            10             3623 22.201543          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.007
+                              3871 23.721273          NaN           NaN           NaN                  NaN                  NaN               -0.007                  NaN
+                              3975 24.358579          NaN           NaN           NaN                  NaN               -0.018                  NaN                  NaN
+                              4226 25.896693          NaN           NaN        -0.079                  NaN                  NaN                  NaN                  NaN
+                              4430 27.146794          NaN           NaN           NaN               -0.068                  NaN                  NaN                  NaN
+                              4631 28.378511          NaN        -0.076           NaN                  NaN                  NaN                  NaN                  NaN
+                              4800 29.414133       -0.066           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             4398 26.950700          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.058
+                              4742 29.058713          NaN           NaN           NaN                  NaN                  NaN                0.031                  NaN
+                              4910 30.088207          NaN           NaN           NaN                  NaN                0.002                  NaN                  NaN
+                              5396 33.066388          NaN           NaN        -0.051                  NaN                  NaN                  NaN                  NaN
+                              5614 34.402280          NaN           NaN           NaN               -0.048                  NaN                  NaN                  NaN
+                              5967 36.565444          NaN        -0.056           NaN                  NaN                  NaN                  NaN                  NaN
+                              6208 38.042279       -0.059           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             4515 27.667669          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.083
+                              4878 29.892113          NaN           NaN           NaN                  NaN                  NaN                0.049                  NaN
+                              5068 31.056422          NaN           NaN           NaN                  NaN                0.022                  NaN                  NaN
+                              5608 34.365512          NaN           NaN        -0.032                  NaN                  NaN                  NaN                  NaN
+                              5815 35.633997          NaN           NaN           NaN               -0.035                  NaN                  NaN                  NaN
+                              6198 37.981000          NaN        -0.049           NaN                  NaN                  NaN                  NaN                  NaN
+                              6452 39.537497       -0.058           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+2.5            10             2655 16.269692          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.069
+                              2845 17.434002          NaN           NaN           NaN                  NaN                  NaN                0.022                  NaN
+                              2888 17.697504          NaN           NaN           NaN                  NaN                0.007                  NaN                  NaN
+                              2963 18.157099          NaN           NaN        -0.084                  NaN                  NaN                  NaN                  NaN
+                              3077 18.855685          NaN           NaN           NaN               -0.047                  NaN                  NaN                  NaN
+                              3132 19.192722          NaN        -0.084           NaN                  NaN                  NaN                  NaN                  NaN
+                              3264 20.001611       -0.082           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             3784 23.188142          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.049
+                              4127 25.290027          NaN           NaN           NaN                  NaN                  NaN                0.015                  NaN
+                              4232 25.933461          NaN           NaN           NaN                  NaN               -0.002                  NaN                  NaN
+                              4473 27.410295          NaN           NaN        -0.050                  NaN                  NaN                  NaN                  NaN
+                              4647 28.476558          NaN           NaN           NaN               -0.039                  NaN                  NaN                  NaN
+                              4838 29.646995          NaN        -0.073           NaN                  NaN                  NaN                  NaN                  NaN
+                              5098 31.240261       -0.071           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             4063 24.897838          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.065
+                              4457 27.312248          NaN           NaN           NaN                  NaN                  NaN                0.040                  NaN
+                              4598 28.176289          NaN           NaN           NaN                  NaN                0.022                  NaN                  NaN
+                              4901 30.033056          NaN           NaN        -0.027                  NaN                  NaN                  NaN                  NaN
+                              5085 31.160597          NaN           NaN           NaN               -0.026                  NaN                  NaN                  NaN
+                              5315 32.570025          NaN        -0.065           NaN                  NaN                  NaN                  NaN                  NaN
+                              5604 34.341001       -0.067           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+3.0            10             1855 11.367337          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.090
+                              1968 12.059795          NaN           NaN           NaN                  NaN                  NaN                0.058                  NaN
+                              1976 12.108818          NaN           NaN        -0.025                  NaN                0.041                  NaN                  NaN
+                              2028 12.427471          NaN           NaN           NaN               -0.033                  NaN                  NaN                  NaN
+                              2055 12.592926          NaN        -0.067           NaN                  NaN                  NaN                  NaN                  NaN
+                              2149 13.168953       -0.092           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             3125 19.149826          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.078
+                              3454 21.165920          NaN           NaN           NaN                  NaN                  NaN                0.062                  NaN
+                              3491 21.392654          NaN           NaN           NaN                  NaN                0.032                  NaN                  NaN
+                              3559 21.809354          NaN           NaN        -0.022                  NaN                  NaN                  NaN                  NaN
+                              3662 22.440533          NaN           NaN           NaN               -0.014                  NaN                  NaN                  NaN
+                              3859 23.647738          NaN        -0.067           NaN                  NaN                  NaN                  NaN                  NaN
+                              4085 25.032653       -0.080           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             3570 21.876762          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.076
+                              4020 24.634337          NaN           NaN           NaN                  NaN                  NaN                0.047                  NaN
+                              4083 25.020397          NaN           NaN           NaN                  NaN                0.023                  NaN                  NaN
+                              4203 25.755750          NaN           NaN        -0.016                  NaN                  NaN                  NaN                  NaN
+                              4308 26.399185          NaN           NaN           NaN               -0.028                  NaN                  NaN                  NaN
+                              4565 27.974066          NaN        -0.067           NaN                  NaN                  NaN                  NaN                  NaN
+                              4862 29.794066       -0.086           NaN           NaN                  NaN                  NaN                  NaN                  NaN
 
 ==== 20-session ratio at least 0.50 alone: average result in ATR by pullback size, watch length and exit ====
 exit                                          time exit 5  time exit 10  time exit 20  trail 2 ATR, max 40  trail 3 ATR, max 40  trail 3 ATR, max 60  trail 4 ATR, max 60
 pullback_x_atr watch_sessions n    per_month                                                                                                                             
-0.5            10             3370 20.651173       -0.066        -0.025        -0.008               -0.025                0.027                0.067                0.114
-               20             3384 20.736964       -0.065        -0.024        -0.007               -0.024                0.032                0.074                0.120
-               40             3384 20.736964       -0.065        -0.024        -0.007               -0.024                0.032                0.074                0.120
-1.0            10             3080 18.874069       -0.074        -0.039        -0.052               -0.024                0.010                0.016                0.073
-               20             3347 20.510230       -0.078        -0.047        -0.052               -0.037                0.003                0.012                0.068
-               40             3378 20.700196       -0.079        -0.049        -0.056               -0.040               -0.001                0.007                0.061
-1.5            10             2452 15.025720       -0.061        -0.019        -0.024               -0.019                0.048                0.038                0.092
-               20             3147 19.284641       -0.058        -0.014        -0.005                0.009                0.100                0.102                0.142
-               40             3360 20.589893       -0.066        -0.018        -0.012                0.007                0.106                0.114                0.146
-2.0            10             1751 10.730031       -0.084        -0.052         0.015               -0.020                0.080                0.100                0.168
-               20             2673 16.379995       -0.063        -0.003         0.087                0.034                0.147                0.166                0.217
-               40             3228 19.781005       -0.095        -0.034         0.036               -0.004                0.094                0.111                0.151
-2.5            10             1205 7.384173        -0.040        -0.021         0.093                0.063                0.252                0.273                0.315
-               20             2181 13.365047       -0.032         0.025         0.147                0.086                0.234                0.241                0.291
-               40             3004 18.408345       -0.047        -0.004         0.108                0.059                0.199                0.228                0.270
-3.0            10             759  4.651110        -0.105        -0.089        -0.134               -0.105                0.044                0.053                0.075
-               20             1649 10.104980       -0.077        -0.043        -0.009               -0.016                0.061                0.070                0.085
-               40             2573 15.767201       -0.066         0.000         0.061                0.056                0.113                0.138                0.133
+0.5            10             2124 13.015754          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.169
+                              2152 13.187336          NaN           NaN           NaN                  NaN                  NaN                0.103                  NaN
+                              2202 13.493734          NaN           NaN           NaN                  NaN                0.063                  NaN                  NaN
+                              2295 14.063632          NaN           NaN           NaN               -0.001                  NaN                  NaN                  NaN
+                              2330 14.278111          NaN           NaN         0.030                  NaN                  NaN                  NaN                  NaN
+                              2568 15.736561          NaN        -0.004           NaN                  NaN                  NaN                  NaN                  NaN
+                              2873 17.605584       -0.047           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             2126 13.028010          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.177
+                              2154 13.199592          NaN           NaN           NaN                  NaN                  NaN                0.111                  NaN
+                              2205 13.512117          NaN           NaN           NaN                  NaN                0.067                  NaN                  NaN
+                              2299 14.088144          NaN           NaN           NaN               -0.002                  NaN                  NaN                  NaN
+                              2334 14.302622          NaN           NaN         0.030                  NaN                  NaN                  NaN                  NaN
+                              2574 15.773329          NaN        -0.004           NaN                  NaN                  NaN                  NaN                  NaN
+                              2879 17.642352       -0.047           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             2126 13.028010          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.177
+                              2154 13.199592          NaN           NaN           NaN                  NaN                  NaN                0.111                  NaN
+                              2205 13.512117          NaN           NaN           NaN                  NaN                0.067                  NaN                  NaN
+                              2299 14.088144          NaN           NaN           NaN               -0.002                  NaN                  NaN                  NaN
+                              2334 14.302622          NaN           NaN         0.030                  NaN                  NaN                  NaN                  NaN
+                              2574 15.773329          NaN        -0.004           NaN                  NaN                  NaN                  NaN                  NaN
+                              2879 17.642352       -0.047           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+1.0            10             2004 12.280401          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.072
+                              2033 12.458111          NaN           NaN           NaN                  NaN                  NaN               -0.003                  NaN
+                              2063 12.641949          NaN           NaN           NaN                  NaN                0.002                  NaN                  NaN
+                              2160 13.236360          NaN           NaN        -0.031                  NaN                  NaN                  NaN                  NaN
+                              2163 13.254744          NaN           NaN           NaN               -0.043                  NaN                  NaN                  NaN
+                              2342 14.351646          NaN        -0.022           NaN                  NaN                  NaN                  NaN                  NaN
+                              2551 15.632386       -0.056           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             2067 12.666461          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.093
+                              2099 12.862555          NaN           NaN           NaN                  NaN                  NaN                0.021                  NaN
+                              2134 13.077033          NaN           NaN           NaN                  NaN                0.018                  NaN                  NaN
+                              2248 13.775619          NaN           NaN        -0.023               -0.039                  NaN                  NaN                  NaN
+                              2447 14.995080          NaN        -0.028           NaN                  NaN                  NaN                  NaN                  NaN
+                              2662 16.312588       -0.060           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             2077 12.727741          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.089
+                              2109 12.923835          NaN           NaN           NaN                  NaN                  NaN                0.018                  NaN
+                              2145 13.144441          NaN           NaN           NaN                  NaN                0.014                  NaN                  NaN
+                              2259 13.843026          NaN           NaN        -0.023               -0.041                  NaN                  NaN                  NaN
+                              2458 15.062487          NaN        -0.030           NaN                  NaN                  NaN                  NaN                  NaN
+                              2674 16.386123       -0.062           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+1.5            10             1708 10.466529          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.132
+                              1734 10.625856          NaN           NaN           NaN                  NaN                  NaN                0.079                  NaN
+                              1767 10.828078          NaN           NaN           NaN                  NaN                0.102                  NaN                  NaN
+                              1845 11.306057          NaN           NaN         0.007                  NaN                  NaN                  NaN                  NaN
+                              1854 11.361209          NaN           NaN           NaN                0.024                  NaN                  NaN                  NaN
+                              1947 11.931108          NaN         0.015           NaN                  NaN                  NaN                  NaN                  NaN
+                              2014 12.341680       -0.042           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             1916 11.741142          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.139
+                              1951 11.955620          NaN           NaN           NaN                  NaN                  NaN                0.111                  NaN
+                              1997 12.237505          NaN           NaN           NaN                  NaN                0.106                  NaN                  NaN
+                              2115 12.960602          NaN           NaN         0.004                  NaN                  NaN                  NaN                  NaN
+                              2123 13.009626          NaN           NaN           NaN                0.012                  NaN                  NaN                  NaN
+                              2251 13.794003          NaN         0.009           NaN                  NaN                  NaN                  NaN                  NaN
+                              2330 14.278111       -0.039           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             1956 11.986259          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.157
+                              1992 12.206865          NaN           NaN           NaN                  NaN                  NaN                0.127                  NaN
+                              2045 12.531646          NaN           NaN           NaN                  NaN                0.121                  NaN                  NaN
+                              2168 13.285384          NaN           NaN         0.011                  NaN                  NaN                  NaN                  NaN
+                              2171 13.303767          NaN           NaN           NaN                0.020                  NaN                  NaN                  NaN
+                              2307 14.137168          NaN         0.014           NaN                  NaN                  NaN                  NaN                  NaN
+                              2386 14.621275       -0.036           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+2.0            10             1347 8.254341           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.139
+                              1376 8.432052           NaN           NaN           NaN                  NaN                  NaN                0.076                  NaN
+                              1393 8.536227           NaN           NaN           NaN                  NaN                0.055                  NaN                  NaN
+                              1433 8.781344           NaN           NaN        -0.022                  NaN                  NaN                  NaN                  NaN
+                              1454 8.910031           NaN           NaN           NaN               -0.023                  NaN                  NaN                  NaN
+                              1462 8.959055           NaN        -0.043           NaN                  NaN                  NaN                  NaN                  NaN
+                              1478 9.057102        -0.083           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             1698 10.405250          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.174
+                              1745 10.693263          NaN           NaN           NaN                  NaN                  NaN                0.139                  NaN
+                              1779 10.901613          NaN           NaN           NaN                  NaN                0.108                  NaN                  NaN
+                              1857 11.379593          NaN           NaN         0.043                  NaN                  NaN                  NaN                  NaN
+                              1883 11.538919          NaN           NaN           NaN                0.035                  NaN                  NaN                  NaN
+                              1914 11.728886          NaN        -0.005           NaN                  NaN                  NaN                  NaN                  NaN
+                              1936 11.863700       -0.059           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             1839 11.269290          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.165
+                              1897 11.624711          NaN           NaN           NaN                  NaN                  NaN                0.131                  NaN
+                              1940 11.888212          NaN           NaN           NaN                  NaN                0.098                  NaN                  NaN
+                              2037 12.482623          NaN           NaN         0.029                  NaN                  NaN                  NaN                  NaN
+                              2059 12.617438          NaN           NaN           NaN                0.024                  NaN                  NaN                  NaN
+                              2098 12.856427          NaN        -0.011           NaN                  NaN                  NaN                  NaN                  NaN
+                              2121 12.997370       -0.063           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+2.5            10             986  6.042153           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.338
+                              1006 6.164712           NaN           NaN           NaN                  NaN                  NaN                0.297                  NaN
+                              1007 6.170840           NaN           NaN           NaN                  NaN                0.266                  NaN                  NaN
+                              1028 6.299527           NaN           NaN         0.054                  NaN                  NaN                  NaN                  NaN
+                              1033 6.330167           NaN        -0.019           NaN                  NaN                  NaN                  NaN                  NaN
+                              1034 6.336295           NaN           NaN           NaN                0.048                  NaN                  NaN                  NaN
+                              1040 6.373062        -0.041           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             1446 8.861008           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.310
+                              1500 9.191917           NaN           NaN           NaN                  NaN                  NaN                0.282                  NaN
+                              1515 9.283836           NaN           NaN           NaN                  NaN                0.271                  NaN                  NaN
+                              1556 9.535082           NaN           NaN         0.121                  NaN                  NaN                  NaN                  NaN
+                              1571 9.627001           NaN         0.013           NaN                0.089                  NaN                  NaN                  NaN
+                              1583 9.700536        -0.023           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             1718 10.527809          NaN           NaN           NaN                  NaN                  NaN                  NaN                0.254
+                              1791 10.975148          NaN           NaN           NaN                  NaN                  NaN                0.240                  NaN
+                              1818 11.140603          NaN           NaN           NaN                  NaN                0.227                  NaN                  NaN
+                              1876 11.496024          NaN           NaN         0.091                  NaN                  NaN                  NaN                  NaN
+                              1890 11.581815          NaN           NaN           NaN                0.072                  NaN                  NaN                  NaN
+                              1896 11.618583          NaN        -0.004           NaN                  NaN                  NaN                  NaN                  NaN
+                              1908 11.692118       -0.027           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+3.0            10             665  4.075083           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.160
+                              676  4.142490           NaN           NaN           NaN                  NaN                0.102                0.116                  NaN
+                              680  4.167002           NaN           NaN        -0.100                  NaN                  NaN                  NaN                  NaN
+                              681  4.173130           NaN           NaN           NaN               -0.063                  NaN                  NaN                  NaN
+                              683  4.185386           NaN        -0.070           NaN                  NaN                  NaN                  NaN                  NaN
+                              684  4.191514        -0.101           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             1176 7.206463           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.130
+                              1212 7.427069           NaN           NaN           NaN                  NaN                  NaN                0.101                  NaN
+                              1215 7.445452           NaN           NaN           NaN                  NaN                0.086                  NaN                  NaN
+                              1221 7.482220           NaN           NaN        -0.026                  NaN                  NaN                  NaN                  NaN
+                              1227 7.518988           NaN           NaN           NaN               -0.017                  NaN                  NaN                  NaN
+                              1231 7.543500           NaN        -0.070           NaN                  NaN                  NaN                  NaN                  NaN
+                              1234 7.561883        -0.078           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             1544 9.461546           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.125
+                              1619 9.921142           NaN           NaN           NaN                  NaN                  NaN                0.121                  NaN
+                              1628 9.976294           NaN           NaN           NaN                  NaN                0.099                  NaN                  NaN
+                              1638 10.037573          NaN           NaN         0.025                  NaN                  NaN                  NaN                  NaN
+                              1649 10.104980          NaN           NaN           NaN                0.014                  NaN                  NaN                  NaN
+                              1653 10.129492          NaN        -0.038           NaN                  NaN                  NaN                  NaN                  NaN
+                              1659 10.166260       -0.071           NaN           NaN                  NaN                  NaN                  NaN                  NaN
 
 ==== control: no ratio, every 5th session, 20-session direction: average result in ATR by pullback size, watch length and exit ====
 exit                                            time exit 5  time exit 10  time exit 20  trail 2 ATR, max 40  trail 3 ATR, max 40  trail 3 ATR, max 60  trail 4 ATR, max 60
 pullback_x_atr watch_sessions n     per_month                                                                                                                              
-0.5            10             29033 177.912611       -0.089        -0.070        -0.018               -0.034                0.015                0.034                0.066
-               20             29185 178.844058       -0.087        -0.068        -0.017               -0.032                0.017                0.037                0.070
-               40             29187 178.856314       -0.087        -0.068        -0.017               -0.032                0.017                0.037                0.070
-1.0            10             26487 162.310864       -0.090        -0.072        -0.041               -0.049               -0.013                0.005                0.038
-               20             28893 177.054699       -0.088        -0.064        -0.038               -0.047               -0.011                0.005                0.039
-               40             29166 178.727627       -0.087        -0.063        -0.036               -0.047               -0.009                0.006                0.040
-1.5            10             21152 129.618281       -0.062        -0.053        -0.045               -0.028                0.004                0.021                0.029
-               20             27118 166.177597       -0.055        -0.041        -0.037               -0.018                0.015                0.031                0.037
-               40             29006 177.747156       -0.052        -0.034        -0.033               -0.010                0.027                0.042                0.051
-2.0            10             15241 93.396001        -0.083        -0.077        -0.039               -0.052               -0.011                0.010                0.020
-               20             23394 143.357132       -0.077        -0.065        -0.026               -0.040                0.002                0.025                0.038
-               40             28035 171.796922       -0.086        -0.068        -0.033               -0.048                0.000                0.026                0.045
-2.5            10             10234 62.713383        -0.103        -0.098        -0.038               -0.040                0.018                0.026                0.036
-               20             18868 115.622056       -0.086        -0.077        -0.017               -0.022                0.031                0.046                0.055
-               40             25966 159.118205       -0.084        -0.074        -0.013               -0.020                0.051                0.073                0.092
-3.0            10             6653  40.769214        -0.087        -0.072        -0.044               -0.039                0.057                0.073                0.056
-               20             14779 90.564891        -0.087        -0.071        -0.037               -0.033                0.029                0.047                0.042
-               40             23050 141.249119       -0.081        -0.062        -0.018               -0.011                0.060                0.088                0.094
+0.5            10             7865  48.196283           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.070
+                              9051  55.464025           NaN           NaN           NaN                  NaN                  NaN                0.013                  NaN
+                              9696  59.416549           NaN           NaN           NaN                  NaN                0.022                  NaN                  NaN
+                              11907 72.965434           NaN           NaN           NaN               -0.030                  NaN                  NaN                  NaN
+                              12099 74.142000           NaN           NaN        -0.016                  NaN                  NaN                  NaN                  NaN
+                              16627 101.889332          NaN        -0.060           NaN                  NaN                  NaN                  NaN                  NaN
+                              22988 140.869187       -0.089           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             7865  48.196283           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.070
+                              9051  55.464025           NaN           NaN           NaN                  NaN                  NaN                0.013                  NaN
+                              9696  59.416549           NaN           NaN           NaN                  NaN                0.022                  NaN                  NaN
+                              11906 72.959306           NaN           NaN           NaN               -0.030                  NaN                  NaN                  NaN
+                              12099 74.142000           NaN           NaN        -0.016                  NaN                  NaN                  NaN                  NaN
+                              16627 101.889332          NaN        -0.060           NaN                  NaN                  NaN                  NaN                  NaN
+                              22989 140.875315       -0.089           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             7865  48.196283           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.070
+                              9051  55.464025           NaN           NaN           NaN                  NaN                  NaN                0.013                  NaN
+                              9696  59.416549           NaN           NaN           NaN                  NaN                0.022                  NaN                  NaN
+                              11906 72.959306           NaN           NaN           NaN               -0.030                  NaN                  NaN                  NaN
+                              12099 74.142000           NaN           NaN        -0.016                  NaN                  NaN                  NaN                  NaN
+                              16627 101.889332          NaN        -0.060           NaN                  NaN                  NaN                  NaN                  NaN
+                              22989 140.875315       -0.089           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+1.0            10             7307  44.776890           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.031
+                              8210  50.310424           NaN           NaN           NaN                  NaN                  NaN                0.033                  NaN
+                              8793  53.883015           NaN           NaN           NaN                  NaN                0.023                  NaN                  NaN
+                              10642 65.213585           NaN           NaN        -0.021                  NaN                  NaN                  NaN                  NaN
+                              10832 66.377894           NaN           NaN           NaN               -0.030                  NaN                  NaN                  NaN
+                              13971 85.613512           NaN        -0.060           NaN                  NaN                  NaN                  NaN                  NaN
+                              17839 109.316401       -0.087           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             7314  44.819786           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.030
+                              8218  50.359447           NaN           NaN           NaN                  NaN                  NaN                0.032                  NaN
+                              8801  53.932039           NaN           NaN           NaN                  NaN                0.023                  NaN                  NaN
+                              10653 65.280992           NaN           NaN        -0.020                  NaN                  NaN                  NaN                  NaN
+                              10840 66.426918           NaN           NaN           NaN               -0.031                  NaN                  NaN                  NaN
+                              13987 85.711559           NaN        -0.061           NaN                  NaN                  NaN                  NaN                  NaN
+                              17860 109.445088       -0.087           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             7314  44.819786           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.030
+                              8218  50.359447           NaN           NaN           NaN                  NaN                  NaN                0.032                  NaN
+                              8801  53.932039           NaN           NaN           NaN                  NaN                0.023                  NaN                  NaN
+                              10653 65.280992           NaN           NaN        -0.020                  NaN                  NaN                  NaN                  NaN
+                              10840 66.426918           NaN           NaN           NaN               -0.031                  NaN                  NaN                  NaN
+                              13987 85.711559           NaN        -0.061           NaN                  NaN                  NaN                  NaN                  NaN
+                              17860 109.445088       -0.087           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+1.5            10             6524  39.978709           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.055
+                              7297  44.715611           NaN           NaN           NaN                  NaN                  NaN                0.051                  NaN
+                              7753  47.509953           NaN           NaN           NaN                  NaN                0.033                  NaN                  NaN
+                              9070  55.580456           NaN           NaN        -0.023                  NaN                  NaN                  NaN                  NaN
+                              9580  58.705708           NaN           NaN           NaN               -0.012                  NaN                  NaN                  NaN
+                              11345 69.521530           NaN        -0.034           NaN                  NaN                  NaN                  NaN                  NaN
+                              13567 83.137822        -0.056           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             6555  40.168676           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.053
+                              7339  44.972984           NaN           NaN           NaN                  NaN                  NaN                0.047                  NaN
+                              7791  47.742815           NaN           NaN           NaN                  NaN                0.028                  NaN                  NaN
+                              9142  56.021668           NaN           NaN        -0.022                  NaN                  NaN                  NaN                  NaN
+                              9636  59.048873           NaN           NaN           NaN               -0.015                  NaN                  NaN                  NaN
+                              11454 70.189476           NaN        -0.034           NaN                  NaN                  NaN                  NaN                  NaN
+                              13731 84.142805        -0.057           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             6555  40.168676           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.053
+                              7339  44.972984           NaN           NaN           NaN                  NaN                  NaN                0.047                  NaN
+                              7791  47.742815           NaN           NaN           NaN                  NaN                0.028                  NaN                  NaN
+                              9142  56.021668           NaN           NaN        -0.022                  NaN                  NaN                  NaN                  NaN
+                              9636  59.048873           NaN           NaN           NaN               -0.015                  NaN                  NaN                  NaN
+                              11454 70.189476           NaN        -0.034           NaN                  NaN                  NaN                  NaN                  NaN
+                              13732 84.148933        -0.057           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+2.0            10             5685  34.837364           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.036
+                              6453  39.543625           NaN           NaN           NaN                  NaN                  NaN                0.021                  NaN
+                              6731  41.247194           NaN           NaN           NaN                  NaN                0.011                  NaN                  NaN
+                              7545  46.235341           NaN           NaN        -0.013                  NaN                  NaN                  NaN                  NaN
+                              8296  50.837427           NaN           NaN           NaN               -0.026                  NaN                  NaN                  NaN
+                              9032  55.347594           NaN        -0.057           NaN                  NaN                  NaN                  NaN                  NaN
+                              10218 62.615336        -0.074           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             5794  35.505310           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.041
+                              6610  40.505713           NaN           NaN           NaN                  NaN                  NaN                0.028                  NaN
+                              6908  42.331840           NaN           NaN           NaN                  NaN                0.022                  NaN                  NaN
+                              7824  47.945037           NaN           NaN        -0.008                  NaN                  NaN                  NaN                  NaN
+                              8606  52.737090           NaN           NaN           NaN               -0.026                  NaN                  NaN                  NaN
+                              9476  58.068401           NaN        -0.051           NaN                  NaN                  NaN                  NaN                  NaN
+                              10802 66.194056        -0.069           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             5804  35.566589           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.039
+                              6620  40.566992           NaN           NaN           NaN                  NaN                  NaN                0.026                  NaN
+                              6919  42.399248           NaN           NaN           NaN                  NaN                0.020                  NaN                  NaN
+                              7840  48.043084           NaN           NaN        -0.010                  NaN                  NaN                  NaN                  NaN
+                              8622  52.835137           NaN           NaN           NaN               -0.028                  NaN                  NaN                  NaN
+                              9493  58.172577           NaN        -0.052           NaN                  NaN                  NaN                  NaN                  NaN
+                              10830 66.365638        -0.069           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+2.5            10             4786  29.328342           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.053
+                              5409  33.146051           NaN           NaN           NaN                  NaN                  NaN                0.039                  NaN
+                              5552  34.022347           NaN           NaN           NaN                  NaN                0.034                  NaN                  NaN
+                              5899  36.148744           NaN           NaN        -0.011                  NaN                  NaN                  NaN                  NaN
+                              6233  38.195478           NaN           NaN           NaN               -0.015                  NaN                  NaN                  NaN
+                              6725  41.210426           NaN        -0.067           NaN                  NaN                  NaN                  NaN                  NaN
+                              7398  45.334533        -0.098           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             5200  31.865311           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.078
+                              5938  36.387734           NaN           NaN           NaN                  NaN                  NaN                0.075                  NaN
+                              6142  37.637835           NaN           NaN           NaN                  NaN                0.070                  NaN                  NaN
+                              6703  41.075612           NaN           NaN         0.010                  NaN                  NaN                  NaN                  NaN
+                              7105  43.539045           NaN           NaN           NaN                0.010                  NaN                  NaN                  NaN
+                              7875  48.257562           NaN        -0.046           NaN                  NaN                  NaN                  NaN                  NaN
+                              8841  54.177157        -0.086           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             5220  31.987870           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.083
+                              5983  36.663492           NaN           NaN           NaN                  NaN                  NaN                0.069                  NaN
+                              6185  37.901336           NaN           NaN           NaN                  NaN                0.068                  NaN                  NaN
+                              6764  41.449416           NaN           NaN         0.012                  NaN                  NaN                  NaN                  NaN
+                              7176  43.974129           NaN           NaN           NaN                0.015                  NaN                  NaN                  NaN
+                              7963  48.796822           NaN        -0.043           NaN                  NaN                  NaN                  NaN                  NaN
+                              8978  55.016685        -0.084           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+3.0            10             3846  23.568074           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.036
+                              4264  26.129555           NaN           NaN           NaN                  NaN                  NaN                0.041                  NaN
+                              4305  26.380801           NaN           NaN           NaN                  NaN                0.017                  NaN                  NaN
+                              4399  26.956828           NaN           NaN        -0.032                  NaN                  NaN                  NaN                  NaN
+                              4511  27.643157           NaN           NaN           NaN               -0.029                  NaN                  NaN                  NaN
+                              4835  29.628611           NaN        -0.050           NaN                  NaN                  NaN                  NaN                  NaN
+                              5192  31.816287        -0.082           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               20             4676  28.654268           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.053
+                              5375  32.937701           NaN           NaN           NaN                  NaN                  NaN                0.038                  NaN
+                              5470  33.519856           NaN           NaN           NaN                  NaN                0.005                  NaN                  NaN
+                              5751  35.241808           NaN           NaN        -0.031                  NaN                  NaN                  NaN                  NaN
+                              5873  35.989418           NaN           NaN           NaN               -0.025                  NaN                  NaN                  NaN
+                              6630  40.628272           NaN        -0.048           NaN                  NaN                  NaN                  NaN                  NaN
+                              7312  44.807530        -0.087           NaN           NaN                  NaN                  NaN                  NaN                  NaN
+               40             4758  29.156760           NaN           NaN           NaN                  NaN                  NaN                  NaN                0.055
+                              5513  33.783358           NaN           NaN           NaN                  NaN                  NaN                0.029                  NaN
+                              5616  34.414536           NaN           NaN           NaN                  NaN                0.001                  NaN                  NaN
+                              5949  36.455141           NaN           NaN        -0.025                  NaN                  NaN                  NaN                  NaN
+                              6086  37.294670           NaN           NaN           NaN               -0.025                  NaN                  NaN                  NaN
+                              6894  42.246049           NaN        -0.046           NaN                  NaN                  NaN                  NaN                  NaN
+                              7664  46.964566        -0.089           NaN           NaN                  NaN                  NaN                  NaN                  NaN
 
 ==== HEADLINE (pooled, pullback 1.5 ATR, watch 20 sessions): every exit ====
                exit     n  per_month  avg_ATR  win_rate_pct  avg_sessions  pct_held_over_20  first_half  second_half  t_stat  pct_years_positive  best_winner_ATR  avg_winner  avg_loser
-        time exit 5 17638    108.085   -0.055        40.413         3.846             0.000      -0.053       -0.057  -5.088              21.429           53.538       1.276     -0.958
-       time exit 10 17638    108.085   -0.062        33.604         6.154             0.000      -0.052       -0.073  -4.283              28.571           80.347       1.889     -1.050
-       time exit 20 17638    108.085   -0.066        25.428         9.444             0.000      -0.073       -0.059  -3.528              21.429           87.438       2.929     -1.088
-trail 2 ATR, max 20 17638    108.085   -0.058        28.252         8.143             0.000      -0.051       -0.065  -3.569              21.429           83.554       2.312     -0.991
-trail 2 ATR, max 40 17638    108.085   -0.044        27.719         9.319            12.524      -0.023       -0.065  -2.292              28.571          124.711       2.417     -0.987
-trail 2 ATR, max 60 17638    108.085   -0.038        27.719         9.493            12.524      -0.018       -0.059  -1.972              28.571          128.391       2.437     -0.987
-trail 3 ATR, max 20 17638    108.085   -0.060        25.700         9.200             0.000      -0.069       -0.051  -3.250              21.429           87.438       2.818     -1.056
-trail 3 ATR, max 40 17638    108.085   -0.019        22.650        12.219            23.035      -0.014       -0.024  -0.840              28.571          124.711       3.472     -1.041
-trail 3 ATR, max 60 17638    108.085    0.001        22.440        13.320            23.035       0.004       -0.003   0.036              35.714          128.391       3.596     -1.039
-trail 4 ATR, max 20 17638    108.085   -0.062        25.490         9.409             0.000      -0.069       -0.056  -3.332              21.429           87.438       2.914     -1.081
-trail 4 ATR, max 40 17638    108.085   -0.010        20.246        13.480            26.658       0.002       -0.022  -0.435              28.571          124.711       4.176     -1.073
-trail 4 ATR, max 60 17638    108.085    0.017        19.441        15.669            26.658       0.033        0.001   0.679              42.857          128.391       4.517     -1.069
+        time exit 5 10854     66.513   -0.046        40.685         3.854             0.000      -0.047       -0.045  -3.401              28.571           53.538       1.281     -0.956
+       time exit 10  9455     57.940   -0.041        34.225         6.193             0.000      -0.024       -0.057  -2.099              28.571           80.347       1.899     -1.050
+       time exit 20  7753     47.510   -0.028        25.835         9.559             0.000      -0.024       -0.033  -1.000              42.857           87.438       3.008     -1.086
+trail 2 ATR, max 20  8526     52.247   -0.043        28.501         8.176             0.000      -0.025       -0.061  -1.902              28.571           79.145       2.336     -0.991
+trail 2 ATR, max 40  8041     49.275   -0.031        27.795         9.356            12.387      -0.010       -0.052  -1.110              35.714          124.711       2.453     -0.987
+trail 2 ATR, max 60  7986     48.938   -0.029        27.774         9.520            12.397      -0.009       -0.049  -1.003              35.714          128.391       2.464     -0.987
+trail 3 ATR, max 20  7869     48.221   -0.032        26.013         9.270             0.000      -0.030       -0.034  -1.152              28.571           87.438       2.876     -1.054
+trail 3 ATR, max 40  6767     41.468    0.016        22.979        12.361            23.437       0.029        0.003   0.414              35.714          124.711       3.560     -1.042
+trail 3 ATR, max 60  6431     39.409    0.031        22.671        13.494            23.418       0.022        0.040   0.753              35.714          128.391       3.683     -1.040
+trail 4 ATR, max 20  7768     47.602   -0.026        25.824         9.516             0.000      -0.021       -0.031  -0.922              42.857           87.438       2.994     -1.078
+trail 4 ATR, max 40  6404     39.243    0.027        20.440        13.533            26.827       0.048        0.006   0.651              35.714          124.711       4.315     -1.075
+trail 4 ATR, max 60  5830     35.726    0.060        19.657        15.797            26.792       0.088        0.032   1.281              35.714          128.391       4.681     -1.070
 
 by year:
 exit  time exit 10  trail 3 ATR, max 40  trail 3 ATR, max 60
 year                                                        
-2008         0.054                0.162                0.192
-2009        -0.068               -0.197               -0.172
-2010        -0.138               -0.102               -0.058
-2011        -0.095               -0.241               -0.243
-2012         0.001                0.118                0.099
-2013        -0.018               -0.030               -0.030
-2014        -0.078                0.246                0.306
-2015        -0.164               -0.189               -0.195
-2016        -0.226               -0.233               -0.239
-2017        -0.055               -0.043                0.043
-2018        -0.122               -0.125               -0.152
-2019        -0.148               -0.264               -0.257
-2020         0.222                0.720                0.794
-2021         0.006               -0.144               -0.132
+2008         0.169                0.303                0.319
+2009        -0.045               -0.212               -0.247
+2010        -0.104               -0.011               -0.006
+2011        -0.052               -0.222               -0.222
+2012         0.022                0.319                0.278
+2013        -0.043               -0.032               -0.047
+2014        -0.078                0.142                0.179
+2015        -0.133               -0.217               -0.243
+2016        -0.217               -0.158               -0.130
+2017         0.011                0.029                0.041
+2018        -0.113               -0.132               -0.091
+2019        -0.111               -0.295               -0.246
+2020         0.187                0.878                1.003
+2021        -0.002               -0.189               -0.157
 
 by group:
 exit           time exit 10  trail 3 ATR, max 40  trail 3 ATR, max 60
 group                                                                
-currencies           -0.077               -0.110               -0.098
-energy                0.002                0.212                0.263
-grains               -0.140               -0.075               -0.075
-meats                 0.002                0.055                0.071
-metals               -0.118               -0.052               -0.020
-rates                -0.040                0.030                0.048
-softs                -0.045                0.036                0.071
-stock indexes        -0.086               -0.215               -0.212
-volatility            0.185                0.385                0.449
-done 26s
+currencies           -0.102               -0.121               -0.115
+energy               -0.034                0.154                0.231
+grains               -0.049               -0.049                0.019
+meats                 0.084                0.076                0.052
+metals               -0.012                0.026               -0.011
+rates                -0.048                0.184                0.192
+softs                -0.025                0.068                0.061
+stock indexes        -0.054               -0.141               -0.129
+volatility            0.175                0.280                0.274
+
+==== OUTLIER CHECK ====
+                                                     trend  pullback_x_atr  watch_sessions                exit    n  avg_all  avg_without_short_rates  n_short_rate  avg_short_rates_only  avg_with_each_trade_capped_at_20  avg_without_top_10_trades  avg_without_top_10_and_short_rates  t_stat_without_short_rates  first_half_without_short_rates  second_half_without_short_rates
+                      20-session ratio at least 0.50 alone             2.5              20        time exit 20 1556    0.121                    0.119            98                 0.151                             0.109                      0.009                               0.033                       1.857                           0.105                            0.135
+                      20-session ratio at least 0.50 alone             2.5              20 trail 3 ATR, max 40 1515    0.271                    0.153            97                 2.001                             0.162                      0.055                               0.077                       2.145                           0.148                            0.157
+                      20-session ratio at least 0.50 alone             2.5              20 trail 4 ATR, max 60 1446    0.310                    0.175            94                 2.252                             0.189                      0.062                               0.080                       2.136                           0.204                            0.143
+                      20-session ratio at least 0.50 alone             2.0              20        time exit 20 1857    0.043                    0.040           120                 0.073                             0.031                     -0.055                              -0.033                       0.703                           0.053                            0.027
+                      20-session ratio at least 0.50 alone             2.0              20 trail 3 ATR, max 40 1779    0.108                    0.098           116                 0.242                             0.098                      0.005                               0.030                       1.483                           0.121                            0.074
+                      20-session ratio at least 0.50 alone             2.0              20 trail 4 ATR, max 60 1698    0.174                    0.160           112                 0.370                             0.161                      0.053                               0.076                       2.044                           0.234                            0.080
+                      10-session ratio at least 0.45 alone             3.0              10        time exit 20 1976   -0.025                   -0.119           104                 1.680                            -0.096                     -0.171                              -0.173                      -2.448                          -0.144                           -0.093
+                      10-session ratio at least 0.45 alone             3.0              10 trail 3 ATR, max 40 1976    0.041                   -0.117           106                 2.830                            -0.100                     -0.187                              -0.189                      -2.064                          -0.184                           -0.046
+                      10-session ratio at least 0.45 alone             3.0              10 trail 4 ATR, max 60 1855    0.090                   -0.082           101                 3.073                            -0.062                     -0.165                              -0.164                      -1.275                          -0.162                            0.003
+                  pooled ratio (any of 5, 10, 20 sessions)             1.5              20        time exit 20 7753   -0.028                   -0.039           400                 0.167                            -0.046                     -0.067                              -0.057                      -1.574                          -0.024                           -0.054
+                  pooled ratio (any of 5, 10, 20 sessions)             1.5              20 trail 3 ATR, max 40 6767    0.016                   -0.010           361                 0.479                            -0.014                     -0.043                              -0.036                      -0.338                           0.020                           -0.041
+                  pooled ratio (any of 5, 10, 20 sessions)             1.5              20 trail 4 ATR, max 60 5830    0.060                    0.026           313                 0.669                             0.019                     -0.014                              -0.013                       0.654                           0.077                           -0.027
+control: no ratio, every 5th session, 20-session direction             2.5              40        time exit 20 6764    0.012                   -0.003           351                 0.274                            -0.003                     -0.030                              -0.019                      -0.102                           0.016                           -0.022
+control: no ratio, every 5th session, 20-session direction             2.5              40 trail 3 ATR, max 40 6185    0.068                    0.033           323                 0.700                             0.034                      0.002                               0.012                       1.021                           0.062                            0.004
+control: no ratio, every 5th session, 20-session direction             2.5              40 trail 4 ATR, max 60 5220    0.083                    0.038           285                 0.856                             0.039                      0.001                               0.014                       0.961                           0.057                            0.019
+
+TOP 25 WINNERS (20-session ratio alone, pullback 2.5 ATR, watch 20, trail 4 ATR max 60):
+market decision_date  direction  result_ATR  sessions
+    ZQ    2020-01-29          1      175.01        60
+   SR1    2020-02-27          1       36.89        56
+    6J    2012-11-08         -1       23.62        60
+    6L    2012-04-09         -1       19.41        58
+    ZQ    2008-09-30          1       19.20        60
+    CL    2020-02-20         -1       18.60        60
+    BZ    2020-02-19         -1       17.71        60
+    ZF    2020-02-06          1       16.52        60
+   RTY    2020-10-28          1       16.50        60
+    HG    2008-08-21         -1       16.39        60
+    ZS    2020-07-13          1       15.48        60
+    HO    2020-02-19         -1       15.29        60
+    ZC    2020-10-28          1       15.17        60
+    SI    2020-06-15          1       14.84        60
+    6E    2014-06-30         -1       14.22        60
+    CL    2014-07-21         -1       13.01        60
+    RB    2011-01-25          1       12.81        60
+    ZM    2020-09-29          1       12.69        60
+    6C    2020-02-21         -1       12.57        35
+    YM    2012-12-28          1       12.52        60
+    BZ    2017-10-04          1       11.51        60
+    ZL    2008-08-21         -1       11.35        60
+    DX    2017-06-19         -1       11.09        60
+    HE    2009-05-12         -1       10.93        60
+    GF    2014-05-23          1       10.89        60
+done 16s
