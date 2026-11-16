@@ -1,0 +1,51 @@
+{
+  "cot_commit": "8622f760ab6ef1f8fbc5effdfc37c2f801fa835e",
+  "archives": [
+    {
+      "path": "data/raw/legacy_fut/deacot1986_2016.zip",
+      "sha": "2cc692e158c450072f7f987acecfc7db771f9f9f"
+    },
+    {
+      "path": "data/raw/legacy_fut/deacot2017.zip",
+      "sha": "830d21dcf90a394052b4f1f1bb24d087e74233cb"
+    },
+    {
+      "path": "data/raw/legacy_fut/deacot2018.zip",
+      "sha": "b0b119976c53343a19c6f8de670a557c57a1c520"
+    },
+    {
+      "path": "data/raw/legacy_fut/deacot2019.zip",
+      "sha": "656e35ee24fbc9d07fa513ef918d1ca7414e5d87"
+    },
+    {
+      "path": "data/raw/legacy_fut/deacot2020.zip",
+      "sha": "91ec7eb6733297ae2c391f7ee3d21a7f0e1c28be"
+    },
+    {
+      "path": "data/raw/legacy_fut/deacot2021.zip",
+      "sha": "afcfedf6183ccc69842aa1270c0b39d753b38392"
+    },
+    {
+      "path": "data/raw/legacy_fut/deacot2022.zip",
+      "sha": "d3a5bcb839f9161328b2dec4750226268d65bbeb"
+    },
+    {
+      "path": "data/raw/legacy_fut/deacot2023.zip",
+      "sha": "a4e343f3d5d27d3d082203dd1803c7a942b462f2"
+    },
+    {
+      "path": "data/raw/legacy_fut/deacot2024.zip",
+      "sha": "1be4637b882f215faed36606b4c22a81017ea5eb"
+    },
+    {
+      "path": "data/raw/legacy_fut/deacot2025.zip",
+      "sha": "2684b32a16d06b8b3e4d1a73ca189830c7e26747"
+    },
+    {
+      "path": "data/raw/legacy_fut/deacot2026.zip",
+      "sha": "2ff93790fabed49758643f81375d63741927d8c7"
+    }
+  ],
+  "cot_snapshot_sha256": "4df6f3447630f049519d810cf6642515e4e1bf1b6eb4e4d0638a94aea0846f64",
+  "canonical_pilot_sha256": "5f91fc4702c91ac465ca45e1a422103a273999117a63d4a150b6e28ce4da211c"
+}

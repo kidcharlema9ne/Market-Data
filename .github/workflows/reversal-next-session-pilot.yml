@@ -1,0 +1,36 @@
+name: COT reversal next-session development pilot
+on:
+  push:
+    branches: ['research/reversal-next-session-20261116']
+    paths: ['research/reversal_next_session/**', '.github/workflows/reversal-next-session-pilot.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pandas numpy pyarrow boto3 pandas_market_calendars
+      - name: Test mandatory entry rules
+        run: python research/reversal_next_session/test_engine.py
+      - name: Read and verify existing R2 development prices
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python research/reversal_next_session/fetch_pilot.py
+      - name: Run explicitly provisional diagnostic
+        run: |
+          python research/reversal_next_session/run_pilot.py --prices /tmp/reversal_pilot_prices.csv.gz --cot-snapshot research/reversal_next_session/cot_pilot_snapshot.csv --releases research/reversal_next_session/release_metadata.csv --diagnostic-nominal-ticks | tee research/reversal_next_session/actions_run.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reversal-next-session-development-diagnostic
+          path: |
+            research/reversal_next_session/actions_run.log
+            research/reversal_next_session/output/

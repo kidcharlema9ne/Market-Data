@@ -1,0 +1,73 @@
+{
+  "status": "DIAGNOSTIC ONLY",
+  "cot_commit": "8622f760ab6ef1f8fbc5effdfc37c2f801fa835e",
+  "cot_hashes_verified": 11,
+  "price_sha256": "f19b7bb6825334ea5c794b02dc3c344872fc73ac3c7230752f34238faf967329",
+  "canonical_pilot_sha256": "5f91fc4702c91ac465ca45e1a422103a273999117a63d4a150b6e28ce4da211c",
+  "release_sha256": "0a0fa8316dba8468d85d9fbcfde5fad76aedbf6c292fe039fa80b8ade1f764d7",
+  "coverage": {
+    "rows": 281517,
+    "first": "2008-01-02",
+    "last": "2026-11-06",
+    "roots": 66
+  },
+  "cutoff": "2021-08-06",
+  "sealed_from": "2021-11-08",
+  "python": "3.12.14",
+  "exact_blockers": [
+    "No contract identifiers or historical roll factors in price input",
+    "No adjusted historical tick sizes; nominal ticks are diagnostic proxies",
+    "Development COT publication timestamps are estimated",
+    "Historical exchange-session calendar alignment not independently certified"
+  ],
+  "markets": [
+    {
+      "root": "ZC",
+      "raw_rows": 3404,
+      "rejected_rows": 0,
+      "missing_calendar_rows": 33,
+      "first": "2008-02-19",
+      "last": "2021-08-06"
+    },
+    {
+      "root": "ZN",
+      "raw_rows": 3432,
+      "rejected_rows": 0,
+      "missing_calendar_rows": 81,
+      "first": "2008-01-02",
+      "last": "2021-08-06"
+    },
+    {
+      "root": "CL",
+      "raw_rows": 3429,
+      "rejected_rows": 0,
+      "missing_calendar_rows": 80,
+      "first": "2008-01-02",
+      "last": "2021-08-06"
+    },
+    {
+      "root": "GC",
+      "raw_rows": 3412,
+      "rejected_rows": 0,
+      "missing_calendar_rows": 97,
+      "first": "2008-01-28",
+      "last": "2021-08-06"
+    },
+    {
+      "root": "E6",
+      "raw_rows": 3432,
+      "rejected_rows": 0,
+      "missing_calendar_rows": 81,
+      "first": "2008-01-02",
+      "last": "2021-08-06"
+    },
+    {
+      "root": "ES",
+      "raw_rows": 3433,
+      "rejected_rows": 0,
+      "missing_calendar_rows": 80,
+      "first": "2008-01-02",
+      "last": "2021-08-06"
+    }
+  ]
+}
