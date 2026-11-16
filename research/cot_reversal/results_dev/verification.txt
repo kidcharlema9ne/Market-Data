@@ -1,0 +1,15 @@
+rows 33798, filled 8276
+  invariant: COT publication strictly before signal day: 0 violations
+  invariant: COT as-of before publication: 0 violations
+  invariant: entry date after signal date: 0 violations
+  invariant: entry more than 5 days after signal: 0 violations
+  invariant: fill below long trigger: 0 violations
+  invariant: fill above short trigger: 0 violations
+  invariant: negative MFE: 0 violations
+  invariant: negative MAE: 0 violations
+  invariant: MAE lower bound above upper bound: 0 violations
+  invariant: test C not inside B: 0 violations
+  invariant: test B not inside A: 0 violations
+  invariant: dates after sealed cut-off used: 0 violations
+independent recomputation of 400 random filled trades: mismatches {'fill': 0, 'mfe5': 0, 'mae5': 0, 'maeopt5': 0, 'ret5': 0, 'mfe10': 0, 'trail': 0, 'cot': 0, 'pattern': 0}
+VERIFICATION PASSED
