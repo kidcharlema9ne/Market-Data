@@ -1,0 +1,9 @@
+bet size,version,trades,profit a year %,score (Sharpe),worst losing stretch %,total profit $
+bet size 0.15% of the account per ATR,original rule,1022.0,6.021,0.87,-13.324,347593.728
+bet size 0.15% of the account per ATR,candidate version 2,910.0,9.219,0.925,-14.526,532171.329
+bet size 0.15% of the account per ATR,earlier system,682.0,2.879,0.42,-10.011,166204.617
+bet size 0.15% of the account per ATR,50/50 mix of version 2 and the earlier system,,6.049,0.827,-9.148,349187.973
+bet size 0.25% of the account per ATR,original rule,1391.0,6.469,0.549,-32.611,373413.459
+bet size 0.25% of the account per ATR,candidate version 2,1246.0,11.553,0.672,-30.691,666929.015
+bet size 0.25% of the account per ATR,earlier system,916.0,6.153,0.482,-14.998,355196.712
+bet size 0.25% of the account per ATR,50/50 mix of version 2 and the earlier system,,8.853,0.684,-19.695,511062.863

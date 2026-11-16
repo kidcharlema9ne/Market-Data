@@ -1,0 +1,209 @@
+development rows 526,297; 2007-12-31 to 2026-11-06; indicator warm-up from 2020-06; trades counted only from 2021-08-07
+46 markets; 203,982 decision days; 7,163 entries across 2 combinations; 1s
+frozen best rule (pullback entry, 1 ATR stop, 5 ATR trail): 1891 trades (development 1396, sealed 495); median sessions held 6; win rate 19.5%
+earlier system (20-session breakout, ratio 0.6, 3 ATR stop, 3 ATR trail): 1179 trades (development 897, sealed 282); median sessions held 19; win rate 37.4%
+SIMULATOR CHECK PASSED: 1 ATR / 5 ATR / 130 (frozen) and 3 ATR / 3 ATR / 130 (earlier) reproduce the engine's trades, results and daily profit exactly
+REFERENCE CHECK PASSED: whole-history return, Sharpe and drawdown match Entry 128
+
+==== BASELINE, whole history ====
+                             bet size                                       version  trades  profit a year %  score (Sharpe)  worst losing stretch %  total profit $
+bet size 0.15% of the account per ATR                                 original rule  1022.0             6.02            0.87                  -13.32       347593.73
+bet size 0.15% of the account per ATR                           candidate version 2   910.0             9.22            0.93                  -14.53       532171.33
+bet size 0.15% of the account per ATR                                earlier system   682.0             2.88            0.42                  -10.01       166204.62
+bet size 0.15% of the account per ATR 50/50 mix of version 2 and the earlier system     NaN             6.05            0.83                   -9.15       349187.97
+bet size 0.25% of the account per ATR                                 original rule  1391.0             6.47            0.55                  -32.61       373413.46
+bet size 0.25% of the account per ATR                           candidate version 2  1246.0            11.55            0.67                  -30.69       666929.02
+bet size 0.25% of the account per ATR                                earlier system   916.0             6.15            0.48                  -15.00       355196.71
+bet size 0.25% of the account per ATR 50/50 mix of version 2 and the earlier system     NaN             8.85            0.68                  -19.70       511062.86
+
+==== TEST 1: how much of the profit came from the ten biggest trades ====
+                             bet size             version  trades  best ten trades' share of all profit %  single best trade's share %  profit from all other trades $                                                  years of the best ten  short-rate trades among the ten  different markets among the ten
+bet size 0.15% of the account per ATR       original rule    1022                                    66.8                         12.1                        115444.3                                     2012 x1, 2014 x3, 2020 x4, 2021 x2                                3                                9
+bet size 0.15% of the account per ATR candidate version 2     910                                    48.8                          8.4                        272548.3                            2010 x1, 2012 x1, 2014 x2, 2020 x3, 2021 x3                                3                                8
+bet size 0.15% of the account per ATR      earlier system     682                                    86.3                         21.9                         22697.5                   2008 x1, 2010 x1, 2012 x1, 2014 x1, 2016 x1, 2020 x5                                3                               10
+bet size 0.25% of the account per ATR       original rule    1391                                    94.9                         18.7                         18915.3                            2012 x1, 2014 x3, 2020 x4, 2021 x1, 2024 x1                                3                               10
+bet size 0.25% of the account per ATR candidate version 2    1246                                    63.8                         11.5                        241646.0                            2012 x1, 2014 x3, 2020 x4, 2021 x1, 2024 x1                                3                               10
+bet size 0.25% of the account per ATR      earlier system     916                                    90.4                         15.6                         34030.0 2008 x1, 2010 x1, 2011 x1, 2012 x1, 2014 x2, 2017 x1, 2020 x2, 2024 x1                                2                               10
+
+==== TEST 1: candidate version 2, the ten biggest trades, bet size 0.15% of the account per ATR ====
+ rank market direction entry_date  exit_date  sessions_held  result_ATR  profit_usd  share_of_all_profit_pct
+    1     ZT     short 2021-10-04 2022-06-23            182      100.18    44773.09                     8.41
+    2     ZS      long 2020-07-14 2021-06-14            232       56.39    43503.56                     8.17
+    3     ZQ      long 2020-01-30 2020-06-03             87      177.67    40557.67                     7.62
+    4     6E     short 2014-07-01 2015-04-29            210       40.90    26754.53                     5.03
+    5     DX      long 2014-06-24 2015-03-18            190       49.13    19291.17                     3.62
+    6     6E     short 2021-10-21 2022-11-10            267       32.09    19257.61                     3.62
+    7     DX      long 2021-07-30 2022-11-10            333       36.82    18502.89                     3.48
+    8    SR1      long 2020-02-28 2020-05-26             61       36.68    16866.90                     3.17
+    9     6A      long 2010-08-16 2011-08-05            247       18.16    15091.54                     2.84
+   10     6J     short 2012-11-09 2013-06-06            143       30.09    15024.10                     2.82
+
+==== TEST 1: candidate version 2, the ten biggest trades, bet size 0.25% of the account per ATR ====
+ rank market direction entry_date  exit_date  sessions_held  result_ATR  profit_usd  share_of_all_profit_pct
+    1     GF      long 2024-10-31 2025-10-24            247       51.49    76371.31                    11.45
+    2     ZT     short 2021-10-04 2022-06-23            182      100.18    74621.82                    11.19
+    3     ZS      long 2020-07-14 2021-06-14            232       56.39    43503.56                     6.52
+    4     ZQ      long 2020-01-30 2020-06-03             87      177.67    40557.67                     6.08
+    5     ZL      long 2020-09-24 2021-06-17            184       39.52    39200.91                     5.88
+    6     DX      long 2014-06-24 2015-03-18            190       49.13    38582.35                     5.79
+    7     6J     short 2012-11-09 2013-06-06            143       30.09    30048.20                     4.51
+    8    SR1      long 2020-02-28 2020-05-26             61       36.68    29517.07                     4.43
+    9     6E     short 2014-07-01 2015-04-29            210       40.90    26754.53                     4.01
+   10     CL     short 2014-07-22 2015-04-16            186       33.45    26125.62                     3.92
+
+==== TEST 2: remove the most profitable trades, bet size 0.15% of the account per ATR ====
+ best trades removed                                       version  trades left  profit a year %  score (Sharpe)  worst losing stretch %  total profit $
+                   0                                 original rule       1022.0             6.02            0.87                  -13.32       347593.73
+                   0                           candidate version 2        910.0             9.22            0.93                  -14.53       532171.33
+                   0                                earlier system        682.0             2.88            0.42                  -10.01       166204.62
+                   0 50/50 mix of version 2 and the earlier system          NaN             6.05            0.83                   -9.15       349187.97
+                   1                                 original rule       1021.0             5.30            0.78                  -13.32       305695.21
+                   1                           candidate version 2        909.0             8.44            0.87                  -14.53       487398.23
+                   1                                earlier system        681.0             2.25            0.34                  -10.78       129876.07
+                   1 50/50 mix of version 2 and the earlier system          NaN             5.35            0.76                   -9.15       308637.15
+                   3                                 original rule       1019.0             3.94            0.62                  -13.32       227252.78
+                   3                           candidate version 2        907.0             6.99            0.75                  -14.53       403337.00
+                   3                                earlier system        679.0             1.55            0.24                  -11.78        89680.71
+                   3 50/50 mix of version 2 and the earlier system          NaN             4.27            0.64                   -9.30       246508.85
+                   5                                 original rule       1017.0             3.31            0.52                  -14.52       191102.62
+                   5                           candidate version 2        905.0             6.19            0.68                  -14.58       357291.30
+                   5                                earlier system        677.0             1.17            0.19                  -12.54        67318.18
+                   5 50/50 mix of version 2 and the earlier system          NaN             3.68            0.57                  -10.44       212304.74
+                  10                                 original rule       1012.0             2.00            0.33                  -18.76       115444.28
+                  10                           candidate version 2        900.0             4.72            0.55                  -15.48       272548.26
+                  10                                earlier system        672.0             0.39            0.07                  -13.94        22697.50
+                  10 50/50 mix of version 2 and the earlier system          NaN             2.56            0.42                  -11.07       147622.88
+                  20                                 original rule       1002.0             0.24            0.04                  -24.85        13645.82
+                  20                           candidate version 2        890.0             2.53            0.32                  -18.29       146229.46
+                  20                                earlier system        662.0            -0.70           -0.12                  -21.90       -40287.11
+                  20 50/50 mix of version 2 and the earlier system          NaN             0.92            0.16                  -14.85        52971.17
+
+==== TEST 2: remove the most profitable trades, bet size 0.25% of the account per ATR ====
+ best trades removed                                       version  trades left  profit a year %  score (Sharpe)  worst losing stretch %  total profit $
+                   0                                 original rule       1391.0             6.47            0.55                  -32.61       373413.46
+                   0                           candidate version 2       1246.0            11.55            0.67                  -30.69       666929.02
+                   0                                earlier system        916.0             6.15            0.48                  -15.00       355196.71
+                   0 50/50 mix of version 2 and the earlier system          NaN             8.85            0.68                  -19.70       511062.86
+                   1                                 original rule       1390.0             5.26            0.46                  -32.61       303582.60
+                   1                           candidate version 2       1245.0            10.23            0.61                  -30.69       590557.70
+                   1                                earlier system        915.0             5.19            0.41                  -15.00       299618.07
+                   1 50/50 mix of version 2 and the earlier system          NaN             7.71            0.60                  -20.72       445087.89
+                   3                                 original rule       1388.0             3.86            0.35                  -32.66       222847.07
+                   3                           candidate version 2       1243.0             8.18            0.51                  -30.69       472432.32
+                   3                                earlier system        913.0             3.52            0.29                  -20.65       203312.91
+                   3 50/50 mix of version 2 and the earlier system          NaN             5.85            0.48                  -20.72       337872.61
+                   5                                 original rule       1386.0             2.57            0.23                  -35.59       148511.27
+                   5                           candidate version 2       1241.0             6.80            0.43                  -30.69       392673.74
+                   5                                earlier system        911.0             2.24            0.19                  -23.42       129410.24
+                   5 50/50 mix of version 2 and the earlier system          NaN             4.52            0.38                  -20.97       261041.99
+                  10                                 original rule       1381.0             0.33            0.03                  -48.06        18915.34
+                  10                           candidate version 2       1236.0             4.19            0.27                  -40.68       241645.97
+                  10                                earlier system        906.0             0.59            0.05                  -28.33        34030.04
+                  10 50/50 mix of version 2 and the earlier system          NaN             2.39            0.21                  -28.29       137838.00
+                  20                                 original rule       1371.0            -2.23           -0.22                  -60.19      -128506.86
+                  20                           candidate version 2       1226.0             0.76            0.05                  -52.42        43910.59
+                  20                                earlier system        896.0            -1.60           -0.15                  -44.55       -92403.50
+                  20 50/50 mix of version 2 and the earlier system          NaN            -0.42           -0.04                  -42.08       -24246.46
+
+==== TEST 3: 10,000 imagined 19-year histories built by redrawing whole calendar years ====
+                             bet size                                       version profit a year %: bad draw (5th) / typical / good draw (95th) score (Sharpe): bad / typical / good worst losing stretch %: bad / typical / good  share of draws that lost money %
+bet size 0.15% of the account per ATR                                 original rule                                             2.2 / 5.8 / 10.6                   0.35 / 0.84 / 1.37                          -16.9 / -9.3 / -5.6                               0.1
+bet size 0.15% of the account per ATR                           candidate version 2                                             4.3 / 9.1 / 14.6                   0.48 / 0.91 / 1.34                         -22.3 / -11.7 / -6.9                               0.0
+bet size 0.15% of the account per ATR                                earlier system                                              0.1 / 2.7 / 6.3                   0.01 / 0.40 / 0.80                         -25.2 / -13.7 / -8.5                               4.6
+bet size 0.15% of the account per ATR 50/50 mix of version 2 and the earlier system                                             2.6 / 5.9 / 10.1                   0.40 / 0.81 / 1.22                          -14.5 / -8.8 / -5.8                               0.0
+bet size 0.25% of the account per ATR                                 original rule                                             0.9 / 6.2 / 12.9                   0.08 / 0.53 / 0.99                        -41.5 / -20.6 / -11.3                               2.5
+bet size 0.25% of the account per ATR                           candidate version 2                                            4.3 / 11.4 / 19.2                   0.28 / 0.66 / 1.04                        -43.4 / -22.7 / -12.5                               0.3
+bet size 0.25% of the account per ATR                                earlier system                                             1.1 / 6.0 / 12.0                   0.09 / 0.47 / 0.83                        -37.0 / -19.8 / -12.1                               2.0
+bet size 0.25% of the account per ATR 50/50 mix of version 2 and the earlier system                                             3.9 / 8.6 / 14.5                   0.33 / 0.67 / 1.01                        -26.0 / -15.5 / -10.0                               0.1
+
+==== TEST 3: which version wins in the same imagined histories ====
+                             bet size                                                                  question  share of draws %
+bet size 0.15% of the account per ATR                      version 2 earns more per year than the original rule              99.6
+bet size 0.15% of the account per ATR            version 2 has the higher score (Sharpe) than the original rule              70.4
+bet size 0.15% of the account per ATR   version 2 has the shallower worst losing stretch than the original rule              13.1
+bet size 0.15% of the account per ATR           version 2 has the higher score (Sharpe) than the earlier system              98.9
+bet size 0.15% of the account per ATR the 50/50 mix has the shallower worst losing stretch than version 2 alone              93.0
+bet size 0.25% of the account per ATR                      version 2 earns more per year than the original rule              99.8
+bet size 0.25% of the account per ATR            version 2 has the higher score (Sharpe) than the original rule              89.4
+bet size 0.25% of the account per ATR   version 2 has the shallower worst losing stretch than the original rule              32.2
+bet size 0.25% of the account per ATR           version 2 has the higher score (Sharpe) than the earlier system              76.0
+bet size 0.25% of the account per ATR the 50/50 mix has the shallower worst losing stretch than version 2 alone              97.5
+
+==== TEST 3: take the two biggest years out, bet size 0.15% of the account per ATR ====
+                                      version            years used  profit a year %  score (Sharpe)  worst losing stretch %
+                                original rule             all years             6.02            0.87                  -13.32
+                                original rule          without 2020             3.90            0.61                  -13.32
+                                original rule          without 2022             5.17            0.75                  -13.32
+                                original rule without 2020 and 2022             2.87            0.46                  -13.32
+                          candidate version 2             all years             9.22            0.93                  -14.53
+                          candidate version 2          without 2020             7.32            0.75                  -14.53
+                          candidate version 2          without 2022             7.72            0.82                  -14.53
+                          candidate version 2 without 2020 and 2022             5.62            0.61                  -14.53
+                               earlier system             all years             2.88            0.42                  -10.01
+                               earlier system          without 2020             1.25            0.20                  -12.39
+                               earlier system          without 2022             2.77            0.41                  -12.94
+                               earlier system without 2020 and 2022             1.04            0.17                  -16.01
+50/50 mix of version 2 and the earlier system             all years             6.05            0.83                   -9.15
+50/50 mix of version 2 and the earlier system          without 2020             4.29            0.63                   -9.15
+50/50 mix of version 2 and the earlier system          without 2022             5.24            0.74                   -9.15
+50/50 mix of version 2 and the earlier system without 2020 and 2022             3.33            0.51                   -9.15
+
+==== TEST 3: take the two biggest years out, bet size 0.25% of the account per ATR ====
+                                      version            years used  profit a year %  score (Sharpe)  worst losing stretch %
+                                original rule             all years             6.47            0.55                  -32.61
+                                original rule          without 2020             3.80            0.34                  -32.05
+                                original rule          without 2022             4.93            0.43                  -32.61
+                                original rule without 2020 and 2022             2.00            0.19                  -32.05
+                          candidate version 2             all years            11.55            0.67                  -30.69
+                          candidate version 2          without 2020             9.19            0.54                  -30.69
+                          candidate version 2          without 2022             9.34            0.57                  -30.69
+                          candidate version 2 without 2020 and 2022             6.70            0.42                  -30.69
+                               earlier system             all years             6.15            0.48                  -15.00
+                               earlier system          without 2020             3.64            0.31                  -17.09
+                               earlier system          without 2022             6.57            0.52                  -15.00
+                               earlier system without 2020 and 2022             3.93            0.34                  -16.43
+50/50 mix of version 2 and the earlier system             all years             8.85            0.68                  -19.70
+50/50 mix of version 2 and the earlier system          without 2020             6.42            0.52                  -19.70
+50/50 mix of version 2 and the earlier system          without 2022             7.95            0.63                  -19.70
+50/50 mix of version 2 and the earlier system without 2020 and 2022             5.32            0.45                  -19.70
+
+==== TEST 3: profit by calendar year, percent of the $300k account ====
+      original rule 0.15%  candidate version 2 0.15%  earlier system 0.15%  original rule 0.25%  candidate version 2 0.25%  earlier system 0.25%
+2008                 10.6                       19.8                   7.4                 11.8                       26.3                  14.7
+2009                  3.3                       11.7                  -1.7                  5.2                       20.7                  -9.0
+2010                  2.8                       12.5                   7.9                  0.5                        6.3                  17.5
+2011                  2.0                        8.1                  -4.5                 -3.5                        9.1                   6.7
+2012                  3.1                       -1.4                   3.8                  0.3                       -9.1                   6.4
+2013                 11.7                        9.6                  -1.7                 15.8                       14.9                  -5.4
+2014                 10.2                       18.8                  10.6                  8.8                       15.1                  29.7
+2015                 -3.5                        0.0                   0.7                -11.8                       -9.0                   4.3
+2016                 -6.5                      -12.3                   1.1                -12.1                      -19.5                  -3.7
+2017                  1.6                        2.2                   1.1                 -4.8                       -3.9                   3.8
+2018                 -3.6                       -2.7                   7.9                 -4.6                       -5.8                  15.7
+2019                 -2.7                       -2.3                  -4.6                 -3.5                       -1.5                  -5.7
+2020                 44.9                       44.0                  32.6                 55.3                       55.0                  52.0
+2021                 14.4                       25.3                  -0.2                 23.6                       39.8                  -3.2
+2022                 21.7                       36.8                   5.0                 34.7                       52.1                  -1.2
+2023                  4.0                        1.3                  -6.8                  0.1                        4.2                  -9.2
+2024                  3.5                        5.1                   0.0                  4.9                        5.9                  10.4
+2025                 -1.1                        1.4                  -3.6                  7.4                       23.5                  -5.2
+2026                 -0.5                       -0.4                   0.4                 -3.7                       -1.8                  -0.1
+
+==== TEST 4: without short-rate futures, bet size 0.15% of the account per ATR ====
+                             which markets and years             version  trades  profit a year %  score (Sharpe)  worst losing stretch %  best ten trades' share of profit %
+                          without short-rate futures       original rule     864             4.23            0.68                  -13.36                               68.06
+without short-rate futures and without 2020 and 2022       original rule     864             2.91            0.48                  -13.36                               68.06
+                          without short-rate futures candidate version 2     778             6.97            0.77                  -15.01                               49.52
+without short-rate futures and without 2020 and 2022 candidate version 2     778             5.65            0.64                  -15.01                               49.52
+                          without short-rate futures      earlier system     571             1.28            0.21                  -14.87                              130.75
+without short-rate futures and without 2020 and 2022      earlier system     571             1.02            0.17                  -14.13                              130.75
+
+==== TEST 4: without short-rate futures, bet size 0.25% of the account per ATR ====
+                             which markets and years             version  trades  profit a year %  score (Sharpe)  worst losing stretch %  best ten trades' share of profit %
+                          without short-rate futures       original rule    1233             3.89            0.36                  -32.65                              116.64
+without short-rate futures and without 2020 and 2022       original rule    1233             2.02            0.19                  -32.25                              116.64
+                          without short-rate futures candidate version 2    1114             8.45            0.53                  -31.23                               70.54
+without short-rate futures and without 2020 and 2022 candidate version 2    1114             6.85            0.44                  -31.23                               70.54
+                          without short-rate futures      earlier system     805             3.98            0.34                  -20.52                              116.72
+without short-rate futures and without 2020 and 2022      earlier system     805             4.00            0.35                  -16.12                              116.72
+done 10s

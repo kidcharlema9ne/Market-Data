@@ -1,0 +1,33 @@
+bet size,version,years used,profit a year %,score (Sharpe),worst losing stretch %
+bet size 0.15% of the account per ATR,original rule,all years,6.021,0.87,-13.324
+bet size 0.15% of the account per ATR,original rule,without 2020,3.898,0.608,-13.324
+bet size 0.15% of the account per ATR,original rule,without 2022,5.17,0.754,-13.324
+bet size 0.15% of the account per ATR,original rule,without 2020 and 2022,2.869,0.455,-13.324
+bet size 0.15% of the account per ATR,candidate version 2,all years,9.219,0.925,-14.526
+bet size 0.15% of the account per ATR,candidate version 2,without 2020,7.322,0.754,-14.526
+bet size 0.15% of the account per ATR,candidate version 2,without 2022,7.717,0.815,-14.526
+bet size 0.15% of the account per ATR,candidate version 2,without 2020 and 2022,5.618,0.614,-14.526
+bet size 0.15% of the account per ATR,earlier system,all years,2.879,0.42,-10.011
+bet size 0.15% of the account per ATR,earlier system,without 2020,1.252,0.202,-12.39
+bet size 0.15% of the account per ATR,earlier system,without 2022,2.768,0.407,-12.936
+bet size 0.15% of the account per ATR,earlier system,without 2020 and 2022,1.037,0.17,-16.009
+bet size 0.15% of the account per ATR,50/50 mix of version 2 and the earlier system,all years,6.049,0.827,-9.148
+bet size 0.15% of the account per ATR,50/50 mix of version 2 and the earlier system,without 2020,4.287,0.628,-9.148
+bet size 0.15% of the account per ATR,50/50 mix of version 2 and the earlier system,without 2022,5.243,0.744,-9.148
+bet size 0.15% of the account per ATR,50/50 mix of version 2 and the earlier system,without 2020 and 2022,3.328,0.512,-9.148
+bet size 0.25% of the account per ATR,original rule,all years,6.469,0.549,-32.611
+bet size 0.25% of the account per ATR,original rule,without 2020,3.795,0.341,-32.048
+bet size 0.25% of the account per ATR,original rule,without 2022,4.926,0.431,-32.611
+bet size 0.25% of the account per ATR,original rule,without 2020 and 2022,2.001,0.187,-32.048
+bet size 0.25% of the account per ATR,candidate version 2,all years,11.553,0.672,-30.691
+bet size 0.25% of the account per ATR,candidate version 2,without 2020,9.186,0.543,-30.691
+bet size 0.25% of the account per ATR,candidate version 2,without 2022,9.342,0.569,-30.691
+bet size 0.25% of the account per ATR,candidate version 2,without 2020 and 2022,6.702,0.417,-30.691
+bet size 0.25% of the account per ATR,earlier system,all years,6.153,0.482,-14.998
+bet size 0.25% of the account per ATR,earlier system,without 2020,3.644,0.311,-17.091
+bet size 0.25% of the account per ATR,earlier system,without 2022,6.567,0.515,-14.998
+bet size 0.25% of the account per ATR,earlier system,without 2020 and 2022,3.934,0.338,-16.435
+bet size 0.25% of the account per ATR,50/50 mix of version 2 and the earlier system,all years,8.853,0.684,-19.695
+bet size 0.25% of the account per ATR,50/50 mix of version 2 and the earlier system,without 2020,6.415,0.524,-19.695
+bet size 0.25% of the account per ATR,50/50 mix of version 2 and the earlier system,without 2022,7.955,0.631,-19.695
+bet size 0.25% of the account per ATR,50/50 mix of version 2 and the earlier system,without 2020 and 2022,5.318,0.45,-19.695

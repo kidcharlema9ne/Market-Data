@@ -1,0 +1,7 @@
+bet size,version,trades,best ten trades' share of all profit %,single best trade's share %,profit from all other trades $,years of the best ten,short-rate trades among the ten,different markets among the ten
+bet size 0.15% of the account per ATR,original rule,1022,66.8,12.1,115444.3,"2012 x1, 2014 x3, 2020 x4, 2021 x2",3,9
+bet size 0.15% of the account per ATR,candidate version 2,910,48.8,8.4,272548.3,"2010 x1, 2012 x1, 2014 x2, 2020 x3, 2021 x3",3,8
+bet size 0.15% of the account per ATR,earlier system,682,86.3,21.9,22697.5,"2008 x1, 2010 x1, 2012 x1, 2014 x1, 2016 x1, 2020 x5",3,10
+bet size 0.25% of the account per ATR,original rule,1391,94.9,18.7,18915.3,"2012 x1, 2014 x3, 2020 x4, 2021 x1, 2024 x1",3,10
+bet size 0.25% of the account per ATR,candidate version 2,1246,63.8,11.5,241646.0,"2012 x1, 2014 x3, 2020 x4, 2021 x1, 2024 x1",3,10
+bet size 0.25% of the account per ATR,earlier system,916,90.4,15.6,34030.0,"2008 x1, 2010 x1, 2011 x1, 2012 x1, 2014 x2, 2017 x1, 2020 x2, 2024 x1",2,10

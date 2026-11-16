@@ -1,0 +1,13 @@
+bet size,which markets and years,version,trades,profit a year %,score (Sharpe),worst losing stretch %,best ten trades' share of profit %
+bet size 0.15% of the account per ATR,without short-rate futures,original rule,864,4.232,0.68,-13.361,68.061
+bet size 0.15% of the account per ATR,without short-rate futures and without 2020 and 2022,original rule,864,2.913,0.481,-13.361,68.061
+bet size 0.15% of the account per ATR,without short-rate futures,candidate version 2,778,6.965,0.769,-15.013,49.524
+bet size 0.15% of the account per ATR,without short-rate futures and without 2020 and 2022,candidate version 2,778,5.647,0.637,-15.013,49.524
+bet size 0.15% of the account per ATR,without short-rate futures,earlier system,571,1.278,0.213,-14.87,130.753
+bet size 0.15% of the account per ATR,without short-rate futures and without 2020 and 2022,earlier system,571,1.02,0.173,-14.129,130.753
+bet size 0.25% of the account per ATR,without short-rate futures,original rule,1233,3.89,0.358,-32.652,116.641
+bet size 0.25% of the account per ATR,without short-rate futures and without 2020 and 2022,original rule,1233,2.021,0.195,-32.253,116.641
+bet size 0.25% of the account per ATR,without short-rate futures,candidate version 2,1114,8.446,0.53,-31.23,70.538
+bet size 0.25% of the account per ATR,without short-rate futures and without 2020 and 2022,candidate version 2,1114,6.849,0.437,-31.23,70.538
+bet size 0.25% of the account per ATR,without short-rate futures,earlier system,805,3.984,0.343,-20.518,116.716
+bet size 0.25% of the account per ATR,without short-rate futures and without 2020 and 2022,earlier system,805,4.002,0.355,-16.115,116.716

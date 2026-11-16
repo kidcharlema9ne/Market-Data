@@ -1,0 +1,49 @@
+bet size,best trades removed,version,trades left,profit a year %,score (Sharpe),worst losing stretch %,total profit $
+bet size 0.15% of the account per ATR,0,original rule,1022.0,6.021,0.87,-13.324,347593.728
+bet size 0.15% of the account per ATR,0,candidate version 2,910.0,9.219,0.925,-14.526,532171.329
+bet size 0.15% of the account per ATR,0,earlier system,682.0,2.879,0.42,-10.011,166204.617
+bet size 0.15% of the account per ATR,0,50/50 mix of version 2 and the earlier system,,6.049,0.827,-9.148,349187.973
+bet size 0.15% of the account per ATR,1,original rule,1021.0,5.296,0.784,-13.324,305695.214
+bet size 0.15% of the account per ATR,1,candidate version 2,909.0,8.443,0.874,-14.526,487398.234
+bet size 0.15% of the account per ATR,1,earlier system,681.0,2.25,0.345,-10.78,129876.073
+bet size 0.15% of the account per ATR,1,50/50 mix of version 2 and the earlier system,,5.347,0.764,-9.148,308637.153
+bet size 0.15% of the account per ATR,3,original rule,1019.0,3.937,0.619,-13.324,227252.775
+bet size 0.15% of the account per ATR,3,candidate version 2,907.0,6.987,0.754,-14.526,403337.004
+bet size 0.15% of the account per ATR,3,earlier system,679.0,1.554,0.245,-11.781,89680.706
+bet size 0.15% of the account per ATR,3,50/50 mix of version 2 and the earlier system,,4.27,0.642,-9.304,246508.855
+bet size 0.15% of the account per ATR,5,original rule,1017.0,3.311,0.524,-14.525,191102.617
+bet size 0.15% of the account per ATR,5,candidate version 2,905.0,6.189,0.682,-14.582,357291.299
+bet size 0.15% of the account per ATR,5,earlier system,677.0,1.166,0.187,-12.541,67318.175
+bet size 0.15% of the account per ATR,5,50/50 mix of version 2 and the earlier system,,3.678,0.568,-10.438,212304.737
+bet size 0.15% of the account per ATR,10,original rule,1012.0,2.0,0.328,-18.763,115444.281
+bet size 0.15% of the account per ATR,10,candidate version 2,900.0,4.721,0.549,-15.485,272548.264
+bet size 0.15% of the account per ATR,10,earlier system,672.0,0.393,0.066,-13.937,22697.497
+bet size 0.15% of the account per ATR,10,50/50 mix of version 2 and the earlier system,,2.557,0.416,-11.07,147622.88
+bet size 0.15% of the account per ATR,20,original rule,1002.0,0.236,0.042,-24.85,13645.824
+bet size 0.15% of the account per ATR,20,candidate version 2,890.0,2.533,0.317,-18.294,146229.46
+bet size 0.15% of the account per ATR,20,earlier system,662.0,-0.698,-0.123,-21.9,-40287.115
+bet size 0.15% of the account per ATR,20,50/50 mix of version 2 and the earlier system,,0.918,0.161,-14.845,52971.172
+bet size 0.25% of the account per ATR,0,original rule,1391.0,6.469,0.549,-32.611,373413.459
+bet size 0.25% of the account per ATR,0,candidate version 2,1246.0,11.553,0.672,-30.691,666929.015
+bet size 0.25% of the account per ATR,0,earlier system,916.0,6.153,0.482,-14.998,355196.712
+bet size 0.25% of the account per ATR,0,50/50 mix of version 2 and the earlier system,,8.853,0.684,-19.695,511062.863
+bet size 0.25% of the account per ATR,1,original rule,1390.0,5.259,0.457,-32.611,303582.602
+bet size 0.25% of the account per ATR,1,candidate version 2,1245.0,10.23,0.605,-30.691,590557.704
+bet size 0.25% of the account per ATR,1,earlier system,915.0,5.19,0.411,-14.998,299618.072
+bet size 0.25% of the account per ATR,1,50/50 mix of version 2 and the earlier system,,7.71,0.604,-20.72,445087.888
+bet size 0.25% of the account per ATR,3,original rule,1388.0,3.86,0.345,-32.657,222847.074
+bet size 0.25% of the account per ATR,3,candidate version 2,1243.0,8.184,0.506,-30.691,472432.315
+bet size 0.25% of the account per ATR,3,earlier system,913.0,3.522,0.291,-20.654,203312.914
+bet size 0.25% of the account per ATR,3,50/50 mix of version 2 and the earlier system,,5.853,0.479,-20.72,337872.615
+bet size 0.25% of the account per ATR,5,original rule,1386.0,2.573,0.232,-35.586,148511.274
+bet size 0.25% of the account per ATR,5,candidate version 2,1241.0,6.802,0.428,-30.691,392673.737
+bet size 0.25% of the account per ATR,5,earlier system,911.0,2.242,0.191,-23.424,129410.238
+bet size 0.25% of the account per ATR,5,50/50 mix of version 2 and the earlier system,,4.522,0.381,-20.969,261041.987
+bet size 0.25% of the account per ATR,10,original rule,1381.0,0.328,0.03,-48.055,18915.338
+bet size 0.25% of the account per ATR,10,candidate version 2,1236.0,4.186,0.271,-40.682,241645.968
+bet size 0.25% of the account per ATR,10,earlier system,906.0,0.59,0.052,-28.326,34030.039
+bet size 0.25% of the account per ATR,10,50/50 mix of version 2 and the earlier system,,2.388,0.209,-28.288,137838.004
+bet size 0.25% of the account per ATR,20,original rule,1371.0,-2.226,-0.217,-60.19,-128506.856
+bet size 0.25% of the account per ATR,20,candidate version 2,1226.0,0.761,0.052,-52.416,43910.59
+bet size 0.25% of the account per ATR,20,earlier system,896.0,-1.601,-0.149,-44.555,-92403.503
+bet size 0.25% of the account per ATR,20,50/50 mix of version 2 and the earlier system,,-0.42,-0.039,-42.082,-24246.457
