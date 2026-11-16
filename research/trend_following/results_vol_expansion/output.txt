@@ -1,0 +1,83 @@
+development rows 526,297; 2007-12-31 to 2026-11-06; indicator warm-up from 2020-06; trades counted only from 2021-08-07
+46 markets; 203,982 decision days; 2,942 entries across 1 combinations; 1s
+trades 1891; short-rate 158
+
+==== trade buckets (whole contracts, 0.25%, whole history) ====
+                         trades  profit_usd  profit_if_resized_daily_usd  avg_result_ATR  avg_result_resized_ATR  median_entry_ATR_percentile  median_max_ATR_expansion  median_avg_ATR_expansion  median_path_efficiency  median_sessions_held
+bucket                                                                                                                                                                                                                                         
+10 biggest trades            10   447974.28                    226462.46           54.66                   26.60                         39.8                      2.57                      1.53                    0.38                 130.0
+all other trades           1227    27878.76                     26626.45            0.10                    0.10                         39.4                      1.05                      1.01                    0.32                   6.0
+other short-rate trades     154   -18747.00                    -18930.27           -0.14                   -0.15                         46.8                      1.07                      1.03                    0.64                   4.0
+
+==== trade group (short rates / other rates / everything else) ====
+                             trades  profit_usd  profit_if_resized_daily_usd  avg_result_ATR  avg_result_resized_ATR  median_entry_ATR_percentile  median_max_ATR_expansion  median_avg_ATR_expansion  median_path_efficiency
+group                                                                                                                                                                                                                        
+everything else                1112   191137.10                    128048.66            0.26                    0.20                         39.2                      1.05                      1.01                    0.32
+other interest-rate futures     121    33409.55                     36224.78            0.43                    0.46                         40.4                      1.05                      1.02                    0.33
+short-rate futures              158   232559.39                     69885.21            1.96                    0.59                         46.8                      1.07                      1.04                    0.68
+
+==== the 15 biggest trades ====
+market decision_date  direction  sessions_held  result_ATR_entry_units  result_ATR_resized_daily  entry_ATR_percentile_vs_prior_250  max_ATR_over_entry_ATR  avg_ATR_over_entry_ATR  path_efficiency  contracts  profit_usd  profit_usd_if_resized_daily
+    ZQ    2020-01-29          1             87                  177.67                     50.34                               29.2                   20.12                    5.52             0.71       33.0   133840.30                     37922.11
+    ZT    2021-10-01         -1            130                   93.75                     27.08                               68.0                    7.07                    3.86             0.34       10.0    69830.86                     20174.07
+    GF    2024-10-30          1            130                   27.09                     19.62                                0.4                    1.91                    1.48             0.27        1.0    40177.86                     29104.75
+    ZS    2020-07-13          1            130                   49.10                     32.49                               30.0                    2.99                    1.55             0.45        1.0    37884.77                     25064.67
+    6J    2012-11-08         -1            130                   36.50                     27.23                               37.2                    1.94                    1.52             0.39        2.0    36451.03                     27189.16
+    ZC    2020-10-28          1            130                   37.41                     26.05                               77.2                    2.67                    1.52             0.35        2.0    33832.04                     23557.13
+    CL    2014-07-21         -1            130                   38.72                     25.25                               42.4                    2.30                    1.52             0.38        6.0    30242.60                     19720.49
+   SR1    2020-02-27          1             61                   36.68                     19.05                               64.4                    4.16                    1.61             0.71        7.0    29517.07                     15324.72
+    ZQ    2016-11-02         -1            130                   23.94                     20.34                               42.8                    2.47                    1.03             0.95       43.0    18118.17                     15394.58
+    6C    2014-08-27         -1            130                   25.78                     18.55                               36.8                    2.42                    1.61             0.24        2.0    18079.58                     13010.79
+    6E    2014-06-30         -1            130                   27.40                     24.79                               18.4                    1.85                    1.28             0.32        1.0    17924.64                     16217.27
+    NQ    2009-06-23          1            130                   14.00                     14.33                                0.0                    1.07                    0.94             0.25        1.0    16920.47                     17314.71
+   SR3    2022-02-28         -1            130                   20.74                     30.57                              100.0                    2.13                    1.18             0.30        5.0    15917.55                     23454.62
+    ZF    2020-02-06          1            130                   18.06                     13.59                               40.8                    3.19                    1.18             0.26        3.0    15220.25                     11459.16
+    CT    2021-10-12          1            130                   12.03                     12.26                              100.0                    1.32                    0.95             0.18        1.0    15180.65                     15466.70
+
+==== winners over 10 ATR (entry units): how many kept more than half their size when re-sized daily? ====
+48 trades; 46 kept over half; median entry ATR percentile 48.6 ; median max ATR expansion 1.97
+all trades: median entry ATR percentile 40.8 ; median max expansion 1.05
+
+correlation of result (entry ATR units) with max ATR expansion: 0.88; with entry ATR percentile: 0.00
+
+==== short-rate contract cap (whole contracts, whole history first) ====
+
+-- whole history --
+ target_pct short_rate_contract_cap  return_per_year_pct  vol_pct  sharpe  max_drawdown_pct  max_drawdown_usd  short_rate_profit_usd  total_profit_usd  max_short_rate_contracts_in_a_trade
+       0.15                    none                 6.69     7.42    0.90            -12.54         -54707.36              141701.53         386006.03                                 73.0
+       0.15                      20                 6.68     7.41    0.90            -13.00         -56714.03              141497.95         385802.45                                 20.0
+       0.15                      10                 6.02     6.92    0.87            -13.32         -58284.74              103289.23         347593.73                                 10.0
+       0.15                       5                 5.62     6.71    0.84            -13.23         -58169.79               80074.77         324379.27                                  5.0
+       0.15                       2                 4.99     6.45    0.77            -12.91         -57263.70               43948.94         288253.44                                  2.0
+       0.25                    none                 7.92    12.87    0.62            -31.61        -138461.84              232559.39         457106.04                                122.0
+       0.25                      20                 7.04    12.18    0.58            -32.82        -144267.76              181951.85         406498.49                                 20.0
+       0.25                      10                 6.47    11.79    0.55            -32.61        -144390.33              148866.81         373413.46                                 10.0
+       0.25                       5                 5.55    11.39    0.49            -32.08        -143574.67               95654.40         320201.04                                  5.0
+       0.25                       2                 4.72    11.10    0.43            -31.40        -141733.20               48170.83         272717.47                                  2.0
+
+-- development --
+ target_pct short_rate_contract_cap  return_per_year_pct  vol_pct  sharpe  max_drawdown_pct  max_drawdown_usd  short_rate_profit_usd  total_profit_usd  max_short_rate_contracts_in_a_trade
+       0.15                    none                 7.34     7.72    0.95            -12.54         -54707.36              101783.83         306486.42                                 47.0
+       0.15                      20                 7.30     7.71    0.95            -13.00         -56714.03               99745.18         304447.78                                 20.0
+       0.15                      10                 6.33     7.07    0.90            -13.32         -58284.74               59536.75         264239.35                                 10.0
+       0.15                       5                 5.91     6.85    0.86            -13.23         -58169.79               42309.20         247011.79                                  5.0
+       0.15                       2                 5.57     6.68    0.83            -12.91         -57263.70               28172.97         232875.57                                  2.0
+       0.25                    none                 7.89    13.17    0.60            -31.61        -138461.84              166088.61         328332.14                                 78.0
+       0.25                      20                 6.54    12.25    0.53            -32.82        -144267.76              110096.84         272340.37                                 20.0
+       0.25                      10                 5.67    11.73    0.48            -32.61        -144390.33               73922.57         236166.09                                 10.0
+       0.25                       5                 5.15    11.46    0.45            -32.08        -143574.67               52242.78         214486.30                                  5.0
+       0.25                       2                 4.71    11.26    0.42            -31.40        -141733.20               34122.54         196366.07                                  2.0
+
+-- sealed --
+ target_pct short_rate_contract_cap  return_per_year_pct  vol_pct  sharpe  max_drawdown_pct  max_drawdown_usd  short_rate_profit_usd  total_profit_usd  max_short_rate_contracts_in_a_trade
+       0.15                    none                 4.92     6.38    0.77             -5.79         -22090.35               39917.70          79519.61                                 73.0
+       0.15                      20                 5.03     6.37    0.79             -5.77         -22090.35               41752.77          81354.67                                 20.0
+       0.15                      10                 5.16     6.32    0.82             -5.73         -22005.28               43752.48          83354.38                                 10.0
+       0.15                       5                 4.79     6.11    0.78             -5.94         -22470.54               37765.57          77367.47                                  5.0
+       0.15                       2                 3.43     5.61    0.61             -6.47         -22982.03               15775.97          55377.87                                  2.0
+       0.25                    none                 7.97    11.81    0.67            -14.18         -62018.29               66470.78         128773.91                                122.0
+       0.25                      20                 8.30    11.75    0.71            -13.98         -61633.05               71855.00         134158.13                                 20.0
+       0.25                      10                 8.49    11.69    0.73            -13.68         -60463.66               74944.24         137247.37                                 10.0
+       0.25                       5                 6.54    10.97    0.60            -14.83         -60653.97               43411.62         105714.74                                  5.0
+       0.25                       2                 4.72    10.45    0.45            -15.12         -56381.26               14048.28          76351.41                                  2.0
+done 3s
