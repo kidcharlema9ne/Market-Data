@@ -1,0 +1,182 @@
+development rows 355,303; 2007-12-31 to 2021-08-06; sealed years removed at load
+48 markets; 144,073 decision days; 114,238 entries across 20 combinations; 1s
+20-session ratio at least 0.50 X=1.5 N=20: 2322 distinct entries (2s)
+20-session ratio at least 0.50 X=2.0 N=20: 1910 distinct entries (2s)
+20-session ratio at least 0.50 X=2.5 N=20: 1574 distinct entries (2s)
+20-session ratio at least 0.50 X=3.0 N=20: 1234 distinct entries (2s)
+40-session ratio at least 0.35 X=1.5 N=20: 1695 distinct entries (2s)
+40-session ratio at least 0.35 X=2.0 N=20: 1367 distinct entries (2s)
+40-session ratio at least 0.35 X=2.5 N=20: 1067 distinct entries (2s)
+40-session ratio at least 0.35 X=3.0 N=20: 821 distinct entries (2s)
+20-session at least 0.50 AND 4 X=1.5 N=20: 930 distinct entries (2s)
+20-session at least 0.50 AND 4 X=2.0 N=20: 766 distinct entries (2s)
+20-session at least 0.50 AND 4 X=2.5 N=20: 620 distinct entries (2s)
+20-session at least 0.50 AND 4 X=3.0 N=20: 476 distinct entries (3s)
+20-session at least 0.50 OR 40 X=1.5 N=20: 2957 distinct entries (3s)
+20-session at least 0.50 OR 40 X=2.0 N=20: 2392 distinct entries (3s)
+20-session at least 0.50 OR 40 X=2.5 N=20: 1922 distinct entries (3s)
+20-session at least 0.50 OR 40 X=3.0 N=20: 1498 distinct entries (3s)
+control: no ratio, every 5th s X=1.5 N=20: 15555 distinct entries (4s)
+control: no ratio, every 5th s X=2.0 N=20: 12124 distinct entries (5s)
+control: no ratio, every 5th s X=2.5 N=20: 9809 distinct entries (5s)
+control: no ratio, every 5th s X=3.0 N=20: 8094 distinct entries (6s)
+
+==== 20-session ratio at least 0.50 alone: average result in ATR by pullback size, watch length and exit ====
+exit                           time exit 20  time exit 60  trail 3 ATR, max 60  trail 3 ATR, max 90  trail 3 ATR, max 130  trail 4 ATR, max 60  trail 4 ATR, max 90  trail 4 ATR, max 130  trail 5 ATR, max 60  trail 5 ATR, max 90  trail 5 ATR, max 130  trail 6 ATR, max 60  trail 6 ATR, max 90  trail 6 ATR, max 130
+pullback_x_atr watch_sessions                                                                                                                                                                                                                                                                                            
+1.5            20                     0.002         0.169                0.113                0.120                 0.132                0.141                0.133                 0.180                0.156                0.170                 0.247                0.181                0.208                 0.300
+2.0            20                     0.034         0.165                0.129                0.170                 0.188                0.163                0.210                 0.248                0.168                0.225                 0.273                0.166                0.255                 0.319
+2.5            20                     0.106         0.359                0.271                0.283                 0.295                0.295                0.311                 0.391                0.329                0.371                 0.452                0.344                0.391                 0.469
+3.0            20                    -0.043         0.123                0.087                0.100                 0.096                0.106                0.099                 0.104                0.094                0.136                 0.134                0.092                0.174                 0.149
+
+==== 40-session ratio at least 0.35 alone: average result in ATR by pullback size, watch length and exit ====
+exit                           time exit 20  time exit 60  trail 3 ATR, max 60  trail 3 ATR, max 90  trail 3 ATR, max 130  trail 4 ATR, max 60  trail 4 ATR, max 90  trail 4 ATR, max 130  trail 5 ATR, max 60  trail 5 ATR, max 90  trail 5 ATR, max 130  trail 6 ATR, max 60  trail 6 ATR, max 90  trail 6 ATR, max 130
+pullback_x_atr watch_sessions                                                                                                                                                                                                                                                                                            
+1.5            20                     0.175         0.308                0.277                0.284                 0.278                0.288                0.264                 0.272                0.292                0.263                 0.303                0.297                0.253                 0.288
+2.0            20                     0.080         0.148                0.111                0.141                 0.139                0.162                0.156                 0.180                0.187                0.166                 0.193                0.155                0.126                 0.145
+2.5            20                     0.067         0.185                0.087                0.079                 0.079                0.143                0.122                 0.162                0.171                0.123                 0.178                0.144                0.092                 0.158
+3.0            20                    -0.049         0.034               -0.008                0.001                -0.004               -0.002               -0.013                -0.026                0.013               -0.003                 0.013                0.006                0.006                 0.004
+
+==== 20-session at least 0.50 AND 40-session at least 0.35: average result in ATR by pullback size, watch length and exit ====
+exit                           time exit 20  time exit 60  trail 3 ATR, max 60  trail 3 ATR, max 90  trail 3 ATR, max 130  trail 4 ATR, max 60  trail 4 ATR, max 90  trail 4 ATR, max 130  trail 5 ATR, max 60  trail 5 ATR, max 90  trail 5 ATR, max 130  trail 6 ATR, max 60  trail 6 ATR, max 90  trail 6 ATR, max 130
+pullback_x_atr watch_sessions                                                                                                                                                                                                                                                                                            
+1.5            20                     0.075         0.209                0.208                0.204                 0.202                0.195                0.173                 0.191                0.202                0.195                 0.220                0.220                0.214                 0.227
+2.0            20                     0.175         0.215                0.220                0.250                 0.251                0.247                0.256                 0.288                0.275                0.282                 0.310                0.207                0.217                 0.225
+2.5            20                     0.220         0.297                0.280                0.284                 0.289                0.294                0.272                 0.332                0.337                0.316                 0.386                0.305                0.255                 0.322
+3.0            20                     0.003         0.053                0.066                0.104                 0.095                0.041                0.038                 0.016                0.072                0.087                 0.084                0.036                0.047                 0.013
+
+==== 20-session at least 0.50 OR 40-session at least 0.35: average result in ATR by pullback size, watch length and exit ====
+exit                           time exit 20  time exit 60  trail 3 ATR, max 60  trail 3 ATR, max 90  trail 3 ATR, max 130  trail 4 ATR, max 60  trail 4 ATR, max 90  trail 4 ATR, max 130  trail 5 ATR, max 60  trail 5 ATR, max 90  trail 5 ATR, max 130  trail 6 ATR, max 60  trail 6 ATR, max 90  trail 6 ATR, max 130
+pullback_x_atr watch_sessions                                                                                                                                                                                                                                                                                            
+1.5            20                     0.040         0.199                0.137                0.148                 0.159                0.177                0.165                 0.202                0.176                0.180                 0.261                0.194                0.209                 0.306
+2.0            20                     0.027         0.130                0.095                0.127                 0.143                0.139                0.176                 0.210                0.133                0.182                 0.231                0.128                0.205                 0.278
+2.5            20                     0.093         0.298                0.210                0.215                 0.221                0.249                0.267                 0.333                0.264                0.292                 0.368                0.276                0.323                 0.404
+3.0            20                    -0.026         0.139                0.092                0.098                 0.096                0.103                0.099                 0.107                0.096                0.109                 0.117                0.104                0.162                 0.156
+
+==== control: no ratio, every 5th session, 20-session direction: average result in ATR by pullback size, watch length and exit ====
+exit                           time exit 20  time exit 60  trail 3 ATR, max 60  trail 3 ATR, max 90  trail 3 ATR, max 130  trail 4 ATR, max 60  trail 4 ATR, max 90  trail 4 ATR, max 130  trail 5 ATR, max 60  trail 5 ATR, max 90  trail 5 ATR, max 130  trail 6 ATR, max 60  trail 6 ATR, max 90  trail 6 ATR, max 130
+pullback_x_atr watch_sessions                                                                                                                                                                                                                                                                                            
+1.5            20                    -0.018         0.096                0.053                0.063                 0.071                0.062                0.091                 0.105                0.071                0.114                 0.131                0.081                0.132                 0.155
+2.0            20                    -0.003         0.027                0.032                0.043                 0.049                0.048                0.078                 0.099                0.042                0.071                 0.085                0.015                0.053                 0.053
+2.5            20                     0.009         0.095                0.073                0.072                 0.075                0.073                0.104                 0.122                0.096                0.124                 0.147                0.087                0.126                 0.159
+3.0            20                    -0.035         0.061                0.030                0.028                 0.029                0.045                0.039                 0.066                0.010                0.041                 0.048                0.039                0.065                 0.065
+
+==== HEADLINE (20-session alone, pullback 2.5 ATR, watch 20 sessions): every exit ====
+                exit    n  per_month  avg_ATR  win_rate_pct  avg_sessions  pct_held_over_20  first_half  second_half  t_stat  pct_years_positive  best_winner_ATR  avg_winner  avg_loser
+        time exit 20 1522      9.327    0.106        27.070         9.355             0.000       0.072        0.144   1.577              42.857           37.377       3.328     -1.090
+        time exit 60 1392      8.530    0.359        17.888        18.491            28.879       0.335        0.387   2.292              57.143          175.006       7.077     -1.104
+ trail 3 ATR, max 60 1470      9.008    0.271        23.673        13.654            23.878       0.178        0.376   1.916              57.143          175.006       4.516     -1.045
+ trail 3 ATR, max 90 1463      8.965    0.283        23.650        14.198            23.855       0.191        0.388   1.940              57.143          178.552       4.569     -1.045
+trail 3 ATR, max 130 1463      8.965    0.295        23.650        14.295            23.855       0.213        0.388   2.001              57.143          178.552       4.621     -1.045
+ trail 4 ATR, max 60 1418      8.689    0.295        21.298        16.010            27.645       0.205        0.398   1.978              57.143          175.006       5.366     -1.077
+ trail 4 ATR, max 90 1397      8.561    0.311        21.188        17.503            27.631       0.241        0.390   1.993              64.286          178.286       5.469     -1.076
+trail 4 ATR, max 130 1388      8.506    0.391        21.326        18.373            27.666       0.342        0.447   2.358              64.286          178.286       5.809     -1.077
+ trail 5 ATR, max 60 1403      8.598    0.329        20.314        17.421            28.724       0.243        0.428   2.157              71.429          175.006       5.913     -1.094
+ trail 5 ATR, max 90 1375      8.426    0.371        20.000        20.140            28.873       0.337        0.409   2.289              64.286          177.665       6.220     -1.092
+trail 5 ATR, max 130 1357      8.316    0.452        20.044        22.000            28.814       0.448        0.456   2.607              64.286          177.665       6.603     -1.090
+ trail 6 ATR, max 60 1398      8.567    0.344        18.813        18.029            28.898       0.262        0.436   2.230              71.429          175.006       6.538     -1.092
+ trail 6 ATR, max 90 1360      8.334    0.391        17.941        21.662            29.118       0.367        0.419   2.373              71.429          177.045       7.151     -1.086
+trail 6 ATR, max 130 1333      8.169    0.469        17.704        24.333            29.032       0.491        0.445   2.630              64.286          177.045       7.685     -1.083
+
+by year:
+exit  time exit 60  trail 4 ATR, max 130  trail 4 ATR, max 60
+year                                                         
+2008         1.055                 1.247                1.026
+2009         0.430                 0.367                0.321
+2010         0.564                 0.019               -0.029
+2011        -0.013                -0.200               -0.146
+2012         0.204                 0.479                0.336
+2013         0.143                -0.187               -0.135
+2014         0.096                 0.700                0.166
+2015        -0.679                -0.669               -0.622
+2016        -0.164                -0.181               -0.251
+2017        -0.007                 0.035                0.095
+2018        -0.380                -0.516               -0.453
+2019        -0.194                 0.081                0.191
+2020         3.030                 3.292                2.830
+2021         2.178                 1.832                1.505
+
+by group:
+exit           time exit 60  trail 4 ATR, max 130  trail 4 ATR, max 60
+group                                                                 
+currencies           -0.000                 0.084               -0.007
+energy                0.376                 0.303                0.221
+grains                0.468                 0.491                0.263
+meats                 0.328                 0.432                0.330
+metals                0.105                -0.026                0.027
+rates                 1.214                 1.379                1.088
+softs                 0.030                -0.087               -0.062
+stock indexes         0.513                 0.672                0.665
+volatility            0.039                 0.258                0.258
+
+==== OUTLIER CHECK ====
+                                                     trend  pullback_x_atr  watch_sessions                 exit    n  avg_all  avg_without_short_rates  n_short_rate  avg_short_rates_only  avg_with_each_trade_capped_at_20  avg_without_top_10_trades  avg_without_top_10_and_short_rates  t_stat_without_short_rates  first_half_without_short_rates  second_half_without_short_rates
+                      20-session ratio at least 0.50 alone             2.0              20         time exit 60 1639    0.165                    0.148           107                 0.411                             0.146                      0.033                               0.044                       1.724                           0.291                           -0.016
+                      20-session ratio at least 0.50 alone             2.0              20  trail 4 ATR, max 60 1659    0.163                    0.147           108                 0.394                             0.149                      0.039                               0.061                       1.861                           0.234                            0.047
+                      20-session ratio at least 0.50 alone             2.0              20 trail 4 ATR, max 130 1616    0.248                    0.228           100                 0.563                             0.175                      0.052                               0.058                       2.332                           0.377                            0.059
+                      20-session ratio at least 0.50 alone             2.0              20 trail 5 ATR, max 130 1592    0.273                    0.254           100                 0.549                             0.178                      0.055                               0.062                       2.345                           0.426                            0.062
+                      20-session ratio at least 0.50 alone             2.5              20         time exit 60 1392    0.359                    0.212            89                 2.510                             0.227                      0.094                               0.106                       2.280                           0.331                            0.074
+                      20-session ratio at least 0.50 alone             2.5              20  trail 4 ATR, max 60 1418    0.295                    0.155            90                 2.368                             0.171                      0.042                               0.058                       1.876                           0.204                            0.097
+                      20-session ratio at least 0.50 alone             2.5              20 trail 4 ATR, max 130 1388    0.391                    0.239            84                 2.758                             0.199                      0.056                               0.080                       2.285                           0.341                            0.120
+                      20-session ratio at least 0.50 alone             2.5              20 trail 5 ATR, max 130 1357    0.452                    0.301            84                 2.736                             0.248                      0.102                               0.115                       2.639                           0.456                            0.123
+                      40-session ratio at least 0.35 alone             2.0              20         time exit 60 1088    0.148                    0.067            77                 1.210                             0.125                     -0.036                              -0.060                       0.666                           0.297                           -0.200
+                      40-session ratio at least 0.35 alone             2.0              20  trail 4 ATR, max 60 1109    0.162                    0.105            80                 0.899                             0.147                     -0.003                              -0.003                       1.140                           0.250                           -0.063
+                      40-session ratio at least 0.35 alone             2.0              20 trail 4 ATR, max 130 1085    0.180                    0.131            76                 0.828                             0.130                     -0.044                              -0.038                       1.250                           0.290                           -0.048
+                      40-session ratio at least 0.35 alone             2.0              20 trail 5 ATR, max 130 1059    0.193                    0.130            73                 1.044                             0.133                     -0.053                              -0.078                       1.142                           0.306                           -0.069
+                      40-session ratio at least 0.35 alone             2.5              20         time exit 60  926    0.185                    0.108            62                 1.252                             0.154                     -0.030                              -0.042                       0.973                           0.227                           -0.029
+                      40-session ratio at least 0.35 alone             2.5              20  trail 4 ATR, max 60  945    0.143                    0.089            64                 0.883                             0.123                     -0.045                              -0.033                       0.927                           0.165                            0.004
+                      40-session ratio at least 0.35 alone             2.5              20 trail 4 ATR, max 130  926    0.162                    0.111            61                 0.882                             0.121                     -0.070                              -0.072                       1.030                           0.148                            0.070
+                      40-session ratio at least 0.35 alone             2.5              20 trail 5 ATR, max 130  904    0.178                    0.113            60                 1.103                             0.130                     -0.081                              -0.079                       0.959                           0.144                            0.077
+     20-session at least 0.50 AND 40-session at least 0.35             2.0              20         time exit 60  677    0.215                    0.057            50                 2.190                             0.178                     -0.065                              -0.130                       0.446                           0.161                           -0.057
+     20-session at least 0.50 AND 40-session at least 0.35             2.0              20  trail 4 ATR, max 60  681    0.247                    0.112            50                 1.951                             0.222                     -0.006                              -0.026                       0.961                           0.160                            0.059
+     20-session at least 0.50 AND 40-session at least 0.35             2.0              20 trail 4 ATR, max 130  669    0.288                    0.148            45                 2.228                             0.216                     -0.041                              -0.090                       1.077                           0.210                            0.080
+     20-session at least 0.50 AND 40-session at least 0.35             2.0              20 trail 5 ATR, max 130  663    0.310                    0.148            45                 2.538                             0.221                     -0.065                              -0.112                       0.987                           0.232                            0.055
+     20-session at least 0.50 AND 40-session at least 0.35             2.5              20         time exit 60  570    0.297                    0.153            39                 2.251                             0.252                     -0.021                              -0.056                       1.093                           0.216                            0.087
+     20-session at least 0.50 AND 40-session at least 0.35             2.5              20  trail 4 ATR, max 60  575    0.294                    0.174            39                 1.947                             0.265                      0.013                               0.002                       1.417                           0.126                            0.225
+     20-session at least 0.50 AND 40-session at least 0.35             2.5              20 trail 4 ATR, max 130  565    0.332                    0.212            36                 2.092                             0.271                     -0.012                              -0.050                       1.480                           0.182                            0.244
+     20-session at least 0.50 AND 40-session at least 0.35             2.5              20 trail 5 ATR, max 130  557    0.386                    0.239            36                 2.511                             0.314                     -0.009                              -0.044                       1.520                           0.248                            0.229
+      20-session at least 0.50 OR 40-session at least 0.35             2.0              20         time exit 60 1858    0.130                    0.118           118                 0.310                             0.114                      0.014                               0.027                       1.503                           0.267                           -0.052
+      20-session at least 0.50 OR 40-session at least 0.35             2.0              20  trail 4 ATR, max 60 1900    0.139                    0.137           121                 0.173                             0.127                      0.031                               0.062                       1.888                           0.229                            0.031
+      20-session at least 0.50 OR 40-session at least 0.35             2.0              20 trail 4 ATR, max 130 1838    0.210                    0.204           116                 0.297                             0.145                      0.037                               0.055                       2.297                           0.360                            0.029
+      20-session at least 0.50 OR 40-session at least 0.35             2.0              20 trail 5 ATR, max 130 1788    0.231                    0.226           113                 0.305                             0.147                      0.037                               0.055                       2.270                           0.381                            0.052
+      20-session at least 0.50 OR 40-session at least 0.35             2.5              20         time exit 60 1608    0.298                    0.180            97                 2.145                             0.187                      0.072                               0.092                       2.128                           0.312                            0.026
+      20-session at least 0.50 OR 40-session at least 0.35             2.5              20  trail 4 ATR, max 60 1651    0.249                    0.141           100                 1.937                             0.142                      0.028                               0.054                       1.845                           0.227                            0.041
+      20-session at least 0.50 OR 40-session at least 0.35             2.5              20 trail 4 ATR, max 130 1606    0.333                    0.212            97                 2.219                             0.165                      0.041                               0.059                       2.228                           0.321                            0.087
+      20-session at least 0.50 OR 40-session at least 0.35             2.5              20 trail 5 ATR, max 130 1562    0.368                    0.248            96                 2.201                             0.189                      0.063                               0.086                       2.398                           0.399                            0.076
+control: no ratio, every 5th session, 20-session direction             2.0              20         time exit 60 5211    0.027                   -0.004           283                 0.565                            -0.008                     -0.046                              -0.040                      -0.091                           0.094                           -0.110
+control: no ratio, every 5th session, 20-session direction             2.0              20  trail 4 ATR, max 60 5663    0.048                    0.029           303                 0.386                             0.016                     -0.019                              -0.004                       0.744                           0.115                           -0.062
+control: no ratio, every 5th session, 20-session direction             2.0              20 trail 4 ATR, max 130 5218    0.099                    0.080           276                 0.436                             0.041                      0.013                               0.026                       1.698                           0.192                           -0.037
+control: no ratio, every 5th session, 20-session direction             2.0              20 trail 5 ATR, max 130 4693    0.085                    0.060           262                 0.509                             0.022                     -0.009                               0.000                       1.134                           0.176                           -0.063
+control: no ratio, every 5th session, 20-session direction             2.5              20         time exit 60 4616    0.095                    0.033           253                 1.155                             0.040                     -0.002                              -0.004                       0.715                           0.081                           -0.019
+control: no ratio, every 5th session, 20-session direction             2.5              20  trail 4 ATR, max 60 5089    0.073                    0.027           273                 0.882                             0.028                     -0.011                               0.002                       0.680                           0.055                           -0.002
+control: no ratio, every 5th session, 20-session direction             2.5              20 trail 4 ATR, max 130 4743    0.122                    0.076           254                 0.948                             0.052                      0.015                               0.020                       1.572                           0.126                            0.022
+control: no ratio, every 5th session, 20-session direction             2.5              20 trail 5 ATR, max 130 4231    0.147                    0.095           237                 1.026                             0.063                      0.025                               0.032                       1.703                           0.139                            0.046
+
+TOP 25 WINNERS (20-session ratio alone, pullback 2.5 ATR, watch 20, trail 4 ATR max 130):
+market decision_date  direction  result_ATR  sessions
+    ZQ    2020-01-29          1      178.29        86
+    ZS    2020-07-13          1       49.10       130
+    CL    2014-07-21         -1       38.72       130
+    ZC    2020-10-28          1       37.41       130
+   SR1    2020-02-27          1       36.89        56
+    6J    2012-11-08         -1       36.50       130
+    6C    2014-08-27         -1       25.78       130
+    ZQ    2016-11-02         -1       23.94       130
+    6L    2012-04-09         -1       19.41        58
+    ZQ    2008-09-30          1       19.36        88
+    HE    2009-02-12         -1       19.02       130
+    CL    2020-02-20         -1       18.60        60
+    LE    2014-01-24          1       17.97       130
+    ZF    2008-07-18          1       17.82       130
+    HG    2008-08-21         -1       17.20       107
+    6E    2014-10-16         -1       16.22       104
+    BZ    2020-02-19         -1       16.03        62
+    YM    2012-12-28          1       15.83       109
+   RTY    2020-10-28          1       15.09        87
+    ZT    2008-07-22          1       14.95       130
+    NQ    2017-08-10          1       14.94       122
+    ZF    2020-02-06          1       14.88        83
+    NQ    2009-06-23          1       14.00       130
+    ZM    2020-09-29          1       13.12        80
+    6E    2014-06-30         -1       13.06        75
+done 7s

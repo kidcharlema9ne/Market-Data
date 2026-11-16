@@ -1,0 +1,28 @@
+exit,group,n,avg_ATR
+time exit 60,grains,188,0.46802274145518363
+time exit 60,energy,160,0.3755798246929968
+time exit 60,softs,151,0.030129703041016212
+time exit 60,meats,102,0.3279848266355399
+time exit 60,metals,136,0.10500689092983671
+time exit 60,currencies,304,-0.0001304962632751331
+time exit 60,rates,193,1.214458608248042
+time exit 60,stock indexes,125,0.513241791477833
+time exit 60,volatility,33,0.039395029714934776
+"trail 4 ATR, max 60",grains,196,0.2630859453062017
+"trail 4 ATR, max 60",energy,160,0.2206646640647477
+"trail 4 ATR, max 60",softs,154,-0.06215237736114785
+"trail 4 ATR, max 60",meats,103,0.3295419868041542
+"trail 4 ATR, max 60",metals,136,0.02660615210535109
+"trail 4 ATR, max 60",currencies,310,-0.0070516468999608905
+"trail 4 ATR, max 60",rates,194,1.0879487362357998
+"trail 4 ATR, max 60",stock indexes,128,0.6654965824824016
+"trail 4 ATR, max 60",volatility,37,0.2576944795798304
+"trail 4 ATR, max 130",grains,193,0.4906866661599166
+"trail 4 ATR, max 130",energy,157,0.3032372746370643
+"trail 4 ATR, max 130",softs,152,-0.08692050772427884
+"trail 4 ATR, max 130",meats,100,0.4318772551760265
+"trail 4 ATR, max 130",metals,135,-0.026086263923966218
+"trail 4 ATR, max 130",currencies,306,0.08350033526227513
+"trail 4 ATR, max 130",rates,187,1.3791515047123166
+"trail 4 ATR, max 130",stock indexes,121,0.6718493029653279
+"trail 4 ATR, max 130",volatility,37,0.2576944795798304
