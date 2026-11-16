@@ -1,0 +1,296 @@
+development rows 526,297; 2007-12-31 to 2026-11-06; indicator warm-up from 2020-06; trades counted only from 2021-08-07
+46 markets; 203,982 decision days; 2,942 entries across 1 combinations; 1s
+frozen rule trades (one position per market, 46 markets): 1891; development 1396, sealed 495; window 2008-02-01 to 2026-11-06
+done variant 1 whole contracts only (as Entries 120 and 122) (3s)
+done variant 2 plus micro Dow, micro natural gas, micro copper (4s)
+done variant 3 plus ETF stand-ins where a US ETF exists (cash c (5s)
+done variant 4 upper bound: every skipped trade at fractional s (7s)
+
+==== development 2008 to Aug 2021 | 1 whole contracts only (as Entries 120 and 122) ====
+ target_pct_per_ATR                  markets  n_trades  skipped_too_big  etf_trades  win_rate_pct  avg_ATR_per_trade  avg_ATR_without_top_10  return_per_year_pct  vol_per_year_pct  sharpe  max_drawdown_pct_of_peak  longest_underwater_sessions  best_year_pct  worst_year_pct years_positive  peak_etf_cash_usd
+               0.15           all 46 markets       757              639           0         21.00               0.77                    0.15                 7.34              7.72    0.95                    -12.54                         1305          58.47           -5.87       10 of 14                NaN
+               0.15 without any interest-rat       594              605           0         22.05               0.56                    0.07                 4.39              5.97    0.73                    -11.76                         1493          22.63           -4.30       10 of 14                NaN
+               0.15 without short-rate futur       666              639           0         21.92               0.55                    0.11                 4.90              6.48    0.76                    -13.36                         1484          25.69           -5.73       10 of 14                NaN
+               0.25           all 46 markets      1033              363           0         19.36               0.47                    0.02                 7.89             13.17    0.60                    -31.61                         1315          86.59          -13.08        7 of 14                NaN
+               0.25 without any interest-rat       849              350           0         19.67               0.27                   -0.07                 3.23             10.30    0.31                    -29.02                         1546          26.39          -11.96        7 of 14                NaN
+               0.25 without short-rate futur       942              363           0         19.85               0.28                   -0.03                 3.89             11.08    0.35                    -32.65                         1562          31.95          -13.76        8 of 14                NaN
+
+==== development 2008 to Aug 2021 | 2 plus micro Dow, micro natural gas, micro copper ====
+ target_pct_per_ATR                  markets  n_trades  skipped_too_big  etf_trades  win_rate_pct  avg_ATR_per_trade  avg_ATR_without_top_10  return_per_year_pct  vol_per_year_pct  sharpe  max_drawdown_pct_of_peak  longest_underwater_sessions  best_year_pct  worst_year_pct years_positive  peak_etf_cash_usd
+               0.15           all 46 markets       844              552           0         21.21               0.76                    0.20                 8.00              8.13    0.98                    -13.86                         1312          60.17           -6.45       10 of 14                NaN
+               0.15 without any interest-rat       681              518           0         22.17               0.57                    0.14                 5.04              6.48    0.78                    -13.22                         1511          24.33           -4.57       10 of 14                NaN
+               0.15 without short-rate futur       753              552           0         22.05               0.55                    0.17                 5.55              6.94    0.80                    -14.63                         1497          27.39           -6.31        9 of 14                NaN
+               0.25           all 46 markets      1104              292           0         19.84               0.50                    0.07                 9.35             13.72    0.68                    -28.10                         1315          87.15          -11.57        9 of 14                NaN
+               0.25 without any interest-rat       920              279           0         20.22               0.32                    0.00                 4.69             11.02    0.43                    -25.54                         1553          26.94          -10.45        8 of 14                NaN
+               0.25 without short-rate futur      1013              292           0         20.34               0.33                    0.04                 5.35             11.73    0.46                    -28.98                         1559          32.50          -12.25        8 of 14                NaN
+
+==== development 2008 to Aug 2021 | 3 plus ETF stand-ins where a US ETF exists (cash cap $150k) ====
+ target_pct_per_ATR                  markets  n_trades  skipped_too_big  etf_trades  win_rate_pct  avg_ATR_per_trade  avg_ATR_without_top_10  return_per_year_pct  vol_per_year_pct  sharpe  max_drawdown_pct_of_peak  longest_underwater_sessions  best_year_pct  worst_year_pct years_positive  peak_etf_cash_usd
+               0.15           all 46 markets      1094              302         250         20.29               0.56                    0.13                 7.69              9.12    0.84                    -18.30                         1316          62.18           -7.89       10 of 14          147157.31
+               0.15 without any interest-rat       900              299         219         21.11               0.41                    0.09                 4.84              7.45    0.65                    -16.01                         1512          26.83           -5.72       10 of 14          147157.31
+               0.15 without short-rate futur      1003              302         250         20.84               0.39                    0.10                 5.25              8.01    0.65                    -19.11                         1523          29.40           -7.75        9 of 14          147157.31
+               0.25           all 46 markets      1236              160         132         19.82               0.46                    0.08                 9.62             14.91    0.65                    -29.59                         1316          91.60          -13.25        8 of 14          146408.18
+               0.25 without any interest-rat      1040              159         120         20.38               0.31                    0.03                 5.19             12.22    0.42                    -26.37                         1499          32.21           -9.27        8 of 14          146408.18
+               0.25 without short-rate futur      1145              160         132         20.26               0.30                    0.05                 5.63             12.99    0.43                    -30.47                         1553          36.95          -12.93        7 of 14          146408.18
+
+==== development 2008 to Aug 2021 | 4 upper bound: every skipped trade at fractional size ====
+ target_pct_per_ATR                  markets  n_trades  skipped_too_big  etf_trades  win_rate_pct  avg_ATR_per_trade  avg_ATR_without_top_10  return_per_year_pct  vol_per_year_pct  sharpe  max_drawdown_pct_of_peak  longest_underwater_sessions  best_year_pct  worst_year_pct years_positive  peak_etf_cash_usd
+               0.15           all 46 markets      1396                0         552         20.20               0.44                    0.10                 7.79             10.37    0.75                    -20.78                         1316          62.55          -10.12        9 of 14                NaN
+               0.15 without any interest-rat      1199                0         518         20.77               0.31                    0.07                 4.93              8.73    0.56                    -18.83                         1527          26.97           -7.78       10 of 14                NaN
+               0.15 without short-rate futur      1305                0         552         20.61               0.30                    0.08                 5.34              9.27    0.58                    -21.61                         1529          29.78           -9.98        9 of 14                NaN
+               0.25           all 46 markets      1396                0         292         20.20               0.44                    0.10                10.59             16.25    0.65                    -29.89                         1316          92.21          -15.26        8 of 14                NaN
+               0.25 without any interest-rat      1199                0         279         20.77               0.31                    0.07                 6.18             13.63    0.45                    -26.88                         1554          32.83          -12.59        7 of 14                NaN
+               0.25 without short-rate futur      1305                0         292         20.61               0.30                    0.08                 6.59             14.36    0.46                    -30.70                         1559          37.57          -15.05        7 of 14                NaN
+
+==== sealed Aug 2021 to Nov 2026 | 1 whole contracts only (as Entries 120 and 122) ====
+ target_pct_per_ATR                  markets  n_trades  skipped_too_big  etf_trades  win_rate_pct  avg_ATR_per_trade  avg_ATR_without_top_10  return_per_year_pct  vol_per_year_pct  sharpe  max_drawdown_pct_of_peak  longest_underwater_sessions  best_year_pct  worst_year_pct years_positive  peak_etf_cash_usd
+               0.15           all 46 markets       265              230           0         21.51               0.60                   -0.27                 4.92              6.38    0.77                     -5.79                          262          21.39           -1.20         4 of 6                NaN
+               0.15 without any interest-rat       182              208           0         24.73               0.27                   -0.30                 2.06              5.08    0.41                     -6.26                          267           6.53           -2.29         4 of 6                NaN
+               0.15 without short-rate futur       198              230           0         24.75               0.35                   -0.26                 2.45              5.32    0.46                     -6.73                          267           5.82           -1.39         4 of 6                NaN
+               0.25           all 46 markets       358              137           0         18.99               0.45                   -0.26                 7.97             11.81    0.67                    -14.18                          709          34.87           -3.64         4 of 6                NaN
+               0.25 without any interest-rat       263              127           0         20.91               0.22                   -0.30                 3.49              9.26    0.38                    -13.55                          381          11.10           -5.00         4 of 6                NaN
+               0.25 without short-rate futur       291              137           0         20.62               0.25                   -0.27                 3.85             10.11    0.38                    -14.41                          643           9.31           -3.62         4 of 6                NaN
+
+==== sealed Aug 2021 to Nov 2026 | 2 plus micro Dow, micro natural gas, micro copper ====
+ target_pct_per_ATR                  markets  n_trades  skipped_too_big  etf_trades  win_rate_pct  avg_ATR_per_trade  avg_ATR_without_top_10  return_per_year_pct  vol_per_year_pct  sharpe  max_drawdown_pct_of_peak  longest_underwater_sessions  best_year_pct  worst_year_pct years_positive  peak_etf_cash_usd
+               0.15           all 46 markets       301              194           0         20.93               0.49                   -0.27                 4.60              6.62    0.69                     -5.76                          265          21.22           -1.13         4 of 6                NaN
+               0.15 without any interest-rat       218              172           0         23.39               0.17                   -0.31                 1.73              5.43    0.32                     -5.84                          267           5.55           -2.81         4 of 6                NaN
+               0.15 without short-rate futur       234              194           0         23.50               0.25                   -0.27                 2.13              5.65    0.38                     -6.31                          267           4.90           -1.18         4 of 6                NaN
+               0.25           all 46 markets       392              103           0         18.62               0.37                   -0.27                 7.28             12.08    0.60                    -15.86                          733          35.02           -4.70         4 of 6                NaN
+               0.25 without any interest-rat       297               93           0         20.20               0.14                   -0.31                 2.81              9.59    0.29                    -15.91                          743          11.92           -6.05         4 of 6                NaN
+               0.25 without short-rate futur       325              103           0         20.00               0.18                   -0.29                 3.17             10.41    0.30                    -17.77                          779          10.13           -4.67         4 of 6                NaN
+
+==== sealed Aug 2021 to Nov 2026 | 3 plus ETF stand-ins where a US ETF exists (cash cap $150k) ====
+ target_pct_per_ATR                  markets  n_trades  skipped_too_big  etf_trades  win_rate_pct  avg_ATR_per_trade  avg_ATR_without_top_10  return_per_year_pct  vol_per_year_pct  sharpe  max_drawdown_pct_of_peak  longest_underwater_sessions  best_year_pct  worst_year_pct years_positive  peak_etf_cash_usd
+               0.15           all 46 markets       392              103          91         18.62               0.24                   -0.35                 3.11              7.49    0.41                     -9.51                         1116          20.13           -2.31         3 of 6          147157.31
+               0.15 without any interest-rat       293               97          75         19.80              -0.04                   -0.41                 0.32              6.13    0.05                     -9.16                          847           3.30           -3.51         4 of 6          147157.31
+               0.15 without short-rate futur       325              103          91         20.00               0.02                   -0.36                 0.64              6.58    0.10                    -10.53                          914           3.80           -1.91         3 of 6          147157.31
+               0.25           all 46 markets       447               48          55         17.90               0.26                   -0.30                 5.95             13.10    0.45                    -19.84                         1116          32.70           -5.21         4 of 6          146408.18
+               0.25 without any interest-rat       342               48          45         19.01               0.05                   -0.35                 1.55             10.45    0.15                    -21.58                          810          11.27           -6.56         4 of 6          146408.18
+               0.25 without short-rate futur       380               48          55         18.95               0.08                   -0.32                 1.84             11.55    0.16                    -23.55                          838           9.49           -5.18         3 of 6          146408.18
+
+==== sealed Aug 2021 to Nov 2026 | 4 upper bound: every skipped trade at fractional size ====
+ target_pct_per_ATR                  markets  n_trades  skipped_too_big  etf_trades  win_rate_pct  avg_ATR_per_trade  avg_ATR_without_top_10  return_per_year_pct  vol_per_year_pct  sharpe  max_drawdown_pct_of_peak  longest_underwater_sessions  best_year_pct  worst_year_pct years_positive  peak_etf_cash_usd
+               0.15           all 46 markets       495                0         194         17.58               0.23                   -0.30                 3.63              8.27    0.44                    -13.26                          823          18.04           -3.20         5 of 6                NaN
+               0.15 without any interest-rat       390                0         172         18.46               0.03                   -0.34                 0.99              6.95    0.14                    -12.92                          790           6.43           -4.84         4 of 6                NaN
+               0.15 without short-rate futur       428                0         194         18.46               0.06                   -0.32                 1.16              7.48    0.16                    -14.79                          811           5.42           -3.24         4 of 6                NaN
+               0.25           all 46 markets       495                0         103         17.58               0.23                   -0.30                 5.74             13.55    0.42                    -21.87                          835          29.53           -6.86         3 of 6                NaN
+               0.25 without any interest-rat       390                0          93         18.46               0.03                   -0.34                 1.34             11.06    0.12                    -24.16                          791          14.64           -8.21         3 of 6                NaN
+               0.25 without short-rate futur       428                0         103         18.46               0.06                   -0.32                 1.63             12.11    0.13                    -26.05                          811          12.85           -6.83         4 of 6                NaN
+
+==== whole history | 1 whole contracts only (as Entries 120 and 122) ====
+ target_pct_per_ATR                  markets  n_trades  skipped_too_big  etf_trades  win_rate_pct  avg_ATR_per_trade  avg_ATR_without_top_10  return_per_year_pct  vol_per_year_pct  sharpe  max_drawdown_pct_of_peak  longest_underwater_sessions  best_year_pct  worst_year_pct years_positive  peak_etf_cash_usd
+               0.15           all 46 markets      1022              869           0         21.14               0.73                    0.20                 6.69              7.42    0.90                    -12.54                         1305          58.47           -5.87       13 of 19                NaN
+               0.15 without any interest-rat       776              813           0         22.68               0.49                    0.11                 3.76              5.78    0.65                    -11.76                         1493          22.63           -4.30       14 of 19                NaN
+               0.15 without short-rate futur       864              869           0         22.57               0.50                    0.16                 4.23              6.22    0.68                    -13.36                         1484          25.69           -5.73       14 of 19                NaN
+               0.25           all 46 markets      1391              500           0         19.27               0.47                    0.07                 7.92             12.87    0.62                    -31.61                         1315          86.59          -13.08       10 of 19                NaN
+               0.25 without any interest-rat      1112              477           0         19.96               0.26                   -0.01                 3.31             10.08    0.33                    -29.02                         1546          26.39          -11.96       11 of 19                NaN
+               0.25 without short-rate futur      1233              500           0         20.03               0.27                    0.03                 3.89             10.88    0.36                    -32.65                         1562          31.95          -13.76       12 of 19                NaN
+
+==== whole history | 2 plus micro Dow, micro natural gas, micro copper ====
+ target_pct_per_ATR                  markets  n_trades  skipped_too_big  etf_trades  win_rate_pct  avg_ATR_per_trade  avg_ATR_without_top_10  return_per_year_pct  vol_per_year_pct  sharpe  max_drawdown_pct_of_peak  longest_underwater_sessions  best_year_pct  worst_year_pct years_positive  peak_etf_cash_usd
+               0.15           all 46 markets      1145              746           0         21.14               0.69                    0.21                 7.07              7.78    0.91                    -13.86                         1312          60.17           -6.45       13 of 19                NaN
+               0.15 without any interest-rat       899              690           0         22.47               0.47                    0.14                 4.14              6.24    0.66                    -13.22                         1511          24.33           -4.57       14 of 19                NaN
+               0.15 without short-rate futur       987              746           0         22.39               0.48                    0.18                 4.61              6.65    0.69                    -14.63                         1497          27.39           -6.31       13 of 19                NaN
+               0.25           all 46 markets      1496              395           0         19.52               0.47                    0.10                 8.78             13.34    0.66                    -28.10                         1315          87.15          -11.57       12 of 19                NaN
+               0.25 without any interest-rat      1217              372           0         20.21               0.28                    0.03                 4.17             10.69    0.39                    -25.54                         1553          26.94          -10.45       12 of 19                NaN
+               0.25 without short-rate futur      1338              395           0         20.25               0.29                    0.06                 4.75             11.43    0.42                    -28.98                         1559          32.50          -12.25       12 of 19                NaN
+
+==== whole history | 3 plus ETF stand-ins where a US ETF exists (cash cap $150k) ====
+ target_pct_per_ATR                  markets  n_trades  skipped_too_big  etf_trades  win_rate_pct  avg_ATR_per_trade  avg_ATR_without_top_10  return_per_year_pct  vol_per_year_pct  sharpe  max_drawdown_pct_of_peak  longest_underwater_sessions  best_year_pct  worst_year_pct years_positive  peak_etf_cash_usd
+               0.15           all 46 markets      1486              405         341         19.85               0.48                    0.11                 6.43              8.74    0.74                    -18.30                         1316          62.18           -7.89       13 of 19          147157.31
+               0.15 without any interest-rat      1193              396         294         20.79               0.30                    0.05                 3.60              7.14    0.50                    -16.01                         1512          26.83           -5.72       14 of 19          147157.31
+               0.15 without short-rate futur      1328              405         341         20.63               0.30                    0.07                 3.98              7.68    0.52                    -19.11                         1523          29.40           -7.75       12 of 19          147157.31
+               0.25           all 46 markets      1683              208         187         19.31               0.41                    0.08                 8.60             14.49    0.59                    -29.59                         1316          91.60          -13.25       11 of 19          146408.18
+               0.25 without any interest-rat      1382              207         165         20.04               0.24                    0.02                 4.18             11.80    0.35                    -26.37                         1499          32.21           -9.27       12 of 19          146408.18
+               0.25 without short-rate futur      1525              208         187         19.93               0.25                    0.04                 4.58             12.66    0.36                    -30.47                         1553          36.95          -12.93       10 of 19          146408.18
+
+==== whole history | 4 upper bound: every skipped trade at fractional size ====
+ target_pct_per_ATR                  markets  n_trades  skipped_too_big  etf_trades  win_rate_pct  avg_ATR_per_trade  avg_ATR_without_top_10  return_per_year_pct  vol_per_year_pct  sharpe  max_drawdown_pct_of_peak  longest_underwater_sessions  best_year_pct  worst_year_pct years_positive  peak_etf_cash_usd
+               0.15           all 46 markets      1891                0         746         19.51               0.39                    0.10                 6.63              9.87    0.67                    -20.78                         1316          62.55          -10.12       13 of 19                NaN
+               0.15 without any interest-rat      1589                0         690         20.20               0.24                    0.05                 3.84              8.31    0.46                    -18.83                         1527          26.97           -7.78       14 of 19                NaN
+               0.15 without short-rate futur      1733                0         746         20.08               0.24                    0.06                 4.18              8.85    0.47                    -21.61                         1529          29.78           -9.98       13 of 19                NaN
+               0.25           all 46 markets      1891                0         395         19.51               0.39                    0.10                 9.21             15.59    0.59                    -29.89                         1316          92.21          -15.26       10 of 19                NaN
+               0.25 without any interest-rat      1589                0         372         20.20               0.24                    0.05                 4.80             13.01    0.37                    -26.88                         1554          32.83          -12.59       10 of 19                NaN
+               0.25 without short-rate futur      1733                0         395         20.08               0.24                    0.06                 5.18             13.82    0.38                    -30.70                         1559          37.57          -15.05       11 of 19                NaN
+
+==== profit by group and year, variant 1 at 0.25% (percent of $300k) ====
+      currencies  energy  grains  meats  metals  other interest-rate futures  short-rate futures  softs  stock indexes  volatility
+2008         2.3     1.3     1.3   -1.5    -0.8                          3.9                 6.2   -0.2           -1.0         0.0
+2009         4.2    -1.8    -3.1    2.1    -1.1                         -1.9                -0.8   -0.4            6.5         1.4
+2010        -2.6    -1.2     1.1   -2.4     1.0                          1.5                -1.1    1.4            1.3         0.8
+2011         0.5    -0.3    -2.8   -0.6     1.8                         -0.8                 0.5   -2.4           -0.3         0.5
+2012         2.2    -0.6     3.0   -0.1    -2.2                         -0.8                -0.8    0.3            0.1        -0.4
+2013         3.0     0.2     1.3    2.0     3.3                         -1.1                -1.6    0.4            9.4        -1.8
+2014         6.9     7.7    -2.5    2.7    -5.6                          4.3                -0.4    1.2           -3.9        -1.2
+2015        -4.0    -0.2    -1.8   -1.2    -2.0                         -1.8                 0.7   -2.1           -0.7         0.0
+2016        -4.7    -1.4     3.4   -1.0     0.6                         -4.9                -0.3    0.2           -1.9        -0.8
+2017        -1.5    -2.4    -2.2   -0.9    -4.5                         -1.4                 5.2   -1.1            3.2         5.0
+2018        -4.2    -0.8     0.4   -1.0    -1.0                          1.7                -3.0   -1.2            3.4        -0.6
+2019        -0.3    -1.8    -3.4   -0.7    -1.1                          3.1                -2.0    0.7            0.6         0.5
+2020         3.0     6.7    14.4    4.5    -1.0                          5.6                54.6   -0.4            0.9        -1.7
+2021         5.9     1.8     7.4   -1.7    -1.1                          2.4                 0.8    1.5            2.3         2.2
+2022         7.5    -0.5    -2.8   -1.4     0.6                          2.8                27.3    2.4            0.4        -0.9
+2023        -1.5     0.3    -0.3    4.3    -1.1                         -2.1                -3.8   -1.2            1.6         2.4
+2024         1.6    -0.6    -2.3    5.4     1.1                          1.1                -1.7   -0.5            1.3        -0.9
+2025        -3.6    -1.0    -2.6   10.5     2.7                         -1.8                -2.3    2.5            1.1         1.4
+2026        -3.0    -0.5    -0.7   -0.4     0.6                          1.4                -0.0   -0.9            0.0         0.0
+
+==== profit by group and year, variant 3 at 0.25% ====
+      currencies  energy  grains  meats  metals  other interest-rate futures  short-rate futures  softs  stock indexes  volatility
+2008         1.7     4.8     2.3   -1.5     6.3                          3.9                 6.2   -0.2           -0.5         0.0
+2009         4.2    -0.7    -2.7    2.1     3.8                         -1.9                -0.8   -0.4            5.7         1.4
+2010        -3.7    -2.7     1.1   -2.4     5.6                          1.0                -1.1    1.4            1.7         0.8
+2011        -1.1     2.1    -3.1   -0.6     2.5                         -0.8                 0.5   -2.4           -0.3         0.5
+2012         2.2    -0.5     3.2   -0.1    -3.8                         -1.0                -0.8    0.3            0.0        -0.4
+2013         3.0    -0.3     1.0    2.0     2.0                         -1.1                -1.6    0.4           11.9        -1.8
+2014         6.9     7.5    -2.5    2.7    -5.3                          4.3                -0.4    1.2           -3.5        -1.2
+2015        -1.7    -0.4    -1.8   -1.2    -0.5                         -2.5                 0.7   -2.1           -1.5         0.0
+2016        -4.7    -2.0     3.4   -1.0    -0.3                         -5.5                -0.3    0.2           -2.2        -0.8
+2017        -1.5     1.2    -2.2   -0.9    -4.9                         -1.4                 5.2   -1.1            3.2         5.0
+2018        -4.2    -3.1     0.4   -1.0    -1.3                          1.7                -3.0   -1.2            2.8        -0.6
+2019        -0.3    -2.2    -3.4   -0.7    -1.9                          3.1                -2.0    0.7            1.5         0.5
+2020         3.0     8.7    14.4    4.5     2.7                          4.7                54.6   -0.4            1.0        -1.7
+2021         5.9     0.2     8.7   -1.7    -1.0                          2.1                 0.8    1.5            1.7         2.2
+2022         7.5    -2.2    -3.1   -1.4     2.3                          1.5                27.3    2.4           -0.2        -0.9
+2023        -1.5    -0.2    -0.6    4.3    -2.3                         -1.8                -3.8   -1.2            0.9         2.4
+2024         1.6    -3.9    -2.3    5.4     1.1                          1.7                -1.7   -0.5            0.4        -0.9
+2025        -4.1    -2.0    -2.6   10.5     4.6                         -1.8                -2.3    2.5            0.9         1.4
+2026        -3.0    -1.6    -0.7   -0.4     0.5                          1.4                -0.0   -0.9           -0.4         0.0
+
+==== per market profit, variant 1 at 0.25%, development 2008 to Aug 2021 ====
+market                       group  trades  profit_usd  profit_pct_of_account  win_rate_pct  avg_ATR_per_trade  avg_sessions_held  median_contracts  etf_trades  median_atr_pct_of_price
+    ZQ          short-rate futures      41   152158.06                  50.72         17.07               4.99              22.85              38.0           0                     0.00
+    ZS                      grains      29    36385.93                  12.13         24.14               1.58              23.59               1.0           0                     1.70
+    CL                      energy      36    31393.57                  10.46         16.67               1.07              23.44               3.0           0                     2.78
+    NQ               stock indexes      27    29641.33                   9.88         25.93               1.54              27.63               1.0           0                     1.34
+    ZC                      grains      30    23002.22                   7.67         20.00               0.89              22.80               1.5           0                     2.35
+    ES               stock indexes      23    21824.95                   7.27         30.43               1.02              28.26               2.0           0                     1.17
+    6J                  currencies      33    21755.68                   7.25         21.21               0.66              18.42               1.0           0                     0.88
+    6C                  currencies      32    20219.33                   6.74         25.00               0.80              27.28               1.0           0                     0.75
+    CT                       softs      29    19622.22                   6.54         27.59               0.87              27.79               1.0           0                     1.97
+   SR1          short-rate futures      14    18181.57                   6.06          7.14               1.53               6.79              30.0           0                     0.01
+    ZF other interest-rate futures      24    16467.97                   5.49         20.83               1.01              29.38               2.5           0                     0.28
+    ZM                      grains      34    14725.08                   4.91         32.35               0.67              28.24               1.0           0                     2.50
+   RTY               stock indexes      25    13415.04                   4.47         20.00               0.80              25.20               3.0           0                     1.76
+    VX                  volatility      25    12309.97                   4.10         24.00               0.47              19.08               1.0           0                     4.36
+    DX                  currencies      30    12198.83                   4.07         20.00               0.71              28.77               1.0           0                     0.74
+    TN other interest-rate futures       9    11745.45                   3.92         33.33               1.83              33.44               1.0           0                     0.51
+    6E                  currencies      16    11205.75                   3.74         25.00               1.50              38.69               1.0           0                     0.85
+    LE                       meats      22    11134.32                   3.71         18.18               0.74              23.36               1.0           0                     1.31
+    ZB other interest-rate futures      20    10521.83                   3.51         25.00               0.71              29.85               1.0           0                     0.82
+    6M                  currencies      30     6945.83                   2.32         33.33               0.35              34.53               2.0           0                     1.20
+    ZL                      grains      32     5852.57                   1.95         15.62               0.10              22.78               1.0           0                     1.97
+    UB other interest-rate futures       9     4659.02                   1.55         22.22               0.46              25.11               1.0           0                     0.98
+    BZ                      energy       4     3210.21                   1.07         50.00               0.56              23.50               1.0           0                     1.37
+    6L                  currencies      41    -1508.88                  -0.50         21.95              -0.08              17.63               4.0           0                     1.18
+    YM               stock indexes       1    -1529.72                  -0.51          0.00              -1.10               5.00               1.0           0                     0.54
+    ZT          short-rate futures      29    -1978.38                  -0.66         13.79              -0.03              20.03               5.0           0                     0.07
+   SR3          short-rate futures       7    -2272.64                  -0.76         14.29              -0.42              17.71              31.0           0                     0.01
+    GF                       meats       2    -2991.07                  -1.00          0.00              -1.10               8.00               1.0           0                     0.85
+    6N                  currencies      26    -3460.45                  -1.15         15.38              -0.37              25.08               1.0           0                     1.05
+    HE                       meats      43    -5591.39                  -1.86         13.95               0.01              17.21               2.0           0                     2.32
+    GC                      metals      42    -8268.33                  -2.76         14.29              -0.02              21.45               1.0           0                     1.40
+    6S                  currencies      19   -10527.52                  -3.51         10.53              -0.46              12.89               1.0           0                     0.71
+    CC                       softs      24   -10708.08                  -3.57         20.83              -0.48              20.38               1.0           0                     2.02
+    6A                  currencies      19   -11375.65                  -3.79          5.26              -0.81              12.89               1.0           0                     0.92
+    PL                      metals       9   -11453.91                  -3.82         11.11              -0.98              12.00               1.0           0                     1.70
+    ZW                      grains      26   -12349.83                  -4.12         26.92              -0.34              19.92               1.0           0                     2.92
+    KE                      grains      27   -13487.50                  -4.50         14.81              -0.43              13.78               1.0           0                     2.85
+    6B                  currencies      30   -14071.25                  -4.69         16.67              -0.46              20.13               1.0           0                     0.94
+    ZN other interest-rate futures      31   -15801.91                  -5.27         16.13              -0.72              16.58               2.0           0                     0.45
+    NG                      energy      21   -17071.53                  -5.69          9.52              -0.72              17.57               1.0           0                     3.77
+    SB                       softs      40   -17182.35                  -5.73         10.00              -0.61              16.92               1.0           0                     2.96
+    SI                      metals      22   -18614.20                  -6.20          9.09              -0.76              12.36               1.0           0                     2.26
+
+==== per market profit, variant 1 at 0.25%, sealed Aug 2021 to Nov 2026 ====
+market                       group  trades  profit_usd  profit_pct_of_account  win_rate_pct  avg_ATR_per_trade  avg_sessions_held  median_contracts  etf_trades  median_atr_pct_of_price
+    ZT          short-rate futures       7    65951.10                  21.98         28.57              12.62              30.86               2.0           0                     0.20
+    GF                       meats       1    40177.86                  13.39        100.00              27.09             130.00               1.0           0                     0.93
+    6E                  currencies       8    21101.80                   7.03         37.50               3.66              43.75               1.0           0                     0.56
+    GC                      metals      11    18753.28                   6.25         54.55               2.48              46.55               1.0           0                     1.68
+    ZF other interest-rate futures       6    12980.31                   4.33         33.33               3.47              38.67               2.0           0                     0.42
+    LE                       meats       8    12394.34                   4.13         25.00               1.82              37.62               1.0           0                     1.31
+   SR3          short-rate futures      16    10200.75                   3.40         12.50               0.80              19.75               6.5           0                     0.05
+    ES               stock indexes      10    10152.13                   3.38         50.00               1.32              35.60               2.0           0                     1.04
+    CT                       softs      12     7770.19                   2.59         16.67               0.27              27.75               1.0           0                     2.01
+    6J                  currencies      11     5941.22                   1.98         27.27               0.73              25.27               1.0           0                     0.92
+    VX                  volatility      10     5080.73                   1.69         30.00               0.64              23.00               1.0           0                     4.92
+    SB                       softs       9     4682.61                   1.56         11.11               0.35              24.67               1.0           0                     2.47
+    NG                      energy       2     3739.38                   1.25         50.00               1.69              46.50               1.0           0                     4.01
+    6M                  currencies      11     2127.66                   0.71         27.27               0.12              23.00               3.0           0                     1.04
+    6B                  currencies      10     1854.07                   0.62         20.00              -0.01              21.10               1.0           0                     0.71
+    ZN other interest-rate futures       7      984.71                   0.33         14.29               0.34              25.00               1.0           0                     0.61
+    HE                       meats      11      723.05                   0.24         27.27               0.10              27.18               2.0           0                     2.20
+    DX                  currencies      11      659.22                   0.22         27.27               0.06              22.09               1.0           0                     0.62
+    ZW                      grains       8      168.79                   0.06         25.00               0.04              28.38               1.0           0                     2.77
+   RTY               stock indexes       8      -47.47                  -0.02         25.00               0.04              26.00               3.0           0                     2.03
+    NQ               stock indexes       6     -208.42                  -0.07         33.33               0.26              23.50               1.0           0                     1.48
+    ZC                      grains       6     -535.18                  -0.18         16.67              -0.03              16.67               2.0           0                     1.99
+    ZB other interest-rate futures       6     -629.02                  -0.21         16.67              -0.16              24.17               1.0           0                     1.07
+   SR1          short-rate futures      25    -1400.45                  -0.47          8.00              -0.07              11.16               9.0           0                     0.02
+    UB other interest-rate futures       1    -1488.20                  -0.50          0.00              -1.10               7.00               1.0           0                     1.23
+    6A                  currencies       7    -1785.09                  -0.60         14.29              -0.12              22.29               1.0           0                     0.88
+    6L                  currencies      12    -3263.25                  -1.09         25.00              -0.26              18.42               3.5           0                     1.19
+    CC                       softs       3    -3401.99                  -1.13          0.00              -1.10              16.00               1.0           0                     1.97
+    ZL                      grains      12    -5170.11                  -1.72          8.33              -0.55              21.33               1.0           0                     2.84
+    KE                      grains       7    -5729.66                  -1.91          0.00              -0.97              20.00               1.0           0                     2.77
+    TN other interest-rate futures       8    -6030.60                  -2.01         12.50              -0.74              16.75               1.0           0                     0.87
+    CL                      energy      11    -6608.81                  -2.20          9.09              -0.79               7.09               3.0           0                     3.02
+    6S                  currencies       5    -6694.64                  -2.23          0.00              -1.10               5.80               1.0           0                     0.83
+    6C                  currencies      12    -7664.22                  -2.55          8.33              -0.82              13.83               2.0           0                     0.52
+    6N                  currencies      13    -8155.84                  -2.72         15.38              -0.85              16.77               1.0           0                     0.92
+    ZQ          short-rate futures      19    -8280.62                  -2.76         10.53              -0.58              14.21              36.0           0                     0.01
+    ZS                      grains       8    -9051.97                  -3.02          0.00              -1.02              10.38               1.0           0                     1.79
+    SI                      metals       7   -10068.54                  -3.36          0.00              -1.10               4.71               1.0           0                     2.52
+    ZM                      grains      13   -10455.22                  -3.49          7.69              -0.94              16.92               1.0           0                     2.50
+
+==== per market profit, variant 1 at 0.25%, whole history ====
+market                       group  trades  profit_usd  profit_pct_of_account  win_rate_pct  avg_ATR_per_trade  avg_sessions_held  median_contracts  etf_trades  median_atr_pct_of_price
+    ZQ          short-rate futures      60   143877.44                  47.96         15.00               3.22              20.12              36.0           0                     0.01
+    ZT          short-rate futures      36    63972.72                  21.32         16.67               2.43              22.14               4.0           0                     0.09
+    GF                       meats       3    37186.79                  12.40         33.33               8.30              48.67               1.0           0                     0.86
+    6E                  currencies      24    32307.55                  10.77         29.17               2.22              40.38               1.0           0                     0.70
+    ES               stock indexes      33    31977.08                  10.66         36.36               1.11              30.48               2.0           0                     1.11
+    ZF other interest-rate futures      30    29448.28                   9.82         23.33               1.50              31.23               2.0           0                     0.30
+    NQ               stock indexes      33    29432.91                   9.81         27.27               1.31              26.88               1.0           0                     1.38
+    6J                  currencies      44    27696.91                   9.23         22.73               0.68              20.14               1.0           0                     0.90
+    CT                       softs      41    27392.41                   9.13         24.39               0.70              27.78               1.0           0                     1.97
+    ZS                      grains      37    27333.96                   9.11         18.92               1.02              20.73               1.0           0                     1.73
+    CL                      energy      47    24784.75                   8.26         14.89               0.63              19.62               3.0           0                     2.94
+    LE                       meats      30    23528.66                   7.84         20.00               1.03              27.17               1.0           0                     1.31
+    ZC                      grains      36    22467.04                   7.49         19.44               0.74              21.78               2.0           0                     2.18
+    VX                  volatility      35    17390.70                   5.80         25.71               0.52              20.20               1.0           0                     4.60
+   SR1          short-rate futures      39    16781.12                   5.59          7.69               0.51               9.59              14.0           0                     0.01
+   RTY               stock indexes      33    13367.57                   4.46         21.21               0.62              25.39               3.0           0                     1.79
+    DX                  currencies      41    12858.05                   4.29         21.95               0.54              26.98               1.0           0                     0.73
+    6C                  currencies      44    12555.11                   4.19         20.45               0.36              23.61               2.0           0                     0.63
+    GC                      metals      53    10484.96                   3.49         22.64               0.50              26.66               1.0           0                     1.43
+    ZB other interest-rate futures      26     9892.81                   3.30         23.08               0.51              28.54               1.0           0                     0.91
+    6M                  currencies      41     9073.49                   3.02         31.71               0.29              31.44               3.0           0                     1.11
+   SR3          short-rate futures      23     7928.11                   2.64         13.04               0.43              19.13               7.0           0                     0.04
+    TN other interest-rate futures      17     5714.85                   1.90         23.53               0.62              25.59               1.0           0                     0.70
+    ZM                      grains      47     4269.86                   1.42         25.53               0.23              25.11               1.0           0                     2.50
+    BZ                      energy       4     3210.21                   1.07         50.00               0.56              23.50               1.0           0                     1.37
+    UB other interest-rate futures      10     3170.81                   1.06         20.00               0.30              23.30               1.0           0                     1.03
+    ZL                      grains      44      682.45                   0.23         13.64              -0.08              22.39               1.0           0                     2.24
+    YM               stock indexes       1    -1529.72                  -0.51          0.00              -1.10               5.00               1.0           0                     0.54
+    6L                  currencies      53    -4772.13                  -1.59         22.64              -0.12              17.81               4.0           0                     1.18
+    HE                       meats      54    -4868.34                  -1.62         16.67               0.03              19.24               2.0           0                     2.30
+    PL                      metals       9   -11453.91                  -3.82         11.11              -0.98              12.00               1.0           0                     1.70
+    6N                  currencies      39   -11616.29                  -3.87         15.38              -0.53              22.31               1.0           0                     0.97
+    ZW                      grains      34   -12181.04                  -4.06         26.47              -0.25              21.91               1.0           0                     2.86
+    6B                  currencies      40   -12217.18                  -4.07         17.50              -0.34              20.38               1.0           0                     0.81
+    SB                       softs      49   -12499.75                  -4.17         10.20              -0.43              18.35               1.0           0                     2.81
+    6A                  currencies      26   -13160.74                  -4.39          7.69              -0.62              15.42               1.0           0                     0.92
+    NG                      energy      23   -13332.15                  -4.44         13.04              -0.51              20.09               1.0           0                     3.81
+    CC                       softs      27   -14110.06                  -4.70         18.52              -0.54              19.89               1.0           0                     1.97
+    ZN other interest-rate futures      38   -14817.20                  -4.94         15.79              -0.53              18.13               1.0           0                     0.49
+    6S                  currencies      24   -17222.17                  -5.74          8.33              -0.59              11.42               1.0           0                     0.71
+    KE                      grains      34   -19217.16                  -6.41         11.76              -0.54              15.06               1.0           0                     2.81
+    SI                      metals      29   -28682.74                  -9.56          6.90              -0.84              10.52               1.0           0                     2.36
+ZQ: face value per contract $5,000,000; contracts per trade at 0.25% target median 36
+SR1: face value per contract $5,000,000; contracts per trade at 0.25% target median 14
+SR3: face value per contract $1,000,000; contracts per trade at 0.25% target median 7
+ZT: face value per contract $200,000; contracts per trade at 0.25% target median 4
+done 7s
