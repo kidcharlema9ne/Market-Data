@@ -162,6 +162,24 @@ def sim(rows, d, kind, mm, cap):
     return res - COST_RT, held
 
 
+def nonoverlap(rows, held):
+    """One open position per market: skip an entry whose decision day falls before the previous kept trade of that market has exited."""
+    keep = np.zeros(len(rows), bool)
+    last = {}
+    for i in range(len(rows)):
+        mk = MK[rows[i]]
+        if rows[i] >= last.get(mk, -1):
+            keep[i] = True
+            last[mk] = rows[i] + held[i]
+    return keep
+
+
+def dedupe(lst):
+    rows = np.array([r for r, _ in lst]); d = np.array([x for _, x in lst], float)
+    rows, idx = np.unique(rows, return_index=True)
+    return rows, d[idx]
+
+
 def tstat(x):
     return float(x.mean() / x.std(ddof=1) * np.sqrt(len(x))) if len(x) > 30 and x.std() > 0 else np.nan
 
@@ -172,13 +190,17 @@ def label(e):
 
 rows_out, by_year, by_group = [], [], []
 for (tname, X, N), lst in sorted(entries.items(), key=lambda kv: (TRENDS.index(kv[0][0]), kv[0][1], kv[0][2])):
-    rows = np.array([r for r, _ in lst]); d = np.array([x for _, x in lst], float)
-    if len(rows) < 30:
+    rows0, d0 = dedupe(lst)
+    if len(rows0) < 30:
         continue
-    fh = np.asarray(DATE[rows] < SPLIT)
-    yrs = np.asarray(DATE[rows].year)
     for e in EXITS:
-        res, held = sim(rows, d, *e)
+        res_all, held_all = sim(rows0, d0, *e)
+        kp = nonoverlap(rows0, held_all)
+        rows, d, res, held = rows0[kp], d0[kp], res_all[kp], held_all[kp]
+        if len(rows) < 30:
+            continue
+        fh = np.asarray(DATE[rows] < SPLIT)
+        yrs = np.asarray(DATE[rows].year)
         row = dict(trend=tname, pullback_x_atr=X, watch_sessions=N, exit=label(e), n=len(rows), per_month=len(rows) / YEARS / 12, avg_ATR=float(np.nanmean(res)),
                    win_rate_pct=float((res > 0).mean() * 100), avg_sessions=float(held.mean()), pct_held_over_20=float((held > 20).mean() * 100),
                    first_half=float(res[fh].mean()) if fh.sum() > 20 else np.nan, second_half=float(res[~fh].mean()) if (~fh).sum() > 20 else np.nan,
@@ -192,7 +214,7 @@ for (tname, X, N), lst in sorted(entries.items(), key=lambda kv: (TRENDS.index(k
             for gname in list(GROUPS):
                 mk_ = np.array([GROUP_OF.get(x, "other") == gname for x in gm])
                 by_group.append(dict(exit=label(e), group=gname, n=int(mk_.sum()), avg_ATR=float(res[mk_].mean()) if mk_.sum() >= 15 else np.nan))
-    print(f"{tname[:30]} X={X} N={N}: {len(rows)} entries ({time.time()-t0:.0f}s)", flush=True)
+    print(f"{tname[:30]} X={X} N={N}: {len(rows0)} distinct entries ({time.time()-t0:.0f}s)", flush=True)
 out = pd.DataFrame(rows_out)
 out.to_csv(f"{out_dir}/signal_then_pullback.csv", index=False)
 pd.DataFrame(by_year).to_csv(f"{out_dir}/headline_by_year.csv", index=False)
@@ -212,4 +234,39 @@ print("\n==== HEADLINE (pooled, pullback 1.5 ATR, watch 20 sessions): every exit
 print(head.drop(columns=["trend", "pullback_x_atr", "watch_sessions"]).round(3).to_string(index=False))
 print("\nby year:\n" + pd.DataFrame(by_year).pivot_table(index="year", columns="exit", values="avg_ATR").round(3).to_string())
 print("\nby group:\n" + pd.DataFrame(by_group).pivot_table(index="group", columns="exit", values="avg_ATR").round(3).to_string())
+
+# ---- OUTLIER CHECK: are the best cells carried by a few huge winners in the short-rate futures?
+SHORT_RATES = ["ZQ", "SR1", "SR3", "ZT"]
+check_rows, trade_dump = [], []
+for (tname, X, N) in ((TRENDS[2], 2.5, 20), (TRENDS[2], 2.0, 20), (TRENDS[1], 3.0, 10), (TRENDS[0], 1.5, 20), (TRENDS[3], 2.5, 40)):
+    lst = entries.get((tname, X, N))
+    if not lst:
+        continue
+    rows0, d0 = dedupe(lst)
+    for e in (("time", None, 20), ("trail", 3.0, 40), ("trail", 4.0, 60)):
+        res_all, held_all = sim(rows0, d0, *e)
+        kp = nonoverlap(rows0, held_all)
+        rows, d, res, held = rows0[kp], d0[kp], res_all[kp], held_all[kp]
+        mk_ = mkt_names[rows]
+        short_rate = np.isin(mk_, SHORT_RATES)
+        order = np.argsort(-res)
+        top10 = order[:10]
+        keep = np.ones(len(res), bool); keep[top10] = False
+        check_rows.append(dict(trend=tname, pullback_x_atr=X, watch_sessions=N, exit=label(e), n=len(res), avg_all=float(res.mean()),
+                               avg_without_short_rates=float(res[~short_rate].mean()), n_short_rate=int(short_rate.sum()),
+                               avg_short_rates_only=float(res[short_rate].mean()) if short_rate.sum() else np.nan,
+                               avg_with_each_trade_capped_at_20=float(np.minimum(res, 20).mean()), avg_without_top_10_trades=float(res[keep].mean()),
+                               avg_without_top_10_and_short_rates=float(res[keep & ~short_rate].mean()),
+                               t_stat_without_short_rates=tstat(res[~short_rate]),
+                               first_half_without_short_rates=float(res[(~short_rate) & (DATE[rows] < SPLIT)].mean()), second_half_without_short_rates=float(res[(~short_rate) & (DATE[rows] >= SPLIT)].mean())))
+        if tname == TRENDS[2] and X == 2.5 and N == 20 and e == ("trail", 4.0, 60):
+            for i in order[:25]:
+                trade_dump.append(dict(market=mk_[i], decision_date=str(DATE[rows[i]].date()), direction=int(d[i]), result_ATR=float(res[i]), sessions=int(held[i])))
+chk = pd.DataFrame(check_rows)
+chk.to_csv(f"{out_dir}/outlier_check.csv", index=False)
+pd.DataFrame(trade_dump).to_csv(f"{out_dir}/top_25_winners_headline.csv", index=False)
+print("\n==== OUTLIER CHECK ====")
+print(chk.round(3).to_string(index=False))
+print("\nTOP 25 WINNERS (20-session ratio alone, pullback 2.5 ATR, watch 20, trail 4 ATR max 60):")
+print(pd.DataFrame(trade_dump).round(2).to_string(index=False))
 print("done", f"{time.time()-t0:.0f}s")
