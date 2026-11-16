@@ -1,0 +1,4 @@
+system,initial_stop_ATR,candidate_entries,closed_by_130_cap,avg_ATR_result_at_the_cap,avg_ATR_added_by_letting_them_run,median_ATR_added,share_that_added_profit_pct,share_that_gave_back_pct,total_ATR_added,best_ten_additions_ATR,avg_extra_sessions
+frozen rule,1.0,2184,63,17.84,0.56,-0.92,34.92,65.08,35.3,120.47,47.19
+frozen rule,2.0,2184,110,15.66,0.53,-0.92,32.73,67.27,58.75,164.24,42.75
+earlier system,3.0,4221,18,19.34,-1.58,-1.2,5.56,94.44,-28.52,-7.0,49.94

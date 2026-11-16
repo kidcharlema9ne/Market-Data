@@ -1,0 +1,111 @@
+development rows 526,297; 2007-12-31 to 2026-11-06; indicator warm-up from 2020-06; trades counted only from 2021-08-07
+46 markets; 203,982 decision days; 7,163 entries across 2 combinations; 1s
+frozen best rule (pullback entry, 1 ATR stop, 5 ATR trail): 1891 trades (development 1396, sealed 495); median sessions held 6; win rate 19.5%
+earlier system (20-session breakout, ratio 0.6, 3 ATR stop, 3 ATR trail): 1179 trades (development 897, sealed 282); median sessions held 19; win rate 37.4%
+SIMULATOR CHECK PASSED: 1 ATR / 5 ATR / 130 (frozen) and 3 ATR / 3 ATR / 130 (earlier) reproduce the engine's trades, results and daily profit exactly
+REFERENCE CHECK PASSED: whole-history return, Sharpe and drawdown match Entry 128
+done frozen rule 1.0 5.0 130 sessions (as before) (1s)
+done frozen rule 1.0 5.0 260 sessions (2s)
+done frozen rule 1.0 5.0 520 sessions (2s)
+done frozen rule 1.0 5.0 no time limit (2s)
+done frozen rule 1.5 5.0 130 sessions (as before) (2s)
+done frozen rule 1.5 5.0 260 sessions (2s)
+done frozen rule 1.5 5.0 520 sessions (2s)
+done frozen rule 1.5 5.0 no time limit (2s)
+done frozen rule 2.0 5.0 130 sessions (as before) (2s)
+done frozen rule 2.0 5.0 260 sessions (2s)
+done frozen rule 2.0 5.0 520 sessions (3s)
+done frozen rule 2.0 5.0 no time limit (3s)
+done frozen rule 3.0 5.0 130 sessions (as before) (3s)
+done frozen rule 3.0 5.0 260 sessions (3s)
+done frozen rule 3.0 5.0 520 sessions (3s)
+done frozen rule 3.0 5.0 no time limit (3s)
+done earlier system 3.0 3.0 130 sessions (as before) (3s)
+done earlier system 3.0 3.0 260 sessions (3s)
+done earlier system 3.0 3.0 520 sessions (3s)
+done earlier system 3.0 3.0 no time limit (3s)
+
+==== frozen rule | same dollars per ATR: 0.15% of the account per ATR ====
+ initial stop               time limit  trades  win %  avg held  closed by limit  open at end  dev ret/yr  dev Sharpe  dev drawdown  sealed ret/yr  sealed Sharpe  whole ret/yr  whole Sharpe  whole drawdown  top-ten share %  longest under water
+          1.0 130 sessions (as before)    1022  21.14     23.11               33            0        6.33        0.90        -13.32           5.23           0.80          6.02          0.87          -13.32            66.79                 1309
+          1.0             260 sessions    1010  21.39     24.97                3            0        6.08        0.81        -14.32           7.04           0.88          6.35          0.83          -14.32            69.16                 1286
+          1.0             520 sessions    1009  21.41     25.19                0            0        6.10        0.82        -14.09           7.04           0.85          6.37          0.82          -14.09            68.96                 1286
+          1.0            no time limit    1009  21.41     25.19                0            0        6.10        0.82        -14.09           7.04           0.85          6.37          0.82          -14.09            68.96                 1286
+          1.5 130 sessions (as before)     971  26.67     30.82               42            0        7.75        0.92        -14.13           6.01           0.78          7.26          0.88          -14.13            56.21                 1320
+          1.5             260 sessions     957  27.06     33.16                3            0        7.70        0.86        -15.86           7.70           0.85          7.70          0.86          -15.86            57.48                 1291
+          1.5             520 sessions     956  27.09     33.41                0            0        7.73        0.86        -15.65           7.69           0.82          7.72          0.85          -15.65            57.33                 1291
+          1.5            no time limit     956  27.09     33.41                0            0        7.73        0.86        -15.65           7.69           0.82          7.72          0.85          -15.65            57.33                 1291
+          2.0 130 sessions (as before)     926  32.83     38.62               55            0        9.48        1.02        -12.40           7.36           0.84          8.88          0.97          -12.40            45.95                 1320
+          2.0             260 sessions     911  32.93     41.43                3            0        9.34        0.95        -14.73           8.82           0.88          9.20          0.93          -14.73            48.90                 1291
+          2.0             520 sessions     910  32.97     41.70                0            0        9.37        0.95        -14.53           8.82           0.86          9.22          0.93          -14.53            48.79                 1291
+          2.0            no time limit     910  32.97     41.70                0            0        9.37        0.95        -14.53           8.82           0.86          9.22          0.93          -14.53            48.79                 1291
+          3.0 130 sessions (as before)     873  36.66     46.52               61            0        8.97        0.90        -14.65           6.85           0.72          8.38          0.85          -14.65            48.74                 1315
+          3.0             260 sessions     860  36.63     49.47                3            0        8.59        0.82        -16.27           8.22           0.77          8.49          0.80          -16.27            52.97                 1289
+          3.0             520 sessions     859  36.67     49.67                0            0        8.61        0.82        -16.11           8.22           0.75          8.50          0.80          -16.11            52.88                 1289
+          3.0            no time limit     859  36.67     49.67                0            0        8.61        0.82        -16.11           8.22           0.75          8.50          0.80          -16.11            52.88                 1289
+
+==== frozen rule | same dollars per ATR: 0.25% of the account per ATR ====
+ initial stop               time limit  trades  win %  avg held  closed by limit  open at end  dev ret/yr  dev Sharpe  dev drawdown  sealed ret/yr  sealed Sharpe  whole ret/yr  whole Sharpe  whole drawdown  top-ten share %  longest under water
+          1.0 130 sessions (as before)    1391  19.27     22.10               41            0        5.67        0.48        -32.61           8.52           0.71          6.47          0.55          -32.61            94.93                 1342
+          1.0             260 sessions    1375  19.42     23.60                3            0        4.81        0.39        -35.51          12.59           0.88          6.99          0.54          -35.51            98.08                 1346
+          1.0             520 sessions    1373  19.45     23.76                0            0        4.83        0.40        -35.27          12.67           0.87          7.03          0.54          -35.27            97.52                 1346
+          1.0            no time limit    1373  19.45     23.76                0            0        4.83        0.40        -35.27          12.67           0.87          7.03          0.54          -35.27            97.52                 1346
+          1.5 130 sessions (as before)    1322  24.81     29.86               54            0        7.56        0.54        -34.70           8.81           0.65          7.91          0.57          -34.70            80.56                 1525
+          1.5             260 sessions    1303  25.10     31.93                3            0        7.33        0.50        -36.81          12.55           0.79          8.79          0.58          -36.81            81.15                 1527
+          1.5             520 sessions    1301  25.13     32.11                0            0        7.36        0.50        -36.59          12.67           0.79          8.84          0.59          -36.59            80.67                 1527
+          1.5            no time limit    1301  25.13     32.11                0            0        7.36        0.50        -36.59          12.67           0.79          8.84          0.59          -36.59            80.67                 1527
+          2.0 130 sessions (as before)    1268  30.91     37.92               71            0       10.26        0.64        -28.56          12.87           0.82         10.99          0.69          -28.56            58.06                 1524
+          2.0             260 sessions    1248  31.01     40.42                3            0        9.86        0.59        -30.89          15.67           0.88         11.49          0.67          -30.89            64.13                 1502
+          2.0             520 sessions    1246  31.06     40.63                0            0        9.89        0.59        -30.69          15.83           0.88         11.55          0.67          -30.69            63.77                 1502
+          2.0            no time limit    1246  31.06     40.63                0            0        9.89        0.59        -30.69          15.83           0.88         11.55          0.67          -30.69            63.77                 1502
+          3.0 130 sessions (as before)    1201  34.97     46.19               84            0       10.46        0.61        -26.91          16.18           0.92         12.06          0.69          -26.91            65.43                 1318
+          3.0             260 sessions    1184  34.88     48.78                3            0        9.53        0.52        -29.99          12.15           0.63         10.26          0.56          -29.99            74.72                 1291
+          3.0             520 sessions    1182  34.94     48.95                0            0        9.55        0.52        -29.99          12.33           0.63         10.33          0.56          -29.99            74.27                 1291
+          3.0            no time limit    1182  34.94     48.95                0            0        9.55        0.52        -29.99          12.33           0.63         10.33          0.56          -29.99            74.27                 1291
+
+==== frozen rule | same risk per stop-out: 0.15% of the account divided by the stop width ====
+ initial stop               time limit  trades  win %  avg held  closed by limit  open at end  dev ret/yr  dev Sharpe  dev drawdown  sealed ret/yr  sealed Sharpe  whole ret/yr  whole Sharpe  whole drawdown  top-ten share %  longest under water
+          1.0 130 sessions (as before)    1022  21.14     23.11               33            0        6.33        0.90        -13.32           5.23           0.80          6.02          0.87          -13.32            66.79                 1309
+          1.0             260 sessions    1010  21.39     24.97                3            0        6.08        0.81        -14.32           7.04           0.88          6.35          0.83          -14.32            69.16                 1286
+          1.0             520 sessions    1009  21.41     25.19                0            0        6.10        0.82        -14.09           7.04           0.85          6.37          0.82          -14.09            68.96                 1286
+          1.0            no time limit    1009  21.41     25.19                0            0        6.10        0.82        -14.09           7.04           0.85          6.37          0.82          -14.09            68.96                 1286
+          1.5 130 sessions (as before)     632  23.89     28.30               24            0        3.00        0.72         -9.27           1.76           0.45          2.65          0.65           -9.27           106.51                 1576
+          1.5             260 sessions     623  24.24     30.21                2            0        2.77        0.65        -10.21           2.72           0.60          2.75          0.63          -10.21           101.85                 1576
+          1.5             520 sessions     622  24.28     30.58                0            0        2.79        0.65        -10.21           2.94           0.62          2.83          0.64          -10.21           101.14                 1576
+          1.5            no time limit     622  24.28     30.58                0            0        2.79        0.65        -10.21           2.94           0.62          2.83          0.64          -10.21           101.14                 1576
+          2.0 130 sessions (as before)     419  29.59     34.19               20            0        2.04        0.68         -5.98           2.53           0.88          2.18          0.74           -5.98           104.63                 1301
+          2.0             260 sessions     414  29.47     36.39                1            0        2.13        0.68         -6.37           3.11           0.84          2.41          0.73           -6.37            98.68                 1299
+          2.0             520 sessions     413  29.54     36.77                0            0        2.16        0.69         -6.37           3.11           0.84          2.43          0.74           -6.37            97.85                 1299
+          2.0            no time limit     413  29.54     36.77                0            0        2.16        0.69         -6.37           3.11           0.84          2.43          0.74           -6.37            97.85                 1299
+          3.0 130 sessions (as before)     242  29.75     39.52               12            0        0.88        0.46         -4.04           1.14           0.71          0.95          0.52           -4.04           142.60                 2645
+          3.0             260 sessions     239  29.71     41.95                1            0        0.87        0.46         -4.04           1.53           0.72          1.05          0.54           -4.04           133.01                 2645
+          3.0             520 sessions     238  29.83     42.32                0            0        0.89        0.47         -4.04           1.53           0.72          1.06          0.55           -4.04           132.59                 2645
+          3.0            no time limit     238  29.83     42.32                0            0        0.89        0.47         -4.04           1.53           0.72          1.06          0.55           -4.04           132.59                 2645
+
+==== earlier system | same dollars per ATR: 0.15% of the account per ATR ====
+ initial stop               time limit  trades  win %  avg held  closed by limit  open at end  dev ret/yr  dev Sharpe  dev drawdown  sealed ret/yr  sealed Sharpe  whole ret/yr  whole Sharpe  whole drawdown  top-ten share %  longest under water
+          3.0 130 sessions (as before)     682  38.27     25.65                2            0        4.65        0.63         -8.93          -1.67          -0.31          2.88          0.42          -10.01            86.34                 1450
+          3.0             260 sessions     681  38.33     25.69                0            0        4.62        0.63         -8.97          -1.67          -0.31          2.86          0.42          -10.04            86.03                 1450
+          3.0             520 sessions     681  38.33     25.69                0            0        4.62        0.63         -8.97          -1.67          -0.31          2.86          0.42          -10.04            86.03                 1450
+          3.0            no time limit     681  38.33     25.69                0            0        4.62        0.63         -8.97          -1.67          -0.31          2.86          0.42          -10.04            86.03                 1450
+
+==== earlier system | same dollars per ATR: 0.25% of the account per ATR ====
+ initial stop               time limit  trades  win %  avg held  closed by limit  open at end  dev ret/yr  dev Sharpe  dev drawdown  sealed ret/yr  sealed Sharpe  whole ret/yr  whole Sharpe  whole drawdown  top-ten share %  longest under water
+          3.0 130 sessions (as before)     916  37.66     25.01                3            0        9.51        0.70        -15.00          -2.48          -0.24          6.15          0.48          -15.00            90.42                 1450
+          3.0             260 sessions     915  37.70     25.05                0            0        9.34        0.69        -15.09          -2.48          -0.24          6.03          0.47          -15.09            90.13                 1450
+          3.0             520 sessions     915  37.70     25.05                0            0        9.34        0.69        -15.09          -2.48          -0.24          6.03          0.47          -15.09            90.13                 1450
+          3.0            no time limit     915  37.70     25.05                0            0        9.34        0.69        -15.09          -2.48          -0.24          6.03          0.47          -15.09            90.13                 1450
+
+==== earlier system | same risk per stop-out: 0.15% of the account divided by the stop width ====
+ initial stop               time limit  trades  win %  avg held  closed by limit  open at end  dev ret/yr  dev Sharpe  dev drawdown  sealed ret/yr  sealed Sharpe  whole ret/yr  whole Sharpe  whole drawdown  top-ten share %  longest under water
+          3.0 130 sessions (as before)     216   41.2     27.95                2            0        1.44        1.00         -1.93          -0.18          -0.15          0.98          0.71           -2.29            96.56                  949
+          3.0             260 sessions     215   41.4     28.10                0            0        1.42        0.99         -1.94          -0.18          -0.15          0.97          0.70           -2.29            96.15                  949
+          3.0             520 sessions     215   41.4     28.10                0            0        1.42        0.99         -1.94          -0.18          -0.15          0.97          0.70           -2.29            96.15                  949
+          3.0            no time limit     215   41.4     28.10                0            0        1.42        0.99         -1.94          -0.18          -0.15          0.97          0.70           -2.29            96.15                  949
+
+==== trades closed by the 130 cap: what letting them run added (ATR per trade, all candidate entries before the one-position rule) ====
+        system  initial_stop_ATR  candidate_entries  closed_by_130_cap  avg_ATR_result_at_the_cap  avg_ATR_added_by_letting_them_run  median_ATR_added  share_that_added_profit_pct  share_that_gave_back_pct  total_ATR_added  best_ten_additions_ATR  avg_extra_sessions
+   frozen rule               1.0               2184                 63                      17.84                               0.56             -0.92                        34.92                     65.08            35.30                  120.47               47.19
+   frozen rule               2.0               2184                110                      15.66                               0.53             -0.92                        32.73                     67.27            58.75                  164.24               42.75
+earlier system               3.0               4221                 18                      19.34                              -1.58             -1.20                         5.56                     94.44           -28.52                   -7.00               49.94
+done 3s
