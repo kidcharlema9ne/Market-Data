@@ -100,6 +100,11 @@ def build_cot(path, uni):
         g["comm_idx"] = cot_index(g["comm"]).values
         g["large_idx"] = cot_index(g["large"]).values
         g["small_idx"] = cot_index(g["small"]).values
+        # Continuity rule: the 26 reports must span at most 26 weeks + 4 weeks of slack, otherwise missing weeks make the window stale.
+        span = (g["date"] - g["date"].shift(25)).dt.days
+        stale = ~(span <= 26 * 7 + 28)
+        for c_ in ("comm_idx", "large_idx", "small_idx"):
+            g.loc[stale, c_] = np.nan
         g["pub"] = pub_dates(pd.DatetimeIndex(g["date"]))
         for start, end, first_asof in SHUTDOWNS:
             m = (g["date"] >= first_asof) & (g["pub"] <= end)
@@ -321,7 +326,7 @@ def collect_signals(prices, cot, uni, unseal):
                            comm_idx=q.comm_idx, large_idx=q.large_idx, small_idx=q.small_idx, filled=t is not None, **flags)
                 if t is not None:
                     assert t["j"] == i + 1 and s["d"][t["j"]] > s["d"][i]
-                    row.update(entry_date=pd.Timestamp(s["d"][t["j"]]), fill=t["fill"], trig=t["trig"], gapfill=t["gapfill"],
+                    row.update(entry_date=pd.Timestamp(s["d"][t["j"]]), tick=tick, fill=t["fill"], trig=t["trig"], gapfill=t["gapfill"],
                                atr=t["atr"], risk_atr=t["risk"] / t["atr"])
                     for N in HORIZONS:
                         e = excursions(s, t, N)
@@ -694,6 +699,150 @@ def audit(prices, cot, uni, outdir, unseal):
     return text
 
 
+
+def verify(cot_path, uni_path, px_path, outdir, unseal):
+    """Independent recomputation of a random sample of trades from the raw bars and raw COT file, using different code paths."""
+    uni = pd.read_csv(uni_path, dtype={"code": str})
+    tr = pd.read_csv(Path(outdir) / "signals_and_trades.csv.gz", parse_dates=["signal_date", "entry_date", "cot_asof", "cot_pub"],
+                     dtype={"code": str})
+    px = read_prices(px_path)
+    raw = pd.read_csv(cot_path, parse_dates=["date"], dtype={"code": str})
+    out = []
+    fails = 0
+    f = tr[tr["filled"]]
+    # global invariants over every row
+    out.append(f"rows {len(tr)}, filled {len(f)}")
+    inv = {
+        "COT publication strictly before signal day": int((tr["cot_pub"] >= tr["signal_date"]).sum()),
+        "COT as-of before publication": int((tr["cot_asof"] >= tr["cot_pub"]).sum()),
+        "entry date after signal date": int((f["entry_date"] <= f["signal_date"]).sum()),
+        "entry more than 5 days after signal": int(((f["entry_date"] - f["signal_date"]).dt.days > 5).sum()),
+        "fill below long trigger": int(((f["side"] == "long") & (f["fill"] < f["trig"] - 1e-9)).sum()),
+        "fill above short trigger": int(((f["side"] == "short") & (f["fill"] > f["trig"] + 1e-9)).sum()),
+        "negative MFE": int((f["mfe5"] < 0).sum()),
+        "negative MAE": int((f["mae5"] < 0).sum()),
+        "MAE lower bound above upper bound": int((f["maeopt5"] > f["mae5"] + 1e-9).sum()),
+        "test C not inside B": int((tr["C"] & ~tr["B"]).sum()),
+        "test B not inside A": int((tr["B"] & ~tr["A"]).sum()),
+        "dates after sealed cut-off used": 0 if unseal else int((tr["signal_date"] > DEV_LAST_SIGNAL).sum()),
+    }
+    for k, v in inv.items():
+        out.append(f"  invariant: {k}: {v} violations")
+        fails += v
+    HOL = set(USFederalHolidayCalendar().holidays(start="1992-01-01", end="2027-12-31"))
+    rng = np.random.default_rng(11)
+    sample = f.iloc[rng.choice(len(f), size=min(400, len(f)), replace=False)]
+    cache = {}
+    chk = dict(fill=0, mfe5=0, mae5=0, maeopt5=0, ret5=0, mfe10=0, trail=0, cot=0, pattern=0, n=0)
+    sym_of = {r.code: PRICE_ROOTS.get(r.ibkr, r.ibkr) for r in uni.itertuples()}
+    for r in sample.itertuples():
+        sym = sym_of[r.code]
+        if sym not in cache:
+            g = px[px["symbol"] == sym].sort_values("date").reset_index(drop=True)
+            cache[sym] = g
+        g = cache[sym]
+        chk["n"] += 1
+        pos = g.index[g["date"] == r.signal_date][0]
+        prev, sig, nxt = g.iloc[pos - 1], g.iloc[pos], g.iloc[pos + 1]
+        ok_pat = (sig.high > prev.high and sig.close < prev.close) if r.side == "long" else (sig.low < prev.low and sig.close > prev.close)
+        chk["pattern"] += int(not ok_pat)
+        if nxt.date != r.entry_date:
+            chk["fill"] += 1
+            continue
+        # independent ATR and tick-based fill
+        tr_list = []
+        for k in range(pos - 13, pos + 1):
+            a, b = g.iloc[k], g.iloc[k - 1]
+            tr_list.append(max(a.high - a.low, abs(a.high - b.close), abs(a.low - b.close)))
+        atr = sum(tr_list) / 14.0
+        tick = r.tick
+        if r.side == "long":
+            trig = sig.high + tick
+            fill = max(nxt.open, trig)
+            ok = nxt.high >= trig
+        else:
+            trig = sig.low - tick
+            fill = min(nxt.open, trig)
+            ok = nxt.low <= trig
+        if not ok or abs(fill - r.fill) > 1e-9 * max(1, abs(fill)):
+            chk["fill"] += 1
+            continue
+        for N, key in ((5, "5"), (10, "10")):
+            w = g.iloc[pos + 1: pos + 1 + N]
+            if len(w) < N or pd.isna(getattr(r, f"mfe{N}")):
+                continue
+            if r.side == "long":
+                mfe, lo_c, ret = w.high.max() - fill, w.low.min(), w.close.iloc[-1] - fill
+                mae_c = max(fill - lo_c, 0)
+                later = w.iloc[1:]
+                lo_o = min(later.low.min() if len(later) else fill, fill) if not (nxt.open >= trig) else lo_c
+                mae_o = max(fill - lo_o, 0)
+            else:
+                mfe, hi_c, ret = fill - w.low.min(), w.high.max(), fill - w.close.iloc[-1]
+                mae_c = max(hi_c - fill, 0)
+                later = w.iloc[1:]
+                hi_o = max(later.high.max() if len(later) else fill, fill) if not (nxt.open <= trig) else hi_c
+                mae_o = max(hi_o - fill, 0)
+            for name, mine, theirs in ((f"mfe{N}", mfe / atr, getattr(r, f"mfe{N}")), (f"mae{N}", mae_c / atr, getattr(r, f"mae{N}")),
+                                       (f"maeopt{N}", mae_o / atr, getattr(r, f"maeopt{N}")), (f"ret{N}", ret / atr, getattr(r, f"ret{N}"))):
+                if name in chk and abs(mine - theirs) > 1e-7:
+                    chk[name] += 1
+        # trailing stop, written independently
+        stop = sig.low if r.side == "long" else sig.high
+        ex = None
+        for q in range(pos + 1, min(pos + 1 + MAX_HOLD, len(g))):
+            b = g.iloc[q]
+            if q > pos + 1:
+                if r.side == "long":
+                    stop = max(stop, min(g.iloc[q - 1].low, g.iloc[q - 2].low))
+                    if b.open <= stop:
+                        ex = (b.open, q); break
+                else:
+                    stop = min(stop, g.iloc[q - 1].high)
+                    if b.open >= stop:
+                        ex = (b.open, q); break
+            hit = b.low <= stop if r.side == "long" else b.high >= stop
+            if hit:
+                ex = (stop, q); break
+        if ex is None and pos + MAX_HOLD < len(g):
+            ex = (g.iloc[pos + MAX_HOLD].close, pos + MAX_HOLD)
+        if ex is not None:
+            gross = (ex[0] - fill) if r.side == "long" else (fill - ex[0])
+            if abs(gross / atr - r.trail_ret) > 1e-7:
+                chk["trail"] += 1
+        # COT: recompute the report available on the signal day with a brute-force loop
+        rc = raw[raw["code"] == r.code].sort_values("date").drop_duplicates("date").reset_index(drop=True)
+        best = None
+        near = np.where((rc["date"] < r.signal_date) & (rc["date"] > r.signal_date - pd.Timedelta(days=140)))[0]
+        for k in near:
+            d0 = rc["date"].iloc[k]
+            pub = d0 + pd.Timedelta(days=(4 - d0.weekday()) % 7 or 3)   # Friday of that week (a Friday as-of date -> next Monday)
+            mon = d0 - pd.Timedelta(days=d0.weekday())
+            if any((mon + pd.Timedelta(days=q_)) in HOL for q_ in range(5)):
+                pub = pub + pd.Timedelta(days=3)
+            for a, b_, c_ in SHUTDOWNS:
+                if d0 >= c_ and pub <= b_:
+                    pub = b_
+            if pub < r.signal_date and (best is None or (pub, d0) > (best[0], best[1])):
+                best = (pub, d0, k)
+        if best is None or best[1] != r.cot_asof:
+            chk["cot"] += 1
+        else:
+            k = best[2]
+            for col, key in (("comm", "comm_idx"), ("large", "large_idx"), ("small", "small_idx")):
+                win = rc[col].iloc[k - 25:k + 1]
+                lo, hi = win.min(), win.max()
+                val = (rc[col].iloc[k] - lo) / (hi - lo) * 100 if hi > lo else np.nan
+                if not (abs(val - getattr(r, key)) < 1e-6):
+                    chk["cot"] += 1
+                    break
+    out.append(f"independent recomputation of {chk['n']} random filled trades: mismatches {({k: v for k, v in chk.items() if k != 'n'})}")
+    fails += sum(v for k, v in chk.items() if k != "n")
+    out.append("VERIFICATION " + ("PASSED" if fails == 0 else f"FAILED ({fails} problems)"))
+    text = "\n".join(out) + "\n"
+    (Path(outdir) / "verification.txt").write_text(text, encoding="utf-8")
+    return text
+
 # ----------------------------------------------------------------------------------------------- self test
 def selftest():
     # Hand-built bars. Day 0..15 are filler with a stable range; day 16 is a bearish reversal day with a higher high.
@@ -765,6 +914,9 @@ def main():
     prices = read_prices(px_path)
     if mode == "audit":
         print(audit(prices, cot, uni, outdir, unseal))
+        return
+    if mode == "verify":
+        print(verify(cot_path, uni_path, px_path, outdir, unseal))
         return
     print(audit(prices, cot, uni, outdir, unseal))
     tr, cover = collect_signals(prices, cot, uni, unseal)

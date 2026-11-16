@@ -38,6 +38,11 @@ jobs:
           mkdir -p $OUT
           python research/cot_reversal/cot_reversal_breakout.py run research/cot_reversal/cot_weekly_full.csv.gz research/cot_reversal/cot_universe_report.csv futures_prices.parquet $OUT $FLAG | tee $OUT/run_output.txt
           echo "OUT=$OUT" >> $GITHUB_ENV
+      - name: Independent verification of a random sample of trades
+        run: |
+          FLAG=""
+          if [ "${{ github.event.inputs.unseal }}" = "true" ]; then FLAG="--unseal"; fi
+          python research/cot_reversal/cot_reversal_breakout.py verify research/cot_reversal/cot_weekly_full.csv.gz research/cot_reversal/cot_universe_report.csv futures_prices.parquet $OUT $FLAG | tee $OUT/verification_output.txt
       - name: Save results on the branch
         run: |
           git config user.name "github-actions"
