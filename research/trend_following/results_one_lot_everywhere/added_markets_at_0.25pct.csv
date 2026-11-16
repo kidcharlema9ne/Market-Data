@@ -1,0 +1,123 @@
+rule,variant,market,group,trades,of_which_ETF,avg_ATR_result,share_that_made_money_pct,profit_usd,median_one_contract_ATR_pct_of_account
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",6A,currencies,2,0,-1.15,0.0,-4271.29,0.62
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",6B,currencies,2,0,0.87,50.0,4872.24,0.71
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",6C,currencies,1,0,-1.1,0.0,-2334.13,0.71
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",6E,currencies,9,0,-0.19,22.22,-4610.72,0.66
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",6N,currencies,2,0,-1.1,0.0,-3437.51,0.52
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",6S,currencies,12,0,-0.47,8.33,-10277.67,0.71
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",BZ,energy,37,0,0.27,18.92,13273.59,0.89
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",CC,softs,21,0,-0.33,19.05,-23335.09,0.68
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",CT,softs,7,0,-0.58,14.29,-5655.05,0.51
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",DX,currencies,1,0,-1.1,0.0,-1967.88,0.6
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",ES,stock indexes,3,0,-0.32,33.33,-1344.37,0.86
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",GC,metals,1,0,-1.1,0.0,-1779.08,0.54
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",GF,meats,36,0,1.48,30.56,79025.43,0.76
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",HG,metals,45,0,1.41,31.11,302313.12,1.23
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",HO,energy,49,0,-0.06,12.24,-59376.18,1.75
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",KC,softs,48,0,0.45,25.0,73551.45,1.02
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",KE,grains,3,0,-0.58,33.33,-2800.52,0.54
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",LE,meats,9,0,-0.39,22.22,-2792.98,0.53
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",NG,energy,19,0,-0.52,10.53,-23664.12,0.59
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",NQ,stock indexes,5,0,-0.47,20.0,-974.83,0.6
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",PL,metals,24,0,0.31,20.83,33680.78,0.65
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",RB,energy,45,0,-0.42,11.11,-63059.43,0.95
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",SI,metals,21,0,0.1,28.57,-2116.23,0.65
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",UB,rates,17,0,-0.54,11.76,-18478.45,0.55
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",VX,volatility,14,0,0.36,28.57,4986.36,0.65
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",YM,stock indexes,43,0,-0.09,20.93,-33332.59,0.96
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",ZB,rates,6,0,-1.03,0.0,-10195.16,0.54
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",ZL,grains,3,0,-1.1,0.0,-5589.83,0.57
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",ZM,grains,1,0,-0.1,0.0,-193.2,0.64
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",ZS,grains,12,0,0.76,33.33,19648.31,0.59
+"original rule (1 ATR stop, 130-session limit)","one contract in every market (no limit), futures only",ZW,grains,2,0,-1.1,0.0,-3370.86,0.51
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",6A,currencies,2,0,-1.15,0.0,-4271.29,0.62
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",6B,currencies,2,0,0.87,50.0,4872.24,0.71
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",6C,currencies,1,0,-1.1,0.0,-2334.13,0.71
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",6E,currencies,9,8,-0.19,22.22,-2605.96,0.66
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",6N,currencies,2,0,-1.1,0.0,-3437.51,0.52
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",6S,currencies,12,12,-0.47,8.33,-4195.45,0.71
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",BZ,energy,37,36,0.27,18.92,4462.99,0.89
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",CC,softs,21,0,-0.33,19.05,-23335.09,0.68
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",CT,softs,7,0,-0.58,14.29,-5655.05,0.51
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",DX,currencies,1,0,-1.1,0.0,-1967.88,0.6
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",ES,stock indexes,3,0,-0.32,33.33,-1344.37,0.86
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",GC,metals,1,1,-1.1,0.0,-825.0,0.54
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",GF,meats,36,0,1.48,30.56,79025.43,0.76
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",HG,metals,45,0,1.41,31.11,302313.12,1.23
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",HO,energy,49,0,-0.06,12.24,-59376.18,1.75
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",KC,softs,48,0,0.45,25.0,73551.45,1.02
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",KE,grains,3,0,-0.58,33.33,-2800.52,0.54
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",LE,meats,9,0,-0.39,22.22,-2792.98,0.53
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",NG,energy,19,0,-0.52,10.53,-23664.12,0.59
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",NQ,stock indexes,5,5,-0.47,20.0,-1769.31,0.6
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",PL,metals,24,24,0.31,20.83,5664.42,0.65
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",RB,energy,45,44,-0.42,11.11,-17781.58,0.95
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",SI,metals,21,21,0.1,28.57,1521.87,0.65
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",UB,rates,17,17,-0.54,11.76,-6825.69,0.55
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",VX,volatility,14,0,0.36,28.57,4986.36,0.65
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",YM,stock indexes,43,0,-0.09,20.93,-33332.59,0.96
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",ZB,rates,6,5,-1.03,0.0,-5596.25,0.54
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",ZL,grains,3,0,-1.1,0.0,-5589.83,0.57
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",ZM,grains,1,0,-0.1,0.0,-193.2,0.64
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",ZS,grains,12,12,0.76,33.33,6862.88,0.59
+"original rule (1 ATR stop, 130-session limit)","one contract in every market, ETF stand-ins where a US ETF exists",ZW,grains,2,2,-1.1,0.0,-1650.0,0.51
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",6A,currencies,1,0,-2.1,0.0,-3464.96,0.55
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",6B,currencies,2,0,0.44,50.0,3255.7,0.71
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",6E,currencies,6,0,0.14,50.0,-1843.85,0.67
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",6N,currencies,1,0,-1.87,0.0,-3004.61,0.53
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",6S,currencies,9,0,1.44,33.33,24037.9,0.72
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",BZ,energy,35,0,-0.24,22.86,-40633.25,0.89
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",CC,softs,17,0,-0.69,17.65,-34602.49,0.67
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",CT,softs,5,0,1.2,60.0,10396.25,0.51
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",DX,currencies,1,0,-2.1,0.0,-3756.86,0.6
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",ES,stock indexes,2,0,-1.98,0.0,-8005.96,0.69
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",GC,metals,1,0,1.53,100.0,2481.3,0.54
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",GF,meats,32,0,0.93,37.5,24163.68,0.77
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",HG,metals,36,0,1.63,36.11,274209.65,1.23
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",HO,energy,46,0,-0.74,17.39,-196391.76,1.65
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",KC,softs,41,0,0.6,31.71,84706.58,1.0
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",KE,grains,2,0,0.76,100.0,2520.43,0.55
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",LE,meats,7,0,-1.49,14.29,-17472.26,0.53
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",NG,energy,17,0,-0.37,23.53,-12145.2,0.59
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",NQ,stock indexes,5,0,-1.07,20.0,-6287.07,0.6
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",PL,metals,23,0,-0.29,21.74,416.0,0.65
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",RB,energy,43,0,-0.56,18.6,-57352.11,0.95
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",SI,metals,18,0,0.81,38.89,22173.48,0.66
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",UB,rates,15,0,-0.21,26.67,-11553.85,0.59
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",VX,volatility,11,0,0.5,36.36,4911.26,0.7
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",YM,stock indexes,43,0,-0.76,23.26,-151487.71,0.96
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",ZB,rates,6,0,-1.52,0.0,-15318.88,0.54
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",ZL,grains,3,0,-2.1,0.0,-10671.49,0.57
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",ZM,grains,1,0,-0.1,0.0,-193.2,0.64
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",ZS,grains,10,0,0.8,50.0,14989.17,0.59
+"version 2 (2 ATR stop, no time limit)","one contract in every market (no limit), futures only",ZW,grains,1,0,-2.1,0.0,-3199.51,0.51
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",6A,currencies,1,0,-2.1,0.0,-3464.96,0.55
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",6B,currencies,2,0,0.44,50.0,3255.7,0.71
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",6E,currencies,6,4,0.14,50.0,854.45,0.67
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",6N,currencies,1,0,-1.87,0.0,-3004.61,0.53
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",6S,currencies,9,8,1.44,33.33,7414.06,0.72
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",BZ,energy,35,34,-0.24,22.86,-12237.51,0.89
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",CC,softs,17,0,-0.69,17.65,-34602.49,0.67
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",CT,softs,5,0,1.2,60.0,10396.25,0.51
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",DX,currencies,1,0,-2.1,0.0,-3756.86,0.6
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",ES,stock indexes,2,0,-1.98,0.0,-8005.96,0.69
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",GC,metals,1,1,1.53,100.0,1150.63,0.54
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",GF,meats,32,0,0.93,37.5,24163.68,0.77
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",HG,metals,36,0,1.63,36.11,274209.65,1.23
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",HO,energy,46,0,-0.74,17.39,-196391.76,1.65
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",KC,softs,41,0,0.6,31.71,84706.58,1.0
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",KE,grains,2,0,0.76,100.0,2520.43,0.55
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",LE,meats,7,0,-1.49,14.29,-17472.26,0.53
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",NG,energy,17,0,-0.37,23.53,-12145.2,0.59
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",NQ,stock indexes,5,5,-1.07,20.0,-4019.31,0.6
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",PL,metals,23,22,-0.29,21.74,-8085.12,0.65
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",RB,energy,43,40,-0.56,18.6,-36451.81,0.95
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",SI,metals,18,18,0.81,38.89,10935.34,0.66
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",UB,rates,15,14,-0.21,26.67,-3029.16,0.59
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",VX,volatility,11,0,0.5,36.36,4911.26,0.7
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",YM,stock indexes,43,0,-0.76,23.26,-151487.71,0.96
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",ZB,rates,6,5,-1.52,0.0,-8718.56,0.54
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",ZL,grains,3,0,-2.1,0.0,-10671.49,0.57
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",ZM,grains,1,0,-0.1,0.0,-193.2,0.64
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",ZS,grains,10,10,0.8,50.0,5976.46,0.59
+"version 2 (2 ATR stop, no time limit)","one contract in every market, ETF stand-ins where a US ETF exists",ZW,grains,1,1,-2.1,0.0,-1575.0,0.51
