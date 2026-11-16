@@ -1,0 +1,135 @@
+development rows 355,303; 2007-12-31 to 2021-08-06; sealed years removed at load
+48 markets; 144,073 decision days; 233,819 entries across 24 combinations; 5s
+done 20-session ratio at le | pullback 2.5 ATR (current best) (6s)
+done 20-session ratio at le | pullback 1.5 ATR (6s)
+done 20-session ratio at le | stochastic 5-session slow at or beyond 10 (6s)
+done 20-session ratio at le | stochastic 5-session slow at or beyond 20 (7s)
+done 20-session ratio at le | stochastic 5-session slow at or beyond 30 (7s)
+done 20-session ratio at le | stochastic 14-session slow at or beyond 10 (7s)
+done 20-session ratio at le | stochastic 14-session slow at or beyond 20 (7s)
+done 20-session ratio at le | stochastic 14-session slow at or beyond 30 (7s)
+done 20-session ratio at le | pullback 1.5 ATR and stochastic 5-session at or beyond 20 (8s)
+done 20-session ratio at le | pullback 2.5 ATR and stochastic 5-session at or beyond 20 (8s)
+done 20-session ratio at le | pullback 1.5 ATR and stochastic 14-session at or beyond 20 (8s)
+done 20-session ratio at le | pullback 2.5 ATR and stochastic 14-session at or beyond 20 (8s)
+done control: no ratio, eve | pullback 2.5 ATR (current best) (9s)
+done control: no ratio, eve | pullback 1.5 ATR (10s)
+done control: no ratio, eve | stochastic 5-session slow at or beyond 10 (11s)
+done control: no ratio, eve | stochastic 5-session slow at or beyond 20 (11s)
+done control: no ratio, eve | stochastic 5-session slow at or beyond 30 (12s)
+done control: no ratio, eve | stochastic 14-session slow at or beyond 10 (13s)
+done control: no ratio, eve | stochastic 14-session slow at or beyond 20 (13s)
+done control: no ratio, eve | stochastic 14-session slow at or beyond 30 (14s)
+done control: no ratio, eve | pullback 1.5 ATR and stochastic 5-session at or beyond 20 (15s)
+done control: no ratio, eve | pullback 2.5 ATR and stochastic 5-session at or beyond 20 (16s)
+done control: no ratio, eve | pullback 1.5 ATR and stochastic 14-session at or beyond 20 (16s)
+done control: no ratio, eve | pullback 2.5 ATR and stochastic 14-session at or beyond 20 (17s)
+
+==== 20-session ratio at le | trail 5 ATR, max 130 | portfolio at 0.25% of $300k per ATR ====
+                                                   trigger                    markets  n_trades  trades_per_month  avg_ATR_per_trade  avg_ATR_without_top_10  first_half_ATR  second_half_ATR  return_per_year_pct  sharpe  max_drawdown_pct_of_peak
+                           pullback 2.5 ATR (current best)             all 48 markets      1357              8.32               0.45                    0.10            0.45             0.46                11.00    0.73                    -25.34
+                           pullback 2.5 ATR (current best) without short-rate futures      1273              7.80               0.30                    0.07            0.46             0.12                 6.88    0.52                    -26.08
+                                          pullback 1.5 ATR             all 48 markets      1785             10.94               0.25                    0.06            0.34             0.14                 7.90    0.44                    -34.21
+                                          pullback 1.5 ATR without short-rate futures      1671             10.24               0.22                    0.02            0.34             0.08                 6.50    0.37                    -35.61
+                 stochastic 5-session slow at or beyond 10             all 48 markets       620              3.80               0.28                   -0.32            0.18             0.39                 3.08    0.38                    -29.02
+                 stochastic 5-session slow at or beyond 10 without short-rate futures       572              3.51               0.01                   -0.34            0.19            -0.20                 0.07    0.01                    -24.61
+                 stochastic 5-session slow at or beyond 20             all 48 markets      1305              8.00               0.20                   -0.03            0.36             0.03                 4.79    0.39                    -25.56
+                 stochastic 5-session slow at or beyond 20 without short-rate futures      1213              7.43               0.27                    0.02            0.43             0.10                 5.92    0.49                    -21.76
+                 stochastic 5-session slow at or beyond 30             all 48 markets      1603              9.82               0.10                   -0.10            0.31            -0.13                 2.73    0.19                    -48.15
+                 stochastic 5-session slow at or beyond 30 without short-rate futures      1499              9.19               0.10                   -0.10            0.29            -0.11                 2.68    0.19                    -45.04
+                stochastic 14-session slow at or beyond 10             all 48 markets       619              3.79              -0.01                   -0.33           -0.09             0.07                -0.11   -0.02                    -29.74
+                stochastic 14-session slow at or beyond 10 without short-rate futures       579              3.55              -0.04                   -0.37           -0.09             0.01                -0.43   -0.07                    -30.15
+                stochastic 14-session slow at or beyond 20             all 48 markets      1062              6.51               0.33                   -0.04            0.28             0.37                 6.21    0.54                    -30.73
+                stochastic 14-session slow at or beyond 20 without short-rate futures       994              6.09               0.21                   -0.02            0.33             0.06                 3.71    0.37                    -28.83
+                stochastic 14-session slow at or beyond 30             all 48 markets      1277              7.83               0.46                    0.09            0.63             0.26                10.46    0.76                    -26.92
+                stochastic 14-session slow at or beyond 30 without short-rate futures      1198              7.34               0.32                    0.08            0.62            -0.02                 6.87    0.55                    -25.85
+ pullback 1.5 ATR and stochastic 5-session at or beyond 20             all 48 markets      1289              7.90               0.18                   -0.06            0.34             0.00                 4.12    0.34                    -27.30
+ pullback 1.5 ATR and stochastic 5-session at or beyond 20 without short-rate futures      1213              7.43               0.23                   -0.03            0.39             0.05                 4.94    0.41                    -23.18
+ pullback 2.5 ATR and stochastic 5-session at or beyond 20             all 48 markets      1112              6.81               0.33                   -0.06            0.30             0.36                 6.49    0.53                    -22.28
+ pullback 2.5 ATR and stochastic 5-session at or beyond 20 without short-rate futures      1052              6.45               0.21                   -0.06            0.34             0.05                 3.87    0.36                    -21.14
+pullback 1.5 ATR and stochastic 14-session at or beyond 20             all 48 markets      1060              6.50               0.33                   -0.04            0.28             0.37                 6.19    0.54                    -30.55
+pullback 1.5 ATR and stochastic 14-session at or beyond 20 without short-rate futures       993              6.09               0.21                   -0.02            0.33             0.06                 3.70    0.37                    -28.83
+pullback 2.5 ATR and stochastic 14-session at or beyond 20             all 48 markets      1012              6.20               0.25                   -0.13            0.20             0.30                 4.47    0.42                    -34.06
+pullback 2.5 ATR and stochastic 14-session at or beyond 20 without short-rate futures       951              5.83               0.10                   -0.12            0.22            -0.03                 1.74    0.19                    -30.67
+
+==== 20-session ratio at le | time exit 60 | portfolio at 0.25% of $300k per ATR ====
+                                                   trigger                    markets  n_trades  trades_per_month  avg_ATR_per_trade  avg_ATR_without_top_10  first_half_ATR  second_half_ATR  return_per_year_pct  sharpe  max_drawdown_pct_of_peak
+                           pullback 2.5 ATR (current best)             all 48 markets      1392              8.53               0.36                    0.09            0.33             0.39                 8.97    0.63                    -26.25
+                           pullback 2.5 ATR (current best) without short-rate futures      1303              7.98               0.21                    0.07            0.33             0.07                 4.96    0.41                    -25.75
+                                          pullback 1.5 ATR             all 48 markets      1854             11.36               0.17                    0.03            0.30             0.02                 5.62    0.33                    -28.87
+                                          pullback 1.5 ATR without short-rate futures      1731             10.61               0.14                    0.01            0.31            -0.05                 4.44    0.27                    -28.73
+                 stochastic 5-session slow at or beyond 10             all 48 markets       619              3.79               0.21                   -0.31            0.05             0.38                 2.33    0.30                    -33.23
+                 stochastic 5-session slow at or beyond 10 without short-rate futures       570              3.49              -0.04                   -0.31            0.08            -0.19                -0.45   -0.08                    -28.50
+                 stochastic 5-session slow at or beyond 20             all 48 markets      1340              8.21               0.17                    0.03            0.35            -0.03                 4.00    0.36                    -27.78
+                 stochastic 5-session slow at or beyond 20 without short-rate futures      1247              7.64               0.23                    0.09            0.41             0.03                 5.14    0.47                    -21.29
+                 stochastic 5-session slow at or beyond 30             all 48 markets      1644             10.07               0.05                   -0.08            0.21            -0.12                 1.51    0.11                    -50.43
+                 stochastic 5-session slow at or beyond 30 without short-rate futures      1535              9.41               0.04                   -0.08            0.18            -0.11                 1.16    0.09                    -49.32
+                stochastic 14-session slow at or beyond 10             all 48 markets       623              3.82               0.01                   -0.29           -0.12             0.14                 0.09    0.01                    -26.53
+                stochastic 14-session slow at or beyond 10 without short-rate futures       583              3.57              -0.02                   -0.31           -0.09             0.04                -0.26   -0.04                    -24.46
+                stochastic 14-session slow at or beyond 20             all 48 markets      1091              6.69               0.24                   -0.06            0.19             0.29                 4.68    0.44                    -34.59
+                stochastic 14-session slow at or beyond 20 without short-rate futures      1022              6.26               0.12                   -0.03            0.24            -0.01                 2.28    0.26                    -29.78
+                stochastic 14-session slow at or beyond 30             all 48 markets      1308              8.02               0.37                    0.10            0.49             0.24                 8.76    0.69                    -30.09
+                stochastic 14-session slow at or beyond 30 without short-rate futures      1224              7.50               0.23                    0.09            0.46            -0.05                 4.97    0.45                    -30.28
+ pullback 1.5 ATR and stochastic 5-session at or beyond 20             all 48 markets      1320              8.09               0.16                    0.02            0.33            -0.03                 3.71    0.33                    -28.53
+ pullback 1.5 ATR and stochastic 5-session at or beyond 20 without short-rate futures      1244              7.62               0.20                    0.06            0.38            -0.00                 4.42    0.41                    -25.19
+ pullback 2.5 ATR and stochastic 5-session at or beyond 20             all 48 markets      1140              6.99               0.27                   -0.02            0.23             0.32                 5.49    0.48                    -27.40
+ pullback 2.5 ATR and stochastic 5-session at or beyond 20 without short-rate futures      1080              6.62               0.15                   -0.01            0.27             0.01                 2.88    0.29                    -23.83
+pullback 1.5 ATR and stochastic 14-session at or beyond 20             all 48 markets      1088              6.67               0.24                   -0.05            0.19             0.30                 4.71    0.44                    -34.39
+pullback 1.5 ATR and stochastic 14-session at or beyond 20 without short-rate futures      1021              6.26               0.12                   -0.03            0.24            -0.01                 2.26    0.25                    -29.78
+pullback 2.5 ATR and stochastic 14-session at or beyond 20             all 48 markets      1039              6.37               0.14                   -0.16            0.10             0.19                 2.65    0.27                    -42.10
+pullback 2.5 ATR and stochastic 14-session at or beyond 20 without short-rate futures       977              5.99               0.01                   -0.15            0.13            -0.14                 0.09    0.01                    -37.64
+
+==== control: no ratio, eve | trail 5 ATR, max 130 | portfolio at 0.25% of $300k per ATR ====
+                                                   trigger                    markets  n_trades  trades_per_month  avg_ATR_per_trade  avg_ATR_without_top_10  first_half_ATR  second_half_ATR  return_per_year_pct  sharpe  max_drawdown_pct_of_peak
+                           pullback 2.5 ATR (current best)             all 48 markets      4231             25.93               0.15                    0.03            0.14             0.15                11.14    0.41                    -47.77
+                           pullback 2.5 ATR (current best) without short-rate futures      3994             24.48               0.09                    0.01            0.14             0.05                 6.78    0.27                    -44.08
+                                          pullback 1.5 ATR             all 48 markets      5144             31.52               0.13                    0.02            0.16             0.10                12.04    0.35                    -57.87
+                                          pullback 1.5 ATR without short-rate futures      4862             29.79               0.08                    0.01            0.16             0.01                 7.39    0.23                    -57.27
+                 stochastic 5-session slow at or beyond 10             all 48 markets      2605             15.96               0.08                   -0.09           -0.04             0.20                 3.57    0.21                    -50.01
+                 stochastic 5-session slow at or beyond 10 without short-rate futures      2469             15.13               0.04                   -0.09           -0.05             0.13                 1.57    0.10                    -52.64
+                 stochastic 5-session slow at or beyond 20             all 48 markets      3967             24.31               0.14                    0.03            0.16             0.13                10.10    0.41                    -37.33
+                 stochastic 5-session slow at or beyond 20 without short-rate futures      3741             22.92               0.13                    0.04            0.18             0.06                 8.47    0.36                    -30.33
+                 stochastic 5-session slow at or beyond 30             all 48 markets      4652             28.51               0.10                    0.01            0.13             0.08                 8.75    0.31                    -59.63
+                 stochastic 5-session slow at or beyond 30 without short-rate futures      4385             26.87               0.08                    0.00            0.12             0.03                 6.34    0.23                    -51.70
+                stochastic 14-session slow at or beyond 10             all 48 markets      2632             16.13              -0.02                   -0.12            0.03            -0.08                -0.89   -0.06                    -46.00
+                stochastic 14-session slow at or beyond 10 without short-rate futures      2515             15.41              -0.01                   -0.12            0.04            -0.07                -0.49   -0.03                    -41.46
+                stochastic 14-session slow at or beyond 20             all 48 markets      3339             20.46               0.12                    0.00            0.11             0.12                 7.00    0.33                    -51.44
+                stochastic 14-session slow at or beyond 20 without short-rate futures      3156             19.34               0.11                    0.02            0.14             0.08                 6.09    0.31                    -43.10
+                stochastic 14-session slow at or beyond 30             all 48 markets      3680             22.55               0.20                    0.05            0.12             0.28                12.88    0.53                    -37.31
+                stochastic 14-session slow at or beyond 30 without short-rate futures      3477             21.31               0.13                    0.03            0.11             0.15                 7.93    0.35                    -32.13
+ pullback 1.5 ATR and stochastic 5-session at or beyond 20             all 48 markets      4069             24.93               0.10                    0.00            0.14             0.06                 7.27    0.30                    -48.27
+ pullback 1.5 ATR and stochastic 5-session at or beyond 20 without short-rate futures      3852             23.60               0.11                    0.02            0.16             0.06                 7.67    0.33                    -35.16
+ pullback 2.5 ATR and stochastic 5-session at or beyond 20             all 48 markets      3796             23.26               0.14                   -0.00            0.09             0.19                 9.33    0.39                    -52.63
+ pullback 2.5 ATR and stochastic 5-session at or beyond 20 without short-rate futures      3609             22.12               0.08                   -0.01            0.12             0.05                 5.46    0.25                    -42.53
+pullback 1.5 ATR and stochastic 14-session at or beyond 20             all 48 markets      3510             21.51               0.12                   -0.00            0.10             0.15                 7.68    0.35                    -48.54
+pullback 1.5 ATR and stochastic 14-session at or beyond 20 without short-rate futures      3318             20.33               0.10                    0.02            0.13             0.06                 5.75    0.28                    -38.96
+pullback 2.5 ATR and stochastic 14-session at or beyond 20             all 48 markets      3588             21.99               0.11                   -0.01            0.13             0.10                 7.25    0.34                    -42.97
+pullback 2.5 ATR and stochastic 14-session at or beyond 20 without short-rate futures      3400             20.84               0.08                   -0.00            0.16             0.01                 5.06    0.26                    -39.46
+
+==== control: no ratio, eve | time exit 60 | portfolio at 0.25% of $300k per ATR ====
+                                                   trigger                    markets  n_trades  trades_per_month  avg_ATR_per_trade  avg_ATR_without_top_10  first_half_ATR  second_half_ATR  return_per_year_pct  sharpe  max_drawdown_pct_of_peak
+                           pullback 2.5 ATR (current best)             all 48 markets      4616             28.29               0.09                   -0.00            0.09             0.10                 7.83    0.31                    -58.68
+                           pullback 2.5 ATR (current best) without short-rate futures      4363             26.74               0.03                   -0.02            0.08            -0.02                 2.59    0.11                    -57.65
+                                          pullback 1.5 ATR             all 48 markets      5845             35.82               0.10                    0.01            0.15             0.04                10.09    0.31                    -54.45
+                                          pullback 1.5 ATR without short-rate futures      5538             33.94               0.05                    0.01            0.14            -0.04                 5.25    0.17                    -55.82
+                 stochastic 5-session slow at or beyond 10             all 48 markets      2726             16.70               0.15                   -0.04           -0.01             0.33                 7.57    0.42                    -42.02
+                 stochastic 5-session slow at or beyond 10 without short-rate futures      2579             15.80               0.04                   -0.05            0.00             0.08                 1.81    0.12                    -35.55
+                 stochastic 5-session slow at or beyond 20             all 48 markets      4385             26.87               0.07                   -0.01            0.11             0.03                 5.25    0.24                    -56.85
+                 stochastic 5-session slow at or beyond 20 without short-rate futures      4145             25.40               0.07                    0.01            0.13             0.00                 5.01    0.24                    -46.11
+                 stochastic 5-session slow at or beyond 30             all 48 markets      5194             31.83               0.06                   -0.00            0.10             0.02                 5.80    0.22                    -67.57
+                 stochastic 5-session slow at or beyond 30 without short-rate futures      4898             30.01               0.05                    0.01            0.09             0.01                 4.69    0.19                    -61.14
+                stochastic 14-session slow at or beyond 10             all 48 markets      2756             16.89              -0.05                   -0.13           -0.07            -0.02                -2.24   -0.15                    -58.94
+                stochastic 14-session slow at or beyond 10 without short-rate futures      2637             16.16              -0.05                   -0.13           -0.06            -0.04                -2.24   -0.16                    -51.76
+                stochastic 14-session slow at or beyond 20             all 48 markets      3591             22.01               0.07                   -0.04            0.06             0.08                 4.59    0.24                    -58.44
+                stochastic 14-session slow at or beyond 20 without short-rate futures      3411             20.90               0.03                   -0.04            0.08            -0.03                 1.68    0.10                    -49.03
+                stochastic 14-session slow at or beyond 30             all 48 markets      4007             24.55               0.17                    0.04            0.13             0.21                12.18    0.53                    -41.10
+                stochastic 14-session slow at or beyond 30 without short-rate futures      3799             23.28               0.09                    0.03            0.13             0.04                 5.83    0.29                    -39.77
+ pullback 1.5 ATR and stochastic 5-session at or beyond 20             all 48 markets      4450             27.27               0.04                   -0.03            0.08             0.01                 3.47    0.15                    -68.69
+ pullback 1.5 ATR and stochastic 5-session at or beyond 20 without short-rate futures      4225             25.89               0.04                   -0.02            0.10            -0.02                 3.32    0.15                    -56.83
+ pullback 2.5 ATR and stochastic 5-session at or beyond 20             all 48 markets      4065             24.91               0.09                   -0.02            0.09             0.10                 6.88    0.32                    -55.66
+ pullback 2.5 ATR and stochastic 5-session at or beyond 20 without short-rate futures      3867             23.70               0.04                   -0.02            0.12            -0.06                 2.58    0.13                    -50.51
+pullback 1.5 ATR and stochastic 14-session at or beyond 20             all 48 markets      3773             23.12               0.05                   -0.05            0.05             0.06                 3.68    0.19                    -57.88
+pullback 1.5 ATR and stochastic 14-session at or beyond 20 without short-rate futures      3580             21.94               0.02                   -0.04            0.07            -0.03                 1.30    0.07                    -49.93
+pullback 2.5 ATR and stochastic 14-session at or beyond 20             all 48 markets      3852             23.60               0.04                   -0.06            0.09            -0.01                 2.67    0.14                    -50.01
+pullback 2.5 ATR and stochastic 14-session at or beyond 20 without short-rate futures      3659             22.42              -0.00                   -0.06            0.11            -0.12                -0.01   -0.00                    -50.00
+done 17s
