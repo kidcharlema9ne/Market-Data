@@ -1,0 +1,62 @@
+simulator self-test passed
+symbol filter self-test passed
+mode look252: ranking lookback 252 sessions; dollar-volume floor $3,000,000
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 3s
+11,108 common-stock segments ever liquid; 25s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,422,556 stock-days; eligible stocks per session median 2135, min 387, max 2998; 277s
+rank by 252-session return, SPY average 200 | top 10% | 6,272 signals, 4,537 taken
+rank by 252-session return, SPY average 200 | top 15% | 8,980 signals, 4,671 taken
+rank by 252-session return, SPY average 200 | top 20% | 11,622 signals, 4,642 taken
+rank by 252-session return, SPY average 200 | top 25% | 14,117 signals, 4,599 taken
+rank by 252-session return, SPY average 200 | top 30% | 16,517 signals, 4,483 taken
+
+==== look252 | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | 2000 to 2007 ====
+                                    setting  strongest share kept  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+rank by 252-session return, SPY average 200                  0.10    1197       38.18                   0.06               0.97          0.04          -36.43        -19.48         2 of 9                                71.78
+rank by 252-session return, SPY average 200                  0.15    1301       40.12                   0.32               5.17          0.20          -28.01         -9.68         2 of 9                                88.72
+rank by 252-session return, SPY average 200                  0.20    1342       38.82                   0.25               4.29          0.16          -26.88        -17.38         3 of 9                                94.61
+rank by 252-session return, SPY average 200                  0.25    1272       41.04                   0.50               7.98          0.31          -23.26         -8.77         3 of 9                               100.42
+rank by 252-session return, SPY average 200                  0.30    1260       41.90                   0.67              10.50          0.41          -18.03         -8.90         3 of 9                               101.95
+
+==== look252 | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | 2000 to 2007 ====
+                                    setting  strongest share kept  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+rank by 252-session return, SPY average 200                  0.10     776       38.79                  -0.08              -0.70         -0.05          -27.38        -16.43         2 of 9                                44.64
+rank by 252-session return, SPY average 200                  0.15     738       40.79                   0.33               3.04          0.21          -18.49        -10.04         3 of 9                                49.27
+rank by 252-session return, SPY average 200                  0.20     742       40.43                   0.27               2.60          0.18          -18.90        -12.75         2 of 9                                51.08
+rank by 252-session return, SPY average 200                  0.25     729       40.33                   0.35               3.32          0.23          -16.19         -6.80         3 of 9                                52.70
+rank by 252-session return, SPY average 200                  0.30     717       41.14                   0.46               4.18          0.31          -14.87         -6.96         4 of 9                                53.92
+
+==== look252 | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | 2008 to Aug 2021 ====
+                                    setting  strongest share kept  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+rank by 252-session return, SPY average 200                  0.10    3340       39.88                   0.78              19.27          0.51          -29.62        -19.32       11 of 14                               133.12
+rank by 252-session return, SPY average 200                  0.15    3370       39.82                   0.77              19.24          0.52          -33.33        -10.31        9 of 14                               143.86
+rank by 252-session return, SPY average 200                  0.20    3300       39.76                   0.90              21.83          0.59          -31.00        -13.03       10 of 14                               148.24
+rank by 252-session return, SPY average 200                  0.25    3327       38.98                   0.57              14.01          0.40          -33.18        -31.04        9 of 14                               150.66
+rank by 252-session return, SPY average 200                  0.30    3223       40.83                   0.90              21.64          0.60          -31.09        -19.98        9 of 14                               152.60
+
+==== look252 | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | 2008 to Aug 2021 ====
+                                    setting  strongest share kept  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+rank by 252-session return, SPY average 200                  0.10    1942       40.58                   0.74              10.67          0.50          -17.48        -11.45       10 of 14                                73.09
+rank by 252-session return, SPY average 200                  0.15    1926       39.30                   0.60               8.57          0.41          -20.73        -10.53       10 of 14                                75.23
+rank by 252-session return, SPY average 200                  0.20    1853       40.04                   0.83              11.44          0.56          -16.99         -9.50        9 of 14                                76.94
+rank by 252-session return, SPY average 200                  0.25    1836       39.22                   0.66               9.00          0.43          -27.23        -19.47        9 of 14                                77.16
+rank by 252-session return, SPY average 200                  0.30    1756       41.12                   0.73               9.51          0.51          -20.77        -12.24       10 of 14                                77.81
+
+==== look252 | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | whole 2000 to Aug 2021 ====
+                                    setting  strongest share kept  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+rank by 252-session return, SPY average 200                  0.10    4537       39.43                   0.59              12.43          0.37          -36.43        -19.48       13 of 22                               110.19
+rank by 252-session return, SPY average 200                  0.15    4671       39.91                   0.64              13.98          0.41          -28.01        -10.31       11 of 22                               123.25
+rank by 252-session return, SPY average 200                  0.20    4642       39.49                   0.71              15.28          0.46          -27.97        -17.38       13 of 22                               128.20
+rank by 252-session return, SPY average 200                  0.25    4599       39.55                   0.55              11.76          0.37          -23.26        -31.04       12 of 22                               131.88
+rank by 252-session return, SPY average 200                  0.30    4483       41.13                   0.84              17.47          0.54          -20.38        -19.98       12 of 22                               133.67
+
+==== look252 | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | whole 2000 to Aug 2021 ====
+                                    setting  strongest share kept  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+rank by 252-session return, SPY average 200                  0.10    2718       40.07                   0.51               6.42          0.33          -27.38        -16.43       12 of 22                                62.46
+rank by 252-session return, SPY average 200                  0.15    2664       39.71                   0.52               6.50          0.35          -19.14        -10.53       13 of 22                                65.53
+rank by 252-session return, SPY average 200                  0.20    2595       40.15                   0.67               8.13          0.44          -19.97        -12.75       11 of 22                                67.27
+rank by 252-session return, SPY average 200                  0.25    2565       39.53                   0.57               6.88          0.37          -22.57        -19.47       12 of 22                                68.02
+rank by 252-session return, SPY average 200                  0.30    2473       41.12                   0.65               7.51          0.44          -16.61        -12.24       14 of 22                                68.88
+done
