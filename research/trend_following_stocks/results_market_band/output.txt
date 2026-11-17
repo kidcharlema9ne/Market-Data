@@ -1,0 +1,163 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 2s
+11,108 common-stock segments ever liquid; 27s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 330s
+breadth: median 61.7% of eligible stocks above their own 200-session average; min 3.0%, max 94.5%
+top 20% | no market condition: 16,494 trades
+top 20% | SPY band 0%: 13,482 trades
+top 20% | SPY band 1%: 13,767 trades
+top 20% | SPY band 2%: 13,754 trades
+top 20% | SPY band 3%: 13,527 trades
+top 20% | SPY band 5%: 13,499 trades
+top 20% | breadth above 50%: 13,080 trades
+top 20% | breadth band 55/45%: 13,518 trades
+top 20% | breadth band 60/40%: 13,404 trades
+top 100% | no market condition: 53,224 trades
+top 100% | SPY band 0%: 45,185 trades
+top 100% | SPY band 1%: 45,851 trades
+top 100% | SPY band 2%: 45,604 trades
+top 100% | SPY band 3%: 44,362 trades
+top 100% | SPY band 5%: 44,196 trades
+top 100% | breadth above 50%: 44,047 trades
+top 100% | breadth band 55/45%: 44,961 trades
+top 100% | breadth band 60/40%: 44,381 trades
+
+==== how often each switch changes state (from the first session with a 200-session average) ====
+   market condition  switches per year  share of sessions on %
+        SPY band 0%               6.30                   70.30
+        SPY band 1%               2.84                   70.11
+        SPY band 2%               1.59                   69.23
+        SPY band 3%               0.82                   68.77
+        SPY band 5%               0.62                   69.82
+  breadth above 50%               8.51                   71.56
+breadth band 55/45%               2.07                   71.19
+breadth band 60/40%               1.59                   69.72
+
+==== top 20% | initial stop 4 ATR, trailing stop 5 ATR | long only | cap 200% | 2000 to 2007 ====
+   market condition  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown % years positive  worst year % first date account below zero
+no market condition    2400       38.50                   0.24               7.42          0.21          -97.87         6 of 9        -46.60                         never
+        SPY band 0%    1397       43.59                   0.74              12.82          0.44          -20.54         4 of 9         -9.52                         never
+        SPY band 1%    1400       44.50                   0.83              14.47          0.49          -18.52         5 of 9        -10.36                         never
+        SPY band 2%    1415       44.52                   0.82              14.52          0.49          -18.75         4 of 9         -9.78                         never
+        SPY band 3%    1456       42.86                   0.79              14.25          0.47          -20.49         4 of 9         -8.71                         never
+        SPY band 5%    1470       45.99                   1.03              18.55          0.60          -19.82         5 of 9        -15.26                         never
+  breadth above 50%    1804       38.58                   0.20               4.59          0.15          -65.38         5 of 9        -41.11                         never
+breadth band 55/45%    1839       39.37                   0.30               7.05          0.22          -65.29         4 of 9        -41.08                         never
+breadth band 60/40%    1748       39.47                   0.32               6.94          0.23          -69.38         5 of 9        -40.89                         never
+
+==== top 20% | initial stop 4 ATR, trailing stop 5 ATR | long only | cap 200% | 2008 to Aug 2021 (futures development years) ====
+   market condition  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown % years positive  worst year % first date account below zero
+no market condition    4329       40.52                   0.91              29.01          0.64          -75.79       10 of 14        -49.17                         never
+        SPY band 0%    3562       40.65                   0.96              25.52          0.67          -27.48       10 of 14        -17.63                         never
+        SPY band 1%    3564       40.40                   0.93              24.77          0.63          -26.86       10 of 14        -16.33                         never
+        SPY band 2%    3584       40.65                   0.87              23.28          0.59          -26.71       10 of 14        -16.90                         never
+        SPY band 3%    3541       41.34                   0.94              24.78          0.63          -25.83       10 of 14        -21.87                         never
+        SPY band 5%    3428       40.52                   0.93              23.83          0.61          -32.00       11 of 14        -26.60                         never
+  breadth above 50%    3330       40.36                   0.83              20.61          0.55          -25.64        9 of 14        -14.67                         never
+breadth band 55/45%    3394       40.95                   0.97              24.36          0.63          -29.08        9 of 14        -18.58                         never
+breadth band 60/40%    3380       40.95                   0.94              23.69          0.61          -27.85       10 of 14        -23.42                         never
+
+==== top 20% | initial stop 4 ATR, trailing stop 5 ATR | long only | cap 200% | whole in-sample 2000 to Aug 2021 ====
+   market condition  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown % years positive  worst year % first date account below zero
+no market condition    6729       39.80                   0.67              20.94          0.50          -97.87       16 of 22        -74.25                         never
+        SPY band 0%    4959       41.48                   0.90              20.77          0.59          -25.02       14 of 22        -17.63                         never
+        SPY band 1%    4964       41.56                   0.90              20.92          0.58          -21.48       15 of 22        -16.33                         never
+        SPY band 2%    4999       41.75                   0.86              20.00          0.56          -23.06       14 of 22        -16.90                         never
+        SPY band 3%    4997       41.79                   0.89              20.84          0.57          -24.52       14 of 22        -21.87                         never
+        SPY band 5%    4898       42.16                   0.96              21.86          0.60          -19.82       15 of 22        -26.60                         never
+  breadth above 50%    5134       39.74                   0.61              14.62          0.42          -65.38       14 of 22        -41.11                         never
+breadth band 55/45%    5233       40.40                   0.73              17.89          0.50          -65.29       13 of 22        -41.08                         never
+breadth band 60/40%    5128       40.44                   0.73              17.43          0.49          -69.38       14 of 22        -40.89                         never
+
+==== top 100% | initial stop 4 ATR, trailing stop 5 ATR | long only | cap 200% | 2000 to 2007 ====
+   market condition  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown % years positive  worst year % first date account below zero
+no market condition    2545       37.45                   0.06               2.86          0.09         -108.81         5 of 9        -47.11                    2002-10-09
+        SPY band 0%    1303       41.44                   0.50               8.17          0.35          -19.84         4 of 9        -18.04                         never
+        SPY band 1%    1253       42.62                   0.67              10.37          0.44          -18.95         3 of 9        -10.77                         never
+        SPY band 2%    1271       42.96                   0.70              11.47          0.47          -19.50         4 of 9         -9.79                         never
+        SPY band 3%    1266       42.73                   0.83              13.20          0.52          -19.07         5 of 9         -8.51                         never
+        SPY band 5%    1322       43.27                   0.90              14.99          0.57          -17.91         5 of 9        -13.56                         never
+  breadth above 50%    1691       38.50                   0.34               7.34          0.28          -45.56         5 of 9        -34.37                         never
+breadth band 55/45%    1722       37.86                   0.23               5.08          0.19          -62.88         4 of 9        -38.58                         never
+breadth band 60/40%    1691       36.43                   0.03               0.68          0.03          -78.36         4 of 9        -49.04                         never
+
+==== top 100% | initial stop 4 ATR, trailing stop 5 ATR | long only | cap 200% | 2008 to Aug 2021 (futures development years) ====
+   market condition  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown % years positive  worst year % first date account below zero
+no market condition    4527       38.59                   0.58              18.98          0.47          -98.50       10 of 14        -56.29                         never
+        SPY band 0%    3600       38.83                   0.55              14.83          0.45          -29.72        9 of 14        -39.90                         never
+        SPY band 1%    3521       38.74                   0.75              19.84          0.57          -34.24       10 of 14        -29.99                         never
+        SPY band 2%    3509       38.27                   0.55              14.06          0.42          -35.39        7 of 14        -21.21                         never
+        SPY band 3%    3448       39.41                   0.72              18.44          0.53          -30.15       10 of 14        -29.23                         never
+        SPY band 5%    3350       38.36                   0.68              16.93          0.50          -39.81       10 of 14        -36.57                         never
+  breadth above 50%    3076       41.25                   0.83              18.94          0.61          -27.30       11 of 14        -18.44                         never
+breadth band 55/45%    3170       41.07                   0.91              21.36          0.65          -28.52       11 of 14        -21.80                         never
+breadth band 60/40%    3127       39.40                   0.77              18.07          0.57          -29.33        9 of 14        -32.40                         never
+
+==== top 100% | initial stop 4 ATR, trailing stop 5 ATR | long only | cap 200% | whole in-sample 2000 to Aug 2021 ====
+   market condition  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown % years positive  worst year % first date account below zero
+no market condition    7072       38.18                   0.39              12.96          0.34         -108.81       15 of 22        -83.22                    2002-10-09
+        SPY band 0%    4903       39.53                   0.54              12.34          0.42          -21.87       13 of 22        -39.90                         never
+        SPY band 1%    4774       39.76                   0.73              16.30          0.52          -23.76       12 of 22        -29.99                         never
+        SPY band 2%    4780       39.52                   0.59              13.09          0.43          -26.41       11 of 22        -21.21                         never
+        SPY band 3%    4714       40.31                   0.75              16.48          0.52          -19.07       15 of 22        -29.23                         never
+        SPY band 5%    4672       39.75                   0.74              16.20          0.52          -21.53       15 of 22        -36.57                         never
+  breadth above 50%    4767       40.28                   0.66              14.60          0.50          -45.56       16 of 22        -34.37                         never
+breadth band 55/45%    4892       39.94                   0.67              15.28          0.50          -62.88       15 of 22        -38.58                         never
+breadth band 60/40%    4818       38.36                   0.51              11.57          0.39          -78.36       12 of 22        -49.04                         never
+
+==== named market declines, top 20%: strategy profit % of $300k (worst drop inside window %) | SPY change % (worst drop %) ====
+episode             2000 to 2002 decline 2007 to 2009 decline 2011 summer decline 2015 to 2016 decline late 2018 decline     2020 crash
+market condition                                                                                                                       
+no market condition        -83.3 (-97.1)      -103.8 (-113.0)       -56.8 (-57.5)        -48.8 (-58.5)     -53.7 (-58.9)  -56.1 (-60.2)
+SPY band 0%                  -1.7 (-5.6)        -22.9 (-32.1)       -39.4 (-40.0)        -29.7 (-36.5)     -35.6 (-40.6)  -39.6 (-43.2)
+SPY band 1%                  -3.0 (-7.1)        -21.8 (-31.1)       -39.0 (-40.6)        -34.6 (-39.7)     -34.2 (-38.6)  -38.4 (-41.6)
+SPY band 2%                  -3.1 (-7.1)        -24.5 (-33.9)       -40.8 (-42.2)        -34.5 (-38.8)     -34.4 (-38.6)  -39.8 (-44.1)
+SPY band 3%                    0.0 (0.0)        -23.4 (-34.8)       -40.4 (-41.4)        -22.0 (-32.0)     -33.9 (-38.6)  -48.9 (-52.5)
+SPY band 5%                    0.0 (0.0)        -25.1 (-35.2)       -40.5 (-41.3)        -25.4 (-34.2)     -46.0 (-50.5)  -49.0 (-53.5)
+breadth above 50%          -65.0 (-65.7)        -20.4 (-28.8)       -32.3 (-33.8)        -17.5 (-23.9)     -25.7 (-31.6)  -26.6 (-28.7)
+breadth band 55/45%        -64.1 (-67.5)        -23.5 (-34.0)       -41.0 (-41.9)        -13.9 (-24.2)     -25.8 (-30.2)  -34.9 (-37.6)
+breadth band 60/40%        -68.9 (-70.5)        -24.0 (-30.9)       -41.9 (-42.0)        -27.1 (-34.3)     -34.8 (-40.1)  -40.8 (-42.6)
+SPY: {'2000 to 2002 decline': '-49.1 (-49.1)', '2007 to 2009 decline': '-56.5 (-56.5)', '2011 summer decline': '-19.4 (-19.4)', '2015 to 2016 decline': '-14.4 (-14.4)', 'late 2018 decline': '-20.2 (-20.2)', '2020 crash': '-34.1 (-34.1)'}
+
+==== named market declines, top 100%: strategy profit % of $300k (worst drop inside window %) | SPY change % (worst drop %) ====
+episode             2000 to 2002 decline 2007 to 2009 decline 2011 summer decline 2015 to 2016 decline late 2018 decline     2020 crash
+market condition                                                                                                                       
+no market condition      -100.3 (-111.4)      -126.8 (-133.7)       -53.8 (-55.1)        -44.3 (-51.2)     -52.3 (-55.5)  -53.6 (-55.9)
+SPY band 0%                 -3.1 (-10.6)        -20.3 (-25.4)       -40.1 (-42.5)        -44.6 (-46.6)     -29.4 (-33.3)  -30.6 (-35.0)
+SPY band 1%                 -0.7 (-11.9)        -23.3 (-29.9)       -38.0 (-39.5)        -26.0 (-39.3)     -29.6 (-32.6)  -37.4 (-41.1)
+SPY band 2%                 -5.9 (-13.2)        -26.9 (-29.8)       -39.1 (-40.8)        -39.8 (-48.4)     -43.3 (-45.7)  -33.4 (-35.9)
+SPY band 3%                    0.0 (0.0)        -23.0 (-29.6)       -45.0 (-46.8)        -25.3 (-31.7)     -31.2 (-36.2)  -41.2 (-44.9)
+SPY band 5%                    0.0 (0.0)        -27.1 (-31.0)       -45.4 (-46.6)        -22.2 (-31.0)     -47.3 (-50.5)  -38.0 (-44.5)
+breadth above 50%          -42.4 (-47.9)        -16.9 (-21.6)       -28.6 (-30.0)        -15.9 (-23.2)     -24.9 (-28.0)  -22.7 (-24.2)
+breadth band 55/45%        -61.8 (-64.1)        -17.2 (-28.2)       -40.0 (-40.4)        -17.9 (-26.9)     -26.4 (-29.3)  -32.6 (-35.8)
+breadth band 60/40%        -77.8 (-79.6)        -23.4 (-26.7)       -35.7 (-35.9)        -31.0 (-37.4)     -27.8 (-30.5)  -32.7 (-35.9)
+SPY: {'2000 to 2002 decline': '-49.1 (-49.1)', '2007 to 2009 decline': '-56.5 (-56.5)', '2011 summer decline': '-19.4 (-19.4)', '2015 to 2016 decline': '-14.4 (-14.4)', 'late 2018 decline': '-20.2 (-20.2)', '2020 crash': '-34.1 (-34.1)'}
+
+==== profit by calendar year, percent of $300k ====
+      top 20% | no market condition  top 20% | SPY band 0%  top 20% | SPY band 1%  top 20% | SPY band 2%  top 20% | SPY band 3%  top 20% | SPY band 5%  top 20% | breadth above 50%  top 20% | breadth band 55/45%  top 20% | breadth band 60/40%  top 100% | no market condition  top 100% | SPY band 0%  top 100% | SPY band 1%  top 100% | SPY band 2%  top 100% | SPY band 3%  top 100% | SPY band 5%  top 100% | breadth above 50%  top 100% | breadth band 55/45%  top 100% | breadth band 60/40%
+2000                            2.1                    0.0                    0.0                    0.0                    0.0                    0.0                         -0.5                            0.0                            0.0                            -2.2                     0.0                     0.0                     0.0                     0.0                     0.0                           5.5                             0.0                             0.0
+2001                          -46.6                    0.0                    0.0                    0.0                    0.0                    0.0                        -41.1                          -41.1                          -40.9                           -44.0                     0.0                     0.0                     0.0                     0.0                     0.0                         -34.4                           -38.6                           -49.0
+2002                          -42.7                   -1.7                   -3.0                   -3.1                    0.0                    0.0                        -23.4                          -23.0                          -28.0                           -47.1                    -3.1                    -0.7                    -5.9                     0.0                     0.0                         -13.5                           -23.2                           -28.8
+2003                           77.2                   64.7                   65.6                   65.1                   68.2                   62.1                         54.0                           66.6                           61.1                            64.5                    52.0                    57.3                    59.3                    62.2                    72.8                          66.7                            62.5                            49.0
+2004                           29.3                    5.0                    7.4                   12.8                   17.1                   33.4                         11.3                           14.8                           22.1                            19.2                    18.1                    26.8                    24.8                    18.3                    24.8                          15.3                            19.6                            21.1
+2005                           18.3                    6.9                    0.3                    8.5                    8.0                   22.9                          1.2                           15.4                           10.9                             9.1                   -18.0                    -9.3                    -1.5                     1.8                     8.3                          13.7                            11.5                             9.5
+2006                           37.2                   43.9                   45.0                   46.0                   36.6                   45.0                         39.8                           33.9                           35.5                            34.7                    15.5                    20.2                    23.9                    24.9                    24.6                          26.0                            19.7                            29.3
+2007                           10.1                   -6.0                   11.7                   -2.4                   -6.3                    1.3                          1.6                           -1.6                            7.0                            15.8                     9.3                    -0.0                     1.8                     7.8                     3.9                         -17.0                            -5.7                           -18.6
+2008                          -74.3                   -9.8                  -10.5                   -9.9                   -8.8                  -14.0                         -6.6                           -8.7                          -11.4                           -83.2                    -8.3                    -9.8                   -13.1                    -9.3                   -14.9                          -5.3                            -4.9                            -6.0
+2009                           67.9                   47.6                   52.8                   57.9                   56.5                   35.9                         56.1                           58.0                           58.1                            52.5                    36.6                    37.7                    32.6                    42.4                    18.5                          42.3                            46.4                            37.6
+2010                           23.6                   14.8                   12.4                   11.6                   17.8                   12.0                         20.3                           18.0                           30.0                            31.6                    16.5                     6.0                     8.6                    14.3                    14.9                          14.0                            23.0                            18.9
+2011                           -5.2                  -14.0                   -5.1                  -16.9                  -21.9                  -13.6                        -14.7                          -18.6                          -23.4                           -26.1                   -17.2                   -30.0                   -21.2                   -29.2                   -36.6                          -6.9                           -21.8                           -18.7
+2012                           28.3                    8.5                   13.6                    6.4                   12.6                   10.8                         -0.9                            6.1                           -0.6                            14.9                     5.3                     7.3                    25.6                    17.3                     3.9                           5.2                             0.8                            10.7
+2013                          102.8                  102.7                   86.0                   87.2                  105.3                  104.3                         80.2                           94.6                           98.7                            97.2                    83.9                    94.8                    88.2                    84.8                    78.9                          69.4                            79.6                            85.1
+2014                            4.6                    8.6                    1.9                    8.7                    9.0                   14.2                          1.8                           -6.0                            7.8                            12.9                    -6.2                    -4.3                    -5.7                     8.2                    10.3                           4.8                             8.1                            -4.5
+2015                          -16.3                  -17.6                  -16.1                  -14.4                  -17.6                  -18.2                        -14.4                           -6.5                          -22.5                           -16.7                   -39.9                   -17.0                   -20.8                   -15.0                   -17.9                         -18.4                           -16.8                           -32.4
+2016                           20.1                   16.5                    9.3                   16.7                   21.3                   10.1                         15.0                           24.6                           23.2                            11.6                    18.1                    14.1                    -2.3                     8.7                    22.7                          16.0                            20.7                            21.7
+2017                           36.0                   47.4                   33.4                   38.9                   37.3                   50.4                         45.4                           43.4                           43.5                            21.3                    21.0                    24.0                    40.4                    22.1                    35.5                          41.2                            55.3                            39.8
+2018                          -23.7                   -9.4                  -16.3                   -9.1                   -8.9                  -26.6                         -9.9                           -3.5                           -9.5                           -27.1                    -4.1                    -2.6                   -15.5                    -4.5                   -14.8                           4.2                             2.5                            -1.4
+2019                           34.0                   29.3                   13.6                   22.0                   20.3                   24.7                          9.9                           10.9                            5.8                            27.7                    10.7                    12.1                    -2.3                    18.3                    17.3                           2.6                            10.5                            -0.2
+2020                           84.2                   41.3                   82.0                   60.7                   52.8                   60.9                         37.1                           36.6                           38.9                            70.2                    34.0                    45.7                    30.7                    25.8                    11.5                          32.6                            27.9                            22.2
+2021                           84.7                   69.1                   67.2                   44.7                   50.2                   55.5                         53.1                           71.7                           69.3                            42.5                    42.1                    79.1                    34.8                    56.4                    85.8                          51.0                            52.2                            64.2
+done
