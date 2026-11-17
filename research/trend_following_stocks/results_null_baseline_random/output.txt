@@ -1,0 +1,158 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 3s
+11,108 common-stock segments ever liquid; 35s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 398s
+signal recomputation matches the original on 396 segments (pullback 2.5, threshold 0.5)
+reference rule (efficiency ratio 0.50, 1.5 ATR pullback): 18,978 signals
+REPRODUCTION CHECK vs project doc (whole period, cap 200%: +22.9% / Sharpe 0.64 / -22%): got +22.9% / 0.64 / -22%
+eligible stock-days for a random entry: 1,639,120 in 6,616 stocks; target trades 18,978
+calibration 0: chance per eligible day 0.023156 -> 21,648 trades
+calibration 1: chance per eligible day 0.020300 -> 20,012 trades
+calibration 2: chance per eligible day 0.019251 -> 19,359 trades
+calibration 3: chance per eligible day 0.018873 -> 19,126 trades
+chance per eligible day used: 0.018873
+random draw 1/30: 19,238 trades
+random draw 2/30: 19,036 trades
+random draw 3/30: 19,015 trades
+random draw 4/30: 19,128 trades
+random draw 5/30: 19,043 trades
+random draw 6/30: 19,051 trades
+random draw 7/30: 19,018 trades
+random draw 8/30: 19,100 trades
+random draw 9/30: 19,105 trades
+random draw 10/30: 19,156 trades
+random draw 11/30: 19,091 trades
+random draw 12/30: 19,055 trades
+random draw 13/30: 18,943 trades
+random draw 14/30: 19,082 trades
+random draw 15/30: 19,032 trades
+random draw 16/30: 19,225 trades
+random draw 17/30: 19,070 trades
+random draw 18/30: 19,094 trades
+random draw 19/30: 19,140 trades
+random draw 20/30: 19,115 trades
+random draw 21/30: 19,120 trades
+random draw 22/30: 19,099 trades
+random draw 23/30: 18,959 trades
+random draw 24/30: 19,052 trades
+random draw 25/30: 19,027 trades
+random draw 26/30: 18,925 trades
+random draw 27/30: 18,987 trades
+random draw 28/30: 18,834 trades
+random draw 29/30: 18,755 trades
+random draw 30/30: 19,117 trades
+
+==== random entries (30 draws, ~18,978 trades each) vs the reference rule | long only | strongest 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | 2000 to 2007 ====
+                                 measure  random mean  random std  random min  random 5th pct  random median  random 95th pct  random max  reference rule  share of random draws at or above the reference
+                            trades taken      1583.97       24.43     1538.00         1545.90        1587.50          1619.15     1632.00         1331.00                                             1.00
+                              win rate %        40.60        1.18       38.48           38.80          40.69            42.36       42.66           43.35                                             0.00
+                   average ATR per trade         0.70        0.11        0.48            0.51           0.70             0.85        0.94            0.90                                             0.03
+SPY move over the same holds (ATR units)         0.29        0.02        0.25            0.26           0.29             0.32        0.32            0.30                                             0.43
+             excess over SPY (ATR units)         0.40        0.11        0.21            0.22           0.41             0.59        0.63            0.61                                             0.03
+                   average sessions held        50.92        0.69       49.11           50.09          50.77            52.12       52.29           50.84                                              NaN
+                       profit per year %        13.81        2.03        9.79           10.59          13.87            16.76       18.11           14.69                                             0.33
+                            Sharpe ratio         0.44        0.06        0.31            0.34           0.44             0.53        0.57            0.50                                             0.10
+                          max drawdown %       -23.83        1.88      -27.39          -26.66         -23.68           -21.04      -19.74          -22.48                                              NaN
+                            worst year %       -20.63        2.49      -24.76          -24.05         -21.22           -16.48      -15.66          -10.12                                              NaN
+
+==== random entries (30 draws, ~18,978 trades each) vs the reference rule | long only | strongest 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | 2000 to 2007 ====
+                                 measure  random mean  random std  random min  random 5th pct  random median  random 95th pct  random max  reference rule  share of random draws at or above the reference
+                            trades taken       869.03       24.69      820.00          827.15         870.00           904.05      914.00          725.00                                             1.00
+                              win rate %        39.82        1.51       37.12           37.28          40.09            41.77       42.67           44.69                                             0.00
+                   average ATR per trade         0.61        0.24        0.15            0.27           0.61             0.94        1.14            1.16                                             0.00
+SPY move over the same holds (ATR units)         0.26        0.02        0.21            0.23           0.26             0.29        0.32            0.29                                             0.10
+             excess over SPY (ATR units)         0.35        0.23       -0.06            0.02           0.37             0.66        0.88            0.87                                             0.03
+                   average sessions held        50.90        1.41       48.35           49.06          50.84            53.13       54.30           52.60                                              NaN
+                       profit per year %         6.61        2.43        2.02            2.90           6.58             9.80       11.93           10.22                                             0.07
+                            Sharpe ratio         0.38        0.14        0.12            0.17           0.38             0.57        0.66            0.62                                             0.03
+                          max drawdown %       -19.10        2.32      -24.72          -23.28         -18.98           -15.67      -14.71          -13.98                                              NaN
+                            worst year %       -10.68        1.47      -13.39          -12.78         -11.02            -8.68       -7.09           -4.91                                              NaN
+
+==== random entries (30 draws, ~18,978 trades each) vs the reference rule | long only | strongest 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | 2008 to Aug 2021 ====
+                                 measure  random mean  random std  random min  random 5th pct  random median  random 95th pct  random max  reference rule  share of random draws at or above the reference
+                            trades taken      3840.23       57.50     3666.00         3753.15        3837.50          3919.00     3957.00         3501.00                                             1.00
+                              win rate %        39.97        0.62       38.23           39.25          39.92            41.20       41.38           41.10                                             0.10
+                   average ATR per trade         0.77        0.10        0.51            0.62           0.78             0.94        1.00            1.06                                             0.00
+SPY move over the same holds (ATR units)         0.60        0.02        0.58            0.58           0.60             0.63        0.64            0.66                                             0.00
+             excess over SPY (ATR units)         0.17        0.10       -0.07            0.04           0.18             0.31        0.42            0.40                                             0.03
+                   average sessions held        52.31        0.51       51.35           51.52          52.37            53.16       53.35           52.30                                              NaN
+                       profit per year %        21.84        2.82       14.61           17.83          21.96            26.20       28.37           27.74                                             0.03
+                            Sharpe ratio         0.54        0.06        0.37            0.45           0.55             0.63        0.67            0.70                                             0.00
+                          max drawdown %       -36.98        2.20      -40.66          -40.04         -37.18           -33.11      -31.67          -27.91                                              NaN
+                            worst year %       -25.77        6.12      -36.07          -33.40         -27.31           -14.19      -13.39          -13.81                                              NaN
+
+==== random entries (30 draws, ~18,978 trades each) vs the reference rule | long only | strongest 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | 2008 to Aug 2021 ====
+                                 measure  random mean  random std  random min  random 5th pct  random median  random 95th pct  random max  reference rule  share of random draws at or above the reference
+                            trades taken      2139.97       40.14     2013.00         2091.75        2138.00          2195.85     2215.00         1921.00                                             1.00
+                              win rate %        39.01        0.97       36.96           37.75          38.99            40.52       41.57           40.71                                             0.03
+                   average ATR per trade         0.64        0.13        0.37            0.46           0.66             0.79        0.97            0.96                                             0.03
+SPY move over the same holds (ATR units)         0.52        0.02        0.48            0.49           0.52             0.54        0.57            0.60                                             0.00
+             excess over SPY (ATR units)         0.12        0.12       -0.14           -0.04           0.13             0.25        0.44            0.36                                             0.03
+                   average sessions held        51.61        0.68       50.51           50.60          51.55            52.65       52.80           52.29                                              NaN
+                       profit per year %        10.09        1.96        5.83            7.35          10.39            12.36       15.31           13.76                                             0.03
+                            Sharpe ratio         0.46        0.08        0.27            0.35           0.47             0.56        0.66            0.59                                             0.03
+                          max drawdown %       -27.12        2.49      -33.01          -31.55         -26.64           -24.11      -23.27          -17.93                                              NaN
+                            worst year %       -16.31        4.36      -24.80          -22.08         -16.29           -10.19       -8.76           -9.15                                              NaN
+
+==== random entries (30 draws, ~18,978 trades each) vs the reference rule | long only | strongest 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | whole 2000 to Aug 2021 ====
+                                 measure  random mean  random std  random min  random 5th pct  random median  random 95th pct  random max  reference rule  share of random draws at or above the reference
+                            trades taken      5424.20       65.10     5239.00         5335.55        5419.50          5523.80     5562.00         4832.00                                              1.0
+                              win rate %        40.15        0.64       38.51           39.35          40.17            41.32       41.58           41.72                                              0.0
+                   average ATR per trade         0.75        0.08        0.50            0.63           0.76             0.87        0.90            1.02                                              0.0
+SPY move over the same holds (ATR units)         0.51        0.01        0.48            0.49           0.51             0.54        0.54            0.56                                              0.0
+             excess over SPY (ATR units)         0.24        0.08        0.01            0.13           0.25             0.34        0.40            0.46                                              0.0
+                   average sessions held        51.90        0.41       50.83           51.20          52.00            52.46       52.71           51.90                                              NaN
+                       profit per year %        18.84        1.98       12.81           16.16          19.16            21.53       22.77           22.86                                              0.0
+                            Sharpe ratio         0.51        0.05        0.35            0.44           0.52             0.56        0.57            0.64                                              0.0
+                          max drawdown %       -28.11        3.38      -36.27          -34.33         -28.46           -23.14      -21.01          -22.48                                              NaN
+                            worst year %       -27.57        3.98      -36.07          -33.40         -27.94           -21.32      -19.39          -13.81                                              NaN
+
+==== random entries (30 draws, ~18,978 trades each) vs the reference rule | long only | strongest 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | whole 2000 to Aug 2021 ====
+                                 measure  random mean  random std  random min  random 5th pct  random median  random 95th pct  random max  reference rule  share of random draws at or above the reference
+                            trades taken      3009.00       51.43     2887.00         2921.60        3016.00          3081.75     3085.00         2646.00                                              1.0
+                              win rate %        39.24        0.75       37.92           38.13          39.24            40.28       41.16           41.80                                              0.0
+                   average ATR per trade         0.63        0.12        0.37            0.47           0.61             0.80        0.83            1.01                                              0.0
+SPY move over the same holds (ATR units)         0.44        0.02        0.42            0.42           0.44             0.47        0.48            0.51                                              0.0
+             excess over SPY (ATR units)         0.19        0.11       -0.07            0.04           0.17             0.34        0.37            0.50                                              0.0
+                   average sessions held        51.40        0.69       50.12           50.49          51.35            52.38       53.00           52.38                                              NaN
+                       profit per year %         8.79        1.57        5.26            6.72           8.56            11.06       11.62           12.44                                              0.0
+                            Sharpe ratio         0.43        0.07        0.26            0.33           0.42             0.54        0.55            0.59                                              0.0
+                          max drawdown %       -24.59        4.33      -33.67          -31.64         -24.15           -19.71      -16.88          -15.50                                              NaN
+                            worst year %       -16.96        3.65      -24.80          -22.08         -16.29           -12.20      -10.93           -9.15                                              NaN
+
+==== random draws, whole period, cap 200% ====
+ seed  signals  trades taken  win rate %  average ATR per trade  SPY move over the same holds (ATR units)  excess over SPY (ATR units)  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+    1    19238          5416       41.54                   0.81                                      0.51                         0.30                  52.10              20.46          0.55          -28.41        -24.76       15 of 22                               142.33
+    2    19036          5410       40.22                   0.78                                      0.51                         0.27                  52.18              19.57          0.54          -28.88        -33.45       15 of 22                               143.04
+    3    19015          5432       40.56                   0.76                                      0.52                         0.24                  52.03              19.23          0.52          -23.09        -30.39       15 of 22                               142.98
+    4    19128          5468       39.90                   0.67                                      0.48                         0.19                  51.48              17.07          0.47          -26.43        -29.59       13 of 22                               143.32
+    5    19043          5515       38.51                   0.50                                      0.49                         0.01                  50.83              12.81          0.35          -35.97        -36.07       14 of 22                               142.64
+    6    19051          5388       40.39                   0.80                                      0.53                         0.27                  52.35              19.98          0.54          -29.47        -25.86       14 of 22                               142.29
+    7    19018          5392       40.11                   0.75                                      0.50                         0.25                  52.25              18.76          0.51          -27.01        -25.86       15 of 22                               142.64
+    8    19100          5446       39.59                   0.90                                      0.50                         0.40                  51.98              22.77          0.57          -29.73        -24.71       14 of 22                               142.26
+    9    19105          5432       39.45                   0.77                                      0.52                         0.25                  52.02              19.29          0.51          -32.31        -28.36       13 of 22                               142.74
+   10    19156          5491       40.39                   0.80                                      0.50                         0.30                  51.79              20.34          0.54          -28.41        -27.51       15 of 22                               142.79
+   11    19091          5358       41.58                   0.81                                      0.52                         0.28                  52.11              20.05          0.53          -27.16        -33.35       16 of 22                               141.86
+   12    19055          5380       40.28                   0.80                                      0.52                         0.28                  51.89              20.05          0.55          -28.81        -29.63       14 of 22                               142.44
+   13    18943          5436       39.61                   0.65                                      0.52                         0.13                  51.65              16.41          0.45          -31.05        -32.25       14 of 22                               142.55
+   14    19082          5468       39.54                   0.65                                      0.50                         0.15                  51.62              16.49          0.45          -36.27        -23.20       14 of 22                               142.73
+   15    19032          5480       40.04                   0.71                                      0.50                         0.21                  51.63              18.17          0.50          -26.02        -30.47       14 of 22                               142.50
+   16    19225          5531       39.74                   0.69                                      0.50                         0.19                  51.50              17.76          0.47          -31.08        -31.89       13 of 22                               143.01
+   17    19070          5425       40.59                   0.88                                      0.52                         0.37                  52.00              22.28          0.56          -25.50        -30.32       15 of 22                               142.59
+   18    19094          5404       39.27                   0.68                                      0.51                         0.17                  51.34              17.05          0.47          -25.50        -23.85       15 of 22                               142.46
+   19    19140          5405       39.85                   0.73                                      0.53                         0.20                  52.04              18.46          0.50          -26.54        -28.68       14 of 22                               142.76
+   20    19115          5376       40.62                   0.80                                      0.51                         0.29                  52.44              19.92          0.53          -23.20        -25.11       15 of 22                               142.67
+   21    19120          5357       40.40                   0.70                                      0.52                         0.18                  52.29              17.44          0.48          -31.10        -28.37       15 of 22                               142.51
+   22    19099          5386       39.62                   0.76                                      0.51                         0.25                  52.14              19.03          0.51          -28.55        -19.84       15 of 22                               143.32
+   23    18959          5399       40.27                   0.78                                      0.53                         0.25                  51.84              19.55          0.53          -28.50        -30.05       15 of 22                               142.33
+   24    19052          5493       40.05                   0.80                                      0.50                         0.29                  51.45              20.29          0.53          -25.30        -24.20       15 of 22                               141.98
+   25    19027          5562       39.91                   0.62                                      0.50                         0.12                  51.10              15.95          0.43          -29.09        -28.87       14 of 22                               142.53
+   26    18925          5419       40.67                   0.76                                      0.51                         0.25                  52.01              19.03          0.51          -26.00        -23.13       15 of 22                               142.47
+   27    18987          5420       40.44                   0.76                                      0.51                         0.25                  52.07              19.09          0.52          -21.01        -27.47       14 of 22                               143.13
+   28    18834          5480       40.64                   0.68                                      0.51                         0.17                  51.76              17.33          0.47          -29.51        -27.15       14 of 22                               142.58
+   29    18755          5239       41.04                   0.85                                      0.54                         0.31                  52.48              20.61          0.57          -28.75        -19.39       15 of 22                               142.51
+   30    19117          5318       39.66                   0.80                                      0.54                         0.27                  52.71              19.89          0.54          -24.57        -23.42       15 of 22                               142.36
+done
