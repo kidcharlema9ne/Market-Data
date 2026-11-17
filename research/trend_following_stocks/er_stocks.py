@@ -181,7 +181,7 @@ def build(path):
     cal = np.unique(date_i)
     print(f"{len(sym):,} rows; {len(uni):,} symbols; {len(cal)} sessions {(EPOCH + pd.Timedelta(days=int(cal[0]))).date()} to {(EPOCH + pd.Timedelta(days=int(cal[-1]))).date()}; load {time.time()-t0:.0f}s", flush=True)
     first_i = (FIRST_TRADE - EPOCH).days
-    V = {name: dict(sess_e=[], sess_x=[], d=[], px_e=[], a0=[], res=[], held=[], how=[], sym=[], f_sess=[], f_incr=[], f_tid=[]) for name in VERSIONS}
+    V = {name: dict(sess_e=[], sess_x=[], d=[], px_e=[], px_x=[], a0=[], res=[], held=[], how=[], sym=[], f_sess=[], f_incr=[], f_tid=[]) for name in VERSIONS}
     n_seg = n_liq_seg = n_cand = 0
     for code, q, s, so, sh, sl, sc, sv in segments(sym, date_i, o, h, l, c, v):
         n_seg += 1
@@ -207,18 +207,18 @@ def build(path):
                 seq = np.r_[entry, np.asarray(marks, float), xpx]
                 incr = d * np.diff(seq)
                 tid = len(R["d"])
-                R["sess_e"].append(int(s[e])); R["sess_x"].append(int(s[x])); R["d"].append(d); R["px_e"].append(entry); R["a0"].append(a0)
+                R["sess_e"].append(int(s[e])); R["sess_x"].append(int(s[x])); R["d"].append(d); R["px_e"].append(entry); R["px_x"].append(xpx); R["a0"].append(a0)
                 R["res"].append(d * (xpx - entry) / a0 - COST_RT); R["held"].append(x - e + 1); R["how"].append(how); R["sym"].append(int(code))
                 R["f_sess"].append(s[e:x + 1]); R["f_incr"].append(incr); R["f_tid"].append(np.full(len(incr), tid))
     print(f"{n_seg:,} stock segments; {n_liq_seg:,} ever liquid; {n_cand:,} pullback entries passing the $3M floor; {time.time()-t0:.0f}s", flush=True)
     for name, R in V.items():
-        for k in ("sess_e", "sess_x", "d", "px_e", "a0", "res", "held", "sym"):
-            R[k] = np.asarray(R[k], dtype=float if k in ("px_e", "a0", "res") else np.int64)
+        for k in ("sess_e", "sess_x", "d", "px_e", "px_x", "a0", "res", "held", "sym"):
+            R[k] = np.asarray(R[k], dtype=float if k in ("px_e", "px_x", "a0", "res") else np.int64)
         R["how"] = np.asarray(R["how"])
         for k in ("f_sess", "f_incr", "f_tid"):
             R[k] = np.concatenate(R[k]) if R[k] else np.array([])
         print(f"  {name}: {len(R['d']):,} trades (one position per stock, before any account limit)", flush=True)
-    return V, cal
+    return V, cal, uni
 
 
 def portfolio(R, cal, sides, tp, cap, rng_key):
@@ -267,7 +267,7 @@ def wstats(pnl, dates, lo, hi, open_n=None, gross=None):
         longest = max(longest, cur)
     st = {"profit per year %": (eq[-1] - CAPITAL) / CAPITAL * 100 / (len(u) / 252.0), "Sharpe ratio": r.mean() / r.std() * np.sqrt(252) if r.std() > 0 else np.nan,
           "max drawdown %": ((eq - peak) / peak).min() * 100, "worst year %": cal_y.min(), "best year %": cal_y.max(), "years positive": f"{int((cal_y > 0).sum())} of {len(cal_y)}",
-          "longest time under water (sessions)": longest}
+          "longest time under water (sessions)": longest, "first date account below zero": (str(pd.DatetimeIndex(dates[sel])[np.where(eq[1:] <= 0)[0][0]].date()) if (eq[1:] <= 0).any() else "never")}
     if open_n is not None:
         st["average open positions"] = float(open_n[sel].mean()); st["most open positions"] = int(open_n[sel].max())
         st["average position value % of account"] = float(gross[sel].mean() / CAPITAL * 100); st["most position value % of account"] = float(gross[sel].max() / CAPITAL * 100)
@@ -278,7 +278,7 @@ def main():
     prices_path, out_dir = sys.argv[1], Path(sys.argv[2])
     out_dir.mkdir(parents=True, exist_ok=True)
     selftest()
-    V, cal = build(prices_path)
+    V, cal, uni = build(prices_path)
     dates = EPOCH + pd.to_timedelta(cal, unit="D")
     dates = pd.DatetimeIndex(dates)
     WIN = {"2000 to 2007": (pd.Timestamp("2000-01-01"), MAIN_START - pd.Timedelta(days=1)), "2008 to Aug 2021 (futures development years)": (MAIN_START, END), "whole in-sample 2000 to Aug 2021": (pd.Timestamp("2000-01-01"), END)}
@@ -325,6 +325,30 @@ def main():
                                "closed by time limit %": float((R["how"][m] == "time limit").mean() * 100)})
     PT = pd.DataFrame(pt)
     PT.to_csv(out_dir / "per_trade_before_sizing.csv", index=False)
+
+    # ---- diagnostics: extreme trades, per-year trade averages, outliers
+    ext, yr_rows, pct_rows = [], [], []
+    for vname, R in V.items():
+        ed = dates[R["sess_e"]]; xd = dates[R["sess_x"]]
+        T = pd.DataFrame({"version": vname[:11], "stock": uni[R["sym"]], "direction": np.where(R["d"] > 0, "long", "short"), "entry date": ed.date, "exit date": xd.date, "entry price": R["px_e"], "exit price": R["px_x"],
+                          "ATR in dollars": R["a0"], "ATR percent of price": R["a0"] / R["px_e"] * 100, "result in ATR": R["res"], "sessions held": R["held"]})
+        ext.append(T.nsmallest(20, "result in ATR")); ext.append(T.nlargest(20, "result in ATR"))
+        q = np.percentile(R["res"], [0.1, 1, 5, 25, 50, 75, 95, 99, 99.9])
+        pct_rows.append({"version": vname[:11], "trades": len(R["res"]), **{f"percentile {p_}": v_ for p_, v_ in zip([0.1, 1, 5, 25, 50, 75, 95, 99, 99.9], q)}, "worse than -5 ATR": int((R["res"] < -5).sum()), "worse than -20 ATR": int((R["res"] < -20).sum()),
+                         "better than +20 ATR": int((R["res"] > 20).sum()), "better than +50 ATR": int((R["res"] > 50).sum()), "median ATR percent of price": float(np.median(R["a0"] / R["px_e"] * 100))})
+        T["year"] = pd.DatetimeIndex(ed).year
+        for sd_name, sd_ in (("long", 1), ("short", -1)):
+            g = T[T.direction == sd_name].groupby("year")["result in ATR"].agg(["count", "mean"]).rename(columns={"count": f"{sd_name} trades", "mean": f"{sd_name} average ATR"})
+            yr_rows.append(g.add_prefix(vname[:11] + " | "))
+    pd.concat(ext).to_csv(out_dir / "extreme_trades.csv", index=False)
+    YR = pd.concat(yr_rows, axis=1); YR.round(3).to_csv(out_dir / "per_trade_by_year.csv")
+    PCT = pd.DataFrame(pct_rows); PCT.round(2).to_csv(out_dir / "trade_result_percentiles.csv", index=False)
+    print("\n==== distribution of trade results in ATR (net of cost) ===="); print(PCT.round(2).to_string(index=False))
+    print("\n==== 20 worst and 20 best trades per version ====")
+    print(pd.concat(ext).round(2).to_string(index=False))
+    print("\n==== average ATR per trade and trade count by entry year ===="); print(YR.round(2).to_string())
+    print("\n==== date the account first goes below zero (fixed $300k sizing, whole window) ====")
+    print(S[(S.window.str.startswith("whole")) & (S["account limit"] == "position value capped at 200% of the account")][["version", "sides", "size per ATR %", "first date account below zero", "max drawdown %"]].to_string(index=False))
     # SPY buy and hold
     spy = None
     if len(sys.argv) > 3:
