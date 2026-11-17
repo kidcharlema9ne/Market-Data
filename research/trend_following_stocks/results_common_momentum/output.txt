@@ -1,10 +1,10 @@
 simulator self-test passed
 symbol filter self-test passed
-common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 2s
-11,108 common-stock segments ever liquid; 27s
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 3s
+11,108 common-stock segments ever liquid; 41s
 duplicate detection: 1402264 candidate pairs from matching big moves
 duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
-ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 322s
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 411s
 top 5%: old version: 10,430 trades
 top 5%: new version: 9,752 trades
 top 10%: old version: 19,662 trades
