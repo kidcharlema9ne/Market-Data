@@ -1,0 +1,193 @@
+version,market condition,stock,entry date,exit date,result in ATR,sessions held
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,ATRS-DELISTED#6,2006-12-19,2007-04-09,-27.178120969701922,74.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,PIP-DELISTED#74,2017-01-20,2017-02-06,-27.059560852741,12.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,ITMN-DELISTED,2010-04-28,2010-05-05,-20.232187281300604,6.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,OREX-DELISTED,2011-01-20,2011-02-01,-16.21386657467568,9.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,THQI-DELISTED,2005-08-24,2005-09-02,-15.708464286921696,8.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,LNCR-DELISTED,2010-05-07,2010-06-16,-15.396155894143913,28.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,ADLR-DELISTED,2006-05-19,2006-09-05,-14.31459430599918,75.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,NIHDQ-DELISTED#1,2004-01-30,2004-03-23,-12.925624305316957,37.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,GME,2020-10-29,2021-01-28,156.55153991353643,62.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,RIOT#11,2020-09-03,2021-02-23,101.71350150325192,118.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,MARA#33,2020-10-29,2021-02-23,80.4630365457849,79.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,EBIX-DELISTED#5,2016-04-08,2016-09-12,73.86105016465227,109.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,PCYC-DELISTED#27,2012-01-20,2012-10-23,67.4039000400327,193.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,WWE-DELISTED#21,2017-12-26,2018-10-10,66.0525016119857,200.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,XYZ,2016-12-30,2017-11-29,62.02694723889594,231.0
+"initial stop 2 ATR, trailing stop 5 ATR",SPY above 200-day average,RAD-DELISTED,2013-02-19,2013-12-19,61.83048669069863,213.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,ATRS-DELISTED#6,2006-12-19,2007-04-09,-27.178120969701922,74.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,PIP-DELISTED#74,2017-01-20,2017-02-06,-27.059560852741,12.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,ITMN-DELISTED,2010-04-28,2010-05-05,-20.232187281300604,6.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,OREX-DELISTED,2011-01-20,2011-02-01,-16.21386657467568,9.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,THQI-DELISTED,2005-08-24,2005-09-02,-15.708464286921696,8.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,LNCR-DELISTED,2010-05-07,2010-06-16,-15.396155894143913,28.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,FRX-DELISTED,2002-12-09,2003-01-09,-15.102502940193183,22.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,ADLR-DELISTED,2006-05-19,2006-09-05,-14.31459430599918,75.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,GME,2020-10-29,2021-01-28,156.55153991353643,62.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,PLUG#24,2020-05-04,2021-02-23,153.98658767874653,204.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,RIOT#11,2020-09-03,2021-02-23,101.71350150325192,118.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,MARA#33,2020-10-29,2021-02-23,80.4630365457849,79.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,EBIX-DELISTED#5,2016-04-08,2016-09-12,73.86105016465227,109.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,PCYC-DELISTED#27,2012-01-20,2012-10-23,67.4039000400327,193.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,WWE-DELISTED#21,2017-12-26,2018-10-10,66.0525016119857,200.0
+"initial stop 2 ATR, trailing stop 5 ATR",no market condition,XYZ,2016-12-30,2017-11-29,62.02694723889594,231.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,ATRS-DELISTED#6,2006-12-19,2007-04-09,-27.178120969701922,74.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,PIP-DELISTED#74,2017-01-20,2017-02-06,-27.059560852741,12.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,ITMN-DELISTED,2010-04-28,2010-05-05,-20.232187281300604,6.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,OREX-DELISTED,2011-01-20,2011-02-01,-16.21386657467568,9.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,THQI-DELISTED,2005-08-24,2005-09-02,-15.708464286921696,8.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,LNCR-DELISTED,2010-05-07,2010-06-16,-15.396155894143913,28.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,ADLR-DELISTED,2006-05-19,2006-09-05,-14.31459430599918,75.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,CLAR,2019-07-11,2019-08-06,-13.11194858153918,19.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,GME,2020-10-29,2021-01-28,156.55153991353643,62.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,RIOT#11,2020-09-03,2021-02-23,101.71350150325192,118.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,MARA#33,2020-10-29,2021-02-23,80.4630365457849,79.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,EBIX-DELISTED#5,2016-04-08,2016-09-12,73.86105016465227,109.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,PCYC-DELISTED#27,2012-01-20,2012-10-23,67.4039000400327,193.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,WWE-DELISTED#21,2017-12-26,2018-10-10,66.0525016119857,200.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,XYZ,2016-12-30,2017-11-29,62.02694723889594,231.0
+"initial stop 3 ATR, trailing stop 5 ATR",SPY above 200-day average,RAD-DELISTED,2013-02-19,2013-12-19,61.83048669069863,213.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,ATRS-DELISTED#6,2006-12-19,2007-04-09,-27.178120969701922,74.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,PIP-DELISTED#74,2017-01-20,2017-02-06,-27.059560852741,12.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,ITMN-DELISTED,2010-04-28,2010-05-05,-20.232187281300604,6.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,OREX-DELISTED,2011-01-20,2011-02-01,-16.21386657467568,9.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,THQI-DELISTED,2005-08-24,2005-09-02,-15.708464286921696,8.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,LNCR-DELISTED,2010-05-07,2010-06-16,-15.396155894143913,28.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,FRX-DELISTED,2002-12-09,2003-01-09,-15.102502940193183,22.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,ADLR-DELISTED,2006-05-19,2006-09-05,-14.31459430599918,75.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,GME,2020-10-29,2021-01-28,156.55153991353643,62.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,PLUG#24,2020-05-04,2021-02-23,153.98658767874653,204.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,RIOT#11,2020-09-03,2021-02-23,101.71350150325192,118.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,MARA#33,2020-10-29,2021-02-23,80.4630365457849,79.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,EBIX-DELISTED#5,2016-04-08,2016-09-12,73.86105016465227,109.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,PCYC-DELISTED#27,2012-01-20,2012-10-23,67.4039000400327,193.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,WWE-DELISTED#21,2017-12-26,2018-10-10,66.0525016119857,200.0
+"initial stop 3 ATR, trailing stop 5 ATR",no market condition,XYZ,2016-12-30,2017-11-29,62.02694723889594,231.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,ATRS-DELISTED#6,2006-12-19,2007-04-09,-27.178120969701922,74.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,PIP-DELISTED#74,2017-01-20,2017-02-06,-27.059560852741,12.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,THLD-DELISTED#3,2006-04-21,2006-05-12,-22.25093506223171,16.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,ITMN-DELISTED,2010-04-28,2010-05-05,-20.232187281300604,6.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,OREX-DELISTED,2011-01-20,2011-02-01,-16.21386657467568,9.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,THQI-DELISTED,2005-08-24,2005-09-02,-15.708464286921696,8.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,JEF,2005-09-22,2006-05-16,-15.672541378006098,163.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,ABCO-DELISTED,2016-10-06,2016-11-02,-15.59649355278794,20.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,GME,2020-10-29,2021-01-28,156.55153991353643,62.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,RIOT#11,2020-09-03,2021-02-23,101.71350150325192,118.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,ACAD#22,2012-10-10,2013-10-08,96.54719618619379,249.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,MARA#33,2020-10-29,2021-02-23,80.4630365457849,79.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,EBIX-DELISTED#5,2016-04-08,2016-09-12,73.86105016465227,109.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,PCYC-DELISTED#27,2012-01-20,2012-10-23,67.4039000400327,193.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,WWE-DELISTED#21,2017-12-26,2018-10-10,66.0525016119857,200.0
+"initial stop 4 ATR, trailing stop 5 ATR",SPY above 200-day average,XYZ,2016-12-30,2017-11-29,62.02694723889594,231.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,ATRS-DELISTED#6,2006-12-19,2007-04-09,-27.178120969701922,74.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,PIP-DELISTED#74,2017-01-20,2017-02-06,-27.059560852741,12.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,THLD-DELISTED#3,2006-04-21,2006-05-12,-22.25093506223171,16.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,ITMN-DELISTED,2010-04-28,2010-05-05,-20.232187281300604,6.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,OREX-DELISTED,2011-01-20,2011-02-01,-16.21386657467568,9.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,THQI-DELISTED,2005-08-24,2005-09-02,-15.708464286921696,8.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,JEF,2005-09-22,2006-05-16,-15.672541378006098,163.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,ABCO-DELISTED,2016-10-06,2016-11-02,-15.59649355278794,20.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,GME,2020-10-29,2021-01-28,156.55153991353643,62.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,PLUG#24,2020-05-04,2021-02-23,153.98658767874653,204.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,RIOT#11,2020-09-03,2021-02-23,101.71350150325192,118.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,ACAD#22,2012-10-10,2013-10-08,96.54719618619379,249.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,MARA#33,2020-10-29,2021-02-23,80.4630365457849,79.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,EBIX-DELISTED#5,2016-04-08,2016-09-12,73.86105016465227,109.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,PCYC-DELISTED#27,2012-01-20,2012-10-23,67.4039000400327,193.0
+"initial stop 4 ATR, trailing stop 5 ATR",no market condition,WWE-DELISTED#21,2017-12-26,2018-10-10,66.0525016119857,200.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,ATRS-DELISTED#6,2006-12-19,2007-04-09,-27.178120969701922,74.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,PIP-DELISTED#74,2017-01-20,2017-02-06,-27.059560852741,12.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,THLD-DELISTED#3,2006-04-21,2006-05-12,-22.25093506223171,16.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,ITMN-DELISTED,2010-04-28,2010-05-05,-20.232187281300604,6.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,OREX-DELISTED,2011-01-20,2011-02-01,-16.21386657467568,9.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,THQI-DELISTED,2005-08-24,2005-09-02,-15.708464286921696,8.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,JEF,2005-09-22,2006-05-16,-15.672541378006098,163.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,ABCO-DELISTED,2016-10-06,2016-11-02,-15.59649355278794,20.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,GME,2020-10-29,2021-01-28,156.55153991353643,62.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,RIOT#11,2020-09-03,2021-02-23,101.71350150325192,118.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,ACAD#22,2012-10-10,2013-10-08,96.54719618619379,249.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,MARA#33,2020-10-29,2021-02-23,80.4630365457849,79.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,EBIX-DELISTED#5,2016-04-08,2016-09-12,73.86105016465227,109.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,INGN,2017-09-27,2018-09-27,68.87590006843863,253.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,PCYC-DELISTED#27,2012-01-20,2012-10-23,67.4039000400327,193.0
+"initial stop 5 ATR, trailing stop 5 ATR",SPY above 200-day average,WWE-DELISTED#21,2017-12-26,2018-10-10,66.0525016119857,200.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,ATRS-DELISTED#6,2006-12-19,2007-04-09,-27.178120969701922,74.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,PIP-DELISTED#74,2017-01-20,2017-02-06,-27.059560852741,12.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,THLD-DELISTED#3,2006-04-21,2006-05-12,-22.25093506223171,16.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,ITMN-DELISTED,2010-04-28,2010-05-05,-20.232187281300604,6.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,MLI,2004-10-14,2004-10-27,-19.39823560854294,10.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,OREX-DELISTED,2011-01-20,2011-02-01,-16.21386657467568,9.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,THQI-DELISTED,2005-08-24,2005-09-02,-15.708464286921696,8.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,JEF,2005-09-22,2006-05-16,-15.672541378006098,163.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,GME,2020-10-29,2021-01-28,156.55153991353643,62.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,PLUG#24,2020-05-04,2021-02-23,153.98658767874653,204.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,RIOT#11,2020-09-03,2021-02-23,101.71350150325192,118.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,ACAD#22,2012-10-10,2013-10-08,96.54719618619379,249.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,MARA#33,2020-10-29,2021-02-23,80.4630365457849,79.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,EBIX-DELISTED#5,2016-04-08,2016-09-12,73.86105016465227,109.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,INGN,2017-09-27,2018-09-27,68.87590006843863,253.0
+"initial stop 5 ATR, trailing stop 5 ATR",no market condition,PCYC-DELISTED#27,2012-01-20,2012-10-23,67.4039000400327,193.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,ATRS-DELISTED#6,2006-12-19,2007-04-09,-27.178120969701922,74.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,PIP-DELISTED#74,2017-01-20,2017-02-06,-27.059560852741,12.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,DLPH-DELISTED,2017-06-09,2017-12-05,-22.90630253684647,125.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,PBY-DELISTED,2012-02-29,2012-05-01,-22.52125540019076,44.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,THLD-DELISTED#3,2006-04-21,2006-05-12,-22.25093506223171,16.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,VIP-DELISTED,2006-12-15,2007-08-22,-22.007578198207906,171.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,ITMN-DELISTED,2010-04-28,2010-05-05,-20.232187281300604,6.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,DPZ,2007-03-06,2007-05-07,-17.429375443851157,44.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,MNST#27,2004-12-21,2006-08-07,180.54049028515269,410.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,JOY-DELISTED,2003-06-24,2006-05-18,169.7344044807472,732.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,DRYS-DELISTED,2007-01-22,2007-11-26,124.85131949422271,214.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,PCRX#3,2012-07-13,2014-11-07,105.9106038799486,585.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,STRZA-DELISTED#1,2012-09-13,2014-06-12,103.54010219577407,438.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,JACK,2012-07-24,2015-06-15,101.13229965415212,727.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,TIE-DELISTED#15,2005-03-29,2006-06-13,99.27770527037376,306.0
+"initial stop 4 ATR, trailing stop 8 ATR",SPY above 200-day average,GME,2020-10-29,2021-01-28,98.32932423495939,62.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,ATRS-DELISTED#6,2006-12-19,2007-04-09,-27.178120969701922,74.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,PIP-DELISTED#74,2017-01-20,2017-02-06,-27.059560852741,12.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,DLPH-DELISTED,2017-06-09,2017-12-05,-22.90630253684647,125.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,PBY-DELISTED,2012-02-29,2012-05-01,-22.52125540019076,44.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,THLD-DELISTED#3,2006-04-21,2006-05-12,-22.25093506223171,16.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,VIP-DELISTED,2006-12-15,2007-08-22,-22.007578198207906,171.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,ITMN-DELISTED,2010-04-28,2010-05-05,-20.232187281300604,6.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,RIGL#23,2005-10-07,2005-12-01,-18.228510806802586,39.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,MNST#27,2004-12-21,2006-08-07,180.54049028515269,410.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,JOY-DELISTED,2003-06-24,2006-05-18,169.7344044807472,732.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,CCJ#13,2004-07-27,2006-09-25,130.2774702420334,547.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,DRYS-DELISTED,2007-01-22,2007-11-26,124.85131949422271,214.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,FTO-DELISTED,2004-10-14,2006-09-25,116.23890273472297,491.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,RIOT#11,2020-05-27,2021-05-06,116.1506538240796,239.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,PLUG#24,2020-05-04,2021-03-24,113.95648390607658,225.0
+"initial stop 4 ATR, trailing stop 8 ATR",no market condition,HFC-DELISTED#11,2004-08-05,2006-02-14,110.65295814462027,386.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,ATRS-DELISTED#6,2006-12-19,2007-04-09,-27.178120969701922,74.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,PIP-DELISTED#74,2017-01-20,2017-02-06,-27.059560852741,12.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,DLPH-DELISTED,2017-06-09,2017-12-05,-22.90630253684647,125.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,PBY-DELISTED,2012-02-29,2012-05-01,-22.52125540019076,44.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,THLD-DELISTED#3,2006-04-21,2006-05-12,-22.25093506223171,16.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,VIP-DELISTED,2006-12-15,2007-08-22,-22.007578198207906,171.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,ITMN-DELISTED,2010-04-28,2010-05-05,-20.232187281300604,6.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,DPZ,2007-03-06,2007-05-07,-17.429375443851157,44.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,MNST#27,2004-12-21,2006-08-07,180.54049028515269,410.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,JOY-DELISTED,2003-06-24,2006-05-18,169.7344044807472,732.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,DRYS-DELISTED,2007-01-22,2007-11-26,124.85131949422271,214.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,HTHT,2016-04-25,2018-08-02,121.14077382091402,574.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,PCRX#3,2012-07-13,2014-11-07,105.9106038799486,585.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,STRZA-DELISTED#1,2012-09-13,2014-06-12,103.54010219577407,438.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,JACK,2012-07-24,2015-06-15,101.13229965415212,727.0
+"initial stop 5 ATR, trailing stop 8 ATR",SPY above 200-day average,TIE-DELISTED#15,2005-03-29,2006-06-13,99.27770527037376,306.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,ATRS-DELISTED#6,2006-12-19,2007-04-09,-27.178120969701922,74.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,PIP-DELISTED#74,2017-01-20,2017-02-06,-27.059560852741,12.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,DLPH-DELISTED,2017-06-09,2017-12-05,-22.90630253684647,125.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,PBY-DELISTED,2012-02-29,2012-05-01,-22.52125540019076,44.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,THLD-DELISTED#3,2006-04-21,2006-05-12,-22.25093506223171,16.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,VIP-DELISTED,2006-12-15,2007-08-22,-22.007578198207906,171.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,ITMN-DELISTED,2010-04-28,2010-05-05,-20.232187281300604,6.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,RIGL#23,2005-10-07,2005-12-01,-18.228510806802586,39.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,MNST#27,2004-12-21,2006-08-07,180.54049028515269,410.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,JOY-DELISTED,2003-06-24,2006-05-18,169.7344044807472,732.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,CCJ#13,2004-07-27,2006-09-25,130.2774702420334,547.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,DRYS-DELISTED,2007-01-22,2007-11-26,124.85131949422271,214.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,HTHT,2016-04-25,2018-08-02,121.14077382091402,574.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,FTO-DELISTED,2004-10-14,2006-09-25,116.23890273472297,491.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,RIOT#11,2020-05-27,2021-05-06,116.1506538240796,239.0
+"initial stop 5 ATR, trailing stop 8 ATR",no market condition,PLUG#24,2020-05-04,2021-03-24,113.95648390607658,225.0
