@@ -1,0 +1,87 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 3s
+11,108 common-stock segments ever liquid; 41s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 403s
+depth 2.5 signals match the original on 396 segments
+pullback none (buy at the signal) | top 20%: 21,600 signals
+pullback none (buy at the signal) | top 100%: 59,671 signals
+pullback 0.5 ATR | top 20%: 21,426 signals
+pullback 0.5 ATR | top 100%: 59,467 signals
+pullback 1 ATR | top 20%: 20,653 signals
+pullback 1 ATR | top 100%: 58,572 signals
+
+==== pullback depth | long only | top 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | 2000 to 2007 ====
+          pullback depth  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+none (buy at the signal)          1323       39.38                   0.62                  49.59              10.28          0.37          -20.85        -19.94         4 of 9                               107.04
+                 0.5 ATR          1314       38.36                   0.62                  49.79              10.44          0.38          -24.11        -16.65         4 of 9                               106.33
+                   1 ATR          1306       40.05                   0.65                  49.77              10.78          0.39          -25.10         -9.40         4 of 9                               104.77
+
+==== pullback depth | long only | top 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | 2000 to 2007 ====
+          pullback depth  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+none (buy at the signal)           707       40.59                   0.69                  50.36               6.31          0.41          -16.87        -10.93         5 of 9                                55.72
+                 0.5 ATR           708       38.70                   0.53                  50.86               4.86          0.33          -16.65        -11.03         4 of 9                                55.75
+                   1 ATR           706       40.51                   0.64                  50.28               5.88          0.40          -19.62         -6.47         4 of 9                                54.81
+
+==== pullback depth | long only | top 100% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | 2000 to 2007 ====
+          pullback depth  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+none (buy at the signal)          1204       39.62                   0.69                  50.96              10.63          0.45          -21.47        -17.22         5 of 9                               114.93
+                 0.5 ATR          1164       38.66                   0.83                  53.12              12.09          0.51          -18.57        -17.47         5 of 9                               114.14
+                   1 ATR          1242       38.16                   0.44                  50.54               6.59          0.28          -24.50        -14.38         4 of 9                               113.89
+
+==== pullback depth | long only | top 100% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | 2000 to 2007 ====
+          pullback depth  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+none (buy at the signal)           672       38.24                   0.35                  49.78               3.23          0.25          -16.83         -7.65         3 of 9                                58.27
+                 0.5 ATR           633       43.13                   1.23                  55.37               9.47          0.69          -11.80        -10.26         5 of 9                                58.00
+                   1 ATR           687       38.43                   0.40                  51.37               3.47          0.27          -15.45         -9.17         5 of 9                                58.23
+
+==== pullback depth | long only | top 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | 2008 to Aug 2021 ====
+          pullback depth  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+none (buy at the signal)          3287       40.80                   0.86                  51.90              21.04          0.59          -30.56        -28.19       10 of 14                               157.26
+                 0.5 ATR          3307       39.82                   0.97                  51.64              23.55          0.64          -34.22        -11.83       10 of 14                               156.19
+                   1 ATR          3405       40.23                   0.97                  52.13              24.34          0.64          -35.53        -14.59       10 of 14                               155.90
+
+==== pullback depth | long only | top 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | 2008 to Aug 2021 ====
+          pullback depth  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+none (buy at the signal)          1846       40.09                   0.76                  50.56              10.23          0.53          -20.59        -10.51       10 of 14                                80.02
+                 0.5 ATR          1901       40.35                   0.89                  51.12              12.39          0.57          -22.62        -11.32       10 of 14                                80.42
+                   1 ATR          1876       38.59                   0.86                  51.84              11.85          0.57          -21.91        -11.04       10 of 14                                80.05
+
+==== pullback depth | long only | top 100% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | 2008 to Aug 2021 ====
+          pullback depth  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+none (buy at the signal)          3287       38.42                   0.71                  50.74              17.23          0.53          -38.76        -29.56       10 of 14                               161.85
+                 0.5 ATR          3328       37.98                   0.55                  50.41              13.54          0.43          -32.70        -42.19       10 of 14                               162.35
+                   1 ATR          3290       38.45                   0.73                  51.88              17.92          0.55          -35.17        -25.41       10 of 14                               161.72
+
+==== pullback depth | long only | top 100% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | 2008 to Aug 2021 ====
+          pullback depth  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+none (buy at the signal)          1795       38.77                   0.76                  50.23               9.95          0.55          -28.63        -22.52       10 of 14                                81.88
+                 0.5 ATR          1889       37.64                   0.58                  50.39               8.35          0.46          -23.13        -22.67        9 of 14                                81.99
+                   1 ATR          1882       35.97                   0.65                  50.63               9.16          0.47          -24.23        -20.46        8 of 14                                82.15
+
+==== pullback depth | long only | top 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | whole 2000 to Aug 2021 ====
+          pullback depth  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+none (buy at the signal)          4610       40.39                   0.79                  51.23              17.02          0.52          -24.42        -28.19       14 of 22                               138.49
+                 0.5 ATR          4621       39.41                   0.87                  51.12              18.65          0.56          -26.96        -22.60       14 of 22                               137.56
+                   1 ATR          4711       40.18                   0.88                  51.48              19.27          0.56          -27.09        -16.45       14 of 22                               136.79
+
+==== pullback depth | long only | top 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | whole 2000 to Aug 2021 ====
+          pullback depth  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+none (buy at the signal)          2553       40.23                   0.74                  50.50               8.77          0.49          -20.00        -15.09       15 of 22                                70.94
+                 0.5 ATR          2609       39.90                   0.79                  51.05               9.58          0.49          -26.38        -15.70       14 of 22                                71.20
+                   1 ATR          2582       39.12                   0.80                  51.41               9.62          0.51          -24.29        -12.91       14 of 22                                70.61
+
+==== pullback depth | long only | top 100% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | whole 2000 to Aug 2021 ====
+          pullback depth  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+none (buy at the signal)          4491       38.74                   0.71                  50.80              14.77          0.50          -26.65        -29.56       15 of 22                               144.31
+                 0.5 ATR          4492       38.16                   0.62                  51.11              13.00          0.45          -29.24        -42.19       15 of 22                               144.33
+                   1 ATR          4532       38.37                   0.65                  51.51              13.68          0.46          -35.29        -26.37       14 of 22                               143.84
+
+==== pullback depth | long only | top 100% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | whole 2000 to Aug 2021 ====
+          pullback depth  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+none (buy at the signal)          2467       38.63                   0.65                  50.11               7.44          0.46          -23.45        -22.52       13 of 22                                73.06
+                 0.5 ATR          2522       39.02                   0.74                  51.64               8.77          0.52          -18.42        -22.67       14 of 22                                73.02
+                   1 ATR          2569       36.63                   0.59                  50.83               7.03          0.41          -29.22        -20.46       13 of 22                                73.21
+done
