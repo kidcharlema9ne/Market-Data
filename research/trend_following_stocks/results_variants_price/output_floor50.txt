@@ -1,0 +1,31 @@
+simulator self-test passed
+symbol filter self-test passed
+mode floor50: ranking lookback 126 sessions; dollar-volume floor $50,000,000
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 3s
+4,065 common-stock segments ever liquid; 25s
+duplicate detection: 158572 candidate pairs from matching big moves
+duplicate companies removed: 193 series; examples (kept | dropped | overlapping sessions): [('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('BHGE-DELISTED', 'BHI-DELISTED', 4401), ('BBRY-DELISTED', 'BB', 2637), ('LB-DELISTED', 'BBWI', 3590), ('VIAV', 'JDSU-DELISTED', 1705), ('VIAC-DELISTED', 'PSKY', 3593), ('CREE-DELISTED', 'WOLF', 3594), ('WPM', 'SLW-DELISTED', 2527), ('CTRP-DELISTED', 'TCOM', 3153), ('JOY-DELISTED', 'JOYG-DELISTED', 2658), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('JCI', 'TYC-DELISTED', 4193), ('LEH-DELISTED', 'LEHMQ-DELISTED', 2186), ('VRX-DELISTED', 'BHC', 2822), ('FEYE-DELISTED', 'MNDT-DELISTED', 1983), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('ADS-DELISTED', 'BFH', 3593), ('COH-DELISTED', 'TPR', 2646), ('VIAC-DELISTED', 'CBS-DELISTED', 3504), ('DD#2', 'DWDP-DELISTED#2', 3019), ('PEAK-DELISTED', 'DOC', 3422), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('BIG-DELISTED', 'BIGGQ-DELISTED', 3766)]
+ranking universe: 3,086,293 stock-days; eligible stocks per session median 620, min 90, max 1232; 57s
+dollar-volume floor $50M | top 10% | 2,250 signals, 2,186 taken
+dollar-volume floor $50M | top 20% | 4,098 signals, 3,171 taken
+dollar-volume floor $50M | top 30% | 5,781 signals, 3,345 taken
+
+==== floor50 | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | 2000 to 2007 ====
+                 setting  strongest share kept  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+dollar-volume floor $50M                   0.1     385       37.40                   0.14               0.77          0.08          -17.51         -6.53         3 of 9                                23.42
+dollar-volume floor $50M                   0.2     669       38.57                   0.30               2.60          0.16          -25.16         -7.57         3 of 9                                51.25
+dollar-volume floor $50M                   0.3     808       39.60                   0.30               3.06          0.16          -25.46         -8.98         3 of 9                                68.45
+
+==== floor50 | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | 2008 to Aug 2021 ====
+                 setting  strongest share kept  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+dollar-volume floor $50M                   0.1    1801       40.42                   0.91              12.06          0.51          -26.00        -10.36       10 of 14                                81.70
+dollar-volume floor $50M                   0.2    2502       40.09                   0.81              14.94          0.47          -34.72        -17.05        8 of 14                               126.87
+dollar-volume floor $50M                   0.3    2537       41.27                   1.06              19.76          0.61          -28.44        -14.60        8 of 14                               139.70
+
+==== floor50 | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | whole 2000 to Aug 2021 ====
+                 setting  strongest share kept  trades  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+dollar-volume floor $50M                   0.1    2186       39.89                   0.78               7.84          0.40          -25.53        -10.36       13 of 22                                59.92
+dollar-volume floor $50M                   0.2    3171       39.77                   0.70              10.33          0.38          -30.06        -17.05       11 of 22                                98.60
+dollar-volume floor $50M                   0.3    3345       40.87                   0.87              13.52          0.48          -25.54        -14.60       11 of 22                               113.07
+share of trades taken priced under $2: 0.5%, under $5: 2.3%, under $10: 8.3%; median entry price $42.95
+done
