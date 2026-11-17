@@ -1,0 +1,230 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 3s
+11,108 common-stock segments ever liquid; 34s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 369s
+SPY condition: 67.7% of sessions SPY above its 200-session average; first session allowed 2002-01-04
+top 10% | old version | SPY above 200-day average: 8,229 trades
+top 10% | old version | no market condition: 10,270 trades
+top 10% | new version | SPY above 200-day average: 7,657 trades
+top 10% | new version | no market condition: 9,545 trades
+top 20% | old version | SPY above 200-day average: 15,420 trades
+top 20% | old version | no market condition: 18,895 trades
+top 20% | new version | SPY above 200-day average: 14,259 trades
+top 20% | new version | no market condition: 17,446 trades
+top 100% | old version | SPY above 200-day average: 53,097 trades
+top 100% | old version | no market condition: 62,688 trades
+top 100% | new version | SPY above 200-day average: 48,561 trades
+top 100% | new version | no market condition: 57,216 trades
+
+==== per trade before sizing (ATR, net of cost), whole window ====
+ strongest share kept     version          market condition                           window  trades  win rate %  average ATR per trade  median ATR per trade  average sessions held
+                  0.1 old version SPY above 200-day average whole in-sample 2000 to Aug 2021    8229      18.666                  0.119                  -1.1                 19.940
+                  0.1 old version       no market condition whole in-sample 2000 to Aug 2021   10270      18.734                  0.121                  -1.1                 20.204
+                  0.1 new version SPY above 200-day average whole in-sample 2000 to Aug 2021    7657      29.973                  0.385                  -2.1                 34.048
+                  0.1 new version       no market condition whole in-sample 2000 to Aug 2021    9545      30.183                  0.370                  -2.1                 34.592
+                  0.2 old version SPY above 200-day average whole in-sample 2000 to Aug 2021   15420      18.904                  0.172                  -1.1                 20.546
+                  0.2 old version       no market condition whole in-sample 2000 to Aug 2021   18895      18.926                  0.169                  -1.1                 20.763
+                  0.2 new version SPY above 200-day average whole in-sample 2000 to Aug 2021   14259      30.598                  0.452                  -2.1                 35.406
+                  0.2 new version       no market condition whole in-sample 2000 to Aug 2021   17446      30.786                  0.441                  -2.1                 35.806
+                  1.0 old version SPY above 200-day average whole in-sample 2000 to Aug 2021   53097      18.828                  0.170                  -1.1                 21.211
+                  1.0 old version       no market condition whole in-sample 2000 to Aug 2021   62688      18.823                  0.161                  -1.1                 21.366
+                  1.0 new version SPY above 200-day average whole in-sample 2000 to Aug 2021   48561      30.312                  0.404                  -2.1                 36.178
+                  1.0 new version       no market condition whole in-sample 2000 to Aug 2021   57216      30.338                  0.388                  -2.1                 36.432
+
+==== 2000 to 2007 | long only | 0.10% per ATR | position value capped at 200% of the account ====
+ strongest share kept     version          market condition  trades  stocks traded  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown % years positive  worst year % first date account below zero  average open positions  average position value % of account  signals skipped, account full
+                  0.1 new version SPY above 200-day average    1537           1004       32.34                   0.29               5.52          0.24          -27.40         2 of 9        -11.19                         never                   24.68                                64.80                           1296
+                  0.1 new version       no market condition    2286           1324       30.49                   0.12               3.73          0.14          -49.63         5 of 9        -25.75                         never                   35.60                                89.74                           1570
+                  0.1 old version SPY above 200-day average    1760           1052       20.57                   0.11               2.43          0.14          -24.57         2 of 9         -8.09                         never                   17.29                                46.06                            320
+                  0.1 old version       no market condition    2573           1374       18.77                  -0.01              -0.18         -0.01          -36.69         2 of 9        -17.48                         never                   23.74                                60.73                            417
+                  0.2 new version SPY above 200-day average    1806           1192       33.06                   0.32               7.28          0.26          -25.35         2 of 9        -19.61                         never                   30.40                                89.15                           7598
+                  0.2 new version       no market condition    2972           1613       29.78                   0.05               2.41          0.07          -89.24         4 of 9        -44.74                         never                   47.42                               135.12                           8606
+                  0.2 old version SPY above 200-day average    2515           1412       21.39                   0.21               6.60          0.27          -26.67         2 of 9        -11.01                         never                   25.48                                78.06                           5772
+                  0.2 old version       no market condition    3870           1775       18.68                   0.01               0.34          0.01          -65.44         2 of 9        -32.11                         never                   36.71                               107.85                           6498
+                  1.0 new version SPY above 200-day average    1618           1161       33.19                   0.53              10.51          0.45          -21.21         3 of 9         -6.04                         never                   30.85                               107.92                          41988
+                  1.0 new version       no market condition    3391           1742       29.78                   0.07               2.91          0.09         -111.44         5 of 9        -48.54                    2002-10-09                   57.02                               169.98                          47443
+                  1.0 old version SPY above 200-day average    2487           1509       21.79                   0.24               7.50          0.34          -19.70         3 of 9        -13.74                         never                   27.50                               102.22                          42983
+                  1.0 old version       no market condition    5030           2023       19.18                  -0.00              -0.16         -0.01         -104.25         4 of 9        -58.75                    2003-02-07                   51.06                               159.74                          47939
+
+==== 2000 to 2007 | long only | 0.10% per ATR | position value capped at 100% of the account ====
+ strongest share kept     version          market condition  trades  stocks traded  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown % years positive  worst year % first date account below zero  average open positions  average position value % of account  signals skipped, account full
+                  0.1 new version SPY above 200-day average    1071            775       32.68                   0.37               4.97          0.30          -19.66         3 of 9         -6.49                         never                   17.57                                43.28                           3645
+                  0.1 new version       no market condition    1737           1137       29.82                   0.01               0.35          0.02          -49.63         4 of 9        -25.75                         never                   26.94                                65.09                           4200
+                  0.1 old version SPY above 200-day average    1411            915       21.19                   0.15               2.64          0.19          -20.17         2 of 9         -8.07                         never                   14.32                                36.74                           2519
+                  0.1 old version       no market condition    2193           1268       18.92                  -0.03              -0.68         -0.04          -36.69         2 of 9        -17.48                         never                   20.37                                50.08                           2896
+                  0.2 new version SPY above 200-day average    1015            791       34.78                   0.41               5.16          0.33          -17.71         3 of 9         -8.40                         never                   17.58                                48.48                          10447
+                  0.2 new version       no market condition    1916           1248       28.81                  -0.12              -2.48         -0.13          -73.84         4 of 9        -39.08                         never                   30.37                                80.31                          11975
+                  0.2 old version SPY above 200-day average    1461           1007       22.93                   0.19               3.53          0.24          -16.42         3 of 9         -9.87                         never                   15.64                                45.37                           9654
+                  0.2 old version       no market condition    2635           1479       18.82                  -0.05              -1.64         -0.09          -61.97         4 of 9        -32.56                         never                   25.18                                70.15                          10949
+                  1.0 new version SPY above 200-day average     973            776       32.17                   0.28               3.28          0.25          -15.44         3 of 9         -5.31                         never                   17.62                                54.96                          44691
+                  1.0 new version       no market condition    1931           1275       29.73                   0.02               0.29          0.02          -75.96         5 of 9        -37.54                         never                   32.12                                88.58                          51397
+                  1.0 old version SPY above 200-day average    1361           1019       22.70                   0.32               5.37          0.43          -14.63         4 of 9         -7.40                         never                   15.82                                53.22                          47235
+                  1.0 old version       no market condition    2938           1612       19.09                   0.02               0.68          0.04          -70.77         4 of 9        -32.80                         never                   29.28                                85.36                          53970
+
+==== 2008 to Aug 2021 (futures development years) | long only | 0.10% per ATR | position value capped at 200% of the account ====
+ strongest share kept     version          market condition  trades  stocks traded  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown % years positive  worst year % first date account below zero  average open positions  average position value % of account  signals skipped, account full
+                  0.1 new version SPY above 200-day average    4712           2616       29.97                   0.49              17.13          0.45          -40.00        8 of 14        -18.71                         never                   48.89                               127.17                           1296
+                  0.1 new version       no market condition    5567           2926       30.72                   0.52              21.62          0.51          -45.12        9 of 14        -19.68                         never                   59.83                               152.82                           1570
+                  0.1 old version SPY above 200-day average    6030           2870       18.23                   0.12               5.55          0.19          -32.10        7 of 14        -12.76                         never                   35.58                                99.15                            320
+                  0.1 old version       no market condition    7148           3223       18.77                   0.16               8.51          0.26          -31.24        9 of 14        -19.75                         never                   43.59                               120.98                            417
+                  0.2 new version SPY above 200-day average    4718           2780       30.90                   0.55              19.13          0.50          -29.87       10 of 14        -13.59                         never                   51.46                               145.54                           7598
+                  0.2 new version       no market condition    5713           3106       31.52                   0.54              22.58          0.53          -61.78        9 of 14        -38.34                         never                   63.16                               173.58                           8606
+                  0.2 old version SPY above 200-day average    6988           3360       19.36                   0.25              13.17          0.38          -30.43        7 of 14        -22.27                         never                   44.05                               134.82                           5772
+                  0.2 old version       no market condition    8362           3681       19.10                   0.26              15.94          0.42          -49.03        9 of 14        -29.68                         never                   53.72                               157.77                           6498
+                  1.0 new version SPY above 200-day average    4657           2856       30.94                   0.44              15.19          0.47          -28.42       10 of 14        -24.14                         never                   51.36                               155.32                          41988
+                  1.0 new version       no market condition    6035           3334       30.14                   0.47              21.22          0.52          -90.76        8 of 14        -51.90                         never                   66.23                               186.14                          47443
+                  1.0 old version SPY above 200-day average    7305           3603       18.66                   0.12               6.73          0.23          -46.80        8 of 14        -27.81                         never                   45.84                               150.58                          42983
+                  1.0 old version       no market condition    9346           4008       18.60                   0.09               6.64          0.19          -83.32        6 of 14        -54.58                         never                   58.67                               178.01                          47939
+
+==== 2008 to Aug 2021 (futures development years) | long only | 0.10% per ATR | position value capped at 100% of the account ====
+ strongest share kept     version          market condition  trades  stocks traded  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown % years positive  worst year % first date account below zero  average open positions  average position value % of account  signals skipped, account full
+                  0.1 new version SPY above 200-day average    2829           1887       31.35                   0.56              11.77          0.49          -22.72       10 of 14        -10.47                         never                   30.23                                71.52                           3645
+                  0.1 new version       no market condition    3486           2182       29.80                   0.48              12.34          0.47          -37.47       10 of 14        -19.49                         never                   37.50                                86.58                           4200
+                  0.1 old version SPY above 200-day average    4180           2346       18.78                   0.17               5.36          0.27          -25.99        7 of 14        -14.33                         never                   25.24                                65.22                           2519
+                  0.1 old version       no market condition    5049           2679       18.84                   0.16               5.89          0.26          -29.31        9 of 14        -16.56                         never                   30.96                                76.94                           2896
+                  0.2 new version SPY above 200-day average    2660           1885       30.94                   0.59              11.62          0.53          -21.34        7 of 14         -8.07                         never                   29.28                                75.84                          10447
+                  0.2 new version       no market condition    3400           2283       29.97                   0.38               9.35          0.39          -48.09        8 of 14        -29.39                         never                   36.08                                91.58                          11975
+                  0.2 old version SPY above 200-day average    4160           2518       18.56                   0.19               5.82          0.30          -22.92        8 of 14        -17.66                         never                   25.84                                72.22                           9654
+                  0.2 old version       no market condition    5146           2902       18.36                   0.16               6.13          0.28          -38.01        9 of 14        -24.24                         never                   32.20                                86.26                          10949
+                  1.0 new version SPY above 200-day average    2599           1906       30.86                   0.62              11.97          0.62          -21.61       10 of 14        -17.22                         never                   29.27                                78.83                          44691
+                  1.0 new version       no market condition    3541           2389       30.16                   0.31               8.31          0.36          -55.93       10 of 14        -29.81                         never                   38.45                                94.82                          51397
+                  1.0 old version SPY above 200-day average    4179           2634       18.45                   0.11               3.49          0.20          -51.35        7 of 14        -21.21                         never                   26.04                                76.80                          47235
+                  1.0 old version       no market condition    5407           3080       18.24                   0.14               5.88          0.27          -53.11        7 of 14        -31.57                         never                   33.19                                92.22                          53970
+
+==== whole in-sample 2000 to Aug 2021 | long only | 0.10% per ATR | position value capped at 200% of the account ====
+ strongest share kept     version          market condition  trades  stocks traded  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown % years positive  worst year % first date account below zero  average open positions  average position value % of account  signals skipped, account full
+                  0.1 new version SPY above 200-day average    6249           3168       30.55                   0.44              12.79          0.38          -30.90       10 of 22        -18.71                         never                   39.84                               103.86                           1296
+                  0.1 new version       no market condition    7853           3571       30.65                   0.41              14.93          0.40          -49.63       14 of 22        -35.79                         never                   50.78                               129.25                           1570
+                  0.1 old version SPY above 200-day average    7790           3420       18.75                   0.12               4.39          0.17          -34.31        9 of 22        -12.76                         never                   28.75                                79.31                            320
+                  0.1 old version       no market condition    9721           3844       18.77                   0.11               5.26          0.19          -49.23       11 of 22        -28.15                         never                   36.17                                98.46                            417
+                  0.2 new version SPY above 200-day average    6524           3380       31.50                   0.48              14.70          0.43          -30.31       12 of 22        -19.61                         never                   43.59                               124.47                           7598
+                  0.2 new version       no market condition    8685           3829       30.93                   0.37              15.04          0.39          -89.24       13 of 22        -63.70                         never                   57.28                               159.20                           8606
+                  0.2 old version SPY above 200-day average    9503           3964       19.90                   0.24              10.71          0.34          -27.48        9 of 22        -22.27                         never                   37.11                               113.61                           5772
+                  0.2 old version       no market condition   12232           4329       18.97                   0.18              10.11          0.30          -65.44       11 of 22        -46.98                         never                   47.36                               139.11                           6498
+                  1.0 new version SPY above 200-day average    6275           3417       31.52                   0.46              13.44          0.46          -23.48       12 of 22        -24.14                         never                   43.70                               137.60                          41988
+                  1.0 new version       no market condition    9426           4021       30.01                   0.33              14.37          0.38         -111.44       13 of 22        -76.76                    2002-10-09                   62.79                               180.10                          47443
+                  1.0 old version SPY above 200-day average    9792           4142       19.45                   0.15               7.02          0.26          -35.65       11 of 22        -27.81                         never                   38.99                               132.50                          42983
+                  1.0 old version       no market condition   14376           4601       18.80                   0.06               4.09          0.12         -104.25       10 of 22        -79.01                    2003-02-07                   55.82                               171.19                          47939
+
+==== whole in-sample 2000 to Aug 2021 | long only | 0.10% per ATR | position value capped at 100% of the account ====
+ strongest share kept     version          market condition  trades  stocks traded  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown % years positive  worst year % first date account below zero  average open positions  average position value % of account  signals skipped, account full
+                  0.1 new version SPY above 200-day average    3900           2403       31.72                   0.51               9.23          0.43          -19.95       13 of 22        -10.47                         never                   25.50                                60.97                           3645
+                  0.1 new version       no market condition    5223           2882       29.81                   0.32               7.86          0.33          -49.63       14 of 22        -31.96                         never                   33.56                                78.55                           4200
+                  0.1 old version SPY above 200-day average    5591           2884       19.39                   0.16               4.34          0.24          -27.25        9 of 22        -14.33                         never                   21.16                                54.57                           2519
+                  0.1 old version       no market condition    7242           3348       18.86                   0.10               3.43          0.17          -44.62       11 of 22        -26.64                         never                   27.00                                66.90                           2896
+                  0.2 new version SPY above 200-day average    3675           2418       32.00                   0.54               9.21          0.47          -23.27       10 of 22         -8.40                         never                   24.91                                65.61                          10447
+                  0.2 new version       no market condition    5316           3009       29.55                   0.20               4.93          0.22          -73.84       12 of 22        -46.30                         never                   33.95                                87.37                          11975
+                  0.2 old version SPY above 200-day average    5621           3094       19.69                   0.19               4.97          0.28          -24.06       11 of 22        -17.66                         never                   22.03                                62.18                           9654
+                  0.2 old version       no market condition    7781           3632       18.52                   0.09               3.23          0.16          -61.97       13 of 22        -39.43                         never                   29.57                                80.24                          10949
+                  1.0 new version SPY above 200-day average    3572           2424       31.22                   0.52               8.72          0.51          -20.81       12 of 22        -17.22                         never                   24.92                                69.91                          44691
+                  1.0 new version       no market condition    5472           3127       30.01                   0.21               5.31          0.25          -75.96       15 of 22        -44.77                         never                   36.09                                92.49                          51397
+                  1.0 old version SPY above 200-day average    5540           3188       19.49                   0.16               4.20          0.26          -40.39       11 of 22        -21.21                         never                   22.22                                67.98                          47235
+                  1.0 old version       no market condition    8345           3786       18.54                   0.10               3.94          0.19          -70.77       11 of 22        -46.96                         never                   31.73                                89.66                          53970
+
+==== SPY buy and hold, price only ====
+                                             profit per year % Sharpe ratio max drawdown %
+2000 to 2007                                         -0.697996    -0.047104     -49.119297
+2008 to Aug 2021 (futures development years)         15.515123     0.580789     -49.527111
+whole in-sample 2000 to Aug 2021                      9.455343     0.411017     -56.448935
+
+==== SPY held only while above its 200-day average (no stocks), price only ====
+                                             profit per year % Sharpe ratio max drawdown %
+2000 to 2007                                          1.778964     0.244356      -11.38365
+2008 to Aug 2021 (futures development years)         10.908451      0.58854      -23.21575
+whole in-sample 2000 to Aug 2021                      7.496234     0.488975     -21.652896
+
+==== profit by calendar year, percent of $300k (cap 200%) ====
+      top 10% | old version | SPY above 20  top 10% | old version | no market co  top 10% | new version | SPY above 20  top 10% | new version | no market co  top 100% | old version | SPY above 20  top 100% | old version | no market co  top 100% | new version | SPY above 20  top 100% | new version | no market co
+2000                                   0.0                                  -0.2                                   0.0                                   1.1                                    0.0                                    1.8                                    0.0                                   -4.7
+2001                                   0.0                                 -17.5                                   0.0                                 -25.8                                    0.0                                  -58.8                                    0.0                                  -48.5
+2002                                  -0.8                                 -14.8                                  -0.6                                 -19.1                                   -3.6                                  -33.2                                   -3.7                                  -42.1
+2003                                  22.6                                  32.4                                  38.0                                  50.3                                   55.8                                   75.4                                   58.7                                   80.8
+2004                                  -8.1                                  -2.0                                 -11.2                                   3.7                                    9.0                                   22.8                                   14.2                                   26.2
+2005                                  -4.0                                  -0.3                                  -3.2                                   4.8                                  -13.7                                   -4.0                                   -0.5                                    9.0
+2006                                  17.9                                  17.0                                  35.2                                  31.5                                   22.7                                   23.1                                   27.5                                   24.8
+2007                                  -6.9                                  -6.0                                 -10.4                                  -0.4                                   -5.3                                   -4.1                                   -5.4                                    2.8
+2008                                  -1.3                                 -28.1                                  -3.5                                 -35.8                                   -4.7                                  -79.0                                   -5.1                                  -76.8
+2009                                   8.2                                  22.0                                  23.3                                  43.0                                   15.8                                   46.2                                   27.1                                   63.4
+2010                                  -2.2                                  18.9                                  -1.0                                  28.7                                    1.1                                   -1.7                                    9.4                                   14.2
+2011                                 -12.8                                 -19.8                                 -18.7                                 -19.7                                  -13.2                                  -33.6                                  -14.8                                  -26.4
+2012                                  -5.1                                   6.3                                  -6.2                                  13.4                                    0.0                                   -9.5                                   -2.0                                   22.5
+2013                                  57.4                                  62.5                                  91.2                                  92.9                                   80.6                                   78.6                                   74.3                                   97.9
+2014                                 -12.2                                 -11.9                                  -4.8                                  -6.6                                   -3.6                                  -12.7                                    0.2                                   -7.0
+2015                                 -11.0                                 -18.7                                 -11.6                                  -8.5                                  -27.8                                  -26.3                                  -24.1                                  -22.9
+2016                                   6.4                                   6.2                                   5.9                                   4.9                                   14.5                                   -0.7                                   18.0                                   -3.2
+2017                                  33.2                                  35.4                                  45.6                                  42.3                                   10.2                                   11.9                                   41.7                                   32.6
+2018                                  -8.4                                 -14.7                                   2.5                                  -6.1                                  -25.9                                  -15.2                                  -21.9                                  -21.5
+2019                                   1.6                                   5.9                                  19.1                                  14.8                                  -13.5                                   20.7                                    4.9                                   27.8
+2020                                   6.6                                  26.1                                  33.4                                  60.8                                   34.8                                   64.1                                   43.2                                   81.1
+2021                                  13.4                                  14.8                                  52.8                                  51.7                                   17.8                                   22.4                                   48.1                                   79.9
+
+==== 8 worst and 8 best trades (top 10% rows) ====
+    version          market condition            stock entry date  exit date  result in ATR  sessions held
+old version SPY above 200-day average  PIP-DELISTED#74 2017-01-20 2017-02-06         -27.06           12.0
+old version SPY above 200-day average NIHDQ-DELISTED#1 2004-01-30 2004-03-23         -12.93           37.0
+old version SPY above 200-day average    BBRY-DELISTED 2004-06-04 2004-06-07         -12.74            2.0
+old version SPY above 200-day average              WAT 2019-03-08 2019-04-23         -11.06           32.0
+old version SPY above 200-day average    AMPE-DELISTED 2015-03-17 2015-04-20          -9.94           24.0
+old version SPY above 200-day average           GERN#2 2018-08-28 2018-09-27          -9.67           22.0
+old version SPY above 200-day average GNVC-DELISTED#41 2010-03-19 2010-03-30          -9.09            8.0
+old version SPY above 200-day average  BLUD-DELISTED#7 2004-06-18 2004-07-19          -8.22           21.0
+old version SPY above 200-day average          MARA#33 2020-10-29 2021-02-23          80.46           79.0
+old version SPY above 200-day average PCYC-DELISTED#27 2012-01-20 2012-10-23          67.40          193.0
+old version SPY above 200-day average  WWE-DELISTED#21 2017-12-26 2018-10-10          66.05          200.0
+old version SPY above 200-day average              XYZ 2016-12-30 2017-11-29          62.03          231.0
+old version SPY above 200-day average    DRYS-DELISTED 2007-02-28 2007-08-16          54.39          118.0
+old version SPY above 200-day average             NVDA 2016-06-27 2017-02-23          51.80          167.0
+old version SPY above 200-day average             CTRN 2020-09-24 2021-05-25          50.58          168.0
+old version SPY above 200-day average          PLUG#24 2020-08-03 2021-02-23          49.87          141.0
+old version       no market condition  PIP-DELISTED#74 2017-01-20 2017-02-06         -27.06           12.0
+old version       no market condition NIHDQ-DELISTED#1 2004-01-30 2004-03-23         -12.93           37.0
+old version       no market condition    BBRY-DELISTED 2004-06-04 2004-06-07         -12.74            2.0
+old version       no market condition     CCE-DELISTED 2010-08-25 2010-10-04         -11.26           28.0
+old version       no market condition              WAT 2019-03-08 2019-04-23         -11.06           32.0
+old version       no market condition    PFCB-DELISTED 2002-02-08 2002-05-02         -10.98           58.0
+old version       no market condition    AMPE-DELISTED 2015-03-17 2015-04-20          -9.94           24.0
+old version       no market condition           GERN#2 2018-08-28 2018-09-27          -9.67           22.0
+old version       no market condition          PLUG#24 2020-05-04 2021-02-23         153.99          204.0
+old version       no market condition          MARA#33 2020-10-29 2021-02-23          80.46           79.0
+old version       no market condition PCYC-DELISTED#27 2012-01-20 2012-10-23          67.40          193.0
+old version       no market condition  WWE-DELISTED#21 2017-12-26 2018-10-10          66.05          200.0
+old version       no market condition              XYZ 2016-12-30 2017-11-29          62.03          231.0
+old version       no market condition    DRYS-DELISTED 2007-02-28 2007-08-16          54.39          118.0
+old version       no market condition             NVDA 2016-06-27 2017-02-23          51.80          167.0
+old version       no market condition             CTRN 2020-09-24 2021-05-25          50.58          168.0
+new version SPY above 200-day average  PIP-DELISTED#74 2017-01-20 2017-02-06         -27.06           12.0
+new version SPY above 200-day average    ITMN-DELISTED 2010-04-28 2010-05-05         -20.23            6.0
+new version SPY above 200-day average    OREX-DELISTED 2011-01-20 2011-02-01         -16.21            9.0
+new version SPY above 200-day average    ADLR-DELISTED 2006-05-19 2006-09-05         -14.31           75.0
+new version SPY above 200-day average NIHDQ-DELISTED#1 2004-01-30 2004-03-23         -12.93           37.0
+new version SPY above 200-day average    BBRY-DELISTED 2004-06-04 2004-06-07         -12.74            2.0
+new version SPY above 200-day average             VRSN 2012-09-12 2012-10-26         -12.13           33.0
+new version SPY above 200-day average              WAT 2019-03-08 2019-04-23         -11.06           32.0
+new version SPY above 200-day average              GME 2020-10-29 2021-01-28         156.55           62.0
+new version SPY above 200-day average          RIOT#11 2020-09-03 2021-02-23         101.71          118.0
+new version SPY above 200-day average          MARA#33 2020-10-29 2021-02-23          80.46           79.0
+new version SPY above 200-day average  EBIX-DELISTED#5 2016-04-08 2016-09-12          73.86          109.0
+new version SPY above 200-day average PCYC-DELISTED#27 2012-01-20 2012-10-23          67.40          193.0
+new version SPY above 200-day average  WWE-DELISTED#21 2017-12-26 2018-10-10          66.05          200.0
+new version SPY above 200-day average              XYZ 2016-12-30 2017-11-29          62.03          231.0
+new version SPY above 200-day average             CDLX 2019-06-21 2020-02-27          59.59          173.0
+new version       no market condition  PIP-DELISTED#74 2017-01-20 2017-02-06         -27.06           12.0
+new version       no market condition    ITMN-DELISTED 2010-04-28 2010-05-05         -20.23            6.0
+new version       no market condition    OREX-DELISTED 2011-01-20 2011-02-01         -16.21            9.0
+new version       no market condition     FRX-DELISTED 2002-12-09 2003-01-09         -15.10           22.0
+new version       no market condition    ADLR-DELISTED 2006-05-19 2006-09-05         -14.31           75.0
+new version       no market condition NIHDQ-DELISTED#1 2004-01-30 2004-03-23         -12.93           37.0
+new version       no market condition    BBRY-DELISTED 2004-06-04 2004-06-07         -12.74            2.0
+new version       no market condition             VRSN 2012-09-12 2012-10-26         -12.13           33.0
+new version       no market condition              GME 2020-10-29 2021-01-28         156.55           62.0
+new version       no market condition          PLUG#24 2020-05-04 2021-02-23         153.99          204.0
+new version       no market condition          RIOT#11 2020-09-03 2021-02-23         101.71          118.0
+new version       no market condition          MARA#33 2020-10-29 2021-02-23          80.46           79.0
+new version       no market condition  EBIX-DELISTED#5 2016-04-08 2016-09-12          73.86          109.0
+new version       no market condition PCYC-DELISTED#27 2012-01-20 2012-10-23          67.40          193.0
+new version       no market condition  WWE-DELISTED#21 2017-12-26 2018-10-10          66.05          200.0
+new version       no market condition              XYZ 2016-12-30 2017-11-29          62.03          231.0
+done
