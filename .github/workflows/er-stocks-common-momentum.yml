@@ -1,0 +1,45 @@
+name: "Efficiency ratio rule on common stocks, one series per company, strongest 6-month performers: old vs new version, in-sample"
+# research/trend_following_stocks/er_stocks_common_momentum.py (Michael, 17 Nov 2026). In-sample only (data through 2021-08-06); later years are never read.
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/er-stocks-20261117']
+    paths:
+      - 'research/trend_following_stocks/er_stocks_common_momentum.py'
+      - 'research/trend_following_stocks/fetch_stock_prices.py'
+      - 'research/trend_following_stocks/er_stocks.py'
+      - '.github/workflows/er-stocks-common-momentum.yml'
+concurrency:
+  group: er-stocks-common-momentum
+  cancel-in-progress: true
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas numpy
+      - name: Fetch stock and SPY prices from R2
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python research/trend_following_stocks/fetch_stock_prices.py data_stocks
+      - name: Efficiency ratio rule on stocks
+        run: |
+          mkdir -p research/trend_following_stocks/results_common_momentum
+          python research/trend_following_stocks/er_stocks_common_momentum.py data_stocks/stock_prices.parquet research/trend_following_stocks/results_common_momentum data_stocks/spy_prices.parquet | tee research/trend_following_stocks/results_common_momentum/output.txt
+      - name: Save results_common_momentum on the branch
+        run: |
+          echo "workflow run ${{ github.run_id }}" > research/trend_following_stocks/results_common_momentum/RUN_ID.txt
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add research/trend_following_stocks/results_common_momentum
+          git commit -m "Common stocks, strongest 6-month performers, in-sample results_common_momentum (workflow run ${{ github.run_id }})" || echo "nothing to commit"
+          git pull --rebase origin ${{ github.ref_name }}
+          git push origin HEAD:${{ github.ref_name }}
