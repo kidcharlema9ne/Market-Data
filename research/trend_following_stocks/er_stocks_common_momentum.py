@@ -196,7 +196,7 @@ def build(path):
     return SEG, names, dropped, cal
 
 
-def trades_for(SEG, dropped, cal, top, version):
+def trades_for(SEG, dropped, cal, top, version, market_ok=None, long_only=False):
     init, mm, cap = VERSIONS[version]
     first_i = (FIRST_TRADE - EPOCH).days
     R = dict(sess_e=[], sess_x=[], d=[], px_e=[], px_x=[], a0=[], res=[], held=[], how=[], sym=[], rank=[], f_sess=[], f_incr=[], f_tid=[])
@@ -210,6 +210,10 @@ def trades_for(SEG, dropped, cal, top, version):
             if t < last_exit or not np.isfinite(rk) or g["spac"][t] or not g["liq"][t] or t + 1 >= len(sc) or cal[s[t + 1]] < first_i:
                 continue
             if top < 1.0 and not ((d > 0 and rk >= 1.0 - top) or (d < 0 and rk <= top)):
+                continue
+            if long_only and d < 0:
+                continue
+            if market_ok is not None and d > 0 and not market_ok[s[t]]:
                 continue
             res = B.run_trade(so, sh, sl, sc, atr, t, d, init, mm, cap)
             if res is None:
