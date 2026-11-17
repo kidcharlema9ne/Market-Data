@@ -1,0 +1,48 @@
+development rows 526,297; 2007-12-31 to 2026-11-06; indicator warm-up from 2020-06; trades counted only from 2021-08-07
+46 markets; 203,982 decision days; 7,163 entries across 2 combinations; 1s
+frozen best rule (pullback entry, 1 ATR stop, 5 ATR trail): 1891 trades (development 1396, sealed 495); median sessions held 6; win rate 19.5%
+earlier system (20-session breakout, ratio 0.6, 3 ATR stop, 3 ATR trail): 1179 trades (development 897, sealed 282); median sessions held 19; win rate 37.4%
+SIMULATOR CHECK PASSED: 1 ATR / 5 ATR / 130 (frozen) and 3 ATR / 3 ATR / 130 (earlier) reproduce the engine's trades, results and daily profit exactly
+REFERENCE CHECK PASSED: whole-history return, Sharpe and drawdown match Entry 128
+CHECKS PASSED: fixed-size run reproduces the engine and the logged Entry 131 rows
+done original rule (1 ATR stop, 130-session limit) (3s)
+done version 2 (2 ATR stop, no time limit) (3s)
+
+==== original rule (1 ATR stop, 130-session limit) ====
+                                                                            0                                1                           2                                3
+bet_size                                                        0.15% per ATR                    0.15% per ATR               0.25% per ATR                    0.25% per ATR
+sizing                                             fixed $300,000 (as before)  scaled to current account value  fixed $300,000 (as before)  scaled to current account value
+trades                                                                   1022                             1255                        1391                             1571
+smallest_target_pct_of_start                                             0.15                             0.15                        0.25                             0.24
+largest_target_pct_of_start                                              0.15                             0.37                        0.25                             0.65
+development years: growth a year %                                       4.65                             4.23                        4.27                             4.94
+development years: Sharpe                                                0.87                             0.66                        0.48                             0.48
+development years: max drawdown %                                      -13.32                           -20.16                      -32.61                           -40.74
+sealed years (read-only look): growth a year %                           2.63                             4.55                        4.34                             3.01
+sealed years (read-only look): Sharpe                                    0.84                             0.66                        0.77                             0.32
+sealed years (read-only look): max drawdown %                           -3.39                           -12.92                       -8.91                           -22.03
+whole history: growth a year %                                           4.08                             4.32                        4.29                              4.4
+whole history: Sharpe                                                    0.84                             0.66                        0.52                             0.44
+whole history: max drawdown %                                          -13.32                           -20.16                      -32.61                           -40.74
+ending account value $                                              647593.73                        676968.12                   673413.46                        686817.44
+logged-style profit a year % (simple, over $300k)                        6.02                              NaN                        6.47                              NaN
+
+==== version 2 (2 ATR stop, no time limit) ====
+                                                                            4                                5                           6                                7
+bet_size                                                        0.15% per ATR                    0.15% per ATR               0.25% per ATR                    0.25% per ATR
+sizing                                             fixed $300,000 (as before)  scaled to current account value  fixed $300,000 (as before)  scaled to current account value
+trades                                                                    910                             1221                        1246                             1545
+smallest_target_pct_of_start                                             0.15                             0.15                        0.25                             0.23
+largest_target_pct_of_start                                              0.15                              0.5                        0.25                             1.15
+development years: growth a year %                                       6.19                             5.82                        6.43                             8.56
+development years: Sharpe                                                0.97                             0.65                        0.62                             0.57
+development years: max drawdown %                                      -14.53                           -31.47                      -30.69                           -54.29
+sealed years (read-only look): growth a year %                           3.55                              7.0                        5.87                             5.68
+sealed years (read-only look): Sharpe                                     0.9                              0.7                        0.94                             0.43
+sealed years (read-only look): max drawdown %                           -2.97                            -13.6                       -6.75                            -27.9
+whole history: growth a year %                                           5.45                             6.15                        6.27                             7.75
+whole history: Sharpe                                                    0.94                             0.66                        0.66                             0.53
+whole history: max drawdown %                                          -14.53                           -31.47                      -30.69                           -54.29
+ending account value $                                              832171.33                        946253.67                   966929.02                       1260824.53
+logged-style profit a year % (simple, over $300k)                        9.22                              NaN                       11.55                              NaN
+done 3s

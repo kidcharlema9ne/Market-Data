@@ -1,0 +1,9 @@
+rule,bet_size,sizing,trades,smallest_target_pct_of_start,largest_target_pct_of_start,development years: growth a year %,development years: Sharpe,development years: max drawdown %,sealed years (read-only look): growth a year %,sealed years (read-only look): Sharpe,sealed years (read-only look): max drawdown %,whole history: growth a year %,whole history: Sharpe,whole history: max drawdown %,ending account value $,"logged-style profit a year % (simple, over $300k)"
+"original rule (1 ATR stop, 130-session limit)",0.15% per ATR,"fixed $300,000 (as before)",1022,0.15,0.15,4.649,0.869,-13.324,2.632,0.836,-3.394,4.08,0.844,-13.324,647593.728,6.021
+"original rule (1 ATR stop, 130-session limit)",0.15% per ATR,scaled to current account value,1255,0.15,0.367,4.23,0.664,-20.163,4.552,0.659,-12.924,4.32,0.662,-20.163,676968.122,
+"original rule (1 ATR stop, 130-session limit)",0.25% per ATR,"fixed $300,000 (as before)",1391,0.25,0.25,4.273,0.477,-32.611,4.34,0.773,-8.914,4.292,0.52,-32.611,673413.459,6.469
+"original rule (1 ATR stop, 130-session limit)",0.25% per ATR,scaled to current account value,1571,0.242,0.647,4.945,0.48,-40.743,3.008,0.32,-22.035,4.399,0.436,-40.743,686817.435,
+"version 2 (2 ATR stop, no time limit)",0.15% per ATR,"fixed $300,000 (as before)",910,0.15,0.15,6.192,0.974,-14.526,3.55,0.901,-2.969,5.445,0.942,-14.526,832171.329,9.219
+"version 2 (2 ATR stop, no time limit)",0.15% per ATR,scaled to current account value,1221,0.15,0.496,5.824,0.646,-31.473,7.0,0.697,-13.604,6.152,0.66,-31.473,946253.667,
+"version 2 (2 ATR stop, no time limit)",0.25% per ATR,"fixed $300,000 (as before)",1246,0.25,0.25,6.427,0.617,-30.691,5.871,0.936,-6.751,6.271,0.659,-30.691,966929.015,11.553
+"version 2 (2 ATR stop, no time limit)",0.25% per ATR,scaled to current account value,1545,0.235,1.147,8.563,0.572,-54.287,5.676,0.426,-27.901,7.747,0.532,-54.287,1260824.531,
