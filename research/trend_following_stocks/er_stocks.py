@@ -7,12 +7,12 @@ Rule (same entry for both versions, close-based, copied from the futures work, n
      qualifies in a direction starts a watch.
   2. Watch up to 20 sessions for a pullback: a close at least 2.5 ATR (20-day average true range) below the best high since the signal (long) or above the lowest low since the signal (short).
   3. Enter at the next session's open. One position per stock.
-  4. OLD VERSION: 1 ATR initial stop from entry, then 5 ATR trailing stop from the best close, closed after 130 sessions.
+  4. OLD VERSION: 1 ATR initial stop from entry, then 5 ATR trailing stop from the best close, NO time limit (Michael, 17 Nov 2026: the 130-session limit was wrong for the old version).
      NEW VERSION (version 2): 2 ATR initial stop, then 5 ATR trailing stop from the best close, no time limit.
   Cost 0.05 ATR a side (0.10 ATR round trip). Gap through a stop fills at the open.
 Stock rules: liquidity floor = average dollar volume (close x volume) of the prior 15 sessions of at least $3,000,000, all 15 sessions present, checked on the decision day (same definition as the
-insider study, Entry 19). Position size = whole shares, 0.15% or 0.25% of a fixed $300,000 per ATR (shares = floor(target / ATR in dollars per share); skip if under 1 share). Total position value
-(longs and shorts added together) is capped at 100% of the account (fully paid) or 200% (margin), or not capped; when a cap is full a new signal is skipped, same-day ties in a fixed random order (seed
+insider study, Entry 19). Position size = whole shares, 0.10% of a fixed $300,000 per ATR (Michael, 17 Nov 2026) (shares = floor(target / ATR in dollars per share); skip if under 1 share). Total position value
+(longs and shorts added together) is capped at 200% of the account (Michael's choice; 100% fully paid and no cap shown for comparison); when a cap is full a new signal is skipped, same-day ties in a fixed random order (seed
 20261117). Stocks are tested long and short, long only and short only.
 In-sample = data through 2021-08-06 (the same development cut as the futures work; later years stay sealed and are not read). Windows: 2000-2007, 2008 to Aug 2021 (the futures development years), whole.
 Positions still open on the last day, or whose stock stops trading (delisting, trading suspended), are closed at the last available close. A series is cut into separate stocks at a gap of more than 5
@@ -36,10 +36,10 @@ EPOCH = pd.Timestamp("1970-01-01")
 END = pd.Timestamp("2021-08-06")
 FIRST_TRADE = pd.Timestamp("2000-03-01")
 MAIN_START = pd.Timestamp("2008-02-01")
-VERSIONS = {"old version (1 ATR stop, 5 ATR trail, 130-session limit)": (1.0, TRAIL, 130),
+VERSIONS = {"old version (1 ATR stop, 5 ATR trail, no time limit)": (1.0, TRAIL, None),
             "new version 2 (2 ATR stop, 5 ATR trail, no time limit)": (2.0, TRAIL, None)}
-SIZES = (0.15, 0.25)
-CAPS = (1.0, 2.0, None)
+SIZES = (0.10,)
+CAPS = (2.0, 1.0, None)
 SIDES = {"long and short": (1, -1), "long only": (1,), "short only": (-1,)}
 SEED = 20261117
 
@@ -305,13 +305,13 @@ def main():
                                    "average sessions held": float(R["held"][inw].mean()) if inw.any() else np.nan, "ten biggest trades share of profit %": float(top.sum() / usd.sum() * 100) if usd.sum() > 0 else np.nan,
                                    "total profit $": float(usd.sum()), "signals skipped, account full": P["skipped_cap"], "signals skipped, under 1 share": P["skipped_small"]})
                         rows.append(st)
-                        if wn.startswith("whole") and tp == 0.15 and cap == 1.0:
+                        if wn.startswith("whole") and cap == 2.0:
                             by_year[(vname, sname)] = cal_y
                             daily_keep[(vname, sname)] = P["pnl"]
         # unconstrained per-trade summary (before any account limit or sizing)
     S = pd.DataFrame(rows)
     S.to_csv(out_dir / "stock_results_summary.csv", index=False)
-    pd.DataFrame({f"{k[0][:12]} | {k[1]}": v for k, v in by_year.items()}).round(2).to_csv(out_dir / "profit_by_year_pct_0.15_cap100.csv")
+    pd.DataFrame({f"{k[0][:12]} | {k[1]}": v for k, v in by_year.items()}).round(2).to_csv(out_dir / "profit_by_year_pct_0.10_cap200.csv")
     # per-trade table before sizing and account limits
     pt = []
     for vname, R in V.items():
@@ -344,19 +344,19 @@ def main():
     print(PT.round(3).to_string(index=False))
     sort_cols = ["sides", "size per ATR %", "version"]
     for wn in WIN:
-        v = S[(S.window == wn) & (S["account limit"] == "position value capped at 100% of the account")].copy()
+        v = S[(S.window == wn) & (S["account limit"] == "position value capped at 200% of the account")].copy()
         v["version"] = v["version"].str.slice(0, 11)
         v = v.sort_values(sort_cols, key=lambda col: col.map({"long and short": 0, "long only": 1, "short only": 2}) if col.name == "sides" else col)
-        print(f"\n==== {wn} | position value capped at 100% of the account (fully paid) ====")
+        print(f"\n==== {wn} | position value capped at 200% of the account ====")
         print(v[["sides", "size per ATR %"] + cols].round(2).to_string(index=False))
-    v = S[(S.window.str.startswith("whole")) & (S.sides == "long and short") & (S["size per ATR %"] == 0.15)].copy()
+    v = S[(S.window.str.startswith("whole")) & (S.sides == "long and short") & (S["size per ATR %"] == 0.10)].copy()
     v["version"] = v["version"].str.slice(0, 11)
-    print("\n==== whole in-sample | long and short | 0.15% per ATR | effect of the account limit ====")
+    print("\n==== whole in-sample | long and short | 0.10% per ATR | effect of the account limit ====")
     print(v[["account limit"] + cols].round(2).to_string(index=False))
     if spy:
         print("\n==== SPY buy and hold, price only, $300k, same windows ====")
         print(pd.DataFrame(spy).T[["profit per year %", "Sharpe ratio", "max drawdown %"]].round(2).to_string())
-    print("\n==== profit by calendar year, percent of $300k (0.15% per ATR, position value capped at 100%) ====")
+    print("\n==== profit by calendar year, percent of $300k (0.10% per ATR, position value capped at 200%) ====")
     print(pd.DataFrame({f"{k[0][:11]} | {k[1]}": v for k, v in by_year.items()}).round(1).to_string())
     print("done")
 

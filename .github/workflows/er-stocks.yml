@@ -8,6 +8,9 @@ on:
       - 'research/trend_following_stocks/er_stocks.py'
       - 'research/trend_following_stocks/fetch_stock_prices.py'
       - '.github/workflows/er-stocks.yml'
+concurrency:
+  group: er-stocks
+  cancel-in-progress: true
 permissions:
   contents: write
 jobs:
@@ -28,14 +31,14 @@ jobs:
         run: python research/trend_following_stocks/fetch_stock_prices.py data_stocks
       - name: Efficiency ratio rule on stocks
         run: |
-          mkdir -p research/trend_following_stocks/results
-          python research/trend_following_stocks/er_stocks.py data_stocks/stock_prices.parquet research/trend_following_stocks/results data_stocks/spy_prices.parquet | tee research/trend_following_stocks/results/output.txt
-      - name: Save results on the branch
+          mkdir -p research/trend_following_stocks/results_no_limit_0.10
+          python research/trend_following_stocks/er_stocks.py data_stocks/stock_prices.parquet research/trend_following_stocks/results_no_limit_0.10 data_stocks/spy_prices.parquet | tee research/trend_following_stocks/results_no_limit_0.10/output.txt
+      - name: Save results_no_limit_0.10 on the branch
         run: |
-          echo "workflow run ${{ github.run_id }}" > research/trend_following_stocks/results/RUN_ID.txt
+          echo "workflow run ${{ github.run_id }}" > research/trend_following_stocks/results_no_limit_0.10/RUN_ID.txt
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
-          git add research/trend_following_stocks/results
-          git commit -m "Efficiency ratio on stocks, in-sample results (workflow run ${{ github.run_id }})" || echo "nothing to commit"
+          git add research/trend_following_stocks/results_no_limit_0.10
+          git commit -m "Efficiency ratio on stocks, in-sample results_no_limit_0.10 (workflow run ${{ github.run_id }})" || echo "nothing to commit"
           git pull --rebase origin ${{ github.ref_name }}
           git push origin HEAD:${{ github.ref_name }}
