@@ -1,0 +1,97 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 3s
+11,108 common-stock segments ever liquid; 37s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 381s
+signal recomputation matches the original on 413 segments (window 20, threshold 0.5)
+window 60, threshold 0.30: 11,602 signals
+window 60, threshold 0.40: 5,984 signals
+window 60, threshold 0.50: 1,882 signals
+window 60, threshold 0.60: 374 signals
+window 60, threshold 0.70: 82 signals
+window 90, threshold 0.30: 8,261 signals
+window 90, threshold 0.40: 2,407 signals
+window 90, threshold 0.50: 427 signals
+window 90, threshold 0.60: 78 signals
+window 90, threshold 0.70: 14 signals
+
+==== efficiency ratio window x threshold | long only | strongest 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | 2000 to 2007 ====
+ ER window  ER threshold  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+        60           0.3          1320       42.73                   0.79                  48.70              12.90          0.47          -20.17         -9.14         4 of 9                                92.45
+        60           0.4           948       45.15                   1.11                  49.30              12.98          0.60          -18.86         -2.03         6 of 9                                71.65
+        60           0.5           353       45.61                   1.11                  46.29               4.82          0.52          -12.98         -0.59         5 of 9                                25.55
+        60           0.6            55       43.64                   1.23                  48.31               0.84          0.39           -4.15         -0.20         4 of 9                                 4.36
+        60           0.7             9       66.67                   1.03                  35.33               0.12          0.16           -1.11         -0.25         3 of 9                                 0.61
+        90           0.3          1171       42.02                   0.67                  47.52               9.67          0.39          -22.25        -15.47         3 of 9                                84.00
+        90           0.4           468       40.60                   0.48                  43.61               2.79          0.25          -18.75         -0.95         4 of 9                                33.79
+        90           0.5            72       43.06                   0.60                  45.82               0.53          0.21           -5.35         -1.05         4 of 9                                 4.86
+        90           0.6             9       44.44                   0.43                  41.67               0.05          0.08           -1.56         -0.32         3 of 9                                 0.45
+        90           0.7             1        0.00                  -5.46                   2.00              -0.07         -0.36           -0.54         -0.54         0 of 9                                 0.00
+
+==== efficiency ratio window x threshold | long only | strongest 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | 2000 to 2007 ====
+ ER window  ER threshold  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+        60           0.3           784       43.49                   0.80                  49.32               7.76          0.49          -16.09         -7.75         4 of 9                                50.51
+        60           0.4           582       43.64                   0.92                  48.87               6.63          0.51          -13.65         -1.78         5 of 9                                42.37
+        60           0.5           323       44.27                   1.03                  46.11               4.11          0.50          -12.98         -0.59         5 of 9                                22.64
+        60           0.6            55       43.64                   1.23                  48.31               0.84          0.39           -4.15         -0.20         4 of 9                                 4.36
+        60           0.7             9       66.67                   1.03                  35.33               0.12          0.16           -1.11         -0.25         3 of 9                                 0.61
+        90           0.3           707       42.43                   0.62                  48.29               5.46          0.38          -14.61         -6.74         3 of 9                                48.28
+        90           0.4           379       41.42                   0.66                  44.99               3.09          0.35          -14.29         -0.52         4 of 9                                26.34
+        90           0.5            72       43.06                   0.60                  45.82               0.53          0.21           -5.35         -1.05         4 of 9                                 4.86
+        90           0.6             9       44.44                   0.43                  41.67               0.05          0.08           -1.56         -0.32         3 of 9                                 0.45
+        90           0.7             1        0.00                  -5.46                   2.00              -0.07         -0.36           -0.54         -0.54         0 of 9                                 0.00
+
+==== efficiency ratio window x threshold | long only | strongest 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | 2008 to Aug 2021 ====
+ ER window  ER threshold  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+        60           0.3          3464       41.28                   1.07                  54.06              27.61          0.69          -24.10        -11.79       11 of 14                               150.84
+        60           0.4          2968       39.29                   0.71                  49.49              15.72          0.47          -29.16        -13.69        7 of 14                               129.48
+        60           0.5          1425       40.35                   0.51                  45.84               5.40          0.29          -24.41        -10.66       10 of 14                                75.85
+        60           0.6           313       38.34                   0.76                  44.54               1.78          0.35          -12.96         -2.13        8 of 14                                26.84
+        60           0.7            70       37.14                   0.08                  44.21               0.05          0.03           -5.18         -2.66        8 of 14                                13.37
+        90           0.3          3073       40.03                   0.77                  51.67              17.58          0.50          -38.13        -16.36        8 of 14                               138.06
+        90           0.4          1645       39.70                   0.64                  47.73               7.82          0.37          -23.93        -17.04       11 of 14                                87.52
+        90           0.5           345       40.29                   0.68                  42.21               1.77          0.29          -18.14         -6.27        7 of 14                                27.16
+        90           0.6            64       43.75                   0.54                  43.69               0.27          0.20           -5.48         -4.07        7 of 14                                 8.40
+        90           0.7            12       33.33                  -0.77                  22.83              -0.07         -0.17           -2.74         -1.13        4 of 14                                 1.91
+
+==== efficiency ratio window x threshold | long only | strongest 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | 2008 to Aug 2021 ====
+ ER window  ER threshold  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+        60           0.3          1916       41.08                   1.02                  53.39              14.53          0.68          -14.50         -7.68        9 of 14                                77.13
+        60           0.4          1767       40.01                   0.80                  50.55              10.57          0.52          -22.74        -10.74        9 of 14                                71.92
+        60           0.5          1127       39.57                   0.43                  46.71               3.66          0.25          -25.51        -10.30        8 of 14                                51.63
+        60           0.6           299       37.79                   0.65                  44.73               1.48          0.30          -13.34         -2.53        9 of 14                                23.86
+        60           0.7            68       36.76                   0.07                  45.15               0.04          0.03           -5.19         -2.66        8 of 14                                12.65
+        90           0.3          1833       40.86                   0.70                  51.45               9.57          0.47          -30.98        -11.71        8 of 14                                72.66
+        90           0.4          1183       39.73                   0.77                  49.94               6.81          0.44          -19.32        -15.19       10 of 14                                54.99
+        90           0.5           324       39.81                   0.72                  42.60               1.75          0.29          -18.16         -6.27        7 of 14                                22.03
+        90           0.6            64       43.75                   0.54                  43.69               0.27          0.20           -5.48         -4.07        7 of 14                                 8.40
+        90           0.7            12       33.33                  -0.77                  22.83              -0.07         -0.17           -2.74         -1.13        4 of 14                                 1.91
+
+==== efficiency ratio window x threshold | long only | strongest 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | whole 2000 to Aug 2021 ====
+ ER window  ER threshold  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+        60           0.3          4784       41.68                   1.00                  52.58              22.11          0.62          -26.31        -11.79       15 of 22                               129.02
+        60           0.4          3916       40.70                   0.81                  49.45              14.70          0.49          -18.86        -13.69       12 of 22                               107.86
+        60           0.5          1778       41.39                   0.63                  45.93               5.18          0.33          -20.80        -10.66       15 of 22                                57.05
+        60           0.6           368       39.13                   0.83                  45.11               1.43          0.33          -12.37         -2.13       12 of 22                                18.44
+        60           0.7            79       40.51                   0.18                  43.20               0.07          0.06           -5.14         -2.66       11 of 22                                 8.60
+        90           0.3          4244       40.57                   0.74                  50.53              14.63          0.46          -25.79        -16.36       11 of 22                               117.86
+        90           0.4          2113       39.90                   0.61                  46.82               5.94          0.33          -25.74        -17.04       15 of 22                                67.44
+        90           0.5           417       40.77                   0.67                  42.83               1.31          0.25          -17.64         -6.27       11 of 22                                18.82
+        90           0.6            73       43.84                   0.53                  43.44               0.18          0.17           -5.46         -4.07       10 of 22                                 5.42
+        90           0.7            13       30.77                  -1.13                  21.23              -0.07         -0.20           -2.76         -1.13        4 of 22                                 1.20
+
+==== efficiency ratio window x threshold | long only | strongest 20% | SPY 200-day for entries | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | whole 2000 to Aug 2021 ====
+ ER window  ER threshold  trades taken  win rate %  average ATR per trade  average sessions held  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  average position value % of account
+        60           0.3          2700       41.78                   0.95                  52.21              12.00          0.61          -20.84         -7.75       13 of 22                                67.18
+        60           0.4          2349       40.91                   0.83                  50.14               9.10          0.51          -16.55        -10.74       13 of 22                                60.88
+        60           0.5          1450       40.62                   0.57                  46.58               3.83          0.31          -21.07        -10.30       13 of 22                                40.80
+        60           0.6           354       38.70                   0.74                  45.28               1.24          0.30          -12.72         -2.53       13 of 22                                16.57
+        60           0.7            77       40.26                   0.18                  44.00               0.07          0.06           -5.14         -2.66       11 of 22                                 8.15
+        90           0.3          2540       41.30                   0.68                  50.57               8.04          0.44          -23.67        -11.71       11 of 22                                63.55
+        90           0.4          1562       40.14                   0.75                  48.74               5.42          0.41          -19.77        -15.19       14 of 22                                44.28
+        90           0.5           396       40.40                   0.70                  43.18               1.30          0.26          -17.65         -6.27       11 of 22                                15.61
+        90           0.6            73       43.84                   0.53                  43.44               0.18          0.17           -5.46         -4.07       10 of 22                                 5.42
+        90           0.7            13       30.77                  -1.13                  21.23              -0.07         -0.20           -2.76         -1.13        4 of 22                                 1.20
+done
