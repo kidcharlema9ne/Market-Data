@@ -1,0 +1,80 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 3s
+11,108 common-stock segments ever liquid; 33s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 361s
+baseline: 18,978 signals; reference pick, whole period cap 200%: +22.9% / Sharpe 0.64 / -22% (documented +22.9% / 0.64 / -22%); generator and account simulator match the standard ones
+copied exit routine (average exit off) matches the standard one on 302 trades
+  baseline: +23.3% / Sharpe 0.65 (0.62 to 0.73) / -22% / worst year -19% / trades 4774
+  REPLACE the SPY condition: stock above its own 50-day average: +20.3% / Sharpe 0.50 (0.49 to 0.51) / -117% / worst year -70% / trades 6530
+     (22,195 signals; 18% of them start while SPY is below its 200-day)
+  REPLACE the SPY condition: stock above its own 100-day average: +19.4% / Sharpe 0.48 (0.45 to 0.53) / -113% / worst year -68% / trades 6543
+     (22,201 signals; 18% of them start while SPY is below its 200-day)
+  REPLACE the SPY condition: stock above its own 200-day average: +20.5% / Sharpe 0.52 (0.46 to 0.59) / -100% / worst year -70% / trades 6178
+     (21,047 signals; 18% of them start while SPY is below its 200-day)
+  KEEP the SPY condition AND stock above its own 50-day average: +23.5% / Sharpe 0.66 (0.62 to 0.69) / -22% / worst year -18% / trades 4752
+  KEEP the SPY condition AND stock above its own 100-day average: +22.9% / Sharpe 0.64 (0.60 to 0.67) / -23% / worst year -17% / trades 4793
+  KEEP the SPY condition AND stock above its own 200-day average: +23.6% / Sharpe 0.67 (0.64 to 0.70) / -23% / worst year -17% / trades 4598
+
+==== entry | 2000 to 2007 | cap 200% | mean of 8 random picks ====
+                                                      scenario  profit per year %  Sharpe ratio  Sharpe lowest pick  Sharpe highest pick  max drawdown %  profit / drawdown from peak  worst year %  trades taken  average open positions
+         current best rule (SPY above its 200-day for entries)              15.74          0.54                0.47                 0.64          -22.41                         0.70         -8.64       1319.00                   33.35
+ REPLACE the SPY condition: stock above its own 50-day average               7.24          0.20                0.17                 0.23         -117.22                         0.06        -69.82       2316.38                   53.48
+REPLACE the SPY condition: stock above its own 100-day average               7.17          0.20                0.12                 0.29         -113.24                         0.06        -68.11       2304.75                   53.50
+REPLACE the SPY condition: stock above its own 200-day average               7.40          0.22                0.12                 0.33         -100.16                         0.07        -61.30       2093.25                   48.82
+ KEEP the SPY condition AND stock above its own 50-day average              15.68          0.54                0.51                 0.58          -21.70                         0.72         -9.42       1315.75                   33.33
+KEEP the SPY condition AND stock above its own 100-day average              15.28          0.53                0.49                 0.58          -22.75                         0.67         -8.93       1319.00                   33.26
+KEEP the SPY condition AND stock above its own 200-day average              14.84          0.52                0.44                 0.59          -21.52                         0.69         -8.45       1266.38                   32.08
+
+==== entry | 2000 to 2007 | cap 100% | mean of 8 random picks ====
+                                                      scenario  profit per year %  Sharpe ratio  Sharpe lowest pick  Sharpe highest pick  max drawdown %  profit / drawdown from peak  worst year %  trades taken  average open positions
+         current best rule (SPY above its 200-day for entries)               9.82          0.60                0.49                 0.73          -16.37                         0.60         -7.03        730.88                   18.86
+ REPLACE the SPY condition: stock above its own 50-day average               4.06          0.20               -0.02                 0.34          -73.17                         0.06        -31.93       1352.75                   31.04
+REPLACE the SPY condition: stock above its own 100-day average               4.15          0.20                0.10                 0.34          -67.15                         0.06        -28.95       1343.25                   31.08
+REPLACE the SPY condition: stock above its own 200-day average               4.58          0.24                0.14                 0.33          -55.37                         0.08        -27.06       1199.75                   28.23
+ KEEP the SPY condition AND stock above its own 50-day average               8.29          0.52                0.44                 0.60          -16.33                         0.51         -6.59        724.25                   18.46
+KEEP the SPY condition AND stock above its own 100-day average               8.82          0.55                0.48                 0.63          -16.60                         0.53         -6.62        728.62                   18.62
+KEEP the SPY condition AND stock above its own 200-day average               7.58          0.49                0.42                 0.54          -18.66                         0.41         -7.07        698.88                   17.67
+
+==== entry | 2008 to Aug 2021 | cap 200% | mean of 8 random picks ====
+                                                      scenario  profit per year %  Sharpe ratio  Sharpe lowest pick  Sharpe highest pick  max drawdown %  profit / drawdown from peak  worst year %  trades taken  average open positions
+         current best rule (SPY above its 200-day for entries)              27.76          0.71                0.67                 0.78          -26.38                         1.05        -19.29       3455.25                   53.63
+ REPLACE the SPY condition: stock above its own 50-day average              28.09          0.65                0.64                 0.67          -71.38                         0.39        -39.69       4213.25                   64.73
+REPLACE the SPY condition: stock above its own 100-day average              26.71          0.63                0.59                 0.68          -70.19                         0.38        -40.10       4238.50                   64.76
+REPLACE the SPY condition: stock above its own 200-day average              28.33          0.67                0.59                 0.72          -68.79                         0.41        -43.98       4084.25                   63.18
+ KEEP the SPY condition AND stock above its own 50-day average              28.22          0.72                0.67                 0.76          -25.96                         1.09        -18.08       3436.50                   53.44
+KEEP the SPY condition AND stock above its own 100-day average              27.38          0.70                0.66                 0.76          -26.86                         1.02        -16.81       3473.88                   53.66
+KEEP the SPY condition AND stock above its own 200-day average              28.77          0.74                0.71                 0.78          -27.46                         1.05        -15.67       3331.88                   52.06
+
+==== entry | 2008 to Aug 2021 | cap 100% | mean of 8 random picks ====
+                                                      scenario  profit per year %  Sharpe ratio  Sharpe lowest pick  Sharpe highest pick  max drawdown %  profit / drawdown from peak  worst year %  trades taken  average open positions
+         current best rule (SPY above its 200-day for entries)              13.86          0.62                0.51                 0.71          -19.69                         0.70        -14.41       1933.88                   29.81
+ REPLACE the SPY condition: stock above its own 50-day average              12.69          0.51                0.33                 0.64          -49.27                         0.26        -25.62       2386.88                   36.14
+REPLACE the SPY condition: stock above its own 100-day average              14.70          0.58                0.53                 0.66          -50.26                         0.29        -26.79       2389.50                   36.28
+REPLACE the SPY condition: stock above its own 200-day average              13.92          0.57                0.44                 0.63          -47.65                         0.29        -25.81       2318.38                   35.31
+ KEEP the SPY condition AND stock above its own 50-day average              13.66          0.61                0.53                 0.68          -19.28                         0.71        -13.17       1922.75                   29.58
+KEEP the SPY condition AND stock above its own 100-day average              14.76          0.64                0.51                 0.76          -19.12                         0.77        -12.25       1922.50                   29.63
+KEEP the SPY condition AND stock above its own 200-day average              13.37          0.63                0.56                 0.79          -19.82                         0.67        -11.29       1858.25                   28.76
+
+==== entry | whole 2000 to Aug 2021 | cap 200% | mean of 8 random picks ====
+                                                      scenario  profit per year %  Sharpe ratio  Sharpe lowest pick  Sharpe highest pick  max drawdown %  profit / drawdown from peak  worst year %  trades taken  average open positions
+         current best rule (SPY above its 200-day for entries)              23.27          0.65                0.62                 0.73          -22.45                         1.04        -19.29       4774.25                   46.05
+ REPLACE the SPY condition: stock above its own 50-day average              20.30          0.50                0.49                 0.51         -117.22                         0.17        -69.98       6529.62                   60.52
+REPLACE the SPY condition: stock above its own 100-day average              19.41          0.48                0.45                 0.53         -113.24                         0.17        -68.48       6543.25                   60.55
+REPLACE the SPY condition: stock above its own 200-day average              20.51          0.52                0.46                 0.59         -100.16                         0.20        -70.46       6177.50                   57.81
+ KEEP the SPY condition AND stock above its own 50-day average              23.53          0.66                0.62                 0.69          -22.02                         1.07        -18.08       4752.25                   45.92
+KEEP the SPY condition AND stock above its own 100-day average              22.86          0.64                0.60                 0.67          -22.75                         1.00        -16.81       4792.88                   46.04
+KEEP the SPY condition AND stock above its own 200-day average              23.56          0.67                0.64                 0.70          -23.30                         1.01        -16.59       4598.25                   44.59
+
+==== entry | whole 2000 to Aug 2021 | cap 100% | mean of 8 random picks ====
+                                                      scenario  profit per year %  Sharpe ratio  Sharpe lowest pick  Sharpe highest pick  max drawdown %  profit / drawdown from peak  worst year %  trades taken  average open positions
+         current best rule (SPY above its 200-day for entries)              12.35          0.61                0.52                 0.68          -17.39                         0.71        -14.89       2664.75                   25.72
+ REPLACE the SPY condition: stock above its own 50-day average               9.46          0.41                0.29                 0.46          -73.17                         0.13        -41.17       3739.62                   34.23
+REPLACE the SPY condition: stock above its own 100-day average              10.76          0.46                0.38                 0.50          -67.15                         0.16        -42.50       3732.75                   34.33
+REPLACE the SPY condition: stock above its own 200-day average              10.43          0.46                0.40                 0.51          -55.37                         0.19        -41.70       3518.12                   32.66
+ KEEP the SPY condition AND stock above its own 50-day average              11.65          0.58                0.51                 0.64          -17.79                         0.65        -13.71       2647.00                   25.43
+KEEP the SPY condition AND stock above its own 100-day average              12.54          0.61                0.50                 0.69          -17.84                         0.70        -12.55       2651.12                   25.51
+KEEP the SPY condition AND stock above its own 200-day average              11.21          0.58                0.54                 0.70          -19.67                         0.57        -12.63       2557.12                   24.61
+done
