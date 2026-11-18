@@ -1,0 +1,9 @@
+ranking when the account is full,cap %,profit per year %,Sharpe ratio,max drawdown %,profit per year / drawdown,worst year %,trades taken
+volume surge on the signal day (current baseline),200,28.237,0.714,-30.094,0.938,-16.132,4874.0
+volume surge on the signal day (current baseline),100,16.94,0.717,-24.53,0.691,-11.391,2721.0
+"ridge, walk-forward",200,25.749,0.651,-31.702,0.812,-16.204,4942.0
+"ridge, walk-forward",100,13.565,0.607,-25.638,0.529,-11.379,2743.0
+"boosted trees, walk-forward",200,26.371,0.669,-32.977,0.8,-22.011,4814.0
+"boosted trees, walk-forward",100,14.167,0.603,-24.253,0.584,-17.048,2655.0
+random pick (mean of 8),100,13.435,0.607,-23.647,0.571,-14.892,2664.75
+random pick (mean of 8),200,26.225,0.678,-32.389,0.812,-19.291,4774.25

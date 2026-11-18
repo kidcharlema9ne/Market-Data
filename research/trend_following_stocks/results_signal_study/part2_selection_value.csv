@@ -1,0 +1,4 @@
+ranking,top fifth minus average (ATR per trade),bottom fifth minus average (ATR per trade),average within-month correlation,years top fifth beat average,test-year signals
+volume surge on the signal day (current baseline ranking),0.0184,-0.0987,0.0197,6 of 15,16689
+ridge (walk-forward),0.4497,-0.3625,0.0652,11 of 15,16689
+boosted trees (walk-forward),0.3622,-0.3474,0.0512,12 of 15,16689
