@@ -1,6 +1,9 @@
 name: "Efficiency ratio rule on stocks: Nasdaq vs SPY, volume at the signal, ranking when the account is full: in-sample"
 # research/trend_following_stocks/er_stocks_nasdaq_volume.py (Michael, 18 Nov 2026). In-sample only (data through 2021-08-06); later years are never read.
 on:
+  push:
+    branches: [claude/er-stocks-20261117]
+    paths: ['.github/workflows/er-stocks-nasdaq-volume.yml']
   workflow_dispatch:
     inputs:
       modes:
@@ -18,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mode: ${{ fromJSON(inputs.modes) }}
+        mode: ${{ fromJSON(inputs.modes || '["nasdaq","volume","rank"]') }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
