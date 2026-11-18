@@ -1,5 +1,5 @@
 name: "Side-by-side quality statistics, stock system vs SPY and QQQ at 100% and 200% exposure: in-sample"
-# research/trend_following_stocks/er_stocks_metrics.py (Michael, 18 Nov 2026). In-sample only (through 2021-08-06).
+# research/trend_following_stocks/er_stocks_metrics.py (Michael, 18 Nov 2026; rerun with one-time-purchase ETF rows). In-sample only (through 2021-08-06).
 on:
   push:
     branches: [claude/er-stocks-20261117]

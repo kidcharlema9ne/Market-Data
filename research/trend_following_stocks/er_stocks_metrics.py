@@ -1,6 +1,6 @@
 """Side-by-side quality statistics: stock system (base rule and volume-surge ranking, caps 200% and 100%) vs SPY and QQQ (buy and hold, and long only above their own 200-day average) at 100% and 200% exposure.
 Usage: python er_stocks_metrics.py unused spy_prices.parquet nasdaq_etfs.parquet OUT_DIR EQUITY_DAILY_CSV
-Same basis for every row: fixed $300,000 account, no compounding, idle cash earns nothing, no trading costs on the ETF rows and NO financing charge on borrowed money for any row (the stock rows have none either). 200% exposure = twice $300,000 held in the ETF.
+Same basis for every row: fixed $300,000 account, no compounding; ETF rows are real one-time share purchases (bought once at each entry, never re-sized while held); idle cash earns nothing, no trading costs on the ETF rows and NO financing charge on borrowed money for any row (the stock rows have none either). 200% exposure = twice $300,000 held in the ETF.
 200-day rule: long only if the ETF's close two sessions back was above its 200-day average (one-day delay). In-sample 2000-01-03 to 2021-08-06, post hoc.
 Drawdown (dollar basis) = dollars below the account's highest value so far, as a percent of the starting $300,000 (so account growth does not shrink it). Ulcer index = square root of the average squared dollar-basis drawdown over all sessions.
 """
@@ -22,6 +22,17 @@ def load(path, sym=None):
         df = df[df.symbol == sym]
     df = df.sort_values("date_i").drop_duplicates("date_i")
     return pd.Series(df["close"].to_numpy(float), index=EPOCH + pd.to_timedelta(df["date_i"].to_numpy(), unit="D"))
+
+
+def hold_pnl(P, pos, lev):
+    """Shares are bought ONCE when the position turns on, with lev x $300,000 at that close, and held (no daily re-sizing) until it turns off; daily profit = shares x price change. A one-time purchase cannot lose more than 100% at lev 1."""
+    out = np.zeros(len(P)); sh = 0.0
+    for d in range(1, len(P)):
+        if pos[d] > 0 and pos[d - 1] <= 0:
+            sh = lev * CAP / P[d - 1]
+        if pos[d] > 0:
+            out[d] = sh * (P[d] - P[d - 1])
+    return out
 
 
 def metrics(u, idx):
@@ -53,11 +64,12 @@ def main():
         lab = ("Stock system, " + ("volume-surge ranking" if "Rank by" in nm else "base rule")) + f", cap {cap}"
         D[lab] = eq[c].diff().fillna(eq[c].iloc[0] - CAP)
     for name, s in (("SPY", spy), ("QQQ", qqq)):
-        full = s.reindex(s.index.union(idx)).ffill(); ret = full.pct_change(); sma = full.rolling(200, min_periods=200).mean()
-        on = (full > sma).astype(float).where(sma.notna(), 0.0).shift(2).fillna(0.0)
+        full = s.reindex(s.index.union(idx)).ffill(); sma = full.rolling(200, min_periods=200).mean()
+        on = (full > sma).astype(float).where(sma.notna(), 0.0).shift(2).fillna(0.0).reindex(idx).to_numpy()
+        px = full.reindex(idx).to_numpy()
         for lev, tag in ((1.0, "100%"), (2.0, "200%")):
-            D[f"{name} buy and hold, {tag}"] = (ret * lev * CAP).reindex(idx).fillna(0.0)
-            D[f"{name} above 200-day else flat, {tag}"] = (ret * on * lev * CAP).reindex(idx).fillna(0.0)
+            D[f"{name} buy and hold, {tag}"] = hold_pnl(px, np.r_[0.0, np.ones(len(px) - 1)], lev)
+            D[f"{name} above 200-day else flat, {tag}"] = hold_pnl(px, on, lev)
     D = pd.DataFrame(D, index=idx)
     order = [c for c in D.columns if c.startswith("Stock")] + [c for c in D.columns if "200-day" in c and c.endswith("200%")] + [c for c in D.columns if "200-day" in c and c.endswith("100%")] + [c for c in D.columns if "buy and hold" in c and c.endswith("200%")] + [c for c in D.columns if "buy and hold" in c and c.endswith("100%")]
     D = D[order]
