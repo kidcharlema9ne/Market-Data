@@ -1,0 +1,215 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 2s
+11,108 common-stock segments ever liquid; 19s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 214s
+baseline: 18,978 signals; reference pick, whole period cap 200%: +22.9% / Sharpe 0.64 / -22% (documented +22.9% / 0.64 / -22%); generator and account simulator match the standard ones
+volume features built for 153,182 signals
+  NEW BASELINE: volume-surge ranking + 125-day exit in addition to stops: +26.3% / Sharpe 0.72 (0.72 to 0.72) / -20% / worst year -18% / trades 4996
+
+historical volatility 5-day / 10-day ratio: lowest third < 0.99, median 1.14, highest third > 1.25  (153,180 signals)
+  historical volatility 5-day / 10-day ratio in its lowest third: +18.1% / Sharpe 0.56 (0.56 to 0.56) / -20% / worst year -19% / trades 4277
+  historical volatility 5-day / 10-day ratio in its lowest half: +20.1% / Sharpe 0.58 (0.58 to 0.58) / -20% / worst year -18% / trades 4543
+  historical volatility 5-day / 10-day ratio in its highest half: +20.8% / Sharpe 0.63 (0.63 to 0.63) / -21% / worst year -13% / trades 4546
+  historical volatility 5-day / 10-day ratio in its highest third: +17.6% / Sharpe 0.57 (0.57 to 0.57) / -22% / worst year -24% / trades 4276
+
+historical volatility 5-day / 20-day ratio: lowest third < 0.94, median 1.14, highest third > 1.34  (153,182 signals)
+  historical volatility 5-day / 20-day ratio in its lowest third: +16.9% / Sharpe 0.54 (0.54 to 0.54) / -24% / worst year -16% / trades 4253
+  historical volatility 5-day / 20-day ratio in its lowest half: +21.2% / Sharpe 0.62 (0.62 to 0.62) / -20% / worst year -22% / trades 4525
+  historical volatility 5-day / 20-day ratio in its highest half: +18.7% / Sharpe 0.56 (0.56 to 0.56) / -28% / worst year -22% / trades 4547
+  historical volatility 5-day / 20-day ratio in its highest third: +17.8% / Sharpe 0.55 (0.55 to 0.55) / -22% / worst year -15% / trades 4301
+
+historical volatility 5-day / 90-day ratio: lowest third < 0.73, median 0.91, highest third > 1.12  (143,914 signals)
+  historical volatility 5-day / 90-day ratio in its lowest third: +17.1% / Sharpe 0.59 (0.59 to 0.59) / -27% / worst year -13% / trades 3707
+  historical volatility 5-day / 90-day ratio in its lowest half: +18.6% / Sharpe 0.58 (0.58 to 0.58) / -24% / worst year -13% / trades 4267
+  historical volatility 5-day / 90-day ratio in its highest half: +21.0% / Sharpe 0.60 (0.60 to 0.60) / -19% / worst year -23% / trades 4834
+  historical volatility 5-day / 90-day ratio in its highest third: +17.5% / Sharpe 0.52 (0.52 to 0.52) / -20% / worst year -18% / trades 4570
+
+historical volatility 10-day / 20-day ratio: lowest third < 0.97, median 1.08, highest third > 1.18  (153,182 signals)
+  historical volatility 10-day / 20-day ratio in its lowest third: +14.2% / Sharpe 0.46 (0.46 to 0.46) / -31% / worst year -29% / trades 4244
+  historical volatility 10-day / 20-day ratio in its lowest half: +18.5% / Sharpe 0.57 (0.57 to 0.57) / -25% / worst year -17% / trades 4486
+  historical volatility 10-day / 20-day ratio in its highest half: +22.2% / Sharpe 0.64 (0.64 to 0.64) / -18% / worst year -21% / trades 4645
+  historical volatility 10-day / 20-day ratio in its highest third: +20.2% / Sharpe 0.59 (0.59 to 0.59) / -17% / worst year -13% / trades 4407
+
+historical volatility 10-day / 90-day ratio: lowest third < 0.73, median 0.86, highest third > 1.02  (143,914 signals)
+  historical volatility 10-day / 90-day ratio in its lowest third: +15.5% / Sharpe 0.56 (0.56 to 0.56) / -27% / worst year -18% / trades 3559
+  historical volatility 10-day / 90-day ratio in its lowest half: +16.2% / Sharpe 0.53 (0.53 to 0.53) / -27% / worst year -20% / trades 4111
+  historical volatility 10-day / 90-day ratio in its highest half: +21.0% / Sharpe 0.58 (0.58 to 0.58) / -19% / worst year -17% / trades 4875
+  historical volatility 10-day / 90-day ratio in its highest third: +21.3% / Sharpe 0.62 (0.62 to 0.62) / -16% / worst year -10% / trades 4608
+
+historical volatility 20-day / 90-day ratio: lowest third < 0.75, median 0.85, highest third > 0.97  (143,914 signals)
+  historical volatility 20-day / 90-day ratio in its lowest third: +16.1% / Sharpe 0.60 (0.60 to 0.60) / -28% / worst year -22% / trades 3300
+  historical volatility 20-day / 90-day ratio in its lowest half: +15.2% / Sharpe 0.51 (0.51 to 0.51) / -27% / worst year -17% / trades 3949
+  historical volatility 20-day / 90-day ratio in its highest half: +22.6% / Sharpe 0.64 (0.64 to 0.64) / -18% / worst year -20% / trades 4876
+  historical volatility 20-day / 90-day ratio in its highest third: +21.1% / Sharpe 0.62 (0.62 to 0.62) / -17% / worst year -12% / trades 4713
+
+==== hv | 2000 to 2007 | cap 200% ====
+                                                              scenario  profit per year %  max drawdown %  profit / drawdown from peak  worst year %  Sharpe ratio  trades taken
+NEW BASELINE: volume-surge ranking + 125-day exit in addition to stops              18.36          -19.90                         0.92         -9.93          0.63          1340
+        historical volatility 5-day / 10-day ratio in its lowest third              12.08          -20.02                         0.60         -7.61          0.47          1178
+         historical volatility 5-day / 10-day ratio in its lowest half              12.74          -20.09                         0.63         -8.92          0.45          1258
+        historical volatility 5-day / 10-day ratio in its highest half              12.12          -20.54                         0.59         -7.41          0.46          1210
+       historical volatility 5-day / 10-day ratio in its highest third               9.88          -19.30                         0.51         -5.60          0.41          1105
+        historical volatility 5-day / 20-day ratio in its lowest third               9.85          -24.07                         0.41         -6.70          0.38          1180
+         historical volatility 5-day / 20-day ratio in its lowest half              13.22          -20.28                         0.65         -6.74          0.48          1252
+        historical volatility 5-day / 20-day ratio in its highest half              11.49          -27.53                         0.42         -9.09          0.43          1209
+       historical volatility 5-day / 20-day ratio in its highest third              12.41          -19.35                         0.64         -5.38          0.49          1106
+        historical volatility 5-day / 90-day ratio in its lowest third               6.00          -27.21                         0.22        -13.41          0.27           988
+         historical volatility 5-day / 90-day ratio in its lowest half               9.51          -21.45                         0.44        -12.93          0.37          1185
+        historical volatility 5-day / 90-day ratio in its highest half              16.29          -19.25                         0.85         -9.42          0.58          1269
+       historical volatility 5-day / 90-day ratio in its highest third              13.07          -20.26                         0.65         -6.57          0.49          1193
+       historical volatility 10-day / 20-day ratio in its lowest third               5.66          -26.17                         0.22        -20.92          0.23          1174
+        historical volatility 10-day / 20-day ratio in its lowest half               9.43          -23.53                         0.40         -8.31          0.35          1260
+       historical volatility 10-day / 20-day ratio in its highest half              15.19          -18.07                         0.84         -7.96          0.54          1239
+      historical volatility 10-day / 20-day ratio in its highest third              15.07          -16.63                         0.91         -5.66          0.56          1158
+       historical volatility 10-day / 90-day ratio in its lowest third               4.25          -20.60                         0.21        -17.71          0.21           913
+        historical volatility 10-day / 90-day ratio in its lowest half               7.86          -20.72                         0.38        -19.80          0.32          1126
+       historical volatility 10-day / 90-day ratio in its highest half              14.24          -18.28                         0.78         -8.39          0.49          1319
+      historical volatility 10-day / 90-day ratio in its highest third              17.79          -16.06                         1.11         -5.35          0.63          1218
+       historical volatility 20-day / 90-day ratio in its lowest third               4.31          -27.23                         0.16        -22.17          0.21           817
+        historical volatility 20-day / 90-day ratio in its lowest half               5.48          -26.58                         0.21        -10.02          0.23          1081
+       historical volatility 20-day / 90-day ratio in its highest half              17.94          -17.63                         1.02         -9.05          0.62          1301
+      historical volatility 20-day / 90-day ratio in its highest third              16.78          -16.80                         1.00         -5.81          0.60          1242
+
+==== hv | 2000 to 2007 | cap 100% ====
+                                                              scenario  profit per year %  max drawdown %  profit / drawdown from peak  worst year %  Sharpe ratio  trades taken
+NEW BASELINE: volume-surge ranking + 125-day exit in addition to stops              10.29          -16.01                         0.64         -6.43          0.62           756
+        historical volatility 5-day / 10-day ratio in its lowest third               6.92          -15.56                         0.44         -3.90          0.46           680
+         historical volatility 5-day / 10-day ratio in its lowest half               6.39          -15.62                         0.41         -5.94          0.38           713
+        historical volatility 5-day / 10-day ratio in its highest half               8.64          -12.31                         0.70         -3.62          0.56           689
+       historical volatility 5-day / 10-day ratio in its highest third               7.61          -13.15                         0.58         -3.40          0.52           638
+        historical volatility 5-day / 20-day ratio in its lowest third               5.69          -17.89                         0.32        -11.67          0.36           688
+         historical volatility 5-day / 20-day ratio in its lowest half               6.59          -17.57                         0.38         -9.97          0.40           707
+        historical volatility 5-day / 20-day ratio in its highest half               8.19          -16.06                         0.51         -5.56          0.53           687
+       historical volatility 5-day / 20-day ratio in its highest third               6.35          -17.68                         0.36         -4.76          0.43           650
+        historical volatility 5-day / 90-day ratio in its lowest third               5.45          -17.70                         0.31        -13.67          0.37           618
+         historical volatility 5-day / 90-day ratio in its lowest half               4.59          -20.13                         0.23         -4.11          0.32           688
+        historical volatility 5-day / 90-day ratio in its highest half              10.62          -13.24                         0.80         -5.09          0.66           706
+       historical volatility 5-day / 90-day ratio in its highest third               9.10          -14.19                         0.64         -3.74          0.58           669
+       historical volatility 10-day / 20-day ratio in its lowest third               4.51          -17.59                         0.26        -11.34          0.29           690
+        historical volatility 10-day / 20-day ratio in its lowest half               4.78          -19.63                         0.24        -10.27          0.30           722
+       historical volatility 10-day / 20-day ratio in its highest half               9.66          -14.23                         0.68         -3.54          0.61           683
+      historical volatility 10-day / 20-day ratio in its highest third               9.46          -13.63                         0.69         -2.62          0.60           652
+       historical volatility 10-day / 90-day ratio in its lowest third               5.12          -14.04                         0.36         -3.02          0.41           586
+        historical volatility 10-day / 90-day ratio in its lowest half               4.92          -16.29                         0.30        -15.11          0.32           669
+       historical volatility 10-day / 90-day ratio in its highest half              10.96          -13.98                         0.78         -4.74          0.66           724
+      historical volatility 10-day / 90-day ratio in its highest third              13.79          -10.64                         1.30         -3.15          0.82           686
+       historical volatility 20-day / 90-day ratio in its lowest third               2.83          -18.73                         0.15        -18.32          0.21           520
+        historical volatility 20-day / 90-day ratio in its lowest half               3.62          -17.37                         0.21         -5.91          0.27           646
+       historical volatility 20-day / 90-day ratio in its highest half              10.11          -13.27                         0.76         -6.59          0.62           720
+      historical volatility 20-day / 90-day ratio in its highest third               9.47          -12.46                         0.76         -5.06          0.57           708
+
+==== hv | 2008 to Aug 2021 | cap 200% ====
+                                                              scenario  profit per year %  max drawdown %  profit / drawdown from peak  worst year %  Sharpe ratio  trades taken
+NEW BASELINE: volume-surge ranking + 125-day exit in addition to stops              31.12          -26.03                         1.20        -17.83          0.78          3656
+        historical volatility 5-day / 10-day ratio in its lowest third              21.72          -27.88                         0.78        -18.93          0.61          3099
+         historical volatility 5-day / 10-day ratio in its lowest half              24.44          -28.10                         0.87        -18.03          0.64          3285
+        historical volatility 5-day / 10-day ratio in its highest half              26.04          -23.85                         1.09        -12.88          0.71          3336
+       historical volatility 5-day / 10-day ratio in its highest third              22.17          -26.64                         0.83        -24.46          0.64          3171
+        historical volatility 5-day / 20-day ratio in its lowest third              21.15          -24.60                         0.86        -15.96          0.62          3073
+         historical volatility 5-day / 20-day ratio in its lowest half              25.90          -25.68                         1.01        -21.88          0.69          3273
+        historical volatility 5-day / 20-day ratio in its highest half              22.99          -28.66                         0.80        -22.14          0.62          3338
+       historical volatility 5-day / 20-day ratio in its highest third              20.95          -25.81                         0.81        -15.25          0.58          3195
+        historical volatility 5-day / 90-day ratio in its lowest third              23.78          -24.15                         0.98        -11.03          0.73          2719
+         historical volatility 5-day / 90-day ratio in its lowest half              24.08          -23.40                         1.03        -12.26          0.68          3082
+        historical volatility 5-day / 90-day ratio in its highest half              23.86          -31.35                         0.76        -22.83          0.62          3565
+       historical volatility 5-day / 90-day ratio in its highest third              20.12          -32.83                         0.61        -17.78          0.55          3377
+       historical volatility 10-day / 20-day ratio in its lowest third              19.36          -24.68                         0.78        -29.15          0.57          3070
+        historical volatility 10-day / 20-day ratio in its lowest half              23.87          -27.07                         0.88        -17.39          0.67          3226
+       historical volatility 10-day / 20-day ratio in its highest half              26.34          -28.07                         0.94        -21.32          0.69          3406
+      historical volatility 10-day / 20-day ratio in its highest third              23.20          -28.59                         0.81        -12.91          0.62          3249
+       historical volatility 10-day / 90-day ratio in its lowest third              22.15          -22.66                         0.98         -6.99          0.72          2646
+        historical volatility 10-day / 90-day ratio in its lowest half              21.12          -23.95                         0.88        -20.16          0.63          2985
+       historical volatility 10-day / 90-day ratio in its highest half              24.99          -33.09                         0.76        -17.06          0.63          3556
+      historical volatility 10-day / 90-day ratio in its highest third              23.40          -32.03                         0.73         -9.89          0.62          3390
+       historical volatility 20-day / 90-day ratio in its lowest third              23.10          -22.07                         1.05         -9.08          0.77          2483
+        historical volatility 20-day / 90-day ratio in its lowest half              20.96          -23.15                         0.91        -16.77          0.64          2868
+       historical volatility 20-day / 90-day ratio in its highest half              25.44          -32.93                         0.77        -19.73          0.66          3575
+      historical volatility 20-day / 90-day ratio in its highest third              23.62          -30.98                         0.76        -12.06          0.64          3471
+
+==== hv | 2008 to Aug 2021 | cap 100% ====
+                                                              scenario  profit per year %  max drawdown %  profit / drawdown from peak  worst year %  Sharpe ratio  trades taken
+NEW BASELINE: volume-surge ranking + 125-day exit in addition to stops              18.57          -16.84                         1.10        -11.23          0.77          2053
+        historical volatility 5-day / 10-day ratio in its lowest third              14.96          -21.29                         0.70        -13.91          0.66          1828
+         historical volatility 5-day / 10-day ratio in its lowest half              15.70          -17.05                         0.92        -14.18          0.69          1868
+        historical volatility 5-day / 10-day ratio in its highest half              13.37          -14.91                         0.90         -3.81          0.65          1920
+       historical volatility 5-day / 10-day ratio in its highest third              12.66          -17.79                         0.71        -10.04          0.64          1821
+        historical volatility 5-day / 20-day ratio in its lowest third              12.65          -16.39                         0.77        -12.43          0.59          1778
+         historical volatility 5-day / 20-day ratio in its lowest half              15.11          -19.04                         0.79        -10.63          0.67          1858
+        historical volatility 5-day / 20-day ratio in its highest half              14.96          -17.72                         0.84        -10.76          0.68          1953
+       historical volatility 5-day / 20-day ratio in its highest third              13.71          -16.64                         0.82         -5.36          0.66          1825
+        historical volatility 5-day / 90-day ratio in its lowest third              14.48          -15.59                         0.93        -13.06          0.71          1583
+         historical volatility 5-day / 90-day ratio in its lowest half              15.37          -14.72                         1.04        -12.77          0.71          1738
+        historical volatility 5-day / 90-day ratio in its highest half              13.23          -18.12                         0.73         -9.02          0.60          2020
+       historical volatility 5-day / 90-day ratio in its highest third              14.06          -18.02                         0.78         -7.90          0.65          1926
+       historical volatility 10-day / 20-day ratio in its lowest third              11.53          -17.29                         0.67        -20.39          0.60          1770
+        historical volatility 10-day / 20-day ratio in its lowest half              15.88          -19.22                         0.83        -13.27          0.78          1797
+       historical volatility 10-day / 20-day ratio in its highest half              15.76          -16.45                         0.96        -11.79          0.67          1949
+      historical volatility 10-day / 20-day ratio in its highest third              15.37          -18.05                         0.85        -13.58          0.65          1915
+       historical volatility 10-day / 90-day ratio in its lowest third              14.07          -15.88                         0.89         -6.55          0.79          1503
+        historical volatility 10-day / 90-day ratio in its lowest half              13.47          -15.10                         0.89        -12.50          0.70          1665
+       historical volatility 10-day / 90-day ratio in its highest half              14.57          -20.59                         0.71         -8.58          0.62          2000
+      historical volatility 10-day / 90-day ratio in its highest third              14.24          -22.60                         0.63         -7.36          0.61          1944
+       historical volatility 20-day / 90-day ratio in its lowest third              12.32          -16.49                         0.75        -14.78          0.69          1430
+        historical volatility 20-day / 90-day ratio in its lowest half              15.14          -17.34                         0.87        -13.66          0.79          1580
+       historical volatility 20-day / 90-day ratio in its highest half              15.35          -24.22                         0.63        -13.66          0.64          2069
+      historical volatility 20-day / 90-day ratio in its highest third              16.57          -18.66                         0.89        -14.12          0.72          1955
+
+==== hv | whole 2000 to Aug 2021 | cap 200% ====
+                                                              scenario  profit per year %  max drawdown %  profit / drawdown from peak  worst year %  Sharpe ratio  trades taken
+NEW BASELINE: volume-surge ranking + 125-day exit in addition to stops              26.35          -19.90                         1.32        -17.83          0.72          4996
+        historical volatility 5-day / 10-day ratio in its lowest third              18.12          -20.02                         0.90        -18.93          0.56          4277
+         historical volatility 5-day / 10-day ratio in its lowest half              20.07          -20.09                         1.00        -18.03          0.58          4543
+        historical volatility 5-day / 10-day ratio in its highest half              20.84          -21.26                         0.98        -12.88          0.63          4546
+       historical volatility 5-day / 10-day ratio in its highest third              17.58          -21.99                         0.80        -24.46          0.57          4276
+        historical volatility 5-day / 20-day ratio in its lowest third              16.93          -24.07                         0.70        -15.96          0.54          4253
+         historical volatility 5-day / 20-day ratio in its lowest half              21.16          -20.28                         1.04        -21.88          0.62          4525
+        historical volatility 5-day / 20-day ratio in its highest half              18.69          -27.53                         0.68        -22.14          0.56          4547
+       historical volatility 5-day / 20-day ratio in its highest third              17.76          -21.67                         0.82        -15.25          0.55          4301
+        historical volatility 5-day / 90-day ratio in its lowest third              17.13          -27.21                         0.63        -13.41          0.59          3707
+         historical volatility 5-day / 90-day ratio in its lowest half              18.63          -24.12                         0.77        -12.93          0.58          4267
+        historical volatility 5-day / 90-day ratio in its highest half              21.03          -19.25                         1.09        -22.83          0.60          4834
+       historical volatility 5-day / 90-day ratio in its highest third              17.48          -20.26                         0.86        -17.78          0.52          4570
+       historical volatility 10-day / 20-day ratio in its lowest third              14.24          -30.61                         0.47        -29.15          0.46          4244
+        historical volatility 10-day / 20-day ratio in its lowest half              18.47          -25.28                         0.73        -17.39          0.57          4486
+       historical volatility 10-day / 20-day ratio in its highest half              22.17          -18.07                         1.23        -21.32          0.64          4645
+      historical volatility 10-day / 20-day ratio in its highest third              20.16          -16.63                         1.21        -12.91          0.59          4407
+       historical volatility 10-day / 90-day ratio in its lowest third              15.46          -27.29                         0.57        -17.71          0.56          3559
+        historical volatility 10-day / 90-day ratio in its lowest half              16.16          -26.77                         0.60        -20.16          0.53          4111
+       historical volatility 10-day / 90-day ratio in its highest half              20.98          -19.49                         1.08        -17.06          0.58          4875
+      historical volatility 10-day / 90-day ratio in its highest third              21.31          -16.28                         1.31         -9.89          0.62          4608
+       historical volatility 20-day / 90-day ratio in its lowest third              16.08          -27.97                         0.57        -22.17          0.60          3300
+        historical volatility 20-day / 90-day ratio in its lowest half              15.18          -26.58                         0.57        -16.77          0.51          3949
+       historical volatility 20-day / 90-day ratio in its highest half              22.63          -17.72                         1.28        -19.73          0.64          4876
+      historical volatility 20-day / 90-day ratio in its highest third              21.07          -17.17                         1.23        -12.06          0.62          4713
+
+==== hv | whole 2000 to Aug 2021 | cap 100% ====
+                                                              scenario  profit per year %  max drawdown %  profit / drawdown from peak  worst year %  Sharpe ratio  trades taken
+NEW BASELINE: volume-surge ranking + 125-day exit in addition to stops              15.48          -17.25                         0.90        -11.23          0.72          2809
+        historical volatility 5-day / 10-day ratio in its lowest third              11.96          -17.08                         0.70        -13.91          0.59          2508
+         historical volatility 5-day / 10-day ratio in its lowest half              12.22          -16.41                         0.74        -14.18          0.59          2581
+        historical volatility 5-day / 10-day ratio in its highest half              11.60          -16.48                         0.70         -5.41          0.62          2609
+       historical volatility 5-day / 10-day ratio in its highest third              10.77          -14.01                         0.77        -10.04          0.60          2459
+        historical volatility 5-day / 20-day ratio in its lowest third              10.05          -21.47                         0.47        -12.43          0.52          2466
+         historical volatility 5-day / 20-day ratio in its lowest half              11.93          -20.83                         0.57        -10.63          0.58          2565
+        historical volatility 5-day / 20-day ratio in its highest half              12.43          -16.06                         0.77        -10.76          0.62          2640
+       historical volatility 5-day / 20-day ratio in its highest third              10.96          -17.68                         0.62         -5.36          0.59          2475
+        historical volatility 5-day / 90-day ratio in its lowest third              11.10          -17.98                         0.62        -13.67          0.60          2201
+         historical volatility 5-day / 90-day ratio in its lowest half              11.34          -20.13                         0.56        -12.77          0.59          2426
+        historical volatility 5-day / 90-day ratio in its highest half              12.26          -13.24                         0.93         -9.02          0.61          2726
+       historical volatility 5-day / 90-day ratio in its highest third              12.20          -14.19                         0.86         -7.90          0.63          2595
+       historical volatility 10-day / 20-day ratio in its lowest third               8.91          -23.18                         0.38        -20.39          0.50          2460
+        historical volatility 10-day / 20-day ratio in its lowest half              11.73          -26.02                         0.45        -13.27          0.63          2519
+       historical volatility 10-day / 20-day ratio in its highest half              13.48          -14.23                         0.95        -11.79          0.65          2632
+      historical volatility 10-day / 20-day ratio in its highest third              13.16          -13.63                         0.97        -13.58          0.63          2567
+       historical volatility 10-day / 90-day ratio in its lowest third              10.72          -14.04                         0.76         -6.55          0.67          2089
+        historical volatility 10-day / 90-day ratio in its lowest half              10.27          -22.19                         0.46        -15.11          0.57          2334
+       historical volatility 10-day / 90-day ratio in its highest half              13.22          -13.98                         0.95         -8.58          0.62          2724
+      historical volatility 10-day / 90-day ratio in its highest third              14.07          -12.05                         1.17         -7.36          0.67          2630
+       historical volatility 20-day / 90-day ratio in its lowest third               8.77          -25.12                         0.35        -18.32          0.54          1950
+        historical volatility 20-day / 90-day ratio in its lowest half              10.83          -17.37                         0.62        -13.66          0.63          2226
+       historical volatility 20-day / 90-day ratio in its highest half              13.39          -14.74                         0.91        -13.66          0.63          2789
+      historical volatility 20-day / 90-day ratio in its highest third              13.92          -12.46                         1.12        -14.12          0.67          2663
+done
