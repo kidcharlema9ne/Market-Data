@@ -1,0 +1,20 @@
+name: Intraday sample probe - size of the free MarketParquet 1-minute to 1-hour sample (read-only, no R2)
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'research/canonical/intraday_sample_probe.py'
+      - '.github/workflows/intraday-sample-probe.yml'
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pyarrow
+      - run: python -u research/canonical/intraday_sample_probe.py
