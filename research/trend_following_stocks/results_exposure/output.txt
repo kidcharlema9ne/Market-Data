@@ -1,0 +1,148 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 3s
+11,108 common-stock segments ever liquid; 36s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 402s
+signal check passed on 396 segments
+20-day ratio 0.50 (current rule): 18,978 signals at 1.5 ATR pullback
+either 20-day 0.50 or 60-day 0.30: 21,097 signals at 1.5 ATR pullback
+
+==== exposure | 20-day ratio 0.50 (current rule) | 1.5 ATR pullback | whole 2000 to Aug 2021 ====
+ cap %  average position value % of account  median  90th percentile  % of sessions with no position  % of sessions at the cap  % of sessions above 100% of account  average open positions  median open positions  most open positions  average open positions when at the cap  average position size when at the cap % of account  average borrowed % of account  trades taken  signals skipped, account full  signals in period
+   200                                136.9   194.7            199.7                            16.5                      54.2                                 69.5                    46.5                   56.0                  118                                    67.2                                                 3.1                           62.0          4832                          14146              18978
+   150                                104.6   147.1            149.7                            16.5                      56.7                                 68.3                    36.6                   44.0                   91                                    52.0                                                 3.0                           30.6          3802                          15176              18978
+   100                                 70.8    98.1             99.8                            16.5                      59.4                                  0.0                    25.7                   31.0                   62                                    36.1                                                 2.9                            0.0          2646                          16332              18978
+
+==== exposure | 20-day ratio 0.50 (current rule) | 1.5 ATR pullback | 2008 to Aug 2021 ====
+ cap %  average position value % of account  median  90th percentile  % of sessions with no position  % of sessions at the cap  % of sessions above 100% of account  average open positions  median open positions  most open positions  average open positions when at the cap  average position size when at the cap % of account  average borrowed % of account  trades taken  signals skipped, account full  signals in period
+   200                                155.4   197.9            199.8                             7.0                      65.1                                 78.8                    53.9                   60.0                  118                                    68.7                                                 3.0                           72.4          3501                          11285              14786
+   150                                118.2   148.4            149.8                             7.0                      67.2                                 78.4                    42.1                   47.0                   91                                    53.1                                                 2.9                           35.8          2748                          12038              14786
+   100                                 79.8    98.8             99.9                             7.0                      69.1                                  0.0                    29.6                   33.0                   62                                    36.9                                                 2.8                            0.0          1921                          12865              14786
+
+==== exposure | either 20-day 0.50 or 60-day 0.30 | 1.5 ATR pullback | whole 2000 to Aug 2021 ====
+ cap %  average position value % of account  median  90th percentile  % of sessions with no position  % of sessions at the cap  % of sessions above 100% of account  average open positions  median open positions  most open positions  average open positions when at the cap  average position size when at the cap % of account  average borrowed % of account  trades taken  signals skipped, account full  signals in period
+   200                                140.4   197.4            199.8                            16.5                      59.3                                 71.0                    48.9                   58.0                  127                                    68.9                                                 3.0                           65.1          4993                          16104              21097
+   150                                106.8   148.1            149.8                            16.8                      61.3                                 69.3                    38.3                   45.0                   94                                    53.4                                                 2.9                           32.0          3918                          17179              21097
+   100                                 72.1    98.5             99.8                            16.8                      63.2                                  0.0                    27.2                   32.0                   66                                    37.5                                                 2.8                            0.0          2818                          18279              21097
+
+==== exposure | either 20-day 0.50 or 60-day 0.30 | 1.5 ATR pullback | 2008 to Aug 2021 ====
+ cap %  average position value % of account  median  90th percentile  % of sessions with no position  % of sessions at the cap  % of sessions above 100% of account  average open positions  median open positions  most open positions  average open positions when at the cap  average position size when at the cap % of account  average borrowed % of account  trades taken  signals skipped, account full  signals in period
+   200                                158.1   198.5            199.8                             7.1                      70.1                                 79.3                    56.5                   62.0                  127                                    70.7                                                 2.9                           74.9          3586                          12884              16470
+   150                                119.7   148.8            149.8                             7.6                      71.9                                 78.5                    43.9                   47.0                   94                                    54.6                                                 2.9                           36.9          2803                          13667              16470
+   100                                 80.5    98.9             99.9                             7.6                      73.0                                  0.0                    31.4                   34.0                   66                                    38.8                                                 2.7                            0.0          2041                          14429              16470
+
+==== results with a charge on borrowed money (position value above 100% of $300k) | 2000 to 2007 ====
+                             rule  cap %  borrowing rate %  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  financing cost, % of $300k per year
+ 20-day ratio 0.50 (current rule)    200               0.0              14.69          0.50          -22.48        -10.12         4 of 9                                 0.00
+ 20-day ratio 0.50 (current rule)    200               2.0              13.83          0.48          -23.05        -10.12         4 of 9                                 0.88
+ 20-day ratio 0.50 (current rule)    200               4.0              12.96          0.45          -24.01        -10.12         4 of 9                                 1.76
+ 20-day ratio 0.50 (current rule)    200               6.0              12.10          0.42          -25.07        -10.12         4 of 9                                 2.65
+ 20-day ratio 0.50 (current rule)    150               0.0              11.91          0.52          -21.42         -7.12         4 of 9                                 0.00
+ 20-day ratio 0.50 (current rule)    150               2.0              11.48          0.50          -21.73         -7.12         4 of 9                                 0.43
+ 20-day ratio 0.50 (current rule)    150               4.0              11.05          0.48          -22.04         -7.12         4 of 9                                 0.87
+ 20-day ratio 0.50 (current rule)    150               6.0              10.63          0.46          -22.36         -7.12         4 of 9                                 1.30
+ 20-day ratio 0.50 (current rule)    100               0.0              10.22          0.62          -13.98         -4.91         5 of 9                                 0.00
+either 20-day 0.50 or 60-day 0.30    200               0.0              15.18          0.52          -23.07         -9.48         5 of 9                                 0.00
+either 20-day 0.50 or 60-day 0.30    200               2.0              14.24          0.49          -24.10         -9.48         5 of 9                                 0.97
+either 20-day 0.50 or 60-day 0.30    200               4.0              13.29          0.46          -25.40         -9.48         4 of 9                                 1.93
+either 20-day 0.50 or 60-day 0.30    200               6.0              12.34          0.42          -26.72         -9.48         4 of 9                                 2.90
+either 20-day 0.50 or 60-day 0.30    150               0.0              10.85          0.47          -21.80         -9.67         5 of 9                                 0.00
+either 20-day 0.50 or 60-day 0.30    150               2.0              10.39          0.45          -22.16         -9.67         5 of 9                                 0.47
+either 20-day 0.50 or 60-day 0.30    150               4.0               9.93          0.43          -22.52         -9.67         5 of 9                                 0.94
+either 20-day 0.50 or 60-day 0.30    150               6.0               9.47          0.41          -22.89         -9.67         5 of 9                                 1.42
+either 20-day 0.50 or 60-day 0.30    100               0.0               7.26          0.45          -17.65         -7.11         5 of 9                                 0.00
+
+==== results with a charge on borrowed money (position value above 100% of $300k) | 2008 to Aug 2021 ====
+                             rule  cap %  borrowing rate %  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  financing cost, % of $300k per year
+ 20-day ratio 0.50 (current rule)    200               0.0              27.74          0.70          -27.91        -13.81       10 of 14                                 0.00
+ 20-day ratio 0.50 (current rule)    200               2.0              26.29          0.67          -28.27        -15.31        9 of 14                                 1.45
+ 20-day ratio 0.50 (current rule)    200               4.0              24.84          0.63          -28.64        -16.81        9 of 14                                 2.90
+ 20-day ratio 0.50 (current rule)    200               6.0              23.39          0.59          -29.01        -18.31        9 of 14                                 4.35
+ 20-day ratio 0.50 (current rule)    150               0.0              20.74          0.65          -22.80        -14.97        9 of 14                                 0.00
+ 20-day ratio 0.50 (current rule)    150               2.0              20.03          0.63          -22.98        -15.53        9 of 14                                 0.72
+ 20-day ratio 0.50 (current rule)    150               4.0              19.31          0.61          -23.31        -16.09        9 of 14                                 1.43
+ 20-day ratio 0.50 (current rule)    150               6.0              18.60          0.59          -23.94        -16.64        9 of 14                                 2.15
+ 20-day ratio 0.50 (current rule)    100               0.0              13.76          0.59          -17.93         -9.15        9 of 14                                 0.00
+either 20-day 0.50 or 60-day 0.30    200               0.0              29.61          0.74          -30.62        -17.19       10 of 14                                 0.00
+either 20-day 0.50 or 60-day 0.30    200               2.0              28.11          0.70          -30.76        -18.35       10 of 14                                 1.50
+either 20-day 0.50 or 60-day 0.30    200               4.0              26.62          0.67          -30.90        -19.50       10 of 14                                 3.00
+either 20-day 0.50 or 60-day 0.30    200               6.0              25.12          0.63          -31.03        -20.65       10 of 14                                 4.49
+either 20-day 0.50 or 60-day 0.30    150               0.0              22.34          0.70          -25.18        -21.56       10 of 14                                 0.00
+either 20-day 0.50 or 60-day 0.30    150               2.0              21.60          0.68          -25.39        -22.13       10 of 14                                 0.74
+either 20-day 0.50 or 60-day 0.30    150               4.0              20.86          0.66          -25.60        -22.70       10 of 14                                 1.48
+either 20-day 0.50 or 60-day 0.30    150               6.0              20.12          0.63          -26.12        -23.27       10 of 14                                 2.22
+either 20-day 0.50 or 60-day 0.30    100               0.0              13.70          0.62          -19.23        -13.07       10 of 14                                 0.00
+
+==== results with a charge on borrowed money (position value above 100% of $300k) | whole 2000 to Aug 2021 ====
+                             rule  cap %  borrowing rate %  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  financing cost, % of $300k per year
+ 20-day ratio 0.50 (current rule)    200               0.0              22.86          0.64          -22.48        -13.81       14 of 22                                 0.00
+ 20-day ratio 0.50 (current rule)    200               2.0              21.63          0.60          -23.05        -15.31       13 of 22                                 1.24
+ 20-day ratio 0.50 (current rule)    200               4.0              20.40          0.57          -24.01        -16.81       13 of 22                                 2.48
+ 20-day ratio 0.50 (current rule)    200               6.0              19.17          0.53          -25.07        -18.31       13 of 22                                 3.72
+ 20-day ratio 0.50 (current rule)    150               0.0              17.44          0.61          -21.42        -14.97       13 of 22                                 0.00
+ 20-day ratio 0.50 (current rule)    150               2.0              16.83          0.58          -21.73        -15.53       13 of 22                                 0.61
+ 20-day ratio 0.50 (current rule)    150               4.0              16.23          0.56          -22.04        -16.09       13 of 22                                 1.22
+ 20-day ratio 0.50 (current rule)    150               6.0              15.62          0.54          -22.36        -16.64       13 of 22                                 1.84
+ 20-day ratio 0.50 (current rule)    100               0.0              12.44          0.59          -15.50         -9.15       14 of 22                                 0.00
+either 20-day 0.50 or 60-day 0.30    200               0.0              24.22          0.67          -23.07        -17.19       15 of 22                                 0.00
+either 20-day 0.50 or 60-day 0.30    200               2.0              22.93          0.63          -24.10        -18.35       15 of 22                                 1.30
+either 20-day 0.50 or 60-day 0.30    200               4.0              21.64          0.60          -25.40        -19.50       14 of 22                                 2.60
+either 20-day 0.50 or 60-day 0.30    200               6.0              20.34          0.56          -26.72        -20.65       14 of 22                                 3.90
+either 20-day 0.50 or 60-day 0.30    150               0.0              18.04          0.63          -21.80        -21.56       15 of 22                                 0.00
+either 20-day 0.50 or 60-day 0.30    150               2.0              17.41          0.60          -22.16        -22.13       15 of 22                                 0.64
+either 20-day 0.50 or 60-day 0.30    150               4.0              16.77          0.58          -22.52        -22.70       15 of 22                                 1.28
+either 20-day 0.50 or 60-day 0.30    150               6.0              16.14          0.56          -22.90        -23.27       15 of 22                                 1.92
+either 20-day 0.50 or 60-day 0.30    100               0.0              11.30          0.56          -19.78        -13.07       15 of 22                                 0.00
+
+==== by year, cap 200% | 20-day ratio 0.50 (current rule) ====
+ year  average position value % of account  % of sessions at the cap  average open positions
+ 2000                                  0.0                       0.0                     0.0
+ 2001                                  0.0                       0.0                     0.0
+ 2002                                 29.9                       0.0                    11.5
+ 2003                                128.3                      46.0                    50.4
+ 2004                                165.5                      44.8                    50.6
+ 2005                                171.1                      61.5                    52.1
+ 2006                                171.8                      73.7                    51.7
+ 2007                                161.0                      55.0                    50.1
+ 2008                                  9.8                       0.0                     4.1
+ 2009                                105.8                      39.7                    54.8
+ 2010                                157.8                      52.0                    54.5
+ 2011                                123.1                      50.4                    42.0
+ 2012                                188.0                      76.4                    49.2
+ 2013                                197.0                      89.3                    63.3
+ 2014                                188.2                      75.4                    57.5
+ 2015                                163.3                      66.7                    50.7
+ 2016                                165.4                      71.0                    49.3
+ 2017                                197.8                      95.6                    63.0
+ 2018                                168.2                      66.1                    59.5
+ 2019                                176.2                      83.3                    52.5
+ 2020                                148.3                      64.8                    71.5
+ 2021                                195.9                      83.3                    97.4
+
+==== by year, cap 200% | either 20-day 0.50 or 60-day 0.30 ====
+ year  average position value % of account  % of sessions at the cap  average open positions
+ 2000                                  0.0                       0.0                     0.0
+ 2001                                  0.0                       0.0                     0.0
+ 2002                                 39.5                       4.0                    14.7
+ 2003                                130.6                      50.0                    53.9
+ 2004                                168.3                      56.0                    53.4
+ 2005                                177.9                      69.0                    55.6
+ 2006                                177.3                      76.1                    56.3
+ 2007                                174.8                      68.5                    49.9
+ 2008                                 10.0                       0.0                     4.2
+ 2009                                110.3                      43.3                    60.9
+ 2010                                169.8                      57.1                    64.0
+ 2011                                123.8                      56.0                    42.5
+ 2012                                193.2                      84.0                    54.8
+ 2013                                198.3                      97.2                    61.6
+ 2014                                194.2                      89.3                    60.3
+ 2015                                162.3                      70.6                    51.7
+ 2016                                165.1                      69.8                    50.6
+ 2017                                198.4                      98.8                    63.8
+ 2018                                170.2                      73.7                    61.2
+ 2019                                177.3                      84.1                    53.8
+ 2020                                150.4                      68.8                    74.6
+ 2021                                197.9                      92.0                   102.6
+done
