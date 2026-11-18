@@ -1,1 +1,50 @@
 5434 stock_daily files from 2000-01-03 to 2021-08-06 (files after 2021-08-06 not opened)
+  0 files read
+  1000 files read
+  2000 files read
+  3000 files read
+  4000 files read
+  5000 files read
+kept rows (dollar volume >= $250k): 21,112,636
+
+=== Per year, median (min to max) over trading days ===
+year   days  all rows in file        rows >= $3M that day    common, 15-day avg >= $3M   non-common passing floor  
+2000    252   2,749 (1,650 to 2,947)    941 (515 to 1,207)      969 (0 to 1,088)              3 (0 to 4)           
+2001    248   2,931 (2,852 to 3,080)    974 (613 to 1,342)    1,015 (955 to 1,102)            4 (3 to 5)           
+2002    252   3,122 (2,902 to 3,335)  1,035 (666 to 1,526)    1,082 (977 to 1,180)            3 (2 to 5)           
+2003    252   3,370 (3,232 to 3,628)  1,192 (741 to 1,456)    1,245 (1,010 to 1,438)          4 (2 to 8)           
+2004    252   3,741 (3,576 to 3,950)  1,467 (979 to 1,869)    1,503 (1,350 to 1,711)          7 (4 to 10)          
+2005    252   4,093 (3,882 to 4,329)  1,674 (1,065 to 2,110)  1,721 (1,626 to 1,914)          7 (5 to 10)          
+2006    251   4,422 (4,289 to 4,692)  1,952 (1,313 to 2,470)  2,000 (1,870 to 2,145)          7 (5 to 11)          
+2007    251   5,341 (4,741 to 5,637)  2,461 (1,753 to 3,058)  2,523 (2,112 to 2,861)         12 (7 to 26)          
+2008    253   5,631 (5,495 to 5,810)  2,432 (1,339 to 3,287)  2,489 (2,014 to 2,639)         16 (11 to 25)         
+2009    252   5,693 (5,582 to 5,853)  2,105 (1,434 to 3,078)  2,170 (1,947 to 2,307)         19 (14 to 28)         
+2010    252   5,854 (5,711 to 6,013)  2,288 (1,576 to 3,266)  2,326 (2,178 to 2,589)         23 (12 to 35)         
+2011    252   6,002 (5,782 to 6,150)  2,423 (1,675 to 3,164)  2,473 (2,294 to 2,699)         24 (12 to 40)         
+2012    250   6,064 (5,855 to 6,196)  2,342 (1,652 to 3,038)  2,372 (2,195 to 2,511)         28 (10 to 40)         
+2013    252   6,238 (6,080 to 6,402)  2,591 (2,109 to 3,390)  2,612 (2,362 to 2,921)         34 (20 to 52)         
+2014    252   6,483 (6,334 to 6,591)  2,841 (2,250 to 3,483)  2,886 (2,757 to 3,046)         35 (22 to 42)         
+2015    252   6,534 (6,376 to 6,620)  2,854 (2,120 to 3,532)  2,884 (2,759 to 3,064)         30 (22 to 44)         
+2016    252   6,439 (6,269 to 6,557)  2,708 (2,174 to 3,491)  2,736 (2,593 to 2,965)         40 (26 to 54)         
+2017    251   6,348 (6,212 to 6,430)  2,786 (2,229 to 3,392)  2,823 (2,686 to 3,018)         26 (16 to 41)         
+2018    251   6,386 (6,260 to 6,495)  2,879 (2,142 to 3,534)  2,920 (2,801 to 3,097)         21 (14 to 45)         
+2019    252   6,418 (6,313 to 6,500)  2,767 (2,265 to 3,585)  2,794 (2,652 to 2,970)         28 (16 to 48)         
+2020    253   6,558 (6,389 to 7,096)  2,958 (2,694 to 3,815)  2,970 (2,839 to 3,444)         40 (26 to 93)         
+2021    150   7,576 (7,081 to 7,724)  3,581 (3,222 to 4,247)  3,612 (3,420 to 3,974)         42 (27 to 99)         
+
+WHOLE WINDOW median: common eligible 2,434; non-common passing floor 21; both together 2,458; rows >= $3M single day 2,403
+LAST DAY 2021-08-06: all rows 7,643; rows >= $3M that day 3,336; common eligible 3,437; non-common passing 30
+Last 60 days median: common eligible 3,544; other 35
+
+=== Symbols ===
+distinct symbols with at least one day over $250k: 12,725 (common by symbol rule 10,829; -DELISTED suffix 7,734)
+distinct symbols ever eligible at the $3M 15-day floor: 9,525 (common 8,729; non-common 796)
+
+=== Are well-known ETF tickers inside stock_daily? (first day, last day, days seen) ===
+  none of: SPY, QQQ, IWM, DIA, GLD, SLV, TLT, IEF, HYG, LQD, EEM, EFA, VTI, VOO, XLF, XLE, XLK, XLV, XLU, ARKK, TQQQ, SQQQ, UVXY, USO, UNG, VXX, SOXL, SPXU
+  checked 28 tickers; found 0
+
+=== Non-common symbols that pass the floor, most days first (sample of 60) ===
+WPPGY-DELISTED(4001), CBDBY-DELISTED(3654), PBR.A(3583), ABBNY-DELISTED(3580), BAC.L(3275), SHPGY-DELISTED(3134), VALE.P-DELISTED(2984), WFC.L(2503), ALLY.A-DELISTED(2301), RYAAY(2123), TELFY-DELISTED(2123), BCS.D-DELISTED(2122), C.N(2034), WFC.J-DELISTED(1978), C.K-DELISTED(1965), GECXU-DELISTED(1933), VLCCF-DELISTED(1815), RBS.G-DELISTED(1735), WFC.W-DELISTED(1646), TSEOF-DELISTED(1639), C.L-DELISTED(1503), VIA.B-DELISTED(1492), CFC.B-DELISTED(1442), CWEN.A-DELISTED(1381), WFC.Q-DELISTED(1250), C.K(1238), JPM.C(1185), RBS.T-DELISTED(1145), JPM.D(1133), MET.B-DELISTED(1070), BAC.C-DELISTED(1066), PNC.P-DELISTED(958), RBS.E-DELISTED(840), C.J-DELISTED(825), ALLY.B-DELISTED(812), GS.J-DELISTED(765), GS.D(715), JPM.B-DELISTED(668), LEN.B(659), AGN.A-DELISTED(648), C.S-DELISTED(642), KMI.A-DELISTED(632), MS.I(575), NYLD.A-DELISTED(539), USB.M-DELISTED(528), JPM.F-DELISTED(517), RBS.S-DELISTED(476), ARNC.B-DELISTED(444), BCS.A-DELISTED(440), MS.A(423), WELL.I-DELISTED(413), MS.K(402), JPM.H-DELISTED(400), VER.F-DELISTED(397), JPM.G-DELISTED(391), FTRPR-DELISTED(383), BBT.E-DELISTED(382), CFC.A-DELISTED(380), WFC.X-DELISTED(380), BAC.B(380)
+
+sealed check: last file opened 2021-08-06
