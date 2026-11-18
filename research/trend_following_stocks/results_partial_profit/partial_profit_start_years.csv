@@ -1,0 +1,169 @@
+version,cap %,start,profit per year %,max drawdown % (from peak),profit per year / drawdown,worst year %,Sharpe ratio
+no profit taking (current rule),200,2000-01-01,25.143,-21.702,1.159,-16.132,0.688
+no profit taking (current rule),200,2001-01-01,26.366,-21.702,1.215,-16.132,0.704
+no profit taking (current rule),200,2002-01-01,27.691,-21.702,1.276,-16.132,0.722
+no profit taking (current rule),200,2003-01-01,29.484,-21.1,1.397,-16.132,0.75
+no profit taking (current rule),200,2004-01-01,25.225,-45.155,0.559,-18.857,0.651
+no profit taking (current rule),200,2005-01-01,28.098,-25.924,1.084,-16.132,0.72
+no profit taking (current rule),200,2006-01-01,26.732,-35.087,0.762,-16.132,0.679
+no profit taking (current rule),200,2007-01-01,28.219,-35.755,0.789,-16.132,0.71
+no profit taking (current rule),200,2008-01-01,29.064,-26.621,1.092,-16.132,0.727
+no profit taking (current rule),200,2009-01-01,31.701,-25.958,1.221,-16.132,0.763
+no profit taking (current rule),200,2010-01-01,31.5,-33.546,0.939,-16.132,0.764
+no profit taking (current rule),200,2011-01-01,31.82,-33.864,0.94,-18.676,0.775
+no profit taking (current rule),200,2012-01-01,37.349,-16.959,2.202,-13.143,0.897
+no profit taking (current rule),200,2013-01-01,38.528,-18.036,2.136,-5.165,0.905
+no profit taking (current rule),200,2014-01-01,33.898,-26.89,1.261,-7.193,0.798
+no profit taking (current rule),200,2015-01-01,33.535,-37.689,0.89,-21.472,0.779
+no profit taking (current rule),200,2016-01-01,47.509,-21.642,2.195,5.334,1.056
+no profit taking (current rule),200,2017-01-01,47.659,-26.067,1.828,5.326,0.992
+no profit taking (current rule),200,2018-01-01,46.793,-35.962,1.301,-11.393,0.906
+no profit taking (current rule),200,2019-01-01,71.782,-33.036,2.173,37.355,1.254
+no profit taking (current rule),200,2020-01-01,86.361,-47.121,1.833,66.829,1.24
+no profit taking (current rule),100,2000-01-01,14.49,-18.062,0.802,-11.391,0.67
+no profit taking (current rule),100,2001-01-01,15.194,-18.062,0.841,-11.391,0.686
+no profit taking (current rule),100,2002-01-01,15.958,-18.062,0.884,-11.391,0.703
+no profit taking (current rule),100,2003-01-01,17.059,-17.63,0.968,-11.391,0.735
+no profit taking (current rule),100,2004-01-01,15.344,-24.227,0.633,-12.567,0.666
+no profit taking (current rule),100,2005-01-01,17.264,-20.919,0.825,-11.055,0.74
+no profit taking (current rule),100,2006-01-01,16.724,-25.091,0.667,-11.714,0.709
+no profit taking (current rule),100,2007-01-01,17.753,-24.766,0.717,-11.656,0.742
+no profit taking (current rule),100,2008-01-01,18.157,-19.161,0.948,-9.692,0.751
+no profit taking (current rule),100,2009-01-01,19.923,-18.583,1.072,-9.692,0.793
+no profit taking (current rule),100,2010-01-01,19.916,-20.789,0.958,-11.311,0.791
+no profit taking (current rule),100,2011-01-01,21.302,-16.397,1.299,-2.862,0.843
+no profit taking (current rule),100,2012-01-01,24.988,-12.189,2.05,-4.902,0.969
+no profit taking (current rule),100,2013-01-01,23.96,-15.67,1.529,-5.008,0.9
+no profit taking (current rule),100,2014-01-01,14.143,-21.822,0.648,-8.06,0.592
+no profit taking (current rule),100,2015-01-01,22.714,-25.119,0.904,-15.439,0.819
+no profit taking (current rule),100,2016-01-01,27.518,-15.043,1.829,-9.224,0.945
+no profit taking (current rule),100,2017-01-01,30.693,-15.403,1.993,-3.334,0.98
+no profit taking (current rule),100,2018-01-01,29.013,-18.977,1.529,-10.588,0.857
+no profit taking (current rule),100,2019-01-01,27.009,-18.323,1.474,12.959,0.86
+no profit taking (current rule),100,2020-01-01,51.352,-23.96,2.143,32.264,1.107
+sell half at 4 ATR above the 50-day,200,2000-01-01,22.049,-21.2,1.04,-19.43,0.671
+sell half at 4 ATR above the 50-day,200,2001-01-01,23.121,-21.2,1.091,-19.43,0.688
+sell half at 4 ATR above the 50-day,200,2002-01-01,24.284,-21.2,1.145,-19.43,0.705
+sell half at 4 ATR above the 50-day,200,2003-01-01,25.713,-20.939,1.228,-19.43,0.728
+sell half at 4 ATR above the 50-day,200,2004-01-01,22.385,-44.546,0.503,-19.43,0.637
+sell half at 4 ATR above the 50-day,200,2005-01-01,24.96,-23.888,1.045,-19.43,0.706
+sell half at 4 ATR above the 50-day,200,2006-01-01,24.576,-29.102,0.844,-19.43,0.689
+sell half at 4 ATR above the 50-day,200,2007-01-01,24.449,-34.792,0.703,-19.43,0.68
+sell half at 4 ATR above the 50-day,200,2008-01-01,25.902,-24.772,1.046,-19.43,0.716
+sell half at 4 ATR above the 50-day,200,2009-01-01,28.075,-24.593,1.142,-19.43,0.747
+sell half at 4 ATR above the 50-day,200,2010-01-01,27.472,-30.297,0.907,-18.323,0.739
+sell half at 4 ATR above the 50-day,200,2011-01-01,26.99,-37.735,0.715,-23.506,0.731
+sell half at 4 ATR above the 50-day,200,2012-01-01,29.997,-20.568,1.458,-16.275,0.807
+sell half at 4 ATR above the 50-day,200,2013-01-01,30.839,-24.542,1.257,-17.229,0.809
+sell half at 4 ATR above the 50-day,200,2014-01-01,27.051,-31.378,0.862,-14.208,0.71
+sell half at 4 ATR above the 50-day,200,2015-01-01,30.63,-31.434,0.974,-12.044,0.785
+sell half at 4 ATR above the 50-day,200,2016-01-01,38.391,-20.884,1.838,-7.337,0.951
+sell half at 4 ATR above the 50-day,200,2017-01-01,36.659,-26.631,1.377,-9.436,0.862
+sell half at 4 ATR above the 50-day,200,2018-01-01,34.598,-37.037,0.934,-16.729,0.756
+sell half at 4 ATR above the 50-day,200,2019-01-01,55.161,-30.338,1.818,24.405,1.094
+sell half at 4 ATR above the 50-day,200,2020-01-01,68.843,-40.064,1.718,48.573,1.129
+sell half at 4 ATR above the 50-day,100,2000-01-01,11.294,-13.518,0.835,-14.774,0.61
+sell half at 4 ATR above the 50-day,100,2001-01-01,11.843,-13.518,0.876,-14.774,0.624
+sell half at 4 ATR above the 50-day,100,2002-01-01,12.438,-13.518,0.92,-14.774,0.64
+sell half at 4 ATR above the 50-day,100,2003-01-01,13.137,-13.481,0.974,-14.774,0.66
+sell half at 4 ATR above the 50-day,100,2004-01-01,11.205,-20.995,0.534,-14.774,0.569
+sell half at 4 ATR above the 50-day,100,2005-01-01,11.778,-17.619,0.669,-14.774,0.595
+sell half at 4 ATR above the 50-day,100,2006-01-01,11.534,-19.316,0.597,-14.774,0.575
+sell half at 4 ATR above the 50-day,100,2007-01-01,11.293,-22.122,0.51,-14.774,0.559
+sell half at 4 ATR above the 50-day,100,2008-01-01,11.883,-16.991,0.699,-14.774,0.584
+sell half at 4 ATR above the 50-day,100,2009-01-01,12.937,-16.823,0.769,-14.774,0.612
+sell half at 4 ATR above the 50-day,100,2010-01-01,12.787,-18.52,0.69,-12.393,0.612
+sell half at 4 ATR above the 50-day,100,2011-01-01,12.26,-21.267,0.576,-12.492,0.589
+sell half at 4 ATR above the 50-day,100,2012-01-01,16.858,-14.852,1.135,-9.37,0.787
+sell half at 4 ATR above the 50-day,100,2013-01-01,19.883,-13.304,1.495,-8.215,0.909
+sell half at 4 ATR above the 50-day,100,2014-01-01,16.511,-16.995,0.972,-6.929,0.753
+sell half at 4 ATR above the 50-day,100,2015-01-01,17.615,-19.41,0.908,-8.147,0.787
+sell half at 4 ATR above the 50-day,100,2016-01-01,23.873,-14.668,1.628,-3.879,1.02
+sell half at 4 ATR above the 50-day,100,2017-01-01,22.894,-17.308,1.323,-0.966,0.923
+sell half at 4 ATR above the 50-day,100,2018-01-01,21.976,-21.214,1.036,-9.588,0.831
+sell half at 4 ATR above the 50-day,100,2019-01-01,30.995,-19.727,1.571,16.179,1.074
+sell half at 4 ATR above the 50-day,100,2020-01-01,40.742,-24.509,1.662,29.2,1.126
+sell half at 5 ATR above the 50-day,200,2000-01-01,23.318,-17.817,1.309,-21.852,0.698
+sell half at 5 ATR above the 50-day,200,2001-01-01,24.452,-17.817,1.372,-21.852,0.715
+sell half at 5 ATR above the 50-day,200,2002-01-01,25.681,-17.817,1.441,-21.852,0.733
+sell half at 5 ATR above the 50-day,200,2003-01-01,27.226,-17.611,1.546,-21.852,0.758
+sell half at 5 ATR above the 50-day,200,2004-01-01,22.827,-41.21,0.554,-21.852,0.642
+sell half at 5 ATR above the 50-day,200,2005-01-01,25.813,-24.573,1.05,-21.852,0.721
+sell half at 5 ATR above the 50-day,200,2006-01-01,25.485,-29.703,0.858,-21.852,0.706
+sell half at 5 ATR above the 50-day,200,2007-01-01,25.99,-34.934,0.744,-21.852,0.713
+sell half at 5 ATR above the 50-day,200,2008-01-01,27.096,-29.039,0.933,-21.852,0.74
+sell half at 5 ATR above the 50-day,200,2009-01-01,29.428,-28.72,1.025,-21.852,0.773
+sell half at 5 ATR above the 50-day,200,2010-01-01,28.222,-37.263,0.757,-21.105,0.751
+sell half at 5 ATR above the 50-day,200,2011-01-01,27.561,-47.139,0.585,-24.993,0.741
+sell half at 5 ATR above the 50-day,200,2012-01-01,33.458,-17.632,1.898,-18.345,0.887
+sell half at 5 ATR above the 50-day,200,2013-01-01,34.89,-18.151,1.922,-14.241,0.903
+sell half at 5 ATR above the 50-day,200,2014-01-01,29.661,-28.407,1.044,-9.46,0.77
+sell half at 5 ATR above the 50-day,200,2015-01-01,32.844,-30.296,1.084,-10.177,0.839
+sell half at 5 ATR above the 50-day,200,2016-01-01,42.182,-20.947,2.014,-4.145,1.033
+sell half at 5 ATR above the 50-day,200,2017-01-01,41.677,-25.146,1.657,-0.492,0.978
+sell half at 5 ATR above the 50-day,200,2018-01-01,41.411,-34.378,1.205,-13.906,0.898
+sell half at 5 ATR above the 50-day,200,2019-01-01,57.578,-33.559,1.716,23.234,1.139
+sell half at 5 ATR above the 50-day,200,2020-01-01,75.971,-40.713,1.866,58.772,1.245
+sell half at 5 ATR above the 50-day,100,2000-01-01,13.878,-14.665,0.946,-14.736,0.724
+sell half at 5 ATR above the 50-day,100,2001-01-01,14.553,-14.665,0.992,-14.736,0.742
+sell half at 5 ATR above the 50-day,100,2002-01-01,15.284,-14.665,1.042,-14.736,0.76
+sell half at 5 ATR above the 50-day,100,2003-01-01,16.242,-14.424,1.126,-14.736,0.789
+sell half at 5 ATR above the 50-day,100,2004-01-01,14.207,-21.605,0.658,-14.736,0.698
+sell half at 5 ATR above the 50-day,100,2005-01-01,15.294,-17.015,0.899,-14.736,0.748
+sell half at 5 ATR above the 50-day,100,2006-01-01,14.747,-19.546,0.754,-14.736,0.713
+sell half at 5 ATR above the 50-day,100,2007-01-01,15.052,-21.327,0.706,-14.736,0.72
+sell half at 5 ATR above the 50-day,100,2008-01-01,15.635,-18.823,0.831,-14.736,0.743
+sell half at 5 ATR above the 50-day,100,2009-01-01,17.052,-18.557,0.919,-14.736,0.78
+sell half at 5 ATR above the 50-day,100,2010-01-01,16.882,-19.867,0.85,-14.736,0.781
+sell half at 5 ATR above the 50-day,100,2011-01-01,16.49,-24.287,0.679,-14.736,0.764
+sell half at 5 ATR above the 50-day,100,2012-01-01,17.731,-15.972,1.11,-11.182,0.809
+sell half at 5 ATR above the 50-day,100,2013-01-01,20.352,-15.754,1.292,-14.567,0.913
+sell half at 5 ATR above the 50-day,100,2014-01-01,19.735,-19.681,1.003,-8.811,0.878
+sell half at 5 ATR above the 50-day,100,2015-01-01,21.949,-19.141,1.147,-8.599,0.952
+sell half at 5 ATR above the 50-day,100,2016-01-01,25.081,-14.438,1.737,0.036,1.048
+sell half at 5 ATR above the 50-day,100,2017-01-01,23.825,-17.633,1.351,-2.536,0.946
+sell half at 5 ATR above the 50-day,100,2018-01-01,26.344,-19.259,1.368,-5.738,0.962
+sell half at 5 ATR above the 50-day,100,2019-01-01,37.76,-19.072,1.98,21.175,1.249
+sell half at 5 ATR above the 50-day,100,2020-01-01,44.21,-22.948,1.927,32.6,1.241
+sell half at 10 ATR above the 50-day,200,2000-01-01,27.27,-21.85,1.248,-16.0,0.741
+sell half at 10 ATR above the 50-day,200,2001-01-01,28.596,-21.85,1.309,-16.0,0.759
+sell half at 10 ATR above the 50-day,200,2002-01-01,30.034,-21.85,1.375,-16.0,0.777
+sell half at 10 ATR above the 50-day,200,2003-01-01,31.952,-21.226,1.505,-16.0,0.807
+sell half at 10 ATR above the 50-day,200,2004-01-01,27.883,-44.544,0.626,-16.742,0.714
+sell half at 10 ATR above the 50-day,200,2005-01-01,31.241,-25.839,1.209,-16.0,0.792
+sell half at 10 ATR above the 50-day,200,2006-01-01,30.247,-33.172,0.912,-16.0,0.76
+sell half at 10 ATR above the 50-day,200,2007-01-01,31.707,-35.624,0.89,-16.0,0.788
+sell half at 10 ATR above the 50-day,200,2008-01-01,32.769,-25.46,1.287,-16.0,0.809
+sell half at 10 ATR above the 50-day,200,2009-01-01,35.701,-24.828,1.438,-16.0,0.848
+sell half at 10 ATR above the 50-day,200,2010-01-01,35.253,-33.66,1.047,-15.61,0.843
+sell half at 10 ATR above the 50-day,200,2011-01-01,36.05,-35.574,1.013,-20.167,0.863
+sell half at 10 ATR above the 50-day,200,2012-01-01,39.278,-18.602,2.112,-12.999,0.927
+sell half at 10 ATR above the 50-day,200,2013-01-01,40.084,-20.307,1.974,-11.556,0.929
+sell half at 10 ATR above the 50-day,200,2014-01-01,35.875,-30.176,1.189,-12.415,0.831
+sell half at 10 ATR above the 50-day,200,2015-01-01,37.1,-38.266,0.97,-20.314,0.843
+sell half at 10 ATR above the 50-day,200,2016-01-01,47.333,-22.491,2.105,2.428,1.036
+sell half at 10 ATR above the 50-day,200,2017-01-01,49.76,-26.797,1.857,-1.996,1.027
+sell half at 10 ATR above the 50-day,200,2018-01-01,49.937,-36.156,1.381,-10.622,0.951
+sell half at 10 ATR above the 50-day,200,2019-01-01,76.039,-31.859,2.387,36.97,1.308
+sell half at 10 ATR above the 50-day,200,2020-01-01,92.868,-47.148,1.97,71.038,1.305
+sell half at 10 ATR above the 50-day,100,2000-01-01,14.429,-17.659,0.817,-11.138,0.678
+sell half at 10 ATR above the 50-day,100,2001-01-01,15.131,-17.659,0.857,-11.138,0.695
+sell half at 10 ATR above the 50-day,100,2002-01-01,15.891,-17.659,0.9,-11.138,0.712
+sell half at 10 ATR above the 50-day,100,2003-01-01,16.989,-17.242,0.985,-11.138,0.744
+sell half at 10 ATR above the 50-day,100,2004-01-01,15.601,-24.227,0.644,-11.278,0.687
+sell half at 10 ATR above the 50-day,100,2005-01-01,16.661,-22.077,0.755,-11.714,0.728
+sell half at 10 ATR above the 50-day,100,2006-01-01,16.727,-23.94,0.699,-12.577,0.721
+sell half at 10 ATR above the 50-day,100,2007-01-01,17.578,-24.499,0.717,-12.552,0.748
+sell half at 10 ATR above the 50-day,100,2008-01-01,17.874,-19.52,0.916,-10.106,0.753
+sell half at 10 ATR above the 50-day,100,2009-01-01,19.618,-18.931,1.036,-10.106,0.796
+sell half at 10 ATR above the 50-day,100,2010-01-01,19.235,-20.987,0.917,-15.118,0.778
+sell half at 10 ATR above the 50-day,100,2011-01-01,20.616,-17.538,1.175,-5.957,0.833
+sell half at 10 ATR above the 50-day,100,2012-01-01,24.128,-12.323,1.958,-7.756,0.946
+sell half at 10 ATR above the 50-day,100,2013-01-01,22.519,-16.28,1.383,-14.033,0.872
+sell half at 10 ATR above the 50-day,100,2014-01-01,19.655,-24.825,0.792,-18.614,0.756
+sell half at 10 ATR above the 50-day,100,2015-01-01,20.344,-28.128,0.723,-18.793,0.761
+sell half at 10 ATR above the 50-day,100,2016-01-01,22.001,-15.295,1.438,-3.043,0.864
+sell half at 10 ATR above the 50-day,100,2017-01-01,22.85,-17.795,1.284,-3.083,0.843
+sell half at 10 ATR above the 50-day,100,2018-01-01,27.148,-21.063,1.289,-6.193,0.83
+sell half at 10 ATR above the 50-day,100,2019-01-01,30.267,-19.32,1.567,14.634,0.94
+sell half at 10 ATR above the 50-day,100,2020-01-01,36.287,-23.203,1.564,21.534,0.92
