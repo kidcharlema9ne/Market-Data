@@ -1316,3 +1316,8 @@ Baseline = current rule with volume-surge ranking (+25.1%/yr, Sharpe 0.69, -21.7
 - Exit in place of trailing stop: 75-day 0.69, 100-day 0.66 (+28.1%, -19.7%, profit/DD 1.42), 125-day 0.63, 200-day 0.55, 50-day 0.64 - higher profit, lower Sharpe.
 - Exit only while SPY below 200-day: 75-day 0.72, 125-day 0.72, 200-day 0.71 (+25.9%), 100-day 0.69, 50-day 0.64.
 - Own-average SIGNAL replacing efficiency ratio: all worse. Cross-up 50-day 0.55-0.56, 100-day 0.53-0.57, 200-day 0.44-0.46 (random pick); state version ("above average and 1.5 ATR below 20-day high") 0.47-0.49. Drawdown -23% to -32%, worst year -23% to -37%. Efficiency ratio signal clearly better.
+
+## Entry 158 (18 Nov 2026) - volatility-ratio gates on the NEW BASELINE (run 44326630297)
+New baseline = volume-surge ranking + exit below own 125-day average in addition to the 4 ATR initial and 5 ATR trailing stops: +26.3%/yr, drawdown -19.9%, profit/DD 1.32, worst year -17.8%, Sharpe 0.72 (200% cap); 100% cap +15.5%, -17.3%, 0.90, -11.2%, 0.72.
+Gates on trigger day: ratios of historical volatility (stdev of daily log returns) and of average true range, 5/10, 5/20, 5/90, 10/20, 10/90, 20/90; lowest third/half, highest half/third (cut-offs from all signals). 48 gates x 2 measures.
+Result: nothing beats the baseline on profit per year. Calm (low-ratio) gates are clearly worse (profit 7-17%, drawdowns -18% to -31%). High-ratio gates keep most profit and trim drawdown at the 100% cap but are inconsistent by period (e.g. HV 10/90 highest third: 200% cap 2000-07 profit/DD 1.11 vs 0.92 baseline, 2008-21 0.73 vs 1.20). No volatility-ratio screen adopted.
