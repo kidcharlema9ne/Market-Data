@@ -1,0 +1,215 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 2s
+11,108 common-stock segments ever liquid; 28s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 330s
+baseline: 18,978 signals; reference pick, whole period cap 200%: +22.9% / Sharpe 0.64 / -22% (documented +22.9% / 0.64 / -22%); generator and account simulator match the standard ones
+volume features built for 153,182 signals
+  NEW BASELINE: volume-surge ranking + 125-day exit in addition to stops: +26.3% / Sharpe 0.72 (0.72 to 0.72) / -20% / worst year -18% / trades 4996
+
+average true range 5-day / 10-day ratio: lowest third < 1.00, median 1.08, highest third > 1.15  (153,182 signals)
+  average true range 5-day / 10-day ratio in its lowest third: +15.5% / Sharpe 0.50 (0.50 to 0.50) / -22% / worst year -26% / trades 4135
+  average true range 5-day / 10-day ratio in its lowest half: +20.9% / Sharpe 0.62 (0.62 to 0.62) / -17% / worst year -16% / trades 4409
+  average true range 5-day / 10-day ratio in its highest half: +19.4% / Sharpe 0.56 (0.56 to 0.56) / -26% / worst year -13% / trades 4711
+  average true range 5-day / 10-day ratio in its highest third: +17.1% / Sharpe 0.52 (0.52 to 0.52) / -26% / worst year -10% / trades 4398
+
+average true range 5-day / 20-day ratio: lowest third < 1.01, median 1.11, highest third > 1.23  (153,182 signals)
+  average true range 5-day / 20-day ratio in its lowest third: +15.5% / Sharpe 0.54 (0.54 to 0.54) / -20% / worst year -19% / trades 3918
+  average true range 5-day / 20-day ratio in its lowest half: +18.3% / Sharpe 0.59 (0.59 to 0.59) / -21% / worst year -16% / trades 4240
+  average true range 5-day / 20-day ratio in its highest half: +20.7% / Sharpe 0.57 (0.57 to 0.57) / -22% / worst year -19% / trades 4801
+  average true range 5-day / 20-day ratio in its highest third: +19.5% / Sharpe 0.56 (0.56 to 0.56) / -21% / worst year -13% / trades 4541
+
+average true range 5-day / 90-day ratio: lowest third < 0.94, median 1.08, highest third > 1.24  (143,914 signals)
+  average true range 5-day / 90-day ratio in its lowest third: +12.6% / Sharpe 0.58 (0.58 to 0.58) / -22% / worst year -14% / trades 2825
+  average true range 5-day / 90-day ratio in its lowest half: +14.4% / Sharpe 0.55 (0.55 to 0.55) / -22% / worst year -18% / trades 3564
+  average true range 5-day / 90-day ratio in its highest half: +24.2% / Sharpe 0.65 (0.65 to 0.65) / -20% / worst year -15% / trades 5040
+  average true range 5-day / 90-day ratio in its highest third: +22.3% / Sharpe 0.60 (0.60 to 0.60) / -22% / worst year -12% / trades 4923
+
+average true range 10-day / 20-day ratio: lowest third < 0.99, median 1.05, highest third > 1.12  (153,182 signals)
+  average true range 10-day / 20-day ratio in its lowest third: +16.6% / Sharpe 0.60 (0.60 to 0.60) / -22% / worst year -16% / trades 3847
+  average true range 10-day / 20-day ratio in its lowest half: +17.2% / Sharpe 0.56 (0.56 to 0.56) / -22% / worst year -24% / trades 4256
+  average true range 10-day / 20-day ratio in its highest half: +22.2% / Sharpe 0.61 (0.61 to 0.61) / -19% / worst year -18% / trades 4782
+  average true range 10-day / 20-day ratio in its highest third: +18.5% / Sharpe 0.52 (0.52 to 0.52) / -21% / worst year -12% / trades 4633
+
+average true range 10-day / 90-day ratio: lowest third < 0.92, median 1.02, highest third > 1.15  (143,914 signals)
+  average true range 10-day / 90-day ratio in its lowest third: +13.1% / Sharpe 0.65 (0.65 to 0.65) / -19% / worst year -10% / trades 2569
+  average true range 10-day / 90-day ratio in its lowest half: +12.5% / Sharpe 0.51 (0.51 to 0.51) / -22% / worst year -18% / trades 3333
+  average true range 10-day / 90-day ratio in its highest half: +25.4% / Sharpe 0.67 (0.67 to 0.67) / -22% / worst year -16% / trades 5084
+  average true range 10-day / 90-day ratio in its highest third: +24.0% / Sharpe 0.64 (0.64 to 0.64) / -21% / worst year -11% / trades 4974
+
+average true range 20-day / 90-day ratio: lowest third < 0.91, median 0.99, highest third > 1.08  (143,914 signals)
+  average true range 20-day / 90-day ratio in its lowest third: +11.7% / Sharpe 0.59 (0.59 to 0.59) / -18% / worst year -10% / trades 2381
+  average true range 20-day / 90-day ratio in its lowest half: +11.8% / Sharpe 0.49 (0.49 to 0.49) / -26% / worst year -14% / trades 3139
+  average true range 20-day / 90-day ratio in its highest half: +25.0% / Sharpe 0.66 (0.66 to 0.66) / -22% / worst year -14% / trades 5095
+  average true range 20-day / 90-day ratio in its highest third: +24.6% / Sharpe 0.66 (0.66 to 0.66) / -19% / worst year -20% / trades 4994
+
+==== atr | 2000 to 2007 | cap 200% ====
+                                                              scenario  profit per year %  max drawdown %  profit / drawdown from peak  worst year %  Sharpe ratio  trades taken
+NEW BASELINE: volume-surge ranking + 125-day exit in addition to stops              18.36          -19.90                         0.92         -9.93          0.63          1340
+           average true range 5-day / 10-day ratio in its lowest third              10.39          -21.68                         0.48         -6.52          0.40          1154
+            average true range 5-day / 10-day ratio in its lowest half              15.96          -17.36                         0.92         -7.24          0.56          1227
+           average true range 5-day / 10-day ratio in its highest half               8.92          -24.93                         0.36         -8.38          0.34          1231
+          average true range 5-day / 10-day ratio in its highest third               8.84          -23.23                         0.38         -7.05          0.35          1175
+           average true range 5-day / 20-day ratio in its lowest third              10.29          -19.86                         0.52         -7.63          0.42          1081
+            average true range 5-day / 20-day ratio in its lowest half              13.73          -20.75                         0.66         -7.62          0.51          1196
+           average true range 5-day / 20-day ratio in its highest half              12.23          -22.36                         0.55         -9.96          0.44          1277
+          average true range 5-day / 20-day ratio in its highest third              13.22          -19.95                         0.66         -7.81          0.49          1182
+           average true range 5-day / 90-day ratio in its lowest third               5.11          -22.11                         0.23        -14.27          0.29           707
+            average true range 5-day / 90-day ratio in its lowest half               9.33          -21.88                         0.43         -8.57          0.43           985
+           average true range 5-day / 90-day ratio in its highest half              14.85          -19.84                         0.75         -7.42          0.51          1355
+          average true range 5-day / 90-day ratio in its highest third              13.60          -21.92                         0.62         -8.43          0.48          1292
+          average true range 10-day / 20-day ratio in its lowest third               7.96          -21.25                         0.37         -5.55          0.35          1074
+           average true range 10-day / 20-day ratio in its lowest half              11.83          -21.90                         0.54         -6.49          0.47          1199
+          average true range 10-day / 20-day ratio in its highest half              13.24          -19.12                         0.69         -8.25          0.47          1279
+         average true range 10-day / 20-day ratio in its highest third              13.19          -20.79                         0.63         -7.89          0.48          1210
+          average true range 10-day / 90-day ratio in its lowest third               6.75          -19.08                         0.35         -7.42          0.44           615
+           average true range 10-day / 90-day ratio in its lowest half               4.86          -22.02                         0.22        -10.12          0.25           913
+          average true range 10-day / 90-day ratio in its highest half              17.71          -21.95                         0.81         -6.85          0.61          1355
+         average true range 10-day / 90-day ratio in its highest third              14.27          -21.44                         0.67         -7.21          0.50          1313
+          average true range 20-day / 90-day ratio in its lowest third               4.32          -16.53                         0.26         -9.80          0.29           569
+           average true range 20-day / 90-day ratio in its lowest half               3.54          -26.00                         0.14        -14.02          0.19           844
+          average true range 20-day / 90-day ratio in its highest half              17.94          -22.15                         0.81         -8.44          0.61          1349
+         average true range 20-day / 90-day ratio in its highest third              16.53          -19.43                         0.85         -7.14          0.57          1340
+
+==== atr | 2000 to 2007 | cap 100% ====
+                                                              scenario  profit per year %  max drawdown %  profit / drawdown from peak  worst year %  Sharpe ratio  trades taken
+NEW BASELINE: volume-surge ranking + 125-day exit in addition to stops              10.29          -16.01                         0.64         -6.43          0.62           756
+           average true range 5-day / 10-day ratio in its lowest third               6.55          -16.43                         0.40        -12.74          0.41           687
+            average true range 5-day / 10-day ratio in its lowest half               6.23          -16.45                         0.38         -7.49          0.37           720
+           average true range 5-day / 10-day ratio in its highest half               7.41          -15.39                         0.48         -5.85          0.48           706
+          average true range 5-day / 10-day ratio in its highest third               7.90          -12.13                         0.65         -5.12          0.52           682
+           average true range 5-day / 20-day ratio in its lowest third               5.28          -17.94                         0.29         -8.65          0.36           636
+            average true range 5-day / 20-day ratio in its lowest half               7.80          -15.92                         0.49         -3.64          0.54           681
+           average true range 5-day / 20-day ratio in its highest half               8.98          -12.60                         0.71         -6.89          0.55           723
+          average true range 5-day / 20-day ratio in its highest third               9.45          -14.78                         0.64         -4.24          0.60           672
+           average true range 5-day / 90-day ratio in its lowest third               3.13          -17.74                         0.18        -11.18          0.25           491
+            average true range 5-day / 90-day ratio in its lowest half               6.36          -19.34                         0.33         -7.62          0.47           582
+           average true range 5-day / 90-day ratio in its highest half               9.52          -15.02                         0.63         -6.50          0.57           745
+          average true range 5-day / 90-day ratio in its highest third               9.05          -17.30                         0.52         -6.11          0.54           749
+          average true range 10-day / 20-day ratio in its lowest third               6.51          -18.06                         0.36         -3.60          0.48           627
+           average true range 10-day / 20-day ratio in its lowest half               7.84          -13.95                         0.56         -3.41          0.54           681
+          average true range 10-day / 20-day ratio in its highest half               9.97          -15.05                         0.66         -4.90          0.62           715
+         average true range 10-day / 20-day ratio in its highest third               8.79          -15.37                         0.57         -4.30          0.55           692
+          average true range 10-day / 90-day ratio in its lowest third               2.11          -13.28                         0.16         -8.01          0.22           429
+           average true range 10-day / 90-day ratio in its lowest half               4.72          -17.90                         0.26         -7.35          0.39           538
+          average true range 10-day / 90-day ratio in its highest half              10.72          -16.58                         0.65         -4.84          0.62           766
+         average true range 10-day / 90-day ratio in its highest third               9.39          -19.24                         0.49         -7.09          0.56           762
+          average true range 20-day / 90-day ratio in its lowest third               3.81           -8.25                         0.46         -4.41          0.40           385
+           average true range 20-day / 90-day ratio in its lowest half               2.97          -20.41                         0.15         -9.09          0.25           531
+          average true range 20-day / 90-day ratio in its highest half              10.58          -14.97                         0.71         -6.02          0.63           758
+         average true range 20-day / 90-day ratio in its highest third               9.85          -17.51                         0.56         -3.95          0.59           768
+
+==== atr | 2008 to Aug 2021 | cap 200% ====
+                                                              scenario  profit per year %  max drawdown %  profit / drawdown from peak  worst year %  Sharpe ratio  trades taken
+NEW BASELINE: volume-surge ranking + 125-day exit in addition to stops              31.12          -26.03                         1.20        -17.83          0.78          3656
+           average true range 5-day / 10-day ratio in its lowest third              18.57          -27.01                         0.69        -25.88          0.56          2981
+            average true range 5-day / 10-day ratio in its lowest half              23.78          -26.51                         0.90        -16.39          0.66          3182
+           average true range 5-day / 10-day ratio in its highest half              25.69          -25.22                         1.02        -10.02          0.66          3480
+          average true range 5-day / 10-day ratio in its highest third              22.08          -27.71                         0.80         -6.79          0.60          3223
+           average true range 5-day / 20-day ratio in its lowest third              18.59          -24.23                         0.77        -18.80          0.60          2837
+            average true range 5-day / 20-day ratio in its lowest half              21.02          -25.73                         0.82        -15.72          0.64          3044
+           average true range 5-day / 20-day ratio in its highest half              25.77          -30.00                         0.86        -19.32          0.64          3524
+          average true range 5-day / 20-day ratio in its highest third              23.32          -28.25                         0.83        -12.61          0.60          3359
+           average true range 5-day / 90-day ratio in its lowest third              17.00          -21.68                         0.78         -9.74          0.71          2118
+            average true range 5-day / 90-day ratio in its lowest half              17.45          -23.26                         0.75        -17.55          0.61          2579
+           average true range 5-day / 90-day ratio in its highest half              29.82          -28.17                         1.06        -14.95          0.72          3685
+          average true range 5-day / 90-day ratio in its highest third              27.54          -32.92                         0.84        -10.15          0.66          3631
+          average true range 10-day / 20-day ratio in its lowest third              21.81          -20.12                         1.08        -16.50          0.72          2773
+           average true range 10-day / 20-day ratio in its lowest half              20.33          -26.17                         0.78        -24.05          0.62          3057
+          average true range 10-day / 20-day ratio in its highest half              27.50          -29.08                         0.95        -17.52          0.67          3503
+         average true range 10-day / 20-day ratio in its highest third              21.60          -32.40                         0.67        -12.12          0.55          3423
+          average true range 10-day / 90-day ratio in its lowest third              16.82          -18.61                         0.90         -9.63          0.75          1954
+           average true range 10-day / 90-day ratio in its lowest half              17.04          -20.36                         0.84        -17.70          0.63          2420
+          average true range 10-day / 90-day ratio in its highest half              29.97          -31.77                         0.94        -15.51          0.71          3729
+         average true range 10-day / 90-day ratio in its highest third              29.78          -33.40                         0.89        -10.74          0.71          3661
+          average true range 20-day / 90-day ratio in its lowest third              16.17          -18.75                         0.86         -1.06          0.72          1812
+           average true range 20-day / 90-day ratio in its lowest half              16.73          -21.80                         0.77        -13.70          0.62          2295
+          average true range 20-day / 90-day ratio in its highest half              29.24          -32.54                         0.90        -14.47          0.70          3746
+         average true range 20-day / 90-day ratio in its highest third              29.47          -29.93                         0.98        -20.39          0.72          3654
+
+==== atr | 2008 to Aug 2021 | cap 100% ====
+                                                              scenario  profit per year %  max drawdown %  profit / drawdown from peak  worst year %  Sharpe ratio  trades taken
+NEW BASELINE: volume-surge ranking + 125-day exit in addition to stops              18.57          -16.84                         1.10        -11.23          0.77          2053
+           average true range 5-day / 10-day ratio in its lowest third              12.14          -19.55                         0.62        -13.01          0.63          1688
+            average true range 5-day / 10-day ratio in its lowest half              16.09          -19.60                         0.82         -6.96          0.72          1832
+           average true range 5-day / 10-day ratio in its highest half              15.82          -18.71                         0.85         -9.24          0.70          1962
+          average true range 5-day / 10-day ratio in its highest third              12.81          -19.37                         0.66         -8.81          0.61          1886
+           average true range 5-day / 20-day ratio in its lowest third              13.05          -14.94                         0.87         -8.70          0.75          1568
+            average true range 5-day / 20-day ratio in its lowest half              14.36          -15.17                         0.95         -8.75          0.76          1720
+           average true range 5-day / 20-day ratio in its highest half              15.68          -20.12                         0.78        -12.76          0.65          2038
+          average true range 5-day / 20-day ratio in its highest third              16.43          -19.15                         0.86         -5.34          0.69          1929
+           average true range 5-day / 90-day ratio in its lowest third              10.66          -16.32                         0.65         -5.70          0.77          1204
+            average true range 5-day / 90-day ratio in its lowest half              13.12          -19.51                         0.67        -14.58          0.79          1475
+           average true range 5-day / 90-day ratio in its highest half              18.24          -18.37                         0.99         -8.26          0.72          2061
+          average true range 5-day / 90-day ratio in its highest third              11.75          -23.78                         0.49        -12.32          0.50          2114
+          average true range 10-day / 20-day ratio in its lowest third              11.53          -14.23                         0.81         -8.21          0.65          1635
+           average true range 10-day / 20-day ratio in its lowest half              14.25          -17.08                         0.83        -10.37          0.75          1701
+          average true range 10-day / 20-day ratio in its highest half              16.46          -16.80                         0.98        -10.31          0.69          1979
+         average true range 10-day / 20-day ratio in its highest third              15.00          -18.91                         0.79         -6.25          0.62          1961
+          average true range 10-day / 90-day ratio in its lowest third               9.21          -19.18                         0.48         -7.16          0.70          1182
+           average true range 10-day / 90-day ratio in its lowest half              10.81          -12.43                         0.87        -10.57          0.69          1356
+          average true range 10-day / 90-day ratio in its highest half              14.23          -16.73                         0.85        -13.40          0.61          2071
+         average true range 10-day / 90-day ratio in its highest third              18.33          -19.52                         0.94        -15.77          0.74          2078
+          average true range 20-day / 90-day ratio in its lowest third              10.29          -12.47                         0.83         -6.39          0.77          1056
+           average true range 20-day / 90-day ratio in its lowest half              10.17          -14.02                         0.73        -14.28          0.64          1341
+          average true range 20-day / 90-day ratio in its highest half              16.48          -19.45                         0.85         -8.40          0.68          2095
+         average true range 20-day / 90-day ratio in its highest third              18.32          -22.88                         0.80        -10.64          0.74          2103
+
+==== atr | whole 2000 to Aug 2021 | cap 200% ====
+                                                              scenario  profit per year %  max drawdown %  profit / drawdown from peak  worst year %  Sharpe ratio  trades taken
+NEW BASELINE: volume-surge ranking + 125-day exit in addition to stops              26.35          -19.90                         1.32        -17.83          0.72          4996
+           average true range 5-day / 10-day ratio in its lowest third              15.51          -21.68                         0.72        -25.88          0.50          4135
+            average true range 5-day / 10-day ratio in its lowest half              20.86          -17.36                         1.20        -16.39          0.62          4409
+           average true range 5-day / 10-day ratio in its highest half              19.42          -26.23                         0.74        -12.62          0.56          4711
+          average true range 5-day / 10-day ratio in its highest third              17.13          -25.73                         0.67        -10.41          0.52          4398
+           average true range 5-day / 20-day ratio in its lowest third              15.49          -19.93                         0.78        -18.80          0.54          3918
+            average true range 5-day / 20-day ratio in its lowest half              18.30          -20.75                         0.88        -15.72          0.59          4240
+           average true range 5-day / 20-day ratio in its highest half              20.71          -22.36                         0.93        -19.32          0.57          4801
+          average true range 5-day / 20-day ratio in its highest third              19.54          -20.71                         0.94        -12.61          0.56          4541
+           average true range 5-day / 90-day ratio in its lowest third              12.56          -22.11                         0.57        -14.27          0.58          2825
+            average true range 5-day / 90-day ratio in its lowest half              14.41          -21.88                         0.66        -17.55          0.55          3564
+           average true range 5-day / 90-day ratio in its highest half              24.23          -19.84                         1.22        -14.95          0.65          5040
+          average true range 5-day / 90-day ratio in its highest third              22.33          -21.92                         1.02        -11.61          0.60          4923
+          average true range 10-day / 20-day ratio in its lowest third              16.64          -22.42                         0.74        -16.50          0.60          3847
+           average true range 10-day / 20-day ratio in its lowest half              17.16          -21.90                         0.78        -24.05          0.56          4256
+          average true range 10-day / 20-day ratio in its highest half              22.17          -19.12                         1.16        -17.52          0.61          4782
+         average true range 10-day / 20-day ratio in its highest third              18.45          -20.79                         0.89        -12.12          0.52          4633
+          average true range 10-day / 90-day ratio in its lowest third              13.06          -19.08                         0.68         -9.63          0.65          2569
+           average true range 10-day / 90-day ratio in its lowest half              12.49          -22.02                         0.57        -17.70          0.51          3333
+          average true range 10-day / 90-day ratio in its highest half              25.39          -21.95                         1.16        -15.51          0.67          5084
+         average true range 10-day / 90-day ratio in its highest third              23.98          -21.44                         1.12        -10.74          0.64          4974
+          average true range 20-day / 90-day ratio in its lowest third              11.74          -17.65                         0.67         -9.80          0.59          2381
+           average true range 20-day / 90-day ratio in its lowest half              11.80          -26.00                         0.45        -14.02          0.49          3139
+          average true range 20-day / 90-day ratio in its highest half              25.02          -22.15                         1.13        -14.47          0.66          5095
+         average true range 20-day / 90-day ratio in its highest third              24.63          -19.43                         1.27        -20.39          0.66          4994
+
+==== atr | whole 2000 to Aug 2021 | cap 100% ====
+                                                              scenario  profit per year %  max drawdown %  profit / drawdown from peak  worst year %  Sharpe ratio  trades taken
+NEW BASELINE: volume-surge ranking + 125-day exit in addition to stops              15.48          -17.25                         0.90        -11.23          0.72          2809
+           average true range 5-day / 10-day ratio in its lowest third              10.05          -20.16                         0.50        -13.01          0.55          2375
+            average true range 5-day / 10-day ratio in its lowest half              12.40          -17.89                         0.69         -7.49          0.61          2552
+           average true range 5-day / 10-day ratio in its highest half              12.68          -18.74                         0.68         -9.43          0.63          2668
+          average true range 5-day / 10-day ratio in its highest third              10.97          -15.64                         0.70         -8.81          0.58          2568
+           average true range 5-day / 20-day ratio in its lowest third              10.14          -23.28                         0.44         -8.70          0.61          2204
+            average true range 5-day / 20-day ratio in its lowest half              11.91          -15.92                         0.75         -8.75          0.68          2401
+           average true range 5-day / 20-day ratio in its highest half              13.18          -17.23                         0.76        -12.76          0.61          2761
+          average true range 5-day / 20-day ratio in its highest third              13.82          -14.78                         0.93         -7.60          0.65          2601
+           average true range 5-day / 90-day ratio in its lowest third               7.85          -17.74                         0.44        -11.18          0.59          1695
+            average true range 5-day / 90-day ratio in its lowest half              10.59          -19.34                         0.55        -14.58          0.68          2057
+           average true range 5-day / 90-day ratio in its highest half              14.98          -17.89                         0.84        -10.01          0.67          2806
+          average true range 5-day / 90-day ratio in its highest third              10.74          -18.11                         0.59        -12.32          0.51          2863
+          average true range 10-day / 20-day ratio in its lowest third               9.66          -18.06                         0.53         -8.21          0.59          2262
+           average true range 10-day / 20-day ratio in its lowest half              11.85          -13.95                         0.85        -10.37          0.68          2382
+          average true range 10-day / 20-day ratio in its highest half              14.04          -15.05                         0.93        -10.31          0.66          2694
+         average true range 10-day / 20-day ratio in its highest third              12.68          -15.37                         0.82         -6.72          0.59          2653
+          average true range 10-day / 90-day ratio in its lowest third               6.56          -16.86                         0.39         -8.01          0.54          1611
+           average true range 10-day / 90-day ratio in its lowest half               8.53          -17.90                         0.48        -10.57          0.59          1894
+          average true range 10-day / 90-day ratio in its highest half              12.92          -16.71                         0.77        -13.40          0.61          2837
+         average true range 10-day / 90-day ratio in its highest third              14.99          -19.24                         0.78        -15.77          0.68          2840
+          average true range 20-day / 90-day ratio in its lowest third               7.86          -10.61                         0.74         -6.39          0.65          1441
+           average true range 20-day / 90-day ratio in its lowest half               7.48          -20.41                         0.37        -14.28          0.52          1872
+          average true range 20-day / 90-day ratio in its highest half              14.27          -16.98                         0.84         -9.28          0.66          2853
+         average true range 20-day / 90-day ratio in its highest third              15.15          -17.51                         0.87        -10.64          0.68          2871
+done
