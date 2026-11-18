@@ -1,0 +1,8 @@
+flag,trades flagged (all signals),taken trades flagged,net dollars of flagged taken trades
+clean jump,27,13,137651.8076374358
+spike,10,3,111242.27764583587
+bad range,1,1,2276.103136496544
+zero volume,0,0,0.0
+exit outside range,0,0,0.0
+wide range,82,42,131496.0602895263
+any hard flag,37,16,145703.85204073368
