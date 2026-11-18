@@ -3,10 +3,10 @@ name: "Side-by-side quality statistics, stock system vs SPY and QQQ at 100% and 
 on:
   push:
     branches: [claude/er-stocks-20261117]
-    paths: ['.github/workflows/er-stocks-benchmarks.yml']
+    paths: ['.github/workflows/er-stocks-metrics.yml']
   workflow_dispatch:
 concurrency:
-  group: er-stocks-benchmarks-${{ github.ref }}
+  group: er-stocks-metrics-${{ github.ref }}
   cancel-in-progress: true
 permissions:
   contents: write
