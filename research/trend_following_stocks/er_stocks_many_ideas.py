@@ -203,8 +203,7 @@ def portfolio_gen(R, cal, cap, key, cap_t=None, mult_fn=None, adv_frac=None, imp
 
 def add_interest(P, credit, borrow):
     """Interest on idle cash (credit rate) and charge on borrowed money (borrow rate), flat annual rates on the account value."""
-    eq = CAPITAL + np.r_[0.0, np.cumsum(P["pnl"])[:-1]]
-    net = eq - P["gross"]
+    net = CAPITAL - P["gross"]          # the account is a fixed $300,000 (profits are not added to it), so idle cash = 300,000 minus position value
     extra = np.where(net > 0, net * credit, net * borrow) / 252.0
     Q = dict(P); Q["pnl"] = P["pnl"] + extra
     return Q
@@ -564,6 +563,42 @@ def run_sector(ctx, mk200, names, live, E20, rows, spy_close, etf_path):
     return rows
 
 
+# ---------------------------------------------------------------- mode: followup
+def run_followup(ctx, mk200, names, live, E20, rows, spy_close):
+    SEG, dropped, cal, (dates, _, _) = ctx
+    base = gen(ctx, mk200)
+    rows += scen(ctx, base, {"idea": "baseline", "scenario": "current best rule"}); line(rows, "baseline")
+    RK = {L: make_rank(ctx, ret_score(L)) for L in (63, 189, 252)}
+    RK[126] = {i: SEG[i]["rank"] for i in range(len(SEG)) if i not in dropped}
+    def avg(Ls):
+        return {i: np.mean([RK[L][i] for L in Ls], axis=0) for i in RK[63]}
+    combos = {"63+126": (63, 126), "126+252": (126, 252), "63+189": (63, 189), "63+126+252": (63, 126, 252), "63+126+189+252": (63, 126, 189, 252)}
+    reranked = {}
+    for name, Ls in combos.items():
+        sc = avg(Ls); rk = make_rank(ctx, lambda i, g, sc=sc: sc[i]); reranked[name] = rk
+        for top in (0.10, 0.20, 0.30):
+            R = gen(ctx, mk200, rankfn=lambda i, g, rk=rk: rk[i], top=top)
+            r = scen(ctx, R, {"idea": "4 average of strength rankings", "scenario": f"average rank of the {name}-session returns, top {int(top*100)}%"}); rows += r; line(r, f"avg {name} top {int(top*100)}%")
+    for name, Ls in (("63, 126 and 252", (63, 126, 252)), ("63, 126, 189 and 252", (63, 126, 189, 252))):
+        mn = {i: np.min([RK[L][i] for L in Ls], axis=0) for i in RK[63]}
+        for top in (0.30, 0.40):
+            R = gen(ctx, mk200, rankfn=lambda i, g, mn=mn: mn[i], top=top)
+            r = scen(ctx, R, {"idea": "4 every ranking strong", "scenario": f"in the top {int(top*100)}% on each of the {name}-session returns"}); rows += r; line(r, f"all of {name} top {int(top*100)}%")
+    # graded exposure neighbours
+    s = pd.Series(spy_close); sma = s.rolling(200, min_periods=200).mean(); dist = (s / sma - 1.0).to_numpy()
+    def gcap(thr, frac):
+        return lambda cap: np.nan_to_num(np.where(dist >= thr, cap, cap * frac), nan=cap)
+    for thr in (0.03, 0.05, 0.08):
+        for frac in (0.5, 0.25, 0.0):
+            r = scen(ctx, base, {"idea": "7 graded exposure (neighbours)", "scenario": f"cap full when SPY is {int(thr*100)}%+ above its 200-day, {frac:g} of it between 0 and {int(thr*100)}%"}, cap_t_fn=gcap(thr, frac)); rows += r; line(r, f"graded {thr}/{frac}")
+    # stacked (not independent: each piece was picked from the tests above)
+    rk = reranked["63+126+252"]
+    Rc = gen(ctx, mk200, rankfn=lambda i, g: rk[i])
+    r = scen(ctx, Rc, {"idea": "stacked", "scenario": "average of 63/126/252 rankings (top 20%) + graded exposure (full cap only when SPY is 5%+ above its 200-day, half between 0 and 5%)"}, cap_t_fn=gcap(0.05, 0.5)); rows += r; line(r, "stacked rank+graded")
+    r = scen(ctx, Rc, {"idea": "stacked", "scenario": "average of 63/126/252 rankings (top 20%) + 2% interest on idle cash and 4% charge on borrowing"}, post=lambda P: add_interest(P, 0.02, 0.04)); rows += r; line(r, "stacked rank+interest")
+    return rows
+
+
 def main():
     prices_path, out_dir, spy_path, mode = sys.argv[1], Path(sys.argv[2]), sys.argv[3], sys.argv[4]
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -580,6 +615,8 @@ def main():
         run_account(ctx, mk200, names, live, E20, rows, spy_close)
     elif mode == "structure":
         run_structure(ctx, mk200, names, live, E20, rows, spy_close)
+    elif mode == "followup":
+        run_followup(ctx, mk200, names, live, E20, rows, spy_close)
     elif mode == "sector":
         run_sector(ctx, mk200, names, live, E20, rows, spy_close, sys.argv[5])
     S = pd.DataFrame(rows)

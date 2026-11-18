@@ -2,12 +2,10 @@ name: "Efficiency ratio rule on stocks, many ideas (entry, exit, account, struct
 # research/trend_following_stocks/er_stocks_many_ideas.py (Michael, 18 Nov 2026). In-sample only (data through 2021-08-06); later years are never read.
 on:
   workflow_dispatch:
-  push:
-    branches: ['claude/er-stocks-20261117']
-    paths:
-      - 'research/trend_following_stocks/er_stocks_many_ideas.py'
-      - 'research/trend_following_stocks/fetch_sector_etfs.py'
-      - '.github/workflows/er-stocks-many-ideas.yml'
+    inputs:
+      modes:
+        description: 'JSON list of modes'
+        default: '["entry","exit","account","structure","sector","followup"]'
 concurrency:
   group: er-stocks-many-ideas-${{ github.ref }}
   cancel-in-progress: true
@@ -20,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mode: [entry, exit, account, structure, sector]
+        mode: ${{ fromJSON(inputs.modes) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
