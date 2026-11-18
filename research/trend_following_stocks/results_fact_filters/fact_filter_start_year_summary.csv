@@ -1,0 +1,13 @@
+cap %,version,start years,profit per year higher than baseline in,smaller max drawdown than baseline in,higher Sharpe than baseline in,worst drawdown over all start years %,baseline worst drawdown %
+200,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,21,21,11,18,-41.43,-47.12
+200,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",21,21,17,21,-44.56,-47.12
+200,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",21,0,16,14,-45.18,-47.12
+200,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",21,19,7,19,-44.34,-47.12
+200,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",21,0,5,13,-45.16,-47.12
+200,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,21,0,14,10,-45.52,-47.12
+100,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,21,21,14,21,-28.28,-25.12
+100,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",21,21,13,21,-27.52,-25.12
+100,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",21,4,11,16,-27.11,-25.12
+100,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",21,19,12,19,-26.05,-25.12
+100,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",21,20,10,21,-28.21,-25.12
+100,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,21,2,8,10,-27.15,-25.12

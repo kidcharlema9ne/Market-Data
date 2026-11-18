@@ -1,0 +1,295 @@
+start,end,years,profit per year %,Sharpe ratio,max drawdown % (from peak),profit per year / drawdown,worst year %,years positive,trades taken,average open positions,SPY buy and hold profit per year %,SPY buy and hold max drawdown %,version,cap %
+2000-01-01,2021-08-06,21.6,25.143,0.688,-21.702,1.159,-16.132,15 of 22,4874,47.504,9.455,-56.449,BASELINE,200
+2001-01-01,2021-08-06,20.6,26.366,0.704,-21.702,1.215,-16.132,15 of 21,4874,49.814,11.536,-56.457,BASELINE,200
+2002-01-01,2021-08-06,19.6,27.691,0.722,-21.702,1.276,-16.132,15 of 20,4874,52.318,14.661,-56.463,BASELINE,200
+2003-01-01,2021-08-06,18.6,29.484,0.75,-21.1,1.397,-16.132,15 of 19,4815,54.517,21.61,-56.472,BASELINE,200
+2004-01-01,2021-08-06,17.6,25.225,0.651,-45.155,0.559,-18.857,13 of 18,4652,54.47,16.925,-56.46,BASELINE,200
+2005-01-01,2021-08-06,16.6,28.098,0.72,-25.924,1.084,-16.132,13 of 17,4353,54.845,16.049,-56.474,BASELINE,200
+2006-01-01,2021-08-06,15.6,26.732,0.679,-35.087,0.762,-16.132,12 of 16,4078,54.625,16.389,-56.465,BASELINE,200
+2007-01-01,2021-08-06,14.6,28.219,0.71,-35.755,0.789,-16.132,11 of 15,3808,54.694,14.566,-56.465,BASELINE,200
+2008-01-01,2021-08-06,13.6,29.064,0.727,-26.621,1.092,-16.132,10 of 14,3549,55.091,14.908,-53.394,BASELINE,200
+2009-01-01,2021-08-06,12.6,31.701,0.763,-25.958,1.221,-16.132,10 of 13,3535,59.374,31.017,-34.103,BASELINE,200
+2010-01-01,2021-08-06,11.6,31.5,0.764,-33.546,0.939,-16.132,9 of 12,3326,59.628,25.646,-34.105,BASELINE,200
+2011-01-01,2021-08-06,10.6,31.82,0.775,-33.864,0.94,-18.676,8 of 11,3069,59.955,23.793,-34.101,BASELINE,200
+2012-01-01,2021-08-06,9.6,37.349,0.897,-16.959,2.202,-13.143,8 of 10,2811,62.084,26.352,-34.102,BASELINE,200
+2013-01-01,2021-08-06,8.6,38.528,0.905,-18.036,2.136,-5.165,7 of 9,2559,62.469,24.52,-34.101,BASELINE,200
+2014-01-01,2021-08-06,7.6,33.898,0.798,-26.89,1.261,-7.193,6 of 8,2306,62.663,18.384,-34.101,BASELINE,200
+2015-01-01,2021-08-06,6.6,33.535,0.779,-37.689,0.89,-21.472,5 of 7,2014,62.916,17.483,-34.097,BASELINE,200
+2016-01-01,2021-08-06,5.6,47.509,1.056,-21.642,2.195,5.334,6 of 6,1701,65.37,20.926,-34.097,BASELINE,200
+2017-01-01,2021-08-06,4.6,47.659,0.992,-26.067,1.828,5.326,5 of 5,1512,68.426,21.334,-34.103,BASELINE,200
+2018-01-01,2021-08-06,3.6,46.793,0.906,-35.962,1.301,-11.393,3 of 4,1251,69.299,18.303,-34.1,BASELINE,200
+2019-01-01,2021-08-06,2.6,71.782,1.254,-33.036,2.173,37.355,3 of 3,904,72.678,29.635,-34.097,BASELINE,200
+2020-01-01,2021-08-06,1.6,86.361,1.24,-47.121,1.833,66.829,2 of 2,703,83.04,23.434,-34.102,BASELINE,200
+2000-01-01,2021-08-06,21.6,14.49,0.67,-18.062,0.802,-11.391,14 of 22,2721,26.523,9.455,-56.449,BASELINE,100
+2001-01-01,2021-08-06,20.6,15.194,0.686,-18.062,0.841,-11.391,14 of 21,2721,27.813,11.536,-56.457,BASELINE,100
+2002-01-01,2021-08-06,19.6,15.958,0.703,-18.062,0.884,-11.391,14 of 20,2721,29.211,14.661,-56.463,BASELINE,100
+2003-01-01,2021-08-06,18.6,17.059,0.735,-17.63,0.968,-11.391,14 of 19,2681,30.365,21.61,-56.472,BASELINE,100
+2004-01-01,2021-08-06,17.6,15.344,0.666,-24.227,0.633,-12.567,13 of 18,2587,30.423,16.925,-56.46,BASELINE,100
+2005-01-01,2021-08-06,16.6,17.264,0.74,-20.919,0.825,-11.055,13 of 17,2413,30.667,16.049,-56.474,BASELINE,100
+2006-01-01,2021-08-06,15.6,16.724,0.709,-25.091,0.667,-11.714,12 of 16,2277,30.622,16.389,-56.465,BASELINE,100
+2007-01-01,2021-08-06,14.6,17.753,0.742,-24.766,0.717,-11.656,11 of 15,2126,30.624,14.566,-56.465,BASELINE,100
+2008-01-01,2021-08-06,13.6,18.157,0.751,-19.161,0.948,-9.692,10 of 14,1983,30.899,14.908,-53.394,BASELINE,100
+2009-01-01,2021-08-06,12.6,19.923,0.793,-18.583,1.072,-9.692,10 of 13,1969,33.252,31.017,-34.103,BASELINE,100
+2010-01-01,2021-08-06,11.6,19.916,0.791,-20.789,0.958,-11.311,9 of 12,1856,33.47,25.646,-34.105,BASELINE,100
+2011-01-01,2021-08-06,10.6,21.302,0.843,-16.397,1.299,-2.862,8 of 11,1699,33.559,23.793,-34.101,BASELINE,100
+2012-01-01,2021-08-06,9.6,24.988,0.969,-12.189,2.05,-4.902,8 of 10,1550,34.61,26.352,-34.102,BASELINE,100
+2013-01-01,2021-08-06,8.6,23.96,0.9,-15.67,1.529,-5.008,7 of 9,1446,35.239,24.52,-34.101,BASELINE,100
+2014-01-01,2021-08-06,7.6,14.143,0.592,-21.822,0.648,-8.06,7 of 8,1318,35.426,18.384,-34.101,BASELINE,100
+2015-01-01,2021-08-06,6.6,22.714,0.819,-25.119,0.904,-15.439,5 of 7,1122,35.353,17.483,-34.097,BASELINE,100
+2016-01-01,2021-08-06,5.6,27.518,0.945,-15.043,1.829,-9.224,5 of 6,987,36.356,20.926,-34.097,BASELINE,100
+2017-01-01,2021-08-06,4.6,30.693,0.98,-15.403,1.993,-3.334,4 of 5,851,38.137,21.334,-34.103,BASELINE,100
+2018-01-01,2021-08-06,3.6,29.013,0.857,-18.977,1.529,-10.588,3 of 4,713,39.061,18.303,-34.1,BASELINE,100
+2019-01-01,2021-08-06,2.6,27.009,0.86,-18.323,1.474,12.959,3 of 3,497,39.811,29.635,-34.097,BASELINE,100
+2020-01-01,2021-08-06,1.6,51.352,1.107,-23.96,2.143,32.264,2 of 2,410,46.958,23.434,-34.102,BASELINE,100
+2000-01-01,2021-08-06,21.6,27.829,0.742,-19.184,1.451,-13.994,14 of 22,4658,45.326,9.455,-56.449,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2001-01-01,2021-08-06,20.6,29.182,0.76,-19.184,1.521,-13.994,14 of 21,4658,47.53,11.536,-56.457,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2002-01-01,2021-08-06,19.6,30.649,0.778,-19.184,1.598,-13.994,14 of 20,4658,49.919,14.661,-56.463,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2003-01-01,2021-08-06,18.6,32.601,0.808,-18.689,1.744,-13.994,14 of 19,4599,51.99,21.61,-56.472,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2004-01-01,2021-08-06,17.6,28.444,0.714,-41.43,0.687,-13.994,12 of 18,4424,51.731,16.925,-56.46,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2005-01-01,2021-08-06,16.6,32.055,0.798,-24.106,1.33,-13.994,12 of 17,4102,51.76,16.049,-56.474,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2006-01-01,2021-08-06,15.6,30.845,0.759,-33.813,0.912,-13.994,11 of 16,3882,51.987,16.389,-56.465,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2007-01-01,2021-08-06,14.6,31.397,0.762,-36.973,0.849,-13.994,11 of 15,3652,52.152,14.566,-56.465,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2008-01-01,2021-08-06,13.6,34.075,0.819,-26.829,1.27,-13.994,10 of 14,3401,52.858,14.908,-53.394,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2009-01-01,2021-08-06,12.6,36.846,0.852,-26.724,1.379,-13.994,10 of 13,3398,57.046,31.017,-34.103,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2010-01-01,2021-08-06,11.6,36.971,0.857,-34.069,1.085,-14.793,9 of 12,3198,57.484,25.646,-34.105,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2011-01-01,2021-08-06,10.6,36.704,0.854,-36.939,0.994,-23.839,8 of 11,2955,57.855,23.793,-34.101,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2012-01-01,2021-08-06,9.6,41.469,0.947,-17.174,2.415,-13.802,7 of 10,2734,60.169,26.352,-34.102,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2013-01-01,2021-08-06,8.6,41.978,0.942,-19.64,2.137,-13.802,6 of 9,2496,60.787,24.52,-34.101,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2014-01-01,2021-08-06,7.6,38.849,0.868,-26.862,1.446,-12.345,6 of 8,2212,60.596,18.384,-34.101,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2015-01-01,2021-08-06,6.6,42.85,0.931,-30.248,1.417,-13.47,5 of 7,1936,61.352,17.483,-34.097,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2016-01-01,2021-08-06,5.6,55.118,1.128,-19.109,2.884,-10.195,5 of 6,1686,64.726,20.926,-34.097,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2017-01-01,2021-08-06,4.6,49.073,0.959,-28.404,1.728,-9.12,4 of 5,1446,65.175,21.334,-34.103,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2018-01-01,2021-08-06,3.6,49.812,0.904,-38.979,1.278,-20.358,3 of 4,1163,65.35,18.303,-34.1,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2019-01-01,2021-08-06,2.6,75.653,1.219,-34.535,2.191,31.018,3 of 3,855,70.368,29.635,-34.097,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2020-01-01,2021-08-06,1.6,105.512,1.394,-38.174,2.764,70.762,2 of 2,590,76.67,23.434,-34.102,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,200
+2000-01-01,2021-08-06,21.6,20.181,0.87,-13.261,1.522,-9.234,16 of 22,2632,26.392,9.455,-56.449,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2001-01-01,2021-08-06,20.6,21.162,0.891,-13.261,1.596,-9.234,16 of 21,2632,27.676,11.536,-56.457,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2002-01-01,2021-08-06,19.6,22.226,0.913,-13.261,1.676,-9.234,16 of 20,2632,29.067,14.661,-56.463,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2003-01-01,2021-08-06,18.6,23.495,0.943,-13.177,1.783,-9.234,16 of 19,2590,30.173,21.61,-56.472,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2004-01-01,2021-08-06,17.6,21.525,0.865,-21.564,0.998,-9.234,14 of 18,2507,30.195,16.925,-56.46,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2005-01-01,2021-08-06,16.6,23.124,0.919,-17.596,1.314,-9.234,14 of 17,2338,30.273,16.049,-56.474,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2006-01-01,2021-08-06,15.6,23.171,0.906,-20.492,1.131,-9.234,13 of 16,2207,30.394,16.389,-56.465,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2007-01-01,2021-08-06,14.6,23.473,0.902,-24.248,0.968,-9.234,12 of 15,2089,30.477,14.566,-56.465,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2008-01-01,2021-08-06,13.6,25.123,0.953,-16.617,1.512,-9.234,11 of 14,1940,30.799,14.908,-53.394,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2009-01-01,2021-08-06,12.6,27.179,0.992,-16.544,1.643,-9.234,11 of 13,1937,33.227,31.017,-34.103,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2010-01-01,2021-08-06,11.6,27.427,1.005,-21.934,1.25,-8.689,10 of 12,1816,33.159,25.646,-34.105,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2011-01-01,2021-08-06,10.6,27.296,0.984,-24.85,1.098,-16.614,9 of 11,1707,33.658,23.793,-34.101,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2012-01-01,2021-08-06,9.6,30.929,1.097,-11.054,2.798,-7.862,9 of 10,1542,34.667,26.352,-34.102,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2013-01-01,2021-08-06,8.6,30.217,1.048,-17.857,1.692,-16.882,8 of 9,1420,35.142,24.52,-34.101,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2014-01-01,2021-08-06,7.6,28.539,0.966,-19.121,1.493,-8.622,7 of 8,1283,35.571,18.384,-34.101,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2015-01-01,2021-08-06,6.6,30.477,0.997,-23.591,1.292,-12.119,6 of 7,1117,35.849,17.483,-34.097,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2016-01-01,2021-08-06,5.6,37.982,1.17,-14.685,2.586,0.789,6 of 6,963,37.522,20.926,-34.097,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2017-01-01,2021-08-06,4.6,35.683,1.039,-19.574,1.823,-0.774,4 of 5,826,37.765,21.334,-34.103,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2018-01-01,2021-08-06,3.6,37.611,1.006,-24.352,1.544,-11.567,3 of 4,682,38.649,18.303,-34.1,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2019-01-01,2021-08-06,2.6,56.497,1.338,-23.052,2.451,25.67,3 of 3,484,40.061,29.635,-34.097,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2020-01-01,2021-08-06,1.6,74.4,1.419,-28.277,2.631,53.74,2 of 2,364,44.903,23.434,-34.102,lower price level (hindsight-contaminated) | better half only AND ranked by the fact when full,100
+2000-01-01,2021-08-06,21.6,28.265,0.766,-21.034,1.344,-15.316,15 of 22,4597,44.917,9.455,-56.449,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2001-01-01,2021-08-06,20.6,29.639,0.784,-21.034,1.409,-15.316,15 of 21,4597,47.101,11.536,-56.457,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2002-01-01,2021-08-06,19.6,31.129,0.803,-21.034,1.48,-15.316,15 of 20,4597,49.469,14.661,-56.463,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2003-01-01,2021-08-06,18.6,33.107,0.834,-20.45,1.619,-15.316,15 of 19,4538,51.515,21.61,-56.472,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2004-01-01,2021-08-06,17.6,29.007,0.742,-44.556,0.651,-16.958,13 of 18,4363,51.284,16.925,-56.46,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2005-01-01,2021-08-06,16.6,31.817,0.81,-24.893,1.278,-15.316,13 of 17,4040,51.258,16.049,-56.474,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2006-01-01,2021-08-06,15.6,31.694,0.797,-28.75,1.102,-15.316,12 of 16,3809,51.463,16.389,-56.465,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2007-01-01,2021-08-06,14.6,31.282,0.776,-39.066,0.801,-15.316,11 of 15,3600,51.614,14.566,-56.465,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2008-01-01,2021-08-06,13.6,33.867,0.834,-26.181,1.294,-15.316,10 of 14,3349,52.279,14.908,-53.394,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2009-01-01,2021-08-06,12.6,36.622,0.868,-26.077,1.404,-15.316,10 of 13,3346,56.421,31.017,-34.103,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2010-01-01,2021-08-06,11.6,36.383,0.866,-33.988,1.07,-17.785,9 of 12,3147,56.634,25.646,-34.105,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2011-01-01,2021-08-06,10.6,36.397,0.869,-39.158,0.93,-25.799,8 of 11,2916,57.061,23.793,-34.101,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2012-01-01,2021-08-06,9.6,41.805,0.984,-15.866,2.635,-15.316,8 of 10,2677,58.977,26.352,-34.102,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2013-01-01,2021-08-06,8.6,41.537,0.961,-16.817,2.47,-15.316,7 of 9,2449,59.765,24.52,-34.101,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2014-01-01,2021-08-06,7.6,37.297,0.86,-24.611,1.515,-15.316,6 of 8,2190,59.597,18.384,-34.101,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2015-01-01,2021-08-06,6.6,40.163,0.903,-29.731,1.351,-15.316,5 of 7,1925,60.354,17.483,-34.097,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2016-01-01,2021-08-06,5.6,51.795,1.094,-19.424,2.667,-11.194,5 of 6,1673,64.01,20.926,-34.097,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2017-01-01,2021-08-06,4.6,51.563,1.033,-25.079,2.056,-7.916,4 of 5,1422,64.595,21.334,-34.103,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2018-01-01,2021-08-06,3.6,50.612,0.945,-35.911,1.409,-18.591,3 of 4,1150,64.456,18.303,-34.1,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2019-01-01,2021-08-06,2.6,77.444,1.286,-32.138,2.41,34.8,3 of 3,834,69.173,29.635,-34.097,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2020-01-01,2021-08-06,1.6,103.863,1.416,-38.174,2.721,70.328,2 of 2,586,75.794,23.434,-34.102,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",200
+2000-01-01,2021-08-06,21.6,18.969,0.841,-16.77,1.131,-4.502,15 of 22,2604,25.927,9.455,-56.449,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2001-01-01,2021-08-06,20.6,19.892,0.861,-16.77,1.186,-4.502,15 of 21,2604,27.188,11.536,-56.457,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2002-01-01,2021-08-06,19.6,20.892,0.883,-16.77,1.246,-4.502,15 of 20,2604,28.555,14.661,-56.463,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2003-01-01,2021-08-06,18.6,22.258,0.919,-16.287,1.367,-4.121,15 of 19,2564,29.674,21.61,-56.472,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2004-01-01,2021-08-06,17.6,20.51,0.852,-23.865,0.859,-7.057,14 of 18,2467,29.591,16.925,-56.46,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2005-01-01,2021-08-06,16.6,22.585,0.926,-17.335,1.303,-4.121,14 of 17,2295,29.746,16.049,-56.474,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2006-01-01,2021-08-06,15.6,22.277,0.901,-21.077,1.057,-4.121,13 of 16,2158,29.745,16.389,-56.465,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2007-01-01,2021-08-06,14.6,22.62,0.899,-24.097,0.939,-4.121,12 of 15,2039,29.843,14.566,-56.465,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2008-01-01,2021-08-06,13.6,24.133,0.948,-18.328,1.317,-4.121,11 of 14,1890,30.133,14.908,-53.394,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2009-01-01,2021-08-06,12.6,26.11,0.987,-18.245,1.431,-4.121,11 of 13,1887,32.508,31.017,-34.103,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2010-01-01,2021-08-06,11.6,25.627,0.971,-23.235,1.103,-4.121,10 of 12,1786,32.686,25.646,-34.105,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2011-01-01,2021-08-06,10.6,26.067,0.976,-22.747,1.146,-13.792,9 of 11,1651,32.912,23.793,-34.101,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2012-01-01,2021-08-06,9.6,29.323,1.072,-12.417,2.362,-13.073,9 of 10,1513,34.23,26.352,-34.102,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2013-01-01,2021-08-06,8.6,28.084,1.002,-17.527,1.602,-13.073,8 of 9,1399,34.46,24.52,-34.101,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2014-01-01,2021-08-06,7.6,27.031,0.945,-18.808,1.437,-11.576,7 of 8,1263,34.989,18.384,-34.101,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2015-01-01,2021-08-06,6.6,29.04,0.98,-22.724,1.278,-12.713,6 of 7,1099,35.253,17.483,-34.097,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2016-01-01,2021-08-06,5.6,37.841,1.191,-13.945,2.714,7.68,6 of 6,936,37.185,20.926,-34.097,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2017-01-01,2021-08-06,4.6,35.039,1.041,-18.698,1.874,3.238,5 of 5,817,37.783,21.334,-34.103,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2018-01-01,2021-08-06,3.6,37.195,1.015,-22.872,1.626,-4.504,3 of 4,671,38.114,18.303,-34.1,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2019-01-01,2021-08-06,2.6,54.366,1.313,-22.621,2.403,23.843,3 of 3,482,39.954,29.635,-34.097,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2020-01-01,2021-08-06,1.6,70.691,1.379,-27.519,2.569,46.006,2 of 2,362,44.804,23.434,-34.102,"lower price level (hindsight-contaminated) | better half only, volume surge ranking when full",100
+2000-01-01,2021-08-06,21.6,23.823,0.718,-21.605,1.103,-16.597,14 of 22,4436,43.676,9.455,-56.449,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2001-01-01,2021-08-06,20.6,24.982,0.736,-21.605,1.156,-16.597,14 of 21,4436,45.8,11.536,-56.457,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2002-01-01,2021-08-06,19.6,26.237,0.754,-21.605,1.214,-16.597,14 of 20,4436,48.102,14.661,-56.463,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2003-01-01,2021-08-06,18.6,27.951,0.784,-21.005,1.331,-16.597,14 of 19,4377,50.074,21.61,-56.472,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2004-01-01,2021-08-06,17.6,23.646,0.68,-45.182,0.523,-20.569,13 of 18,4205,49.814,16.925,-56.46,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2005-01-01,2021-08-06,16.6,26.976,0.774,-22.042,1.224,-16.597,13 of 17,3877,49.659,16.049,-56.474,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2006-01-01,2021-08-06,15.6,26.067,0.74,-27.134,0.961,-16.597,12 of 16,3667,49.662,16.389,-56.465,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2007-01-01,2021-08-06,14.6,25.789,0.729,-28.026,0.92,-16.597,11 of 15,3426,49.403,14.566,-56.465,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2008-01-01,2021-08-06,13.6,27.688,0.776,-22.176,1.249,-16.597,10 of 14,3200,50.06,14.908,-53.394,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2009-01-01,2021-08-06,12.6,29.988,0.809,-22.029,1.361,-16.597,10 of 13,3195,54.008,31.017,-34.103,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2010-01-01,2021-08-06,11.6,28.467,0.774,-30.72,0.927,-16.597,9 of 12,3023,54.574,25.646,-34.105,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2011-01-01,2021-08-06,10.6,29.424,0.802,-30.431,0.967,-20.917,8 of 11,2791,55.099,23.793,-34.101,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2012-01-01,2021-08-06,9.6,33.937,0.907,-18.13,1.872,-12.911,8 of 10,2590,57.532,26.352,-34.102,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2013-01-01,2021-08-06,8.6,35.013,0.924,-20.405,1.716,-15.783,7 of 9,2353,58.03,24.52,-34.101,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2014-01-01,2021-08-06,7.6,29.902,0.786,-35.057,0.853,-20.83,6 of 8,2120,58.137,18.384,-34.101,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2015-01-01,2021-08-06,6.6,29.37,0.77,-37.901,0.775,-20.546,5 of 7,1839,57.908,17.483,-34.097,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2016-01-01,2021-08-06,5.6,40.394,1.013,-18.245,2.214,1.184,6 of 6,1568,59.871,20.926,-34.097,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2017-01-01,2021-08-06,4.6,36.255,0.882,-24.226,1.497,-0.326,4 of 5,1335,60.668,21.334,-34.103,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2018-01-01,2021-08-06,3.6,31.725,0.728,-34.086,0.931,-11.297,3 of 4,1098,60.657,18.303,-34.1,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2019-01-01,2021-08-06,2.6,49.101,1.03,-29.431,1.668,30.862,3 of 3,787,62.299,29.635,-34.097,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2020-01-01,2021-08-06,1.6,56.886,0.99,-41.15,1.382,33.021,2 of 2,585,66.906,23.434,-34.102,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",200
+2000-01-01,2021-08-06,21.6,14.354,0.723,-18.057,0.795,-7.515,13 of 22,2477,24.962,9.455,-56.449,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2001-01-01,2021-08-06,20.6,15.052,0.74,-18.057,0.834,-7.515,13 of 21,2477,26.176,11.536,-56.457,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2002-01-01,2021-08-06,19.6,15.808,0.758,-18.057,0.875,-7.515,13 of 20,2477,27.492,14.661,-56.463,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2003-01-01,2021-08-06,18.6,16.901,0.793,-17.537,0.964,-7.515,13 of 19,2437,28.554,21.61,-56.472,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2004-01-01,2021-08-06,17.6,14.174,0.677,-27.107,0.523,-14.694,12 of 18,2353,28.44,16.925,-56.46,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2005-01-01,2021-08-06,16.6,16.441,0.776,-15.719,1.046,-6.94,12 of 17,2182,28.556,16.049,-56.474,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2006-01-01,2021-08-06,15.6,16.455,0.768,-17.133,0.96,-6.94,11 of 16,2049,28.417,16.389,-56.465,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2007-01-01,2021-08-06,14.6,16.274,0.75,-17.735,0.918,-6.94,10 of 15,1923,28.481,14.566,-56.465,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2008-01-01,2021-08-06,13.6,17.092,0.774,-18.113,0.944,-6.94,9 of 14,1802,28.885,14.908,-53.394,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2009-01-01,2021-08-06,12.6,18.547,0.809,-17.976,1.032,-6.94,9 of 13,1797,31.144,31.017,-34.103,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2010-01-01,2021-08-06,11.6,17.548,0.774,-22.345,0.785,-6.94,8 of 12,1682,31.178,25.646,-34.105,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2011-01-01,2021-08-06,10.6,18.788,0.818,-21.23,0.885,-9.389,8 of 11,1550,31.526,23.793,-34.101,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2012-01-01,2021-08-06,9.6,21.035,0.895,-14.676,1.433,-4.798,7 of 10,1431,32.676,26.352,-34.102,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2013-01-01,2021-08-06,8.6,21.321,0.891,-17.826,1.196,-14.298,7 of 9,1320,33.204,24.52,-34.101,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2014-01-01,2021-08-06,7.6,19.603,0.801,-23.488,0.835,-8.437,6 of 8,1198,33.419,18.384,-34.101,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2015-01-01,2021-08-06,6.6,23.008,0.91,-20.384,1.129,-6.454,6 of 7,1025,33.526,17.483,-34.097,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2016-01-01,2021-08-06,5.6,27.86,1.045,-13.671,2.038,0.783,6 of 6,874,34.339,20.926,-34.097,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2017-01-01,2021-08-06,4.6,27.887,0.992,-16.134,1.728,7.404,5 of 5,755,35.449,21.334,-34.103,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2018-01-01,2021-08-06,3.6,25.886,0.853,-20.877,1.24,-5.844,3 of 4,621,35.497,18.303,-34.1,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2019-01-01,2021-08-06,2.6,37.018,1.088,-18.551,1.995,16.759,3 of 3,440,36.481,29.635,-34.097,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2020-01-01,2021-08-06,1.6,47.134,1.127,-24.939,1.89,19.682,2 of 2,341,41.015,23.434,-34.102,"7 facts that passed the shuffle benchmark | top half by points, volume surge ranking when full",100
+2000-01-01,2021-08-06,21.6,25.821,0.695,-19.959,1.294,-15.142,14 of 22,4958,48.135,9.455,-56.449,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2001-01-01,2021-08-06,20.6,27.077,0.712,-19.959,1.357,-15.142,14 of 21,4958,50.476,11.536,-56.457,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2002-01-01,2021-08-06,19.6,28.438,0.73,-19.959,1.425,-15.142,14 of 20,4958,53.013,14.661,-56.463,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2003-01-01,2021-08-06,18.6,30.27,0.758,-19.556,1.548,-15.142,14 of 19,4899,55.25,21.61,-56.472,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2004-01-01,2021-08-06,17.6,25.932,0.659,-40.998,0.633,-15.142,12 of 18,4716,55.121,16.925,-56.46,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2005-01-01,2021-08-06,16.6,28.86,0.726,-28.018,1.03,-15.142,12 of 17,4420,55.443,16.049,-56.474,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2006-01-01,2021-08-06,15.6,27.342,0.681,-38.712,0.706,-15.142,11 of 16,4161,55.363,16.389,-56.465,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2007-01-01,2021-08-06,14.6,29.46,0.724,-37.801,0.779,-15.142,10 of 15,3892,55.39,14.566,-56.465,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2008-01-01,2021-08-06,13.6,30.487,0.744,-27.756,1.098,-15.142,9 of 14,3629,55.952,14.908,-53.394,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2009-01-01,2021-08-06,12.6,33.237,0.781,-27.182,1.223,-15.142,9 of 13,3615,60.303,31.017,-34.103,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2010-01-01,2021-08-06,11.6,32.386,0.767,-34.299,0.944,-18.528,9 of 12,3413,60.761,25.646,-34.105,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2011-01-01,2021-08-06,10.6,32.796,0.778,-42.318,0.775,-18.1,7 of 11,3138,60.989,23.793,-34.101,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2012-01-01,2021-08-06,9.6,38.839,0.907,-20.777,1.869,-14.759,9 of 10,2896,63.282,26.352,-34.102,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2013-01-01,2021-08-06,8.6,41.823,0.945,-18.072,2.314,-14.759,7 of 9,2625,64.255,24.52,-34.101,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2014-01-01,2021-08-06,7.6,35.744,0.811,-27.051,1.321,-14.759,7 of 8,2381,64.129,18.384,-34.101,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2015-01-01,2021-08-06,6.6,36.89,0.821,-33.364,1.106,-14.759,5 of 7,2061,64.638,17.483,-34.097,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2016-01-01,2021-08-06,5.6,47.422,1.006,-25.731,1.843,-17.47,5 of 6,1782,67.393,20.926,-34.097,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2017-01-01,2021-08-06,4.6,47.413,0.953,-32.869,1.442,-9.28,4 of 5,1545,69.534,21.334,-34.103,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2018-01-01,2021-08-06,3.6,49.286,0.918,-44.277,1.113,-14.243,3 of 4,1269,70.866,18.303,-34.1,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2019-01-01,2021-08-06,2.6,76.905,1.291,-33.944,2.266,38.027,3 of 3,905,73.919,29.635,-34.097,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2020-01-01,2021-08-06,1.6,101.893,1.398,-44.335,2.298,79.817,2 of 2,675,84.789,23.434,-34.102,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",200
+2000-01-01,2021-08-06,21.6,16.445,0.74,-17.191,0.957,-12.033,15 of 22,2761,27.08,9.455,-56.449,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2001-01-01,2021-08-06,20.6,17.245,0.757,-17.191,1.003,-12.033,15 of 21,2761,28.397,11.536,-56.457,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2002-01-01,2021-08-06,19.6,18.111,0.776,-17.191,1.054,-12.033,15 of 20,2761,29.824,14.661,-56.463,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2003-01-01,2021-08-06,18.6,19.159,0.802,-17.073,1.122,-12.033,15 of 19,2719,30.971,21.61,-56.472,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2004-01-01,2021-08-06,17.6,17.125,0.721,-23.517,0.728,-12.033,13 of 18,2633,31.05,16.925,-56.46,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2005-01-01,2021-08-06,16.6,18.922,0.788,-21.73,0.871,-12.033,13 of 17,2456,31.173,16.049,-56.474,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2006-01-01,2021-08-06,15.6,18.661,0.767,-25.073,0.744,-12.033,12 of 16,2297,31.057,16.389,-56.465,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2007-01-01,2021-08-06,14.6,19.715,0.797,-26.052,0.757,-12.241,11 of 15,2162,31.105,14.566,-56.465,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2008-01-01,2021-08-06,13.6,20.324,0.813,-18.885,1.076,-11.292,10 of 14,2011,31.356,14.908,-53.394,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2009-01-01,2021-08-06,12.6,22.263,0.858,-18.329,1.215,-11.292,10 of 13,1997,33.746,31.017,-34.103,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2010-01-01,2021-08-06,11.6,22.105,0.851,-23.172,0.954,-11.292,9 of 12,1887,34.039,25.646,-34.105,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2011-01-01,2021-08-06,10.6,23.5,0.894,-21.254,1.106,-4.933,8 of 11,1731,34.191,23.793,-34.101,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2012-01-01,2021-08-06,9.6,24.036,0.916,-13.838,1.737,-6.958,8 of 10,1579,35.035,26.352,-34.102,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2013-01-01,2021-08-06,8.6,28.201,1.024,-12.034,2.344,-0.497,8 of 9,1448,35.779,24.52,-34.101,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2014-01-01,2021-08-06,7.6,24.847,0.892,-19.39,1.281,-7.146,6 of 8,1305,35.702,18.384,-34.101,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2015-01-01,2021-08-06,6.6,23.754,0.831,-26.05,0.912,-16.232,5 of 7,1146,35.824,17.483,-34.097,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2016-01-01,2021-08-06,5.6,30.427,1.009,-14.804,2.055,-0.375,5 of 6,981,37.177,20.926,-34.097,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2017-01-01,2021-08-06,4.6,28.986,0.904,-17.537,1.653,-2.051,4 of 5,849,38.381,21.334,-34.103,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2018-01-01,2021-08-06,3.6,30.842,0.902,-19.232,1.604,-7.525,3 of 4,700,40.022,18.303,-34.1,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2019-01-01,2021-08-06,2.6,42.27,1.109,-19.755,2.14,15.147,3 of 3,504,40.202,29.635,-34.097,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2020-01-01,2021-08-06,1.6,60.253,1.27,-21.825,2.761,44.003,2 of 2,382,46.96,23.434,-34.102,"lower price level (hindsight-contaminated) | all signals, ranked by the fact when full",100
+2000-01-01,2021-08-06,21.6,24.534,0.694,-21.702,1.13,-18.233,15 of 22,4570,44.814,9.455,-56.449,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2001-01-01,2021-08-06,20.6,25.727,0.711,-21.702,1.185,-18.233,15 of 21,4570,46.993,11.536,-56.457,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2002-01-01,2021-08-06,19.6,27.02,0.729,-21.702,1.245,-18.233,15 of 20,4570,49.355,14.661,-56.463,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2003-01-01,2021-08-06,18.6,28.777,0.758,-21.1,1.364,-18.233,15 of 19,4511,51.395,21.61,-56.472,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2004-01-01,2021-08-06,17.6,24.602,0.66,-45.155,0.545,-18.857,13 of 18,4343,51.181,16.925,-56.46,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2005-01-01,2021-08-06,16.6,27.464,0.733,-28.742,0.956,-18.233,13 of 17,4041,51.279,16.049,-56.474,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2006-01-01,2021-08-06,15.6,26.377,0.7,-36.308,0.726,-18.233,12 of 16,3760,50.826,16.389,-56.465,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2007-01-01,2021-08-06,14.6,26.4,0.694,-43.637,0.605,-18.233,11 of 15,3537,51.034,14.566,-56.465,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2008-01-01,2021-08-06,13.6,28.378,0.739,-26.937,1.053,-18.233,10 of 14,3297,51.758,14.908,-53.394,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2009-01-01,2021-08-06,12.6,30.96,0.776,-26.291,1.178,-18.233,10 of 13,3283,55.775,31.017,-34.103,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2010-01-01,2021-08-06,11.6,29.94,0.759,-36.741,0.815,-19.849,9 of 12,3079,55.816,25.646,-34.105,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2011-01-01,2021-08-06,10.6,30.822,0.786,-40.163,0.767,-25.497,8 of 11,2845,56.301,23.793,-34.101,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2012-01-01,2021-08-06,9.6,36.419,0.918,-17.205,2.117,-8.577,8 of 10,2613,58.698,26.352,-34.102,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2013-01-01,2021-08-06,8.6,38.028,0.937,-19.066,1.995,-9.271,7 of 9,2380,59.076,24.52,-34.101,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2014-01-01,2021-08-06,7.6,31.164,0.772,-30.927,1.008,-8.577,6 of 8,2125,58.416,18.384,-34.101,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2015-01-01,2021-08-06,6.6,33.165,0.804,-34.93,0.949,-19.37,5 of 7,1857,58.892,17.483,-34.097,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2016-01-01,2021-08-06,5.6,44.906,1.036,-18.048,2.488,-0.42,5 of 6,1599,61.043,20.926,-34.097,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2017-01-01,2021-08-06,4.6,43.529,0.965,-23.09,1.885,-2.58,4 of 5,1328,60.659,21.334,-34.103,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2018-01-01,2021-08-06,3.6,36.68,0.769,-36.693,1.0,-21.492,3 of 4,1086,59.825,18.303,-34.1,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2019-01-01,2021-08-06,2.6,55.326,1.048,-32.084,1.724,15.041,3 of 3,805,63.261,29.635,-34.097,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2020-01-01,2021-08-06,1.6,77.066,1.195,-39.054,1.973,47.005,2 of 2,564,67.551,23.434,-34.102,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",200
+2000-01-01,2021-08-06,21.6,15.537,0.734,-17.836,0.871,-6.641,12 of 22,2537,25.309,9.455,-56.449,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2001-01-01,2021-08-06,20.6,16.293,0.752,-17.836,0.913,-6.641,12 of 21,2537,26.54,11.536,-56.457,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2002-01-01,2021-08-06,19.6,17.112,0.771,-17.836,0.959,-6.641,12 of 20,2537,27.874,14.661,-56.463,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2003-01-01,2021-08-06,18.6,18.275,0.804,-17.323,1.055,-6.641,12 of 19,2497,28.957,21.61,-56.472,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2004-01-01,2021-08-06,17.6,16.517,0.735,-24.227,0.682,-7.374,11 of 18,2394,28.814,16.925,-56.46,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2005-01-01,2021-08-06,16.6,18.66,0.819,-21.188,0.881,-6.641,11 of 17,2230,29.067,16.049,-56.474,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2006-01-01,2021-08-06,15.6,18.52,0.805,-22.727,0.815,-6.641,11 of 16,2089,28.909,16.389,-56.465,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2007-01-01,2021-08-06,14.6,19.275,0.828,-25.693,0.75,-5.304,10 of 15,1950,28.823,14.566,-56.465,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2008-01-01,2021-08-06,13.6,20.091,0.854,-19.17,1.048,-5.256,9 of 14,1814,29.086,14.908,-53.394,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2009-01-01,2021-08-06,12.6,22.012,0.901,-18.61,1.183,-5.256,9 of 13,1800,31.294,31.017,-34.103,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2010-01-01,2021-08-06,11.6,21.216,0.869,-27.131,0.782,-13.18,9 of 12,1708,31.504,25.646,-34.105,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2011-01-01,2021-08-06,10.6,22.542,0.912,-28.207,0.799,-16.589,8 of 11,1577,31.772,23.793,-34.101,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2012-01-01,2021-08-06,9.6,24.854,0.989,-13.161,1.888,-6.636,7 of 10,1437,32.729,26.352,-34.102,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2013-01-01,2021-08-06,8.6,28.282,1.08,-13.413,2.109,-5.882,7 of 9,1307,33.146,24.52,-34.101,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2014-01-01,2021-08-06,7.6,26.943,1.01,-16.663,1.617,-1.426,7 of 8,1166,33.298,18.384,-34.101,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2015-01-01,2021-08-06,6.6,27.659,1.017,-21.641,1.278,-10.797,5 of 7,1007,32.963,17.483,-34.097,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2016-01-01,2021-08-06,5.6,35.401,1.228,-13.575,2.608,3.988,6 of 6,842,33.719,20.926,-34.097,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2017-01-01,2021-08-06,4.6,37.947,1.226,-15.521,2.445,8.112,5 of 5,716,34.739,21.334,-34.103,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2018-01-01,2021-08-06,3.6,35.994,1.082,-21.288,1.691,-9.348,3 of 4,590,34.401,18.303,-34.1,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2019-01-01,2021-08-06,2.6,52.656,1.408,-18.828,2.797,21.953,3 of 3,418,36.237,29.635,-34.097,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2020-01-01,2021-08-06,1.6,69.89,1.509,-23.058,3.031,46.128,2 of 2,308,39.667,23.434,-34.102,"walk-forward ridge | top third by ridge prediction, volume surge ranking when full",100
+2000-01-01,2021-08-06,21.6,22.982,0.698,-21.842,1.052,-16.162,14 of 22,4410,43.741,9.455,-56.449,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2001-01-01,2021-08-06,20.6,24.1,0.715,-21.842,1.103,-16.162,14 of 21,4410,45.868,11.536,-56.457,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2002-01-01,2021-08-06,19.6,25.311,0.733,-21.842,1.159,-16.162,14 of 20,4410,48.173,14.661,-56.463,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2003-01-01,2021-08-06,18.6,26.976,0.763,-21.236,1.27,-16.162,14 of 19,4351,50.149,21.61,-56.472,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2004-01-01,2021-08-06,17.6,22.637,0.657,-45.52,0.497,-21.018,13 of 18,4179,49.895,16.925,-56.46,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2005-01-01,2021-08-06,16.6,25.947,0.751,-20.476,1.267,-16.162,13 of 17,3846,49.718,16.049,-56.474,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2006-01-01,2021-08-06,15.6,25.312,0.728,-26.123,0.969,-16.162,12 of 16,3630,49.692,16.389,-56.465,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2007-01-01,2021-08-06,14.6,24.455,0.699,-28.587,0.855,-16.162,11 of 15,3398,49.461,14.566,-56.465,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2008-01-01,2021-08-06,13.6,26.443,0.75,-22.772,1.161,-16.162,10 of 14,3175,50.139,14.908,-53.394,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2009-01-01,2021-08-06,12.6,28.644,0.782,-22.621,1.266,-16.162,10 of 13,3170,54.094,31.017,-34.103,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2010-01-01,2021-08-06,11.6,27.131,0.749,-30.136,0.9,-16.162,9 of 12,2994,54.66,25.646,-34.105,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2011-01-01,2021-08-06,10.6,26.807,0.743,-33.701,0.795,-24.55,8 of 11,2765,55.1,23.793,-34.101,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2012-01-01,2021-08-06,9.6,32.465,0.883,-17.91,1.813,-13.914,8 of 10,2555,57.403,26.352,-34.102,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2013-01-01,2021-08-06,8.6,36.468,0.973,-17.945,2.032,-5.911,7 of 9,2316,57.923,24.52,-34.101,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2014-01-01,2021-08-06,7.6,27.984,0.759,-29.666,0.943,-12.499,6 of 8,2093,57.51,18.384,-34.101,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2015-01-01,2021-08-06,6.6,28.679,0.771,-35.302,0.812,-16.51,5 of 7,1815,57.452,17.483,-34.097,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2016-01-01,2021-08-06,5.6,39.309,1.011,-18.314,2.146,-2.953,5 of 6,1537,59.299,20.926,-34.097,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2017-01-01,2021-08-06,4.6,34.868,0.862,-24.422,1.428,-0.147,4 of 5,1306,60.162,21.334,-34.103,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2018-01-01,2021-08-06,3.6,29.182,0.682,-35.304,0.827,-13.862,3 of 4,1078,59.851,18.303,-34.1,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2019-01-01,2021-08-06,2.6,49.22,1.042,-29.774,1.653,30.634,3 of 3,766,61.882,29.635,-34.097,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2020-01-01,2021-08-06,1.6,54.346,0.966,-41.238,1.318,31.215,2 of 2,574,65.993,23.434,-34.102,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,200
+2000-01-01,2021-08-06,21.6,13.425,0.676,-18.159,0.739,-11.479,13 of 22,2496,24.895,9.455,-56.449,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2001-01-01,2021-08-06,20.6,14.078,0.693,-18.159,0.775,-11.479,13 of 21,2496,26.106,11.536,-56.457,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2002-01-01,2021-08-06,19.6,14.786,0.71,-18.159,0.814,-11.479,13 of 20,2496,27.418,14.661,-56.463,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2003-01-01,2021-08-06,18.6,15.824,0.743,-17.636,0.897,-11.479,13 of 19,2456,28.476,21.61,-56.472,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2004-01-01,2021-08-06,17.6,13.707,0.655,-27.148,0.505,-12.244,12 of 18,2362,28.396,16.925,-56.46,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2005-01-01,2021-08-06,16.6,15.719,0.744,-14.692,1.07,-11.479,12 of 17,2189,28.469,16.049,-56.474,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2006-01-01,2021-08-06,15.6,15.211,0.713,-16.667,0.913,-11.479,11 of 16,2063,28.359,16.389,-56.465,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2007-01-01,2021-08-06,14.6,14.991,0.698,-18.643,0.804,-11.479,10 of 15,1926,28.245,14.566,-56.465,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2008-01-01,2021-08-06,13.6,15.534,0.712,-19.598,0.793,-11.479,9 of 14,1810,28.651,14.908,-53.394,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2009-01-01,2021-08-06,12.6,16.865,0.744,-19.447,0.867,-11.479,9 of 13,1805,30.891,31.017,-34.103,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2010-01-01,2021-08-06,11.6,17.48,0.775,-18.694,0.935,-10.263,9 of 12,1668,30.81,25.646,-34.105,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2011-01-01,2021-08-06,10.6,16.873,0.745,-20.955,0.805,-9.633,7 of 11,1559,31.217,23.793,-34.101,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2012-01-01,2021-08-06,9.6,19.368,0.832,-16.523,1.172,-11.74,7 of 10,1435,32.554,26.352,-34.102,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2013-01-01,2021-08-06,8.6,23.731,0.985,-12.259,1.936,-3.298,8 of 9,1304,33.278,24.52,-34.101,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2014-01-01,2021-08-06,7.6,19.648,0.81,-21.551,0.912,-11.064,6 of 8,1182,32.985,18.384,-34.101,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2015-01-01,2021-08-06,6.6,20.052,0.809,-22.92,0.875,-12.634,5 of 7,1029,32.917,17.483,-34.097,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2016-01-01,2021-08-06,5.6,23.304,0.901,-19.965,1.167,-7.496,5 of 6,895,34.03,20.926,-34.097,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2017-01-01,2021-08-06,4.6,24.707,0.901,-17.273,1.43,-0.541,4 of 5,763,35.048,21.334,-34.103,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2018-01-01,2021-08-06,3.6,24.697,0.829,-20.944,1.179,-2.888,3 of 4,621,35.155,18.303,-34.1,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2019-01-01,2021-08-06,2.6,38.042,1.133,-19.829,1.918,15.916,3 of 3,441,35.869,29.635,-34.097,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
+2020-01-01,2021-08-06,1.6,47.092,1.147,-23.478,2.006,24.898,2 of 2,336,39.935,23.434,-34.102,7 facts that passed the shuffle benchmark | top half by points AND ranked by points when full,100
