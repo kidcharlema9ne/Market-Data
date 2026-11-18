@@ -1,0 +1,63 @@
+5,110 symbols to look up
+  100/5110 done; {'ok': 45, 'not_found': 41, 'late_start': 14}
+  200/5110 done; {'ok': 92, 'not_found': 92, 'late_start': 16}
+  300/5110 done; {'ok': 150, 'not_found': 132, 'late_start': 18}
+  400/5110 done; {'ok': 195, 'not_found': 182, 'late_start': 23}
+  500/5110 done; {'ok': 237, 'not_found': 231, 'late_start': 32}
+  600/5110 done; {'ok': 290, 'not_found': 270, 'late_start': 40}
+  700/5110 done; {'ok': 336, 'not_found': 316, 'late_start': 48}
+  800/5110 done; {'ok': 382, 'not_found': 367, 'late_start': 51}
+  900/5110 done; {'ok': 423, 'not_found': 412, 'late_start': 65}
+  1000/5110 done; {'not_found': 467, 'ok': 465, 'late_start': 68}
+  1100/5110 done; {'ok': 519, 'not_found': 509, 'late_start': 72}
+  1200/5110 done; {'ok': 564, 'not_found': 562, 'late_start': 74}
+  1300/5110 done; {'ok': 613, 'not_found': 610, 'late_start': 77}
+  1400/5110 done; {'ok': 662, 'not_found': 660, 'late_start': 78}
+  1500/5110 done; {'not_found': 715, 'ok': 702, 'late_start': 83}
+  1600/5110 done; {'not_found': 768, 'ok': 740, 'late_start': 92}
+  1700/5110 done; {'not_found': 813, 'ok': 791, 'late_start': 96}
+  1800/5110 done; {'not_found': 856, 'ok': 841, 'late_start': 103}
+  1900/5110 done; {'not_found': 909, 'ok': 886, 'late_start': 105}
+  2000/5110 done; {'not_found': 959, 'ok': 933, 'late_start': 108}
+  2100/5110 done; {'not_found': 1004, 'ok': 983, 'late_start': 113}
+  2200/5110 done; {'not_found': 1062, 'ok': 1023, 'late_start': 115}
+  2300/5110 done; {'not_found': 1111, 'ok': 1072, 'late_start': 117}
+  2400/5110 done; {'not_found': 1156, 'ok': 1120, 'late_start': 124}
+  2500/5110 done; {'not_found': 1208, 'ok': 1164, 'late_start': 128}
+  2600/5110 done; {'not_found': 1257, 'ok': 1212, 'late_start': 131}
+  2700/5110 done; {'not_found': 1302, 'ok': 1257, 'late_start': 141}
+  2800/5110 done; {'not_found': 1343, 'ok': 1308, 'late_start': 149}
+  2900/5110 done; {'not_found': 1388, 'ok': 1358, 'late_start': 154}
+  3000/5110 done; {'not_found': 1440, 'ok': 1399, 'late_start': 161}
+  3100/5110 done; {'not_found': 1484, 'ok': 1452, 'late_start': 164}
+  3200/5110 done; {'not_found': 1521, 'ok': 1507, 'late_start': 172}
+  3300/5110 done; {'not_found': 1574, 'ok': 1551, 'late_start': 175}
+  3400/5110 done; {'not_found': 1620, 'ok': 1600, 'late_start': 180}
+  3500/5110 done; {'not_found': 1662, 'ok': 1653, 'late_start': 185}
+  3600/5110 done; {'not_found': 1708, 'ok': 1704, 'late_start': 188}
+  3700/5110 done; {'not_found': 1761, 'ok': 1748, 'late_start': 191}
+  3800/5110 done; {'not_found': 1815, 'ok': 1786, 'late_start': 199}
+  3900/5110 done; {'not_found': 1857, 'ok': 1839, 'late_start': 204}
+  4000/5110 done; {'not_found': 1911, 'ok': 1880, 'late_start': 209}
+  4100/5110 done; {'not_found': 1968, 'ok': 1916, 'late_start': 216}
+  4200/5110 done; {'not_found': 2022, 'ok': 1958, 'late_start': 220}
+  4300/5110 done; {'not_found': 2079, 'ok': 1999, 'late_start': 222}
+  4400/5110 done; {'not_found': 2137, 'ok': 2032, 'late_start': 231}
+  4500/5110 done; {'not_found': 2180, 'ok': 2084, 'late_start': 236}
+  4600/5110 done; {'not_found': 2229, 'ok': 2131, 'late_start': 240}
+  4700/5110 done; {'not_found': 2267, 'ok': 2189, 'late_start': 244}
+  4800/5110 done; {'not_found': 2311, 'ok': 2240, 'late_start': 249}
+  4900/5110 done; {'not_found': 2361, 'ok': 2286, 'late_start': 253}
+  5000/5110 done; {'not_found': 2406, 'ok': 2336, 'late_start': 258}
+  5100/5110 done; {'not_found': 2463, 'ok': 2376, 'late_start': 261}
+coverage by status:
+status
+not_found     2469
+ok            2380
+late_start     261
+share of SIGNALS by status:
+status
+ok            53.0
+not_found     42.8
+late_start     4.2
+4,400 split events kept for ok symbols
