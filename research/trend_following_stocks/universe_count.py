@@ -85,7 +85,7 @@ with ThreadPoolExecutor(max_workers=8) as pool:
             etf_seen.setdefault(e, [d, d, 0]); etf_seen[e][1] = d; etf_seen[e][2] += 1
         dates.append(np.full(len(s), (d - date(1970, 1, 1)).days, dtype=np.int32)); syms.append(s); dvs.append(v)
         if i % 1000 == 0:
-            P(f"  {i} files read", flush=True)
+            P(f"  {i} files read")
 cal = [d for d, _, _ in daily]
 cal_i = np.array([(d - date(1970, 1, 1)).days for d in cal], dtype=np.int32)
 df = pd.DataFrame({"date_i": np.concatenate(dates), "symbol": np.concatenate(syms), "dv": np.concatenate(dvs)})
