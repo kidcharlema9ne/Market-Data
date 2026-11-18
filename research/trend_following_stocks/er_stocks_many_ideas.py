@@ -149,7 +149,7 @@ def concat(Rs):
 
 
 # ---------------------------------------------------------------- account simulation
-def portfolio_gen(R, cal, cap, key, cap_t=None, mult_fn=None, adv_frac=None, impact=None, slip_frac=None, size_scale=1.0, sector_cap=None):
+def portfolio_gen(R, cal, cap, key, cap_t=None, mult_fn=None, adv_frac=None, impact=None, slip_frac=None, size_scale=1.0, sector_cap=None, max_pos=None):
     n = len(R["d"]); m = len(cal); tgt = CAPITAL * M.SIZE / 100.0 * size_scale
     base_sh = np.floor(tgt / R["a0"])
     idx = np.where(base_sh >= 1)[0]
@@ -174,6 +174,8 @@ def portfolio_gen(R, cal, cap, key, cap_t=None, mult_fn=None, adv_frac=None, imp
         if adv_frac is not None and np.isfinite(R["adv"][i]):
             sh = min(sh, np.floor(adv_frac * R["adv"][i] / R["px_e"][i]))
         if sh < 1:
+            continue
+        if max_pos is not None and len(heap) >= max_pos:   # maximum number of open positions (Entry 164); expired trades were already popped above
             continue
         notional = sh * R["px_e"][i]
         capi = cap if cap_t is None else cap_t[s]
