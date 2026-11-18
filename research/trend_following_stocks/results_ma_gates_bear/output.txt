@@ -1,0 +1,59 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 3s
+11,108 common-stock segments ever liquid; 28s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 303s
+baseline: 18,978 signals; reference pick, whole period cap 200%: +22.9% / Sharpe 0.64 / -22% (documented +22.9% / 0.64 / -22%); generator and account simulator match the standard ones
+copied exit routine (average exit off) matches the standard one on 302 trades
+  baseline: +23.3% / Sharpe 0.65 (0.62 to 0.73) / -22% / worst year -19% / trades 4774
+  SPY above its 200-day OR stock above its own 50-day average (top 20% by 126-session return): +19.5% / Sharpe 0.48 (0.45 to 0.51) / -116% / worst year -70% / trades 6535
+     (22,360 signals vs 18,978 in the base rule; 18% start while SPY is below its 200-day)
+  SPY above its 200-day OR stock above its own 100-day average (top 20% by 126-session return): +19.7% / Sharpe 0.49 (0.45 to 0.55) / -114% / worst year -69% / trades 6506
+     (22,319 signals vs 18,978 in the base rule; 18% start while SPY is below its 200-day)
+  SPY above its 200-day OR stock above its own 200-day average (top 20% by 126-session return): +20.3% / Sharpe 0.51 (0.46 to 0.57) / -99% / worst year -65% / trades 6291
+     (21,994 signals vs 18,978 in the base rule; 17% start while SPY is below its 200-day)
+
+==== bear | 2000 to 2007 | cap 200% | mean of 8 random picks ====
+                                                                                    scenario  profit per year %  Sharpe ratio  Sharpe lowest pick  Sharpe highest pick  max drawdown %  profit / drawdown from peak  worst year %  trades taken  average open positions
+                                       current best rule (SPY above its 200-day for entries)              15.74          0.54                0.47                 0.64          -22.41                         0.70         -8.64       1319.00                   33.35
+ SPY above its 200-day OR stock above its own 50-day average (top 20% by 126-session return)               6.28          0.18                0.10                 0.25         -115.66                         0.05        -67.49       2320.00                   53.47
+SPY above its 200-day OR stock above its own 100-day average (top 20% by 126-session return)               6.83          0.19                0.14                 0.25         -114.39                         0.06        -68.90       2309.38                   53.61
+SPY above its 200-day OR stock above its own 200-day average (top 20% by 126-session return)               7.99          0.23                0.18                 0.28          -99.07                         0.08        -60.83       2139.88                   50.18
+
+==== bear | 2000 to 2007 | cap 100% | mean of 8 random picks ====
+                                                                                    scenario  profit per year %  Sharpe ratio  Sharpe lowest pick  Sharpe highest pick  max drawdown %  profit / drawdown from peak  worst year %  trades taken  average open positions
+                                       current best rule (SPY above its 200-day for entries)               9.82          0.60                0.49                 0.73          -16.37                         0.60         -7.03        730.88                   18.86
+ SPY above its 200-day OR stock above its own 50-day average (top 20% by 126-session return)               2.77          0.14                0.02                 0.23          -69.83                         0.04        -29.77       1365.25                   31.17
+SPY above its 200-day OR stock above its own 100-day average (top 20% by 126-session return)               3.54          0.17                0.06                 0.29          -68.12                         0.05        -30.07       1345.75                   31.04
+SPY above its 200-day OR stock above its own 200-day average (top 20% by 126-session return)               4.77          0.25                0.13                 0.33          -56.01                         0.09        -26.69       1236.00                   28.88
+
+==== bear | 2008 to Aug 2021 | cap 200% | mean of 8 random picks ====
+                                                                                    scenario  profit per year %  Sharpe ratio  Sharpe lowest pick  Sharpe highest pick  max drawdown %  profit / drawdown from peak  worst year %  trades taken  average open positions
+                                       current best rule (SPY above its 200-day for entries)              27.76          0.71                0.67                 0.78          -26.38                         1.05        -19.29       3455.25                   53.63
+ SPY above its 200-day OR stock above its own 50-day average (top 20% by 126-session return)              27.46          0.64                0.61                 0.67          -71.86                         0.38        -40.59       4215.12                   64.69
+SPY above its 200-day OR stock above its own 100-day average (top 20% by 126-session return)              27.36          0.64                0.59                 0.70          -70.85                         0.39        -41.01       4196.75                   64.40
+SPY above its 200-day OR stock above its own 200-day average (top 20% by 126-session return)              27.68          0.65                0.57                 0.73          -66.10                         0.42        -39.29       4151.12                   64.00
+
+==== bear | 2008 to Aug 2021 | cap 100% | mean of 8 random picks ====
+                                                                                    scenario  profit per year %  Sharpe ratio  Sharpe lowest pick  Sharpe highest pick  max drawdown %  profit / drawdown from peak  worst year %  trades taken  average open positions
+                                       current best rule (SPY above its 200-day for entries)              13.86          0.62                0.51                 0.71          -19.69                         0.70        -14.41       1933.88                   29.81
+ SPY above its 200-day OR stock above its own 50-day average (top 20% by 126-session return)              13.90          0.55                0.49                 0.62          -48.67                         0.29        -24.41       2380.75                   36.33
+SPY above its 200-day OR stock above its own 100-day average (top 20% by 126-session return)              13.16          0.53                0.41                 0.60          -50.81                         0.26        -27.28       2394.00                   36.11
+SPY above its 200-day OR stock above its own 200-day average (top 20% by 126-session return)              13.93          0.57                0.49                 0.64          -48.86                         0.29        -27.31       2377.38                   36.15
+
+==== bear | whole 2000 to Aug 2021 | cap 200% | mean of 8 random picks ====
+                                                                                    scenario  profit per year %  Sharpe ratio  Sharpe lowest pick  Sharpe highest pick  max drawdown %  profit / drawdown from peak  worst year %  trades taken  average open positions
+                                       current best rule (SPY above its 200-day for entries)              23.27          0.65                0.62                 0.73          -22.45                         1.04        -19.29       4774.25                   46.05
+ SPY above its 200-day OR stock above its own 50-day average (top 20% by 126-session return)              19.54          0.48                0.45                 0.51         -115.66                         0.17        -69.91       6535.12                   60.50
+SPY above its 200-day OR stock above its own 100-day average (top 20% by 126-session return)              19.68          0.49                0.45                 0.55         -114.39                         0.17        -69.20       6506.12                   60.37
+SPY above its 200-day OR stock above its own 200-day average (top 20% by 126-session return)              20.32          0.51                0.46                 0.57          -99.07                         0.21        -64.90       6291.00                   58.84
+
+==== bear | whole 2000 to Aug 2021 | cap 100% | mean of 8 random picks ====
+                                                                                    scenario  profit per year %  Sharpe ratio  Sharpe lowest pick  Sharpe highest pick  max drawdown %  profit / drawdown from peak  worst year %  trades taken  average open positions
+                                       current best rule (SPY above its 200-day for entries)              12.35          0.61                0.52                 0.68          -17.39                         0.71        -14.89       2664.75                   25.72
+ SPY above its 200-day OR stock above its own 50-day average (top 20% by 126-session return)               9.74          0.41                0.35                 0.47          -69.83                         0.14        -40.68       3746.00                   34.40
+SPY above its 200-day OR stock above its own 100-day average (top 20% by 126-session return)               9.57          0.41                0.33                 0.49          -68.12                         0.14        -42.86       3739.75                   34.22
+SPY above its 200-day OR stock above its own 200-day average (top 20% by 126-session return)              10.51          0.46                0.39                 0.52          -56.01                         0.19        -42.05       3613.38                   33.43
+done
