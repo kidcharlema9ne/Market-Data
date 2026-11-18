@@ -1,0 +1,123 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 3s
+11,108 common-stock segments ever liquid; 40s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 402s
+signal recomputation matches the original on 396 segments
+CELL all stocks | no SPY condition: real rule 65,052 signals
+eligible stock-days for a random entry: 10,922,980 in 8,194 stocks; target trades 65,052
+calibration 0: chance per eligible day 0.011911 -> 82,297 trades
+calibration 1: chance per eligible day 0.009415 -> 70,616 trades
+calibration 2: chance per eligible day 0.008673 -> 66,655 trades
+calibration 3: chance per eligible day 0.008465 -> 65,501 trades
+random draw 1/30: 65,177 trades
+random draw 2/30: 65,598 trades
+random draw 3/30: 65,410 trades
+random draw 4/30: 65,480 trades
+random draw 5/30: 65,307 trades
+random draw 6/30: 65,216 trades
+random draw 7/30: 65,360 trades
+random draw 8/30: 65,607 trades
+random draw 9/30: 65,231 trades
+random draw 10/30: 65,255 trades
+random draw 11/30: 65,609 trades
+random draw 12/30: 65,282 trades
+random draw 13/30: 65,225 trades
+random draw 14/30: 65,439 trades
+random draw 15/30: 65,274 trades
+random draw 16/30: 65,364 trades
+random draw 17/30: 65,454 trades
+random draw 18/30: 65,486 trades
+random draw 19/30: 65,753 trades
+random draw 20/30: 65,297 trades
+random draw 21/30: 65,630 trades
+random draw 22/30: 65,681 trades
+random draw 23/30: 65,312 trades
+random draw 24/30: 65,476 trades
+random draw 25/30: 65,417 trades
+random draw 26/30: 65,274 trades
+random draw 27/30: 65,189 trades
+random draw 28/30: 65,510 trades
+random draw 29/30: 65,156 trades
+random draw 30/30: 65,094 trades
+
+==== all stocks | no SPY condition | 30 random draws (~65,052 trades each) vs the real rule | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | 2000 to 2007 ====
+                                 measure  random mean  random std  random min  random 5th pct  random median  random 95th pct  random max  real rule  share of random draws at or above the real rule
+                            trades taken      2897.47       33.98     2817.00         2846.50        2901.00          2945.10     2968.00    2383.00                                             1.00
+                              win rate %        36.73        0.78       35.30           35.44          36.66            38.07       38.43      36.59                                             0.57
+                   average ATR per trade         0.08        0.07       -0.07           -0.02           0.08             0.21        0.22       0.08                                             0.57
+SPY move over the same holds (ATR units)        -0.04        0.01       -0.07           -0.06          -0.04            -0.03       -0.02      -0.15                                             1.00
+             excess over SPY (ATR units)         0.12        0.07       -0.03            0.03           0.12             0.23        0.27       0.22                                             0.07
+                   average sessions held        50.49        0.57       49.62           49.72          50.41            51.47       51.90      48.36                                              NaN
+                       profit per year %         4.20        2.43       -1.14            0.88           4.40             8.20        9.17       2.33                                             0.70
+                            Sharpe ratio         0.11        0.06       -0.03            0.02           0.11             0.21        0.24       0.07                                             0.70
+                          max drawdown %      -112.74       12.75     -141.91         -133.29        -112.93           -93.89      -87.63    -102.31                                              NaN
+                            worst year %       -61.03        7.82      -80.75          -68.55         -62.30           -48.11      -41.10     -50.16                                              NaN
+
+==== all stocks | no SPY condition | 30 random draws (~65,052 trades each) vs the real rule | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | 2000 to 2007 ====
+                                 measure  random mean  random std  random min  random 5th pct  random median  random 95th pct  random max  real rule  share of random draws at or above the real rule
+                            trades taken      1613.83       32.30     1552.00         1560.70        1613.00          1664.15     1675.00    1346.00                                             1.00
+                              win rate %        36.33        1.09       34.45           34.80          36.19            38.05       38.64      37.37                                             0.23
+                   average ATR per trade         0.06        0.11       -0.14           -0.12           0.08             0.21        0.28       0.21                                             0.07
+SPY move over the same holds (ATR units)        -0.02        0.01       -0.04           -0.03          -0.02            -0.01       -0.01      -0.10                                             1.00
+             excess over SPY (ATR units)         0.08        0.11       -0.12           -0.11           0.10             0.23        0.29       0.30                                             0.00
+                   average sessions held        50.31        0.98       48.05           48.99          50.34            51.72       52.31      48.68                                              NaN
+                       profit per year %         1.85        2.14       -2.77           -1.96           2.18             4.68        5.37       3.59                                             0.23
+                            Sharpe ratio         0.08        0.10       -0.13           -0.09           0.10             0.22        0.24       0.19                                             0.17
+                          max drawdown %       -66.62       10.05      -85.83          -81.42         -67.34           -50.63      -48.97     -65.08                                              NaN
+                            worst year %       -32.77        7.71      -57.16          -43.09         -32.20           -21.85      -17.55     -28.51                                              NaN
+
+==== all stocks | no SPY condition | 30 random draws (~65,052 trades each) vs the real rule | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | 2008 to Aug 2021 ====
+                                 measure  random mean  random std  random min  random 5th pct  random median  random 95th pct  random max  real rule  share of random draws at or above the real rule
+                            trades taken      5211.50       65.14     5061.00         5132.45        5208.50          5320.10     5351.00    4261.00                                             1.00
+                              win rate %        39.07        0.68       37.61           37.96          39.09            40.01       40.41      37.85                                             0.97
+                   average ATR per trade         0.48        0.07        0.33            0.36           0.48             0.59        0.61       0.55                                             0.23
+SPY move over the same holds (ATR units)         0.57        0.01        0.55            0.55           0.57             0.59        0.60       0.63                                             0.00
+             excess over SPY (ATR units)        -0.09        0.07       -0.24           -0.20          -0.09             0.02        0.05      -0.08                                             0.47
+                   average sessions held        53.42        0.51       52.15           52.67          53.47            54.18       54.49      52.04                                              NaN
+                       profit per year %        18.01        2.75       12.18           13.44          17.85            22.27       23.23      17.29                                             0.63
+                            Sharpe ratio         0.35        0.05        0.25            0.27           0.35             0.42        0.45       0.44                                             0.03
+                          max drawdown %      -154.84        8.40     -174.98         -166.08        -154.68          -142.49     -140.89    -106.16                                              NaN
+                            worst year %       -98.53        7.02     -110.32         -109.94         -98.39           -88.70      -87.55     -67.46                                              NaN
+
+==== all stocks | no SPY condition | 30 random draws (~65,052 trades each) vs the real rule | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | 2008 to Aug 2021 ====
+                                 measure  random mean  random std  random min  random 5th pct  random median  random 95th pct  random max  real rule  share of random draws at or above the real rule
+                            trades taken      2917.50       52.83     2832.00         2835.80        2916.00          2999.20     3013.00    2390.00                                             1.00
+                              win rate %        38.36        0.90       36.35           36.98          38.39            39.77       40.06      37.36                                             0.87
+                   average ATR per trade         0.43        0.09        0.23            0.28           0.42             0.56        0.58       0.59                                             0.00
+SPY move over the same holds (ATR units)         0.49        0.01        0.47            0.48           0.50             0.51        0.52       0.58                                             0.00
+             excess over SPY (ATR units)        -0.07        0.09       -0.24           -0.21          -0.07             0.05        0.09       0.00                                             0.30
+                   average sessions held        52.72        0.70       51.38           51.65          52.82            53.78       54.10      51.87                                              NaN
+                       profit per year %         8.92        1.98        4.44            5.75           8.88            11.80       12.54      10.49                                             0.27
+                            Sharpe ratio         0.32        0.07        0.16            0.21           0.31             0.42        0.44       0.46                                             0.00
+                          max drawdown %       -85.35        6.03      -97.45          -94.95         -85.72           -75.10      -73.37     -59.69                                              NaN
+                            worst year %       -51.05        6.54      -63.59          -59.92         -52.23           -41.74      -38.96     -36.74                                              NaN
+
+==== all stocks | no SPY condition | 30 random draws (~65,052 trades each) vs the real rule | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 200% | whole 2000 to Aug 2021 ====
+                                 measure  random mean  random std  random min  random 5th pct  random median  random 95th pct  random max  real rule  share of random draws at or above the real rule
+                            trades taken      8108.97       70.15     7913.00         8008.05        8103.50          8224.40     8257.00    6644.00                                             1.00
+                              win rate %        38.23        0.51       37.28           37.49          38.18            39.01       39.30      37.40                                             0.97
+                   average ATR per trade         0.34        0.06        0.20            0.23           0.34             0.41        0.45       0.38                                             0.23
+SPY move over the same holds (ATR units)         0.35        0.01        0.33            0.34           0.35             0.36        0.37       0.35                                             0.60
+             excess over SPY (ATR units)        -0.01        0.05       -0.15           -0.12          -0.01             0.06        0.10       0.03                                             0.23
+                   average sessions held        52.37        0.39       51.24           51.81          52.36            53.03       53.22      50.72                                              NaN
+                       profit per year %        12.85        2.09        7.59            8.96          13.05            15.61       16.71      11.70                                             0.73
+                            Sharpe ratio         0.28        0.04        0.17            0.19           0.28             0.33        0.36       0.31                                             0.23
+                          max drawdown %      -119.81       11.42     -148.52         -138.72        -117.33          -104.06     -102.88    -102.31                                              NaN
+                            worst year %      -113.10        7.83     -130.81         -125.33        -114.09          -101.19     -100.52     -94.06                                              NaN
+
+==== all stocks | no SPY condition | 30 random draws (~65,052 trades each) vs the real rule | long only | initial stop 4 ATR, trailing stop 5 ATR | cap 100% | whole 2000 to Aug 2021 ====
+                                 measure  random mean  random std  random min  random 5th pct  random median  random 95th pct  random max  real rule  share of random draws at or above the real rule
+                            trades taken      4531.33       67.45     4394.00         4415.05        4532.50          4632.20     4652.00    3736.00                                             1.00
+                              win rate %        37.63        0.70       35.91           36.71          37.57            38.65       38.85      37.37                                             0.57
+                   average ATR per trade         0.30        0.06        0.13            0.20           0.29             0.39        0.41       0.45                                             0.00
+SPY move over the same holds (ATR units)         0.31        0.01        0.30            0.30           0.31             0.32        0.33       0.34                                             0.00
+             excess over SPY (ATR units)        -0.02        0.06       -0.17           -0.11          -0.02             0.07        0.09       0.11                                             0.00
+                   average sessions held        51.85        0.58       50.81           51.00          51.74            52.66       53.34      50.72                                              NaN
+                       profit per year %         6.28        1.29        2.78            4.26           6.08             8.09        8.42       7.91                                             0.07
+                            Sharpe ratio         0.24        0.05        0.11            0.17           0.24             0.31        0.33       0.37                                             0.00
+                          max drawdown %       -79.58       12.04     -107.82         -104.20         -78.39           -64.66      -63.03     -65.08                                              NaN
+                            worst year %       -58.35        6.87      -72.38          -68.94         -58.94           -47.96      -47.01     -50.38                                              NaN
+done
