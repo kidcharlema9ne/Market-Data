@@ -1,0 +1,75 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 3s
+11,108 common-stock segments ever liquid; 41s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 406s
+baseline: 18,978 signals; reference pick, whole period cap 200%: +22.9% / Sharpe 0.64 / -22% (documented +22.9% / 0.64 / -22%); generator and account simulator match the standard ones
+volume features built for 153,182 signals
+  BASELINE: current rule, ranked by signal-day volume surge: +25.1% / Sharpe 0.69 (0.69 to 0.69) / -22% / worst year -16% / trades 4874
+  surge ranking, exit when the stock closes below its own 50-day average (spy below): +22.8% / Sharpe 0.64 (0.64 to 0.64) / -20% / worst year -19% / trades 5064
+     (share of trades ended by the average: 11%)
+  surge ranking, exit when the stock closes below its own 75-day average (spy below): +26.3% / Sharpe 0.72 (0.72 to 0.72) / -21% / worst year -17% / trades 4958
+     (share of trades ended by the average: 6%)
+  surge ranking, exit when the stock closes below its own 100-day average (spy below): +24.9% / Sharpe 0.69 (0.69 to 0.69) / -21% / worst year -13% / trades 4897
+     (share of trades ended by the average: 3%)
+  surge ranking, exit when the stock closes below its own 125-day average (spy below): +26.2% / Sharpe 0.72 (0.72 to 0.72) / -21% / worst year -17% / trades 4863
+     (share of trades ended by the average: 2%)
+  surge ranking, exit when the stock closes below its own 200-day average (spy below): +25.9% / Sharpe 0.71 (0.71 to 0.71) / -22% / worst year -16% / trades 4867
+     (share of trades ended by the average: 0%)
+
+==== exit_spy_below | 2000 to 2007 | cap 200% ====
+                                                                           scenario  profit per year %  Sharpe ratio  max drawdown %  profit / drawdown from peak  worst year %  trades taken
+                          BASELINE: current rule, ranked by signal-day volume surge              18.01          0.61          -21.70                         0.83         -9.17          1325
+ surge ranking, exit when the stock closes below its own 50-day average (spy below)              18.95          0.66          -20.24                         0.94         -3.79          1381
+ surge ranking, exit when the stock closes below its own 75-day average (spy below)              17.32          0.59          -21.11                         0.82         -7.14          1352
+surge ranking, exit when the stock closes below its own 100-day average (spy below)              17.52          0.60          -21.00                         0.83         -8.60          1337
+surge ranking, exit when the stock closes below its own 125-day average (spy below)              19.05          0.64          -21.37                         0.89         -8.55          1330
+surge ranking, exit when the stock closes below its own 200-day average (spy below)              17.72          0.60          -21.67                         0.82         -9.40          1331
+
+==== exit_spy_below | 2000 to 2007 | cap 100% ====
+                                                                           scenario  profit per year %  Sharpe ratio  max drawdown %  profit / drawdown from peak  worst year %  trades taken
+                          BASELINE: current rule, ranked by signal-day volume surge               8.25          0.51          -17.84                         0.46         -6.66           738
+ surge ranking, exit when the stock closes below its own 50-day average (spy below)               8.61          0.55          -17.60                         0.49         -3.07           771
+ surge ranking, exit when the stock closes below its own 75-day average (spy below)               9.00          0.56          -18.34                         0.49         -4.46           750
+surge ranking, exit when the stock closes below its own 100-day average (spy below)               8.66          0.54          -17.26                         0.50         -6.07           741
+surge ranking, exit when the stock closes below its own 125-day average (spy below)               7.85          0.49          -17.45                         0.45         -6.01           743
+surge ranking, exit when the stock closes below its own 200-day average (spy below)               8.28          0.51          -17.73                         0.47         -6.40           738
+
+==== exit_spy_below | 2008 to Aug 2021 | cap 200% ====
+                                                                           scenario  profit per year %  Sharpe ratio  max drawdown %  profit / drawdown from peak  worst year %  trades taken
+                          BASELINE: current rule, ranked by signal-day volume surge              29.40          0.73          -26.27                         1.12        -16.13          3549
+ surge ranking, exit when the stock closes below its own 50-day average (spy below)              25.10          0.64          -30.08                         0.83        -18.65          3683
+ surge ranking, exit when the stock closes below its own 75-day average (spy below)              31.71          0.79          -25.74                         1.23        -16.83          3606
+surge ranking, exit when the stock closes below its own 100-day average (spy below)              29.33          0.74          -25.41                         1.15        -13.40          3560
+surge ranking, exit when the stock closes below its own 125-day average (spy below)              30.54          0.77          -25.31                         1.21        -17.34          3533
+surge ranking, exit when the stock closes below its own 200-day average (spy below)              30.71          0.77          -25.72                         1.19        -15.68          3536
+
+==== exit_spy_below | 2008 to Aug 2021 | cap 100% ====
+                                                                           scenario  profit per year %  Sharpe ratio  max drawdown %  profit / drawdown from peak  worst year %  trades taken
+                          BASELINE: current rule, ranked by signal-day volume surge              18.21          0.75          -19.27                         0.95         -9.69          1983
+ surge ranking, exit when the stock closes below its own 50-day average (spy below)              12.84          0.59          -20.98                         0.61        -10.84          2054
+ surge ranking, exit when the stock closes below its own 75-day average (spy below)              14.29          0.65          -19.92                         0.72        -10.42          1988
+surge ranking, exit when the stock closes below its own 100-day average (spy below)              16.60          0.74          -18.20                         0.91         -8.84          1978
+surge ranking, exit when the stock closes below its own 125-day average (spy below)              17.79          0.74          -19.38                         0.92        -11.69          1966
+surge ranking, exit when the stock closes below its own 200-day average (spy below)              17.77          0.73          -17.48                         1.02        -14.34          2006
+
+==== exit_spy_below | whole 2000 to Aug 2021 | cap 200% ====
+                                                                           scenario  profit per year %  Sharpe ratio  max drawdown %  profit / drawdown from peak  worst year %  trades taken
+                          BASELINE: current rule, ranked by signal-day volume surge              25.14          0.69          -21.70                         1.16        -16.13          4874
+ surge ranking, exit when the stock closes below its own 50-day average (spy below)              22.80          0.64          -20.24                         1.13        -18.65          5064
+ surge ranking, exit when the stock closes below its own 75-day average (spy below)              26.33          0.72          -21.11                         1.25        -16.83          4958
+surge ranking, exit when the stock closes below its own 100-day average (spy below)              24.92          0.69          -21.00                         1.19        -13.40          4897
+surge ranking, exit when the stock closes below its own 125-day average (spy below)              26.25          0.72          -21.37                         1.23        -17.34          4863
+surge ranking, exit when the stock closes below its own 200-day average (spy below)              25.86          0.71          -21.67                         1.19        -15.68          4867
+
+==== exit_spy_below | whole 2000 to Aug 2021 | cap 100% ====
+                                                                           scenario  profit per year %  Sharpe ratio  max drawdown %  profit / drawdown from peak  worst year %  trades taken
+                          BASELINE: current rule, ranked by signal-day volume surge              14.49          0.67          -18.06                         0.80        -11.39          2721
+ surge ranking, exit when the stock closes below its own 50-day average (spy below)              11.26          0.57          -17.60                         0.64        -10.84          2825
+ surge ranking, exit when the stock closes below its own 75-day average (spy below)              12.31          0.61          -18.34                         0.67        -10.42          2738
+surge ranking, exit when the stock closes below its own 100-day average (spy below)              13.64          0.67          -17.52                         0.78        -10.70          2719
+surge ranking, exit when the stock closes below its own 125-day average (spy below)              14.08          0.65          -18.93                         0.74        -11.69          2709
+surge ranking, exit when the stock closes below its own 200-day average (spy below)              14.22          0.66          -18.22                         0.78        -14.34          2744
+done
