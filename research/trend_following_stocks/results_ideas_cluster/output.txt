@@ -1,0 +1,160 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 2s
+11,108 common-stock segments ever liquid; 27s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 321s
+baseline: 18,978 signals, whole period cap 200%: +22.9% / Sharpe 0.64 / -22% (documented +22.9% / 0.64 / -22%)
+group-cap portfolio matches the standard portfolio when no cap is set
+k=12: 98.7% of signals have a group
+k=12: baseline largest single group as % of the account (sessions with positions): mean 36.3, 90th percentile 55.7, maximum 113.4
+k=20: 98.7% of signals have a group
+
+-- example groups (k=20) at the month-end 2008-12-31: size, then the 8 most typical members --
+group  0 ( 126 liquid stocks): SCHN#33, PCXCQ, MEE, X, CNX, AKS, STLD, CLF
+group  1 (  33 liquid stocks): LAMR, SCI, MWV, TIN, RRD, TWX, QVCA, FLEX
+group  2 ( 158 liquid stocks): ECA, SM, HAL, CNQ, SU, PXP, ATW, TLM
+group  3 (  72 liquid stocks): PKX, BBD, CHA#1, GGB#18, KEP, SNP#6, PTR, CEO
+group  4 (  65 liquid stocks): LLTC, NVLS, MCHP, ADI, SMTC, INTC, ISIL, HITT
+group  5 (  76 liquid stocks): UHS, LPNT, CHE, WMGI, MDCO, AMMD#2, ALXN, HAIN
+group  6 (  88 liquid stocks): LEN, KBH, RYL, AMG, PNK#2, WYND, MTH#11, DHI
+group  7 ( 103 liquid stocks): UBSI, TRMK, FNB, ONB, WL, SUSQ, FMBI, MBFI#15
+group  8 (  63 liquid stocks): PRU, AMP, PFG, MS, CINF, KEY, LNC, XL
+group  9 (  60 liquid stocks): CMCSA, CSCO, FIS, ELNK, SEE, CTXS, NTAP, MCRS
+group 10 ( 101 liquid stocks): BBBY, ASNA#2, TLRD, CBRL, JCP, HIBB#7, MHK, KSS
+group 11 (  45 liquid stocks): EEFT#12, CPTS#2, CYH, OMX, LBTYA, ZBRA, ODP, PAG
+group 12 (  66 liquid stocks): CSR, MATW, WBSN, BGG, BLKB, COLM, KFY, ROL#15
+group 13 (  54 liquid stocks): HTLD, CNW, ABFS, ODFL#9, FWRD, WERN, JBHT, R
+group 14 (  41 liquid stocks): BNI, HON, EMR, UTX, CNI, UNP, BA, ITW
+group 15 ( 110 liquid stocks): HIW, REG, CLI, DCT, KRC, EPR, LPT, WRE
+group 16 (  81 liquid stocks): MMP, ETP#16, NFJ, EEP, ET, GDV, PAA, DTK
+group 17 ( 175 liquid stocks): MGEE, NWN, PSSI, EDE, NJR, UIL, RDK, HTSI
+group 18 ( 102 liquid stocks): PGN, SO, D, DTE, TEG, XEL, AEE, ETR
+group 19 ( 221 liquid stocks): GIS, ABT, DSCP, MKC, BCR, BDX, LH, JNJ
+
+-- example groups (k=20) at the month-end 2015-12-31: size, then the 8 most typical members --
+group  0 (  84 liquid stocks): RY, TD, BSAC, ABEV, BMO, CM, UGP, BNS#2
+group  1 (  63 liquid stocks): OTEX, NTRI#18, PEGA#30, WTS#9, VG#3, ACIW, WWE#21, APD
+group  2 ( 217 liquid stocks): WLL, CRZO#17, NBR, OAS, HP, ERF#3, DNR#4, HES
+group  3 (  68 liquid stocks): ECHO, HUBG#35, ODFL#9, WERN, IRDM, WSO#3, HTLD, RVNC
+group  4 ( 105 liquid stocks): LLTC, ADI, MCHP, MPWR, ON#8, STM, TXN, ARMH
+group  5 ( 181 liquid stocks): FISV, SBUX, FDS, ORLY, CTAS, CME, MA, HD
+group  6 (  59 liquid stocks): LEN, BZH#1, KBH, MDC, DHI, CAA, TOL, PHM
+group  7 ( 182 liquid stocks): FMBI, CBSH, CVBF, TRMK, BOH, ASB, CATY#7, BXS
+group  8 ( 202 liquid stocks): PEP, KMB, ACE, DPS, T, CINF, KO, TRV
+group  9 (  71 liquid stocks): WB, SINA#15, JMEI, JD, YY, NTES#5, LFC, QIHU
+group 10 ( 131 liquid stocks): FL, VFC, JWN, ROST, GIII#58, DDS, TJX, GCO
+group 11 (  93 liquid stocks): LAMR, SSTK, PHH, VIAB, RLD, STMP#4, PRI, MNST#27
+group 12 ( 225 liquid stocks): ALDR, LGND, TSRO#3, PRTA#2, ALNY#8, RARE, IONS, ACAD#22
+group 13 ( 136 liquid stocks): AGII, CFFN, AMSF#9, ROLL, EME, TNC#4, EXPO#51, SIGI
+group 14 ( 131 liquid stocks): FLS, TKR, ETN, ITT, MSM, VMI, LECO, PNR
+group 15 ( 208 liquid stocks): NNN, WRI, REG, AKR#24, SPG, OHI#18, WEC, HIW
+group 16 ( 136 liquid stocks): FMO, KYN, JMF, ENLC, KYE, FEN#3, EEQ, WES
+group 17 ( 168 liquid stocks): EFT, FRA, AWF, DTK#11, BIT, DTK, FPF, JFR
+group 18 (  41 liquid stocks): PAAS#9, GG#3, ABX, WPM, AEM, HL#18, FNV, KGC
+group 19 ( 138 liquid stocks): HUM, LH, HNT, AHS, UHS, LPNT, DGX, ESRX
+
+-- example groups (k=20) at the month-end 2020-12-31: size, then the 8 most typical members --
+group  0 (  55 liquid stocks): ITUB, BBD, BSBR, ABEV, PBR, CIG#2, UGP, ELP#1
+group  1 ( 110 liquid stocks): DOV, ETN, ITW, PPG, MMM, JCI, LECO, XYL
+group  2 ( 162 liquid stocks): FANG, MRO, VET, MUR, DVN, OXY, OII, MTDR
+group  3 ( 114 liquid stocks): AFL, OMC, THG, CNA, BCS, MFC, ING, SAN
+group  4 (  97 liquid stocks): KLAC, NVMI#51, MKSI, LRCX, LSCC, MTSI#1, SWKS, QRVO
+group  5 ( 246 liquid stocks): EQIX#17, TMO, DHR, IDXX, ZTS, VRSK, MCO, TRI
+group  6 ( 131 liquid stocks): FBHS, MTH#11, LGIH, IBP, MHO#10, BLD, PHM, DHI
+group  7 ( 208 liquid stocks): SFNC#4, AUB, WSBC#1, FULT, TRMK, VLY, FNB, ASB
+group  8 ( 122 liquid stocks): ATO, MGEE, ED, CMS, HE, SWX, NI, LNT
+group  9 ( 107 liquid stocks): FCEL, PLUG#24, BLDP#19, VFF, HEXO, CREE, BLNK#3, CLNE
+group 10 (  66 liquid stocks): TVTY#4, ENSG#6, TTEC, APPS#34, CVNA, GMED, DNLI, OTRK#15
+group 11 ( 265 liquid stocks): SHOP, AVLR, FIVN, VEEV, MELI, CDNS, OKTA, WIX
+group 12 ( 297 liquid stocks): CTMX, DRNA#5, XNCR, EXEL, ALNY#8, CUE#1, MGNX, AXSM#11
+group 13 ( 101 liquid stocks): MLI, FSS, FELE#4, ACA, SAFT#6, TNC#4, ICFI, EIG
+group 14 ( 265 liquid stocks): DRH, PK, HST, XHR, INN, RHP, RLJ, SPG
+group 15 (  95 liquid stocks): KRC, PDM, NHI, HIW, GNL, LTC#16, BDN, NNN
+group 16 ( 159 liquid stocks): CBT, FLOW#2, HRI, CNO, ITT, NUE, TEX, LYB
+group 17 ( 251 liquid stocks): CBB, NGHC#1, NAD, NEA#9, VTA, CTBB, NZF, ACIA
+group 18 (  68 liquid stocks): PAAS#9, FSM, AUY#1, WPM, IAG, MAG#64, SAND#17, EXK#4
+group 19 (  65 liquid stocks): JD, NTES#5, EDU, BABA, TAL#4, BZUN, PDD, HUYA
+k=20: baseline largest single group as % of the account (sessions with positions): mean 28.1, 90th percentile 42.6, maximum 110.5
+k=40: 98.7% of signals have a group
+k=40: baseline largest single group as % of the account (sessions with positions): mean 21.4, 90th percentile 33.7, maximum 75.5
+
+==== idea cluster | 2000 to 2007 | cap 200% | long only | strongest 20% | 4 ATR stop, 5 ATR trail ====
+                                            scenario  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  trades taken  average open positions  % of sessions at the cap  % of sessions condition on  average ATR per trade  excess over SPY (ATR units)
+             no group cap (baseline, reference seed)              14.69          0.50          -22.48        -10.12         4 of 9          1331                   33.18                     35.51                         NaN                   0.90                         0.61
+k=12 groups, at most 10% of the account in one group               9.53          0.57          -14.67         -6.83         5 of 9           773                   19.74                      0.00                         NaN                   1.02                         0.75
+k=12 groups, at most 15% of the account in one group              12.88          0.55          -19.19         -9.85         5 of 9          1088                   27.51                      0.00                         NaN                   0.97                         0.75
+k=12 groups, at most 25% of the account in one group              16.08          0.57          -19.88        -10.53         5 of 9          1303                   33.07                     30.44                         NaN                   1.00                         0.74
+k=20 groups, at most 10% of the account in one group              14.72          0.62          -16.54         -9.25         5 of 9          1083                   27.84                      0.55                         NaN                   1.11                         0.86
+k=20 groups, at most 15% of the account in one group              19.09          0.68          -20.87         -9.82         5 of 9          1267                   32.93                     29.13                         NaN                   1.22                         0.94
+k=20 groups, at most 25% of the account in one group              16.25          0.57          -22.46         -8.31         5 of 9          1309                   33.32                     33.45                         NaN                   1.01                         0.71
+k=40 groups, at most 10% of the account in one group              18.19          0.64          -17.44        -10.40         5 of 9          1290                   33.06                     29.23                         NaN                   1.13                         0.82
+k=40 groups, at most 15% of the account in one group              17.38          0.59          -22.26         -8.88         5 of 9          1308                   33.52                     33.85                         NaN                   1.08                         0.78
+k=40 groups, at most 25% of the account in one group              15.46          0.53          -23.21         -9.00         4 of 9          1313                   33.22                     35.11                         NaN                   0.96                         0.66
+
+==== idea cluster | 2000 to 2007 | cap 100% | long only | strongest 20% | 4 ATR stop, 5 ATR trail ====
+                                            scenario  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  trades taken  average open positions  % of sessions at the cap  % of sessions condition on  average ATR per trade  excess over SPY (ATR units)
+             no group cap (baseline, reference seed)              10.22          0.62          -13.98         -4.91         5 of 9           725                   18.64                     42.89                         NaN                   1.16                         0.87
+k=12 groups, at most 10% of the account in one group               7.60          0.49          -14.44         -5.19         4 of 9           716                   18.15                     23.91                         NaN                   0.85                         0.61
+k=12 groups, at most 15% of the account in one group               8.58          0.53          -19.05         -6.37         4 of 9           733                   18.42                     39.88                         NaN                   0.93                         0.67
+k=12 groups, at most 25% of the account in one group               8.78          0.55          -15.54         -5.92         5 of 9           722                   18.57                     41.49                         NaN                   0.96                         0.68
+k=20 groups, at most 10% of the account in one group               8.58          0.52          -18.79         -6.08         5 of 9           749                   18.60                     35.96                         NaN                   0.94                         0.66
+k=20 groups, at most 15% of the account in one group               8.13          0.50          -18.06         -6.02         4 of 9           733                   18.62                     39.83                         NaN                   0.90                         0.63
+k=20 groups, at most 25% of the account in one group               7.64          0.46          -19.72         -6.42         4 of 9           745                   18.62                     41.54                         NaN                   0.80                         0.53
+k=40 groups, at most 10% of the account in one group               9.11          0.54          -19.81         -7.23         4 of 9           733                   18.58                     39.08                         NaN                   1.00                         0.71
+k=40 groups, at most 15% of the account in one group               8.26          0.51          -19.28         -6.42         4 of 9           722                   18.44                     41.19                         NaN                   0.90                         0.62
+k=40 groups, at most 25% of the account in one group               9.41          0.57          -14.49         -5.96         5 of 9           732                   18.52                     42.74                         NaN                   1.03                         0.75
+
+==== idea cluster | 2008 to Aug 2021 | cap 200% | long only | strongest 20% | 4 ATR stop, 5 ATR trail ====
+                                            scenario  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  trades taken  average open positions  % of sessions at the cap  % of sessions condition on  average ATR per trade  excess over SPY (ATR units)
+             no group cap (baseline, reference seed)              27.74          0.70          -27.91        -13.81       10 of 14          3501                   53.91                     65.12                         NaN                   1.06                         0.40
+k=12 groups, at most 10% of the account in one group              16.39          0.63          -21.33        -15.68       10 of 14          2072                   31.77                      0.00                         NaN                   1.05                         0.50
+k=12 groups, at most 15% of the account in one group              20.82          0.62          -31.49        -30.23       10 of 14          2891                   44.39                      0.06                         NaN                   0.97                         0.38
+k=12 groups, at most 25% of the account in one group              30.63          0.76          -28.00        -25.24       10 of 14          3503                   54.10                     53.51                         NaN                   1.17                         0.55
+k=20 groups, at most 10% of the account in one group              23.04          0.67          -24.89        -20.40        9 of 14          2942                   45.09                      1.12                         NaN                   1.05                         0.47
+k=20 groups, at most 15% of the account in one group              28.23          0.71          -25.73        -26.83       10 of 14          3488                   54.07                     48.66                         NaN                   1.09                         0.47
+k=20 groups, at most 25% of the account in one group              28.75          0.71          -25.38        -17.13       10 of 14          3545                   54.54                     61.97                         NaN                   1.09                         0.46
+k=40 groups, at most 10% of the account in one group              29.22          0.74          -27.45        -14.92       10 of 14          3466                   53.74                     50.90                         NaN                   1.14                         0.52
+k=40 groups, at most 15% of the account in one group              27.59          0.70          -24.90        -21.39       10 of 14          3526                   54.52                     62.30                         NaN                   1.05                         0.42
+k=40 groups, at most 25% of the account in one group              28.89          0.72          -26.68        -15.40       10 of 14          3496                   54.41                     63.77                         NaN                   1.11                         0.46
+
+==== idea cluster | 2008 to Aug 2021 | cap 100% | long only | strongest 20% | 4 ATR stop, 5 ATR trail ====
+                                            scenario  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  trades taken  average open positions  % of sessions at the cap  % of sessions condition on  average ATR per trade  excess over SPY (ATR units)
+             no group cap (baseline, reference seed)              13.76          0.59          -17.93         -9.15        9 of 14          1921                   29.61                     69.09                         NaN                   0.96                         0.36
+k=12 groups, at most 10% of the account in one group              14.95          0.63          -18.35        -12.96        9 of 14          1900                   29.44                     41.32                         NaN                   1.06                         0.50
+k=12 groups, at most 15% of the account in one group              16.05          0.71          -18.83        -14.40       10 of 14          1949                   29.99                     64.03                         NaN                   1.11                         0.53
+k=12 groups, at most 25% of the account in one group              10.74          0.49          -18.96         -7.87        9 of 14          1962                   29.90                     68.56                         NaN                   0.75                         0.16
+k=20 groups, at most 10% of the account in one group              15.20          0.68          -19.16         -8.69       10 of 14          1938                   29.95                     61.86                         NaN                   1.05                         0.47
+k=20 groups, at most 15% of the account in one group              15.44          0.67          -18.45         -6.09       10 of 14          1962                   30.55                     67.23                         NaN                   1.06                         0.47
+k=20 groups, at most 25% of the account in one group              11.33          0.52          -18.51        -10.21       10 of 14          1925                   29.48                     69.59                         NaN                   0.80                         0.21
+k=40 groups, at most 10% of the account in one group              15.88          0.71          -16.88        -11.42       10 of 14          1970                   30.41                     68.67                         NaN                   1.09                         0.49
+k=40 groups, at most 15% of the account in one group              12.46          0.55          -18.49        -14.60        9 of 14          1985                   30.38                     68.97                         NaN                   0.85                         0.27
+k=40 groups, at most 25% of the account in one group              14.07          0.61          -18.46         -9.46        9 of 14          1938                   29.60                     69.35                         NaN                   0.98                         0.41
+
+==== idea cluster | whole 2000 to Aug 2021 | cap 200% | long only | strongest 20% | 4 ATR stop, 5 ATR trail ====
+                                            scenario  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  trades taken  average open positions  % of sessions at the cap  % of sessions condition on  average ATR per trade  excess over SPY (ATR units)
+             no group cap (baseline, reference seed)              22.86          0.64          -22.48        -13.81       14 of 22          4832                   46.16                     54.19                         NaN                   1.02                         0.46
+k=12 groups, at most 10% of the account in one group              13.83          0.60          -15.63        -15.68       15 of 22          2845                   27.28                      0.00                         NaN                   1.04                         0.57
+k=12 groups, at most 15% of the account in one group              17.85          0.59          -19.19        -30.23       15 of 22          3979                   38.08                      0.04                         NaN                   0.97                         0.48
+k=12 groups, at most 25% of the account in one group              25.19          0.69          -19.89        -25.24       15 of 22          4806                   46.24                     44.99                         NaN                   1.13                         0.60
+k=20 groups, at most 10% of the account in one group              19.93          0.64          -16.88        -20.40       14 of 22          4025                   38.64                      0.91                         NaN                   1.07                         0.57
+k=20 groups, at most 15% of the account in one group              24.82          0.69          -20.87        -26.83       15 of 22          4755                   46.17                     41.45                         NaN                   1.12                         0.59
+k=20 groups, at most 25% of the account in one group              24.08          0.66          -22.46        -17.13       15 of 22          4854                   46.61                     51.45                         NaN                   1.07                         0.53
+k=40 groups, at most 10% of the account in one group              25.10          0.70          -17.44        -14.92       15 of 22          4756                   46.01                     42.90                         NaN                   1.14                         0.60
+k=40 groups, at most 15% of the account in one group              23.77          0.66          -22.26        -21.39       15 of 22          4834                   46.67                     51.80                         NaN                   1.06                         0.52
+k=40 groups, at most 25% of the account in one group              23.87          0.66          -23.21        -15.40       14 of 22          4809                   46.49                     53.19                         NaN                   1.07                         0.51
+
+==== idea cluster | whole 2000 to Aug 2021 | cap 100% | long only | strongest 20% | 4 ATR stop, 5 ATR trail ====
+                                            scenario  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive  trades taken  average open positions  % of sessions at the cap  % of sessions condition on  average ATR per trade  excess over SPY (ATR units)
+             no group cap (baseline, reference seed)              12.44          0.59          -15.50         -9.15       14 of 22          2646                   25.51                     59.42                         NaN                   1.01                         0.50
+k=12 groups, at most 10% of the account in one group              12.20          0.58          -15.43        -12.96       13 of 22          2616                   25.22                     34.89                         NaN                   1.00                         0.53
+k=12 groups, at most 15% of the account in one group              13.26          0.65          -19.05        -14.40       14 of 22          2682                   25.67                     55.12                         NaN                   1.06                         0.57
+k=12 groups, at most 25% of the account in one group              10.00          0.50          -18.47        -11.44       14 of 22          2684                   25.67                     58.57                         NaN                   0.80                         0.30
+k=20 groups, at most 10% of the account in one group              12.73          0.63          -18.79         -8.69       15 of 22          2687                   25.71                     52.30                         NaN                   1.02                         0.52
+k=20 groups, at most 15% of the account in one group              12.71          0.61          -18.06         -9.48       14 of 22          2695                   26.09                     57.12                         NaN                   1.01                         0.51
+k=20 groups, at most 25% of the account in one group               9.95          0.50          -19.72        -11.94       14 of 22          2670                   25.42                     59.23                         NaN                   0.80                         0.30
+k=40 groups, at most 10% of the account in one group              13.35          0.65          -19.81        -11.95       14 of 22          2703                   25.99                     57.75                         NaN                   1.07                         0.55
+k=40 groups, at most 15% of the account in one group              10.89          0.53          -19.28        -14.60       13 of 22          2707                   25.92                     58.71                         NaN                   0.87                         0.37
+k=40 groups, at most 25% of the account in one group              12.33          0.59          -17.25        -10.45       14 of 22          2670                   25.46                     59.53                         NaN                   1.00                         0.50
+done
