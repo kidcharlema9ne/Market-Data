@@ -1,0 +1,72 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 3s
+11,108 common-stock segments ever liquid; 40s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 399s
+baseline: 18,978 signals; reference pick, whole period cap 200%: +22.9% / Sharpe 0.64 / -22% (documented +22.9% / 0.64 / -22%); generator and account simulator match the standard ones
+volume features built for 153,182 signals
+QQQ: 5,434 days from 2000-01-03
+
+==== profit by calendar year, % of $300,000 | cap 200% (2021 is Jan to 6 Aug) ====
+      Base rule (random pick)  Rank by signal-day volume surge  Gate: up/down dollar volume at least 2  Graded cap by Nasdaq lead (60 sessions)  SPY buy and hold ($300,000)
+2000                      0.0                              0.0                                     0.0                                      0.0                         -7.5
+2001                      0.0                              0.0                                     0.0                                      0.0                        -11.4
+2002                     -5.6                             -5.6                                    -2.9                                     -4.7                        -22.4
+2003                     84.1                             83.4                                    79.3                                     83.3                         24.6
+2004                     -3.4                              2.4                                     2.0                                     11.7                          8.9
+2005                     19.3                             22.0                                     7.8                                     14.8                          3.5
+2006                     22.0                             28.9                                    40.6                                     30.8                         13.4
+2007                     12.1                             23.1                                    10.9                                      7.2                          4.4
+2008                    -12.5                            -11.1                                   -11.8                                    -11.2                        -39.8
+2009                     45.3                             46.2                                    42.7                                     45.6                         24.7
+2010                     11.2                             13.0                                    14.3                                     18.1                         13.7
+2011                    -12.1                            -15.7                                    -8.4                                    -21.4                          2.5
+2012                      1.2                              9.4                                    16.7                                     -3.0                         13.5
+2013                     93.8                            103.0                                    77.3                                     63.0                         26.6
+2014                     15.3                             17.0                                     9.2                                     17.5                         11.3
+2015                    -13.8                            -16.1                                   -10.3                                     -6.4                          0.4
+2016                     30.9                             31.6                                    29.2                                     21.0                         10.1
+2017                     39.4                             33.9                                    32.4                                     28.6                         18.0
+2018                     -8.7                             -2.7                                    -8.2                                     -0.3                         -5.1
+2019                     27.6                             30.3                                    30.7                                     25.0                         26.1
+2020                     74.7                             81.6                                    67.4                                     68.3                         20.7
+2021                     72.3                             67.4                                    75.5                                     70.9                         17.4
+
+==== profit by calendar year, % of $300,000 | cap 100% (2021 is Jan to 6 Aug) ====
+      Base rule (random pick)  Rank by signal-day volume surge  Gate: up/down dollar volume at least 2  Graded cap by Nasdaq lead (60 sessions)  SPY buy and hold ($300,000)
+2000                      0.0                              0.0                                     0.0                                      0.0                         -7.5
+2001                      0.0                              0.0                                     0.0                                      0.0                        -11.4
+2002                     -4.7                             -4.5                                    -2.2                                     -0.2                        -22.4
+2003                     46.5                             48.1                                    47.5                                     44.3                         24.6
+2004                      5.4                             -2.5                                    -8.1                                      0.0                          8.9
+2005                     14.1                              7.4                                     6.7                                     13.9                          3.5
+2006                     15.8                              9.7                                    15.7                                     17.3                         13.4
+2007                     10.1                             14.9                                     7.3                                     13.2                          4.4
+2008                     -7.3                            -11.4                                   -10.9                                    -11.7                        -39.8
+2009                     27.0                             27.9                                    29.0                                     27.3                         24.7
+2010                     17.1                              5.4                                    11.4                                     13.6                         13.7
+2011                     -6.0                             -9.7                                    -5.0                                    -20.5                          2.5
+2012                     -5.1                              4.0                                    15.1                                      1.0                         13.5
+2013                     41.3                             48.1                                    39.1                                     41.3                         26.6
+2014                      8.1                             12.6                                     9.4                                      2.4                         11.3
+2015                     -9.1                             -2.0                                    -8.1                                     -3.8                          0.4
+2016                     19.8                             27.1                                    16.8                                     12.3                         10.1
+2017                     18.4                             25.3                                    13.8                                      9.6                         18.0
+2018                     -2.7                             -2.9                                     4.1                                      0.3                         -5.1
+2019                     16.7                             24.5                                    20.6                                     12.9                         26.1
+2020                     27.8                             37.2                                    32.6                                     25.3                         20.7
+2021                     35.1                             53.2                                    57.6                                     45.4                         17.4
+
+                                         series  profit_per_year_pct  sharpe  max_drawdown_pct  worst_year_pct  final_equity
+                200% | Base rule (random pick)                22.86    0.64            -22.48          -13.81    1778912.69
+        200% | Rank by signal-day volume surge                25.14    0.69            -21.70          -16.13    1926531.24
+ 200% | Gate: up/down dollar volume at least 2                22.93    0.65            -19.98          -11.75    1783366.51
+200% | Graded cap by Nasdaq lead (60 sessions)                21.28    0.65            -19.25          -21.38    1676717.33
+                100% | Base rule (random pick)                12.44    0.59            -15.50           -9.15    1104671.26
+        100% | Rank by signal-day volume surge                14.49    0.67            -18.06          -11.39    1237336.24
+ 100% | Gate: up/down dollar volume at least 2                13.57    0.63            -20.27          -10.86    1177645.77
+100% | Graded cap by Nasdaq lead (60 sessions)                11.32    0.59            -16.94          -20.54    1032062.82
+             SPY | SPY buy and hold ($300,000)                 7.11    0.36            -60.88          -39.75     760129.34
+done
