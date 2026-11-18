@@ -1,10 +1,10 @@
 simulator self-test passed
 symbol filter self-test passed
 common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 3s
-11,108 common-stock segments ever liquid; 42s
+11,108 common-stock segments ever liquid; 41s
 duplicate detection: 1402264 candidate pairs from matching big moves
 duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
-ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 407s
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 408s
 baseline: 18,978 signals, 4,832 trades taken; whole period cap 200%: +22.9% / Sharpe 0.64 / -22% (documented +22.9% / 0.64 / -22%)
 
 ==== profit by entry price (trades taken, cap 200%, whole period) ====
@@ -177,6 +177,8 @@ scenario price floor $3 (trigger-day close): 18,786 signals
 scenario price floor $5 (trigger-day close): 18,440 signals
 scenario price floor $10 (trigger-day close): 16,957 signals
 scenario price floor $5 and remove flagged trades: 18,386 signals
+confirmed bad trades matched: 2 of 2
+scenario remove web-confirmed bad-data trades: 18,978 signals
 
 ==== reruns | 2000 to 2007 | cap 200% | initial stop 4 ATR, trailing stop 5 ATR ====
                                 scenario  trades taken  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive
@@ -190,6 +192,7 @@ scenario price floor $5 and remove flagged trades: 18,386 signals
       price floor $5 (trigger-day close)          1315       42.89                   0.87              13.96          0.49          -23.12         -7.52         4 of 9
      price floor $10 (trigger-day close)          1263       42.52                   0.70              11.01          0.40          -27.74         -9.66         4 of 9
 price floor $5 and remove flagged trades          1294       44.05                   0.99              15.81          0.55          -24.09         -8.89         4 of 9
+    remove web-confirmed bad-data trades          1321       44.13                   0.97              15.69          0.53          -20.85         -9.58         4 of 9
 
 ==== reruns | 2000 to 2007 | cap 100% | initial stop 4 ATR, trailing stop 5 ATR ====
                                 scenario  trades taken  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive
@@ -203,6 +206,7 @@ price floor $5 and remove flagged trades          1294       44.05              
       price floor $5 (trigger-day close)           736       42.80                   0.74               6.84          0.44          -17.78         -6.19         4 of 9
      price floor $10 (trigger-day close)           724       42.40                   0.72               6.55          0.43          -20.34         -7.54         4 of 9
 price floor $5 and remove flagged trades           738       45.26                   0.83               7.68          0.48          -17.58         -7.54         4 of 9
+    remove web-confirmed bad-data trades           732       44.13                   1.04               9.27          0.57          -15.66         -4.91         5 of 9
 
 ==== reruns | 2008 to Aug 2021 | cap 200% | initial stop 4 ATR, trailing stop 5 ATR ====
                                 scenario  trades taken  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive
@@ -216,6 +220,7 @@ price floor $5 and remove flagged trades           738       45.26              
       price floor $5 (trigger-day close)          3415       40.70                   0.95              24.29          0.63          -28.58        -12.86       10 of 14
      price floor $10 (trigger-day close)          3263       41.16                   0.91              22.08          0.60          -24.96        -17.75       10 of 14
 price floor $5 and remove flagged trades          3345       41.02                   0.91              22.72          0.61          -26.58        -20.48       10 of 14
+    remove web-confirmed bad-data trades          3479       41.08                   1.02              26.51          0.68          -27.92        -13.81       10 of 14
 
 ==== reruns | 2008 to Aug 2021 | cap 100% | initial stop 4 ATR, trailing stop 5 ATR ====
                                 scenario  trades taken  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive
@@ -229,6 +234,7 @@ price floor $5 and remove flagged trades          3345       41.02              
       price floor $5 (trigger-day close)          1857       40.50                   0.83              11.46          0.55          -19.78        -14.63       10 of 14
      price floor $10 (trigger-day close)          1777       41.47                   0.88              11.57          0.57          -18.16        -14.58       11 of 14
 price floor $5 and remove flagged trades          1893       39.51                   0.61               8.48          0.41          -20.28        -14.23       10 of 14
+    remove web-confirmed bad-data trades          1945       40.46                   0.94              13.61          0.58          -17.93         -9.15        9 of 14
 
 ==== reruns | whole 2000 to Aug 2021 | cap 200% | initial stop 4 ATR, trailing stop 5 ATR ====
                                 scenario  trades taken  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive
@@ -242,6 +248,7 @@ price floor $5 and remove flagged trades          1893       39.51              
       price floor $5 (trigger-day close)          4730       41.31                   0.93              20.43          0.58          -23.12        -12.86       14 of 22
      price floor $10 (trigger-day close)          4526       41.54                   0.85              17.94          0.53          -27.74        -17.75       14 of 22
 price floor $5 and remove flagged trades          4639       41.86                   0.94              20.14          0.59          -24.09        -20.48       14 of 22
+    remove web-confirmed bad-data trades          4800       41.92                   1.01              22.46          0.63          -20.85        -13.81       14 of 22
 
 ==== reruns | whole 2000 to Aug 2021 | cap 100% | initial stop 4 ATR, trailing stop 5 ATR ====
                                 scenario  trades taken  win rate %  average ATR per trade  profit per year %  Sharpe ratio  max drawdown %  worst year % years positive
@@ -255,4 +262,5 @@ price floor $5 and remove flagged trades          4639       41.86              
       price floor $5 (trigger-day close)          2593       41.15                   0.81               9.73          0.51          -17.78        -14.63       14 of 22
      price floor $10 (trigger-day close)          2501       41.74                   0.83               9.69          0.52          -20.34        -14.58       15 of 22
 price floor $5 and remove flagged trades          2631       41.13                   0.67               8.18          0.43          -17.58        -14.23       14 of 22
+    remove web-confirmed bad-data trades          2677       41.46                   0.97              11.99          0.57          -16.13         -9.15       14 of 22
 done
