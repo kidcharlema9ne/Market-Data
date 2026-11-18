@@ -1,0 +1,82 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (96.2% of rows); load 2s
+11,108 common-stock segments ever liquid; 20s
+duplicate detection: 1402264 candidate pairs from matching big moves
+duplicate companies removed: 599 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRI-DELISTED#11', 'SSRM', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('LPI-DELISTED', 'VTLE-DELISTED', 2424), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('CREE-DELISTED', 'WOLF', 3594), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ZIOP-DELISTED#22', 'TCRT#12', 2888), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('OSTK-DELISTED#3', 'BBBY', 3585), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555), ('IONS', 'ISIS-DELISTED', 3428), ('FSTO-DELISTED', 'SOGC-DELISTED', 3772)]
+ranking universe: 10,927,616 stock-days; eligible stocks per session median 2199, min 404, max 3342; 238s
+baseline: 18,978 signals; reference pick, whole period cap 200%: +22.9% / Sharpe 0.64 / -22% (documented +22.9% / 0.64 / -22%); generator and account simulator match the standard ones
+signals with a real price: 53.0% (symbols ok at Yahoo); of those, price changed by a split factor: 26.0%
+signals 18,978; delisted-suffix signals covered: 1.5%
+  check GME: entry 2020-09-10 archive price 1.84 x split factor 4.000 = as-traded 7.35 (covered=True)
+  check AMC: entry 2021-03-24 archive price 106.60 x split factor 0.100 = as-traded 10.66 (covered=True)
+  check FAST: entry 2019-05-02 archive price 17.32 x split factor 4.000 = as-traded 69.27 (covered=True)
+  split factor on covered signals: share >1 (stock later split forward) 19.2%, share <1 (later reverse split) 6.8%, share =1 74.0%
+  covered signals, archive price: cheaper half mean +1.291 ATR, dearer half +0.428 ATR (median price 32.72)
+  covered signals, as-traded price: cheaper half mean +0.935 ATR, dearer half +0.785 ATR (median price 36.90)
+
+=== baseline ===
+  baseline (kept 100% of signals)
+    2000 to 2007                                 cap 200%: +18.0% a year / Sharpe 0.61 / drawdown -21.7% / worst year -9.2% / trades 1325
+    2008 to Aug 2021                             cap 200%: +29.4% a year / Sharpe 0.73 / drawdown -26.3% / worst year -16.1% / trades 3549
+    whole 2000 to Aug 2021                       cap 200%: +25.1% a year / Sharpe 0.69 / drawdown -21.7% / worst year -16.1% / trades 4874
+    2006 to Aug 2021 (ridge test years)          cap 200%: +28.2% a year / Sharpe 0.71 / drawdown -30.1% / worst year -16.1% / trades 4033
+    2000 to 2007                                 cap 100%: +8.2% a year / Sharpe 0.51 / drawdown -17.8% / worst year -6.7% / trades 738
+    2008 to Aug 2021                             cap 100%: +18.2% a year / Sharpe 0.75 / drawdown -19.3% / worst year -9.7% / trades 1983
+    whole 2000 to Aug 2021                       cap 100%: +14.5% a year / Sharpe 0.67 / drawdown -18.1% / worst year -11.4% / trades 2721
+    2006 to Aug 2021 (ridge test years)          cap 100%: +16.9% a year / Sharpe 0.72 / drawdown -24.5% / worst year -11.4% / trades 2256
+    random pick among kept, whole period cap 200%: Sharpe 0.65
+    random pick among kept, whole period cap 100%: Sharpe 0.61
+
+=== A. archive price (split-adjusted), better half, ALL signals (should reproduce Entry 162: +28.3% / 0.77 and +19.0% / 0.84) ===
+  archive price, better half (kept 44% of signals)
+    2000 to 2007                                 cap 200%: +18.4% a year / Sharpe 0.62 / drawdown -21.0% / worst year -8.1% / trades 1248
+    2008 to Aug 2021                             cap 200%: +34.2% a year / Sharpe 0.84 / drawdown -26.0% / worst year -15.3% / trades 3349
+    whole 2000 to Aug 2021                       cap 200%: +28.3% a year / Sharpe 0.77 / drawdown -21.0% / worst year -15.3% / trades 4597
+    2006 to Aug 2021 (ridge test years)          cap 200%: +32.2% a year / Sharpe 0.80 / drawdown -27.9% / worst year -15.3% / trades 3791
+    2000 to 2007                                 cap 100%: +9.9% a year / Sharpe 0.61 / drawdown -16.8% / worst year -4.5% / trades 714
+    2008 to Aug 2021                             cap 100%: +24.4% a year / Sharpe 0.95 / drawdown -18.2% / worst year -4.1% / trades 1890
+    whole 2000 to Aug 2021                       cap 100%: +19.0% a year / Sharpe 0.84 / drawdown -16.8% / worst year -4.5% / trades 2604
+    2006 to Aug 2021 (ridge test years)          cap 100%: +22.4% a year / Sharpe 0.90 / drawdown -20.7% / worst year -4.1% / trades 2145
+    random pick among kept, whole period cap 200%: Sharpe 0.75
+    random pick among kept, whole period cap 100%: Sharpe 0.81
+
+=== B. archive price, better half, uncovered signals always kept (the fair control for C) ===
+  archive price, covered signals filtered (kept 69% of signals)
+    2000 to 2007                                 cap 200%: +17.7% a year / Sharpe 0.60 / drawdown -21.7% / worst year -10.2% / trades 1336
+    2008 to Aug 2021                             cap 200%: +37.4% a year / Sharpe 0.90 / drawdown -26.7% / worst year -15.2% / trades 3458
+    whole 2000 to Aug 2021                       cap 200%: +30.0% a year / Sharpe 0.80 / drawdown -21.7% / worst year -15.2% / trades 4794
+    2006 to Aug 2021 (ridge test years)          cap 200%: +35.3% a year / Sharpe 0.87 / drawdown -27.3% / worst year -15.2% / trades 3945
+    2000 to 2007                                 cap 100%: +9.3% a year / Sharpe 0.56 / drawdown -17.7% / worst year -7.4% / trades 750
+    2008 to Aug 2021                             cap 100%: +17.6% a year / Sharpe 0.74 / drawdown -21.3% / worst year -12.4% / trades 1973
+    whole 2000 to Aug 2021                       cap 100%: +14.5% a year / Sharpe 0.68 / drawdown -17.7% / worst year -12.4% / trades 2723
+    2006 to Aug 2021 (ridge test years)          cap 100%: +16.7% a year / Sharpe 0.72 / drawdown -22.2% / worst year -12.4% / trades 2254
+    random pick among kept, whole period cap 200%: Sharpe 0.75
+    random pick among kept, whole period cap 100%: Sharpe 0.73
+
+=== C. REAL (as-traded) price, better half, uncovered signals always kept ===
+  as-traded price, covered signals filtered (kept 72% of signals)
+    2000 to 2007                                 cap 200%: +17.6% a year / Sharpe 0.59 / drawdown -23.6% / worst year -10.5% / trades 1355
+    2008 to Aug 2021                             cap 200%: +31.0% a year / Sharpe 0.75 / drawdown -27.7% / worst year -19.0% / trades 3624
+    whole 2000 to Aug 2021                       cap 200%: +26.0% a year / Sharpe 0.69 / drawdown -23.6% / worst year -19.0% / trades 4979
+    2006 to Aug 2021 (ridge test years)          cap 200%: +29.7% a year / Sharpe 0.73 / drawdown -27.8% / worst year -19.0% / trades 4119
+    2000 to 2007                                 cap 100%: +9.1% a year / Sharpe 0.55 / drawdown -18.2% / worst year -6.8% / trades 748
+    2008 to Aug 2021                             cap 100%: +16.3% a year / Sharpe 0.70 / drawdown -20.3% / worst year -12.7% / trades 2019
+    whole 2000 to Aug 2021                       cap 100%: +13.6% a year / Sharpe 0.65 / drawdown -18.2% / worst year -12.7% / trades 2767
+    2006 to Aug 2021 (ridge test years)          cap 100%: +15.6% a year / Sharpe 0.68 / drawdown -21.6% / worst year -12.7% / trades 2296
+    random pick among kept, whole period cap 200%: Sharpe 0.66
+    random pick among kept, whole period cap 100%: Sharpe 0.60
+
+=== D. REAL price where known, archive price where not, better half ===
+  as-traded price with archive fallback (kept 47% of signals)
+    2000 to 2007                                 cap 200%: +16.3% a year / Sharpe 0.56 / drawdown -21.6% / worst year -5.6% / trades 1274
+    2008 to Aug 2021                             cap 200%: +29.5% a year / Sharpe 0.71 / drawdown -27.7% / worst year -17.8% / trades 3541
+    whole 2000 to Aug 2021                       cap 200%: +24.6% a year / Sharpe 0.66 / drawdown -21.6% / worst year -17.8% / trades 4815
+    2006 to Aug 2021 (ridge test years)          cap 200%: +27.2% a year / Sharpe 0.67 / drawdown -32.6% / worst year -17.8% / trades 3998
+    2000 to 2007                                 cap 100%: +8.2% a year / Sharpe 0.51 / drawdown -19.2% / worst year -4.9% / trades 735
+    2008 to Aug 2021                             cap 100%: +19.7% a year / Sharpe 0.78 / drawdown -16.8% / worst year -11.3% / trades 2000
+    whole 2000 to Aug 2021                       cap 100%: +15.4% a year / Sharpe 0.69 / drawdown -19.2% / worst year -11.3% / trades 2735
+    2006 to Aug 2021 (ridge test years)          cap 100%: +17.6% a year / Sharpe 0.72 / drawdown -24.3% / worst year -11.3% / trades 2262
+    random pick among kept, whole period cap 200%: Sharpe 0.63
+    random pick among kept, whole period cap 100%: Sharpe 0.71
+done
