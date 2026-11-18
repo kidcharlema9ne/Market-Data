@@ -1,0 +1,13 @@
+,2000 to 2007,2000 to 2007 Sortino,2008 to Aug 2021,2008 to Aug 2021 Sortino
+"Stock system, base rule, cap 200%",0.552,0.760,0.682,0.951
+"Stock system, volume-surge ranking, cap 200%",0.650,0.897,0.713,0.992
+"Stock system, base rule, cap 100%",0.665,0.921,0.575,0.822
+"Stock system, volume-surge ranking, cap 100%",0.562,0.776,0.728,1.048
+"SPY above 200-day else flat, 200%",0.369,0.506,0.728,0.994
+"QQQ above 200-day else flat, 200%",0.370,0.520,0.752,1.027
+"SPY above 200-day else flat, 100%",0.369,0.506,0.728,0.994
+"QQQ above 200-day else flat, 100%",0.370,0.520,0.752,1.027
+"SPY buy and hold, 200%",0.093,0.132,0.497,0.697
+"QQQ buy and hold, 200%",-0.049,-0.071,0.764,1.082
+"SPY buy and hold, 100%",0.093,0.132,0.497,0.697
+"QQQ buy and hold, 100%",-0.049,-0.071,0.764,1.082

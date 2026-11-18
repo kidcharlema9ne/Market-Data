@@ -1,0 +1,30 @@
+==== whole 2000 to Aug 2021 ====
+                                              profit per year %  Sharpe  Sortino  max drawdown % (of running peak)  max drawdown % of starting $300k (dollars)  profit per year / dollar drawdown  ulcer index  profit per year / ulcer  longest time under water (years)  worst year %  final account $ positive years
+Stock system, base rule, cap 200%                         22.86    0.64     0.89                            -22.48                                       56.46                               0.40        22.19                     1.03                              1.93        -13.81       1778913.00       14 of 22
+Stock system, volume-surge ranking, cap 200%              25.14    0.69     0.95                            -21.70                                       53.87                               0.47        22.32                     1.13                              1.85        -16.13       1926531.00       15 of 22
+Stock system, base rule, cap 100%                         12.44    0.59     0.84                            -15.50                                       41.50                               0.30        13.16                     0.95                              1.94         -9.15       1104671.00       14 of 22
+Stock system, volume-surge ranking, cap 100%              14.49    0.67     0.96                            -18.06                                       40.40                               0.36        13.39                     1.08                              2.08        -11.39       1237336.00       14 of 22
+SPY above 200-day else flat, 200%                         12.90    0.61     0.84                            -29.18                                       51.93                               0.25        14.20                     0.91                              2.65        -23.65       1134754.13       14 of 22
+QQQ above 200-day else flat, 200%                         18.45    0.63     0.86                            -36.20                                       50.01                               0.37        20.02                     0.92                              3.24        -23.76       1493431.34       13 of 22
+SPY above 200-day else flat, 100%                          6.45    0.61     0.84                            -18.68                                       25.96                               0.25         7.10                     0.91                              2.65        -11.82        717377.06       14 of 22
+QQQ above 200-day else flat, 100%                          9.22    0.63     0.86                            -18.10                                       25.01                               0.37        10.01                     0.92                              3.24        -11.88        896715.67       13 of 22
+SPY buy and hold, 200%                                    14.23    0.36     0.51                           -107.58                                      145.86                               0.10        37.26                     0.38                              6.12        -79.50       1220258.68       17 of 22
+QQQ buy and hold, 200%                                    20.16    0.37     0.52                           -190.14                                      284.05                               0.07       101.70                     0.20                             11.89        -92.75       1604249.78       18 of 22
+SPY buy and hold, 100%                                     7.11    0.36     0.51                            -60.88                                       72.93                               0.10        18.63                     0.38                              6.12        -39.75        760129.34       17 of 22
+QQQ buy and hold, 100%                                    10.08    0.37     0.52                           -113.90                                      142.03                               0.07        50.85                     0.20                             11.89        -46.37        952124.89       18 of 22
+
+==== Sharpe and Sortino by period ====
+                                              2000 to 2007  2000 to 2007 Sortino  2008 to Aug 2021  2008 to Aug 2021 Sortino
+Stock system, base rule, cap 200%                     0.55                  0.76              0.68                      0.95
+Stock system, volume-surge ranking, cap 200%          0.65                  0.90              0.71                      0.99
+Stock system, base rule, cap 100%                     0.66                  0.92              0.57                      0.82
+Stock system, volume-surge ranking, cap 100%          0.56                  0.78              0.73                      1.05
+SPY above 200-day else flat, 200%                     0.37                  0.51              0.73                      0.99
+QQQ above 200-day else flat, 200%                     0.37                  0.52              0.75                      1.03
+SPY above 200-day else flat, 100%                     0.37                  0.51              0.73                      0.99
+QQQ above 200-day else flat, 100%                     0.37                  0.52              0.75                      1.03
+SPY buy and hold, 200%                                0.09                  0.13              0.50                      0.70
+QQQ buy and hold, 200%                               -0.05                 -0.07              0.76                      1.08
+SPY buy and hold, 100%                                0.09                  0.13              0.50                      0.70
+QQQ buy and hold, 100%                               -0.05                 -0.07              0.76                      1.08
+done
