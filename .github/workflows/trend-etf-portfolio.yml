@@ -5,6 +5,10 @@ on:
     branches: [claude/trend-etf-portfolio-20261119]
     paths: ['.github/workflows/trend-etf-portfolio.yml']
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'insample (default, sealed years cut off before any calculation) or sealed (run once, after allocations are frozen)'
+        default: 'insample'
 concurrency:
   group: trend-etf-portfolio-${{ github.ref }}
   cancel-in-progress: true
@@ -28,13 +32,15 @@ jobs:
         run: python research/trend_etf_portfolio/fetch_portfolio_etfs.py data_etf
       - name: Run
         run: |
-          D=research/trend_etf_portfolio/results
+          M=${{ github.event.inputs.mode || 'insample' }}
+          D=research/trend_etf_portfolio/results_$M
           mkdir -p $D
-          python research/trend_etf_portfolio/etf_portfolio_timing.py data_etf/portfolio_etfs.parquet $D research/spy_qqq_timing/tb3ms_monthly.csv | tee $D/output.txt
+          python research/trend_etf_portfolio/etf_portfolio_timing.py data_etf/portfolio_etfs.parquet $D research/spy_qqq_timing/tb3ms_monthly.csv $M | tee $D/output.txt
       - name: Save results on the branch
         if: always()
         run: |
-          D=research/trend_etf_portfolio/results
+          M=${{ github.event.inputs.mode || 'insample' }}
+          D=research/trend_etf_portfolio/results_$M
           echo "workflow run ${{ github.run_id }}" > $D/RUN_ID.txt
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"

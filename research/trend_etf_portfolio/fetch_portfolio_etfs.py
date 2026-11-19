@@ -1,4 +1,4 @@
-"""Download SPY, QQQ, VEA, VWO, IAU, BIV, SGOV, IEF daily prices from the R2 ETF feed into OUT_DIR/portfolio_etfs.parquet (symbol, date_i, open, high, low, close, volume). Reads only."""
+"""Download SPY, QQQ, VEA, VWO, IAU, BIV, SGOV, IEF and the older stand-ins EFA, EEM, GLD, AGG, SHY daily prices from the R2 ETF feed into OUT_DIR/portfolio_etfs.parquet (symbol, date_i, open, high, low, close, volume). Reads only."""
 import hashlib, os, sys
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import closing
@@ -13,7 +13,7 @@ import pyarrow.compute as pc
 import pyarrow.parquet as pq
 
 BUCKET = "insider-research"; PREFIX = "marketparquet/etf_daily/"
-WANT = ["SPY", "QQQ", "VEA", "VWO", "IAU", "BIV", "SGOV", "IEF"]
+WANT = ["SPY", "QQQ", "VEA", "VWO", "IAU", "BIV", "SGOV", "IEF", "EFA", "EEM", "GLD", "AGG", "SHY"]
 COLS = ["symbol", "open", "high", "low", "close", "volume"]
 out_dir = Path(sys.argv[1]); out_dir.mkdir(parents=True, exist_ok=True)
 client = boto3.client("s3", endpoint_url=os.environ["R2_ENDPOINT_URL"], aws_access_key_id=os.environ["R2_ACCESS_KEY_ID"], aws_secret_access_key=os.environ["R2_SECRET_ACCESS_KEY"], region_name="auto")
