@@ -1,0 +1,39 @@
+name: "SPY QQQ band system: months out of the market by year"
+# research/spy_qqq_timing/months_out.py (Michael, 19 Nov 2026). Same frozen band rules; reporting only.
+on:
+  push:
+    branches: [claude/trend-etf-portfolio-20261119]
+    paths: ['.github/workflows/spy-qqq-months-out.yml']
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas numpy
+      - name: Fetch SPY and QQQ from R2
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python research/trend_following_stocks/fetch_nasdaq_etf.py data_etf
+      - name: Months out
+        run: |
+          D=research/spy_qqq_timing/results_months
+          mkdir -p $D
+          python research/spy_qqq_timing/months_out.py data_etf/nasdaq_etfs.parquet $D | tee $D/output.txt
+      - name: Save results on the branch
+        if: always()
+        run: |
+          D=research/spy_qqq_timing/results_months
+          echo "workflow run ${{ github.run_id }}" > $D/RUN_ID.txt
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add $D
+          git commit -m "SPY QQQ months out of the market: results (workflow run ${{ github.run_id }})" || echo "nothing to commit"
+          for i in 1 2 3 4 5; do git pull --rebase origin ${{ github.ref_name }} && git push origin HEAD:${{ github.ref_name }} && break || sleep 15; done
