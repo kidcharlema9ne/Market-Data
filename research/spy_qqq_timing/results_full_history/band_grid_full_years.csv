@@ -1,0 +1,109 @@
+rule,year,return %
+buy and hold,2000,-16.0
+buy and hold,2001,-21.3
+buy and hold,2002,-27.9
+buy and hold,2003,33.3
+buy and hold,2004,8.9
+buy and hold,2005,2.4
+buy and hold,2006,11.4
+buy and hold,2007,8.3
+buy and hold,2008,-39.6
+buy and hold,2009,33.9
+buy and hold,2010,15.3
+buy and hold,2011,0.9
+buy and hold,2012,14.8
+buy and hold,2013,31.9
+buy and hold,2014,13.9
+buy and hold,2015,3.2
+buy and hold,2016,7.9
+buy and hold,2017,24.9
+buy and hold,2018,-3.8
+buy and hold,2019,33.3
+buy and hold,2020,32.2
+buy and hold,2021,26.9
+buy and hold,2022,-27.2
+buy and hold,2023,39.8
+buy and hold,2024,24.2
+buy and hold,2025,18.6
+buy and hold,2026,7.2
+plain 200-day,2000,1.2
+plain 200-day,2001,-2.1
+plain 200-day,2002,0.5
+plain 200-day,2003,29.0
+plain 200-day,2004,-0.9
+plain 200-day,2005,-2.4
+plain 200-day,2006,8.0
+plain 200-day,2007,6.2
+plain 200-day,2008,-5.1
+plain 200-day,2009,20.1
+plain 200-day,2010,3.9
+plain 200-day,2011,-8.0
+plain 200-day,2012,7.9
+plain 200-day,2013,30.7
+plain 200-day,2014,12.1
+plain 200-day,2015,-6.8
+plain 200-day,2016,1.8
+plain 200-day,2017,25.8
+plain 200-day,2018,3.4
+plain 200-day,2019,15.0
+plain 200-day,2020,26.8
+plain 200-day,2021,26.9
+plain 200-day,2022,-14.7
+plain 200-day,2023,23.5
+plain 200-day,2024,24.3
+plain 200-day,2025,13.5
+plain 200-day,2026,3.1
+3% band,2000,1.2
+3% band,2001,-0.8
+3% band,2002,-0.8
+3% band,2003,30.9
+3% band,2004,1.3
+3% band,2005,-2.0
+3% band,2006,8.2
+3% band,2007,7.4
+3% band,2008,-6.3
+3% band,2009,25.6
+3% band,2010,4.1
+3% band,2011,-5.2
+3% band,2012,8.7
+3% band,2013,30.8
+3% band,2014,14.3
+3% band,2015,-6.6
+3% band,2016,-0.5
+3% band,2017,25.0
+3% band,2018,5.9
+3% band,2019,17.8
+3% band,2020,22.2
+3% band,2021,26.9
+3% band,2022,-11.9
+3% band,2023,25.5
+3% band,2024,24.3
+3% band,2025,10.8
+3% band,2026,-3.3
+4% band,2000,1.2
+4% band,2001,-0.8
+4% band,2002,1.6
+4% band,2003,28.7
+4% band,2004,5.3
+4% band,2005,-2.0
+4% band,2006,7.9
+4% band,2007,9.3
+4% band,2008,-4.9
+4% band,2009,25.5
+4% band,2010,4.3
+4% band,2011,-10.2
+4% band,2012,6.5
+4% band,2013,29.1
+4% band,2014,13.9
+4% band,2015,-6.8
+4% band,2016,3.0
+4% band,2017,24.5
+4% band,2018,4.0
+4% band,2019,14.4
+4% band,2020,20.8
+4% band,2021,26.9
+4% band,2022,-9.9
+4% band,2023,24.7
+4% band,2024,24.2
+4% band,2025,5.0
+4% band,2026,-4.7
