@@ -1,0 +1,3 @@
+case,paired seeds,"mean growth difference (points, rule minus no rule)",std of the difference,standard error,seeds where the rule lowers growth
+"cap 200%, 4% a year charge on borrowed money",8,-0.124,0.551,0.195,6
+"cap 100%, no borrowing",8,-0.148,0.335,0.119,4

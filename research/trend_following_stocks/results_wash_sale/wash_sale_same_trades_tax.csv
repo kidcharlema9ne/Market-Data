@@ -1,0 +1,19 @@
+case,path,tax without rule $,tax with rule $,difference $,difference % of tax,present-value difference at 5% $,years with a different tax
+"cap 200%, 4% a year charge on borrowed money",volume surge,2657811.62,2653264.49,-4547.13,-0.17,-1295.62,9
+"cap 200%, 4% a year charge on borrowed money",random pick 0,1824016.36,1823027.77,-988.58,-0.05,-353.06,3
+"cap 200%, 4% a year charge on borrowed money",random pick 1,1832219.46,1830622.58,-1596.88,-0.09,-527.6,6
+"cap 200%, 4% a year charge on borrowed money",random pick 2,1386164.53,1385446.93,-717.6,-0.05,-160.05,7
+"cap 200%, 4% a year charge on borrowed money",random pick 3,1631222.68,1624686.61,-6536.08,-0.4,-2222.85,3
+"cap 200%, 4% a year charge on borrowed money",random pick 4,1809094.27,1807714.85,-1379.43,-0.08,-398.36,7
+"cap 200%, 4% a year charge on borrowed money",random pick 5,1614195.2,1614301.29,106.09,0.01,156.19,7
+"cap 200%, 4% a year charge on borrowed money",random pick 6,2187538.4,2186335.33,-1203.07,-0.05,-438.28,7
+"cap 200%, 4% a year charge on borrowed money",random pick 7,1605855.6,1604346.81,-1508.79,-0.09,-526.39,5
+"cap 100%, no borrowing",volume surge,1007074.43,1006904.46,-169.97,-0.02,43.92,5
+"cap 100%, no borrowing",random pick 0,830967.42,830309.95,-657.47,-0.08,-228.78,4
+"cap 100%, no borrowing",random pick 1,793065.73,792923.57,-142.17,-0.02,-71.8,1
+"cap 100%, no borrowing",random pick 2,711154.97,711298.66,143.69,0.02,75.71,3
+"cap 100%, no borrowing",random pick 3,869940.39,869889.77,-50.61,-0.01,-25.56,1
+"cap 100%, no borrowing",random pick 4,752559.38,752559.38,0.0,0.0,0.0,0
+"cap 100%, no borrowing",random pick 5,1138918.82,1139024.87,106.05,0.01,70.43,2
+"cap 100%, no borrowing",random pick 6,780974.46,779523.91,-1450.55,-0.19,-477.38,5
+"cap 100%, no borrowing",random pick 7,709221.05,709088.1,-132.95,-0.02,-47.72,1
