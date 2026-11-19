@@ -29,6 +29,7 @@ A drawdown throttle on the stock system (Entry 166: new entries at half or quart
 ## Standing caveats
 - Survivorship: 16.5% of events have no price series (31% in 2008); bounds in Entries 38 and 44. Entry 65: only 1 of 1,276 trades ended inside the hold, so the archive cannot measure wipe-outs; the D1 lead survives an assumed 1-3% wipe-out rate at -55% and fails at about 5% or more. No survivorship pattern across years or eras. Only a second price source with delisting history can settle it.
 - Costs: Standing cost per Michael: 0.10 ATR round trip (the older 0.25 ATR columns are retired, not to be quoted). Entry 70's model cross-check (published spreads + impact): 0.04-0.11 ATR round trip for F at 0.1-1% of daily volume; the base rule (+0.154 gross) is still thin; the deep-fall group trades $14-20M a day, a quarter under $6M (Entries 45, 54, 57, 70). Still model estimates, no quotes or fills.
+- Tax (Entries 169, 170): the compounded stock account loses about 45% of its gain to federal plus New Jersey tax (+16.3% to +11.9% a year at cap 200%). The wash-sale rule on the account's own re-entries is immaterial (0.6% of losing sales re-bought within 30 days; tax changes about 0.1%). Narrow start-year wins against QQQ flip with a one-month change in the payment date, so only the clear ones (2000-2002, 2016) count.
 - Concentration: three large episodes (2008Q4, 2011Q3, 2020Q1) and a few spells; independent sample is tens of market periods.
 - Liquidity inverted-U (C21): base rule pays at $5-25M a day, about zero above $25M.
 
