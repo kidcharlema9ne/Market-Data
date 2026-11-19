@@ -40,6 +40,9 @@ jobs:
         run: |
           mkdir -p research/trend_etf_portfolio/results_insample
           python research/trend_etf_portfolio/fund_calendar_years.py data_etf/portfolio_etfs.parquet research/trend_etf_portfolio/results_insample | tee research/trend_etf_portfolio/results_insample/fund_calendar_years.txt
+      - name: Matched-risk test, in-sample only
+        run: |
+          python research/trend_etf_portfolio/matched_risk.py data_etf/portfolio_etfs.parquet research/trend_etf_portfolio/results_insample research/spy_qqq_timing/tb3ms_monthly.csv | tee research/trend_etf_portfolio/results_insample/matched_risk.txt
       - name: Save results on the branch
         if: always()
         run: |
