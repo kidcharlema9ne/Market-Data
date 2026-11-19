@@ -87,7 +87,7 @@ def main(path, out, tbill):
     cash = cash_daily(px.index, tb); assert cash.notna().all(); have_open = "spy_open" in px and px["spy_open"].notna().mean() > 0.9
     print(f"data {px.index[0].date()} to {px.index[-1].date()}, {len(px)} sessions; opens: {have_open}")
     periods = {"in-sample": (START, SPLIT), "sealed": (SPLIT + pd.Timedelta(days=1), px.index[-1]), "whole": (START, px.index[-1])}
-    rows = []; yearly = []
+    rows = []; yearly = []; curves = {}
     for timing in ("next_close", "signal_close") + (("next_open",) if have_open else ()):
         for rule in ("hold", "plain", "band"):
             sigs, poss, rets = {}, {}, {}
@@ -97,6 +97,7 @@ def main(path, out, tbill):
             ent = {f: int((poss[f].astype(int).diff() == 1).sum()) for f in ("spy", "qqq")}
             for w in (1.0, 0.75, 0.5):
                 r = w * base + (1 - w) * cash
+                if timing == "next_close": curves[f"{rule}_{int(w*100)}"] = (1 + r.loc[START:]).cumprod() * 500000  # output only, no rule change
                 for pn, (a, b) in periods.items():
                     if len(r.loc[a:b]) < 20: continue
                     m, yr = metrics(r.loc[a:b], inv.loc[a:b])
@@ -106,6 +107,7 @@ def main(path, out, tbill):
                     if pn != "whole":
                         for y, v in yr.items(): yearly.append({"timing": timing, "rule": rule, "invested": int(w * 100), "period": pn, "year": int(y), "return %": round(v * 100, 1)})
     R = pd.DataFrame(rows); Y = pd.DataFrame(yearly)
+    pd.DataFrame(curves).round(0).to_csv(out / "equity_curves_500k.csv")
     R.to_csv(out / "results.csv", index=False); Y.to_csv(out / "yearly.csv", index=False)
     pd.set_option("display.width", 250, "display.max_columns", 30, "display.max_rows", 500)
     key = ["timing", "rule", "invested", "period", "average yearly return %", "growth per year %", "best year %", "worst year %", "worst month %", "worst drawdown %", "growth per year / worst drawdown", "entries per year (both funds)", "years"]

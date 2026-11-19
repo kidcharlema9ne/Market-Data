@@ -1,5 +1,5 @@
 name: "SPY QQQ 200-day timing: in-sample reproduction and one look at the sealed years"
-# research/spy_qqq_timing/spy_qqq_timing.py (Michael, 19 Nov 2026). Rules are frozen in the script header; one look at the sealed years (rerun after carrying the last Treasury bill rate into Nov 2026).
+# research/spy_qqq_timing/spy_qqq_timing.py (Michael, 19 Nov 2026). Rules are frozen in the script header; one look at the sealed years (also saves equity curves; rerun after carrying the last Treasury bill rate into Nov 2026).
 on:
   push:
     branches: [claude/spy-qqq-oos-20261119]
