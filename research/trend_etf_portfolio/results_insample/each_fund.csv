@@ -1,0 +1,37 @@
+fund,rule,period,years,profit per year %,max drawdown %,profit / max drawdown,worst calendar year %,Sharpe ratio,time invested %,entries per year
+US large (SPY),buy and hold,own full history (to 6 Aug 2021),20.8,5.89,-56.5,0.1,-38.3,0.39,100.0,0.0
+US large (SPY),buy and hold,in-sample,15.9,8.41,-56.5,0.15,-38.3,0.51,100.0,0.0
+US large (SPY),plain 200-day,own full history (to 6 Aug 2021),20.8,6.85,-21.9,0.31,-11.7,0.67,70.3,3.2
+US large (SPY),plain 200-day,in-sample,15.9,7.17,-21.9,0.33,-11.7,0.66,77.9,3.3
+US large (SPY),200-day with 4% band,own full history (to 6 Aug 2021),20.8,8.43,-18.9,0.44,-7.8,0.78,70.2,0.3
+US large (SPY),200-day with 4% band,in-sample,15.9,8.67,-18.9,0.46,-7.8,0.75,76.8,0.4
+Nasdaq 100 (QQQ),buy and hold,own full history (to 6 Aug 2021),20.8,7.74,-76.8,0.1,-41.9,0.42,100.0,0.0
+Nasdaq 100 (QQQ),buy and hold,in-sample,15.9,15.17,-53.6,0.28,-41.9,0.76,100.0,0.0
+Nasdaq 100 (QQQ),plain 200-day,own full history (to 6 Aug 2021),20.8,9.38,-22.7,0.41,-12.4,0.67,72.3,3.5
+Nasdaq 100 (QQQ),plain 200-day,in-sample,15.9,11.6,-22.7,0.51,-12.4,0.78,81.5,3.3
+Nasdaq 100 (QQQ),200-day with 4% band,own full history (to 6 Aug 2021),20.8,8.96,-25.2,0.36,-16.7,0.65,68.6,0.7
+Nasdaq 100 (QQQ),200-day with 4% band,in-sample,15.9,10.55,-25.2,0.42,-16.7,0.73,76.4,0.7
+Developed intl (VEA),buy and hold,own full history (to 6 Aug 2021),19.1,4.36,-62.9,0.07,-42.7,0.31,100.0,0.0
+Developed intl (VEA),buy and hold,in-sample,15.9,2.65,-62.9,0.04,-42.7,0.23,100.0,0.0
+Developed intl (VEA),plain 200-day,own full history (to 6 Aug 2021),19.1,4.86,-27.4,0.18,-16.1,0.45,66.0,4.1
+Developed intl (VEA),plain 200-day,in-sample,15.9,3.07,-27.4,0.11,-16.1,0.31,65.0,4.5
+Developed intl (VEA),200-day with 4% band,own full history (to 6 Aug 2021),19.1,7.0,-20.8,0.34,-9.3,0.61,64.6,0.4
+Developed intl (VEA),200-day with 4% band,in-sample,15.9,5.02,-20.8,0.24,-9.3,0.46,63.1,0.4
+Emerging (VWO),buy and hold,own full history (to 6 Aug 2021),17.5,5.69,-68.3,0.08,-54.8,0.34,100.0,0.0
+Emerging (VWO),buy and hold,in-sample,15.9,4.14,-68.3,0.06,-54.8,0.28,100.0,0.0
+Emerging (VWO),plain 200-day,own full history (to 6 Aug 2021),17.5,5.4,-39.5,0.14,-16.3,0.4,65.5,4.4
+Emerging (VWO),plain 200-day,in-sample,15.9,4.34,-39.5,0.11,-16.3,0.34,63.9,4.5
+Emerging (VWO),200-day with 4% band,own full history (to 6 Aug 2021),17.5,3.74,-43.5,0.09,-15.9,0.3,64.6,0.9
+Emerging (VWO),200-day with 4% band,in-sample,15.9,2.64,-43.5,0.06,-15.9,0.24,63.4,0.8
+Gold (IAU),buy and hold,own full history (to 6 Aug 2021),15.9,8.73,-45.1,0.19,-28.3,0.55,100.0,0.0
+Gold (IAU),buy and hold,in-sample,15.9,8.73,-45.1,0.19,-28.3,0.55,100.0,0.0
+Gold (IAU),plain 200-day,own full history (to 6 Aug 2021),15.9,6.51,-33.6,0.19,-9.8,0.5,66.2,3.5
+Gold (IAU),plain 200-day,in-sample,15.9,6.51,-33.6,0.19,-9.8,0.5,66.2,3.5
+Gold (IAU),200-day with 4% band,own full history (to 6 Aug 2021),15.9,7.14,-37.2,0.19,-9.3,0.55,64.8,0.6
+Gold (IAU),200-day with 4% band,in-sample,15.9,7.14,-37.2,0.19,-9.3,0.55,64.8,0.6
+Intermediate bonds (BIV),buy and hold,own full history (to 6 Aug 2021),17.1,1.05,-15.9,0.07,-7.4,0.21,100.0,0.0
+Intermediate bonds (BIV),buy and hold,in-sample,15.9,1.0,-15.9,0.06,-7.4,0.2,100.0,0.0
+Intermediate bonds (BIV),plain 200-day,own full history (to 6 Aug 2021),17.1,1.02,-11.4,0.09,-6.4,0.27,58.8,3.5
+Intermediate bonds (BIV),plain 200-day,in-sample,15.9,1.24,-11.4,0.11,-6.4,0.32,58.5,3.0
+Intermediate bonds (BIV),200-day with 4% band,own full history (to 6 Aug 2021),17.1,0.75,-13.2,0.06,-5.0,0.21,40.5,0.2
+Intermediate bonds (BIV),200-day with 4% band,in-sample,15.9,0.63,-13.2,0.05,-5.0,0.17,43.4,0.3

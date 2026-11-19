@@ -1,0 +1,16 @@
+allocation,rule,period,years,profit per year %,max drawdown %,profit / max drawdown,worst calendar year %,Sharpe ratio,average share of risk funds held %,entries per year (all funds)
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,in-sample,15.9,9.58,-42.6,0.22,-29.7,0.69,100.0,0.0
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,in-sample,15.9,7.51,-13.9,0.54,-5.6,0.8,79.7,6.5
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,in-sample,15.9,7.7,-15.4,0.5,-7.9,0.8,76.6,1.1
+Equal split of six funds,buy and hold,in-sample,15.9,7.55,-41.2,0.18,-28.3,0.58,100.0,0.0
+Equal split of six funds,plain 200-day,in-sample,15.9,6.07,-12.0,0.51,-5.6,0.71,68.8,21.9
+Equal split of six funds,200-day with 4% band,in-sample,15.9,6.16,-12.8,0.48,-5.6,0.71,64.7,3.1
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,in-sample,15.9,6.16,-34.4,0.18,-21.5,0.61,100.0,0.0
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,in-sample,15.9,5.02,-9.6,0.53,-5.2,0.77,68.7,21.9
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,in-sample,15.9,5.39,-10.3,0.52,-4.4,0.8,63.1,3.1
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,in-sample,15.9,4.96,-25.6,0.19,-15.1,0.65,100.0,0.0
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,in-sample,15.9,4.07,-7.4,0.55,-4.2,0.81,66.9,21.9
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,in-sample,15.9,4.28,-8.4,0.51,-3.2,0.83,60.2,3.1
+Equal risk (in-sample volatility weights),buy and hold,in-sample,15.9,5.8,-28.0,0.21,-17.0,0.66,100.0,0.0
+Equal risk (in-sample volatility weights),plain 200-day,in-sample,15.9,4.68,-8.9,0.53,-4.0,0.79,65.8,21.9
+Equal risk (in-sample volatility weights),200-day with 4% band,in-sample,15.9,4.62,-10.5,0.44,-4.8,0.76,58.1,3.1

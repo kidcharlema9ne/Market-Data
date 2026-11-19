@@ -1,0 +1,256 @@
+allocation,rule,year,return %
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2005,2.3
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2006,8.9
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2007,9.3
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2008,-29.7
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2009,29.0
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2010,12.0
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2011,0.9
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2012,11.3
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2013,24.3
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2014,10.8
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2015,2.8
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2016,5.9
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2017,19.3
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2018,-2.3
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2019,25.5
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2020,24.0
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",buy and hold,2021,13.4
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2005,1.7
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2006,7.2
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2007,6.3
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2008,-3.3
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2009,15.1
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2010,2.8
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2011,-5.6
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2012,6.0
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2013,23.0
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2014,9.0
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2015,-5.4
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2016,2.0
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2017,19.3
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2018,2.8
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2019,11.6
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2020,18.9
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",plain 200-day,2021,13.4
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2005,2.3
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2006,6.7
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2007,8.9
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2008,-3.6
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2009,19.8
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2010,3.3
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2011,-7.9
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2012,4.7
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2013,21.8
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2014,10.8
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2015,-5.0
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2016,2.0
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2017,19.3
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2018,3.7
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2019,11.5
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2020,16.3
+"Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)",200-day with 4% band,2021,13.4
+Equal split of six funds,buy and hold,2005,6.6
+Equal split of six funds,buy and hold,2006,15.4
+Equal split of six funds,buy and hold,2007,16.3
+Equal split of six funds,buy and hold,2008,-28.3
+Equal split of six funds,buy and hold,2009,33.2
+Equal split of six funds,buy and hold,2010,14.8
+Equal split of six funds,buy and hold,2011,-3.1
+Equal split of six funds,buy and hold,2012,11.7
+Equal split of six funds,buy and hold,2013,6.6
+Equal split of six funds,buy and hold,2014,3.1
+Equal split of six funds,buy and hold,2015,-4.4
+Equal split of six funds,buy and hold,2016,5.5
+Equal split of six funds,buy and hold,2017,19.3
+Equal split of six funds,buy and hold,2018,-7.7
+Equal split of six funds,buy and hold,2019,21.2
+Equal split of six funds,buy and hold,2020,19.2
+Equal split of six funds,buy and hold,2021,6.5
+Equal split of six funds,plain 200-day,2005,6.8
+Equal split of six funds,plain 200-day,2006,8.6
+Equal split of six funds,plain 200-day,2007,14.3
+Equal split of six funds,plain 200-day,2008,-3.9
+Equal split of six funds,plain 200-day,2009,19.1
+Equal split of six funds,plain 200-day,2010,8.6
+Equal split of six funds,plain 200-day,2011,-3.0
+Equal split of six funds,plain 200-day,2012,1.4
+Equal split of six funds,plain 200-day,2013,9.5
+Equal split of six funds,plain 200-day,2014,1.5
+Equal split of six funds,plain 200-day,2015,-5.6
+Equal split of six funds,plain 200-day,2016,-0.4
+Equal split of six funds,plain 200-day,2017,16.0
+Equal split of six funds,plain 200-day,2018,1.4
+Equal split of six funds,plain 200-day,2019,7.9
+Equal split of six funds,plain 200-day,2020,12.4
+Equal split of six funds,plain 200-day,2021,5.6
+Equal split of six funds,200-day with 4% band,2005,6.9
+Equal split of six funds,200-day with 4% band,2006,10.5
+Equal split of six funds,200-day with 4% band,2007,16.2
+Equal split of six funds,200-day with 4% band,2008,-5.6
+Equal split of six funds,200-day with 4% band,2009,21.0
+Equal split of six funds,200-day with 4% band,2010,6.9
+Equal split of six funds,200-day with 4% band,2011,-3.7
+Equal split of six funds,200-day with 4% band,2012,0.4
+Equal split of six funds,200-day with 4% band,2013,9.7
+Equal split of six funds,200-day with 4% band,2014,1.8
+Equal split of six funds,200-day with 4% band,2015,-5.4
+Equal split of six funds,200-day with 4% band,2016,1.3
+Equal split of six funds,200-day with 4% band,2017,17.4
+Equal split of six funds,200-day with 4% band,2018,-0.2
+Equal split of six funds,200-day with 4% band,2019,8.2
+Equal split of six funds,200-day with 4% band,2020,11.0
+Equal split of six funds,200-day with 4% band,2021,6.4
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2005,3.6
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2006,11.4
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2007,9.8
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2008,-21.5
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2009,20.9
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2010,10.9
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2011,-0.8
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2012,9.2
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2013,8.6
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2014,3.8
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2015,-2.3
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2016,4.3
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2017,14.4
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2018,-5.9
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2019,18.5
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2020,14.7
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",buy and hold,2021,6.7
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2005,3.9
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2006,7.6
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2007,7.4
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2008,-1.6
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2009,11.3
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2010,5.4
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2011,-2.0
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2012,2.4
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2013,11.8
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2014,1.9
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2015,-5.2
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2016,0.8
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2017,12.1
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2018,1.4
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2019,8.3
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2020,9.8
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",plain 200-day,2021,6.5
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2005,4.2
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2006,10.3
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2007,9.6
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2008,-2.9
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2009,14.3
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2010,5.1
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2011,-1.9
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2012,2.4
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2013,10.8
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2014,2.8
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2015,-4.4
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2016,1.7
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2017,13.3
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2018,0.7
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2019,8.0
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2020,7.5
+"Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)",200-day with 4% band,2021,6.4
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2005,3.1
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2006,9.7
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2007,8.9
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2008,-15.1
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2009,15.8
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2010,9.2
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2011,0.1
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2012,7.0
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2013,4.1
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2014,3.0
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2015,-2.6
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2016,3.5
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2017,10.9
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2018,-4.6
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2019,14.8
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2020,11.5
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",buy and hold,2021,4.2
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2005,3.6
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2006,6.7
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2007,7.0
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2008,-0.8
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2009,8.0
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2010,5.4
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2011,-0.6
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2012,1.7
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2013,7.9
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2014,0.7
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2015,-4.2
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2016,1.5
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2017,8.5
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2018,1.4
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2019,7.4
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2020,7.3
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",plain 200-day,2021,4.1
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2005,3.9
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2006,9.1
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2007,8.8
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2008,-2.4
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2009,10.9
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2010,5.0
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2011,-0.3
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2012,1.6
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2013,6.8
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2014,1.6
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2015,-3.2
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2016,1.6
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2017,9.7
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2018,0.7
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2019,6.6
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2020,5.2
+"Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)",200-day with 4% band,2021,3.9
+Equal risk (in-sample volatility weights),buy and hold,2005,3.8
+Equal risk (in-sample volatility weights),buy and hold,2006,10.0
+Equal risk (in-sample volatility weights),buy and hold,2007,11.7
+Equal risk (in-sample volatility weights),buy and hold,2008,-17.0
+Equal risk (in-sample volatility weights),buy and hold,2009,21.0
+Equal risk (in-sample volatility weights),buy and hold,2010,11.7
+Equal risk (in-sample volatility weights),buy and hold,2011,0.4
+Equal risk (in-sample volatility weights),buy and hold,2012,8.2
+Equal risk (in-sample volatility weights),buy and hold,2013,2.1
+Equal risk (in-sample volatility weights),buy and hold,2014,3.4
+Equal risk (in-sample volatility weights),buy and hold,2015,-3.3
+Equal risk (in-sample volatility weights),buy and hold,2016,3.7
+Equal risk (in-sample volatility weights),buy and hold,2017,13.1
+Equal risk (in-sample volatility weights),buy and hold,2018,-5.8
+Equal risk (in-sample volatility weights),buy and hold,2019,17.0
+Equal risk (in-sample volatility weights),buy and hold,2020,15.4
+Equal risk (in-sample volatility weights),buy and hold,2021,3.6
+Equal risk (in-sample volatility weights),plain 200-day,2005,4.8
+Equal risk (in-sample volatility weights),plain 200-day,2006,7.0
+Equal risk (in-sample volatility weights),plain 200-day,2007,10.4
+Equal risk (in-sample volatility weights),plain 200-day,2008,-1.9
+Equal risk (in-sample volatility weights),plain 200-day,2009,10.5
+Equal risk (in-sample volatility weights),plain 200-day,2010,7.7
+Equal risk (in-sample volatility weights),plain 200-day,2011,-0.7
+Equal risk (in-sample volatility weights),plain 200-day,2012,1.1
+Equal risk (in-sample volatility weights),plain 200-day,2013,7.1
+Equal risk (in-sample volatility weights),plain 200-day,2014,0.4
+Equal risk (in-sample volatility weights),plain 200-day,2015,-4.0
+Equal risk (in-sample volatility weights),plain 200-day,2016,1.0
+Equal risk (in-sample volatility weights),plain 200-day,2017,9.7
+Equal risk (in-sample volatility weights),plain 200-day,2018,1.6
+Equal risk (in-sample volatility weights),plain 200-day,2019,8.4
+Equal risk (in-sample volatility weights),plain 200-day,2020,9.5
+Equal risk (in-sample volatility weights),plain 200-day,2021,3.4
+Equal risk (in-sample volatility weights),200-day with 4% band,2005,5.0
+Equal risk (in-sample volatility weights),200-day with 4% band,2006,8.7
+Equal risk (in-sample volatility weights),200-day with 4% band,2007,11.8
+Equal risk (in-sample volatility weights),200-day with 4% band,2008,-4.8
+Equal risk (in-sample volatility weights),200-day with 4% band,2009,13.6
+Equal risk (in-sample volatility weights),200-day with 4% band,2010,6.7
+Equal risk (in-sample volatility weights),200-day with 4% band,2011,-0.4
+Equal risk (in-sample volatility weights),200-day with 4% band,2012,0.9
+Equal risk (in-sample volatility weights),200-day with 4% band,2013,5.4
+Equal risk (in-sample volatility weights),200-day with 4% band,2014,1.3
+Equal risk (in-sample volatility weights),200-day with 4% band,2015,-3.5
+Equal risk (in-sample volatility weights),200-day with 4% band,2016,1.1
+Equal risk (in-sample volatility weights),200-day with 4% band,2017,11.5
+Equal risk (in-sample volatility weights),200-day with 4% band,2018,0.6
+Equal risk (in-sample volatility weights),200-day with 4% band,2019,7.2
+Equal risk (in-sample volatility weights),200-day with 4% band,2020,7.3
+Equal risk (in-sample volatility weights),200-day with 4% band,2021,3.1

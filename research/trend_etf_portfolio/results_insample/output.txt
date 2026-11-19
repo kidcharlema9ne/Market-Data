@@ -1,0 +1,129 @@
+  stand-in: VEA uses EFA before 2007-07-26 (stand-in starts 2001-08-27)
+  stand-in: VWO uses EEM before 2005-03-10 (stand-in starts 2003-04-14)
+  stand-in: IAU uses GLD before 2005-01-28 (stand-in starts 2004-11-18)
+  stand-in: BIV uses AGG before 2007-04-10 (stand-in starts 2003-09-26)
+DATA CHECK (close prices; if bond/intl first-to-last change looks too small they are price only)
+  AGG: 2003-09-26 to 2021-08-06, 4497 sessions, first close 102.45, last close 115.79, gaps over 6 days: 0
+  BIV: 2003-09-26 to 2021-08-06, 4497 sessions, first close 77.14, last close 90.57, gaps over 6 days: 0
+  EEM: 2003-04-14 to 2021-08-06, 4612 sessions, first close 11.22, last close 51.94, gaps over 6 days: 0
+  EFA: 2001-08-27 to 2021-08-06, 5018 sessions, first close 42.83, last close 80.31, gaps over 6 days: 1
+  GLD: 2004-11-18 to 2021-08-06, 4208 sessions, first close 44.38, last close 164.64, gaps over 6 days: 0
+  IAU: 2004-11-18 to 2021-08-06, 4208 sessions, first close 8.88, last close 33.52, gaps over 6 days: 0
+  IEF: 2002-07-30 to 2021-08-06, 4790 sessions, first close 81.85, last close 117.03, gaps over 6 days: 0
+  QQQ: 2000-01-03 to 2021-08-06, 5434 sessions, first close 94.75, last close 368.05, gaps over 6 days: 1
+  SGOV: 2020-05-28 to 2021-08-06, 302 sessions, first close 100.01, last close 100.03, gaps over 6 days: 0
+  SHY: 2002-07-30 to 2021-08-06, 4790 sessions, first close 81.01, last close 86.21, gaps over 6 days: 0
+  SPY: 2000-01-03 to 2021-08-06, 5434 sessions, first close 145.56, last close 442.49, gaps over 6 days: 1
+  VEA: 2001-08-27 to 2021-08-06, 5018 sessions, first close 26.06, last close 52.31, gaps over 6 days: 1
+  VWO: 2003-04-14 to 2021-08-06, 4612 sessions, first close 11.68, last close 51.27, gaps over 6 days: 0
+
+common window starts 2005-09-02 (every fund has 200 sessions of history), ends 2021-08-06
+
+Equal-risk weights %: {'SPY': 12.4, 'QQQ': 11.4, 'VEA': 11.0, 'VWO': 8.6, 'IAU': 13.3, 'BIV': 43.2}
+in-sample daily volatility %: {'SPY': 1.24, 'QQQ': 1.35, 'VEA': 1.4, 'VWO': 1.8, 'IAU': 1.16, 'BIV': 0.36}
+
+=== EACH FUND ALONE (100% in the fund, otherwise Treasury bills) ===
+
+-- own full history (to 6 Aug 2021) --
+                    fund                 rule  years  profit per year %  max drawdown %  profit / max drawdown  worst calendar year %  Sharpe ratio  time invested %  entries per year
+          US large (SPY)         buy and hold   20.8               5.89           -56.5                   0.10                  -38.3          0.39            100.0               0.0
+          US large (SPY)        plain 200-day   20.8               6.85           -21.9                   0.31                  -11.7          0.67             70.3               3.2
+          US large (SPY) 200-day with 4% band   20.8               8.43           -18.9                   0.44                   -7.8          0.78             70.2               0.3
+        Nasdaq 100 (QQQ)         buy and hold   20.8               7.74           -76.8                   0.10                  -41.9          0.42            100.0               0.0
+        Nasdaq 100 (QQQ)        plain 200-day   20.8               9.38           -22.7                   0.41                  -12.4          0.67             72.3               3.5
+        Nasdaq 100 (QQQ) 200-day with 4% band   20.8               8.96           -25.2                   0.36                  -16.7          0.65             68.6               0.7
+    Developed intl (VEA)         buy and hold   19.1               4.36           -62.9                   0.07                  -42.7          0.31            100.0               0.0
+    Developed intl (VEA)        plain 200-day   19.1               4.86           -27.4                   0.18                  -16.1          0.45             66.0               4.1
+    Developed intl (VEA) 200-day with 4% band   19.1               7.00           -20.8                   0.34                   -9.3          0.61             64.6               0.4
+          Emerging (VWO)         buy and hold   17.5               5.69           -68.3                   0.08                  -54.8          0.34            100.0               0.0
+          Emerging (VWO)        plain 200-day   17.5               5.40           -39.5                   0.14                  -16.3          0.40             65.5               4.4
+          Emerging (VWO) 200-day with 4% band   17.5               3.74           -43.5                   0.09                  -15.9          0.30             64.6               0.9
+              Gold (IAU)         buy and hold   15.9               8.73           -45.1                   0.19                  -28.3          0.55            100.0               0.0
+              Gold (IAU)        plain 200-day   15.9               6.51           -33.6                   0.19                   -9.8          0.50             66.2               3.5
+              Gold (IAU) 200-day with 4% band   15.9               7.14           -37.2                   0.19                   -9.3          0.55             64.8               0.6
+Intermediate bonds (BIV)         buy and hold   17.1               1.05           -15.9                   0.07                   -7.4          0.21            100.0               0.0
+Intermediate bonds (BIV)        plain 200-day   17.1               1.02           -11.4                   0.09                   -6.4          0.27             58.8               3.5
+Intermediate bonds (BIV) 200-day with 4% band   17.1               0.75           -13.2                   0.06                   -5.0          0.21             40.5               0.2
+
+-- in-sample --
+                    fund                 rule  years  profit per year %  max drawdown %  profit / max drawdown  worst calendar year %  Sharpe ratio  time invested %  entries per year
+          US large (SPY)         buy and hold   15.9               8.41           -56.5                   0.15                  -38.3          0.51            100.0               0.0
+          US large (SPY)        plain 200-day   15.9               7.17           -21.9                   0.33                  -11.7          0.66             77.9               3.3
+          US large (SPY) 200-day with 4% band   15.9               8.67           -18.9                   0.46                   -7.8          0.75             76.8               0.4
+        Nasdaq 100 (QQQ)         buy and hold   15.9              15.17           -53.6                   0.28                  -41.9          0.76            100.0               0.0
+        Nasdaq 100 (QQQ)        plain 200-day   15.9              11.60           -22.7                   0.51                  -12.4          0.78             81.5               3.3
+        Nasdaq 100 (QQQ) 200-day with 4% band   15.9              10.55           -25.2                   0.42                  -16.7          0.73             76.4               0.7
+    Developed intl (VEA)         buy and hold   15.9               2.65           -62.9                   0.04                  -42.7          0.23            100.0               0.0
+    Developed intl (VEA)        plain 200-day   15.9               3.07           -27.4                   0.11                  -16.1          0.31             65.0               4.5
+    Developed intl (VEA) 200-day with 4% band   15.9               5.02           -20.8                   0.24                   -9.3          0.46             63.1               0.4
+          Emerging (VWO)         buy and hold   15.9               4.14           -68.3                   0.06                  -54.8          0.28            100.0               0.0
+          Emerging (VWO)        plain 200-day   15.9               4.34           -39.5                   0.11                  -16.3          0.34             63.9               4.5
+          Emerging (VWO) 200-day with 4% band   15.9               2.64           -43.5                   0.06                  -15.9          0.24             63.4               0.8
+              Gold (IAU)         buy and hold   15.9               8.73           -45.1                   0.19                  -28.3          0.55            100.0               0.0
+              Gold (IAU)        plain 200-day   15.9               6.51           -33.6                   0.19                   -9.8          0.50             66.2               3.5
+              Gold (IAU) 200-day with 4% band   15.9               7.14           -37.2                   0.19                   -9.3          0.55             64.8               0.6
+Intermediate bonds (BIV)         buy and hold   15.9               1.00           -15.9                   0.06                   -7.4          0.20            100.0               0.0
+Intermediate bonds (BIV)        plain 200-day   15.9               1.24           -11.4                   0.11                   -6.4          0.32             58.5               3.0
+Intermediate bonds (BIV) 200-day with 4% band   15.9               0.63           -13.2                   0.05                   -5.0          0.17             43.4               0.3
+
+=== PORTFOLIOS (annual rebalance) ===
+
+-- in-sample --
+                                                            allocation                 rule  years  profit per year %  max drawdown %  profit / max drawdown  worst calendar year %  Sharpe ratio  average share of risk funds held %  entries per year (all funds)
+                Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)         buy and hold   15.9               9.58           -42.6                   0.22                  -29.7          0.69                               100.0                           0.0
+                Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)        plain 200-day   15.9               7.51           -13.9                   0.54                   -5.6          0.80                                79.7                           6.5
+                Current two-fund system (SPY 37.5, QQQ 37.5, bills 25) 200-day with 4% band   15.9               7.70           -15.4                   0.50                   -7.9          0.80                                76.6                           1.1
+                                              Equal split of six funds         buy and hold   15.9               7.55           -41.2                   0.18                  -28.3          0.58                               100.0                           0.0
+                                              Equal split of six funds        plain 200-day   15.9               6.07           -12.0                   0.51                   -5.6          0.71                                68.8                          21.9
+                                              Equal split of six funds 200-day with 4% band   15.9               6.16           -12.8                   0.48                   -5.6          0.71                                64.7                           3.1
+Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)         buy and hold   15.9               6.16           -34.4                   0.18                  -21.5          0.61                               100.0                           0.0
+Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)        plain 200-day   15.9               5.02            -9.6                   0.53                   -5.2          0.77                                68.7                          21.9
+Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10) 200-day with 4% band   15.9               5.39           -10.3                   0.52                   -4.4          0.80                                63.1                           3.1
+    Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)         buy and hold   15.9               4.96           -25.6                   0.19                  -15.1          0.65                               100.0                           0.0
+    Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)        plain 200-day   15.9               4.07            -7.4                   0.55                   -4.2          0.81                                66.9                          21.9
+    Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20) 200-day with 4% band   15.9               4.28            -8.4                   0.51                   -3.2          0.83                                60.2                           3.1
+                             Equal risk (in-sample volatility weights)         buy and hold   15.9               5.80           -28.0                   0.21                  -17.0          0.66                               100.0                           0.0
+                             Equal risk (in-sample volatility weights)        plain 200-day   15.9               4.68            -8.9                   0.53                   -4.0          0.79                                65.8                          21.9
+                             Equal risk (in-sample volatility weights) 200-day with 4% band   15.9               4.62           -10.5                   0.44                   -4.8          0.76                                58.1                           3.1
+
+=== calendar year returns %, 200-day with 4% band ===
+allocation  Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)  Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)  Equal risk (in-sample volatility weights)  Equal split of six funds  Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)
+year                                                                                                                                                                                                                                                                               
+2005                                                                       3.9                                                     2.3                                        5.0                       6.9                                                                     4.2
+2006                                                                       9.1                                                     6.7                                        8.7                      10.5                                                                    10.3
+2007                                                                       8.8                                                     8.9                                       11.8                      16.2                                                                     9.6
+2008                                                                      -2.4                                                    -3.6                                       -4.8                      -5.6                                                                    -2.9
+2009                                                                      10.9                                                    19.8                                       13.6                      21.0                                                                    14.3
+2010                                                                       5.0                                                     3.3                                        6.7                       6.9                                                                     5.1
+2011                                                                      -0.3                                                    -7.9                                       -0.4                      -3.7                                                                    -1.9
+2012                                                                       1.6                                                     4.7                                        0.9                       0.4                                                                     2.4
+2013                                                                       6.8                                                    21.8                                        5.4                       9.7                                                                    10.8
+2014                                                                       1.6                                                    10.8                                        1.3                       1.8                                                                     2.8
+2015                                                                      -3.2                                                    -5.0                                       -3.5                      -5.4                                                                    -4.4
+2016                                                                       1.6                                                     2.0                                        1.1                       1.3                                                                     1.7
+2017                                                                       9.7                                                    19.3                                       11.5                      17.4                                                                    13.3
+2018                                                                       0.7                                                     3.7                                        0.6                      -0.2                                                                     0.7
+2019                                                                       6.6                                                    11.5                                        7.2                       8.2                                                                     8.0
+2020                                                                       5.2                                                    16.3                                        7.3                      11.0                                                                     7.5
+2021                                                                       3.9                                                    13.4                                        3.1                       6.4                                                                     6.4
+
+=== calendar year returns %, buy and hold ===
+allocation  Balanced (SPY 20, QQQ 5, VEA 10, VWO 5, gold 10, BIV 30, bills 20)  Current two-fund system (SPY 37.5, QQQ 37.5, bills 25)  Equal risk (in-sample volatility weights)  Equal split of six funds  Stock-heavy (SPY 25, QQQ 10, VEA 15, VWO 5, gold 10, BIV 25, bills 10)
+year                                                                                                                                                                                                                                                                               
+2005                                                                       3.1                                                     2.3                                        3.8                       6.6                                                                     3.6
+2006                                                                       9.7                                                     8.9                                       10.0                      15.4                                                                    11.4
+2007                                                                       8.9                                                     9.3                                       11.7                      16.3                                                                     9.8
+2008                                                                     -15.1                                                   -29.7                                      -17.0                     -28.3                                                                   -21.5
+2009                                                                      15.8                                                    29.0                                       21.0                      33.2                                                                    20.9
+2010                                                                       9.2                                                    12.0                                       11.7                      14.8                                                                    10.9
+2011                                                                       0.1                                                     0.9                                        0.4                      -3.1                                                                    -0.8
+2012                                                                       7.0                                                    11.3                                        8.2                      11.7                                                                     9.2
+2013                                                                       4.1                                                    24.3                                        2.1                       6.6                                                                     8.6
+2014                                                                       3.0                                                    10.8                                        3.4                       3.1                                                                     3.8
+2015                                                                      -2.6                                                     2.8                                       -3.3                      -4.4                                                                    -2.3
+2016                                                                       3.5                                                     5.9                                        3.7                       5.5                                                                     4.3
+2017                                                                      10.9                                                    19.3                                       13.1                      19.3                                                                    14.4
+2018                                                                      -4.6                                                    -2.3                                       -5.8                      -7.7                                                                    -5.9
+2019                                                                      14.8                                                    25.5                                       17.0                      21.2                                                                    18.5
+2020                                                                      11.5                                                    24.0                                       15.4                      19.2                                                                    14.7
+2021                                                                       4.2                                                    13.4                                        3.6                       6.5                                                                     6.7
