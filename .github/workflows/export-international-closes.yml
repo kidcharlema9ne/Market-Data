@@ -21,7 +21,9 @@ jobs:
           R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-        run: python research/trend_etf_portfolio/fetch_portfolio_etfs.py data_etf
+        run: |
+          sed 's/^WANT = \[/WANT = ["VXUS", /' research/trend_etf_portfolio/fetch_portfolio_etfs.py > /tmp/fetch_with_vxus.py
+          python /tmp/fetch_with_vxus.py data_etf
       - name: Export ETF closes
         run: |
           python - <<'PY'
@@ -34,4 +36,5 @@ jobs:
           git config user.email actions@users.noreply.github.com
           git add portfolio_closes.csv
           git commit -m 'Save MarketParquet ETF closes for standalone tests'
+          git pull --rebase origin ${{ github.ref_name }}
           git push origin HEAD
