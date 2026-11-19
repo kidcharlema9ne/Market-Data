@@ -49,7 +49,7 @@ def signal(p, rule):
 
 def cash_daily(idx, tb):
     m = tb.copy(); m.index = m.index.to_period("M")
-    r = pd.Series(idx.to_period("M")).map(m).values / 100
+    r = pd.Series(idx.to_period("M")).map(m).ffill().values / 100  # months after the last rate (Nov 2026) carry the last rate forward
     return pd.Series((1 + r) ** (1 / ANN) - 1, index=idx)
 
 
@@ -84,7 +84,7 @@ def metrics(r, invested):
 def main(path, out, tbill):
     out = Path(out); out.mkdir(parents=True, exist_ok=True)
     px = load(path); tb = pd.read_csv(tbill, parse_dates=["date"]).set_index("date")["rate"]
-    cash = cash_daily(px.index, tb); have_open = "spy_open" in px and px["spy_open"].notna().mean() > 0.9
+    cash = cash_daily(px.index, tb); assert cash.notna().all(); have_open = "spy_open" in px and px["spy_open"].notna().mean() > 0.9
     print(f"data {px.index[0].date()} to {px.index[-1].date()}, {len(px)} sessions; opens: {have_open}")
     periods = {"in-sample": (START, SPLIT), "sealed": (SPLIT + pd.Timedelta(days=1), px.index[-1]), "whole": (START, px.index[-1])}
     rows = []; yearly = []
