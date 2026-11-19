@@ -1,0 +1,140 @@
+simulator self-test passed
+symbol filter self-test passed
+common-stock filter: kept 13,172 of 15,901 symbols (95.8% of rows); load 3s
+14,161 common-stock segments ever liquid; 51s
+duplicate detection: 2228889 candidate pairs from matching big moves
+duplicate companies removed: 639 series; examples (kept | dropped | overlapping sessions): [('BBRY-DELISTED', 'RIMM-DELISTED', 3290), ('VTLE-DELISTED', 'LPI-DELISTED', 2781), ('OSTK-DELISTED#3', 'BBBY', 4150), ('BIGGQ-DELISTED', 'BIG-DELISTED', 4541), ('KWKAQ-DELISTED#11', 'KWKA-DELISTED', 3295), ('KWK-DELISTED#11', 'KWKAQ-DELISTED#11', 3452), ('RSHCQ-DELISTED', 'RSH-DELISTED', 3791), ('HPR-DELISTED', 'BBG-DELISTED', 3339), ('ANDV-DELISTED', 'TSO-DELISTED', 4419), ('SSRM', 'SSRI-DELISTED#11', 2584), ('CAA-DELISTED', 'SPF-DELISTED', 3948), ('RSHCQ-DELISTED', 'RSHC-DELISTED', 3692), ('AABA-DELISTED', 'YHOO-DELISTED', 4390), ('FSTO-DELISTED', 'FST-DELISTED', 3761), ('SUNE-DELISTED#5', 'WFR-DELISTED#5', 2806), ('OPWV-DELISTED', 'UPIP-DELISTED', 2185), ('HSC-DELISTED', 'NVRI', 4058), ('CREE-DELISTED', 'WOLF', 3633), ('TCRT#12', 'ZIOP-DELISTED#22', 3007), ('XCRA-DELISTED', 'LTXC-DELISTED', 2219), ('TLRD-DELISTED', 'MW-DELISTED', 4043), ('ON#8', 'ONNN-DELISTED#8', 3026), ('NIHDQ-DELISTED#1', 'NIHD-DELISTED#1', 2945), ('AAXN-DELISTED#9', 'TASR-DELISTED#9', 3480), ('KATE-DELISTED', 'FNP-DELISTED', 3555)]
+ranking universe: 14,788,661 stock-days; eligible stocks per session median 2391, min 394, max 3372; 715s
+volume features built for 197,581 signals
+
+==== by entry year, one continuous cap-200% volume-surge account (no borrowing charge) ====
+ entry year  signals  trades taken  average ATR per trade (taken)  SPY move over the same holds (ATR units)  win rate % (taken)  median sessions held  stopped out by a gap through the initial stop %  dollars of trades entered, % of $300,000  SPY 200-day gate on, % of sessions  all signals average ATR (before account limit)
+       2002       57            57                          -0.85                                     -2.42               38.60                  52.0                                             3.51                                     -4.82                                6.35                                           -0.85
+       2003      534           245                           3.39                                      1.64               62.86                  53.0                                             2.86                                     82.98                               71.83                                            2.89
+       2004      760           269                          -0.35                                     -0.09               34.20                  36.0                                             5.20                                     -9.32                               80.16                                           -0.28
+       2005      843           280                           1.72                                      0.26               44.29                  40.0                                             1.79                                     48.07                               88.49                                            1.50
+       2006      895           248                           0.78                                      0.76               40.32                  44.0                                             3.63                                     19.09                               88.45                                            0.94
+       2007     1032           247                           0.25                                     -0.42               37.25                  36.0                                             3.64                                      6.19                               84.06                                            0.01
+       2008       15            14                          -2.87                                     -1.88                0.00                  27.0                                             0.00                                     -4.00                                0.40                                           -2.95
+       2009      652           253                           1.37                                      1.23               56.13                  53.0                                             1.58                                     34.55                               57.14                                            1.26
+       2010     1097           259                           1.19                                      0.91               45.17                  42.0                                             1.54                                     30.70                               73.81                                            1.00
+       2011      712           211                          -0.88                                     -0.54               28.44                  33.0                                             2.84                                    -18.43                               60.71                                           -1.52
+       2012     1146           279                           1.10                                      1.22               39.43                  42.0                                             4.30                                     30.89                               96.40                                            0.99
+       2013     1387           247                           2.91                                      1.20               52.63                  50.0                                             1.21                                     72.00                              100.00                                            2.41
+       2014     1494           310                           0.77                                      0.56               39.68                  42.0                                             3.23                                     23.97                               97.22                                           -0.24
+       2015      981           246                          -1.14                                     -0.98               19.51                  34.0                                             6.50                                    -28.04                               73.81                                           -0.99
+       2016     1246           267                           1.18                                      0.87               44.19                  46.0                                             2.62                                     31.67                               80.95                                            0.76
+       2017     1359           290                           1.46                                      1.08               42.76                  45.5                                             2.41                                     42.16                              100.00                                            1.58
+       2018     1217           289                           0.01                                     -0.05               32.18                  36.0                                             3.46                                      0.58                               79.68                                           -0.65
+       2019     1382           271                           1.15                                      0.88               43.17                  48.0                                             2.58                                     31.00                               87.70                                            0.59
+       2020     1295           373                           4.55                                      0.92               47.18                  47.0                                             7.24                                    168.37                               75.49                                            2.85
+       2021     1604           429                          -0.67                                      0.56               29.37                  35.0                                             3.73                                    -28.03                              100.00                                           -0.88
+       2022      296            95                          -0.73                                     -2.86               30.53                  29.0                                             2.11                                     -6.74                               15.14                                           -1.28
+       2023     1418           377                           0.07                                      1.00               31.83                  34.0                                             5.84                                      2.52                               89.60                                            0.16
+       2024     1606           381                           0.12                                      0.85               37.01                  38.0                                             4.20                                      4.59                              100.00                                            0.24
+       2025     1498           426                           1.20                                      0.33               38.50                  38.0                                             4.23                                     51.25                               83.20                                            1.83
+       2026     1281           415                          -0.64                                      0.22               31.57                  32.0                                             2.89                                    -26.47                               93.93                                           -0.42
+
+==== 25 worst taken trades since 9 Aug 2021 (dollars) ====
+          symbol      entry       exit  entry price  exit price  ATR dollars  result in ATR  shares  dollars  sessions held how it ended
+            LAUR 2021-09-21 2021-11-01        17.26       10.12         0.40         -17.97   750.0 -5384.97           30.0         stop
+   AKRO-DELISTED 2023-09-21 2023-10-10        48.23       19.87         1.94         -14.70   154.0 -4397.35           14.0         stop
+APLT-DELISTED#21 2024-10-28 2024-11-29         8.52        2.18         0.57         -11.28   528.0 -3377.47           24.0         stop
+              XP 2026-10-15 2026-10-26        29.52       14.55         1.37         -11.06   219.0 -3309.45            8.0         stop
+             MBI 2023-12-19 2023-12-26        12.95        6.21         0.71          -9.63   424.0 -2887.74            5.0         stop
+          KRRO#8 2025-10-07 2025-11-13        43.70        6.99         3.92          -9.47    76.0 -2819.72           28.0         stop
+         ALTO#20 2023-10-03 2023-11-07         4.20        2.19         0.22          -9.32  1376.0 -2795.76           26.0         stop
+            SNPS 2025-08-04 2025-09-10       622.42      427.80        20.92          -9.40    14.0 -2753.97           27.0         stop
+            DOYU 2024-07-16 2024-09-03        16.70        8.87         0.91          -8.72   330.0 -2613.87           35.0         stop
+         ALDX#25 2023-04-13 2023-06-21        10.06        5.55         0.55          -8.29   545.0 -2487.94           48.0         stop
+             NWL 2024-12-16 2025-02-07        10.95        7.68         0.41          -7.99   723.0 -2394.18           36.0         stop
+          QURE#1 2025-10-03 2025-11-03        54.84       23.05         4.09          -7.87    73.0 -2350.52           22.0         stop
+          TVTX#1 2025-11-06 2026-01-13        33.96       23.01         1.45          -7.65   206.0 -2285.69           46.0         stop
+         OMCL#13 2026-01-14 2026-02-05        51.34       39.69         1.67          -7.07   179.0 -2115.29           16.0         stop
+            FF#7 2022-03-29 2022-05-10         9.59        7.04         0.38          -6.78   785.0 -2031.72           30.0         stop
+         TKNO#18 2026-10-09 2026-10-21         8.48        5.09         0.52          -6.68   582.0 -2002.96            9.0         stop
+            ALSN 2025-01-28 2025-02-12       114.93       97.70         2.65          -6.59   113.0 -1976.97           12.0         stop
+         PYXS#12 2025-12-02 2025-12-18         4.37        1.70         0.43          -6.24   690.0 -1872.29           13.0         stop
+         SIGA#28 2024-07-31 2024-08-15         9.88        6.95         0.48          -6.14   618.0 -1840.70           12.0         stop
+         CELH#30 2025-10-23 2025-11-06        62.04       47.60         2.39          -6.14   125.0 -1834.90           11.0         stop
+          TAC#55 2025-10-15 2025-11-06        17.05       13.81         0.54          -6.12   557.0 -1834.64           17.0         stop
+            CHRW 2022-01-10 2022-02-02       108.11       93.25         2.47          -6.12   121.0 -1827.93           17.0         stop
+            BSAC 2026-02-02 2026-03-03        35.27       30.19         0.96          -5.37   311.0 -1609.87           21.0         stop
+            VSCO 2023-12-06 2024-03-07        26.00       18.69         1.43          -5.21   209.0 -1557.72           63.0         stop
+          APEI#2 2024-07-26 2024-08-07        19.51       14.34         1.02          -5.18   294.0 -1549.92            9.0         stop
+
+==== 25 best taken trades since 9 Aug 2021 (dollars) ====
+          symbol      entry       exit  entry price  exit price  ATR dollars  result in ATR  shares  dollars  sessions held how it ended
+            FORM 2025-11-03 2026-05-18        55.08      116.33         3.10          19.66    96.0  5850.63          135.0         stop
+   DAWN-DELISTED 2025-11-14 2026-04-22         8.77       21.53         0.65          19.58   462.0  5865.17          108.0     data end
+             HII 2025-05-14 2026-02-05       225.43      354.61         6.20          20.72    48.0  6170.86          184.0         stop
+         IESC#54 2023-12-29 2024-06-04        40.19       71.38         1.47          21.14   204.0  6332.04          108.0         stop
+            LASR 2025-08-18 2026-07-08        26.23       57.59         1.47          21.18   203.0  6337.08          223.0         stop
+          VICR#5 2025-11-14 2026-07-16        84.92      234.33         6.82          21.79    43.0  6395.15          166.0         stop
+            COHU 2026-01-20 2026-07-17        27.42       48.33         0.97          21.41   308.0  6410.35          124.0         stop
+            RKLB 2024-10-02 2025-02-25         8.96       20.48         0.53          21.57   564.0  6468.39           99.0         stop
+         CDNA#36 2026-07-24 2026-11-06        37.80       78.56         1.85          21.95   162.0  6573.18           75.0     data end
+            SATS 2025-07-15 2025-11-06        29.87       71.60         1.85          22.44   162.0  6730.88           82.0         stop
+            IREN 2025-07-07 2025-11-21        16.33       42.73         1.05          25.09   286.0  7518.65           99.0         stop
+         NWPX#62 2025-11-10 2026-07-31        59.53      119.41         2.36          25.29   127.0  7575.38          181.0         stop
+          COGT#8 2025-07-31 2026-03-20        11.48       33.10         0.78          27.44   382.0  8228.35          161.0         stop
+             ASX 2025-11-05 2026-07-29        15.45       31.98         0.58          28.56   520.0  8565.58          182.0         stop
+            DELL 2024-01-23 2024-05-31        81.00      142.31         1.99          30.74   150.0  9166.68           91.0         stop
+            TWST 2026-02-20 2026-10-08        49.90      145.24         3.01          31.54    99.0  9408.88          159.0         stop
+            VNET 2024-09-17 2025-03-20         2.74        8.94         0.19          31.83  1546.0  9549.02          127.0         stop
+            VIAV 2025-11-05 2026-07-15        16.96       38.51         0.62          34.75   485.0 10419.36          172.0         stop
+          ARMN#2 2025-05-13 2026-02-02         5.60       16.86         0.27          41.85  1118.0 12553.40          182.0         stop
+CDTX-DELISTED#26 2025-06-25 2026-01-06        43.68      221.38         3.35          52.99    89.0 15785.51          135.0     data end
+            BW#5 2025-09-05 2026-06-24         2.25       14.39         0.23          53.55  1325.0 16058.66          201.0         stop
+            DFTX 2025-07-30 2026-09-11         9.15       37.73         0.47          60.61   637.0 18175.47          282.0         stop
+         HYMC#31 2025-09-17 2026-02-17         5.85       30.87         0.41          61.32   736.0 18381.12          105.0         stop
+             VST 2023-08-18 2024-07-17        29.60       82.76         0.68          77.55   438.0 23254.09          229.0         stop
+           VRT#9 2023-06-01 2024-07-01        19.37       83.84         0.82          78.75   366.0 23565.27          272.0         stop
+
+out-of-sample taken trades: 1,872; total dollars -6,000; worst 25 sum -61,914; best 25 sum 261,339; trades with result below -6 ATR: 22; above +15 ATR: 40
+
+==== out of sample: what trades entered in each half-year earned in total (cap 200%, volume surge) ====
+                    trades    dollars  average_ATR  dollars % of $300,000
+half-year of entry                                                       
+2021H2                 178  -81467.66        -1.54                 -27.16
+2022H1                  92  -19897.12        -0.75                  -6.63
+2022H2                   3    -309.18        -0.34                  -0.10
+2023H1                 208  -21523.92        -0.34                  -7.17
+2023H2                 169   29085.40         0.57                   9.70
+2024H1                 186  -12719.24        -0.23                  -4.24
+2024H2                 195   26491.13         0.45                   8.83
+2025H1                 204   -6260.91        -0.11                  -2.09
+2025H2                 222  160021.79         2.41                  53.34
+2026H1                 211  -49729.87        -0.79                 -16.58
+2026H2                 204  -29690.03        -0.49                  -9.90
+
+==== largest one-day closing moves inside taken out-of-sample trades ====
+          symbol  worst one-day move  best one-day move date of worst
+          KRRO#8              -0.793              0.122    2025-11-13
+APLT-DELISTED#21              -0.763              0.065    2024-11-29
+APLT-DELISTED#21              -0.703              0.137    2025-11-13
+   AKRO-DELISTED              -0.626              0.061    2023-10-10
+         ALTO#20              -0.608              0.065    2023-11-07
+NVOS-DELISTED#10              -0.595              0.484    2023-11-06
+SGMO-DELISTED#36              -0.564              0.360    2024-12-31
+             MBI              -0.530              0.036    2023-12-26
+            DOYU              -0.502              0.080    2024-09-03
+          QURE#1              -0.493              0.113    2025-11-03
+         PYXS#12              -0.487              0.176    2025-12-18
+              XP              -0.484              0.036    2026-10-26
+             UPB              -0.472              0.183    2026-02-11
+         LODE#85              -0.468              0.084    2025-01-13
+          RGTI#1              -0.454              0.360    2025-01-08
+          symbol  best one-day move
+APOP-DELISTED#27              2.160
+          COGT#8              1.190
+CDTX-DELISTED#26              1.054
+         SENS#10              0.806
+            OPEN              0.795
+ VTYX-DELISTED#1              0.710
+            SATS              0.702
+   DAWN-DELISTED              0.659
+         QUBT#10              0.652
+   RAPT-DELISTED              0.640
+positions with a one-day close fall of 45% or more: 15; of 100% or more rise: 3
+done
