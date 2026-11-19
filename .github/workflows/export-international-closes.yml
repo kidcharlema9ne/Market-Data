@@ -1,0 +1,37 @@
+name: Export ETF closes for independent research
+# research/trend_etf_portfolio/sealed_candidates.py (Michael, 19 Nov 2026). Candidates frozen in the script header before this run. Run once.
+on:
+  push:
+    branches: [claude/trend-etf-portfolio-20261119]
+    paths: ['.github/workflows/export-international-closes.yml']
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas numpy
+      - name: Fetch the funds from R2
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python research/trend_etf_portfolio/fetch_portfolio_etfs.py data_etf
+      - name: Export ETF closes
+        run: |
+          python - <<'PY'
+          import pandas as pd
+          p = pd.read_parquet("data_etf/portfolio_etfs.parquet")
+          p["date"] = pd.to_datetime(p.date_i, unit="D")
+          p.pivot(index="date",columns="symbol",values="close").to_csv("portfolio_closes.csv")
+          PY
+          git config user.name github-actions
+          git config user.email actions@users.noreply.github.com
+          git add portfolio_closes.csv
+          git commit -m 'Save MarketParquet ETF closes for standalone tests'
+          git push origin HEAD
