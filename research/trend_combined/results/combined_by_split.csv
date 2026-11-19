@@ -1,0 +1,49 @@
+stock version,futures version,split,profit per year %,max drawdown %,profit / drawdown,worst full calendar year %,Sharpe
+stocks cap 200%,original rule | 0.15% per ATR,100% stocks / 0% futures,28.544,-32.881,0.868,-16.131,0.713
+stocks cap 200%,original rule | 0.15% per ATR,75% stocks / 25% futures,23.021,-22.993,1.001,-12.963,0.756
+stocks cap 200%,original rule | 0.15% per ATR,50% stocks / 50% futures,17.498,-17.458,1.002,-9.795,0.829
+stocks cap 200%,original rule | 0.15% per ATR,25% stocks / 75% futures,11.975,-11.131,1.076,-6.627,0.969
+stocks cap 200%,original rule | 0.15% per ATR,0% stocks / 100% futures,6.452,-13.324,0.484,-6.539,0.904
+stocks cap 200%,original rule | 0.15% per ATR,"equal-risk split (15% stocks / 85% futures; whole-window volatilities, descriptive)",9.794,-8.443,1.16,-5.377,1.034
+stocks cap 200%,original rule | 0.25% per ATR,100% stocks / 0% futures,28.544,-32.881,0.868,-16.131,0.713
+stocks cap 200%,original rule | 0.25% per ATR,75% stocks / 25% futures,22.853,-23.784,0.961,-15.046,0.742
+stocks cap 200%,original rule | 0.25% per ATR,50% stocks / 50% futures,17.162,-18.066,0.95,-13.96,0.776
+stocks cap 200%,original rule | 0.25% per ATR,25% stocks / 75% futures,11.471,-14.749,0.778,-12.874,0.775
+stocks cap 200%,original rule | 0.25% per ATR,0% stocks / 100% futures,5.781,-32.611,0.177,-12.083,0.488
+stocks cap 200%,original rule | 0.25% per ATR,"equal-risk split (23% stocks / 77% futures; whole-window volatilities, descriptive)",10.98,-15.32,0.717,-12.781,0.768
+stocks cap 200%,candidate version 2 | 0.15% per ATR,100% stocks / 0% futures,28.544,-32.881,0.868,-16.131,0.713
+stocks cap 200%,candidate version 2 | 0.15% per ATR,75% stocks / 25% futures,23.797,-22.319,1.066,-12.09,0.776
+stocks cap 200%,candidate version 2 | 0.15% per ATR,50% stocks / 50% futures,19.05,-16.474,1.156,-8.049,0.879
+stocks cap 200%,candidate version 2 | 0.15% per ATR,25% stocks / 75% futures,14.303,-11.01,1.299,-4.007,1.041
+stocks cap 200%,candidate version 2 | 0.15% per ATR,0% stocks / 100% futures,9.557,-14.526,0.658,-12.257,0.963
+stocks cap 200%,candidate version 2 | 0.15% per ATR,"equal-risk split (20% stocks / 80% futures; whole-window volatilities, descriptive)",13.327,-10.875,1.226,-3.542,1.071
+stocks cap 200%,candidate version 2 | 0.25% per ATR,100% stocks / 0% futures,28.544,-32.881,0.868,-16.131,0.713
+stocks cap 200%,candidate version 2 | 0.25% per ATR,75% stocks / 25% futures,23.929,-22.159,1.08,-14.351,0.767
+stocks cap 200%,candidate version 2 | 0.25% per ATR,50% stocks / 50% futures,19.314,-16.603,1.163,-12.57,0.826
+stocks cap 200%,candidate version 2 | 0.25% per ATR,25% stocks / 75% futures,14.699,-19.165,0.767,-10.79,0.824
+stocks cap 200%,candidate version 2 | 0.25% per ATR,0% stocks / 100% futures,10.083,-30.691,0.329,-19.498,0.593
+stocks cap 200%,candidate version 2 | 0.25% per ATR,"equal-risk split (30% stocks / 70% futures; whole-window volatilities, descriptive)",15.587,-17.861,0.873,-11.133,0.837
+stocks cap 100%,original rule | 0.15% per ATR,100% stocks / 0% futures,17.612,-22.648,0.778,-11.391,0.728
+stocks cap 100%,original rule | 0.15% per ATR,75% stocks / 25% futures,14.822,-16.513,0.898,-6.781,0.798
+stocks cap 100%,original rule | 0.15% per ATR,50% stocks / 50% futures,12.032,-12.609,0.954,-3.87,0.907
+stocks cap 100%,original rule | 0.15% per ATR,25% stocks / 75% futures,9.242,-8.607,1.074,-3.395,1.046
+stocks cap 100%,original rule | 0.15% per ATR,0% stocks / 100% futures,6.452,-13.324,0.484,-6.539,0.904
+stocks cap 100%,original rule | 0.15% per ATR,"equal-risk split (23% stocks / 77% futures; whole-window volatilities, descriptive)",8.993,-8.245,1.091,-3.411,1.055
+stocks cap 100%,original rule | 0.25% per ATR,100% stocks / 0% futures,17.612,-22.648,0.778,-11.391,0.728
+stocks cap 100%,original rule | 0.25% per ATR,75% stocks / 25% futures,14.654,-17.337,0.845,-8.137,0.773
+stocks cap 100%,original rule | 0.25% per ATR,50% stocks / 50% futures,11.696,-14.304,0.818,-6.901,0.808
+stocks cap 100%,original rule | 0.25% per ATR,25% stocks / 75% futures,8.739,-14.147,0.618,-9.345,0.747
+stocks cap 100%,original rule | 0.25% per ATR,0% stocks / 100% futures,5.781,-32.611,0.177,-12.083,0.488
+stocks cap 100%,original rule | 0.25% per ATR,"equal-risk split (33% stocks / 67% futures; whole-window volatilities, descriptive)",9.67,-12.304,0.786,-8.576,0.786
+stocks cap 100%,candidate version 2 | 0.15% per ATR,100% stocks / 0% futures,17.612,-22.648,0.778,-11.391,0.728
+stocks cap 100%,candidate version 2 | 0.15% per ATR,75% stocks / 25% futures,15.598,-15.454,1.009,-5.255,0.829
+stocks cap 100%,candidate version 2 | 0.15% per ATR,50% stocks / 50% futures,13.584,-10.807,1.257,-2.789,0.971
+stocks cap 100%,candidate version 2 | 0.15% per ATR,25% stocks / 75% futures,11.571,-9.56,1.21,-2.752,1.101
+stocks cap 100%,candidate version 2 | 0.15% per ATR,0% stocks / 100% futures,9.557,-14.526,0.658,-12.257,0.963
+stocks cap 100%,candidate version 2 | 0.15% per ATR,"equal-risk split (29% stocks / 71% futures; whole-window volatilities, descriptive)",11.898,-9.448,1.259,-2.758,1.089
+stocks cap 100%,candidate version 2 | 0.25% per ATR,100% stocks / 0% futures,17.612,-22.648,0.778,-11.391,0.728
+stocks cap 100%,candidate version 2 | 0.25% per ATR,75% stocks / 25% futures,15.73,-16.399,0.959,-4.998,0.81
+stocks cap 100%,candidate version 2 | 0.25% per ATR,50% stocks / 50% futures,13.848,-14.441,0.959,-5.512,0.861
+stocks cap 100%,candidate version 2 | 0.25% per ATR,25% stocks / 75% futures,11.966,-19.091,0.627,-7.842,0.79
+stocks cap 100%,candidate version 2 | 0.25% per ATR,0% stocks / 100% futures,10.083,-30.691,0.329,-19.498,0.593
+stocks cap 100%,candidate version 2 | 0.25% per ATR,"equal-risk split (41% stocks / 59% futures; whole-window volatilities, descriptive)",13.19,-15.396,0.857,-6.123,0.855

@@ -1,0 +1,11 @@
+development rows 526,297; 2007-12-31 to 2026-11-06; indicator warm-up from 2020-06; trades counted only from 2021-08-07
+46 markets; 203,982 decision days; 7,163 entries across 2 combinations; 1s
+frozen best rule (pullback entry, 1 ATR stop, 5 ATR trail): 1891 trades (development 1396, sealed 495); median sessions held 6; win rate 19.5%
+earlier system (20-session breakout, ratio 0.6, 3 ATR stop, 3 ATR trail): 1179 trades (development 897, sealed 282); median sessions held 19; win rate 37.4%
+SIMULATOR CHECK PASSED: 1 ATR / 5 ATR / 130 (frozen) and 3 ATR / 3 ATR / 130 (earlier) reproduce the engine's trades, results and daily profit exactly
+REFERENCE CHECK PASSED: whole-history return, Sharpe and drawdown match Entry 128
+wrote 4849 sessions 2008-02-01 to 2026-11-06
+original rule | 0.15% per ATR: total profit $347,594
+original rule | 0.25% per ATR: total profit $373,413
+candidate version 2 | 0.15% per ATR: total profit $532,171
+candidate version 2 | 0.25% per ATR: total profit $666,929

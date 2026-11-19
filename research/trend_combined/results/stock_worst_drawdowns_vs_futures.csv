@@ -1,0 +1,7 @@
+stock system,peak date,trough date,stock drawdown %,original rule | 0.15% per ATR: futures % of account peak-to-trough,original rule | 0.25% per ATR: futures % of account peak-to-trough,candidate version 2 | 0.15% per ATR: futures % of account peak-to-trough,candidate version 2 | 0.25% per ATR: futures % of account peak-to-trough
+stocks cap 200%,2008-01-03,2009-07-08,-32.881,10.881,4.096,21.202,19.035
+stocks cap 200%,2010-04-26,2010-08-24,-27.878,-4.383,-6.001,-5.165,-5.875
+stocks cap 200%,2011-07-07,2011-11-25,-22.499,4.443,1.541,5.787,10.878
+stocks cap 100%,2008-01-03,2009-07-08,-22.648,10.881,4.096,21.202,19.035
+stocks cap 100%,2010-01-05,2010-08-24,-20.332,-4.751,-9.589,-2.56,-10.09
+stocks cap 100%,2011-04-05,2011-11-25,-17.528,2.815,-1.271,9.037,12.784

@@ -1,0 +1,9 @@
+stock vs futures,daily correlation,weekly correlation,monthly correlation,calendar-year correlation,futures average in stock's worst 10% of months (% of account),futures average in stock's best 10% of months (% of account),futures average in all months (% of account),stock average in futures' worst 10% of months (% of account)
+stocks cap 200% | original rule | 0.15% per ATR,0.223,0.225,0.1307,0.5663,1.5735,1.9936,0.5345,-0.2028
+stocks cap 200% | original rule | 0.25% per ATR,0.2234,0.2127,0.1256,0.6368,1.6077,2.4928,0.4789,-0.6637
+stocks cap 200% | candidate version 2 | 0.15% per ATR,0.2244,0.2481,0.1617,0.4083,1.5696,2.5774,0.7918,1.1249
+stocks cap 200% | candidate version 2 | 0.25% per ATR,0.2165,0.2473,0.1676,0.5088,1.3162,3.7243,0.8354,-0.7615
+stocks cap 100% | original rule | 0.15% per ATR,0.1971,0.2231,0.1501,0.4022,1.5522,1.8175,0.5345,0.1117
+stocks cap 100% | original rule | 0.25% per ATR,0.1964,0.2101,0.1335,0.4808,1.4861,2.1883,0.4789,-0.1145
+stocks cap 100% | candidate version 2 | 0.15% per ATR,0.2058,0.2485,0.1637,0.271,1.3604,2.5632,0.7918,1.0884
+stocks cap 100% | candidate version 2 | 0.25% per ATR,0.1945,0.2368,0.1626,0.3994,1.1957,3.5957,0.8354,0.1148

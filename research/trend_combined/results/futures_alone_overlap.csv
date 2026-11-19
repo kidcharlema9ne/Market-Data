@@ -1,0 +1,5 @@
+system,profit per year %,max drawdown %,profit / drawdown,worst full calendar year %,Sharpe
+original rule | 0.15% per ATR,6.452,-13.324,0.484,-6.539,0.904
+original rule | 0.25% per ATR,5.781,-32.611,0.177,-12.083,0.488
+candidate version 2 | 0.15% per ATR,9.557,-14.526,0.658,-12.257,0.963
+candidate version 2 | 0.25% per ATR,10.083,-30.691,0.329,-19.498,0.593
