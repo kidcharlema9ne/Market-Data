@@ -36,6 +36,10 @@ jobs:
           D=research/trend_etf_portfolio/results_$M
           mkdir -p $D
           python research/trend_etf_portfolio/etf_portfolio_timing.py data_etf/portfolio_etfs.parquet $D research/spy_qqq_timing/tb3ms_monthly.csv $M | tee $D/output.txt
+      - name: Calendar years per fund, in-sample only
+        run: |
+          mkdir -p research/trend_etf_portfolio/results_insample
+          python research/trend_etf_portfolio/fund_calendar_years.py data_etf/portfolio_etfs.parquet research/trend_etf_portfolio/results_insample | tee research/trend_etf_portfolio/results_insample/fund_calendar_years.txt
       - name: Save results on the branch
         if: always()
         run: |
@@ -44,6 +48,6 @@ jobs:
           echo "workflow run ${{ github.run_id }}" > $D/RUN_ID.txt
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
-          git add $D
+          git add $D research/trend_etf_portfolio/results_insample
           git commit -m "ETF portfolio 200-day timing: results (workflow run ${{ github.run_id }})" || echo "nothing to commit"
           for i in 1 2 3 4 5; do git pull --rebase origin ${{ github.ref_name }} && git push origin HEAD:${{ github.ref_name }} && break || sleep 15; done
