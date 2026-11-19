@@ -1,0 +1,123 @@
+data 2000-01-03 to 2026-11-06, 6753 sessions
+
+=== price only | no tax (IRA-like) ===
+                                        label  final_value  growth_per_year_pct  max_drawdown_pct  profit_per_year_over_drawdown  worst_year_pct  total_tax  tax_share_of_gain_pct  closed_trades  long_term_trades  wash_sales
+                buy and hold 50% (left alone)      2064124                 5.59             -28.0                           0.20           -20.3          0                    0.0              2                 2           0
+buy and hold 50% (reset to 50% each year end)      1974088                 5.41             -34.2                           0.16           -19.4          0                    0.0             54                53           0
+                           4% band system 75%      3006230                 7.13             -15.9                           0.45            -8.2          0                    0.0             28                12           0
+                           4% band system 50%      1998525                 5.46             -11.1                           0.49            -5.7          0                    0.0             28                12           0
+buy and hold 75% (reset to 75% each year end)      2733796                 6.74             -49.9                           0.14           -29.7          0                    0.0             54                53           0
+                     plain 200-day system 75%      2965111                 7.07             -15.7                           0.45           -11.9          0                    0.0             72                12          91
+
+=== price only | federal 24% / 15% ===
+                                        label  final_value  growth_per_year_pct  max_drawdown_pct  profit_per_year_over_drawdown  worst_year_pct  total_tax  tax_share_of_gain_pct  closed_trades  long_term_trades  wash_sales
+                buy and hold 50% (left alone)      1810031                 5.06             -28.6                           0.18           -20.8     246096                   15.8              2                 2           0
+buy and hold 50% (reset to 50% each year end)      1677729                 4.76             -34.7                           0.14           -19.5     227964                   16.2             54                53           0
+                           4% band system 75%      2295999                 6.02             -17.8                           0.34           -12.4     364961                   16.9             28                12           0
+                           4% band system 50%      1598593                 4.56             -13.0                           0.35            -9.0     233279                   17.5             28                12           0
+buy and hold 75% (reset to 75% each year end)      2349523                 6.12             -50.0                           0.12           -29.8     337359                   15.4             54                53           0
+                     plain 200-day system 75%      2232258                 5.91             -19.2                           0.31           -15.6     377578                   17.9             72                12          91
+
+=== price only | federal 24% / 15% + New Jersey 6.37% ===
+                                        label  final_value  growth_per_year_pct  max_drawdown_pct  profit_per_year_over_drawdown  worst_year_pct  total_tax  tax_share_of_gain_pct  closed_trades  long_term_trades  wash_sales
+                buy and hold 50% (left alone)      1719878                 4.86             -28.6                           0.17           -20.8     336249                   21.6              2                 2           0
+buy and hold 50% (reset to 50% each year end)      1582431                 4.52             -34.7                           0.13           -19.5     304569                   22.0             54                53           0
+                           4% band system 75%      2082767                 5.63             -19.2                           0.29           -14.1     466777                   22.8             28                12           0
+                           4% band system 50%      1492449                 4.29             -14.0                           0.31           -10.2     292864                   22.8             28                12           0
+buy and hold 75% (reset to 75% each year end)      2197122                 5.85             -50.0                           0.12           -29.8     469224                   21.7             54                53           0
+                     plain 200-day system 75%      2026212                 5.52             -20.6                           0.27           -17.0     476395                   23.8             72                12          91
+
+=== with assumed dividends | no tax (IRA-like) ===
+                                        label  final_value  growth_per_year_pct  max_drawdown_pct  profit_per_year_over_drawdown  worst_year_pct  total_tax  tax_share_of_gain_pct  closed_trades  long_term_trades  wash_sales
+                buy and hold 50% (left alone)      2243657                 5.93             -27.1                           0.22           -18.3          0                    0.0              2                 2           0
+buy and hold 50% (reset to 50% each year end)      2317517                 6.06             -33.4                           0.18           -18.8          0                    0.0             54                53           0
+                           4% band system 75%      3584843                 7.85             -15.7                           0.50            -7.9          0                    0.0             28                12           0
+                           4% band system 50%      2262564                 5.96             -11.0                           0.54            -5.5          0                    0.0             28                12           0
+buy and hold 75% (reset to 75% each year end)      3466296                 7.71             -48.8                           0.16           -29.0          0                    0.0             54                53           0
+                     plain 200-day system 75%      3540790                 7.80             -15.4                           0.51           -11.7          0                    0.0             72                12          91
+
+=== with assumed dividends | federal 24% / 15% ===
+                                        label  final_value  growth_per_year_pct  max_drawdown_pct  profit_per_year_over_drawdown  worst_year_pct  total_tax  tax_share_of_gain_pct  closed_trades  long_term_trades  wash_sales
+                buy and hold 50% (left alone)      1956192                 5.37             -27.8                           0.19           -19.0     274564                   15.9              2                 2           0
+buy and hold 50% (reset to 50% each year end)      1932208                 5.33             -34.0                           0.16           -19.0     275238                   16.1             54                53           0
+                           4% band system 75%      2679720                 6.66             -17.4                           0.38           -12.2     438801                   16.8             28                12           0
+                           4% band system 50%      1781180                 5.00             -12.7                           0.39            -8.8     268702                   17.3             28                12           0
+buy and hold 75% (reset to 75% each year end)      2897128                 6.98             -49.1                           0.14           -29.1     436405                   15.4             54                53           0
+                     plain 200-day system 75%      2607728                 6.54             -19.0                           0.34           -15.3     452729                   17.7             72                12          91
+
+=== with assumed dividends | federal 24% / 15% + New Jersey 6.37% ===
+                                        label  final_value  growth_per_year_pct  max_drawdown_pct  profit_per_year_over_drawdown  worst_year_pct  total_tax  tax_share_of_gain_pct  closed_trades  long_term_trades  wash_sales
+                buy and hold 50% (left alone)      1855192                 5.16             -27.8                           0.19           -19.1     373811                   21.6              2                 2           0
+buy and hold 50% (reset to 50% each year end)      1807876                 5.06             -34.0                           0.15           -19.1     366475                   21.9             54                53           0
+                           4% band system 75%      2408202                 6.22             -18.8                           0.33           -13.8     559321                   22.7             28                12           0
+                           4% band system 50%      1651342                 4.69             -13.8                           0.34           -10.0     337779                   22.7             28                12           0
+buy and hold 75% (reset to 75% each year end)      2679652                 6.66             -49.2                           0.14           -29.2     600790                   21.6             54                53           0
+                     plain 200-day system 75%      2343976                 6.11             -20.4                           0.30           -16.7     569672                   23.6             72                12          91
+
+=== 4% band 75% trade list summary (price only, with New Jersey) ===
+            trades     gain  avg_days
+fund kind                            
+QQQ  long        7  1052215     643.0
+     short      11    25216     197.0
+SPY  long        5   630539    1065.0
+     short       5   123876     298.0
+
+=== 4% band 75% yearly tax (price only, with New Jersey) ===
+ year  short_term_gain  long_term_gain  interest  dividends  federal_tax  nj_tax  account_after_tax
+ 2000                0               0      6051          0         1452       0             504599
+ 2001           -15613               0     16675          0         3282       0             502379
+ 2002                0               0      8052          0         1212       0             509218
+ 2003                0               0      2408          0            0       0             621448
+ 2004                0           56436      2980          0         8100    3595             635963
+ 2005           -17846               0      4769          0          424       0             629640
+ 2006             2916               0     10128          0         1711     186             672684
+ 2007                0          111488      6117          0        16852    7102             707449
+ 2008           -17923           37440      8834          0         5048    1243             672704
+ 2009                0               0       662          0          159       0             806170
+ 2010            37833           59626       495          0        18142    6208             807714
+ 2011            -6352               0       116          0            0       0             740573
+ 2012            11857               0       192          0         1395     755             773462
+ 2013                0               0       144          0           35       0             948068
+ 2014                0               0        56          0           13       0            1059088
+ 2015                0          253588       265          0        38102   16154             946917
+ 2016           -28433               0      1503          0            0       0             965216
+ 2017                0               0      2116          0            0       0            1154994
+ 2018                0          266589      8193          0        38232   16982            1144974
+ 2019                0               0     10740          0         2578       0            1274182
+ 2020            22870               0      1281          0         5796    1457            1482560
+ 2021                0               0       117          0           28       0            1809778
+ 2022                0          458187     32603          0        76553   29186            1555174
+ 2023                0               0     24315          0         5836       0            1852708
+ 2024                0               0     20107          0         4826       0            2217321
+ 2025                0          439400     31105          0        73375   27990            2203353
+ 2026           159783               0     17678          0        42591   10178            2082767
+
+=== buy and hold 50% (left alone) yearly (price only, with New Jersey) ===
+ year  short_term_gain  long_term_gain  interest  dividends  federal_tax  nj_tax  account_after_tax
+ 2000                0               0      3026          0          726       0             459954
+ 2001                0               0      8412          0         2019       0             421399
+ 2002                0               0      4146          0          995       0             378803
+ 2003                0               0      2641          0          634       0             420090
+ 2004                0               0      3635          0          872       0             436795
+ 2005                0               0      8407          0         2018       0             447234
+ 2006                0               0     12864          0         3087       0             476677
+ 2007                0               0     12249          0         2940       0             502425
+ 2008                0               0      3985          0          956       0             422081
+ 2009                0               0       439          0          105       0             465997
+ 2010                0               0       406          0           98       0             492528
+ 2011                0               0       153          0           37       0             494506
+ 2012                0               0       253          0           61       0             524171
+ 2013                0               0       171          0           41       0             597348
+ 2014                0               0        96          0           23       0             639589
+ 2015                0               0       157          0           38       0             651323
+ 2016                0               0       941          0          226       0             679913
+ 2017                0               0      2763          0          663       0             778037
+ 2018                0               0      5780          0         1387       0             764820
+ 2019                0               0      6247          0         1499       0             923591
+ 2020                0               0      1091          0          262       0            1125637
+ 2021                0               0       136          0           33       0            1345391
+ 2022                0               0      6249          0         1500       0            1065876
+ 2023                0               0     15799          0         3792       0            1380254
+ 2024                0               0     16187          0         3885       0            1647800
+ 2025                0               0     13636          0         3273       0            1901991
+ 2026                0         1415272     10986          0       214927   90153            1719878

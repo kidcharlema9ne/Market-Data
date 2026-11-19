@@ -1,0 +1,3 @@
+fund,entry,exit,days,entry_price,exit_price,gain,kind
+SPY,2000-10-16,2026-11-06,9517,138.19,735.29,540120,long
+QQQ,2000-10-16,2026-11-06,9517,82.0,656.1,875152,long
