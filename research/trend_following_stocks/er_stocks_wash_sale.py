@@ -256,6 +256,20 @@ def reentry_stats(ledger):
                 median_days_to_reentry=float(np.median(gaps_loss)) if gaps_loss else np.nan, winning_sales=n_gain, winning_sales_bought_again_within_30_days=len(gaps_gain))
 
 
+def frozen_tax(lots, wash, y0=Y0):
+    """Tax on EXACTLY the same trades (same lots, same sizes), with or without the wash-sale rule, paid at the end of January of the following year. No feedback into position sizes, so the difference is the rule alone."""
+    L = WashLedger(wash)
+    for lot in lots:
+        L.add(lot["sym"], lot["e"], lot["x"], lot["yr"], lot["sh"], lot["real"])
+    tax = CT.TaxState(); per = {}; total = 0.0; pv = 0.0
+    for Y in range(min(l["yr"] for l in lots), max(l["yr"] for l in lots) + 1):
+        st, lt, info = L.settle(Y)
+        if st != 0.0 or lt != 0.0 or tax.has_carry():
+            t, _ = tax.year(Y - y0, st, lt)
+            per[Y] = t; total += t; pv += t / (1.05 ** (Y - y0 + 1))
+    return total, pv, per
+
+
 VARIANTS = [("tax at last session of year, no wash-sale rule (Entry 169)", "year_end", False), ("tax at end of January, no wash-sale rule (control)", "late_jan", False), ("tax at end of January, WITH wash-sale rule", "late_jan", True)]
 
 
@@ -288,8 +302,9 @@ def main():
           f"SPY after tax {saft['growth per year % (compound)']:.1f}% a year", flush=True)
 
     cases = [("cap 200%, 4% a year charge on borrowed money", 2.0, BORROW), ("cap 100%, no borrowing", 1.0, 0.0)]
-    rows = []; yearly = []; wstats = []
+    rows = []; yearly = []; wstats = []; frozen_rows = []; paired = []
     for cname, cap, bor in cases:
+        ctrl_lots = []; seed_growth = {}
         P = account_washed(R, cal, dates, cap, key_vs, mode="continuous", tax=None, borrow=bor)
         r = CT.run_stats(R, P, dates, sel, {"case": cname, "tax": "none (pre-tax)", "ranking": "volume surge"}, False); rows.append(r)
         print(f"  {cname} | pre-tax: {r['growth per year % (compound)']:.1f}% a year / dd {r['max drawdown % (from peak)']:.1f}% / end ${r['ending value $']:,.0f}", flush=True)
@@ -298,6 +313,8 @@ def main():
             r = CT.run_stats(R, P, dates, sel, {"case": cname, "tax": vname, "ranking": "volume surge"}, True)
             r["loss_dollars_deferred_in_total"] = float(sum(x.get("disallowed_dollars", 0.0) for x in P["rows"]))
             rows.append(r)
+            if (timing, wash) == ("late_jan", False):
+                ctrl_lots.append(("volume surge", P["ledger"].lots))
             for y in P["rows"]:
                 yearly.append(dict(case=cname, tax=vname, **y))
             re = reentry_stats(P["ledger"]); re.update({"case": cname, "tax": vname}); wstats.append(re)
@@ -306,13 +323,26 @@ def main():
                 key = np.random.default_rng(1000 + sd).random(len(R["d"]))
                 Pk = account_washed(R, cal, dates, cap, key, mode="continuous", tax=CT.TaxState(), borrow=bor, timing=timing, wash=wash)
                 allr.append(CT.run_stats(R, Pk, dates, sel, {"case": cname, "tax": vname, "ranking": "random pick", "pick": sd}, True))
+                if (timing, wash) == ("late_jan", False):
+                    ctrl_lots.append((f"random pick {sd}", Pk["ledger"].lots))
+            seed_growth[vname] = [x["growth per year % (compound)"] for x in allr]
             D = pd.DataFrame(allr); num = [c for c in D.columns if D[c].dtype.kind in "fi" and c != "pick"]
             m_ = {c: D[c].mean() for c in num}; m_.update({"case": cname, "tax": vname, "ranking": "random pick (mean of 8)", "pick": "mean",
                                                        "growth lowest pick": D["growth per year % (compound)"].min(), "growth highest pick": D["growth per year % (compound)"].max()})
             rows.append(m_)
             print(f"  {cname} | {vname}: surge {r['growth per year % (compound)']:.2f}% a year / dd {r['max drawdown % (from peak)']:.1f}% (trading only {r['max drawdown % (trading only, tax payments added back)']:.1f}%) / end ${r['ending value $']:,.0f} / tax ${r['total tax paid $']:,.0f} ({r['tax as % of the gain before tax']:.1f}% of gain);  "
                   f"picks {m_['growth per year % (compound)']:.2f}% (range {m_['growth lowest pick']:.2f} to {m_['growth highest pick']:.2f}) / end ${m_['ending value $']:,.0f} / tax ${m_['total tax paid $']:,.0f}", flush=True)
+        # the rule alone: the same trades taxed with and without it
+        for pname, lots in ctrl_lots:
+            t0, pv0, per0 = frozen_tax(lots, False); t1, pv1, per1 = frozen_tax(lots, True)
+            frozen_rows.append({"case": cname, "path": pname, "tax without rule $": t0, "tax with rule $": t1, "difference $": t1 - t0, "difference % of tax": (t1 - t0) / t0 * 100 if t0 else np.nan,
+                                "present-value difference at 5% $": pv1 - pv0, "years with a different tax": sum(1 for Y in per0 if abs(per0[Y] - per1.get(Y, 0.0)) > 0.5)})
+        a_, b_ = np.array(seed_growth[VARIANTS[1][0]]), np.array(seed_growth[VARIANTS[2][0]])
+        paired.append({"case": cname, "paired seeds": len(a_), "mean growth difference (points, rule minus no rule)": float((b_ - a_).mean()), "std of the difference": float((b_ - a_).std(ddof=1)), "standard error": float((b_ - a_).std(ddof=1) / np.sqrt(len(a_))),
+                       "seeds where the rule lowers growth": int((b_ < a_).sum())})
     S = pd.DataFrame(rows); S.round(3).to_csv(out_dir / "wash_sale_variants.csv", index=False)
+    FZ = pd.DataFrame(frozen_rows); FZ.round(2).to_csv(out_dir / "wash_sale_same_trades_tax.csv", index=False)
+    PD = pd.DataFrame(paired); PD.round(3).to_csv(out_dir / "wash_sale_paired_seeds.csv", index=False)
     Y = pd.DataFrame(yearly); Y.round(2).to_csv(out_dir / "wash_sale_yearly_tax.csv", index=False)
     W = pd.DataFrame(wstats); W.round(2).to_csv(out_dir / "wash_sale_reentry_stats.csv", index=False)
 
@@ -323,6 +353,13 @@ def main():
         v = S[S.case == cname]
         print(f"\n==== {cname} (volume surge = one run; random pick = mean of 8) ====")
         print(v[[c for c in cols if c in v.columns]].to_string(index=False))
+    print("\n==== THE RULE ALONE: the same trades taxed with and without the wash-sale rule (no change in position sizes; tax paid end of January) ====")
+    print(FZ.to_string(index=False))
+    for cname, _, _ in cases:
+        v = FZ[FZ.case == cname]
+        print(f"  {cname}: mean over {len(v)} paths: tax difference ${v['difference $'].mean():,.0f} ({v['difference % of tax'].mean():.2f}% of the tax), present-value difference ${v['present-value difference at 5% $'].mean():,.0f}")
+    print("\n==== paired comparison of growth per year, same random-pick path with and without the rule (differences are noise plus the rule) ====")
+    print(PD.to_string(index=False))
     print("\n==== how often the account bought the same stock again within 30 days of SELLING it (taken trades only) ====")
     print(W[W.tax.str.contains("WITH")].to_string(index=False))
     print("\n==== wash-sale effect by year, main case (cap 200%, 4% charge): tax with the rule minus tax without it (both paid end of January), loss dollars deferred that year ====")
