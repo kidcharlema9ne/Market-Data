@@ -1,0 +1,6 @@
+version,profit per year %,max drawdown % (from peak),profit per year / drawdown,Sharpe ratio,worst year %,years positive,trades taken,average open positions,% of sessions at the cap,average ATR per trade,SPY move over the same holds (ATR units),excess over SPY (ATR units)
+volume surge ranking,0.78,-62.941,0.012,0.018,-21.601,3 of 6,1890.0,65.193,64.973,0.018,0.373,-0.355
+without volume surge: mean of 8 random picks,2.656,-66.967,0.044,0.06,-23.857,,1821.5,63.085,66.708,0.075,0.402,-0.327
+"  random picks, lowest",-4.584,-73.586,-0.063,-0.114,-29.199,,,,,,,
+"  random picks, highest",10.139,-52.413,0.153,0.227,-15.601,,,,,,,
+SPY buy and hold (price only),12.624,-25.327,0.498,0.648,-20.881,5 of 6,,,,,,
