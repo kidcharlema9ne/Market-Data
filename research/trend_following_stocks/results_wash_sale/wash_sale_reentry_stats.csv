@@ -1,0 +1,7 @@
+losing_sales,losing_sales_bought_again_within_30_days,share_of_losing_sales,loss_dollars,loss_dollars_bought_again,share_of_loss_dollars,median_days_to_reentry,winning_sales,winning_sales_bought_again_within_30_days,case,tax
+3094,18,0.58,13716829.71,101125.99,0.74,11.0,2156,11,"cap 200%, 4% a year charge on borrowed money","tax at last session of year, no wash-sale rule (Entry 169)"
+3093,18,0.58,13951174.58,95645.15,0.69,5.5,2128,12,"cap 200%, 4% a year charge on borrowed money","tax at end of January, no wash-sale rule (control)"
+3142,18,0.57,12694948.01,103999.33,0.82,7.5,2117,12,"cap 200%, 4% a year charge on borrowed money","tax at end of January, WITH wash-sale rule"
+1752,7,0.4,4110906.09,22110.52,0.54,14.0,1176,7,"cap 100%, no borrowing","tax at last session of year, no wash-sale rule (Entry 169)"
+1725,11,0.64,4623896.79,41286.5,0.89,9.0,1169,5,"cap 100%, no borrowing","tax at end of January, no wash-sale rule (control)"
+1731,11,0.64,4808898.82,42250.77,0.88,8.0,1161,4,"cap 100%, no borrowing","tax at end of January, WITH wash-sale rule"
