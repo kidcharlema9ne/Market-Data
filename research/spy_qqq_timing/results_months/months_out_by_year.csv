@@ -1,0 +1,28 @@
+year,SPY months out,SPY months listed (half or more of the month out),QQQ months out,QQQ months listed (half or more of the month out),Both months out,Both months listed (half or more of the month out),months of data in year
+2000,3.0,"Oct, Nov, Dec",3.0,"Oct, Nov, Dec",3.0,"Oct, Nov, Dec",3
+2001,12.0,"Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec",11.4,"Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov",11.4,"Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov",12
+2002,12.0,"Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec",12.0,"Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec",12.0,"Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec",12
+2003,3.8,"Jan, Feb, Mar, Apr",2.6,"Jan, Feb, Mar",2.6,"Jan, Feb, Mar",12
+2004,0.0,none,3.5,"Aug, Sep, Oct",0.0,none,12
+2005,0.0,none,1.6,May,0.0,none,12
+2006,0.0,none,4.6,"Jun, Jul, Aug, Sep",0.0,none,12
+2007,1.2,Dec,0.0,none,0.0,none,12
+2008,12.0,"Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec",11.0,"Jan, Feb, Mar, Apr, May, Jul, Aug, Sep, Oct, Nov, Dec",11.0,"Jan, Feb, Mar, Apr, May, Jul, Aug, Sep, Oct, Nov, Dec",12
+2009,5.5,"Jan, Feb, Mar, Apr, May, Jun",4.9,"Jan, Feb, Mar, Apr, May",4.9,"Jan, Feb, Mar, Apr, May",12
+2010,4.1,"Jun, Jul, Aug, Sep",2.6,"Jul, Aug, Sep",2.6,"Jul, Aug, Sep",12
+2011,4.8,"Aug, Sep, Oct, Nov, Dec",3.8,"Aug, Sep, Oct, Dec",3.8,"Aug, Sep, Oct, Dec",12
+2012,0.7,Jan,2.0,"Jan, Dec",0.6,Jan,12
+2013,0.0,none,2.2,"Jan, Feb",0.0,none,12
+2014,0.0,none,0.0,none,0.0,none,12
+2015,4.2,"Sep, Oct, Nov, Dec",2.1,"Sep, Oct",2.1,"Sep, Oct",12
+2016,3.7,"Jan, Feb, Mar, Apr",6.3,"Jan, Feb, Mar, Apr, May, Jun, Jul",3.4,"Jan, Feb, Mar, Apr",12
+2017,0.0,none,0.0,none,0.0,none,12
+2018,2.2,"Nov, Dec",2.0,"Nov, Dec",2.0,"Nov, Dec",12
+2019,3.2,"Jan, Feb, Mar",2.7,"Jan, Feb, Mar",2.7,"Jan, Feb, Mar",12
+2020,2.9,"Mar, Apr, May",1.0,Mar,1.0,Mar,12
+2021,0.0,none,0.0,none,0.0,none,12
+2022,10.1,"Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec",11.2,"Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec",10.1,"Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec",12
+2023,1.1,Jan,1.2,Jan,1.1,Jan,12
+2024,0.0,none,0.0,none,0.0,none,12
+2025,2.2,"Apr, May",2.1,"Mar, Apr",1.3,Apr,12
+2026,0.5,none,0.5,none,0.5,none,11
