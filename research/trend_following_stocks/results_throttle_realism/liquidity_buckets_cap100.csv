@@ -1,0 +1,5 @@
+scenario,liquidity bucket,trades taken,% of trades,average ATR per trade (after the 0.10 ATR cost),SPY move over the same holds (ATR units),profit $,% of total profit,median position as % of daily dollar volume,95th percentile position as % of daily dollar volume,win rate %
+"baseline, cap 100%, volume surge",3-10M a day,1111,40.831,0.975,0.504,323145.916,34.475,0.13,0.303,40.234
+"baseline, cap 100%, volume surge",10-30M a day,721,26.498,1.372,0.514,296787.474,31.663,0.044,0.103,45.908
+"baseline, cap 100%, volume surge",30-100M a day,547,20.103,1.403,0.423,230574.885,24.599,0.014,0.039,38.757
+"baseline, cap 100%, volume surge",100M+ a day,342,12.569,0.844,0.597,86827.962,9.263,0.003,0.012,39.181
