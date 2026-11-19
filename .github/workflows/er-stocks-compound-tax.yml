@@ -1,0 +1,49 @@
+name: "Stocks: compounding and after-tax study versus QQQ buy and hold: in-sample"
+# research/trend_following_stocks/er_stocks_compound_tax.py (Michael, 19 Nov 2026). In-sample only (data through 2021-08-06); later years are never read.
+on:
+  push:
+    branches: [claude/compound-tax-20261119]
+    paths: ['.github/workflows/er-stocks-compound-tax.yml']
+  workflow_dispatch:
+concurrency:
+  group: er-stocks-compound-tax-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas numpy
+      - name: Fetch stock and SPY prices from R2
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python research/trend_following_stocks/fetch_stock_prices.py data_stocks
+      - name: Fetch QQQ from R2
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python research/trend_following_stocks/fetch_nasdaq_etf.py data_stocks
+      - name: Run
+        run: |
+          D=research/trend_following_stocks/results_compound_tax
+          mkdir -p $D
+          python research/trend_following_stocks/er_stocks_compound_tax.py data_stocks/stock_prices.parquet $D data_stocks/spy_prices.parquet data_stocks/nasdaq_etfs.parquet | tee $D/output.txt
+      - name: Save results on the branch
+        if: always()
+        run: |
+          D=research/trend_following_stocks/results_compound_tax
+          echo "workflow run ${{ github.run_id }}" > $D/RUN_ID.txt
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add $D
+          git commit -m "Stocks compounding and after-tax study versus QQQ: in-sample (workflow run ${{ github.run_id }})" || echo "nothing to commit"
+          for i in 1 2 3 4 5; do git pull --rebase origin ${{ github.ref_name }} && git push origin HEAD:${{ github.ref_name }} && break || sleep 15; done
