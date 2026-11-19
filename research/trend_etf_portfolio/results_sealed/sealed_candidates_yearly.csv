@@ -1,0 +1,37 @@
+candidate,rule,year,return %
+SPY/QQQ 75% (current),200-day with 4% band,2021,6.0
+SPY/QQQ 75% (current),200-day with 4% band,2022,-6.9
+SPY/QQQ 75% (current),200-day with 4% band,2023,19.6
+SPY/QQQ 75% (current),200-day with 4% band,2024,19.3
+SPY/QQQ 75% (current),200-day with 4% band,2025,4.2
+SPY/QQQ 75% (current),200-day with 4% band,2026,-2.5
+Stock-heavy,200-day with 4% band,2021,1.9
+Stock-heavy,200-day with 4% band,2022,-2.4
+Stock-heavy,200-day with 4% band,2023,7.8
+Stock-heavy,200-day with 4% band,2024,11.3
+Stock-heavy,200-day with 4% band,2025,9.8
+Stock-heavy,200-day with 4% band,2026,-1.0
+SPY/QQQ 50%,200-day with 4% band,2021,4.2
+SPY/QQQ 50%,200-day with 4% band,2022,-3.9
+SPY/QQQ 50%,200-day with 4% band,2023,14.7
+SPY/QQQ 50%,200-day with 4% band,2024,14.5
+SPY/QQQ 50%,200-day with 4% band,2025,4.2
+SPY/QQQ 50%,200-day with 4% band,2026,-0.6
+SPY/QQQ 75% (current),buy and hold,2021,6.0
+SPY/QQQ 75% (current),buy and hold,2022,-19.2
+SPY/QQQ 75% (current),buy and hold,2023,30.5
+SPY/QQQ 75% (current),buy and hold,2024,19.3
+SPY/QQQ 75% (current),buy and hold,2025,14.7
+SPY/QQQ 75% (current),buy and hold,2026,6.3
+Stock-heavy,buy and hold,2021,2.0
+Stock-heavy,buy and hold,2022,-15.6
+Stock-heavy,buy and hold,2023,16.3
+Stock-heavy,buy and hold,2024,11.3
+Stock-heavy,buy and hold,2025,19.7
+Stock-heavy,buy and hold,2026,2.7
+SPY/QQQ 50%,buy and hold,2021,4.2
+SPY/QQQ 50%,buy and hold,2022,-12.1
+SPY/QQQ 50%,buy and hold,2023,22.0
+SPY/QQQ 50%,buy and hold,2024,14.5
+SPY/QQQ 50%,buy and hold,2025,11.1
+SPY/QQQ 50%,buy and hold,2026,5.2

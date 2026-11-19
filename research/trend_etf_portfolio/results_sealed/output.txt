@@ -1,0 +1,43 @@
+  stand-in: VEA uses EFA before 2007-07-26 (stand-in starts 2001-08-27)
+  stand-in: VWO uses EEM before 2005-03-10 (stand-in starts 2003-04-14)
+  stand-in: IAU uses GLD before 2005-01-28 (stand-in starts 2004-11-18)
+  stand-in: BIV uses AGG before 2007-04-10 (stand-in starts 2003-09-26)
+data to 2026-11-06; common start 2005-09-02; sealed window 2021-08-07 to 2026-11-06 (2021 and 2026 are partial years; Treasury bill rate after Oct 2026 carried forward)
+
+=== sealed (Aug 2021 to end) ===
+            candidate                 rule  years  profit per year %  max drawdown %  profit / max drawdown  worst calendar year %  Sharpe ratio  entries per year
+SPY/QQQ 75% (current) 200-day with 4% band    5.2               7.08           -11.7                   0.61                   -6.9          0.72               1.2
+          Stock-heavy 200-day with 4% band    5.2               5.10            -7.4                   0.69                   -2.4          0.73               3.5
+          SPY/QQQ 50% 200-day with 4% band    5.2               6.07            -7.4                   0.82                   -3.9          0.89               1.2
+SPY/QQQ 75% (current)         buy and hold    5.2               9.73           -22.5                   0.43                  -19.2          0.71               0.0
+          Stock-heavy         buy and hold    5.2               6.19           -21.2                   0.29                  -15.6          0.63               0.0
+          SPY/QQQ 50%         buy and hold    5.2               8.00           -14.7                   0.55                  -12.1          0.85               0.0
+
+=== whole (2005 to end) ===
+            candidate                 rule  years  profit per year %  max drawdown %  profit / max drawdown  worst calendar year %  Sharpe ratio  entries per year
+SPY/QQQ 75% (current) 200-day with 4% band   21.1               7.54           -15.4                   0.49                   -7.9          0.78               1.1
+          Stock-heavy 200-day with 4% band   21.1               5.31           -10.3                   0.51                   -4.4          0.78               3.2
+          SPY/QQQ 50% 200-day with 4% band   21.1               5.70           -10.4                   0.55                   -5.3          0.86               1.1
+SPY/QQQ 75% (current)         buy and hold   21.1               9.61           -42.6                   0.23                  -29.7          0.70               0.0
+          Stock-heavy         buy and hold   21.1               6.17           -34.4                   0.18                  -21.5          0.61               0.0
+          SPY/QQQ 50%         buy and hold   21.1               7.24           -29.3                   0.25                  -19.4          0.77               0.0
+
+=== calendar years %, sealed window, 200-day with 4% band ===
+candidate  SPY/QQQ 50%  SPY/QQQ 75% (current)  Stock-heavy
+year                                                      
+2021               4.2                    6.0          1.9
+2022              -3.9                   -6.9         -2.4
+2023              14.7                   19.6          7.8
+2024              14.5                   19.3         11.3
+2025               4.2                    4.2          9.8
+2026              -0.6                   -2.5         -1.0
+
+=== calendar years %, sealed window, buy and hold ===
+candidate  SPY/QQQ 50%  SPY/QQQ 75% (current)  Stock-heavy
+year                                                      
+2021               4.2                    6.0          2.0
+2022             -12.1                  -19.2        -15.6
+2023              22.0                   30.5         16.3
+2024              14.5                   19.3         11.3
+2025              11.1                   14.7         19.7
+2026               5.2                    6.3          2.7
