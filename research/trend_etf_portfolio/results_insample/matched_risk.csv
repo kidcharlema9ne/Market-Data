@@ -1,0 +1,5 @@
+mix,mix profit/yr %,mix max drawdown %,same drawdown: share in SPY/QQQ %,SPY/QQQ profit/yr %,SPY/QQQ max drawdown %,profit gap (mix minus SPY/QQQ),same profit: share in SPY/QQQ %,SPY/QQQ profit/yr % (matched),SPY/QQQ max drawdown % (matched),drawdown gap (mix minus SPY/QQQ)
+Equal split of six funds,6.15,-12.8,62,6.61,-12.8,-0.46,56,6.18,-11.8,-1.0
+Stock-heavy,5.38,-10.3,50,5.58,-10.4,-0.2,48,5.41,-10.0,-0.3
+Balanced,4.28,-8.4,40,4.71,-8.4,-0.43,35,4.27,-7.4,-1.0
+Equal risk,4.61,-10.5,50,5.58,-10.4,-0.97,39,4.63,-8.2,-2.3

@@ -1,0 +1,33 @@
+  stand-in: VEA uses EFA before 2007-07-26 (stand-in starts 2001-08-27)
+  stand-in: VWO uses EEM before 2005-03-10 (stand-in starts 2003-04-14)
+  stand-in: IAU uses GLD before 2005-01-28 (stand-in starts 2004-11-18)
+  stand-in: BIV uses AGG before 2007-04-10 (stand-in starts 2003-09-26)
+window 2005-09-02 to 2021-08-06
+check: SPY 37.5 / QQQ 37.5 / bills 25 -> profit 7.7%, max drawdown -15.4% (earlier run: 7.70 / -15.4 with a 37.5/37.5 split)
+
+SAME WORST DRAWDOWN: positive profit gap = mix is better
+                     mix  mix profit/yr %  mix max drawdown %  same drawdown: share in SPY/QQQ %  SPY/QQQ profit/yr %  SPY/QQQ max drawdown %  profit gap (mix minus SPY/QQQ)
+Equal split of six funds             6.15               -12.8                                 62                 6.61                   -12.8                           -0.46
+             Stock-heavy             5.38               -10.3                                 50                 5.58                   -10.4                           -0.20
+                Balanced             4.28                -8.4                                 40                 4.71                    -8.4                           -0.43
+              Equal risk             4.61               -10.5                                 50                 5.58                   -10.4                           -0.97
+
+SAME PROFIT PER YEAR: negative drawdown gap = mix has the deeper drawdown (worse); positive = shallower (better)
+                     mix  mix profit/yr %  mix max drawdown %  same profit: share in SPY/QQQ %  SPY/QQQ profit/yr % (matched)  SPY/QQQ max drawdown % (matched)  drawdown gap (mix minus SPY/QQQ)
+Equal split of six funds             6.15               -12.8                               56                           6.18                             -11.8                              -1.0
+             Stock-heavy             5.38               -10.3                               48                           5.41                             -10.0                              -0.3
+                Balanced             4.28                -8.4                               35                           4.27                              -7.4                              -1.0
+              Equal risk             4.61               -10.5                               39                           4.63                              -8.2                              -2.3
+
+Two-fund dial (every 10 points):
+ share in SPY/QQQ  profit per year %  max drawdown %
+              0.1               2.03            -2.1
+              0.2               2.94            -4.2
+              0.3               3.83            -6.3
+              0.4               4.71            -8.4
+              0.5               5.58           -10.4
+              0.6               6.44           -12.4
+              0.7               7.28           -14.4
+              0.8               8.12           -16.3
+              0.9               8.94           -18.2
+              1.0               9.75           -20.1
