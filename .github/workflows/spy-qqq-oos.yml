@@ -31,6 +31,11 @@ jobs:
           D=research/spy_qqq_timing/results
           mkdir -p $D
           python research/spy_qqq_timing/spy_qqq_timing.py data_etf/nasdaq_etfs.parquet $D research/spy_qqq_timing/tb3ms_monthly.csv | tee $D/output.txt
+      - name: After-tax comparison (Michael, 19 Nov 2026)
+        run: |
+          D=research/spy_qqq_timing/results_tax
+          mkdir -p $D
+          python research/spy_qqq_timing/spy_qqq_tax.py data_etf/nasdaq_etfs.parquet $D research/spy_qqq_timing/tb3ms_monthly.csv | tee $D/output.txt
       - name: Save results on the branch
         if: always()
         run: |
@@ -38,6 +43,6 @@ jobs:
           echo "workflow run ${{ github.run_id }}" > $D/RUN_ID.txt
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
-          git add $D
+          git add $D research/spy_qqq_timing/results_tax
           git commit -m "SPY QQQ 200-day timing: results (workflow run ${{ github.run_id }})" || echo "nothing to commit"
           for i in 1 2 3 4 5; do git pull --rebase origin ${{ github.ref_name }} && git push origin HEAD:${{ github.ref_name }} && break || sleep 15; done
