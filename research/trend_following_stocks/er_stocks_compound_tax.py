@@ -31,6 +31,7 @@ import er_stocks_common_momentum as M
 import er_stocks_many_ideas as MI
 import er_stocks_nasdaq_volume as NV
 import er_stocks_spy_buffer as SB
+import er_stocks_start_years as SY
 import er_stocks_throttle_realism as TR
 from er_stocks import CAPITAL, END, EPOCH
 
@@ -127,7 +128,7 @@ def selftest_tax():
 
 
 # ---------------------------------------------------------------- the compounding account
-def account_scaled(R, cal, dates, cap, key, mode="continuous", tax=None, borrow=0.0, adv_frac=None, cost_rt=None):
+def account_scaled(R, cal, dates, cap, key, mode="continuous", tax=None, borrow=0.0, adv_frac=None, cost_rt=None, y0=Y0):
     """mode: 'fixed' (project baseline), 'continuous' or 'annual'. tax: a TaxState (tax paid out of the account at each year's last session) or None. borrow: yearly charge on position value above the account value."""
     cost_rt = BASE_COST if cost_rt is None else cost_rt
     n = len(R["d"]); m = len(cal)
@@ -152,7 +153,7 @@ def account_scaled(R, cal, dates, cap, key, mode="continuous", tax=None, borrow=
             S["yst"] += rst[k]; S["ylt"] += rlt[k]
             if ye[k]:
                 if tax is not None and (S["yst"] != 0.0 or S["ylt"] != 0.0 or tax.has_carry()):
-                    t, parts = tax.year(int(yr[k]) - Y0, S["yst"], S["ylt"])
+                    t, parts = tax.year(int(yr[k]) - y0, S["yst"], S["ylt"])
                     pnl[k] -= t; cum -= t; tax_paid[k] = t
                     parts["calendar_year"] = int(yr[k]); rows.append(parts)
                 S["yst"] = 0.0; S["ylt"] = 0.0
@@ -224,7 +225,16 @@ def path_stats(eq_path, dates_w):
             "worst year %": np.nanmin(yret), "best year %": np.nanmax(yret), "Sharpe ratio": sharpe}
 
 
-def run_stats(R, P, dates, sel, label, taxed):
+def trading_only_drawdown(P, sel):
+    """Drawdown of the account's trading returns with the tax payments added back (a tax payment is a withdrawal, not a trading loss)."""
+    eq_full = CAPITAL + np.cumsum(P["pnl"]); prev = np.r_[CAPITAL, eq_full[:-1]]
+    ok = prev > 0
+    r = np.where(ok, (P["pnl"] + P["tax_paid"]) / np.where(ok, prev, 1.0), 0.0)
+    idx = np.r_[1.0, np.cumprod(1.0 + r[sel])]
+    return float(((idx - np.maximum.accumulate(idx)) / np.maximum.accumulate(idx)).min() * 100)
+
+
+def run_stats(R, P, dates, sel, label, taxed, fixed=False):
     eq_full = CAPITAL + np.cumsum(P["pnl"])
     eqw = eq_full[sel]
     st = path_stats(eqw, dates[sel])
@@ -232,23 +242,26 @@ def run_stats(R, P, dates, sel, label, taxed):
     held = (np.asarray(dates.values.astype("datetime64[D]").astype(np.int64))[R["sess_x"]] - np.asarray(dates.values.astype("datetime64[D]").astype(np.int64))[R["sess_e"]])
     gw = P["gross"][sel]; ew = eqw
     st.update({"trades taken": int(tk.sum()), "average open positions": float(P["open_n"][sel].mean()),
-               "average position value % of account": float(np.mean(np.where(ew > 0, gw / np.where(ew > 0, ew, np.nan), np.nan)) * 100),
+               "average position value % of account": float(np.mean(gw / CAPITAL if fixed else np.where(ew > 0, gw / np.where(ew > 0, ew, np.nan), np.nan)) * 100),
                "total tax paid $": float(P["tax_paid"].sum()), "realised short-term $": float(P["rst"].sum()), "realised long-term $": float(P["rlt"].sum()),
                "trades held over a year": int((tk & (held > 365)).sum())})
+    tdd = trading_only_drawdown(P, sel)
+    st["max drawdown % (trading only, tax payments added back)"] = tdd
+    st["growth per year / trading-only drawdown"] = st["growth per year % (compound)"] / abs(tdd) if tdd != 0 else np.nan
     gain_before_tax = eqw[-1] + P["tax_paid"].sum() - CAPITAL
     st["tax as % of the gain before tax"] = float(P["tax_paid"].sum() / gain_before_tax * 100) if taxed and gain_before_tax > 0 else np.nan
     row = dict(label); row.update(st)
     return row
 
 
-def benchmark(close, dates, sel, name, infl, other0):
+def benchmark(close, dates, sel, name, infl, other0, y0=Y0):
     c = close[sel]; w = dates[sel]
     path = CAPITAL * c / c[0]
     pre = path_stats(path, w)
     gain = path[-1] - CAPITAL
     t = 0.0
     if gain > 0:
-        t, parts = TaxState(other0, infl).year(int(w[-1].year) - Y0, 0.0, gain)
+        t, parts = TaxState(other0, infl).year(int(w[-1].year) - y0, 0.0, gain)
     path_at = path.copy(); path_at[-1] -= t
     aft = path_stats(path_at, w)
     return pre, aft, t
@@ -302,7 +315,7 @@ def main():
                     continue
                 kws = dict(mode=mode, borrow=bor, adv_frac=advf)
                 P = account_scaled(R, cal, dates, cap, key_vs, tax=(TaxState() if taxed else None), **kws)
-                r = run_stats(R, P, dates, sel, {"case": cname, "sizing": mname, "tax": "paid out of the account" if taxed else "none", "ranking": "volume surge", "pick": "reference"}, taxed)
+                r = run_stats(R, P, dates, sel, {"case": cname, "sizing": mname, "tax": "paid out of the account" if taxed else "none", "ranking": "volume surge", "pick": "reference"}, taxed, fixed=(mode == "fixed"))
                 rows.append(r)
                 if taxed and mode == "continuous" and advf is None:
                     for y in P["rows"]:
@@ -311,13 +324,13 @@ def main():
                 for sd in range(KSEEDS):
                     key = np.random.default_rng(1000 + sd).random(len(R["d"]))
                     Pk = account_scaled(R, cal, dates, cap, key, tax=(TaxState() if taxed else None), **kws)
-                    allr.append(run_stats(R, Pk, dates, sel, {"case": cname, "sizing": mname, "tax": "paid out of the account" if taxed else "none", "ranking": "random pick (mean of 8)", "pick": sd}, taxed))
+                    allr.append(run_stats(R, Pk, dates, sel, {"case": cname, "sizing": mname, "tax": "paid out of the account" if taxed else "none", "ranking": "random pick (mean of 8)", "pick": sd}, taxed, fixed=(mode == "fixed")))
                 D = pd.DataFrame(allr); num = [c for c in D.columns if D[c].dtype.kind in "fi" and c != "pick"]
                 m_ = {c: D[c].mean() for c in num}
                 m_.update({"case": cname, "sizing": mname, "tax": "paid out of the account" if taxed else "none", "ranking": "random pick (mean of 8)", "pick": "mean",
                            "ratio lowest pick": D["growth per year / drawdown"].min(), "ratio highest pick": D["growth per year / drawdown"].max(), "growth lowest pick": D["growth per year % (compound)"].min(), "growth highest pick": D["growth per year % (compound)"].max()})
                 rows.append(m_)
-                print(f"  {cname} | {mname} | tax {'on' if taxed else 'off'}: surge {r['growth per year % (compound)']:.1f}% / dd {r['max drawdown % (from peak)']:.1f}% / ratio {r['growth per year / drawdown']:.2f} / end ${r['ending value $']:,.0f};  "
+                print(f"  {cname} | {mname} | tax {'on' if taxed else 'off'}: surge {r['growth per year % (compound)']:.1f}% / dd {r['max drawdown % (from peak)']:.1f}% (trading only {r['max drawdown % (trading only, tax payments added back)']:.1f}%) / ratio {r['growth per year / drawdown']:.2f} / end ${r['ending value $']:,.0f};  "
                       f"picks {m_['growth per year % (compound)']:.1f}% / dd {m_['max drawdown % (from peak)']:.1f}% / ratio {m_['growth per year / drawdown']:.2f} (range {m_['ratio lowest pick']:.2f}-{m_['ratio highest pick']:.2f}) / end ${m_['ending value $']:,.0f}", flush=True)
     S = pd.DataFrame(rows); S.round(3).to_csv(out_dir / "compound_tax_variants.csv", index=False)
 
@@ -342,9 +355,43 @@ def main():
     eqs["QQQ buy and hold (price only)"] = CAPITAL * Q[sel] / Q[sel][0]; eqs["SPY buy and hold (price only)"] = CAPITAL * spy_close[sel] / spy_close[sel][0]
     pd.DataFrame(eqs, index=w).round(0).to_csv(out_dir / "equity_paths.csv")
 
+    # start years: the account started empty on 1 January of each year, run to the last session; QQQ and SPY bought the same day; tax brackets start indexing from the start year
+    sy_rows = []
+    ed = dates[R["sess_e"]]
+    for cname, cap, bor in (cases[0], cases[2]):
+        for y in range(2000, 2017):
+            lo_y = pd.Timestamp(f"{y}-01-01")
+            mask = np.asarray((ed >= lo_y) & (ed <= END)); sel_y = np.asarray((dates >= lo_y) & (dates <= END))
+            Rs = SY.subset(R, mask); ks = key_vs[mask]
+            Pa = account_scaled(Rs, cal, dates, cap, ks, mode="continuous", tax=TaxState(), borrow=bor, y0=y)
+            Pn = account_scaled(Rs, cal, dates, cap, ks, mode="continuous", tax=None, borrow=bor)
+            ra = run_stats(Rs, Pa, dates, sel_y, {}, True); rn = run_stats(Rs, Pn, dates, sel_y, {}, False)
+            qpre, qaft, qt = benchmark(np.asarray(Q, float), dates, sel_y, "QQQ", 0.025, 30000.0, y0=y)
+            spre, saft, stt = benchmark(np.asarray(spy_close, float), dates, sel_y, "SPY", 0.025, 30000.0, y0=y)
+            sy_rows.append({"case": cname, "start year": y, "years": round(sel_y.sum() / 252.0, 1),
+                            "system pre-tax growth %": rn["growth per year % (compound)"], "system after-tax growth %": ra["growth per year % (compound)"], "system after-tax ending $": ra["ending value $"],
+                            "system drawdown % (balance, after tax)": ra["max drawdown % (from peak)"], "system drawdown % (trading only)": ra["max drawdown % (trading only, tax payments added back)"],
+                            "QQQ pre-tax growth %": qpre["growth per year % (compound)"], "QQQ after-tax growth %": qaft["growth per year % (compound)"], "QQQ after-tax ending $": qaft["ending value $"], "QQQ drawdown %": qpre["max drawdown % (from peak)"],
+                            "SPY after-tax growth %": saft["growth per year % (compound)"], "SPY drawdown %": spre["max drawdown % (from peak)"]})
+    SYT = pd.DataFrame(sy_rows); SYT.round(2).to_csv(out_dir / "start_years_vs_qqq.csv", index=False)
+    for cname, _, _ in (cases[0], cases[2]):
+        v = SYT[SYT.case == cname]
+        print(f"\n==== START YEARS | {cname} | continuous compounding, volume surge, tax paid from the account; QQQ and SPY bought the same day (price only), tax once at the end ====")
+        print(v.drop(columns=["case"]).round(1).to_string(index=False))
+        print(f"  system after-tax growth beats QQQ after-tax growth in {int((v['system after-tax growth %'] > v['QQQ after-tax growth %']).sum())} of {len(v)} start years; system trading-only drawdown shallower than QQQ's in {int((v['system drawdown % (trading only)'] > v['QQQ drawdown %']).sum())} of {len(v)}")
+
+    # year-end account values, main case after tax, with QQQ
+    ykeys = [k for k in eqs if "after tax" in k] + ["QQQ buy and hold (price only)"]
+    YE = pd.DataFrame({k: pd.Series(eqs[k], index=w).groupby(w.year).last() for k in ykeys})
+    YR = YE.pct_change() * 100; YR.iloc[0] = (YE.iloc[0] / CAPITAL - 1) * 100
+    YO = pd.concat([YE.add_suffix(" | year-end value $"), YR.add_suffix(" | year return %")], axis=1); YO.round(1).to_csv(out_dir / "year_end_values.csv")
+    print("\n==== year-end account value and return, after tax, 2000-2021 (continuous compounding, volume surge) ====")
+    pd.set_option("display.float_format", lambda v: f"{v:,.1f}")
+    print(YO.to_string())
+
     # readable tables
     pd.set_option("display.float_format", lambda v: f"{v:,.2f}")
-    cols = ["sizing", "tax", "ranking", "ending value $", "growth per year % (compound)", "max drawdown % (from peak)", "growth per year / drawdown", "worst year %", "Sharpe ratio", "trades taken", "average position value % of account", "total tax paid $", "tax as % of the gain before tax"]
+    cols = ["sizing", "tax", "ranking", "ending value $", "growth per year % (compound)", "max drawdown % (from peak)", "max drawdown % (trading only, tax payments added back)", "growth per year / drawdown", "growth per year / trading-only drawdown", "worst year %", "Sharpe ratio", "trades taken", "average position value % of account", "total tax paid $", "tax as % of the gain before tax"]
     for cname, _, _ in cases:
         v = S[S.case == cname]
         print(f"\n==== {cname} (volume surge = one run; random pick = mean of 8) ====")
