@@ -1,0 +1,7 @@
+case,tax assumption,ending value $,growth per year % (compound),max drawdown % (from peak),growth per year / drawdown,worst year %,best year %,Sharpe ratio,trades taken,average open positions,average position value % of account,total tax paid $,realised short-term $,realised long-term $,trades held over a year,tax as % of the gain before tax
+"cap 200%, 4% a year charge on borrowed money","other income $30,000, indexed 2.5% a year (main)",3388874.087,11.9,-60.317,0.197,-26.379,118.011,0.497,5250,50.626,135.942,2755633.883,6433002.024,165428.15,4,47.149
+"cap 200%, 4% a year charge on borrowed money","other income $50,000, indexed 2.5% a year",2179978.084,9.634,-60.637,0.159,-25.468,112.132,0.44,5250,50.097,135.746,1680373.287,3973931.934,152630.059,6,47.197
+"cap 200%, 4% a year charge on borrowed money","other income $30,000, brackets NOT indexed",2254701.045,9.805,-60.896,0.161,-25.63,104.997,0.445,5245,50.131,135.774,1755528.024,4177420.033,132172.792,5,47.316
+"cap 100%, no borrowing","other income $30,000, indexed 2.5% a year (main)",1755362.449,8.538,-42.88,0.199,-19.587,51.415,0.499,2928,27.988,70.43,879044.808,2313542.614,20864.643,2,37.656
+"cap 100%, no borrowing","other income $50,000, indexed 2.5% a year",1912841.987,8.971,-42.217,0.212,-19.159,52.606,0.518,2900,28.138,70.642,1060286.927,2651437.702,21691.212,2,39.665
+"cap 100%, no borrowing","other income $30,000, brackets NOT indexed",1610446.032,8.105,-43.996,0.184,-19.554,50.925,0.483,2905,27.757,70.299,795175.425,2084756.814,20864.643,2,37.764
