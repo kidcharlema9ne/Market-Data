@@ -139,8 +139,13 @@ def check():
                     p = first_price
                     break
             else:
-                problems.append(f"{day} {t}: awaiting two corroborating closing prices ({quotes})")
-                break
+                # Different reported closes can corroborate the trade when every provider
+                # gives the same decision and the exit/entry boundary is outside their range.
+                if len(quotes) < 2 or len({position(price) for price in quotes.values()}) != 1:
+                    problems.append(f"{day} {t}: awaiting two corroborating closing prices ({quotes})")
+                    break
+                p = next(iter(quotes.values()))
+                source_names = ", ".join(f"{name} {price}" for name, price in quotes.items())
             history[:] = history[1:] + [float(p)]
             avg = (subtotal + p) / 200
             new = position(p)
