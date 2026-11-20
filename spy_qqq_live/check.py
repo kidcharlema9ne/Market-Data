@@ -125,8 +125,9 @@ def deliver(item):
 
 if mode == "test":
     positions = "\n".join(t + ": " + ("LONG" if v else "FLAT") for t, v in state["state"].items())
-    deliver({"channel":"email", "title":f"TEST | SPY/QQQ STATUS ALERT | {today} | {os.environ['GITHUB_RUN_ID']}",
-             "body":f"Email delivery test. Verified through {state['date']}.\n{positions}"})
+    for channel in ("email", "push"):
+        deliver({"channel":channel, "title":f"TEST | SPY/QQQ STATUS ALERT | {today} | {os.environ['GITHUB_RUN_ID']}",
+                 "body":f"Delivery test. Verified through {state['date']}.\n{positions}"})
     raise SystemExit(0)
 
 errors=[]
