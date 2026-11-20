@@ -1,12 +1,11 @@
 """Verified SPY/QQQ end-of-day signals. Called only by workflow_dispatch."""
 import json
 import os
-import smtplib
+import subprocess
 import time
 from collections import Counter
 from datetime import datetime, timedelta
 from decimal import Decimal as D
-from email.message import EmailMessage
 from io import StringIO
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -101,15 +100,15 @@ def deliver(item):
         if r.json()["status"]!=1:
             raise RuntimeError("Pushover rejected message")
     else:
-        sender=os.environ["SMTP_USER"]
-        msg=EmailMessage()
-        msg["From"]=f"SPY/QQQ Signals <{sender}>"
-        msg["To"]=os.environ.get("ALERT_EMAIL") or sender
-        msg["Subject"]=title
-        msg.set_content(body)
-        with smtplib.SMTP_SSL("smtp.gmail.com",465,timeout=20) as smtp:
-            smtp.login(sender,os.environ["SMTP_PASSWORD"])
-            smtp.send_message(msg)
+        matches = subprocess.check_output(
+            ["gh", "issue", "list", "--state", "all", "--search", f'"{title}" in:title',
+             "--json", "title"], text=True)
+        if any(issue["title"] == title for issue in json.loads(matches)):
+            return
+        owner = os.environ["GITHUB_REPOSITORY_OWNER"]
+        subprocess.run(["gh", "issue", "create", "--title", title, "--body-file", "-"],
+                       input=f"@{owner}\n\n" + body.replace("\n", "  \n"),
+                       text=True, check=True)
 
 
 errors=[]
