@@ -1,5 +1,7 @@
 """Verified SPY/QQQ end-of-day signals. Called only by workflow_dispatch."""
 import json
+import smtplib
+from email.message import EmailMessage
 import os
 import subprocess
 import time
@@ -100,6 +102,16 @@ def deliver(item):
         if r.json()["status"]!=1:
             raise RuntimeError("Pushover rejected message")
     else:
+        if all(os.environ.get(k) for k in ("SPYQQQ_GMAIL_ADDRESS", "SPYQQQ_GMAIL_APP_PASSWORD", "SPYQQQ_EMAIL_TO")):
+            msg = EmailMessage()
+            msg["From"] = f'SPY/QQQ Trading System <{os.environ["SPYQQQ_GMAIL_ADDRESS"]}>'
+            msg["To"] = os.environ["SPYQQQ_EMAIL_TO"]
+            msg["Subject"] = title
+            msg.set_content(body)
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=25) as smtp:
+                smtp.login(os.environ["SPYQQQ_GMAIL_ADDRESS"], os.environ["SPYQQQ_GMAIL_APP_PASSWORD"])
+                smtp.send_message(msg)
+            return
         matches = subprocess.check_output(
             ["gh", "issue", "list", "--state", "all", "--search", f'"{title}" in:title',
              "--json", "title"], text=True)
