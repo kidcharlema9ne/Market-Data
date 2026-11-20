@@ -147,7 +147,7 @@ if mode=="weekly" and state.get("weekly_queued")!=today:
     missed=[d for d in days if state.get("daily_runs",{}).get(d,{}).get("through")!=d]
     positions="\n".join(t+": "+("LONG" if v else "FLAT") for t,v in state["state"].items())
     body=f"Verified through {state['date']}\n{positions}\nMissing or incomplete daily runs: {', '.join(missed) or 'none'}\nPending prior deliveries: {len(state.get('pending',{}))}\nPrice errors: {', '.join(errors) or 'none'}"
-    queue(today+"status",["email"],f"SPY/QQQ STATUS ALERT | {today}",body)
+    queue(today+"status",["email","push"],f"SPY/QQQ STATUS ALERT | {today}",body)
     state["weekly_queued"]=today
 for key,item in list(state.get("pending",{}).items()):
     try:
