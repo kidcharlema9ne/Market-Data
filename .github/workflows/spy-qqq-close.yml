@@ -8,6 +8,7 @@ on:
         default: daily
 permissions:
   contents: write
+  issues: write
 concurrency:
   group: spy-qqq-close
   cancel-in-progress: false
@@ -26,9 +27,7 @@ jobs:
           CHECK_MODE: ${{ inputs.check }}
           PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
           PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+          GH_TOKEN: ${{ github.token }}
       - name: Save verified signals and outstanding deliveries
         if: always()
         run: |
