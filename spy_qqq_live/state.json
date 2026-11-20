@@ -413,7 +413,9 @@
   "daily_runs": {
     "2026-11-20": {
       "through": "2026-11-19",
-      "errors": []
+      "errors": [
+        "2026-11-20 SPY: two agreeing closes unavailable"
+      ]
     }
   }
 }
