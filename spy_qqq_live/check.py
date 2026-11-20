@@ -111,6 +111,12 @@ def deliver(item):
                        text=True, check=True)
 
 
+if mode == "test":
+    positions = "\n".join(t + ": " + ("LONG" if v else "FLAT") for t, v in state["state"].items())
+    deliver({"channel":"email", "title":f"TEST | SPY/QQQ STATUS ALERT | {today} | {os.environ['GITHUB_RUN_ID']}",
+             "body":f"Email delivery test. Verified through {state['date']}.\n{positions}"})
+    raise SystemExit(0)
+
 errors=[]
 for attempt in range(3):
     try:
@@ -121,15 +127,15 @@ for attempt in range(3):
             errors.append(str(exc))
         else:
             time.sleep(75)
-if mode=="daily":
+if mode in ("daily", "weekly"):
     state.setdefault("daily_runs",{})[today]={"through":state["date"],"errors":errors.copy()}
-if mode=="friday" and state.get("weekly_queued")!=today:
-    since=(now.date()-timedelta(days=4)).isoformat()
+if mode=="weekly" and state.get("weekly_queued")!=today:
+    since=(now.date()-timedelta(days=6)).isoformat()
     days=[s.date().isoformat() for s in calendar.sessions_in_range(max(since,"2026-11-20"),today)]
     missed=[d for d in days if state.get("daily_runs",{}).get(d,{}).get("through")!=d]
     positions="\n".join(t+": "+("LONG" if v else "FLAT") for t,v in state["state"].items())
     body=f"Verified through {state['date']}\n{positions}\nMissing or incomplete daily runs: {', '.join(missed) or 'none'}\nPending prior deliveries: {len(state.get('pending',{}))}\nPrice errors: {', '.join(errors) or 'none'}"
-    queue(today+"status",["email"],f"SPY/QQQ STATUS ALERT | Week ending {today}",body)
+    queue(today+"status",["email"],f"SPY/QQQ STATUS ALERT | {today}",body)
     state["weekly_queued"]=today
 for key,item in list(state.get("pending",{}).items()):
     try:
