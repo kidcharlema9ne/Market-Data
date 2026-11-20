@@ -28,6 +28,9 @@ jobs:
           PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
           PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
           GH_TOKEN: ${{ github.token }}
+          SPYQQQ_GMAIL_ADDRESS: ${{ secrets.SPYQQQ_GMAIL_ADDRESS }}
+          SPYQQQ_GMAIL_APP_PASSWORD: ${{ secrets.SPYQQQ_GMAIL_APP_PASSWORD }}
+          SPYQQQ_EMAIL_TO: ${{ secrets.SPYQQQ_EMAIL_TO }}
       - name: Save verified signals and outstanding deliveries
         if: always()
         run: |
