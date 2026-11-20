@@ -412,13 +412,16 @@
   },
   "daily_runs": {
     "2026-11-20": {
-      "through": "2026-11-20",
-      "errors": []
+      "through": "2026-11-19",
+      "errors": [
+        "2026-11-20 SPY: awaiting two corroborating closing prices ({'stock_analysis': Decimal('692.85'), 'twelve_data': Decimal('690.62')}) | 2026-11-20 QQQ: awaiting two corroborating closing prices ({'stock_analysis': Decimal('612.42'), 'twelve_data': Decimal('609.75')})"
+      ]
     }
   },
   "symbol_dates": {
     "SPY": "2026-11-19",
     "QQQ": "2026-11-19"
   },
-  "pending": {}
+  "pending": {},
+  "warned_on": "2026-11-20"
 }
