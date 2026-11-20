@@ -1,5 +1,7 @@
 name: SPY QQQ verified close
 on:
+  schedule:
+    - cron: '35 20,21,22 * * 1-5'
   workflow_dispatch:
     inputs:
       check:
@@ -14,17 +16,36 @@ concurrency:
   cancel-in-progress: false
 jobs:
   check:
+    if: github.event_name != 'schedule' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Skip recovery when closes and notifications are current
+        id: recovery
+        run: |
+          python - <<'PY'
+          import datetime, json, os
+          from zoneinfo import ZoneInfo
+          now = datetime.datetime.now(ZoneInfo("America/New_York"))
+          state = json.load(open("spy_qqq_live/state.json"))
+          skip = os.environ["GITHUB_EVENT_NAME"] == "schedule" and (
+              now.hour < 16 or (state["date"] == now.date().isoformat() and not state.get("pending")))
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              print(f"skip={str(skip).lower()}", file=out)
+          PY
       - uses: actions/setup-python@v5
+        if: steps.recovery.outputs.skip != 'true'
         with:
           python-version: '3.12'
       - run: pip install 'pandas<3' requests lxml 'exchange-calendars>=4.11,<5'
+        if: steps.recovery.outputs.skip != 'true'
       - run: python spy_qqq_live/check.py
+        if: steps.recovery.outputs.skip != 'true'
         env:
-          CHECK_MODE: ${{ inputs.check }}
+          CHECK_MODE: ${{ inputs.check || 'daily' }}
           PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
           PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
           GH_TOKEN: ${{ github.token }}
