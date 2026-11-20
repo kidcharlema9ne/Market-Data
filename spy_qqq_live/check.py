@@ -90,7 +90,8 @@ def check():
             if new!=old and day>="2026-11-20":
                 side = "LONG" if new else "FLAT"
                 execution = calendar.next_session(day).date()
-                queue(day+t,["email","push"],f"SPY/QQQ TRADE ALERT | {t} {side} | {day}",f"{t} signal: {side}\nVerified close: {p}\n200-session SMA: {avg:.2f}\nBands: {avg*D('.97'):.2f} to {avg*D('1.03'):.2f}\nResearch execution: {execution} close.")
+                channels = ["email", "push"] if new else ["push"]
+                queue(day+t,channels,f"SPY/QQQ TRADE ALERT | {t} {side} | {day}",f"{t} signal: {side}\nVerified close: {p}\n200-session SMA: {avg:.2f}\nBands: {avg*D('.97'):.2f} to {avg*D('1.03'):.2f}\nResearch execution: {execution} close.")
         state["date"] = day
 
 
@@ -142,7 +143,7 @@ for attempt in range(3):
             time.sleep(75)
 if mode in ("daily", "weekly"):
     state.setdefault("daily_runs",{})[today]={"through":state["date"],"errors":errors.copy()}
-if mode=="weekly" and state.get("weekly_queued")!=today:
+if mode=="weekly" and now.weekday()==0 and state.get("weekly_queued")!=today:
     since=(now.date()-timedelta(days=6)).isoformat()
     days=[s.date().isoformat() for s in calendar.sessions_in_range(max(since,"2026-11-20"),today)]
     missed=[d for d in days if state.get("daily_runs",{}).get(d,{}).get("through")!=d]
