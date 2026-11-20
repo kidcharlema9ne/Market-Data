@@ -5,7 +5,6 @@ from email.message import EmailMessage
 import os
 import subprocess
 import time
-from collections import Counter
 from datetime import datetime, timedelta
 from decimal import Decimal as D
 from io import StringIO
@@ -47,6 +46,29 @@ def stock_analysis(t):
 def nasdaq(t):
     rows = get(f"https://api.nasdaq.com/api/quote/{t}/historical", params={"assetclass":"etf","fromdate":state["date"],"todate":today,"limit":250},headers={"Accept":"application/json","Referer":"https://www.nasdaq.com/"}).json()["data"]["tradesTable"]["rows"]
     return {pd.Timestamp(r["date"]).date().isoformat():r["close"].replace("$","").replace(",","") for r in rows}
+
+
+def stooq(t):
+    response = get("https://stooq.com/q/l/", params={
+        "s": t.lower() + ".us", "f": "sd2t2ohlc", "h": "", "e": "csv"})
+    row = pd.read_csv(StringIO(response.text)).iloc[0]
+    day = pd.Timestamp(row["Date"]).date().isoformat()
+    if day == today and datetime.now(NY) < calendar.session_close(day).to_pydatetime() + timedelta(minutes=20):
+        return {}
+    return {day: float(row["Close"])}
+
+
+def twelve_data(t):
+    market_id = {"SPY": "568728/etf/nyse", "QQQ": "958673/etf/nasdaq"}[t]
+    url = f"https://twelvedata.com/markets/{market_id}/{t.lower()}/historical-data"
+    response = get(url)
+    if t.lower() not in response.url.lower().split("/"):
+        return {}
+    table = next((table for table in pd.read_html(StringIO(response.text))
+                  if {"Date", "Close"} <= set(table.columns)), None)
+    if table is None:
+        return {}
+    return {pd.Timestamp(row["Date"]).date().isoformat(): row["Close"] for _, row in table.iterrows()}
 
 
 def fetch(source,t):
@@ -95,7 +117,10 @@ def check():
                 avg = (subtotal + p) / 200
                 return p > avg * D("1.03") if not old else p >= avg * D(".97")
             quotes = {}
-            for source in (stock_analysis, yahoo, nasdaq, closing_minute):
+            for source in (stock_analysis, nasdaq, yahoo, closing_minute, stooq, twelve_data):
+                provider = "yahoo" if source is closing_minute else source.__name__
+                if provider in quotes:
+                    continue
                 if source not in feeds:
                     feeds[source] = fetch(source, t)
                 raw = feeds[source].get(day)
@@ -104,18 +129,18 @@ def check():
                 p = D(str(raw))
                 if not p.is_finite() or p <= 0:
                     continue
-                quotes[source.__name__] = p.quantize(D(".01"))
-                if len(quotes) >= 2 and len(set(quotes.values())) == 1:
+                quotes[provider] = p.quantize(D(".01"))
+                matches = [(name, other) for name, other in quotes.items() if name != provider
+                           and abs(other - p) <= min(other, p) * D(".0005")
+                           and position(other) == position(p)]
+                if matches:
+                    first_name, first_price = matches[0]
+                    source_names = f"{first_name} {first_price}, {provider} {quotes[provider]}"
+                    p = first_price
                     break
-            if not quotes or len({position(p) for p in quotes.values()}) != 1:
-                problems.append(f"{day} {t}: no closing price or conflicting signals ({quotes})")
+            else:
+                problems.append(f"{day} {t}: awaiting two corroborating closing prices ({quotes})")
                 break
-            # Prefer a majority close, then the final regular-session minute, then a dated daily bar.
-            counts = Counter(quotes.values())
-            p, votes = counts.most_common(1)[0]
-            if votes == 1:
-                p = quotes.get("closing_minute", next(iter(quotes.values())))
-            source_names = ", ".join(k for k, v in quotes.items() if v == p)
             history[:] = history[1:] + [float(p)]
             avg = (subtotal + p) / 200
             new = position(p)
@@ -123,11 +148,11 @@ def check():
             state["state"][t] = new
             print(f"{day} {t} {p} ({source_names}) SMA {avg:.2f} LONG={new}", flush=True)
             if new != old and day >= "2026-11-20":
-                side = "LONG" if new else "FLAT"
+                side = "BUY" if new else "SELL"
                 execution = calendar.next_session(day).date()
-                queue(day+t, ["email", "push"] if new else ["push"],
-                      f"SPY/QQQ TRADE ALERT | {t} {side} | {day}",
-                      f"{t} signal: {side}\\nRegular-session price: {p} ({source_names})\\n200-session SMA: {avg:.2f}\\nBands: {avg*D('.97'):.2f} to {avg*D('1.03'):.2f}\\nResearch execution: {execution} close.")
+                queue(day+t, ["email", "push"],
+                      f"TRADE ALERT | {side} {t} | {day}",
+                      f"{side} {t}\nRegular-session price: {p} ({source_names})\n200-session SMA: {avg:.2f}\nBands: {avg*D('.97'):.2f} to {avg*D('1.03'):.2f}\nResearch execution: {execution} close.")
     state["date"] = min(dates.values())
     if problems:
         raise ValueError(" | ".join(problems))
@@ -150,7 +175,10 @@ def deliver(item):
             with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=25) as smtp:
                 smtp.login(os.environ["SPYQQQ_GMAIL_ADDRESS"], os.environ["SPYQQQ_GMAIL_APP_PASSWORD"])
                 smtp.send_message(msg)
+            print(f"Gmail SMTP accepted: {title}", flush=True)
             return
+        if "TRADE ALERT" in title:
+            raise RuntimeError("Missing Gmail configuration for trade alert")
         matches = subprocess.check_output(
             ["gh", "issue", "list", "--state", "all", "--search", f'"{title}" in:title',
              "--json", "title"], text=True)
