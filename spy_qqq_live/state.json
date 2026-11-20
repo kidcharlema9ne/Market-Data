@@ -1,12 +1,11 @@
 {
-  "date": "2026-11-19",
+  "date": "2026-11-20",
   "state": {
-    "SPY": true,
+    "SPY": false,
     "QQQ": false
   },
   "prices": {
     "SPY": [
-      677.62,
       690.62,
       693.95,
       692.12,
@@ -205,10 +204,10 @@
       739.95,
       732.44,
       730.2,
-      715.87
+      715.87,
+      687.97
     ],
     "QQQ": [
-      597.03,
       609.65,
       614.32,
       611.47,
@@ -407,20 +406,19 @@
       661.75,
       656.95,
       659.51,
-      645.04
+      645.04,
+      609.88
     ]
   },
   "daily_runs": {
     "2026-11-20": {
-      "through": "2026-11-19",
-      "errors": [
-        "2026-11-20 SPY: awaiting two corroborating closing prices ({'stock_analysis': Decimal('692.85'), 'twelve_data': Decimal('690.62')}) | 2026-11-20 QQQ: awaiting two corroborating closing prices ({'stock_analysis': Decimal('612.42'), 'twelve_data': Decimal('609.75')})"
-      ]
+      "through": "2026-11-20",
+      "errors": []
     }
   },
   "symbol_dates": {
-    "SPY": "2026-11-19",
-    "QQQ": "2026-11-19"
+    "SPY": "2026-11-20",
+    "QQQ": "2026-11-20"
   },
   "pending": {},
   "warned_on": "2026-11-20"
