@@ -62,37 +62,75 @@ def queue(key, channels, title, body):
         state.setdefault("pending",{}).setdefault(key+"-"+channel, dict(channel=channel,title=title,body=body))
 
 
+def closing_minute(t):
+    data = get(f"https://query2.finance.yahoo.com/v8/finance/chart/{t}",
+               params={"range": "5d", "interval": "1m", "includePrePost": "false"}).json()["chart"]["result"][0]
+    result = {}
+    for stamp, price in zip(data["timestamp"], data["indicators"]["quote"][0]["close"]):
+        if price is None:
+            continue
+        instant = pd.Timestamp(stamp, unit="s", tz="UTC")
+        day = instant.tz_convert(NY).date().isoformat()
+        if instant + pd.Timedelta(minutes=1) == calendar.session_close(day):
+            result[day] = price
+    return result
+
+
 def check():
-    sessions = calendar.sessions_in_range((pd.Timestamp(state["date"])+pd.Timedelta(days=1)).date(),today) if state["date"]<today else []
-    sessions = [s.date().isoformat() for s in sessions if calendar.session_close(s).to_pydatetime()<=now]
-    if not sessions:
-        return
-    feeds = {t:[fetch(yahoo,t),fetch(stock_analysis,t)] for t in state["state"]}
-    for day in sessions:
-        verified = {}
-        for t, sources in feeds.items():
-            def votes():
-                return Counter(D(str(s[day])).quantize(D(".01")) for s in sources if day in s and D(str(s[day])).is_finite() and D(str(s[day]))>0)
-            counts = votes()
-            if max(counts.values(),default=0)<2 and len(sources)==2:
-                sources.append(fetch(nasdaq,t))
-                counts = votes()
-            if max(counts.values(),default=0)<2:
-                raise ValueError(f"{day} {t}: two agreeing closes unavailable")
-            verified[t] = counts.most_common(1)[0][0]
-        for t, p in verified.items():
+    dates = state.setdefault("symbol_dates", {t: state["date"] for t in state["state"]})
+    problems = []
+    for t, last in dates.copy().items():
+        if last >= today:
+            continue
+        days = calendar.sessions_in_range(pd.Timestamp(last) + pd.Timedelta(days=1), today)
+        days = [s.date().isoformat() for s in days if calendar.session_close(s).to_pydatetime() <= datetime.now(NY)]
+        if not days:
+            continue
+        feeds = {}
+        for day in days:
             history = state["prices"][t]
-            history[:] = history[1:]+[float(p)]
-            avg = sum(map(lambda v:D(str(v)),history))/200
+            subtotal = sum(D(str(v)) for v in history[1:])
             old = state["state"][t]
-            new = True if p>avg*D("1.03") else False if p<avg*D(".97") else old
+            def position(p):
+                avg = (subtotal + p) / 200
+                return p > avg * D("1.03") if not old else p >= avg * D(".97")
+            quotes = {}
+            for source in (stock_analysis, yahoo, nasdaq, closing_minute):
+                if source not in feeds:
+                    feeds[source] = fetch(source, t)
+                raw = feeds[source].get(day)
+                if raw is None:
+                    continue
+                p = D(str(raw))
+                if not p.is_finite() or p <= 0:
+                    continue
+                quotes[source.__name__] = p.quantize(D(".01"))
+                if len(quotes) >= 2 and len(set(quotes.values())) == 1:
+                    break
+            if not quotes or len({position(p) for p in quotes.values()}) != 1:
+                problems.append(f"{day} {t}: no closing price or conflicting signals ({quotes})")
+                break
+            # Prefer a majority close, then the final regular-session minute, then a dated daily bar.
+            counts = Counter(quotes.values())
+            p, votes = counts.most_common(1)[0]
+            if votes == 1:
+                p = quotes.get("closing_minute", next(iter(quotes.values())))
+            source_names = ", ".join(k for k, v in quotes.items() if v == p)
+            history[:] = history[1:] + [float(p)]
+            avg = (subtotal + p) / 200
+            new = position(p)
+            dates[t] = day
             state["state"][t] = new
-            if new!=old and day>="2026-11-20":
+            print(f"{day} {t} {p} ({source_names}) SMA {avg:.2f} LONG={new}", flush=True)
+            if new != old and day >= "2026-11-20":
                 side = "LONG" if new else "FLAT"
                 execution = calendar.next_session(day).date()
-                channels = ["email", "push"] if new else ["push"]
-                queue(day+t,channels,f"SPY/QQQ TRADE ALERT | {t} {side} | {day}",f"{t} signal: {side}\nVerified close: {p}\n200-session SMA: {avg:.2f}\nBands: {avg*D('.97'):.2f} to {avg*D('1.03'):.2f}\nResearch execution: {execution} close.")
-        state["date"] = day
+                queue(day+t, ["email", "push"] if new else ["push"],
+                      f"SPY/QQQ TRADE ALERT | {t} {side} | {day}",
+                      f"{t} signal: {side}\\nRegular-session price: {p} ({source_names})\\n200-session SMA: {avg:.2f}\\nBands: {avg*D('.97'):.2f} to {avg*D('1.03'):.2f}\\nResearch execution: {execution} close.")
+    state["date"] = min(dates.values())
+    if problems:
+        raise ValueError(" | ".join(problems))
 
 
 def deliver(item):
@@ -141,6 +179,9 @@ for attempt in range(3):
             errors.append(str(exc))
         else:
             time.sleep(75)
+if errors and state.get("warned_on") != today:
+    queue(today+"data", ["push"], f"SPY/QQQ DATA DELAY | {today}", "Signal check incomplete. " + " | ".join(errors))
+    state["warned_on"] = today
 if mode in ("daily", "weekly"):
     state.setdefault("daily_runs",{})[today]={"through":state["date"],"errors":errors.copy()}
 if mode=="weekly" and now.weekday()==0 and state.get("weekly_queued")!=today:
