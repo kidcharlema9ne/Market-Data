@@ -1,4 +1,6 @@
 """Verified SPY/QQQ end-of-day signals. Called only by workflow_dispatch."""
+import re
+from lxml import html
 import json
 import smtplib
 from email.message import EmailMessage
@@ -71,6 +73,41 @@ def twelve_data(t):
     return {pd.Timestamp(row["Date"]).date().isoformat(): row["Close"] for _, row in table.iterrows()}
 
 
+def stock_analysis_close(t):
+    page = html.fromstring(get(f"https://stockanalysis.com/etf/{t.lower()}/").content)
+    if f"({t})" not in " ".join(page.xpath("//h1//text()")):
+        return {}
+    for label in page.xpath("//span[normalize-space()='At close:']"):
+        stamp = " ".join(label.getparent().text_content().split()).removeprefix("At close:").strip()
+        match = re.fullmatch(r"(.+) (EST|EDT)", stamp)
+        if not match:
+            continue
+        instant = datetime.strptime(match[1], "%b %d, %Y, %I:%M %p").replace(tzinfo=NY)
+        day = instant.date().isoformat()
+        if instant.tzname() != match[2] or instant != calendar.session_close(day):
+            continue
+        price = label.getparent().getparent()[0].text_content().strip().replace(",", "")
+        if re.fullmatch(r"[0-9]+(?:\.[0-9]+)?", price):
+            return {day: price}
+    return {}
+
+
+def robinhood(t):
+    data = get(f"https://api.robinhood.com/marketdata/historicals/{t}/",
+               params={"interval": "5minute", "span": "week", "bounds": "regular"}).json()
+    if data.get("symbol") != t or data.get("interval") != "5minute" or data.get("bounds") != "regular":
+        return {}
+    result = {}
+    for bar in data["historicals"]:
+        if bar["session"] != "reg" or bar["interpolated"] or not bar["volume"]:
+            continue
+        start = pd.Timestamp(bar["begins_at"])
+        day = start.tz_convert(NY).date().isoformat()
+        if start + pd.Timedelta(minutes=5) == calendar.session_close(day):
+            result[day] = bar["close_price"]
+    return result
+
+
 def fetch(source,t):
     try:
         return source(t)
@@ -105,7 +142,7 @@ def check():
         if last >= today:
             continue
         days = calendar.sessions_in_range(pd.Timestamp(last) + pd.Timedelta(days=1), today)
-        days = [s.date().isoformat() for s in days if calendar.session_close(s).to_pydatetime() <= datetime.now(NY)]
+        days = [s.date().isoformat() for s in days if calendar.session_close(s).to_pydatetime() + timedelta(minutes=16) <= datetime.now(NY)]
         if not days:
             continue
         feeds = {}
@@ -117,8 +154,11 @@ def check():
                 avg = (subtotal + p) / 200
                 return p > avg * D("1.03") if not old else p >= avg * D(".97")
             quotes = {}
-            for source in (stock_analysis, nasdaq, yahoo, closing_minute, stooq, twelve_data):
-                provider = "yahoo" if source is closing_minute else source.__name__
+            sources = [stock_analysis_close, robinhood, closing_minute]
+            if day < today:
+                sources.extend([stock_analysis, nasdaq, yahoo, twelve_data])
+            for source in sources:
+                provider = {closing_minute: "yahoo", stock_analysis_close: "stock_analysis"}.get(source, source.__name__)
                 if provider in quotes:
                     continue
                 if source not in feeds:
