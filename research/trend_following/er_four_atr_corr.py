@@ -23,6 +23,8 @@ assert _HEAD.strip() and _CUT in _TXT
 exec(compile(_HEAD, str(_HERE / "er_stop_and_time_limit.py"), "exec"), globals())
 
 COT_FILE = sys.argv[4]
+CUT_ = pd.Timestamp("2021-08-06")
+WINS = {"development": (FIRST, CUT_), "sealed (read-only look)": (CUT_ + pd.Timedelta(days=1), LAST), "whole history": (FIRST, LAST)}
 nm0 = NAMES[0]
 
 # ---- check: original run reproduces the engine
