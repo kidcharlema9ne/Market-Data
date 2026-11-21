@@ -1,6 +1,6 @@
 # Insider Buying Research operating instructions
 
-[Michael’s GitHub master index](MASTER_INDEX.md) locates projects by nickname, including the live Gmail sender, timers and reports.
+[Michael’s GitHub master index](https://github.com/kidcharlema9ne/Master-Index) locates projects by nickname, including the live Gmail sender, timers and reports.
 
 
 **Futures data.** For ANY futures task ("find my futures"), read [FUTURES_DATA.md](FUTURES_DATA.md) first: where the daily futures prices live (Cloudflare R2, readable only through GitHub Actions secrets in this repo), how to fetch them, and the standing rules for futures work.
