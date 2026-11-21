@@ -3,15 +3,25 @@
 Archive newest day: 2026-11-06. Overlap sessions compared: 2026-10-28..2026-11-06.
 - Manifest with API key: HTTP 200; plan=None; 27 files; newest 2026-11-06; keys ['asset_type', 'date_range', 'end', 'expires_in', 'file_count', 'files', 'start', 'total_bytes']
 - Manifest no key: HTTP 401; plan=None; 0 files; newest none; keys ['detail']
-- Vendor days newer than the archive that the manifest offers: none
-- 2026-10-28: download failed (HTTP 400)
-- 2026-10-29: download failed (HTTP 400)
-- 2026-10-30: download failed (HTTP 400)
-- 2026-11-02: download failed (HTTP 400)
-- 2026-11-03: download failed (HTTP 400)
-- 2026-11-04: download failed (HTTP 400)
-- 2026-11-05: download failed (HTTP 400)
-- 2026-11-06: download failed (HTTP 400)
+- Candidate new weekdays tried: 2026-11-09, 2026-11-10, 2026-11-11, 2026-11-12, 2026-11-13, 2026-11-16, 2026-11-17, 2026-11-18, 2026-11-19, 2026-11-20
+- 2026-10-28: not available (public HTTP 401; manifest-url HTTP 400 b'<?xml version="1.0" encoding="UTF-8"?><Error><Code>InvalidRequest</Code><Message>Missing x-amz-content-sha256</Message><')
+- 2026-10-29: not available (public HTTP 401; manifest-url HTTP 400 b'<?xml version="1.0" encoding="UTF-8"?><Error><Code>InvalidRequest</Code><Message>Missing x-amz-content-sha256</Message><')
+- 2026-10-30: not available (public HTTP 401; manifest-url HTTP 400 b'<?xml version="1.0" encoding="UTF-8"?><Error><Code>InvalidRequest</Code><Message>Missing x-amz-content-sha256</Message><')
+- 2026-11-02: not available (public HTTP 401; manifest-url HTTP 400 b'<?xml version="1.0" encoding="UTF-8"?><Error><Code>InvalidRequest</Code><Message>Missing x-amz-content-sha256</Message><')
+- 2026-11-03: not available (public HTTP 401; manifest-url HTTP 400 b'<?xml version="1.0" encoding="UTF-8"?><Error><Code>InvalidRequest</Code><Message>Missing x-amz-content-sha256</Message><')
+- 2026-11-04: not available (public HTTP 401; manifest-url HTTP 400 b'<?xml version="1.0" encoding="UTF-8"?><Error><Code>InvalidRequest</Code><Message>Missing x-amz-content-sha256</Message><')
+- 2026-11-05: not available (public HTTP 401; manifest-url HTTP 400 b'<?xml version="1.0" encoding="UTF-8"?><Error><Code>InvalidRequest</Code><Message>Missing x-amz-content-sha256</Message><')
+- 2026-11-06: not available (public HTTP 401; manifest-url HTTP 400 b'<?xml version="1.0" encoding="UTF-8"?><Error><Code>InvalidRequest</Code><Message>Missing x-amz-content-sha256</Message><')
+- 2026-11-09: not available (public HTTP 401)
+- 2026-11-10: not available (public HTTP 401)
+- 2026-11-11: not available (public HTTP 401)
+- 2026-11-12: not available (public HTTP 401)
+- 2026-11-13: not available (public HTTP 401)
+- 2026-11-16: downloaded (public HTTP 200), 129 rows
+- 2026-11-17: downloaded (public HTTP 200), 129 rows
+- 2026-11-18: downloaded (public HTTP 200), 129 rows
+- 2026-11-19: downloaded (public HTTP 200), 129 rows
+- 2026-11-20: downloaded (public HTTP 200), 129 rows
 
 ## Overlap comparison (vendor close / archive close) on no overlap days
 
@@ -67,3 +77,4 @@ Archive newest day: 2026-11-06. Overlap sessions compared: 2026-10-28..2026-11-0
 | RTY | RTY | | | | no overlap |
 
 Markets needing a rescale or a check: none.
+Newest vendor day 2026-11-20 carries 48 of the 48 markets.
