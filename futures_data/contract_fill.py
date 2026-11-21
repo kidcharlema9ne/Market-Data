@@ -132,24 +132,24 @@ for ps, (root, suf) in MARKETS.items():
 
     for k in range(len(rs), min(needed) - 1, -1):
         lo, hi = seg_days(k)
-        days = sorted(d for d in V if lo < d <= hi)
+        roll_days = {r["roll_date"] for r in rs}
+        days = sorted(d for d in V if lo < d <= hi and d not in roll_days)
         scored = []
         for t, df in P.items():
             if not days or not all(d in df.index for d in days):
                 continue
             err = max(abs(df.loc[d, "Close"] * cumfac(d) / V[d] - 1) for d in days)
-            if k < len(rs) and rs[k]["roll_date"] not in V and k + 1 in chosen:
-                rd = rs[k]["roll_date"]
-                tn = chosen[k + 1]
-                if rd in df.index and rd in P[tn].index:
-                    err = max(err, abs(df.loc[rd, "Close"] * rs[k]["ratio"] / P[tn].loc[rd, "Close"] - 1))
-                else:
-                    continue
             scored.append((err, t))
         scored.sort()
         if scored and scored[0][0] <= TOL:
             chosen[k] = scored[0][1]
-            report.append(f"- segment {k} ({lo}..{hi}): {scored[0][1]} max error {scored[0][0]:.3%} over {len(days)} known days")
+            info = ""
+            if k < len(rs) and k + 1 in chosen:
+                rd = rs[k]["roll_date"]
+                if rd in P[chosen[k]].index and rd in P[chosen[k + 1]].index:
+                    gap_pct = P[chosen[k]].loc[rd, "Close"] * rs[k]["ratio"] / P[chosen[k + 1]].loc[rd, "Close"] - 1
+                    info = f"; roll-day check (expiring close x ratio vs new close) differs by {gap_pct:+.2%}"
+            report.append(f"- segment {k} ({lo}..{hi}): {scored[0][1]} max error {scored[0][0]:.3%} over {len(days)} known non-roll days{info}")
             continue
         report.append(f"- segment {k} ({lo}..{hi}): " + ("NOT IDENTIFIED" if k in needed else "not identified (not needed for the gap)") +
                       f"; {len(days)} known days; contracts with all days: {[t for _, t in scored][:5]}")
