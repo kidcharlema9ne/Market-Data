@@ -70,27 +70,47 @@ for label, auth in (("with API key", True), ("no key", False)):
         out.append(f"- Manifest {label}: HTTP {code}; not JSON: {body[:200]!r}")
         manifests[label] = []
 
+import datetime as dt
 files = max(manifests.values(), key=len)
-want = [e for e in files if e["date"] > last or e["date"] in overlap]
-new_days = [e["date"] for e in want if e["date"] > last]
-out.append(f"- Vendor days newer than the archive that the manifest offers: {', '.join(new_days) or 'none'}")
+by_date = {e["date"]: e for e in files}
+today = dt.date(2026, 11, 21)
+cand = list(overlap)
+d = dt.date.fromisoformat(last) + dt.timedelta(1)
+while d <= today:
+    if d.weekday() < 5:
+        cand.append(d.isoformat())
+    d += dt.timedelta(1)
+new_days = [c for c in cand if c > last]
+out.append(f"- Candidate new weekdays tried: {', '.join(new_days)}")
 vendor = {}
-for e in want:
-    url = e["download_url"]
-    url = BASE + url if url.startswith("/") else url
-    code, data = get(url)
-    if url.startswith(BASE + "/api/v1/download/") and code == 200:
-        try:
-            code, data = get(json.loads(data)["download_url"], auth=False)
-        except Exception as ex:
-            out.append(f"- {e['date']}: could not follow download url ({ex})")
-            continue
-    if code != 200 or data[:4] != b"PAR1":
-        out.append(f"- {e['date']}: download failed (HTTP {code})")
+for day in cand:
+    tried = []
+    data = None
+    # route 1: public no-signup file URL (what the vendor's site advertises)
+    code, body = get(f"{BASE}/api/data/download/futures_daily/{day}.parquet", auth=False)
+    tried.append(f"public HTTP {code}")
+    if code == 200 and body[:4] == b"PAR1":
+        data = body
+    # route 2: the manifest entry with the API key
+    if data is None and day in by_date:
+        url = by_date[day]["download_url"]
+        url = BASE + url if url.startswith("/") else url
+        code, body = get(url)
+        tried.append(f"manifest-url HTTP {code} {body[:120]!r}" if code != 200 else "manifest-url HTTP 200")
+        if code == 200 and url.startswith(BASE + "/api/v1/download/"):
+            try:
+                code, body = get(json.loads(body)["download_url"], auth=False)
+                tried.append(f"presigned HTTP {code}")
+            except Exception as ex:
+                tried.append(f"presigned error {ex}")
+        if code == 200 and body[:4] == b"PAR1":
+            data = body
+    if data is None:
+        out.append(f"- {day}: not available ({'; '.join(tried)})")
         continue
     t = pq.read_table(BytesIO(data))
-    vendor[e["date"]] = dict(zip(t.column("symbol").to_pylist(), t.column("close").to_pylist()))
-    out.append(f"- {e['date']}: downloaded, {t.num_rows} rows")
+    vendor[day] = dict(zip(t.column("symbol").to_pylist(), t.column("close").to_pylist()))
+    out.append(f"- {day}: downloaded ({'; '.join(tried)}), {t.num_rows} rows")
 
 rows = list(csv.DictReader(open("futures_data/report_universe_48_markets.csv")))
 r2 = {d: r2_closes(d) for d in overlap if d in vendor}
@@ -110,9 +130,9 @@ for r in rows:
         need_rescale.append(ps)
     out.append(f"| {r['ibkr']} | {ps} | {med:.6f} | {min(ratios):.6f} | {max(ratios):.6f} | {verdict} |")
 out += ["", f"Markets needing a rescale or a check: {', '.join(need_rescale) or 'none'}."]
-if new_days and vendor.get(new_days[-1]):
-    cnt = sum(1 for r in rows if RENAME.get(r["ibkr"], r["ibkr"]) in vendor[new_days[-1]])
-    out.append(f"Newest vendor day {new_days[-1]} carries {cnt} of the 48 markets.")
+if vendor:
+    cnt = sum(1 for r in rows if RENAME.get(r["ibkr"], r["ibkr"]) in vendor[max(vendor)])
+    out.append(f"Newest vendor day {max(vendor)} carries {cnt} of the 48 markets.")
 text = "\n".join(out)
 open("futures_data/fresh_probe_report.md", "w").write(text + "\n")
 print(text)
