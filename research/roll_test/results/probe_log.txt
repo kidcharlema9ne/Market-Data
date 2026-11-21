@@ -1,0 +1,70 @@
+[1] GET meta/futures_rolls -> HTTP 200, content-type 'application/json', 541 bytes
+    JSON keys: ['columns', 'covers', 'download_url', 'expires_in', 'file']
+    JSON (urls redacted): {"file": "futures_rolls.parquet", "columns": ["root", "roll_date", "ratio", "detected_at"], "covers": "every futures roll since 2026-09", "download_url": "<url redacted>", "expires_in": 60}
+[2] follow download link -> HTTP 200, 2944 bytes, host is marketparquet.com: False
+[3] Parquet rows=90
+    column root: string
+    column roll_date: string
+    column ratio: double
+    column detected_at: string
+  root   roll_date     ratio                detected_at
+0    B  2026-09-21  0.951885  2026-10-03T04:01:59+00:00
+1  BTC  2026-09-21  1.005563  2026-10-03T04:01:59+00:00
+2   BZ  2026-09-21  0.951888  2026-10-03T04:01:59+00:00
+3    C  2026-09-07  1.036956  2026-10-03T04:01:59+00:00
+4   CL  2026-09-11  0.958910  2026-10-03T04:01:59+00:00
+5  CNH  2026-09-08  0.993657  2026-10-03T04:01:59+00:00
+6   CT  2026-09-21  1.039928  2026-10-03T04:01:59+00:00
+7   E1  2026-09-08  1.010308  2026-10-03T04:01:59+00:00
+   root   roll_date     ratio                detected_at
+82  ALI  2026-11-16  0.992308  2026-11-17T04:58:34+00:00
+83   HE  2026-11-16  1.106853  2026-11-17T04:58:34+00:00
+84   HO  2026-11-16  0.937796  2026-11-17T04:58:34+00:00
+85   HG  2026-11-17  1.015814  2026-11-18T04:58:06+00:00
+86  HRC  2026-11-18  1.037658  2026-11-19T04:59:57+00:00
+87   KC  2026-11-18  0.981856  2026-11-19T04:59:57+00:00
+88   ZC  2026-11-18  1.027980  2026-11-19T04:59:57+00:00
+89   CB  2026-11-20  1.115956  2026-11-21T04:57:40+00:00
+    roll_date: min 2026-09-07  max 2026-11-20
+    detected_at: min 2026-10-03T04:01:59+00:00  max 2026-11-21T04:57:40+00:00
+    distinct roots: 69; rolls per root (top 10): [('CL', 3), ('GF', 3), ('HRC', 3), ('MCL', 3), ('VX', 3), ('VXM', 3), ('B', 2), ('BZ', 2), ('FVSA', 2), ('HE', 2)]
+    ratio summary: {'count': 90.0, 'mean': 1.0102289999999998, 'std': 0.04529376989254318, 'min': 0.88081, '25%': 0.992412, '50%': 1.007133, '75%': 1.01795425, 'max': 1.155305}
+Traceback (most recent call last):
+  File "/home/runner/work/insider-buying-research/insider-buying-research/research/roll_test/roll_table_probe.py", line 158, in <module>
+    frame = analyse(data) if data else None
+            ^^^^^^^^^^^^^
+  File "/home/runner/work/insider-buying-research/insider-buying-research/research/roll_test/roll_table_probe.py", line 108, in analyse
+    gap = (frame["detected_at"].astype("datetime64[ns]") - frame["roll_date"].astype("datetime64[ns]")).dt.days
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/generic.py", line 6781, in astype
+    new_data = self._mgr.astype(dtype=dtype, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 632, in astype
+    return self.apply("astype", dtype=dtype, errors=errors)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 456, in apply
+    applied = getattr(b, f)(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 623, in astype
+    new_values = astype_array_safe(values, dtype, errors=errors)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 245, in astype_array_safe
+    new_values = astype_array(values, dtype, copy=copy)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 187, in astype_array
+    values = values.astype(dtype, copy=copy)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/arrays/string_arrow.py", line 391, in astype
+    return super().astype(dtype, copy=copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/arrays/base.py", line 917, in astype
+    return DatetimeArray._from_sequence(self, dtype=dtype, copy=copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/arrays/datetimes.py", line 319, in _from_sequence
+    return cls._from_sequence_not_strict(scalars, dtype=dtype, copy=copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/arrays/datetimes.py", line 367, in _from_sequence_not_strict
+    _validate_tz_from_dtype(dtype, tz, explicit_tz_none)
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/arrays/datetimes.py", line 3026, in _validate_tz_from_dtype
+    raise ValueError(
+ValueError: cannot supply both a tz and a timezone-naive dtype (i.e. datetime64[ns])
