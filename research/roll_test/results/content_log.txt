@@ -1,0 +1,15 @@
+[1] vendor files 4906, stored 4906; size differs on 1219 days (2019-05-06..2024-03-14)
+[1] by year: {'2019': 167, '2020': 253, '2021': 250, '2022': 250, '2023': 248, '2024': 51}
+[2] days compared 1219, download or read failures 0: []
+[2] column differences (stored vs vendor): none
+[2] symbols present on only one side: none
+[2] differing-size days where NO symbol's open/high/low/close/volume changed: 0 []
+[3] symbols with any changed bar: 1 of 132 -> ['MES']
+[3] symbol-days changed: {'MES': 1219}
+[4] largest open/high/low/close ratio spread inside one bar, per changed symbol (about 0 = one factor per day): {'MES': '2.22e-16'}
+[4] days where volume changed, per changed symbol: {'MES': 0}
+[5] MES: compared on 1219 days; factor segments (vendor/stored close):
+     2019-05-06..2023-09-14 days=1094 factor mean 1.002298 min 1.002298 max 1.002298
+     2023-09-15..2023-12-14 days=64 factor mean 0.992868 min 0.992868 max 0.992868 step from previous segment -0.9409%
+     2023-12-15..2024-03-14 days=61 factor mean 0.997209 min 0.997209 max 0.997209 step from previous segment +0.4372%
+[6] wrote content_diff_days.csv with 1219 changed symbol-days
