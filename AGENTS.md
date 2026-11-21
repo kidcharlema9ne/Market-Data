@@ -1,5 +1,8 @@
 # Insider Buying Research operating instructions
 
+[Michael’s GitHub master index](MASTER_INDEX.md) locates projects by nickname, including the live Gmail sender, timers and reports.
+
+
 **Futures data.** For ANY futures task ("find my futures"), read [FUTURES_DATA.md](FUTURES_DATA.md) first: where the daily futures prices live (Cloudflare R2, readable only through GitHub Actions secrets in this repo), how to fetch them, and the standing rules for futures work.
 
 **Read order (keep it small).** Read [docs/LEADS_DIGEST.md](docs/LEADS_DIGEST.md) first (one page: base rule, leads, not-supported list, caveats, open items), then only the last two entries of the log (`grep -n '^## Entry' docs/SHARED_LOG.md | tail -3`, then read from the second-to-last heading). Open older entries one at a time, only when the digest points to them. Refresh the digest when a lead's status changes.
