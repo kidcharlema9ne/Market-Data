@@ -1,0 +1,30 @@
+name: Probe MarketParquet roll file (read-only, commits a report to this branch)
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/futures-48-coverage-20261121']
+    paths: ['futures_data/rolls_probe.py', '.github/workflows/futures-rolls-probe.yml']
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pyarrow
+      - name: Probe
+        env:
+          MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
+        run: python -u futures_data/rolls_probe.py
+      - name: Commit the report to this branch
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git pull -q --rebase origin "$GITHUB_REF_NAME" || true
+          git add futures_data/rolls_probe_report.md
+          git commit -m "Roll file probe report" || echo "nothing to commit"
+          git push
