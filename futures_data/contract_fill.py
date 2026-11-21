@@ -70,12 +70,34 @@ for ps, (root, suf) in MARKETS.items():
     V = st[st["symbol"] == ps].set_index("file_date")["close"].to_dict()
     rs = sorted([r for r in rolls if r["root"] == ps and r["roll_date"] >= KNOWN_FROM], key=lambda r: r["roll_date"])
     tickers = [f"{root}{c}.{suf}" for c in CODES]
+    if ps == "VX":
+        P = {}
+        for exp in ["2026-11-18", "2026-12-16", "2027-01-20", "2027-02-17", "2027-03-17"]:
+            c, b = http(f"https://cdn.cboe.com/data/us/futures/market_statistics/historical_data/VX/VX_{exp}.csv", False)
+            if c != 200:
+                report.append(f"- CBOE VX_{exp}: HTTP {c}")
+                continue
+            d = pd.read_csv(BytesIO(b), skiprows=lambda i: False)
+            d.columns = [x.strip() for x in d.columns]
+            tcol = next(x for x in d.columns if "Trade Date" in x)
+            d["idx"] = pd.to_datetime(d[tcol]).dt.strftime("%Y-%m-%d")
+            d = d.set_index("idx")
+            d = d.rename(columns={"Settle": "Close_settle"})
+            out = pd.DataFrame({"Open": d["Open"], "High": d["High"], "Low": d["Low"], "Close": d["Close_settle"], "Volume": d["Total Volume"]})
+            P[f"VX{exp}"] = out.loc[out.index >= "2026-10-10"]
+        raw_df = None
+        tickers = []
     try:
+        if ps == "VX":
+            raise KeyError("VX handled above")
         raw_df = yf.download(tickers, start="2026-10-10", end="2026-11-22", auto_adjust=False, group_by="ticker", progress=False, threads=True)
+    except KeyError:
+        pass
     except Exception as e:
         summary.append((ps, f"download failed: {e}"))
         continue
-    P = {}
+    if ps != "VX":
+        P = {}
     for t in tickers:
         try:
             d = raw_df[t].dropna(subset=["Close"])
@@ -85,7 +107,7 @@ for ps, (root, suf) in MARKETS.items():
             d = d.copy()
             d.index = [i.strftime("%Y-%m-%d") for i in d.index]
             P[t] = d
-    report.append(f"## {ps}: {len(P)} contract tickers with data; rolls since {KNOWN_FROM}: " +
+    report.append(f"## {ps}: {len(P)} contract series with data; rolls since {KNOWN_FROM}: " +
                   (", ".join(f"{r['roll_date']} x{r['ratio']:.4f}" for r in rs) or "none"))
 
     def cumfac(d):
@@ -100,32 +122,45 @@ for ps, (root, suf) in MARKETS.items():
         hi = rs[k]["roll_date"] if k < len(rs) else "9999"
         return lo, hi
 
+    needed = {sum(1 for r in rs if r["roll_date"] < d) for d in GAP}
     chosen = {}
     ok = True
-    for k in range(len(rs), -1, -1):
+
+    def model_ratios(t, days):
+        df = P[t]
+        return [round(df.loc[d, "Close"] * cumfac(d) / V[d], 4) if d in df.index else None for d in days]
+
+    for k in range(len(rs), min(needed) - 1, -1):
         lo, hi = seg_days(k)
-        days = [d for d in V if lo < d <= hi]
-        best = (None, 9.0)
+        days = sorted(d for d in V if lo < d <= hi)
+        scored = []
         for t, df in P.items():
             if not days or not all(d in df.index for d in days):
                 continue
             err = max(abs(df.loc[d, "Close"] * cumfac(d) / V[d] - 1) for d in days)
             if k < len(rs) and rs[k]["roll_date"] not in V and k + 1 in chosen:
-                # roll day itself is unknown in the vendor data: expiring close x ratio must equal the new contract's close
                 rd = rs[k]["roll_date"]
                 tn = chosen[k + 1]
                 if rd in df.index and rd in P[tn].index:
                     err = max(err, abs(df.loc[rd, "Close"] * rs[k]["ratio"] / P[tn].loc[rd, "Close"] - 1))
                 else:
                     continue
-            if err < best[1]:
-                best = (t, err)
-        if best[0] is None or best[1] > TOL:
-            report.append(f"- segment {k} ({lo}..{hi}): NOT IDENTIFIED (best {best[0]} error {best[1]:.3%}, {len(days)} known days)")
+            scored.append((err, t))
+        scored.sort()
+        if scored and scored[0][0] <= TOL:
+            chosen[k] = scored[0][1]
+            report.append(f"- segment {k} ({lo}..{hi}): {scored[0][1]} max error {scored[0][0]:.3%} over {len(days)} known days")
+            continue
+        report.append(f"- segment {k} ({lo}..{hi}): " + ("NOT IDENTIFIED" if k in needed else "not identified (not needed for the gap)") +
+                      f"; {len(days)} known days; contracts with all days: {[t for _, t in scored][:5]}")
+        for err, t in scored[:3]:
+            report.append(f"    - {t}: max error {err:.3%}; model/vendor by day {dict(zip(days, model_ratios(t, days)))}")
+        if not scored:
+            for t, df in list(P.items())[:6]:
+                report.append(f"    - {t}: has {len(df)} bars, missing known days {[d for d in days if d not in df.index][:6]}")
+        if k in needed:
             ok = False
             break
-        chosen[k] = best[0]
-        report.append(f"- segment {k} ({lo}..{hi}): {best[0]} max error {best[1]:.3%} over {len(days)} known days")
     if not ok:
         summary.append((ps, "not identified"))
         continue
