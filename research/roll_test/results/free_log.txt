@@ -1,0 +1,51 @@
+[1] ES per-symbol daily with key: HTTP 200, valid parquet=True, bytes=14138
+[1] ES per-symbol daily without key: HTTP 200, valid parquet=False, bytes=11624, head=b'<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width'
+[2] testing 48 universe symbols (price symbols): ['ZW', 'KE', 'ZC', 'ZS', 'ZL', 'US', 'UB', 'HO', 'NG', 'ZM', 'CT', 'ZT', 'ZN', 'TN', 'ZF', 'ZQ', 'HE', 'LE', 'GF', 'CL', 'BZ', 'CC', 'PL', 'SB', 'KC', 'SI', 'HG', 'GC', 'AD', 'E1', 'MP', 'B6', 'J1', 'DX', 'E6', 'BR', 'RB', 'N6', 'VX', 'YM', 'SR3', 'SR1', 'ES', 'MES', 'NQ', 'MNQ', 'A6', 'RTY']
+[3] ZW: HTTP 404 no parquet
+[3] KE: HTTP 404 no parquet
+[3] ZC: HTTP 404 no parquet
+[3] ZS: HTTP 404 no parquet
+[3] ZL: HTTP 404 no parquet
+[3] US: free 2025-11-21..2026-11-20 (252 days), days after archive end: 10, free/stored close ratio segments (last 40 overlap days): [[1.0, '2026-09-14', '2026-11-06']], published rolls dated after archive end: []
+[3] UB: HTTP 404 no parquet
+[3] HO: HTTP 404 no parquet
+[3] NG: free 2025-11-21..2026-11-20 (251 days), days after archive end: 10, free/stored close ratio segments (last 40 overlap days): [[1.0, '2026-09-14', '2026-11-06']], published rolls dated after archive end: []
+[3] ZM: HTTP 404 no parquet
+[3] CT: HTTP 404 no parquet
+[3] ZT: HTTP 404 no parquet
+[3] ZN: free 2025-11-21..2026-11-20 (252 days), days after archive end: 10, free/stored close ratio segments (last 40 overlap days): [[1.0, '2026-09-14', '2026-11-06']], published rolls dated after archive end: []
+[3] TN: HTTP 404 no parquet
+[3] ZF: HTTP 404 no parquet
+[3] ZQ: HTTP 404 no parquet
+[3] HE: HTTP 404 no parquet
+[3] LE: HTTP 404 no parquet
+[3] GF: HTTP 404 no parquet
+[3] CL: free 2025-11-21..2026-11-20 (251 days), days after archive end: 10, free/stored close ratio segments (last 40 overlap days): [[1.0, '2026-09-14', '2026-11-06']], published rolls dated after archive end: [('2026-11-12', 0.987299)]
+[3] BZ: HTTP 404 no parquet
+[3] CC: HTTP 404 no parquet
+[3] PL: HTTP 404 no parquet
+[3] SB: HTTP 404 no parquet
+[3] KC: HTTP 404 no parquet
+[3] SI: free 2025-11-21..2026-11-20 (251 days), days after archive end: 10, free/stored close ratio segments (last 40 overlap days): [[1.0, '2026-09-14', '2026-11-06']], published rolls dated after archive end: []
+[3] HG: HTTP 404 no parquet
+[3] GC: free 2025-11-21..2026-11-20 (251 days), days after archive end: 10, free/stored close ratio segments (last 40 overlap days): [[1.0, '2026-09-14', '2026-11-06']], published rolls dated after archive end: []
+[3] AD: HTTP 404 no parquet
+[3] E1: HTTP 404 no parquet
+[3] MP: HTTP 404 no parquet
+[3] B6: HTTP 404 no parquet
+[3] J1: HTTP 404 no parquet
+[3] DX: HTTP 404 no parquet
+[3] E6: HTTP 404 no parquet
+[3] BR: HTTP 404 no parquet
+[3] RB: HTTP 404 no parquet
+[3] N6: HTTP 404 no parquet
+[3] VX: HTTP 404 no parquet
+[3] YM: free 2025-11-21..2026-11-20 (251 days), days after archive end: 10, free/stored close ratio segments (last 40 overlap days): [[1.0, '2026-09-14', '2026-11-06']], published rolls dated after archive end: []
+[3] SR3: HTTP 404 no parquet
+[3] SR1: HTTP 404 no parquet
+[3] ES: free 2025-11-21..2026-11-20 (251 days), days after archive end: 10, free/stored close ratio segments (last 40 overlap days): [[1.0, '2026-09-14', '2026-11-06']], published rolls dated after archive end: []
+[3] MES: free 2025-11-21..2026-11-20 (251 days), days after archive end: 10, free/stored close ratio segments (last 40 overlap days): [[1.0, '2026-09-14', '2026-11-06']], published rolls dated after archive end: []
+[3] NQ: free 2025-11-21..2026-11-20 (251 days), days after archive end: 10, free/stored close ratio segments (last 40 overlap days): [[1.0, '2026-09-14', '2026-11-06']], published rolls dated after archive end: []
+[3] MNQ: free 2025-11-21..2026-11-20 (251 days), days after archive end: 10, free/stored close ratio segments (last 40 overlap days): [[1.0, '2026-09-14', '2026-11-06']], published rolls dated after archive end: []
+[3] A6: HTTP 404 no parquet
+[3] RTY: free 2025-11-21..2026-11-20 (251 days), days after archive end: 10, free/stored close ratio segments (last 40 overlap days): [[1.0, '2026-09-14', '2026-11-06']], published rolls dated after archive end: []
