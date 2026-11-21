@@ -154,9 +154,13 @@ def check():
                 avg = (subtotal + p) / 200
                 return p > avg * D("1.03") if not old else p >= avg * D(".97")
             quotes = {}
-            sources = [stock_analysis_close, robinhood, closing_minute]
+            session_end_sources = (stock_analysis_close, robinhood, closing_minute)
+            session_end_quotes = set()
+            sources = list(session_end_sources)
             if day < today:
                 sources.extend([stock_analysis, nasdaq, yahoo, twelve_data])
+            else:
+                sources.extend([nasdaq, twelve_data])
             for source in sources:
                 provider = {closing_minute: "yahoo", stock_analysis_close: "stock_analysis"}.get(source, source.__name__)
                 if provider in quotes:
@@ -170,7 +174,12 @@ def check():
                 if not p.is_finite() or p <= 0:
                     continue
                 quotes[provider] = p.quantize(D(".01"))
+                if source in session_end_sources:
+                    session_end_quotes.add(provider)
+                # Same-day daily rows carry a date only. Use them to corroborate
+                # an exchange-session-end observation, never to establish its time.
                 matches = [(name, other) for name, other in quotes.items() if name != provider
+                           and (day < today or name in session_end_quotes)
                            and abs(other - p) <= min(other, p) * D(".0005")
                            and position(other) == position(p)]
                 if matches:
@@ -179,13 +188,8 @@ def check():
                     p = first_price
                     break
             else:
-                # Different reported closes can corroborate the trade when every provider
-                # gives the same decision and the exit/entry boundary is outside their range.
-                if len(quotes) < 2 or len({position(price) for price in quotes.values()}) != 1:
-                    problems.append(f"{day} {t}: awaiting two corroborating closing prices ({quotes})")
-                    break
-                p = next(iter(quotes.values()))
-                source_names = ", ".join(f"{name} {price}" for name, price in quotes.items())
+                problems.append(f"{day} {t}: awaiting two corroborating closing prices ({quotes})")
+                break
             history[:] = history[1:] + [float(p)]
             avg = (subtotal + p) / 200
             new = position(p)
