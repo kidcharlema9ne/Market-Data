@@ -1,5 +1,8 @@
 # Insider Buying Research
 
+[Michael’s GitHub master index](MASTER_INDEX.md) locates projects by nickname, including the live Gmail sender, timers and reports.
+
+
 This project studies how discretionary insider purchases perform after public disclosure. A separate SEC scanner is planned to use the research findings.
 
 - [FUTURES_DATA.md](FUTURES_DATA.md): where Michael's daily futures prices live and how to fetch them (any futures task starts here)
