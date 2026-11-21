@@ -157,6 +157,8 @@ def check():
             sources = [stock_analysis_close, robinhood, closing_minute]
             if day < today:
                 sources.extend([stock_analysis, nasdaq, yahoo, twelve_data])
+            else:
+                sources.extend([nasdaq, twelve_data])
             for source in sources:
                 provider = {closing_minute: "yahoo", stock_analysis_close: "stock_analysis"}.get(source, source.__name__)
                 if provider in quotes:
@@ -179,13 +181,8 @@ def check():
                     p = first_price
                     break
             else:
-                # Different reported closes can corroborate the trade when every provider
-                # gives the same decision and the exit/entry boundary is outside their range.
-                if len(quotes) < 2 or len({position(price) for price in quotes.values()}) != 1:
-                    problems.append(f"{day} {t}: awaiting two corroborating closing prices ({quotes})")
-                    break
-                p = next(iter(quotes.values()))
-                source_names = ", ".join(f"{name} {price}" for name, price in quotes.items())
+                problems.append(f"{day} {t}: awaiting two corroborating closing prices ({quotes})")
+                break
             history[:] = history[1:] + [float(p)]
             avg = (subtotal + p) / 200
             new = position(p)
