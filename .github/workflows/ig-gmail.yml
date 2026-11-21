@@ -1,5 +1,8 @@
 name: IG sentiment Gmail delivery
 on:
+  schedule:
+    - cron: '15,45 16-20 * * 1-5'
+      timezone: America/New_York
   workflow_dispatch:
     inputs:
       report_date:
@@ -9,17 +12,54 @@ on:
         description: Label this message as a delivery test
         type: boolean
         default: true
-permissions: {}
+permissions:
+  contents: read
+concurrency:
+  group: ig-gmail-delivery
+  cancel-in-progress: false
 jobs:
   email:
     runs-on: ubuntu-latest
     steps:
-      - name: Send the report link through Gmail
+      - uses: kidcharlema9ne/IG-Sentiment-Report@main
+        id: report
+      - name: Verify official report date
+        id: verify
         env:
+          ROOT: ${{ steps.report.outputs.directory }}
+          REQUESTED: ${{ inputs.report_date }}
+        run: |
+          python - <<'PY'
+          import csv, os
+          from datetime import datetime, timezone
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          eastern = ZoneInfo("America/New_York")
+          root = Path(os.environ["ROOT"])
+          with (root / "data/ig_sentiment/latest.csv").open() as f:
+              dates = {datetime.fromisoformat(row["snapshot_utc"]).replace(tzinfo=timezone.utc).astimezone(eastern).date().isoformat() for row in csv.DictReader(f)}
+          day = os.environ["REQUESTED"] or datetime.now(eastern).date().isoformat()
+          ready = dates == {day} and (root / f"data/ig_sentiment/ig_sentiment_{day}.csv").is_file()
+          if os.environ["REQUESTED"] and not ready:
+              raise SystemExit("The latest official snapshot does not match the requested date")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              print(f"day={day}", file=out)
+              print(f"ready={str(ready).lower()}", file=out)
+          PY
+      - uses: actions/cache/restore@v4
+        id: sent
+        if: steps.verify.outputs.ready == 'true' && !inputs.test
+        with:
+          path: ig-delivery-receipt
+          key: ig-gmail-sent-${{ steps.verify.outputs.day }}
+      - name: Send the report link through Gmail
+        if: steps.verify.outputs.ready == 'true' && steps.sent.outputs.cache-hit != 'true'
+        env:
+          ROOT: ${{ steps.report.outputs.directory }}
           ADDRESS: ${{ secrets.SPYQQQ_GMAIL_ADDRESS }}
           APP_PASSWORD: ${{ secrets.SPYQQQ_GMAIL_APP_PASSWORD }}
           RECIPIENT: ${{ secrets.SPYQQQ_EMAIL_TO }}
-          REPORT_DATE: ${{ inputs.report_date }}
+          REPORT_DATE: ${{ steps.verify.outputs.day }}
           TEST: ${{ inputs.test }}
         run: |
           python - <<'PY'
@@ -34,9 +74,18 @@ jobs:
           msg["To"] = os.environ["RECIPIENT"]
           msg["Subject"] = f"{prefix}IG Bank Customer Positioning - {day}"
           msg.set_content(f"IG retail positioning for {day}\n\nLatest PDF report:\n{root}/reports/IG_Sentiment_latest.pdf\n\nDaily snapshot for {day}:\n{root}/data/ig_sentiment/ig_sentiment_{day}.csv")
+          from pathlib import Path
+          pdf = Path(os.environ["ROOT"]) / "reports/IG_Sentiment_latest.pdf"
+          msg.add_attachment(pdf.read_bytes(), maintype="application", subtype="pdf", filename=f"IG-Sentiment-{day}.pdf")
           with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=30) as smtp:
               smtp.login(os.environ["ADDRESS"], os.environ["APP_PASSWORD"])
               if smtp.send_message(msg):
                   raise RuntimeError("Gmail refused a recipient")
+          Path("ig-delivery-receipt").write_text(day)
           print("Gmail accepted the IG report message.")
           PY
+      - uses: actions/cache/save@v4
+        if: steps.verify.outputs.ready == 'true' && steps.sent.outputs.cache-hit != 'true' && !inputs.test
+        with:
+          path: ig-delivery-receipt
+          key: ig-gmail-sent-${{ steps.verify.outputs.day }}
