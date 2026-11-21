@@ -26,3 +26,8 @@ If Michael says "go to GitHub and find my futures", this is the place. Repo: `ki
 ## Standing research rules for futures work (Michael, 11 Nov 2026)
 - Keep the last 5 years (outside-day dates from 2021-11-08 on) sealed while developing; develop in-sample (2007-12-31 to 2021-08-06, then a 3-month purge). Unseal only when Michael says so.
 - Describe factors and rules in plain words, never letter codes (he does not remember what they stand for).
+
+## Current days past the vendor archive (added 21 Nov 2026, branch claude/futures-48-coverage-20261121)
+- The vendor archive and Michael's API key stop at 2026-11-06 (newer days are the paid Keep Current add-on). `futures_data/build_current_futures.py` writes 2026-11-09..20 for the markets it could verify to the SEPARATE prefix `marketparquet/futures_daily_current/` (days 11-09..13 from free Yahoo bars, exact or offset-scaled; days 11-16..20 are the vendor's public files verbatim). The archive prefix is untouched.
+- `futures_data/fetch_futures_prices_current.py` (workflow `futures-current-build.yml`, artifact `futures_prices_current`) stitches both into one table with a `source` column. Per-market verdicts: `futures_data/current_build_report.md`. Markets not verified stay at 2026-11-06 (do not forward-fill them).
+- Coverage of all 48 markets: `futures_data/coverage_48_report.md`.
