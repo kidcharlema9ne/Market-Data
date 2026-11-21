@@ -154,7 +154,9 @@ def check():
                 avg = (subtotal + p) / 200
                 return p > avg * D("1.03") if not old else p >= avg * D(".97")
             quotes = {}
-            sources = [stock_analysis_close, robinhood, closing_minute]
+            session_end_sources = (stock_analysis_close, robinhood, closing_minute)
+            session_end_quotes = set()
+            sources = list(session_end_sources)
             if day < today:
                 sources.extend([stock_analysis, nasdaq, yahoo, twelve_data])
             else:
@@ -172,7 +174,12 @@ def check():
                 if not p.is_finite() or p <= 0:
                     continue
                 quotes[provider] = p.quantize(D(".01"))
+                if source in session_end_sources:
+                    session_end_quotes.add(provider)
+                # Same-day daily rows carry a date only. Use them to corroborate
+                # an exchange-session-end observation, never to establish its time.
                 matches = [(name, other) for name, other in quotes.items() if name != provider
+                           and (day < today or name in session_end_quotes)
                            and abs(other - p) <= min(other, p) * D(".0005")
                            and position(other) == position(p)]
                 if matches:
