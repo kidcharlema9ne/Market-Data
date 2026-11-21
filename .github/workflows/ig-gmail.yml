@@ -1,0 +1,42 @@
+name: IG sentiment Gmail delivery
+on:
+  workflow_dispatch:
+    inputs:
+      report_date:
+        description: Official report date (YYYY-MM-DD)
+        required: true
+      test:
+        description: Label this message as a delivery test
+        type: boolean
+        default: true
+permissions: {}
+jobs:
+  email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send the report link through Gmail
+        env:
+          ADDRESS: ${{ secrets.SPYQQQ_GMAIL_ADDRESS }}
+          APP_PASSWORD: ${{ secrets.SPYQQQ_GMAIL_APP_PASSWORD }}
+          RECIPIENT: ${{ secrets.SPYQQQ_EMAIL_TO }}
+          REPORT_DATE: ${{ inputs.report_date }}
+          TEST: ${{ inputs.test }}
+        run: |
+          python - <<'PY'
+          import os, smtplib
+          from datetime import date
+          from email.message import EmailMessage
+          day = date.fromisoformat(os.environ["REPORT_DATE"]).isoformat()
+          root = "https://github.com/kidcharlema9ne/IG-Sentiment-Report/blob/main"
+          prefix = "[TEST] " if os.environ["TEST"] == "true" else ""
+          msg = EmailMessage()
+          msg["From"] = os.environ["ADDRESS"]
+          msg["To"] = os.environ["RECIPIENT"]
+          msg["Subject"] = f"{prefix}IG Bank Customer Positioning - {day}"
+          msg.set_content(f"IG retail positioning for {day}\n\nLatest PDF report:\n{root}/reports/IG_Sentiment_latest.pdf\n\nDaily snapshot for {day}:\n{root}/data/ig_sentiment/ig_sentiment_{day}.csv")
+          with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=30) as smtp:
+              smtp.login(os.environ["ADDRESS"], os.environ["APP_PASSWORD"])
+              if smtp.send_message(msg):
+                  raise RuntimeError("Gmail refused a recipient")
+          print("Gmail accepted the IG report message.")
+          PY
