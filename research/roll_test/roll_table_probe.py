@@ -105,7 +105,8 @@ def analyse(data):
     if "ratio" in frame:
         print("    ratio summary:", frame["ratio"].describe().to_dict())
     if "detected_at" in frame and "roll_date" in frame:
-        gap = (frame["detected_at"].astype("datetime64[ns]") - frame["roll_date"].astype("datetime64[ns]")).dt.days
+        import pandas as pd
+        gap = (pd.to_datetime(frame["detected_at"], utc=True) - pd.to_datetime(frame["roll_date"], utc=True)).dt.days
         print("    days from roll_date to detected_at:", gap.describe().to_dict())
     return frame
 
@@ -143,7 +144,9 @@ def staleness(frame, uploads):
         if not later:
             continue
         uploaded = uploads[min(later)]
-        detected = datetime.fromisoformat(str(rec.detected_at)).replace(tzinfo=uploaded.tzinfo)
+        detected = datetime.fromisoformat(str(rec.detected_at))
+        if detected.tzinfo is None:
+            detected = detected.replace(tzinfo=uploaded.tzinfo)
         if detected > uploaded:
             stale.append((rec.root, day, float(rec.ratio), str(rec.detected_at)[:19], uploaded.strftime("%Y-%m-%d %H:%M")))
     print(f"[5] rolls detected AFTER the stored file for that date was uploaded: {len(stale)} of {len(frame)}")
