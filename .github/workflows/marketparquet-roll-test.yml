@@ -1,0 +1,33 @@
+name: MarketParquet roll table probe (read-only, manual)
+# Diagnostic only. Calls GET /api/v1/meta/futures_rolls and LISTS (never writes) the R2 futures_daily keys.
+# Does not touch production workflows, schedules or R2 data.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas
+      - name: Probe roll table and archive freshness
+        env:
+          MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python research/roll_test/roll_table_probe.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: roll_probe
+          path: |
+            roll_probe_report.json
+            futures_rolls.parquet
+          if-no-files-found: ignore
+          retention-days: 7
