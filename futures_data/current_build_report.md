@@ -1,6 +1,6 @@
 # Current-futures build (R2 prefix marketparquet/futures_daily_current/)
 
-Markets extended to 2026-11-20: 30 of 48.
+Markets extended to 2026-11-20: 31 of 48.
 
 | market | price symbol | treatment | last day |
 |---|---|---|---|
@@ -14,7 +14,7 @@ Markets extended to 2026-11-20: 30 of 48.
 | HO | HO | not extended: offset not steady (before 0.9378, after 0.9410, spreads 0.0224/0.0070) | 2026-11-06 |
 | NG | NG | exact (offset before 1.0000, after 1.0000) | 2026-11-20 |
 | ZM | ZM | exact (offset before 1.0000, after 1.0000) | 2026-11-20 |
-| CT | CT | not extended: not on Yahoo | 2026-11-06 |
+| CT | CT | exact (offset before 1.0000, after 1.0000) | 2026-11-20 |
 | ZT | ZT | scaled (offset before 0.9988, after 0.9988) | 2026-11-20 |
 | ZN | ZN | exact (offset before 1.0000, after 1.0000) | 2026-11-20 |
 | TN | TN | exact (offset before 1.0000, after 1.0000) | 2026-11-20 |
