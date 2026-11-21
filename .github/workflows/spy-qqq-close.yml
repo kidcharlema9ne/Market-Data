@@ -1,68 +1,10 @@
-name: SPY QQQ verified close
-on:
-  schedule:
-    - cron: '16 16 * * 1-5'
-      timezone: America/New_York
-    - cron: '35 16,17 * * 1-5'
-      timezone: America/New_York
-  workflow_dispatch:
-    inputs:
-      check:
-        type: choice
-        options: [daily, weekly, test]
-        default: daily
-permissions:
-  contents: write
-  issues: write
-concurrency:
-  group: spy-qqq-close
-  cancel-in-progress: false
+name: SPY QQQ close check (moved to SPY-QQQ-System)
+on: workflow_dispatch
+permissions: {}
 jobs:
-  check:
-    if: github.event_name != 'schedule' || github.ref == 'refs/heads/main'
+  moved:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-      - name: Skip recovery when closes and notifications are current
-        id: recovery
-        run: |
-          python - <<'PY'
-          import datetime, json, os
-          from zoneinfo import ZoneInfo
-          now = datetime.datetime.now(ZoneInfo("America/New_York"))
-          state = json.load(open("spy_qqq_live/state.json"))
-          skip = os.environ["GITHUB_EVENT_NAME"] == "schedule" and (
-              (now.hour, now.minute) < (16, 16) or (state["date"] == now.date().isoformat() and not state.get("pending")))
-          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
-              print(f"skip={str(skip).lower()}", file=out)
-          PY
-      - uses: actions/setup-python@v5
-        if: steps.recovery.outputs.skip != 'true'
-        with:
-          python-version: '3.12'
-      - run: pip install 'pandas<3' requests lxml 'exchange-calendars>=4.11,<5'
-        if: steps.recovery.outputs.skip != 'true'
-      - run: python spy_qqq_live/check.py
-        if: steps.recovery.outputs.skip != 'true'
-        env:
-          CHECK_MODE: ${{ inputs.check || 'daily' }}
-          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
-          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
-          GH_TOKEN: ${{ github.token }}
-          SPYQQQ_GMAIL_ADDRESS: ${{ secrets.SPYQQQ_GMAIL_ADDRESS }}
-          SPYQQQ_GMAIL_APP_PASSWORD: ${{ secrets.SPYQQQ_GMAIL_APP_PASSWORD }}
-          SPYQQQ_EMAIL_TO: ${{ secrets.SPYQQQ_EMAIL_TO }}
-      - name: Save verified signals and outstanding deliveries
-        if: always()
-        run: |
-          git config user.name 'SPY QQQ monitor'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add spy_qqq_live/state.json
-          if ! git diff --cached --quiet; then
-            git commit -m 'Record SPY QQQ close check'
-            git pull --rebase
-            git push
-          fi
+      - run: |
+          echo "::error::The live workflow is now kidcharlema9ne/SPY-QQQ-System/.github/workflows/spy-qqq-close.yml"
+          exit 1
