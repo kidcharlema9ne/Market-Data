@@ -29,42 +29,9 @@
     detected_at: min 2026-10-03T04:01:59+00:00  max 2026-11-21T04:57:40+00:00
     distinct roots: 69; rolls per root (top 10): [('CL', 3), ('GF', 3), ('HRC', 3), ('MCL', 3), ('VX', 3), ('VXM', 3), ('B', 2), ('BZ', 2), ('FVSA', 2), ('HE', 2)]
     ratio summary: {'count': 90.0, 'mean': 1.0102289999999998, 'std': 0.04529376989254318, 'min': 0.88081, '25%': 0.992412, '50%': 1.007133, '75%': 1.01795425, 'max': 1.155305}
-Traceback (most recent call last):
-  File "/home/runner/work/insider-buying-research/insider-buying-research/research/roll_test/roll_table_probe.py", line 158, in <module>
-    frame = analyse(data) if data else None
-            ^^^^^^^^^^^^^
-  File "/home/runner/work/insider-buying-research/insider-buying-research/research/roll_test/roll_table_probe.py", line 108, in analyse
-    gap = (frame["detected_at"].astype("datetime64[ns]") - frame["roll_date"].astype("datetime64[ns]")).dt.days
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/generic.py", line 6781, in astype
-    new_data = self._mgr.astype(dtype=dtype, errors=errors)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 632, in astype
-    return self.apply("astype", dtype=dtype, errors=errors)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 456, in apply
-    applied = getattr(b, f)(**kwargs)
-              ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 623, in astype
-    new_values = astype_array_safe(values, dtype, errors=errors)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 245, in astype_array_safe
-    new_values = astype_array(values, dtype, copy=copy)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 187, in astype_array
-    values = values.astype(dtype, copy=copy)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/arrays/string_arrow.py", line 391, in astype
-    return super().astype(dtype, copy=copy)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/arrays/base.py", line 917, in astype
-    return DatetimeArray._from_sequence(self, dtype=dtype, copy=copy)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/arrays/datetimes.py", line 319, in _from_sequence
-    return cls._from_sequence_not_strict(scalars, dtype=dtype, copy=copy)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/arrays/datetimes.py", line 367, in _from_sequence_not_strict
-    _validate_tz_from_dtype(dtype, tz, explicit_tz_none)
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/arrays/datetimes.py", line 3026, in _validate_tz_from_dtype
-    raise ValueError(
-ValueError: cannot supply both a tz and a timezone-naive dtype (i.e. datetime64[ns])
+    days from roll_date to detected_at: {'count': 90.0, 'mean': 13.677777777777777, 'std': 10.482545983068288, 'min': 1.0, '25%': 1.0, '50%': 12.0, '75%': 25.0, 'max': 26.0}
+[4] R2 archive: 4906 files, file dates 2007-12-31..2026-11-06 (list only, nothing written)
+    upload (LastModified) days, most files first: [('2026-11-08', 4886), ('2026-11-21', 13), ('2026-11-14', 3), ('2026-11-19', 2), ('2026-11-12', 1), ('2026-11-13', 1)]
+    earliest upload: 2026-11-08 11:43:04.649000+00:00  latest upload: 2026-11-21 14:42:45.836000+00:00
+[5] rolls detected AFTER the stored file for that date was uploaded: 0 of 90
+conclusion: roll table ACCESSIBLE

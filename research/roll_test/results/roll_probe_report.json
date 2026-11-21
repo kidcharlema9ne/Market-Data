@@ -1,0 +1,30 @@
+{
+  "step1_status": 200,
+  "step1_content_type": "application/json",
+  "step2_status": 200,
+  "step2_host_is_marketparquet": false,
+  "rows": 90,
+  "columns": {
+    "root": "string",
+    "roll_date": "string",
+    "ratio": "double",
+    "detected_at": "string"
+  },
+  "roll_date_min": "2026-09-07",
+  "roll_date_max": "2026-11-20",
+  "detected_at_min": "2026-10-03T04:01:59+00:00",
+  "detected_at_max": "2026-11-21T04:57:40+00:00",
+  "r2_files": 4906,
+  "r2_first_file_date": "2007-12-31",
+  "r2_last_file_date": "2026-11-06",
+  "r2_uploads_by_day": {
+    "2026-11-08": 4886,
+    "2026-11-21": 13,
+    "2026-11-14": 3,
+    "2026-11-19": 2,
+    "2026-11-12": 1,
+    "2026-11-13": 1
+  },
+  "rolls_newer_than_archive": 0,
+  "stale_roots": []
+}
