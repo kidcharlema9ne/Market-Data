@@ -1,6 +1,6 @@
 # Insider Buying Research
 
-[Michael’s GitHub master index](MASTER_INDEX.md) locates projects by nickname, including the live Gmail sender, timers and reports.
+[Michael’s GitHub master index](https://github.com/kidcharlema9ne/Master-Index) locates projects by nickname, including the live Gmail sender, timers and reports.
 
 
 This project studies how discretionary insider purchases perform after public disclosure. A separate SEC scanner is planned to use the research findings.
