@@ -3,3 +3,64 @@ development rows 526,297; 2007-12-31 to 2026-11-06; indicator warm-up from 2020-
 frozen best rule (pullback entry, 1 ATR stop, 5 ATR trail): 1891 trades (development 1396, sealed 495); median sessions held 6; win rate 19.5%
 earlier system (20-session breakout, ratio 0.6, 3 ATR stop, 3 ATR trail): 1179 trades (development 897, sealed 282); median sessions held 19; win rate 37.4%
 CHECK PASSED: original 1 ATR / 5 ATR / 130 run reproduces the engine's trades and daily profit exactly
+
+==== trend system, whole contracts 0.25% of $300k per ATR ====
+                                                        run                  window  trades  win_rate_pct  avg_sessions_held  still_open_at_end  return_per_year_pct  sharpe  max_drawdown_pct
+original (1 ATR initial, 5 ATR trailing, 130-session limit)             development    1391         19.27              22.10                  0                 5.67    0.48            -32.61
+original (1 ATR initial, 5 ATR trailing, 130-session limit) sealed (read-only look)    1391         19.27              22.10                  0                 8.52    0.71            -13.66
+original (1 ATR initial, 5 ATR trailing, 130-session limit)           whole history    1391         19.27              22.10                  0                 6.47    0.55            -32.61
+         new (4 ATR initial, 5 ATR trailing, no time limit)             development    1129         38.44              55.96                  0                11.05    0.58            -25.47
+         new (4 ATR initial, 5 ATR trailing, no time limit) sealed (read-only look)    1129         38.44              55.96                  0                12.61    0.63            -20.96
+         new (4 ATR initial, 5 ATR trailing, no time limit)           whole history    1129         38.44              55.96                  0                11.49    0.59            -25.47
+
+common days: 4609 from 2008-12-30 to 2026-10-30
+
+==== correlation with the COT gap system, whole common period ====
+       period    n  new_vs_COT  orig_vs_COT
+        daily 4609       0.142        0.129
+       weekly  931       0.149        0.120
+      monthly  215       0.268        0.238
+    quarterly   73       0.232        0.317
+calendar year   19       0.097        0.213
+
+==== split by period ====
+                   period    n  new_vs_COT  orig_vs_COT
+  through Aug 2021, daily 3256       0.126        0.104
+through Aug 2021, monthly  153       0.307        0.267
+    after Aug 2021, daily 1353       0.197        0.210
+  after Aug 2021, monthly   63       0.161        0.154
+
+==== daily correlation by calendar year ====
+period   n  new_vs_COT  orig_vs_COT
+  2008   2         NaN          NaN
+  2009 258       0.305        0.184
+  2010 259      -0.104       -0.098
+  2011 258       0.090        0.096
+  2012 259      -0.238       -0.215
+  2013 258       0.156        0.149
+  2014 258       0.071        0.052
+  2015 259       0.168        0.050
+  2016 258      -0.028       -0.166
+  2017 257      -0.072       -0.125
+  2018 258       0.220        0.131
+  2019 258       0.021       -0.011
+  2020 259       0.474        0.492
+  2021 259       0.195        0.180
+  2022 258       0.287        0.286
+  2023 258      -0.007        0.004
+  2024 259       0.111        0.293
+  2025 258       0.101        0.039
+  2026 216       0.454        0.439
+
+==== rolling 36 months of monthly returns: range and latest ====
+      new_vs_COT  orig_vs_COT
+min       -0.116       -0.099
+mean       0.261        0.209
+max        0.596        0.650
+latest 2026-10-31 {'new_vs_COT': 0.217, 'orig_vs_COT': 0.207}
+
+==== for scale: each system alone and the two added together (each at normal size, simple sum of daily returns) ====
+trend new: 9.11% a year, daily-return Sharpe 0.55, worst drawdown -41.1%
+COT gap: 3.83% a year, daily-return Sharpe 1.05, worst drawdown -9.1%
+both added: 13.18% a year, daily-return Sharpe 0.72, worst drawdown -35.0%
+done 2s

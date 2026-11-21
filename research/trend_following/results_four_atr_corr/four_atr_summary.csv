@@ -1,0 +1,7 @@
+run,window,trades,win_rate_pct,avg_sessions_held,still_open_at_end,return_per_year_pct,sharpe,max_drawdown_pct
+"original (1 ATR initial, 5 ATR trailing, 130-session limit)",development,1391,19.267,22.101,0,5.67,0.483,-32.611
+"original (1 ATR initial, 5 ATR trailing, 130-session limit)",sealed (read-only look),1391,19.267,22.101,0,8.523,0.714,-13.66
+"original (1 ATR initial, 5 ATR trailing, 130-session limit)",whole history,1391,19.267,22.101,0,6.469,0.549,-32.611
+"new (4 ATR initial, 5 ATR trailing, no time limit)",development,1129,38.441,55.965,0,11.055,0.582,-25.468
+"new (4 ATR initial, 5 ATR trailing, no time limit)",sealed (read-only look),1129,38.441,55.965,0,12.608,0.625,-20.962
+"new (4 ATR initial, 5 ATR trailing, no time limit)",whole history,1129,38.441,55.965,0,11.49,0.594,-25.468
