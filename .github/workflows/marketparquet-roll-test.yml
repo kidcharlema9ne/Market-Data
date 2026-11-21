@@ -5,14 +5,14 @@ name: MarketParquet roll table probe (read-only)
 on:
   push:
     branches: ['claude/marketparquet-roll-test-20261121']
-    paths: ['research/roll_test/roll_table_probe.py', 'research/roll_test/overlap_probe.py', 'research/roll_test/free_symbol_probe.py', 'research/roll_test/seam_probe.py', 'research/roll_test/size_diff_probe.py', '.github/workflows/marketparquet-roll-test.yml']
+    paths: ['research/roll_test/roll_table_probe.py', 'research/roll_test/overlap_probe.py', 'research/roll_test/free_symbol_probe.py', 'research/roll_test/seam_probe.py', 'research/roll_test/size_diff_probe.py', 'research/roll_test/content_diff_probe.py', '.github/workflows/marketparquet-roll-test.yml']
   workflow_dispatch:
 permissions:
   contents: write
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -58,6 +58,15 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: python research/roll_test/size_diff_probe.py 2>&1 | tee size_log.txt
+      - name: Content diff of size-differing files (read-only)
+        continue-on-error: true
+        timeout-minutes: 30
+        env:
+          MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python research/roll_test/content_diff_probe.py 2>&1 | tee content_log.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -67,6 +76,9 @@ jobs:
             overlap_log.txt
             free_log.txt
             seam_log.txt
+            size_log.txt
+            content_log.txt
+            content_diff_days.csv
             roll_probe_report.json
             futures_rolls.parquet
           if-no-files-found: ignore
@@ -75,7 +87,7 @@ jobs:
         if: always() && github.ref_type == 'branch'
         run: |
           mkdir -p research/roll_test/results
-          cp -f probe_log.txt overlap_log.txt free_log.txt seam_log.txt size_log.txt roll_probe_report.json futures_rolls.parquet research/roll_test/results/ 2>/dev/null || true
+          cp -f probe_log.txt overlap_log.txt free_log.txt seam_log.txt size_log.txt content_log.txt content_diff_days.csv roll_probe_report.json futures_rolls.parquet research/roll_test/results/ 2>/dev/null || true
           git config user.name "roll-probe"
           git config user.email "roll-probe@users.noreply.github.com"
           git add research/roll_test/results
