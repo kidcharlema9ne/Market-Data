@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install boto3 pyarrow
+      - run: python -m pip install boto3 pyarrow pandas
       - name: Export recent prices from R2
         env:
           R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
