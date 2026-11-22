@@ -77,7 +77,7 @@ def frame(rows):
 # ------------------------------------------------------------------------------------------ sources
 def yahoo(host):
     def get(sym):
-        data = json.loads(http(f"https://{host}.finance.yahoo.com/v8/finance/chart/{sym}?range=2y&interval=1d&events=div,splits"))
+        data = json.loads(http(f"https://{host}.finance.yahoo.com/v8/finance/chart/{sym}?range=2y&interval=1d&includePrePost=false&events=div,splits"))
         res = data["chart"]["result"][0]
         off = res["meta"].get("gmtoffset", 0)
         q = res["indicators"]["quote"][0]
@@ -91,7 +91,9 @@ def yahoo(host):
         last_trade = res["meta"].get("regularMarketTime")
         if last_trade is not None and len(df):
             et = datetime.fromtimestamp(last_trade, tz=ET_ZONE)
-            if df["file_date"].iloc[-1] == et.date().isoformat() and et.hour < 16:
+            # Regular session only: a last-trade time before 4:00 pm means the day is still running; one after 4:30 pm is not a regular-session
+            # time at all (possible after-hours stamp), so that bar is not trusted either.
+            if df["file_date"].iloc[-1] == et.date().isoformat() and (et.hour < 16 or (et.hour, et.minute) > (16, 30)):
                 df = df.iloc[:-1].reset_index(drop=True)
         return df
     return get
