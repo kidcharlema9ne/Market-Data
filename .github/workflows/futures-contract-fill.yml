@@ -1,0 +1,33 @@
+name: Contract-level fill for the 17 holes (read-only, commits a report and candidate rows to this branch)
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/futures-48-coverage-20261121']
+    paths: ['futures_data/contract_fill.py', '.github/workflows/futures-contract-fill.yml']
+permissions:
+  contents: write
+jobs:
+  fill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow yfinance pandas
+      - name: Identify contracts and build the fill rows
+        env:
+          MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python -u futures_data/contract_fill.py
+      - name: Commit to this branch
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git pull -q --rebase origin "$GITHUB_REF_NAME" || true
+          git add futures_data/contract_fill_report.md futures_data/contract_fill_candidates.csv
+          git commit -m "Contract-level fill report" || echo "nothing to commit"
+          git push
