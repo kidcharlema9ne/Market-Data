@@ -34,6 +34,9 @@ OUT = "prices/etf_recent.csv.gz"
 DAYS = 700
 MIN_ROWS = 60
 MAX_AGE_DAYS = 5
+from zoneinfo import ZoneInfo
+
+ET_ZONE = ZoneInfo("America/New_York")
 UA = "Mozilla/5.0 (compatible; COT-System/1.0)"
 COLS = ["symbol", "open", "high", "low", "close", "volume", "file_date"]
 
@@ -82,7 +85,15 @@ def yahoo(host):
         for i, ts in enumerate(res["timestamp"]):
             d = (datetime.fromtimestamp(ts, tz=timezone.utc) + timedelta(seconds=off)).date().isoformat()
             rows.append((d, q["open"][i], q["high"][i], q["low"][i], q["close"][i], q["volume"][i]))
-        return frame(rows)
+        df = frame(rows)
+        # Yahoo's bar for today holds the LATEST regular-session price until the market closes. Keep today's bar only if Yahoo says its
+        # last regular-session trade was at or after 4:00 pm ET (meta.regularMarketTime); otherwise drop it and wait for the next try.
+        last_trade = res["meta"].get("regularMarketTime")
+        if last_trade is not None and len(df):
+            et = datetime.fromtimestamp(last_trade, tz=ET_ZONE)
+            if df["file_date"].iloc[-1] == et.date().isoformat() and et.hour < 16:
+                df = df.iloc[:-1].reset_index(drop=True)
+        return df
     return get
 
 
