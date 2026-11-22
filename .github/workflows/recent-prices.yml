@@ -1,58 +1,65 @@
-name: Recent prices for other repos (futures + ETF stand-ins)
+name: Daily prices (futures + ETF stand-ins), started by the cron-job.org timer
 
-# Writes two small files into THIS public repo so other repos (the COT System, the trend following system) can read prices
-# by cloning it, with no keys of their own:
-#   prices/futures_recent.csv.gz  last ~700 days of the 48+ markets, roll-adjusted, from the stitched table in R2
-#   prices/etf_recent.csv.gz      ETF stand-ins, from Yahoo, then Stooq, then Nasdaq.com, then the MarketParquet copy in R2
-# The stitched futures table itself is rebuilt by futures-current-build.yml; this job only exports its newest copy.
+# Started by cron-job.org (NOT a GitHub schedule) every 15 minutes from 4:15 pm to about 8 pm Eastern on weekdays.
+# Every start is cheap: it checks what is still missing and only does that work.
+#   Futures: adds the vendor's newest public day to the stitched table in R2 (futures_data/daily_update.py). If the vendor has not
+#            published the expected day yet, nothing happens and the next timer tick tries again.
+#   ETFs:    fetches the stand-ins (Yahoo, Yahoo second host, Stooq, Nasdaq.com, then the MarketParquet copy) for any ETF behind the
+#            expected settled trading day; also saves the table in the bucket.
+# Outputs other repos read with no keys: prices/futures_recent.csv.gz, prices/etf_recent.csv.gz (in this repo) and the release asset
+# prices-latest / futures_prices.parquet (full history).
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '30 22 * * 1-5'
-  workflow_run:
-    workflows: ['Build current futures series (Yahoo gap fill + vendor free days) into a separate R2 prefix']
-    types: [completed]
+    inputs:
+      force:
+        description: 'Skip the price-level safety check and refresh everything (true or false)'
+        default: 'false'
 permissions:
   contents: write
-concurrency: recent-prices
+concurrency:
+  group: daily-prices
+  cancel-in-progress: false
 jobs:
-  export:
+  daily:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
+    env:
+      R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
+      FORCE_UPDATE: ${{ inputs.force == 'true' && '1' || '0' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - run: python -m pip install boto3 pyarrow pandas
-      - name: Export recent futures (keeps the old file if the table cannot be read)
-        env:
-          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-        run: python futures_data/export_recent_futures.py
-      - name: Fetch ETF stand-ins (never fails the run)
-        continue-on-error: true
-        env:
-          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-        run: python futures_data/fetch_etf_prices.py
-      - name: Publish the full futures history as a release asset (keeps the old one if the table cannot be read)
+      - name: What is still missing?
+        id: gate
+        run: python futures_data/daily_gate.py
+      - name: Futures - add the vendor's newest day to the stitched table
+        id: fut
+        run: python futures_data/daily_update.py
+      - name: Futures - export the recent file and publish the full history
+        if: steps.fut.outputs.updated == 'true' || inputs.force == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: |
+          python futures_data/export_recent_futures.py
           python futures_data/export_full_history.py
           gh release view prices-latest >/dev/null 2>&1 || gh release create prices-latest --title "Latest futures price history" --notes "Overwritten by recent-prices.yml. Download futures_prices.parquet; no keys needed."
           gh release upload prices-latest futures_prices.parquet --clobber
-      - name: Commit the two files
+      - name: ETFs - fetch the settled closes (never fails the run)
+        if: steps.gate.outputs.etf_needed == 'true' || inputs.force == 'true'
+        continue-on-error: true
+        run: python futures_data/fetch_etf_prices.py
+      - name: Commit the price files
         run: |
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
           git add prices/futures_recent.csv.gz prices/etf_recent.csv.gz
-          git diff --cached --quiet || git commit -m "Recent prices refresh"
+          git diff --cached --quiet && echo "nothing new" && exit 0
+          git commit -m "Daily prices refresh"
           git pull -q --rebase origin "$GITHUB_REF_NAME" || true
           git push

@@ -8,7 +8,8 @@ Each ETF is tried through a chain of free sources, in this order, and the first 
   5. MarketParquet etf_daily files copied into R2 (bucket insider-research, marketparquet/etf_daily/; only used if the R2 secrets
      are present; these lag by days, so they are the last resort and are merged onto the existing history)
 "Good" means: at least 60 sessions, every bar sane (positive, high >= low, open and close inside the range), and the newest bar no
-more than 5 calendar days old. Prices are the raw (not dividend-adjusted) bars, because stops and share counts use real prices.
+more than 5 calendar days old. A bar is only used for a settled trading day (see trading_days.py): before 4:10 pm ET today's running price is dropped, never stored as a close.
+Prices are the raw (not dividend-adjusted) bars, because stops and share counts use real prices.
 Full-history sources replace an ETF's stored history (this also fixes reverse splits such as VXX); the R2 fallback only merges.
 If every source fails for an ETF, its existing rows are kept and the report prints "need <ticker> prices" or uses the old rows
 if they are still fresh. This script never raises for a data problem and always exits 0, so the report always runs.
@@ -25,6 +26,9 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 import pandas as pd
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from trading_days import NYSE_HOLIDAYS, expected_day, now_et  # noqa: E402
 
 OUT = "prices/etf_recent.csv.gz"
 DAYS = 700
@@ -161,6 +165,7 @@ def clean(df):
 
 def main():
     today = date.today()
+    expected = expected_day(now_et(), NYSE_HOLIDAYS)
     tickers = etf_list()
     old = pd.read_csv(OUT) if os.path.exists(OUT) else pd.DataFrame(columns=COLS)
     kept = {s: g for s, g in old.groupby("symbol")}
@@ -174,6 +179,9 @@ def main():
                 continue
             try:
                 df = fn(sym)
+                # Never keep a bar for a day that has not settled yet (a running price, not the close): drop everything after the
+                # expected trading day. Before 4:10 pm ET that removes today's bar.
+                df = df[df["file_date"] <= expected.isoformat()].reset_index(drop=True)
                 ok, why = good(df, today)
             except Exception as exc:  # any source failure just moves to the next source
                 ok, why = False, f"{type(exc).__name__}: {exc}"
@@ -208,6 +216,30 @@ def main():
     os.makedirs("prices", exist_ok=True)
     final.to_csv(OUT, index=False)
     print(f"wrote {OUT}: {len(final)} rows, {final['symbol'].nunique()} of {len(tickers)} ETFs")
+    newest = final.groupby("symbol")["file_date"].max()
+    live = newest[newest >= (expected - timedelta(days=10)).isoformat()]   # an ETF with nothing for 10+ days is treated as dead, not waited for
+    behind = sorted(live[live < expected.isoformat()].index) + sorted(set(tickers) - set(newest.index))
+    print(f"expected trading day {expected}; ETFs not yet at it: {behind or 'none'}")
+    gh = os.environ.get("GITHUB_OUTPUT")
+    if gh:
+        open(gh, "a").write(f"etf_complete={'false' if behind else 'true'}\n")
+    upload_to_r2(final)
+
+
+def upload_to_r2(final):
+    """Also keep the table in the bucket next to the futures: marketparquet/etf_current/etf_prices_current.parquet (best effort)."""
+    if not all(k in os.environ for k in ("R2_ENDPOINT_URL", "R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY")):
+        return
+    try:
+        import boto3
+        buf = io.BytesIO()
+        final.to_parquet(buf, index=False)
+        boto3.client("s3", endpoint_url=os.environ["R2_ENDPOINT_URL"], aws_access_key_id=os.environ["R2_ACCESS_KEY_ID"],
+                     aws_secret_access_key=os.environ["R2_SECRET_ACCESS_KEY"], region_name="auto").put_object(
+            Bucket="insider-research", Key="marketparquet/etf_current/etf_prices_current.parquet", Body=buf.getvalue())
+        print("also saved to the bucket: marketparquet/etf_current/etf_prices_current.parquet")
+    except Exception as exc:
+        print(f"bucket copy skipped ({type(exc).__name__}: {exc})")
 
 
 if __name__ == "__main__":
