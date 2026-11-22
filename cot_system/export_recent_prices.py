@@ -19,7 +19,8 @@ from urllib.request import Request, urlopen
 import pandas as pd
 import pyarrow.parquet as pq
 
-from r2_storage import BUCKET, client
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from r2_storage import BUCKET, client  # noqa: E402
 
 ETFS = ["TLT", "EDV", "IEF", "IEI", "SHY", "PPLT", "BNO", "UNG", "USO", "UGA", "CORN", "WEAT", "SOYB", "CANE", "BAL",
         "UUP", "VXX", "FXC", "FXF", "FXY", "FXE", "FXB", "FXA", "GLD", "SLV", "CPER"]
