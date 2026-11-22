@@ -38,6 +38,16 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: python futures_data/fetch_etf_prices.py
+      - name: Publish the full futures history as a release asset (keeps the old one if the table cannot be read)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          python futures_data/export_full_history.py
+          gh release view prices-latest >/dev/null 2>&1 || gh release create prices-latest --title "Latest futures price history" --notes "Overwritten by recent-prices.yml. Download futures_prices.parquet; no keys needed."
+          gh release upload prices-latest futures_prices.parquet --clobber
       - name: Commit the two files
         run: |
           git config user.name "github-actions"
