@@ -1,0 +1,65 @@
+name: Daily prices (futures + ETF stand-ins), started by the cron-job.org timer
+
+# Started by cron-job.org (NOT a GitHub schedule) every 15 minutes from 4:15 pm to about 8 pm Eastern on weekdays.
+# Every start is cheap: it checks what is still missing and only does that work.
+#   Futures: adds the vendor's newest public day to the stitched table in R2 (futures_data/daily_update.py). If the vendor has not
+#            published the expected day yet, nothing happens and the next timer tick tries again.
+#   ETFs:    fetches the stand-ins (Yahoo, Yahoo second host, Stooq, Nasdaq.com, then the MarketParquet copy) for any ETF behind the
+#            expected settled trading day; also saves the table in the bucket.
+# Outputs other repos read with no keys: prices/futures_recent.csv.gz, prices/etf_recent.csv.gz (in this repo) and the release asset
+# prices-latest / futures_prices.parquet (full history).
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Skip the price-level safety check and refresh everything (true or false)'
+        default: 'false'
+permissions:
+  contents: write
+concurrency:
+  group: daily-prices
+  cancel-in-progress: false
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
+      FORCE_UPDATE: ${{ inputs.force == 'true' && '1' || '0' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas
+      - name: What is still missing?
+        id: gate
+        run: python futures_data/daily_gate.py
+      - name: Futures - add the vendor's newest day to the stitched table
+        id: fut
+        run: python futures_data/daily_update.py
+      - name: Futures - export the recent file and publish the full history
+        if: steps.fut.outputs.updated == 'true' || inputs.force == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python futures_data/export_recent_futures.py
+          python futures_data/export_full_history.py
+          gh release view prices-latest >/dev/null 2>&1 || gh release create prices-latest --title "Latest futures price history" --notes "Overwritten by recent-prices.yml. Download futures_prices.parquet; no keys needed."
+          gh release upload prices-latest futures_prices.parquet --clobber
+      - name: ETFs - fetch the settled closes (never fails the run)
+        if: steps.gate.outputs.etf_needed == 'true' || inputs.force == 'true'
+        continue-on-error: true
+        run: python futures_data/fetch_etf_prices.py
+      - name: Commit the price files
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add prices/futures_recent.csv.gz prices/etf_recent.csv.gz
+          git diff --cached --quiet && echo "nothing new" && exit 0
+          git commit -m "Daily prices refresh"
+          git pull -q --rebase origin "$GITHUB_REF_NAME" || true
+          git push
