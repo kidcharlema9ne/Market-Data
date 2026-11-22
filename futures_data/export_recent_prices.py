@@ -1,5 +1,5 @@
 """Export the most recent daily futures bars from the CURRENT stitched series in R2 into one small CSV
-(for the COT price-gap report).
+(for the COT System report).
 
 Source: marketparquet/futures_current/futures_prices_current.parquet (whole archive on one price level plus the newest days,
 built by futures-current-build.yml). Keeps the newest N sessions (default 420: a 252-session price index plus history).

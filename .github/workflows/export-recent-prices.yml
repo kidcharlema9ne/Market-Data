@@ -1,9 +1,9 @@
-name: Export recent futures prices (for the COT price-gap report)
+name: Export recent futures prices (for the COT System report)
 # Reads the newest 420 daily futures files from R2 and commits a small CSV (futures_data/recent_prices.csv) back to the branch it ran on.
 on:
   workflow_dispatch:
   push:
-    branches: ['claude/cot-price-gap-report-*']
+    branches: ['cot-price-system-report']
     paths: ['.github/workflows/export-recent-prices.yml', 'futures_data/export_recent_prices.py']
 permissions:
   contents: write
@@ -28,5 +28,5 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
           git add futures_data/recent_prices.csv futures_data/prices_full.csv.gz
-          git commit -m "Recent futures prices for the COT price-gap report" || echo "nothing to commit"
+          git commit -m "Recent futures prices for the COT System report" || echo "nothing to commit"
           git push
