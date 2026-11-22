@@ -21,7 +21,7 @@ import os
 import re
 import sys
 import time
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, time, timedelta, timezone
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -145,8 +145,8 @@ def marketparquet_r2(sym):
     return frame(list(zip(sub["file_date"], sub["open"], sub["high"], sub["low"], sub["close"], sub["volume"])))
 
 
-SOURCES = [("yahoo (query1)", yahoo("query1"), True), ("yahoo (query2)", yahoo("query2"), True), ("stooq", stooq, True),
-           ("nasdaq.com", nasdaq, True), ("marketparquet R2 (lagging copy)", marketparquet_r2, False)]
+SOURCES = [("yahoo (query1)", yahoo("query1"), True), ("yahoo (query2)", yahoo("query2"), True), ("stooq", stooq, False),
+           ("nasdaq.com", nasdaq, False), ("marketparquet R2 (lagging copy)", marketparquet_r2, False)]
 
 
 # ------------------------------------------------------------------------------------------ checks
@@ -192,9 +192,11 @@ def main():
                 continue
             try:
                 df = fn(sym)
-                # Never keep a bar for a day that has not settled yet (a running price, not the close): drop everything after the
-                # expected trading day. Before 4:10 pm ET that removes today's bar.
-                df = df[df["file_date"] <= expected.isoformat()].reset_index(drop=True)
+                # Never keep a bar for a day that has not settled yet (a running price, not the close). Yahoo is also checked on its own
+                # last-trade time (see yahoo()). The other sources give no such time, so their bar for today is trusted only after
+                # 5:00 pm ET, when end-of-day files are final; before that they can only supply earlier days.
+                cutoff = expected if name.startswith("yahoo") else expected_day(now_et(), NYSE_HOLIDAYS, settle=time(17, 0))
+                df = df[df["file_date"] <= cutoff.isoformat()].reset_index(drop=True)
                 ok, why = good(df, today)
             except Exception as exc:  # any source failure just moves to the next source
                 ok, why = False, f"{type(exc).__name__}: {exc}"
@@ -203,10 +205,12 @@ def main():
                 continue
             df = clean(df)
             if not full_history and sym in kept:
-                prev = kept[sym].set_index("file_date")["close"]
+                # Not Yahoo: must agree with what is already stored (last 20 stored days, median difference under 1 percent), else it
+                # is rejected (different price basis, split, or bad data). Accepted bars are merged onto the stored history.
+                prev = kept[sym].set_index("file_date")["close"].tail(20)
                 both = df.set_index("file_date")["close"].reindex(prev.index).dropna()
-                if len(both) >= 5 and ((both / prev.reindex(both.index) - 1).abs().median() > 0.02):
-                    log.append(f"{sym}: {name}: rejected (does not match the stored history; possible split)")
+                if len(both) >= 5 and ((both / prev.reindex(both.index) - 1).abs().median() > 0.01):
+                    log.append(f"{sym}: {name}: rejected (does not match the stored history)")
                     continue
                 df = pd.concat([kept[sym].drop(columns="symbol"), df]).drop_duplicates("file_date", keep="last").sort_values("file_date")
             df = df.copy()
