@@ -1,6 +1,6 @@
 # FUTURES DATA: where Michael's futures live (read this first for ANY futures task)
 
-If Michael says "go to GitHub and find my futures", this is the place. Repo: `kidcharlema9ne/insider-buying-research` (private).
+If Michael says "go to GitHub and find my futures", this is the place. Repo: `kidcharlema9ne/Market-Data` (public; renamed from insider-buying-research).
 
 ## Daily futures PRICES
 - Source: MarketParquet. About 130 of the most active futures contracts as continuous series, **ratio back-adjusted** (scale-free; do not treat old prices as tradable levels). Mini and micro versions of one market (ES / MES, NQ / MNQ, ...) are near duplicates.
@@ -12,7 +12,7 @@ If Michael says "go to GitHub and find my futures", this is the place. Repo: `ki
 ## How to use it (the working method)
 1. Run the reusable workflow `.github/workflows/futures-prices.yml` (manual run, or `uses:` it from another workflow in this repo). It runs `futures_data/fetch_futures_prices.py`, which stitches every daily file into ONE table `futures_prices.parquet` (columns `symbol, open, high, low, close, volume, file_date`) and uploads it as the artifact `futures_prices`.
 2. Or copy the pattern of a research workflow: install `boto3 pyarrow pandas numpy`, run `python futures_data/fetch_futures_prices.py` with the three secrets as environment variables, then run your analysis script on `futures_prices.parquet` and commit the results on a branch.
-3. Michael's repo rules: commit the script, report with a workflow run link, push to a **branch** (not main) unless he says otherwise, append an entry to `docs/SHARED_LOG.md`.
+3. Michael's repo rules: commit the script, report with a workflow run link, push to a **branch** (not main) unless he says otherwise, append an entry to the shared log, which now lives in `kidcharlema9ne/insider-scanner` as `research_docs/SHARED_LOG.md`.
 - Working examples: `research/outside_inside/` (outside-day / inside-day study, branch `claude/outside-inside-day-20261111`) and `research/cot_exit/` (COT exit tests, branch `claude/cot-commercial50-exit-20261110`).
 
 ## Markets

@@ -1,14 +1,15 @@
-# Insider Buying Research
+# Market Data
 
-[Michael’s GitHub master index](https://github.com/kidcharlema9ne/Master-Index) locates projects by nickname, including the live Gmail sender, timers and reports.
+Michael's market data: daily futures prices (and equity price archives) stored in Cloudflare R2, plus the
+workflows that load and refresh them and the alert senders that need the shared Gmail and Pushover secrets.
 
+[Michael's GitHub master index](https://github.com/kidcharlema9ne/Master-Index) locates projects by nickname.
 
-This project studies how discretionary insider purchases perform after public disclosure. A separate SEC scanner is planned to use the research findings.
+- [FUTURES_DATA.md](FUTURES_DATA.md): where the daily futures prices live and how to fetch them (any futures task starts here).
+- [docs/INFRASTRUCTURE.md](docs/INFRASTRUCTURE.md): Cloudflare R2 bucket `insider-research` and how Actions reaches it.
+- `marketparquet_archive_transfer.py` and the `marketparquet-*.yml` workflows: load MarketParquet futures and equity data into R2.
+- `futures_data/`: builds the continuous futures price set from R2.
+- `spy_qqq_live/` with `spy-qqq-delivery.yml`, plus `ig-gmail.yml` and the Pushover workflows: alert senders. They live here because the Gmail and Pushover secrets are stored in this repo.
 
-- [FUTURES_DATA.md](FUTURES_DATA.md): where Michael's daily futures prices live and how to fetch them (any futures task starts here)
-- [Master specification](docs/MASTER_SPECIFICATION.md)
-- [Decision log](docs/DECISION_LOG.md)
-- [Infrastructure](docs/INFRASTRUCTURE.md)
-- [Original v0.9 Word backup](docs/Insider_Buying_Research_Master_Specification_v0.9.docx)
-
-For each approved change, read the latest repository version, update the relevant authoritative document and the decision log together, and commit with a descriptive message. Label proposals and open questions explicitly. Change approved methodology only with explicit user approval. Git history preserves prior versions.
+The insider buying research study now lives in [insider-scanner](https://github.com/kidcharlema9ne/insider-scanner)
+(see `research_docs/` there). This repo's earlier history still holds the study's original commits and Actions run records.
