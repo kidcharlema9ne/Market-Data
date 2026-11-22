@@ -3,6 +3,9 @@ name: COT System recent prices (export)
 # stand-in ETF prices as two small files (artifact "cot_system_prices") for the COT System report.
 on:
   workflow_dispatch:
+  push:
+    branches: [cot-system-prices]
+    paths: ['.github/workflows/cot-system-prices.yml', 'cot_system/**']
 permissions:
   contents: read
 jobs:
