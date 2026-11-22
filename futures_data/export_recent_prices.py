@@ -32,4 +32,7 @@ out = df[df["file_date"].astype(str).isin(days)].rename(columns={"file_date": "d
 cols = ["date", "symbol", "open", "high", "low", "close"] + (["source"] if "source" in out.columns else [])
 os.makedirs("futures_data", exist_ok=True)
 out[cols].sort_values(["symbol", "date"]).to_csv("futures_data/recent_prices.csv", index=False)
+if KEEP >= 99999:
+    allrows = df.rename(columns={"file_date": "date"})[cols].sort_values(["symbol", "date"])
+    allrows.to_csv("futures_data/prices_full.csv.gz", index=False, compression="gzip")
 print(f"wrote {len(out)} rows, {out['symbol'].nunique()} symbols, {days[0]} to {days[-1]}")

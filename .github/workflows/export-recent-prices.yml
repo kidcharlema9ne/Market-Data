@@ -22,11 +22,11 @@ jobs:
           R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-        run: python futures_data/export_recent_prices.py 420
+        run: python futures_data/export_recent_prices.py 99999
       - name: Commit the CSV to this branch
         run: |
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
-          git add futures_data/recent_prices.csv
+          git add futures_data/recent_prices.csv futures_data/prices_full.csv.gz
           git commit -m "Recent futures prices for the COT price-gap report" || echo "nothing to commit"
           git push
