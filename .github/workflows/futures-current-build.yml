@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: ['claude/futures-48-coverage-20261121']
-    paths: ['futures_data/build_current_futures.py', 'futures_data/stitch_current_futures.py', '.github/workflows/futures-current-build.yml']
+    paths: ['futures_data/build_current_futures.py', 'futures_data/stitch_current_futures.py', 'futures_data/contract_fill_candidates.csv', '.github/workflows/futures-current-build.yml']
 permissions:
   contents: write
 jobs:
@@ -29,6 +29,12 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: python -u futures_data/stitch_current_futures.py
+      - name: Validate the stitched table
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python -u futures_data/validate_stitch.py
       - uses: actions/upload-artifact@v4
         with:
           name: futures_prices_current
@@ -39,6 +45,6 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
           git pull -q --rebase origin "$GITHUB_REF_NAME" || true
-          git add futures_data/current_build_report.md futures_data/current_stitch_report.md
+          git add futures_data/current_build_report.md futures_data/current_stitch_report.md futures_data/stitch_validation_report.md
           git commit -m "Current-futures build report" || echo "nothing to commit"
           git push

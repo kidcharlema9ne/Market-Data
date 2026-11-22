@@ -131,6 +131,15 @@ for d in GAP:
     t = t[COLS + ["source"]].copy()
     t["file_date"], t["rebase_factor"] = d, 1.0
     add.append(t)
+# contract-level fill (futures_data/contract_fill.py): individual contract prices x the vendor's roll ratios, matched to the vendor's known days
+if os.path.exists("futures_data/contract_fill_candidates.csv"):
+    cf = pd.read_csv("futures_data/contract_fill_candidates.csv")
+    if len(cf):
+        cf = cf.rename(columns={"date": "file_date"})
+        cf["rebase_factor"] = 1.0
+        keys = set(zip(cf["symbol"], cf["file_date"]))
+        add = [a[~a.apply(lambda r: (r["symbol"], r["file_date"]) in keys, axis=1)] if "source" in a.columns and a["source"].astype(str).str.startswith("yahoo").any() else a for a in add]
+        add.append(cf[COLS + ["file_date", "rebase_factor", "source"]])
 out = pd.concat([df.drop(columns=["lastmod"])] + add, ignore_index=True).sort_values(["symbol", "file_date"])
 out.to_parquet("futures_prices_current.parquet", index=False)
 raw_out = open("futures_prices_current.parquet", "rb").read()
