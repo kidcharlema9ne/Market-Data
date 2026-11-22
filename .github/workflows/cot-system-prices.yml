@@ -1,0 +1,43 @@
+name: COT System recent prices (export)
+# Run by hand. Brings the current year of ETF prices up to date from MarketParquet, then exports recent futures and
+# stand-in ETF prices as two small files (artifact "cot_system_prices") for the COT System report.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: cot-system-prices
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas
+      - name: Bring this year's futures and ETF files up to date
+        env:
+          MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          set -e
+          year=$(date -u +%Y)
+          python marketparquet_archive_transfer.py futures_daily "$year"
+          python marketparquet_archive_transfer.py etf_daily "$year"
+      - name: Export recent prices and print coverage
+        env:
+          MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: python cot_system/export_recent_prices.py out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cot_system_prices
+          path: out/
+          if-no-files-found: error
+          retention-days: 7
