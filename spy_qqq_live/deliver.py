@@ -32,10 +32,10 @@ def deliver(item):
 receipts = Path("spy_qqq_live/delivery_receipts.json")
 sent = set(json.loads(receipts.read_text()) if receipts.exists() else [])
 state = json.loads(Path(os.environ["SYSTEM_STATE"]).read_text())
+pending = [(key, item) for key, item in state.get("outbox", {}).items() if key not in sent]
+print(f"Notifications awaiting delivery: {len(pending)}", flush=True)
 errors = []
-for key, item in state.get("outbox", {}).items():
-    if key in sent:
-        continue
+for key, item in pending:
     try:
         deliver(item)
         sent.add(key)
