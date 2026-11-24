@@ -23,10 +23,10 @@ jobs:
     steps:
       - name: Check IG report checkout credential
         env:
-          IG_REPORT_READ_TOKEN: ${{ secrets.IG_REPORT_READ_TOKEN }}
+          IG_REPORT_READ_KEY: ${{ secrets.IG_REPORT_READ_KEY }}
         run: |
-          if [ -z "${IG_REPORT_READ_TOKEN}" ]; then
-            echo "::error::Set the IG_REPORT_READ_TOKEN Actions secret in Market-Data to a fine-grained token with Contents: read access to IG-Sentiment-Report."
+          if [ -z "${IG_REPORT_READ_KEY}" ]; then
+            echo "::error::Set the IG_REPORT_READ_KEY Actions secret in Market-Data to the private half of the IG-Sentiment-Report read-only deploy key."
             exit 1
           fi
       - name: Read the official IG report
@@ -34,7 +34,7 @@ jobs:
         with:
           repository: kidcharlema9ne/IG-Sentiment-Report
           ref: main
-          token: ${{ secrets.IG_REPORT_READ_TOKEN }}
+          ssh-key: ${{ secrets.IG_REPORT_READ_KEY }}
           persist-credentials: false
           path: .ig-report
           sparse-checkout: |
