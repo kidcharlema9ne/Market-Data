@@ -21,12 +21,31 @@ jobs:
   email:
     runs-on: ubuntu-latest
     steps:
-      - uses: kidcharlema9ne/IG-Sentiment-Report@main
-        id: report
+      - name: Check IG report checkout credential
+        env:
+          IG_REPORT_READ_KEY: ${{ secrets.IG_REPORT_READ_KEY }}
+        run: |
+          if [ -z "${IG_REPORT_READ_KEY}" ]; then
+            echo "::error::Set the IG_REPORT_READ_KEY Actions secret in Market-Data to the private half of the IG-Sentiment-Report read-only deploy key."
+            exit 1
+          fi
+      - name: Read the official IG report
+        uses: actions/checkout@v4
+        with:
+          repository: kidcharlema9ne/IG-Sentiment-Report
+          ref: main
+          ssh-key: ${{ secrets.IG_REPORT_READ_KEY }}
+          persist-credentials: false
+          path: .ig-report
+          sparse-checkout: |
+            /data/ig_sentiment/latest.csv
+            /data/ig_sentiment/ig_sentiment_*.csv
+            /reports/IG_Sentiment_latest.pdf
+          sparse-checkout-cone-mode: false
       - name: Verify official report date
         id: verify
         env:
-          ROOT: ${{ steps.report.outputs.directory }}
+          ROOT: .ig-report
           REQUESTED: ${{ inputs.report_date }}
         run: |
           python - <<'PY'
@@ -55,7 +74,7 @@ jobs:
       - name: Send the report link through Gmail
         if: steps.verify.outputs.ready == 'true' && steps.sent.outputs.cache-hit != 'true'
         env:
-          ROOT: ${{ steps.report.outputs.directory }}
+          ROOT: .ig-report
           ADDRESS: ${{ secrets.SPYQQQ_GMAIL_ADDRESS }}
           APP_PASSWORD: ${{ secrets.SPYQQQ_GMAIL_APP_PASSWORD }}
           RECIPIENT: ${{ secrets.SPYQQQ_EMAIL_TO }}
