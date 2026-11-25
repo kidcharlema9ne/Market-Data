@@ -121,21 +121,24 @@ jobs:
           path = Path(os.environ["REPORT_PATH"])
           week = os.environ["REPORT_WEEK"]
           test = os.environ["TEST"] == "true"
-          title = "[TEST] COT SYSTEM REPORT" if test else f"COT SYSTEM REPORT — week ending {week}"
+          title = "[TEST] COT SYSTEM REPORT — HTML tables" if test else f"COT SYSTEM REPORT — week ending {week}"
           text = "Delivery test using your latest saved report." if test else f"Your COT System report for the week ending {week} is ready."
           msg = EmailMessage()
           msg["From"] = os.environ["ADDRESS"]
           msg["To"] = os.environ["RECIPIENT"]
           msg["Subject"] = title
-          plain, html = format_report(path.read_text(encoding="utf-8"), text)
+          source = path.read_bytes()
+          plain, html = format_report(source.decode("utf-8"), text)
           msg.set_content(plain)
           msg.add_alternative(html, subtype="html")
+          msg.add_attachment(source, maintype="text", subtype="html",
+                             params={"charset": "utf-8"}, filename="COT_System_Report.html")
           with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=30) as smtp:
               smtp.login(os.environ["ADDRESS"], os.environ["APP_PASSWORD"])
               if smtp.send_message(msg):
                   raise RuntimeError("Gmail refused a recipient")
           Path("cot-gmail-receipt").write_text(week)
-          print("Gmail accepted the inline HTML COT System report.")
+          print("Gmail accepted the COT System report with inline tables and an HTML attachment.")
           PY
 
       - uses: actions/cache/save@v4
