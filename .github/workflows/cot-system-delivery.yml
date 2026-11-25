@@ -87,12 +87,24 @@ jobs:
           path: cot-pushover-receipt
           key: cot-system-pushover-${{ steps.report.outputs.week }}
 
+      - name: Read the email formatter
+        if: >-
+          ${{ !cancelled() && steps.report.outputs.ready == 'true' &&
+              (inputs.test || (steps.gmail_receipt.outcome == 'success' && steps.gmail_receipt.outputs.cache-hit != 'true')) }}
+        uses: actions/checkout@v4
+        with:
+          path: delivery-tools
+          persist-credentials: false
+          sparse-checkout: /scripts/cot_system_email.py
+          sparse-checkout-cone-mode: false
+
       - name: Send the report through Gmail
         id: gmail
         if: >-
           ${{ !cancelled() && steps.report.outputs.ready == 'true' &&
               (inputs.test || (steps.gmail_receipt.outcome == 'success' && steps.gmail_receipt.outputs.cache-hit != 'true')) }}
         env:
+          PYTHONPATH: delivery-tools/scripts
           ADDRESS: ${{ secrets.SPYQQQ_GMAIL_ADDRESS }}
           APP_PASSWORD: ${{ secrets.SPYQQQ_GMAIL_APP_PASSWORD }}
           RECIPIENT: ${{ secrets.SPYQQQ_EMAIL_TO }}
@@ -104,25 +116,26 @@ jobs:
           import os, smtplib
           from email.message import EmailMessage
           from pathlib import Path
+          from cot_system_email import format_report
 
           path = Path(os.environ["REPORT_PATH"])
           week = os.environ["REPORT_WEEK"]
           test = os.environ["TEST"] == "true"
           title = "[TEST] COT SYSTEM REPORT" if test else f"COT SYSTEM REPORT — week ending {week}"
-          url = f"https://github.com/kidcharlema9ne/COT-System/blob/main/{path}"
           text = "Delivery test using your latest saved report." if test else f"Your COT System report for the week ending {week} is ready."
           msg = EmailMessage()
           msg["From"] = os.environ["ADDRESS"]
           msg["To"] = os.environ["RECIPIENT"]
           msg["Subject"] = title
-          msg.set_content(f"{text}\n\n{url}")
-          msg.add_attachment(path.read_bytes(), maintype="text", subtype="html", filename="COT-System-Report.html")
+          plain, html = format_report(path.read_text(encoding="utf-8"), text)
+          msg.set_content(plain)
+          msg.add_alternative(html, subtype="html")
           with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=30) as smtp:
               smtp.login(os.environ["ADDRESS"], os.environ["APP_PASSWORD"])
               if smtp.send_message(msg):
                   raise RuntimeError("Gmail refused a recipient")
           Path("cot-gmail-receipt").write_text(week)
-          print("Gmail accepted the COT System report.")
+          print("Gmail accepted the inline HTML COT System report.")
           PY
 
       - uses: actions/cache/save@v4
@@ -135,11 +148,11 @@ jobs:
         id: pushover
         if: >-
           ${{ !cancelled() && steps.report.outputs.ready == 'true' &&
+              (steps.gmail.outcome == 'success' || steps.gmail_receipt.outputs.cache-hit == 'true') &&
               (inputs.test || (steps.pushover_receipt.outcome == 'success' && steps.pushover_receipt.outputs.cache-hit != 'true')) }}
         env:
           TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
           USER_KEY: ${{ secrets.PUSHOVER_USER }}
-          REPORT_PATH: ${{ steps.report.outputs.path }}
           REPORT_WEEK: ${{ steps.report.outputs.week }}
           TEST: ${{ github.event_name == 'workflow_dispatch' && inputs.test }}
         run: |
@@ -155,9 +168,8 @@ jobs:
               "token": os.environ["TOKEN"],
               "user": os.environ["USER_KEY"],
               "title": "[TEST] COT SYSTEM REPORT" if test else "COT SYSTEM REPORT",
-              "message": "Delivery test using your latest saved report." if test else f"Report ready for the week ending {week}.",
-              "url": f'https://github.com/kidcharlema9ne/COT-System/blob/main/{os.environ["REPORT_PATH"]}',
-              "url_title": "Open COT System report",
+              "message": ("Delivery test. The readable report is in your email." if test
+                          else f"Report ready for the week ending {week}. Open the email to read it."),
           }).encode()
           with urlopen("https://api.pushover.net/1/messages.json", data=payload, timeout=25) as response:
               if json.load(response).get("status") != 1:
