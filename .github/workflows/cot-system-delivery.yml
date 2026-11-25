@@ -1,0 +1,173 @@
+name: COT System report delivery
+
+on:
+  schedule:
+    - cron: '20 2-9 * * 0,2,6'
+      timezone: America/New_York
+  workflow_dispatch:
+    inputs:
+      test:
+        description: Send a test email and push using the current saved report
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cot-system-report-delivery
+  cancel-in-progress: false
+
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check private report access
+        id: access
+        env:
+          READ_KEY: ${{ secrets.COT_SYSTEM_READ_KEY }}
+        run: |
+          if [ -n "$READ_KEY" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Waiting for COT System read-only report access."
+          fi
+
+      - name: Read the private report
+        if: steps.access.outputs.ready == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: kidcharlema9ne/COT-System
+          ref: main
+          ssh-key: ${{ secrets.COT_SYSTEM_READ_KEY }}
+          persist-credentials: false
+          sparse-checkout: /reports/COT_System_Report_*.html
+          sparse-checkout-cone-mode: false
+
+      - name: Check that this week’s report is published
+        id: report
+        if: steps.access.outputs.ready == 'true'
+        env:
+          TEST: ${{ github.event_name == 'workflow_dispatch' && inputs.test }}
+        run: |
+          python3 - <<'PY'
+          import os, re
+          from datetime import datetime, timedelta
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+
+          day = datetime.now(ZoneInfo("America/New_York")).date()
+          week = day - timedelta(days=(day.weekday() - 4) % 7)
+          testing = os.environ["TEST"] == "true"
+          kind = "latest" if testing else "weekly"
+          path = Path(f"reports/COT_System_Report_{kind}.html")
+          if not path.is_file():
+              print("No qualifying report is published yet.")
+              raise SystemExit(0)
+          text = path.read_text(encoding="utf-8")
+          if not testing:
+              marker = re.search(r'<body data-report-week="([0-9-]+)"', text)
+              if not marker or marker[1] != week.isoformat():
+                  print(f"Waiting for the edition for the week ending {week}.")
+                  raise SystemExit(0)
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              print("ready=true", f"week={week}", f"path={path}", sep="\n", file=out)
+          PY
+
+      - uses: actions/cache/restore@v4
+        id: gmail_receipt
+        if: steps.report.outputs.ready == 'true' && !inputs.test
+        with:
+          path: cot-gmail-receipt
+          key: cot-system-gmail-${{ steps.report.outputs.week }}
+      - uses: actions/cache/restore@v4
+        id: pushover_receipt
+        if: steps.report.outputs.ready == 'true' && !inputs.test
+        with:
+          path: cot-pushover-receipt
+          key: cot-system-pushover-${{ steps.report.outputs.week }}
+
+      - name: Send the report through Gmail
+        id: gmail
+        if: >-
+          ${{ !cancelled() && steps.report.outputs.ready == 'true' &&
+              (inputs.test || (steps.gmail_receipt.outcome == 'success' && steps.gmail_receipt.outputs.cache-hit != 'true')) }}
+        env:
+          ADDRESS: ${{ secrets.SPYQQQ_GMAIL_ADDRESS }}
+          APP_PASSWORD: ${{ secrets.SPYQQQ_GMAIL_APP_PASSWORD }}
+          RECIPIENT: ${{ secrets.SPYQQQ_EMAIL_TO }}
+          REPORT_PATH: ${{ steps.report.outputs.path }}
+          REPORT_WEEK: ${{ steps.report.outputs.week }}
+          TEST: ${{ github.event_name == 'workflow_dispatch' && inputs.test }}
+        run: |
+          python3 - <<'PY'
+          import os, smtplib
+          from email.message import EmailMessage
+          from pathlib import Path
+
+          path = Path(os.environ["REPORT_PATH"])
+          week = os.environ["REPORT_WEEK"]
+          test = os.environ["TEST"] == "true"
+          title = "[TEST] COT SYSTEM REPORT" if test else f"COT SYSTEM REPORT — week ending {week}"
+          url = f"https://github.com/kidcharlema9ne/COT-System/blob/main/{path}"
+          text = "Delivery test using your latest saved report." if test else f"Your COT System report for the week ending {week} is ready."
+          msg = EmailMessage()
+          msg["From"] = os.environ["ADDRESS"]
+          msg["To"] = os.environ["RECIPIENT"]
+          msg["Subject"] = title
+          msg.set_content(f"{text}\n\n{url}")
+          msg.add_attachment(path.read_bytes(), maintype="text", subtype="html", filename="COT-System-Report.html")
+          with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=30) as smtp:
+              smtp.login(os.environ["ADDRESS"], os.environ["APP_PASSWORD"])
+              if smtp.send_message(msg):
+                  raise RuntimeError("Gmail refused a recipient")
+          Path("cot-gmail-receipt").write_text(week)
+          print("Gmail accepted the COT System report.")
+          PY
+
+      - uses: actions/cache/save@v4
+        if: ${{ !cancelled() && steps.gmail.outcome == 'success' && !inputs.test }}
+        with:
+          path: cot-gmail-receipt
+          key: cot-system-gmail-${{ steps.report.outputs.week }}
+
+      - name: Send the Pushover alert
+        id: pushover
+        if: >-
+          ${{ !cancelled() && steps.report.outputs.ready == 'true' &&
+              (inputs.test || (steps.pushover_receipt.outcome == 'success' && steps.pushover_receipt.outputs.cache-hit != 'true')) }}
+        env:
+          TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          USER_KEY: ${{ secrets.PUSHOVER_USER }}
+          REPORT_PATH: ${{ steps.report.outputs.path }}
+          REPORT_WEEK: ${{ steps.report.outputs.week }}
+          TEST: ${{ github.event_name == 'workflow_dispatch' && inputs.test }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          from urllib.parse import urlencode
+          from urllib.request import urlopen
+
+          week = os.environ["REPORT_WEEK"]
+          test = os.environ["TEST"] == "true"
+          payload = urlencode({
+              "token": os.environ["TOKEN"],
+              "user": os.environ["USER_KEY"],
+              "title": "[TEST] COT SYSTEM REPORT" if test else "COT SYSTEM REPORT",
+              "message": "Delivery test using your latest saved report." if test else f"Report ready for the week ending {week}.",
+              "url": f'https://github.com/kidcharlema9ne/COT-System/blob/main/{os.environ["REPORT_PATH"]}',
+              "url_title": "Open COT System report",
+          }).encode()
+          with urlopen("https://api.pushover.net/1/messages.json", data=payload, timeout=25) as response:
+              if json.load(response).get("status") != 1:
+                  raise RuntimeError("Pushover did not accept the alert.")
+          Path("cot-pushover-receipt").write_text(week)
+          print("Pushover accepted the COT System alert.")
+          PY
+
+      - uses: actions/cache/save@v4
+        if: ${{ !cancelled() && steps.pushover.outcome == 'success' && !inputs.test }}
+        with:
+          path: cot-pushover-receipt
+          key: cot-system-pushover-${{ steps.report.outputs.week }}
