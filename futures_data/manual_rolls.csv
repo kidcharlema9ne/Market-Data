@@ -1,0 +1,2 @@
+root,last_old_day,ratio,basis
+SR1,2026-11-20,0.99687174,"Vendor SR1 series moved from the Dec 2026 contract (SR1Z6) to the Mar 2027 contract (SR1H7) on 2026-11-23 with no price adjustment. Ratio = SR1H7 close 95.600 / SR1Z6 close 95.900 on 2026-11-23 (IBKR). The vendor's own ratio is used instead if its roll file lists this roll."

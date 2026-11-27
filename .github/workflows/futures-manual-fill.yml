@@ -1,0 +1,47 @@
+name: Manual futures fill (SR3 and SR1 2026-11-09..13, SR1 contract switch)
+
+# One-off, safe to rerun: adds futures_data/manual_fills.csv rows and applies futures_data/manual_rolls.csv to the stitched table in R2,
+# then re-exports the recent file and the full-history release exactly like recent-prices.yml.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: daily-prices
+  cancel-in-progress: false
+jobs:
+  fill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      MARKETPARQUET_API_KEY: ${{ secrets.MARKETPARQUET_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install boto3 pyarrow pandas
+      - name: Add the fill rows and apply the SR1 contract switch
+        id: fill
+        run: python futures_data/apply_manual_fills.py
+      - name: Export the recent file and publish the full history
+        if: steps.fill.outputs.updated == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python futures_data/export_recent_futures.py
+          python futures_data/export_full_history.py
+          gh release view prices-latest >/dev/null 2>&1 || gh release create prices-latest --title "Latest futures price history" --notes "Overwritten by recent-prices.yml. Download futures_prices.parquet; no keys needed."
+          gh release upload prices-latest futures_prices.parquet --clobber
+      - name: Commit the recent file
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add prices/futures_recent.csv.gz
+          git diff --cached --quiet && echo "nothing new" && exit 0
+          git commit -m "Manual fill: SR3 and SR1 refresh"
+          git pull -q --rebase origin "$GITHUB_REF_NAME" || true
+          git push

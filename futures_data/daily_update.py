@@ -131,10 +131,17 @@ def main():
         state = json.loads(s3.get_object(Bucket=BUCKET, Key=STATE_KEY)["Body"].read())
         applied = set(state["applied"])
     except Exception:
+        state = {}
         cutoff = pd.Timestamp(obj["LastModified"]).tz_convert("UTC")
         applied = {roll_key(r) for r in rolls if pd.Timestamp(r["detected_at"]).tz_convert("UTC") <= cutoff}
         print(f"first run: treating {len(applied)} rolls detected before {cutoff:%Y-%m-%d %H:%M} UTC as already applied")
-    new_rolls = [r for r in rolls if roll_key(r) not in applied]
+    manual_rolls = state.get("manual_rolls", [])
+
+    def done_by_hand(r):
+        # a roll that apply_manual_fills.py already applied: same market, within 3 days after its last old day
+        return any(m["root"] == r["root"] and 0 <= (date.fromisoformat(str(r["roll_date"])[:10]) - date.fromisoformat(m["last_old_day"])).days <= 3
+                   for m in manual_rolls)
+    new_rolls = [r for r in rolls if roll_key(r) not in applied and not done_by_hand(r)]
     print(f"new rolls to apply: {[(r['root'], r['roll_date'], round(float(r['ratio']), 5)) for r in new_rolls]}")
 
     # newest vendor days
@@ -175,7 +182,7 @@ def main():
     pq.write_table(pa.Table.from_pandas(out, preserve_index=False), buf)
     s3.put_object(Bucket=BUCKET, Key=KEY, Body=buf.getvalue())
     applied |= {roll_key(r) for r in new_rolls}
-    s3.put_object(Bucket=BUCKET, Key=STATE_KEY, Body=json.dumps({"applied": sorted(applied)}).encode())
+    s3.put_object(Bucket=BUCKET, Key=STATE_KEY, Body=json.dumps({"applied": sorted(applied), "manual_rolls": manual_rolls}).encode())
     print(f"updated: +{len(out) - len(table)} rows, {changed} old rows rebased, newest day {out['file_date'].max()}")
     set_output(ready=ready, updated=True)
 
